@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Practices.Unity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -61,7 +58,7 @@ namespace Informedica.GenForm.Services.Tests
         #endregion
 
         [TestMethod]
-        public void TestResolutionOfInheritedInterface()
+        public void Resolution_of_inherited_interface()
         {
             var testObject = (ITestInterface)new TestObject();
             IUnityContainer container = new UnityContainer();
@@ -79,12 +76,12 @@ namespace Informedica.GenForm.Services.Tests
         }
 
         [TestMethod]
-        public void TryToFindGenericTypedInterfaceWithoutSpecifyingType()
+        public void Try_to_find_generic_typed_interface_without_specifying_type()
         {
             var testclass = (IInterface<TestClass, String>)new TestClass();
             IUnityContainer container = new UnityContainer();
             container.RegisterInstance("test", testclass);
-
+            
             var result = container.Registrations.FirstOrDefault(r => r.Name == "test");
             
             Assert.IsNotNull(container.Registrations.First(r => r.Name == "test"));

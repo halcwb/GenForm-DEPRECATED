@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Informedica.GenForm.Library.Services
 {
-    interface IProductServices
+    public interface IProductServices
     {
     }
 }

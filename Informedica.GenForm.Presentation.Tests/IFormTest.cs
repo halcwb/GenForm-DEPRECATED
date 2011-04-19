@@ -1,9 +1,6 @@
-﻿using Informedica.GenForm.Mocking.Presentation;
-using Informedica.GenForm.Presentation.Forms;
-using Informedica.GenForm.Presentation;
+﻿using Informedica.GenForm.Presentation.Forms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using TypeMock;
 using TypeMock.ArrangeActAssert;
 
 namespace Informedica.GenForm.Presentation.Tests

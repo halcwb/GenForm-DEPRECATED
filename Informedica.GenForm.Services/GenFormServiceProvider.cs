@@ -1,10 +1,8 @@
-﻿using System;
-using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Repository;
-using Informedica.GenForm.ServiceProviders;
-using IServiceProvider = Informedica.GenForm.ServiceProviders.IServiceProvider;
+﻿using Informedica.GenForm.Library.Security;
+using Informedica.GenForm.Library.Services;
+using TypeMock.ArrangeActAssert;
 
-namespace Informedica.GenForm.Library.Services
+namespace Informedica.GenForm.ServiceProviders
 {
     public class GenFormServiceProvider : ServiceProvider
     {
@@ -29,16 +27,22 @@ namespace Informedica.GenForm.Library.Services
         {
             RegisterInstance(GetLoginServices());
             RegisterInstance(GetProductService());
+            RegisterInstance(GetLoginUser());
+        }
+
+        static ILoginUser GetLoginUser()
+        {
+            return Isolate.Fake.Instance<ILoginUser>();
         }
 
         static ILoginServices GetLoginServices()
         {
-            return new LoginServices();
+            return Isolate.Fake.Instance<ILoginServices>();
         }
 
         static IProductServices GetProductService()
         {
-            return new ProductServices();
+            return Isolate.Fake.Instance<IProductServices>();
         }
 
     }
