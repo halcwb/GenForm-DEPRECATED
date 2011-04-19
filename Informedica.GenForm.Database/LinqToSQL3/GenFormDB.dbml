@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="GenForm" EntityNamespace="Informedica.GenForm.Database" ContextNamespace="Informedica.GenForm.Database" Class="GenFormDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=hal-2008;Initial Catalog=GenForm;Integrated Security=True" SettingsObjectName="Informedica.GenForm.Database.ORM.Properties.Settings" SettingsPropertyName="GenFormConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Brand" Member="Brand">
+    <Type Name="Brand">
+      <Column Name="BrandId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BrandName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Association Name="Brand_Product" Member="Product" ThisKey="BrandId" OtherKey="BrandId" Type="Product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Chapter" Member="Chapter">
+    <Type Name="Chapter">
+      <Column Name="ChapterId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ChapterName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Association Name="Chapter_FormulariumChapter" Member="FormulariumChapter" ThisKey="ChapterId" OtherKey="ChapterId" Type="FormulariumChapter" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DosingAdviceChapter" Member="DosingAdviceChapter">
+    <Type Name="DosingAdviceChapter">
+      <Column Name="DosingAdviceChapterId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubstanceDosingAdviceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FormulariumChapterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="FormulariumChapter_DosingAdviceChapter" Member="FormulariumChapter" ThisKey="FormulariumChapterId" OtherKey="FormulariumChapterId" Type="FormulariumChapter" IsForeignKey="true" />
+      <Association Name="SubstanceDosingAdvice_DosingAdviceChapter" Member="SubstanceDosingAdvice" ThisKey="SubstanceDosingAdviceId" OtherKey="SubstanceDosingAdviceId" Type="SubstanceDosingAdvice" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DosingAdviceProduct" Member="DosingAdviceProduct">
+    <Type Name="DosingAdviceProduct">
+      <Column Name="DosingAdviceProductId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubstanceDosingAdviceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Product_DosingAdviceProduct" Member="Product" ThisKey="ProductId" OtherKey="ProductId" Type="Product" IsForeignKey="true" />
+      <Association Name="SubstanceDosingAdvice_DosingAdviceProduct" Member="SubstanceDosingAdvice" ThisKey="SubstanceDosingAdviceId" OtherKey="SubstanceDosingAdviceId" Type="SubstanceDosingAdvice" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DosingAdviceRoute" Member="DosingAdviceRoute">
+    <Type Name="DosingAdviceRoute">
+      <Column Name="DosingAdviceRouteId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubstanceDosingAdviceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RouteId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Route_DosingAdviceRoute" Member="Route" ThisKey="RouteId" OtherKey="RouteId" Type="Route" IsForeignKey="true" />
+      <Association Name="SubstanceDosingAdvice_DosingAdviceRoute" Member="SubstanceDosingAdvice" ThisKey="SubstanceDosingAdviceId" OtherKey="SubstanceDosingAdviceId" Type="SubstanceDosingAdvice" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Formularium" Member="Formularium">
+    <Type Name="Formularium">
+      <Column Name="FormulariumId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FormulariumName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="PharmacistId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Formularium_FormulariumChapter" Member="FormulariumChapter" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="FormulariumChapter" />
+      <Association Name="Formularium_FormulariumPharmacist" Member="FormulariumPharmacist" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="FormulariumPharmacist" />
+      <Association Name="Formularium_FormulariumSubstanceText" Member="FormulariumSubstanceText" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="FormulariumSubstanceText" />
+      <Association Name="Formularium_FormulariumText" Member="FormulariumText" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="FormulariumText" />
+      <Association Name="Formularium_ProductFormulariumText" Member="ProductFormulariumText" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="ProductFormulariumText" />
+      <Association Name="Formularium_SubstanceDosingAdvice" Member="SubstanceDosingAdvice" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="SubstanceDosingAdvice" />
+      <Association Name="Formularium_TextLog" Member="TextLog" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="TextLog" />
+      <Association Name="Pharmacist_Formularium" Member="Pharmacist" ThisKey="PharmacistId" OtherKey="PharmacistId" Type="Pharmacist" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormulariumChapter" Member="FormulariumChapter">
+    <Type Name="FormulariumChapter">
+      <Column Name="FormulariumChapterId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FormulariumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ChapterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="MainChapterId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="FormulariumChapter_DosingAdviceChapter" Member="DosingAdviceChapter" ThisKey="FormulariumChapterId" OtherKey="FormulariumChapterId" Type="DosingAdviceChapter" />
+      <Association Name="FormulariumChapter_FormulariumChapter" Member="FormulariumChapter2" ThisKey="FormulariumChapterId" OtherKey="MainChapterId" Type="FormulariumChapter" />
+      <Association Name="FormulariumChapter_FormulariumChapterText" Member="FormulariumChapterText" ThisKey="FormulariumChapterId" OtherKey="FormulariumChapterId" Type="FormulariumChapterText" />
+      <Association Name="Formularium_FormulariumChapter" Member="Formularium" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="Formularium" IsForeignKey="true" />
+      <Association Name="Chapter_FormulariumChapter" Member="Chapter" ThisKey="ChapterId" OtherKey="ChapterId" Type="Chapter" IsForeignKey="true" />
+      <Association Name="FormulariumChapter_FormulariumChapter" Member="FormulariumChapter1" ThisKey="MainChapterId" OtherKey="FormulariumChapterId" Type="FormulariumChapter" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormulariumChapterText" Member="FormulariumChapterText">
+    <Type Name="FormulariumChapterText">
+      <Column Name="FormulariumChapterTextId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FormulariumChapterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TextItemId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="FormulariumChapter_FormulariumChapterText" Member="FormulariumChapter" ThisKey="FormulariumChapterId" OtherKey="FormulariumChapterId" Type="FormulariumChapter" IsForeignKey="true" />
+      <Association Name="TextItem_FormulariumChapterText" Member="TextItem" ThisKey="TextItemId" OtherKey="TextItemId" Type="TextItem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormulariumPharmacist" Member="FormulariumPharmacist">
+    <Type Name="FormulariumPharmacist">
+      <Column Name="FormulariumPharmacistId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PharmacistId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FormulariumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Formularium_FormulariumPharmacist" Member="Formularium" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="Formularium" IsForeignKey="true" />
+      <Association Name="Pharmacist_FormulariumPharmacist" Member="Pharmacist" ThisKey="PharmacistId" OtherKey="PharmacistId" Type="Pharmacist" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormulariumSubstanceText" Member="FormulariumSubstanceText">
+    <Type Name="FormulariumSubstanceText">
+      <Column Name="FormulariumSubstanceTextId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubstanceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FormulariumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TextItemId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Formularium_FormulariumSubstanceText" Member="Formularium" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="Formularium" IsForeignKey="true" />
+      <Association Name="Substance_FormulariumSubstanceText" Member="Substance" ThisKey="SubstanceId" OtherKey="SubstanceId" Type="Substance" IsForeignKey="true" />
+      <Association Name="TextItem_FormulariumSubstanceText" Member="TextItem" ThisKey="TextItemId" OtherKey="TextItemId" Type="TextItem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormulariumText" Member="FormulariumText">
+    <Type Name="FormulariumText">
+      <Column Name="FormulariumTextId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FormulariumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TextItemId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Formularium_FormulariumText" Member="Formularium" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="Formularium" IsForeignKey="true" />
+      <Association Name="TextItem_FormulariumText" Member="TextItem" ThisKey="TextItemId" OtherKey="TextItemId" Type="TextItem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GenFormUser" Member="GenFormUser">
+    <Type Name="GenFormUser">
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="PassWord" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(125)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(125)" CanBeNull="true" />
+      <Column Name="PagerNumber" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="GenFormUser_Pharmacist" Member="Pharmacist" ThisKey="UserId" OtherKey="UserId" Type="Pharmacist" />
+      <Association Name="GenFormUser_TextLog" Member="TextLog" ThisKey="UserId" OtherKey="UserId" Type="TextLog" />
+      <Association Name="GenFormUser_UserRole" Member="UserRole" ThisKey="UserId" OtherKey="UserId" Type="UserRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Indication" Member="Indication">
+    <Type Name="Indication">
+      <Column Name="IndicationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IndicationText" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Indication_SubstanceDosingAdvice" Member="SubstanceDosingAdvice" ThisKey="IndicationId" OtherKey="IndicationId" Type="SubstanceDosingAdvice" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Package" Member="Package">
+    <Type Name="Package">
+      <Column Name="PackageId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PackageName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Association Name="Package_Product" Member="Product" ThisKey="PackageId" OtherKey="PackageId" Type="Product" />
+      <Association Name="Package_ShapePackage" Member="ShapePackage" ThisKey="PackageId" OtherKey="PackageId" Type="ShapePackage" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pharmacist" Member="Pharmacist">
+    <Type Name="Pharmacist">
+      <Column Name="PharmacistId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PharmacyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Pharmacist_Formularium" Member="Formularium" ThisKey="PharmacistId" OtherKey="PharmacistId" Type="Formularium" />
+      <Association Name="Pharmacist_FormulariumPharmacist" Member="FormulariumPharmacist" ThisKey="PharmacistId" OtherKey="PharmacistId" Type="FormulariumPharmacist" />
+      <Association Name="GenFormUser_Pharmacist" Member="GenFormUser" ThisKey="UserId" OtherKey="UserId" Type="GenFormUser" IsForeignKey="true" />
+      <Association Name="Pharmacy_Pharmacist" Member="Pharmacy" ThisKey="PharmacyId" OtherKey="PharmacyId" Type="Pharmacy" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pharmacy" Member="Pharmacy">
+    <Type Name="Pharmacy">
+      <Column Name="PharmacyId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PharmacyName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Association Name="Pharmacy_Pharmacist" Member="Pharmacist" ThisKey="PharmacyId" OtherKey="PharmacyId" Type="Pharmacist" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Product" Member="Product">
+    <Type Name="Product">
+      <Column Name="ProductId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="ShapeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PackageId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GenericId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UnitId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProductName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ProductKey" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ProductQuantity" Type="System.Decimal" DbType="Decimal(38,12)" CanBeNull="true" />
+      <Column Name="TradeProductCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ProductCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Divisor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BrandId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Product_DosingAdviceProduct" Member="DosingAdviceProduct" ThisKey="ProductId" OtherKey="ProductId" Type="DosingAdviceProduct" />
+      <Association Name="Product_ProductCombination" Member="ProductCombination" ThisKey="ProductId" OtherKey="ProductId" Type="ProductCombination" />
+      <Association Name="Product_ProductCombination1" Member="ProductCombination1" ThisKey="ProductId" OtherKey="Component" Type="ProductCombination" />
+      <Association Name="Product_ProductFormulariumText" Member="ProductFormulariumText" ThisKey="ProductId" OtherKey="ProductId" Type="ProductFormulariumText" />
+      <Association Name="Product_ProductRoute" Member="ProductRoute" ThisKey="ProductId" OtherKey="ProductId" Type="ProductRoute" />
+      <Association Name="Product_ProductSubstance" Member="ProductSubstance" ThisKey="ProductId" OtherKey="ProductId" Type="ProductSubstance" />
+      <Association Name="Package_Product" Member="Package" ThisKey="PackageId" OtherKey="PackageId" Type="Package" IsForeignKey="true" />
+      <Association Name="Brand_Product" Member="Brand" ThisKey="BrandId" OtherKey="BrandId" Type="Brand" IsForeignKey="true" />
+      <Association Name="Shape_Product" Member="Shape" ThisKey="ShapeId" OtherKey="ShapeId" Type="Shape" IsForeignKey="true" />
+      <Association Name="Substance_Product" Member="Substance" ThisKey="GenericId" OtherKey="SubstanceId" Type="Substance" IsForeignKey="true" />
+      <Association Name="Unit_Product" Member="Unit" ThisKey="UnitId" OtherKey="UnitId" Type="Unit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProductCombination" Member="ProductCombination">
+    <Type Name="ProductCombination">
+      <Column Name="ProductCombinationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Component" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProductCombinationName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Product_ProductCombination" Member="Product" ThisKey="ProductId" OtherKey="ProductId" Type="Product" IsForeignKey="true" />
+      <Association Name="Product_ProductCombination1" Member="Product1" ThisKey="Component" OtherKey="ProductId" Type="Product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProductFormulariumText" Member="ProductFormulariumText">
+    <Type Name="ProductFormulariumText">
+      <Column Name="ProductFormulariumTextId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FormulariumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TextItemId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Product_ProductFormulariumText" Member="Product" ThisKey="ProductId" OtherKey="ProductId" Type="Product" IsForeignKey="true" />
+      <Association Name="Formularium_ProductFormulariumText" Member="Formularium" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="Formularium" IsForeignKey="true" />
+      <Association Name="TextItem_ProductFormulariumText" Member="TextItem" ThisKey="TextItemId" OtherKey="TextItemId" Type="TextItem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProductRoute" Member="ProductRoute">
+    <Type Name="ProductRoute">
+      <Column Name="ProductRouteId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RouteId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Product_ProductRoute" Member="Product" ThisKey="ProductId" OtherKey="ProductId" Type="Product" IsForeignKey="true" />
+      <Association Name="Route_ProductRoute" Member="Route" ThisKey="RouteId" OtherKey="RouteId" Type="Route" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProductSubstance" Member="ProductSubstance">
+    <Type Name="ProductSubstance">
+      <Column Name="ProductSubstanceId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SubstanceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SubstanceOrdering" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Concentration" Type="System.Decimal" DbType="Decimal(38,19)" CanBeNull="true" />
+      <Column Name="SubstanceQuantity" Type="System.Decimal" DbType="Decimal(38,16)" CanBeNull="true" />
+      <Column Name="UnitId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Product_ProductSubstance" Member="Product" ThisKey="ProductId" OtherKey="ProductId" Type="Product" IsForeignKey="true" />
+      <Association Name="Substance_ProductSubstance" Member="Substance" ThisKey="SubstanceId" OtherKey="SubstanceId" Type="Substance" IsForeignKey="true" />
+      <Association Name="Unit_ProductSubstance" Member="Unit" ThisKey="UnitId" OtherKey="UnitId" Type="Unit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Role" Member="Role">
+    <Type Name="Role">
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RoleDescription" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Association Name="Role_UserRole" Member="UserRole" ThisKey="RoleId" OtherKey="RoleId" Type="UserRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Route" Member="Route">
+    <Type Name="Route">
+      <Column Name="RouteId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RouteName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="RouteAbbreviation" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Route_DosingAdviceRoute" Member="DosingAdviceRoute" ThisKey="RouteId" OtherKey="RouteId" Type="DosingAdviceRoute" />
+      <Association Name="Route_ProductRoute" Member="ProductRoute" ThisKey="RouteId" OtherKey="RouteId" Type="ProductRoute" />
+      <Association Name="Route_ShapeRoute" Member="ShapeRoute" ThisKey="RouteId" OtherKey="RouteId" Type="ShapeRoute" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Shape" Member="Shape">
+    <Type Name="Shape">
+      <Column Name="ShapeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ShapeName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Association Name="Shape_Product" Member="Product" ThisKey="ShapeId" OtherKey="ShapeId" Type="Product" />
+      <Association Name="Shape_ShapePackage" Member="ShapePackage" ThisKey="ShapeId" OtherKey="ShapeId" Type="ShapePackage" />
+      <Association Name="Shape_ShapeRoute" Member="ShapeRoute" ThisKey="ShapeId" OtherKey="ShapeId" Type="ShapeRoute" />
+      <Association Name="Shape_ShapeUnit" Member="ShapeUnit" ThisKey="ShapeId" OtherKey="ShapeId" Type="ShapeUnit" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShapePackage" Member="ShapePackage">
+    <Type Name="ShapePackage">
+      <Column Name="ShapePackageId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PackageId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShapeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Package_ShapePackage" Member="Package" ThisKey="PackageId" OtherKey="PackageId" Type="Package" IsForeignKey="true" />
+      <Association Name="Shape_ShapePackage" Member="Shape" ThisKey="ShapeId" OtherKey="ShapeId" Type="Shape" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShapeRoute" Member="ShapeRoute">
+    <Type Name="ShapeRoute">
+      <Column Name="ShapeRouteId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ShapeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RouteId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Shape_ShapeRoute" Member="Shape" ThisKey="ShapeId" OtherKey="ShapeId" Type="Shape" IsForeignKey="true" />
+      <Association Name="Route_ShapeRoute" Member="Route" ThisKey="RouteId" OtherKey="RouteId" Type="Route" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShapeUnit" Member="ShapeUnit">
+    <Type Name="ShapeUnit">
+      <Column Name="ShapeUnitId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ShapeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UnitId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Shape_ShapeUnit" Member="Shape" ThisKey="ShapeId" OtherKey="ShapeId" Type="Shape" IsForeignKey="true" />
+      <Association Name="Unit_ShapeUnit" Member="Unit" ThisKey="UnitId" OtherKey="UnitId" Type="Unit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Substance" Member="Substance">
+    <Type Name="Substance">
+      <Column Name="SubstanceId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubstanceName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="IsGeneric" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SubstanceGroupId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Substance_FormulariumSubstanceText" Member="FormulariumSubstanceText" ThisKey="SubstanceId" OtherKey="SubstanceId" Type="FormulariumSubstanceText" />
+      <Association Name="Substance_Product" Member="Product" ThisKey="SubstanceId" OtherKey="GenericId" Type="Product" />
+      <Association Name="Substance_ProductSubstance" Member="ProductSubstance" ThisKey="SubstanceId" OtherKey="SubstanceId" Type="ProductSubstance" />
+      <Association Name="Substance_SubstanceDosingAdvice" Member="SubstanceDosingAdvice" ThisKey="SubstanceId" OtherKey="SubstanceId" Type="SubstanceDosingAdvice" />
+      <Association Name="SubstanceGroup_Substance" Member="SubstanceGroup" ThisKey="SubstanceGroupId" OtherKey="SubstanceGroupId" Type="SubstanceGroup" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SubstanceDosingAdvice" Member="SubstanceDosingAdvice">
+    <Type Name="SubstanceDosingAdvice">
+      <Column Name="SubstanceDosingAdviceId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TextItemId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SubstanceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FormulariumId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IndicationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SubstanceDosingAdvice_DosingAdviceChapter" Member="DosingAdviceChapter" ThisKey="SubstanceDosingAdviceId" OtherKey="SubstanceDosingAdviceId" Type="DosingAdviceChapter" />
+      <Association Name="SubstanceDosingAdvice_DosingAdviceProduct" Member="DosingAdviceProduct" ThisKey="SubstanceDosingAdviceId" OtherKey="SubstanceDosingAdviceId" Type="DosingAdviceProduct" />
+      <Association Name="SubstanceDosingAdvice_DosingAdviceRoute" Member="DosingAdviceRoute" ThisKey="SubstanceDosingAdviceId" OtherKey="SubstanceDosingAdviceId" Type="DosingAdviceRoute" />
+      <Association Name="Formularium_SubstanceDosingAdvice" Member="Formularium" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="Formularium" IsForeignKey="true" />
+      <Association Name="Substance_SubstanceDosingAdvice" Member="Substance" ThisKey="SubstanceId" OtherKey="SubstanceId" Type="Substance" IsForeignKey="true" />
+      <Association Name="Indication_SubstanceDosingAdvice" Member="Indication" ThisKey="IndicationId" OtherKey="IndicationId" Type="Indication" IsForeignKey="true" />
+      <Association Name="TextItem_SubstanceDosingAdvice" Member="TextItem" ThisKey="TextItemId" OtherKey="TextItemId" Type="TextItem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SubstanceGroup" Member="SubstanceGroup">
+    <Type Name="SubstanceGroup">
+      <Column Name="SubstanceGroupId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubstanceGroupName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="MainSubstanceGroupId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SubstanceGroup_Substance" Member="Substance" ThisKey="SubstanceGroupId" OtherKey="SubstanceGroupId" Type="Substance" />
+      <Association Name="SubstanceGroup_SubstanceGroup" Member="SubstanceGroup2" ThisKey="SubstanceGroupId" OtherKey="MainSubstanceGroupId" Type="SubstanceGroup" />
+      <Association Name="SubstanceGroup_SubstanceGroup" Member="SubstanceGroup1" ThisKey="MainSubstanceGroupId" OtherKey="SubstanceGroupId" Type="SubstanceGroup" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TextItem" Member="TextItem">
+    <Type Name="TextItem">
+      <Column Name="TextItemId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TextType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TextStatus" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="Text" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="TextHeading" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="TextItem_FormulariumChapterText" Member="FormulariumChapterText" ThisKey="TextItemId" OtherKey="TextItemId" Type="FormulariumChapterText" />
+      <Association Name="TextItem_FormulariumSubstanceText" Member="FormulariumSubstanceText" ThisKey="TextItemId" OtherKey="TextItemId" Type="FormulariumSubstanceText" />
+      <Association Name="TextItem_FormulariumText" Member="FormulariumText" ThisKey="TextItemId" OtherKey="TextItemId" Type="FormulariumText" />
+      <Association Name="TextItem_ProductFormulariumText" Member="ProductFormulariumText" ThisKey="TextItemId" OtherKey="TextItemId" Type="ProductFormulariumText" />
+      <Association Name="TextItem_SubstanceDosingAdvice" Member="SubstanceDosingAdvice" ThisKey="TextItemId" OtherKey="TextItemId" Type="SubstanceDosingAdvice" />
+      <Association Name="TextItem_TextLog" Member="TextLog" ThisKey="TextItemId" OtherKey="TextItemId" Type="TextLog" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TextLog" Member="TextLog">
+    <Type Name="TextLog">
+      <Column Name="TextLogId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LogData" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FormulariumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TextItemId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Action" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Formularium_TextLog" Member="Formularium" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="Formularium" IsForeignKey="true" />
+      <Association Name="TextItem_TextLog" Member="TextItem" ThisKey="TextItemId" OtherKey="TextItemId" Type="TextItem" IsForeignKey="true" />
+      <Association Name="GenFormUser_TextLog" Member="GenFormUser" ThisKey="UserId" OtherKey="UserId" Type="GenFormUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Unit" Member="Unit">
+    <Type Name="Unit">
+      <Column Name="UnitId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UnitName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="Multiplier" Type="System.Decimal" DbType="Decimal(38,19) NOT NULL" CanBeNull="false" />
+      <Column Name="UnitAbbreviation" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Divisor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsReference" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UnitGroupId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Unit_Product" Member="Product" ThisKey="UnitId" OtherKey="UnitId" Type="Product" />
+      <Association Name="Unit_ProductSubstance" Member="ProductSubstance" ThisKey="UnitId" OtherKey="UnitId" Type="ProductSubstance" />
+      <Association Name="Unit_ShapeUnit" Member="ShapeUnit" ThisKey="UnitId" OtherKey="UnitId" Type="ShapeUnit" />
+      <Association Name="UnitGroup_Unit" Member="UnitGroup" ThisKey="UnitGroupId" OtherKey="UnitGroupId" Type="UnitGroup" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UnitGroup" Member="UnitGroup">
+    <Type Name="UnitGroup">
+      <Column Name="UnitGroupId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UnitGroupName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="AllowsConversion" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="UnitGroup_Unit" Member="Unit" ThisKey="UnitGroupId" OtherKey="UnitGroupId" Type="Unit" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserRole" Member="UserRole">
+    <Type Name="UserRole">
+      <Column Name="UserRoleId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="GenFormUser_UserRole" Member="GenFormUser" ThisKey="UserId" OtherKey="UserId" Type="GenFormUser" IsForeignKey="true" />
+      <Association Name="Role_UserRole" Member="Role" ThisKey="RoleId" OtherKey="RoleId" Type="Role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_EmptyAllTables" Method="sp_EmptyAllTables">
+    <Parameter Name="ResetIdentity" Parameter="resetIdentity" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

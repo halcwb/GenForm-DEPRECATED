@@ -1,0 +1,2564 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dil:root xmlns:dil="http://schemas.orm.net/DIL/DIL" xmlns:dcl="http://schemas.orm.net/DIL/DCIL" xmlns:ddt="http://schemas.orm.net/DIL/DILDT" xmlns:dep="http://schemas.orm.net/DIL/DILEP" xmlns:dms="http://schemas.orm.net/DIL/DILMS" xmlns:dml="http://schemas.orm.net/DIL/DMIL" xmlns:ddl="http://schemas.orm.net/DIL/DDIL">
+	<dms:startTransactionStatement isolationLevel="SERIALIZABLE" accessMode="READ WRITE" />
+	<ddl:schemaDefinition schemaName="dbo" defaultCharacterSet="UTF8" />
+	<dms:setSchemaStatement>
+		<ddt:characterStringLiteral value="DBO" />
+	</dms:setSchemaStatement>
+	<ddl:domainDefinition name="GeneriekVolgOrde" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="GeneriekVolgOrde_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:tableDefinition name="Gebruiker" schema="dbo">
+		<ddl:columnDefinition name="gebruikerId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="gebruikerNaam">
+			<ddt:characterString type="CHARACTER" length="30" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="email">
+			<ddt:characterString type="CHARACTER" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="paswoord">
+			<ddt:characterString type="CHARACTER" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="voorNaam">
+			<ddt:characterString type="CHARACTER VARYING" length="125" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="achterNaam">
+			<ddt:characterString type="CHARACTER" length="125" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="sein">
+			<ddt:characterString type="CHARACTER" length="125" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Gebruiker_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="gebruikerId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Gebruiker_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="gebruikerNaam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Gebruiker_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="voorNaam" />
+				<dep:simpleColumnReference name="achterNaam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Gebruiker_UC3">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="sein" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Gebruiker_UC4">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="email" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Gebruiker_UC5">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="Apotheek" schema="dbo">
+		<ddl:columnDefinition name="apotheekId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="naam">
+			<ddt:characterString type="CHARACTER VARYING" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Apotheek_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="apotheekId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Apotheek_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="naam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Apotheek_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="Formularium" schema="dbo">
+		<ddl:columnDefinition name="formulariumId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="naam">
+			<ddt:characterString type="CHARACTER VARYING" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="apotheekId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="hoofdauteur">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Formularium_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="formulariumId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Formularium_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="naam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Formularium_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="Merk" schema="dbo">
+		<ddl:columnDefinition name="merkId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="naam">
+			<ddt:characterString type="CHARACTER" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Merk_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="merkId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Merk_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="naam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Merk_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="ToedienVorm" schema="dbo">
+		<ddl:columnDefinition name="toedienVormId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="naam">
+			<ddt:characterString type="CHARACTER" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="ToedienVorm_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="toedienVormId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="ToedienVorm_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="naam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="ToedienVorm_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="Verpakking" schema="dbo">
+		<ddl:columnDefinition name="verpakkingId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="naam">
+			<ddt:characterString type="CHARACTER" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Verpakking_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="verpakkingId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Verpakking_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="naam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Verpakking_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="GeneriekGroep" schema="dbo">
+		<ddl:columnDefinition name="generiekGroepId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="naam">
+			<ddt:characterString type="CHARACTER" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="hoofdGroep">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="GeneriekGroep_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="generiekGroepId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="GeneriekGroep_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="naam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="GeneriekGroep_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="Generiek" schema="dbo">
+		<ddl:columnDefinition name="generiekId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="naam">
+			<ddt:characterString type="CHARACTER" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="code">
+			<ddt:characterString type="CHARACTER" length="125" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="isStof">
+			<ddt:boolean type="BOOLEAN" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="generiekGroepId">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Generiek_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="generiekId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Generiek_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="naam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Generiek_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="Artikel" schema="dbo">
+		<ddl:columnDefinition name="artikelId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="naam">
+			<ddt:characterString type="CHARACTER" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="generiekId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="ArtikelGUID">
+			<ddt:characterString type="CHARACTER" length="125" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="HPKode">
+			<ddt:characterString type="CHARACTER" length="125" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="defaultNaam">
+			<ddt:characterString type="CHARACTER VARYING" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="KAE">
+			<ddt:approximateNumeric type="REAL" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="isCombinatie">
+			<ddt:boolean type="BOOLEAN" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="ATKode">
+			<ddt:characterString type="CHARACTER" length="125" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="hoeveelheid">
+			<ddt:approximateNumeric type="DOUBLE PRECISION" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="eenheidId">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="toedienVormId">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="verpakkingId">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="merkId">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Artikel_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="artikelId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Artikel_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="naam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Artikel_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="ArtikelGeneriek" schema="dbo">
+		<ddl:columnDefinition name="artikelGeneriekId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="volgorde">
+			<ddt:domain name="GeneriekVolgOrde" schema="dbo" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="artikelId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="generiekId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="sterkte">
+			<ddt:approximateNumeric type="DOUBLE PRECISION" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="hoeveelheid">
+			<ddt:approximateNumeric type="DOUBLE PRECISION" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="eenheidId">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="ArtikelGeneriek_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="artikelId" />
+				<dep:simpleColumnReference name="generiekId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="ArtikelGeneriek_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="artikelId" />
+				<dep:simpleColumnReference name="volgorde" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="ArtikelGeneriek_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="artikelGeneriekId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="Eenheid" schema="dbo">
+		<ddl:columnDefinition name="eenheidId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="naam">
+			<ddt:characterString type="CHARACTER" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="eenheidGroepId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="afkorting">
+			<ddt:characterString type="CHARACTER" length="125" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="factor">
+			<ddt:approximateNumeric type="DOUBLE PRECISION" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="KAE">
+			<ddt:approximateNumeric type="REAL" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="isReferentie">
+			<ddt:boolean type="BOOLEAN" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Eenheid_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="eenheidId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Eenheid_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="afkorting" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Eenheid_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="naam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Eenheid_UC3">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="EenheidGroep" schema="dbo">
+		<ddl:columnDefinition name="eenheidGroepId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="naam">
+			<ddt:characterString type="CHARACTER" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="conversieToestaan">
+			<ddt:boolean type="BOOLEAN" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="EenheidGroep_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="eenheidGroepId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="EenheidGroep_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="Route" schema="dbo">
+		<ddl:columnDefinition name="routeId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="naam">
+			<ddt:characterString type="CHARACTER" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Route_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="routeId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Route_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="naam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Route_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="ArtikelRoute" schema="dbo">
+		<ddl:columnDefinition name="artikelRouteId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="artikelId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="routeId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="ArtikelRoute_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="routeId" />
+				<dep:simpleColumnReference name="artikelId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="ArtikelRoute_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="artikelRouteId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="ToedienVormVerpakking" schema="dbo">
+		<ddl:columnDefinition name="toedienVormVerpakkingId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="toedienVormId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="verpakkingId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="ToedienVormVerpakking_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="toedienVormId" />
+				<dep:simpleColumnReference name="verpakkingId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="ToedienVormVerpakking_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="toedienVormVerpakkingId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="ToedienVormEenheid" schema="dbo">
+		<ddl:columnDefinition name="toedienVormEenheidId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="toedienVormId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="eenheidId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="ToedienVormEenheid_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="toedienVormId" />
+				<dep:simpleColumnReference name="eenheidId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="ToedienVormEenheid_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="toedienVormEenheidId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="ToepassingGroep" schema="dbo">
+		<ddl:columnDefinition name="toepassingGroepId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="naam">
+			<ddt:characterString type="CHARACTER" length="125" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="formulariumId">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="hoofdGroep">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="ToepassingGroep_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="toepassingGroepId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="ToepassingGroep_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="naam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="ToepassingGroep_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="GeneriekDosering" schema="dbo">
+		<ddl:columnDefinition name="generiekDoseringId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="tekstItemId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="generiekId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="formulariumId">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="GeneriekDosering_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="generiekDoseringId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="GeneriekDosering_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="GeneriekDosering_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="tekstItemId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="TekstItem" schema="dbo">
+		<ddl:columnDefinition name="tekstItemId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="tekst">
+			<ddt:characterString type="CHARACTER VARYING" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="tekstType">
+			<ddt:characterString type="CHARACTER" length="50" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="tekstStatus">
+			<ddt:characterString type="CHARACTER" length="50" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="tekstKop">
+			<ddt:characterString type="CHARACTER" length="125" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="TekstItem_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="tekstItemId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="TekstItem_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="DoseringToepassing" schema="dbo">
+		<ddl:columnDefinition name="doseringToepassingId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="generiekDoseringId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="toepassingGroepId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="DoseringToepassing_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="generiekDoseringId" />
+				<dep:simpleColumnReference name="toepassingGroepId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="DoseringToepassing_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="doseringToepassingId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="DoseringArtikel" schema="dbo">
+		<ddl:columnDefinition name="doseringArtikelId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="generiekDoseringId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="artikelId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="DoseringArtikel_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="generiekDoseringId" />
+				<dep:simpleColumnReference name="artikelId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="DoseringArtikel_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="doseringArtikelId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="DoseringRoute" schema="dbo">
+		<ddl:columnDefinition name="doseringRouteId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="generiekDoseringId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="routeId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="DoseringRoute_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="generiekDoseringId" />
+				<dep:simpleColumnReference name="routeId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="DoseringRoute_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="doseringRouteId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="ToedienVormRoute" schema="dbo">
+		<ddl:columnDefinition name="toedienVormRouteId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="toedienVormId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="routeId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="ToedienVormRoute_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="toedienVormId" />
+				<dep:simpleColumnReference name="routeId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="ToedienVormRoute_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="toedienVormRouteId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="FormulariumAuteur" schema="dbo">
+		<ddl:columnDefinition name="formulariumAuteurId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="auteur">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="formulariumId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="FormulariumAuteur_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="formulariumAuteurId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="FormulariumAuteur_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="auteur" />
+				<dep:simpleColumnReference name="formulariumId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="GeneriekBijzonderheid" schema="dbo">
+		<ddl:columnDefinition name="generiekBijzonderheidId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="generiekId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="formulariumId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="tekstItemId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="GeneriekBijzonderheid_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="generiekId" />
+				<dep:simpleColumnReference name="formulariumId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="GeneriekBijzonderheid_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="generiekBijzonderheidId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="ToepassingBijzonderheid" schema="dbo">
+		<ddl:columnDefinition name="toepassingBijzonderheidId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="toepassingGroepId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="formulariumId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="tekstItemId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="ToepassingBijzonderheid_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="toepassingGroepId" />
+				<dep:simpleColumnReference name="formulariumId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="ToepassingBijzonderheid_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="toepassingBijzonderheidId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="ArtikelBijzonderheid" schema="dbo">
+		<ddl:columnDefinition name="artikelBijzonderheidId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="artikelId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="formulariumId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="tekstItemId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="ArtikelBijzonderheid_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="artikelId" />
+				<dep:simpleColumnReference name="formulariumId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="ArtikelBijzonderheid_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="artikelBijzonderheidId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="FormulariumTekst" schema="dbo">
+		<ddl:columnDefinition name="formulariumTekstId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="formulariumId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="tekstItemId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="FormulariumTekst_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="formulariumId" />
+				<dep:simpleColumnReference name="tekstItemId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="FormulariumTekst_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="formulariumTekstId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="TekstLog" schema="dbo">
+		<ddl:columnDefinition name="tekstLogId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="logDatum">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="tekstItemId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="formulariumId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="gebruikerId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="actie">
+			<ddt:characterString type="CHARACTER" length="50" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="TekstLog_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="tekstLogId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="TekstLog_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="tekstItemId" />
+				<dep:simpleColumnReference name="gebruikerId" />
+				<dep:simpleColumnReference name="logDatum" />
+				<dep:simpleColumnReference name="formulariumId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="Publicatie" schema="dbo">
+		<ddl:columnDefinition name="publicatieId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="publicatieDatum">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="formulariumId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="gebruikerId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Publicatie_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="publicatieId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Publicatie_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="formulariumId" />
+				<dep:simpleColumnReference name="publicatieDatum" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="PublicatieHoofdstuk" schema="dbo">
+		<ddl:columnDefinition name="publicatieHoofdstukId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="publicatieId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="hoofdstuk">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="inleiding">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="PublicatieHoofdstuk_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="hoofdstuk" />
+				<dep:simpleColumnReference name="publicatieId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="PublicatieHoofdstuk_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="publicatieHoofdstukId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="PublicatieTherapieGroep" schema="dbo">
+		<ddl:columnDefinition name="publicatieTherapieGroepId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="publicatieHoofdstukId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="therapieGroep">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="inleiding">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="PublicatieTherapieGroep_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="publicatieHoofdstukId" />
+				<dep:simpleColumnReference name="therapieGroep" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="PublicatieTherapieGroep_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="publicatieTherapieGroepId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="PublicatieGeneriek" schema="dbo">
+		<ddl:columnDefinition name="publicatieGeneriekId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="publicatieTherapieGroepId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="generiekId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="generiekBijzonderheid">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="PublicatieGeneriek_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="generiekId" />
+				<dep:simpleColumnReference name="publicatieTherapieGroepId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="PublicatieGeneriek_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="publicatieGeneriekId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="PublicatieRoute" schema="dbo">
+		<ddl:columnDefinition name="publicatieRouteId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="publicatieGeneriekId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="routeId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="routeDosering">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="bijzonderheid">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="PublicatieRoute_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="publicatieGeneriekId" />
+				<dep:simpleColumnReference name="routeId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="PublicatieRoute_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="publicatieRouteId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="PublicatieArtikel" schema="dbo">
+		<ddl:columnDefinition name="publicatieArtikelId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="publicatieRouteId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="artikelId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="artikelDosering">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="bijzonderheid">
+			<ddt:exactNumeric type="INTEGER" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="PublicatieArtikel_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="publicatieRouteId" />
+				<dep:simpleColumnReference name="artikelId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="PublicatieArtikel_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="publicatieArtikelId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="PublicatieFormulariumTekst" schema="dbo">
+		<ddl:columnDefinition name="publicatieFormulariumTekstId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="publicatieId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="formulariumTekst">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="PublicatieFormulariumTekst_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="publicatieId" />
+				<dep:simpleColumnReference name="formulariumTekst" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="PublicatieFormulariumTekst_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="publicatieFormulariumTekstId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="Rol" schema="dbo">
+		<ddl:columnDefinition name="rolId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="naam">
+			<ddt:characterString type="CHARACTER" length="30" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="versieTimeStamp">
+			<ddt:time type="TIMESTAMP" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="omschrijving">
+			<ddt:characterString type="CHARACTER VARYING" />
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Rol_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="rolId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Rol_UC1">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="naam" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="Rol_UC2">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="versieTimeStamp" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="GebruikerRol" schema="dbo">
+		<ddl:columnDefinition name="gebruikerRolId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="gebruikerId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="rolId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="GebruikerRol_UC">
+			<ddl:uniqueConstraintDefinition type="UNIQUE">
+				<dep:simpleColumnReference name="rolId" />
+				<dep:simpleColumnReference name="gebruikerId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+		<ddl:tableConstraintDefinition name="GebruikerRol_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="gebruikerRolId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:tableDefinition name="Apotheker" schema="dbo">
+		<ddl:columnDefinition name="apothekerId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:identityColumnSpecification type="ALWAYS">
+				<ddl:sequenceGeneratorStartWithOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorStartWithOption>
+				<ddl:sequenceGeneratorIncrementByOption>
+					<ddt:exactNumericLiteral value="1" />
+				</ddl:sequenceGeneratorIncrementByOption>
+			</ddl:identityColumnSpecification>
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="gebruikerId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:columnDefinition name="apotheekId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
+		<ddl:tableConstraintDefinition name="Apotheker_PK">
+			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
+				<dep:simpleColumnReference name="apothekerId" />
+			</ddl:uniqueConstraintDefinition>
+		</ddl:tableConstraintDefinition>
+	</ddl:tableDefinition>
+	<ddl:alterTableStatement name="Formularium" schema="dbo">
+		<ddl:addTableConstraintDefinition name="Formularium_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="apotheekId" />
+				<ddl:referencesSpecification name="Apotheek" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="apotheekId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="Formularium" schema="dbo">
+		<ddl:addTableConstraintDefinition name="Formularium_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="hoofdauteur" />
+				<ddl:referencesSpecification name="Apotheker" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="apothekerId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="GeneriekGroep" schema="dbo">
+		<ddl:addTableConstraintDefinition name="GeneriekGroep_FK">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="hoofdGroep" />
+				<ddl:referencesSpecification name="GeneriekGroep" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="generiekGroepId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="Generiek" schema="dbo">
+		<ddl:addTableConstraintDefinition name="Generiek_FK">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="generiekGroepId" />
+				<ddl:referencesSpecification name="GeneriekGroep" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="generiekGroepId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="Artikel" schema="dbo">
+		<ddl:addTableConstraintDefinition name="Artikel_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="generiekId" />
+				<ddl:referencesSpecification name="Generiek" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="generiekId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="Artikel" schema="dbo">
+		<ddl:addTableConstraintDefinition name="Artikel_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="eenheidId" />
+				<ddl:referencesSpecification name="Eenheid" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="eenheidId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="Artikel" schema="dbo">
+		<ddl:addTableConstraintDefinition name="Artikel_FK3">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="toedienVormId" />
+				<ddl:referencesSpecification name="ToedienVorm" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="toedienVormId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="Artikel" schema="dbo">
+		<ddl:addTableConstraintDefinition name="Artikel_FK4">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="verpakkingId" />
+				<ddl:referencesSpecification name="Verpakking" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="verpakkingId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="Artikel" schema="dbo">
+		<ddl:addTableConstraintDefinition name="Artikel_FK5">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="merkId" />
+				<ddl:referencesSpecification name="Merk" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="merkId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ArtikelGeneriek" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ArtikelGeneriek_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="artikelId" />
+				<ddl:referencesSpecification name="Artikel" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="artikelId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ArtikelGeneriek" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ArtikelGeneriek_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="generiekId" />
+				<ddl:referencesSpecification name="Generiek" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="generiekId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ArtikelGeneriek" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ArtikelGeneriek_FK3">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="eenheidId" />
+				<ddl:referencesSpecification name="Eenheid" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="eenheidId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="Eenheid" schema="dbo">
+		<ddl:addTableConstraintDefinition name="Eenheid_FK">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="eenheidGroepId" />
+				<ddl:referencesSpecification name="EenheidGroep" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="eenheidGroepId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ArtikelRoute" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ArtikelRoute_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="artikelId" />
+				<ddl:referencesSpecification name="Artikel" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="artikelId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ArtikelRoute" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ArtikelRoute_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="routeId" />
+				<ddl:referencesSpecification name="Route" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="routeId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ToedienVormVerpakking" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ToedienVormVerpakking_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="toedienVormId" />
+				<ddl:referencesSpecification name="ToedienVorm" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="toedienVormId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ToedienVormVerpakking" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ToedienVormVerpakking_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="verpakkingId" />
+				<ddl:referencesSpecification name="Verpakking" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="verpakkingId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ToedienVormEenheid" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ToedienVormEenheid_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="toedienVormId" />
+				<ddl:referencesSpecification name="ToedienVorm" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="toedienVormId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ToedienVormEenheid" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ToedienVormEenheid_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="eenheidId" />
+				<ddl:referencesSpecification name="Eenheid" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="eenheidId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ToepassingGroep" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ToepassingGroep_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="formulariumId" />
+				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="formulariumId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ToepassingGroep" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ToepassingGroep_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="hoofdGroep" />
+				<ddl:referencesSpecification name="ToepassingGroep" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="toepassingGroepId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="GeneriekDosering" schema="dbo">
+		<ddl:addTableConstraintDefinition name="GeneriekDosering_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="generiekId" />
+				<ddl:referencesSpecification name="Generiek" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="generiekId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="GeneriekDosering" schema="dbo">
+		<ddl:addTableConstraintDefinition name="GeneriekDosering_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="formulariumId" />
+				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="formulariumId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="GeneriekDosering" schema="dbo">
+		<ddl:addTableConstraintDefinition name="GeneriekDosering_FK3">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="tekstItemId" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="DoseringToepassing" schema="dbo">
+		<ddl:addTableConstraintDefinition name="DoseringToepassing_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="generiekDoseringId" />
+				<ddl:referencesSpecification name="GeneriekDosering" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="generiekDoseringId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="DoseringToepassing" schema="dbo">
+		<ddl:addTableConstraintDefinition name="DoseringToepassing_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="toepassingGroepId" />
+				<ddl:referencesSpecification name="ToepassingGroep" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="toepassingGroepId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="DoseringArtikel" schema="dbo">
+		<ddl:addTableConstraintDefinition name="DoseringArtikel_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="generiekDoseringId" />
+				<ddl:referencesSpecification name="GeneriekDosering" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="generiekDoseringId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="DoseringArtikel" schema="dbo">
+		<ddl:addTableConstraintDefinition name="DoseringArtikel_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="artikelId" />
+				<ddl:referencesSpecification name="Artikel" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="artikelId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="DoseringRoute" schema="dbo">
+		<ddl:addTableConstraintDefinition name="DoseringRoute_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="generiekDoseringId" />
+				<ddl:referencesSpecification name="GeneriekDosering" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="generiekDoseringId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="DoseringRoute" schema="dbo">
+		<ddl:addTableConstraintDefinition name="DoseringRoute_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="routeId" />
+				<ddl:referencesSpecification name="Route" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="routeId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ToedienVormRoute" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ToedienVormRoute_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="toedienVormId" />
+				<ddl:referencesSpecification name="ToedienVorm" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="toedienVormId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ToedienVormRoute" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ToedienVormRoute_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="routeId" />
+				<ddl:referencesSpecification name="Route" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="routeId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="FormulariumAuteur" schema="dbo">
+		<ddl:addTableConstraintDefinition name="FormulariumAuteur_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="auteur" />
+				<ddl:referencesSpecification name="Apotheker" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="apothekerId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="FormulariumAuteur" schema="dbo">
+		<ddl:addTableConstraintDefinition name="FormulariumAuteur_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="formulariumId" />
+				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="formulariumId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="GeneriekBijzonderheid" schema="dbo">
+		<ddl:addTableConstraintDefinition name="GeneriekBijzonderheid_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="generiekId" />
+				<ddl:referencesSpecification name="Generiek" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="generiekId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="GeneriekBijzonderheid" schema="dbo">
+		<ddl:addTableConstraintDefinition name="GeneriekBijzonderheid_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="tekstItemId" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="GeneriekBijzonderheid" schema="dbo">
+		<ddl:addTableConstraintDefinition name="GeneriekBijzonderheid_FK3">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="formulariumId" />
+				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="formulariumId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ToepassingBijzonderheid" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ToepassingBijzonderheid_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="toepassingGroepId" />
+				<ddl:referencesSpecification name="ToepassingGroep" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="toepassingGroepId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ToepassingBijzonderheid" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ToepassingBijzonderheid_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="tekstItemId" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ToepassingBijzonderheid" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ToepassingBijzonderheid_FK3">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="formulariumId" />
+				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="formulariumId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ArtikelBijzonderheid" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ArtikelBijzonderheid_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="artikelId" />
+				<ddl:referencesSpecification name="Artikel" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="artikelId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ArtikelBijzonderheid" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ArtikelBijzonderheid_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="tekstItemId" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="ArtikelBijzonderheid" schema="dbo">
+		<ddl:addTableConstraintDefinition name="ArtikelBijzonderheid_FK3">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="formulariumId" />
+				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="formulariumId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="FormulariumTekst" schema="dbo">
+		<ddl:addTableConstraintDefinition name="FormulariumTekst_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="formulariumId" />
+				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="formulariumId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="FormulariumTekst" schema="dbo">
+		<ddl:addTableConstraintDefinition name="FormulariumTekst_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="tekstItemId" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="TekstLog" schema="dbo">
+		<ddl:addTableConstraintDefinition name="TekstLog_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="tekstItemId" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="TekstLog" schema="dbo">
+		<ddl:addTableConstraintDefinition name="TekstLog_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="formulariumId" />
+				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="formulariumId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="TekstLog" schema="dbo">
+		<ddl:addTableConstraintDefinition name="TekstLog_FK3">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="gebruikerId" />
+				<ddl:referencesSpecification name="Gebruiker" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="gebruikerId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="Publicatie" schema="dbo">
+		<ddl:addTableConstraintDefinition name="Publicatie_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="formulariumId" />
+				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="formulariumId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="Publicatie" schema="dbo">
+		<ddl:addTableConstraintDefinition name="Publicatie_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="gebruikerId" />
+				<ddl:referencesSpecification name="Gebruiker" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="gebruikerId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieHoofdstuk" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieHoofdstuk_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="publicatieId" />
+				<ddl:referencesSpecification name="Publicatie" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="publicatieId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieHoofdstuk" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieHoofdstuk_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="hoofdstuk" />
+				<ddl:referencesSpecification name="ToepassingGroep" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="toepassingGroepId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieHoofdstuk" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieHoofdstuk_FK3">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="inleiding" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieTherapieGroep" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieTherapieGroep_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="publicatieHoofdstukId" />
+				<ddl:referencesSpecification name="PublicatieHoofdstuk" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="publicatieHoofdstukId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieTherapieGroep" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieTherapieGroep_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="therapieGroep" />
+				<ddl:referencesSpecification name="ToepassingGroep" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="toepassingGroepId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieTherapieGroep" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieTherapieGroep_FK3">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="inleiding" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieGeneriek" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieGeneriek_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="publicatieTherapieGroepId" />
+				<ddl:referencesSpecification name="PublicatieTherapieGroep" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="publicatieTherapieGroepId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieGeneriek" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieGeneriek_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="generiekId" />
+				<ddl:referencesSpecification name="Generiek" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="generiekId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieGeneriek" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieGeneriek_FK3">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="generiekBijzonderheid" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieRoute" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieRoute_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="publicatieGeneriekId" />
+				<ddl:referencesSpecification name="PublicatieGeneriek" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="publicatieGeneriekId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieRoute" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieRoute_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="routeId" />
+				<ddl:referencesSpecification name="Route" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="routeId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieRoute" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieRoute_FK3">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="routeDosering" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieRoute" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieRoute_FK4">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="bijzonderheid" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieArtikel" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieArtikel_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="publicatieRouteId" />
+				<ddl:referencesSpecification name="PublicatieRoute" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="publicatieRouteId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieArtikel" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieArtikel_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="artikelId" />
+				<ddl:referencesSpecification name="Artikel" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="artikelId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieArtikel" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieArtikel_FK3">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="artikelDosering" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieArtikel" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieArtikel_FK4">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="bijzonderheid" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieFormulariumTekst" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieFormulariumTekst_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="publicatieId" />
+				<ddl:referencesSpecification name="Publicatie" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="publicatieId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="PublicatieFormulariumTekst" schema="dbo">
+		<ddl:addTableConstraintDefinition name="PublicatieFormulariumTekst_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="formulariumTekst" />
+				<ddl:referencesSpecification name="TekstItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="tekstItemId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="GebruikerRol" schema="dbo">
+		<ddl:addTableConstraintDefinition name="GebruikerRol_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="gebruikerId" />
+				<ddl:referencesSpecification name="Gebruiker" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="gebruikerId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="GebruikerRol" schema="dbo">
+		<ddl:addTableConstraintDefinition name="GebruikerRol_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="rolId" />
+				<ddl:referencesSpecification name="Rol" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="rolId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="Apotheker" schema="dbo">
+		<ddl:addTableConstraintDefinition name="Apotheker_FK1">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="gebruikerId" />
+				<ddl:referencesSpecification name="Gebruiker" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="gebruikerId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<ddl:alterTableStatement name="Apotheker" schema="dbo">
+		<ddl:addTableConstraintDefinition name="Apotheker_FK2">
+			<ddl:referentialConstraintDefinition>
+				<dep:simpleColumnReference name="apotheekId" />
+				<ddl:referencesSpecification name="Apotheek" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="apotheekId" />
+				</ddl:referencesSpecification>
+			</ddl:referentialConstraintDefinition>
+		</ddl:addTableConstraintDefinition>
+	</ddl:alterTableStatement>
+	<dms:commitStatement />
+</dil:root>
