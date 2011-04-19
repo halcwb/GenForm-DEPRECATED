@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{46C54F92-FF84-4F84-A6E0-CD141EAFBE60}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Informedica.GenForm.Database.ORM</RootNamespace>
+    <AssemblyName>Informedica.GenForm.Database.ORM</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Csla, Version=3.8.2.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Csla\Csla.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ADOHelper.cs" />
+    <Compile Include="Database.cs" />
+    <Compile Include="LINQtoSQL2\CompleteDatabase.cs">
+      <DependentUpon>CompleteDatabase.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="LINQtoSQL2\CompleteDatabase.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompleteDatabase.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="LinqToSQL3\GenFormDB.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenFormDB.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="LINQtoSQL\Administration.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Administration.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="LINQtoSQL\Formularia.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Formularia.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="LINQtoSQL\FormulariumImport.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormulariumImport.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="LINQtoSQL\Products.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Products.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\Formularium2010._ORMCustomToolReport.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Formularium2010.orm</DependentUpon>
+    </Compile>
+    <Compile Include="ORM\GenFormDatabase._ORMCustomToolReport.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenFormDatabase.orm</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ORM\Formularium2010.orm">
+      <Generator>ORMCustomTool</Generator>
+      <LastGenOutput>Formularium2010._ORMCustomToolReport.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="LINQtoSQL\Administration.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Administration.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LINQtoSQL\Administration.dbml.layout">
+      <DependentUpon>Administration.dbml</DependentUpon>
+    </None>
+    <None Include="LINQtoSQL\Products.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Products.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ORM\StoredProcedures.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LINQtoSQL\Formularia.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Formularia.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LINQtoSQL\Products.dbml.layout">
+      <DependentUpon>Products.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup Condition="Exists('ORM/Formularium2010.orm')">
+    <None Include="ORM\Formularium2010.DCIL.xml">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Formularium2010.orm</DependentUpon>
+      <ORMGenerator>ConceptualDBtoDCL</ORMGenerator>
+    </None>
+    <None Include="ORM\Formularium2010.DDIL.xml">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Formularium2010.orm</DependentUpon>
+      <ORMGenerator>DCILtoDDIL</ORMGenerator>
+    </None>
+    <None Include="ORM\Formularium2010.SQLServer.sql">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Formularium2010.orm</DependentUpon>
+      <ORMGenerator>DDILtoSQLServer</ORMGenerator>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FormulariumImport" />
+    <None Include="LINQtoSQL\Formularia.dbml.layout">
+      <DependentUpon>Formularia.dbml</DependentUpon>
+    </None>
+    <None Include="LINQtoSQL\FormulariumImport.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>FormulariumImport.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LinqPad\DoseText.linq" />
+    <None Include="LinqPad\DoseTextImport.linq" />
+    <None Include="LinqPad\GenPresData.linq" />
+    <None Include="LinqPad\GenPresData2.linq" />
+    <None Include="LinqPad\GenPresDoseText.linq" />
+    <None Include="LinqPad\GenPresDoseText2.linq" />
+    <None Include="LinqPad\GenPresUnits.linq" />
+    <None Include="LINQtoSQL2\CompleteDatabase.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>CompleteDatabase.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="LINQtoSQL\FormulariumImport.dbml.layout">
+      <DependentUpon>FormulariumImport.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Formularium2010.bak" />
+    <None Include="LINQtoSQL2\CompleteDatabase.dbml.layout">
+      <DependentUpon>CompleteDatabase.dbml</DependentUpon>
+    </None>
+    <None Include="LinqToSQL3\GenFormDB.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>GenFormDB.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ORM\GenFormDatabase.orm">
+      <Generator>ORMCustomTool</Generator>
+      <LastGenOutput>GenFormDatabase._ORMCustomToolReport.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LinqToSQL3\GenFormDB.dbml.layout">
+      <DependentUpon>GenFormDB.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup Condition="Exists('ORM/GenFormDatabase.orm')">
+    <None Include="ORM\GenFormDatabase.DCIL.xml">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenFormDatabase.orm</DependentUpon>
+      <ORMGenerator>ConceptualDBtoDCL</ORMGenerator>
+    </None>
+    <None Include="ORM\GenFormDatabase.DDIL.xml">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenFormDatabase.orm</DependentUpon>
+      <ORMGenerator>DCILtoDDIL</ORMGenerator>
+    </None>
+    <None Include="ORM\GenFormDatabase.SQLServer.sql">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenFormDatabase.orm</DependentUpon>
+      <ORMGenerator>DDILtoSQLServer</ORMGenerator>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

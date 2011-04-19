@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="Formularium2010" Class="AdministrationDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=HAL-2008;Initial Catalog=Formularium2010;Integrated Security=True" SettingsObjectName="Informedica.GenForm.Database.ORM.Properties.Settings" SettingsPropertyName="Formularium2010ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Apotheek" Member="Apotheeks">
+    <Type Name="Apotheek">
+      <Column Name="apotheekId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="naam" Type="System.String" DbType="NVarChar(125) NOT NULL" CanBeNull="false" />
+      <Column Name="versieTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Association Name="Apotheek_Apotheker" Member="Apothekers" ThisKey="apotheekId" OtherKey="apotheekId" Type="Apotheker" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Apotheker" Member="Apothekers">
+    <Type Name="Apotheker">
+      <Column Name="apothekerId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="gebruikerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="apotheekId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Apotheek_Apotheker" Member="Apotheek" ThisKey="apotheekId" OtherKey="apotheekId" Type="Apotheek" IsForeignKey="true" />
+      <Association Name="Gebruiker_Apotheker" Member="Gebruiker" ThisKey="gebruikerId" OtherKey="gebruikerId" Type="Gebruiker" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Gebruiker" Member="Gebruikers">
+    <Type Name="Gebruiker">
+      <Column Name="gebruikerId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="gebruikerNaam" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="paswoord" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="versieTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="voorNaam" Type="System.String" DbType="NVarChar(125)" CanBeNull="true" />
+      <Column Name="achterNaam" Type="System.String" DbType="NChar(125)" CanBeNull="true" />
+      <Column Name="sein" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Association Name="Gebruiker_Apotheker" Member="Apothekers" ThisKey="gebruikerId" OtherKey="gebruikerId" Type="Apotheker" />
+      <Association Name="Gebruiker_GebruikerRol" Member="GebruikerRols" ThisKey="gebruikerId" OtherKey="gebruikerId" Type="GebruikerRol" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rol" Member="Rols">
+    <Type Name="Rol">
+      <Column Name="rolId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="naam" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="versieTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="omschrijving" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Rol_GebruikerRol" Member="GebruikerRols" ThisKey="rolId" OtherKey="rolId" Type="GebruikerRol" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GebruikerRol" Member="GebruikerRols">
+    <Type Name="GebruikerRol">
+      <Column Name="gebruikerRolId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="gebruikerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="rolId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Gebruiker_GebruikerRol" Member="Gebruiker" ThisKey="gebruikerId" OtherKey="gebruikerId" Type="Gebruiker" IsForeignKey="true" />
+      <Association Name="Rol_GebruikerRol" Member="Rol" ThisKey="rolId" OtherKey="rolId" Type="Rol" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.CSLA_Apotheek_Delete" Method="CSLA_Apotheek_Delete">
+    <Parameter Name="p_apotheekId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_Rol_Update" Method="CSLA_Rol_Update">
+    <Parameter Name="p_versieTimeStamp" Type="System.Data.Linq.Binary" DbType="Timestamp" Direction="InOut" />
+    <Parameter Name="p_rolId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_naam" Type="System.String" DbType="NChar(30)" />
+    <Parameter Name="p_omschrijving" Type="System.String" DbType="NVarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_Apotheek_Insert" Method="CSLA_Apotheek_Insert">
+    <Parameter Name="p_versieTimeStamp" Type="System.Data.Linq.Binary" DbType="Timestamp" Direction="InOut" />
+    <Parameter Name="p_naam" Type="System.String" DbType="NVarChar(125)" />
+    <Parameter Name="p_apotheekId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_Apotheek_Select" Method="CSLA_Apotheek_Select">
+    <Parameter Name="p_apotheekId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_naam" Type="System.String" DbType="NVarChar(125)" />
+    <ElementType Name="CSLA_Apotheek_SelectResult">
+      <Column Name="apotheekId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="naam" Type="System.String" DbType="NVarChar(125) NOT NULL" CanBeNull="false" />
+      <Column Name="versieTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CSLA_Apotheek_Update" Method="CSLA_Apotheek_Update">
+    <Parameter Name="p_versieTimeStamp" Type="System.Data.Linq.Binary" DbType="Timestamp" Direction="InOut" />
+    <Parameter Name="p_apotheekId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_naam" Type="System.String" DbType="NVarChar(125)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_Apotheker_Delete" Method="CSLA_Apotheker_Delete">
+    <Parameter Name="p_apothekerId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_Apotheker_Insert" Method="CSLA_Apotheker_Insert">
+    <Parameter Name="p_gebruikerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_apotheekId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_apothekerId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_Apotheker_Select" Method="CSLA_Apotheker_Select">
+    <Parameter Name="p_apothekerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_gebruikerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_apotheekId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="CSLA_Apotheker_SelectResult">
+      <Column Name="apothekerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="gebruikerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="apotheekId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CSLA_Apotheker_Update" Method="CSLA_Apotheker_Update">
+    <Parameter Name="p_apothekerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_gebruikerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_apotheekId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_Gebruiker_Delete" Method="CSLA_Gebruiker_Delete">
+    <Parameter Name="p_gebruikerId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_Gebruiker_Insert" Method="CSLA_Gebruiker_Insert">
+    <Parameter Name="p_versieTimeStamp" Type="System.Data.Linq.Binary" DbType="Timestamp" Direction="InOut" />
+    <Parameter Name="p_gebruikerNaam" Type="System.String" DbType="NChar(30)" />
+    <Parameter Name="p_paswoord" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="p_email" Type="System.String" DbType="NChar(20)" />
+    <Parameter Name="p_voorNaam" Type="System.String" DbType="NVarChar(125)" />
+    <Parameter Name="p_achterNaam" Type="System.String" DbType="NChar(125)" />
+    <Parameter Name="p_sein" Type="System.String" DbType="NChar(20)" />
+    <Parameter Name="p_gebruikerId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_Gebruiker_Select" Method="CSLA_Gebruiker_Select">
+    <Parameter Name="p_gebruikerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_gebruikerNaam" Type="System.String" DbType="NChar(30)" />
+    <Parameter Name="p_paswoord" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="p_email" Type="System.String" DbType="NChar(20)" />
+    <Parameter Name="p_voorNaam" Type="System.String" DbType="NVarChar(125)" />
+    <Parameter Name="p_voorNaamHasValue" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="p_achterNaam" Type="System.String" DbType="NChar(125)" />
+    <Parameter Name="p_achterNaamHasValue" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="p_sein" Type="System.String" DbType="NChar(20)" />
+    <Parameter Name="p_seinHasValue" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="CSLA_Gebruiker_SelectResult">
+      <Column Name="gebruikerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="gebruikerNaam" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="paswoord" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="versieTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" />
+      <Column Name="voorNaam" Type="System.String" DbType="NVarChar(125)" CanBeNull="true" />
+      <Column Name="achterNaam" Type="System.String" DbType="NChar(125)" CanBeNull="true" />
+      <Column Name="sein" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CSLA_Gebruiker_Update" Method="CSLA_Gebruiker_Update">
+    <Parameter Name="p_versieTimeStamp" Type="System.Data.Linq.Binary" DbType="Timestamp" Direction="InOut" />
+    <Parameter Name="p_gebruikerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_gebruikerNaam" Type="System.String" DbType="NChar(30)" />
+    <Parameter Name="p_paswoord" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="p_email" Type="System.String" DbType="NChar(20)" />
+    <Parameter Name="p_voorNaam" Type="System.String" DbType="NVarChar(125)" />
+    <Parameter Name="p_achterNaam" Type="System.String" DbType="NChar(125)" />
+    <Parameter Name="p_sein" Type="System.String" DbType="NChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_GebruikerRol_Delete" Method="CSLA_GebruikerRol_Delete">
+    <Parameter Name="p_gebruikerRolId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_GebruikerRol_Insert" Method="CSLA_GebruikerRol_Insert">
+    <Parameter Name="p_gebruikerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_rolId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_gebruikerRolId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_GebruikerRol_Select" Method="CSLA_GebruikerRol_Select">
+    <Parameter Name="p_gebruikerRolId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_gebruikerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_rolId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="CSLA_GebruikerRol_SelectResult">
+      <Column Name="gebruikerRolId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="gebruikerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="rolId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CSLA_GebruikerRol_Update" Method="CSLA_GebruikerRol_Update">
+    <Parameter Name="p_gebruikerRolId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_gebruikerId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_rolId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_Rol_Delete" Method="CSLA_Rol_Delete">
+    <Parameter Name="p_rolId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_Rol_Insert" Method="CSLA_Rol_Insert">
+    <Parameter Name="p_versieTimeStamp" Type="System.Data.Linq.Binary" DbType="Timestamp" Direction="InOut" />
+    <Parameter Name="p_naam" Type="System.String" DbType="NChar(30)" />
+    <Parameter Name="p_omschrijving" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="p_rolId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_Rol_Select" Method="CSLA_Rol_Select">
+    <Parameter Name="p_rolId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="p_naam" Type="System.String" DbType="NChar(30)" />
+    <Parameter Name="p_omschrijving" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="p_omschrijvingHasValue" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="CSLA_Rol_SelectResult">
+      <Column Name="rolId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="naam" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="versieTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" />
+      <Column Name="omschrijving" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CSLA_DeleteGebruikerRolsByAndgebruikerId" Method="CSLA_DeleteGebruikerRolsByAndgebruikerId">
+    <Parameter Name="gebruikerId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CSLA_DeleteGebruikerRolsByAndrolId" Method="CSLA_DeleteGebruikerRolsByAndrolId">
+    <Parameter Name="rolId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

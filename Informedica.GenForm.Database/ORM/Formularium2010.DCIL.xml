@@ -1,0 +1,1139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dcl:schema name="dbo" xmlns:dcl="http://schemas.orm.net/DIL/DCIL" xmlns:dil="http://schemas.orm.net/DIL/DIL" xmlns:ddt="http://schemas.orm.net/DIL/DILDT" xmlns:dep="http://schemas.orm.net/DIL/DILEP" xmlns:dml="http://schemas.orm.net/DIL/DMIL" xmlns:ddl="http://schemas.orm.net/DIL/DDIL">
+	<dcl:domain name="GeneriekVolgOrde">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="GeneriekVolgOrde_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:table name="Gebruiker">
+		<dcl:column name="gebruikerId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="gebruikerNaam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="30" />
+		</dcl:column>
+		<dcl:column name="email" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:column name="paswoord" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="voorNaam" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="125" />
+		</dcl:column>
+		<dcl:column name="achterNaam" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="sein" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="Gebruiker_PK" isPrimary="true">
+			<dcl:columnRef name="gebruikerId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Gebruiker_UC1" isPrimary="false">
+			<dcl:columnRef name="gebruikerNaam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Gebruiker_UC2" isPrimary="false">
+			<dcl:columnRef name="voorNaam" />
+			<dcl:columnRef name="achterNaam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Gebruiker_UC3" isPrimary="false">
+			<dcl:columnRef name="sein" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Gebruiker_UC4" isPrimary="false">
+			<dcl:columnRef name="email" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Gebruiker_UC5" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+	</dcl:table>
+	<dcl:table name="Apotheek">
+		<dcl:column name="apotheekId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="naam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="125" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="Apotheek_PK" isPrimary="true">
+			<dcl:columnRef name="apotheekId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Apotheek_UC1" isPrimary="false">
+			<dcl:columnRef name="naam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Apotheek_UC2" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+	</dcl:table>
+	<dcl:table name="Formularium">
+		<dcl:column name="formulariumId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="naam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" length="125" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:column name="apotheekId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="hoofdauteur" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="Formularium_PK" isPrimary="true">
+			<dcl:columnRef name="formulariumId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Formularium_UC1" isPrimary="false">
+			<dcl:columnRef name="naam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Formularium_UC2" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="Formularium_FK1" targetTable="Apotheek">
+			<dcl:columnRef sourceName="apotheekId" targetName="apotheekId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="Formularium_FK2" targetTable="Apotheker">
+			<dcl:columnRef sourceName="hoofdauteur" targetName="apothekerId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="Merk">
+		<dcl:column name="merkId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="naam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="Merk_PK" isPrimary="true">
+			<dcl:columnRef name="merkId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Merk_UC1" isPrimary="false">
+			<dcl:columnRef name="naam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Merk_UC2" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+	</dcl:table>
+	<dcl:table name="ToedienVorm">
+		<dcl:column name="toedienVormId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="naam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="ToedienVorm_PK" isPrimary="true">
+			<dcl:columnRef name="toedienVormId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="ToedienVorm_UC1" isPrimary="false">
+			<dcl:columnRef name="naam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="ToedienVorm_UC2" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+	</dcl:table>
+	<dcl:table name="Verpakking">
+		<dcl:column name="verpakkingId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="naam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="Verpakking_PK" isPrimary="true">
+			<dcl:columnRef name="verpakkingId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Verpakking_UC1" isPrimary="false">
+			<dcl:columnRef name="naam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Verpakking_UC2" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+	</dcl:table>
+	<dcl:table name="GeneriekGroep">
+		<dcl:column name="generiekGroepId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="naam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:column name="hoofdGroep" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="GeneriekGroep_PK" isPrimary="true">
+			<dcl:columnRef name="generiekGroepId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="GeneriekGroep_UC1" isPrimary="false">
+			<dcl:columnRef name="naam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="GeneriekGroep_UC2" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="GeneriekGroep_FK" targetTable="GeneriekGroep">
+			<dcl:columnRef sourceName="hoofdGroep" targetName="generiekGroepId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="Generiek">
+		<dcl:column name="generiekId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="naam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:column name="code" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="isStof" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="BOOLEAN" />
+		</dcl:column>
+		<dcl:column name="generiekGroepId" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="Generiek_PK" isPrimary="true">
+			<dcl:columnRef name="generiekId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Generiek_UC1" isPrimary="false">
+			<dcl:columnRef name="naam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Generiek_UC2" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="Generiek_FK" targetTable="GeneriekGroep">
+			<dcl:columnRef sourceName="generiekGroepId" targetName="generiekGroepId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="Artikel">
+		<dcl:column name="artikelId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="naam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:column name="generiekId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="ArtikelGUID" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="HPKode" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="defaultNaam" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" />
+		</dcl:column>
+		<dcl:column name="KAE" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="REAL" />
+		</dcl:column>
+		<dcl:column name="isCombinatie" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="BOOLEAN" />
+		</dcl:column>
+		<dcl:column name="ATKode" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="hoeveelheid" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="DOUBLE PRECISION" />
+		</dcl:column>
+		<dcl:column name="eenheidId" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="toedienVormId" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="verpakkingId" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="merkId" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="Artikel_PK" isPrimary="true">
+			<dcl:columnRef name="artikelId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Artikel_UC1" isPrimary="false">
+			<dcl:columnRef name="naam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Artikel_UC2" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="Artikel_FK1" targetTable="Generiek">
+			<dcl:columnRef sourceName="generiekId" targetName="generiekId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="Artikel_FK2" targetTable="Eenheid">
+			<dcl:columnRef sourceName="eenheidId" targetName="eenheidId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="Artikel_FK3" targetTable="ToedienVorm">
+			<dcl:columnRef sourceName="toedienVormId" targetName="toedienVormId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="Artikel_FK4" targetTable="Verpakking">
+			<dcl:columnRef sourceName="verpakkingId" targetName="verpakkingId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="Artikel_FK5" targetTable="Merk">
+			<dcl:columnRef sourceName="merkId" targetName="merkId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="ArtikelGeneriek">
+		<dcl:column name="artikelGeneriekId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="volgorde" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="GeneriekVolgOrde" />
+		</dcl:column>
+		<dcl:column name="artikelId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="generiekId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="sterkte" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="DOUBLE PRECISION" />
+		</dcl:column>
+		<dcl:column name="hoeveelheid" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="DOUBLE PRECISION" />
+		</dcl:column>
+		<dcl:column name="eenheidId" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="ArtikelGeneriek_UC1" isPrimary="false">
+			<dcl:columnRef name="artikelId" />
+			<dcl:columnRef name="generiekId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="ArtikelGeneriek_UC2" isPrimary="false">
+			<dcl:columnRef name="artikelId" />
+			<dcl:columnRef name="volgorde" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="ArtikelGeneriek_PK" isPrimary="true">
+			<dcl:columnRef name="artikelGeneriekId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="ArtikelGeneriek_FK1" targetTable="Artikel">
+			<dcl:columnRef sourceName="artikelId" targetName="artikelId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="ArtikelGeneriek_FK2" targetTable="Generiek">
+			<dcl:columnRef sourceName="generiekId" targetName="generiekId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="ArtikelGeneriek_FK3" targetTable="Eenheid">
+			<dcl:columnRef sourceName="eenheidId" targetName="eenheidId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="Eenheid">
+		<dcl:column name="eenheidId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="naam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:column name="eenheidGroepId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="afkorting" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="factor" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="DOUBLE PRECISION" />
+		</dcl:column>
+		<dcl:column name="KAE" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="REAL" />
+		</dcl:column>
+		<dcl:column name="isReferentie" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="BOOLEAN" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="Eenheid_PK" isPrimary="true">
+			<dcl:columnRef name="eenheidId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Eenheid_UC1" isPrimary="false">
+			<dcl:columnRef name="afkorting" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Eenheid_UC2" isPrimary="false">
+			<dcl:columnRef name="naam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Eenheid_UC3" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="Eenheid_FK" targetTable="EenheidGroep">
+			<dcl:columnRef sourceName="eenheidGroepId" targetName="eenheidGroepId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="EenheidGroep">
+		<dcl:column name="eenheidGroepId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:column name="naam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="conversieToestaan" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="BOOLEAN" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="EenheidGroep_PK" isPrimary="true">
+			<dcl:columnRef name="eenheidGroepId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="EenheidGroep_UC" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+	</dcl:table>
+	<dcl:table name="Route">
+		<dcl:column name="routeId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="naam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="Route_PK" isPrimary="true">
+			<dcl:columnRef name="routeId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Route_UC1" isPrimary="false">
+			<dcl:columnRef name="naam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Route_UC2" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+	</dcl:table>
+	<dcl:table name="ArtikelRoute">
+		<dcl:column name="artikelRouteId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="artikelId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="routeId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="ArtikelRoute_UC" isPrimary="false">
+			<dcl:columnRef name="routeId" />
+			<dcl:columnRef name="artikelId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="ArtikelRoute_PK" isPrimary="true">
+			<dcl:columnRef name="artikelRouteId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="ArtikelRoute_FK1" targetTable="Artikel">
+			<dcl:columnRef sourceName="artikelId" targetName="artikelId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="ArtikelRoute_FK2" targetTable="Route">
+			<dcl:columnRef sourceName="routeId" targetName="routeId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="ToedienVormVerpakking">
+		<dcl:column name="toedienVormVerpakkingId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="toedienVormId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="verpakkingId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="ToedienVormVerpakking_UC" isPrimary="false">
+			<dcl:columnRef name="toedienVormId" />
+			<dcl:columnRef name="verpakkingId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="ToedienVormVerpakking_PK" isPrimary="true">
+			<dcl:columnRef name="toedienVormVerpakkingId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="ToedienVormVerpakking_FK1" targetTable="ToedienVorm">
+			<dcl:columnRef sourceName="toedienVormId" targetName="toedienVormId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="ToedienVormVerpakking_FK2" targetTable="Verpakking">
+			<dcl:columnRef sourceName="verpakkingId" targetName="verpakkingId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="ToedienVormEenheid">
+		<dcl:column name="toedienVormEenheidId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="toedienVormId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="eenheidId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="ToedienVormEenheid_UC" isPrimary="false">
+			<dcl:columnRef name="toedienVormId" />
+			<dcl:columnRef name="eenheidId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="ToedienVormEenheid_PK" isPrimary="true">
+			<dcl:columnRef name="toedienVormEenheidId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="ToedienVormEenheid_FK1" targetTable="ToedienVorm">
+			<dcl:columnRef sourceName="toedienVormId" targetName="toedienVormId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="ToedienVormEenheid_FK2" targetTable="Eenheid">
+			<dcl:columnRef sourceName="eenheidId" targetName="eenheidId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="ToepassingGroep">
+		<dcl:column name="toepassingGroepId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="naam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:column name="formulariumId" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="hoofdGroep" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="ToepassingGroep_PK" isPrimary="true">
+			<dcl:columnRef name="toepassingGroepId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="ToepassingGroep_UC1" isPrimary="false">
+			<dcl:columnRef name="naam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="ToepassingGroep_UC2" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="ToepassingGroep_FK1" targetTable="Formularium">
+			<dcl:columnRef sourceName="formulariumId" targetName="formulariumId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="ToepassingGroep_FK2" targetTable="ToepassingGroep">
+			<dcl:columnRef sourceName="hoofdGroep" targetName="toepassingGroepId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="GeneriekDosering">
+		<dcl:column name="generiekDoseringId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:column name="tekstItemId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="generiekId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="formulariumId" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="GeneriekDosering_PK" isPrimary="true">
+			<dcl:columnRef name="generiekDoseringId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="GeneriekDosering_UC1" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="GeneriekDosering_UC2" isPrimary="false">
+			<dcl:columnRef name="tekstItemId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="GeneriekDosering_FK1" targetTable="Generiek">
+			<dcl:columnRef sourceName="generiekId" targetName="generiekId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="GeneriekDosering_FK2" targetTable="Formularium">
+			<dcl:columnRef sourceName="formulariumId" targetName="formulariumId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="GeneriekDosering_FK3" targetTable="TekstItem">
+			<dcl:columnRef sourceName="tekstItemId" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="TekstItem">
+		<dcl:column name="tekstItemId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:column name="tekst" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" />
+		</dcl:column>
+		<dcl:column name="tekstType" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="50" />
+		</dcl:column>
+		<dcl:column name="tekstStatus" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="50" />
+		</dcl:column>
+		<dcl:column name="tekstKop" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="125" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="TekstItem_PK" isPrimary="true">
+			<dcl:columnRef name="tekstItemId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="TekstItem_UC" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+	</dcl:table>
+	<dcl:table name="DoseringToepassing">
+		<dcl:column name="doseringToepassingId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="generiekDoseringId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="toepassingGroepId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="DoseringToepassing_UC" isPrimary="false">
+			<dcl:columnRef name="generiekDoseringId" />
+			<dcl:columnRef name="toepassingGroepId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="DoseringToepassing_PK" isPrimary="true">
+			<dcl:columnRef name="doseringToepassingId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="DoseringToepassing_FK1" targetTable="GeneriekDosering">
+			<dcl:columnRef sourceName="generiekDoseringId" targetName="generiekDoseringId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="DoseringToepassing_FK2" targetTable="ToepassingGroep">
+			<dcl:columnRef sourceName="toepassingGroepId" targetName="toepassingGroepId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="DoseringArtikel">
+		<dcl:column name="doseringArtikelId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="generiekDoseringId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="artikelId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="DoseringArtikel_UC" isPrimary="false">
+			<dcl:columnRef name="generiekDoseringId" />
+			<dcl:columnRef name="artikelId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="DoseringArtikel_PK" isPrimary="true">
+			<dcl:columnRef name="doseringArtikelId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="DoseringArtikel_FK1" targetTable="GeneriekDosering">
+			<dcl:columnRef sourceName="generiekDoseringId" targetName="generiekDoseringId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="DoseringArtikel_FK2" targetTable="Artikel">
+			<dcl:columnRef sourceName="artikelId" targetName="artikelId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="DoseringRoute">
+		<dcl:column name="doseringRouteId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="generiekDoseringId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="routeId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="DoseringRoute_UC" isPrimary="false">
+			<dcl:columnRef name="generiekDoseringId" />
+			<dcl:columnRef name="routeId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="DoseringRoute_PK" isPrimary="true">
+			<dcl:columnRef name="doseringRouteId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="DoseringRoute_FK1" targetTable="GeneriekDosering">
+			<dcl:columnRef sourceName="generiekDoseringId" targetName="generiekDoseringId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="DoseringRoute_FK2" targetTable="Route">
+			<dcl:columnRef sourceName="routeId" targetName="routeId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="ToedienVormRoute">
+		<dcl:column name="toedienVormRouteId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="toedienVormId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="routeId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="ToedienVormRoute_UC" isPrimary="false">
+			<dcl:columnRef name="toedienVormId" />
+			<dcl:columnRef name="routeId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="ToedienVormRoute_PK" isPrimary="true">
+			<dcl:columnRef name="toedienVormRouteId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="ToedienVormRoute_FK1" targetTable="ToedienVorm">
+			<dcl:columnRef sourceName="toedienVormId" targetName="toedienVormId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="ToedienVormRoute_FK2" targetTable="Route">
+			<dcl:columnRef sourceName="routeId" targetName="routeId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="FormulariumAuteur">
+		<dcl:column name="formulariumAuteurId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="auteur" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="formulariumId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="FormulariumAuteur_PK" isPrimary="true">
+			<dcl:columnRef name="formulariumAuteurId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="FormulariumAuteur_UC" isPrimary="false">
+			<dcl:columnRef name="auteur" />
+			<dcl:columnRef name="formulariumId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="FormulariumAuteur_FK1" targetTable="Apotheker">
+			<dcl:columnRef sourceName="auteur" targetName="apothekerId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="FormulariumAuteur_FK2" targetTable="Formularium">
+			<dcl:columnRef sourceName="formulariumId" targetName="formulariumId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="GeneriekBijzonderheid">
+		<dcl:column name="generiekBijzonderheidId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="generiekId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="formulariumId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="tekstItemId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="GeneriekBijzonderheid_UC" isPrimary="false">
+			<dcl:columnRef name="generiekId" />
+			<dcl:columnRef name="formulariumId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="GeneriekBijzonderheid_PK" isPrimary="true">
+			<dcl:columnRef name="generiekBijzonderheidId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="GeneriekBijzonderheid_FK1" targetTable="Generiek">
+			<dcl:columnRef sourceName="generiekId" targetName="generiekId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="GeneriekBijzonderheid_FK2" targetTable="TekstItem">
+			<dcl:columnRef sourceName="tekstItemId" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="GeneriekBijzonderheid_FK3" targetTable="Formularium">
+			<dcl:columnRef sourceName="formulariumId" targetName="formulariumId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="ToepassingBijzonderheid">
+		<dcl:column name="toepassingBijzonderheidId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="toepassingGroepId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="formulariumId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="tekstItemId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="ToepassingBijzonderheid_UC" isPrimary="false">
+			<dcl:columnRef name="toepassingGroepId" />
+			<dcl:columnRef name="formulariumId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="ToepassingBijzonderheid_PK" isPrimary="true">
+			<dcl:columnRef name="toepassingBijzonderheidId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="ToepassingBijzonderheid_FK1" targetTable="ToepassingGroep">
+			<dcl:columnRef sourceName="toepassingGroepId" targetName="toepassingGroepId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="ToepassingBijzonderheid_FK2" targetTable="TekstItem">
+			<dcl:columnRef sourceName="tekstItemId" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="ToepassingBijzonderheid_FK3" targetTable="Formularium">
+			<dcl:columnRef sourceName="formulariumId" targetName="formulariumId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="ArtikelBijzonderheid">
+		<dcl:column name="artikelBijzonderheidId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="artikelId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="formulariumId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="tekstItemId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="ArtikelBijzonderheid_UC" isPrimary="false">
+			<dcl:columnRef name="artikelId" />
+			<dcl:columnRef name="formulariumId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="ArtikelBijzonderheid_PK" isPrimary="true">
+			<dcl:columnRef name="artikelBijzonderheidId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="ArtikelBijzonderheid_FK1" targetTable="Artikel">
+			<dcl:columnRef sourceName="artikelId" targetName="artikelId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="ArtikelBijzonderheid_FK2" targetTable="TekstItem">
+			<dcl:columnRef sourceName="tekstItemId" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="ArtikelBijzonderheid_FK3" targetTable="Formularium">
+			<dcl:columnRef sourceName="formulariumId" targetName="formulariumId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="FormulariumTekst">
+		<dcl:column name="formulariumTekstId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="formulariumId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="tekstItemId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="FormulariumTekst_UC" isPrimary="false">
+			<dcl:columnRef name="formulariumId" />
+			<dcl:columnRef name="tekstItemId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="FormulariumTekst_PK" isPrimary="true">
+			<dcl:columnRef name="formulariumTekstId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="FormulariumTekst_FK1" targetTable="Formularium">
+			<dcl:columnRef sourceName="formulariumId" targetName="formulariumId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="FormulariumTekst_FK2" targetTable="TekstItem">
+			<dcl:columnRef sourceName="tekstItemId" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="TekstLog">
+		<dcl:column name="tekstLogId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="logDatum" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:column name="tekstItemId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="formulariumId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="gebruikerId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="actie" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="50" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="TekstLog_PK" isPrimary="true">
+			<dcl:columnRef name="tekstLogId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="TekstLog_UC" isPrimary="false">
+			<dcl:columnRef name="tekstItemId" />
+			<dcl:columnRef name="gebruikerId" />
+			<dcl:columnRef name="logDatum" />
+			<dcl:columnRef name="formulariumId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="TekstLog_FK1" targetTable="TekstItem">
+			<dcl:columnRef sourceName="tekstItemId" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="TekstLog_FK2" targetTable="Formularium">
+			<dcl:columnRef sourceName="formulariumId" targetName="formulariumId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="TekstLog_FK3" targetTable="Gebruiker">
+			<dcl:columnRef sourceName="gebruikerId" targetName="gebruikerId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="Publicatie">
+		<dcl:column name="publicatieId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="publicatieDatum" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:column name="formulariumId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="gebruikerId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="Publicatie_PK" isPrimary="true">
+			<dcl:columnRef name="publicatieId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Publicatie_UC" isPrimary="false">
+			<dcl:columnRef name="formulariumId" />
+			<dcl:columnRef name="publicatieDatum" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="Publicatie_FK1" targetTable="Formularium">
+			<dcl:columnRef sourceName="formulariumId" targetName="formulariumId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="Publicatie_FK2" targetTable="Gebruiker">
+			<dcl:columnRef sourceName="gebruikerId" targetName="gebruikerId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="PublicatieHoofdstuk">
+		<dcl:column name="publicatieHoofdstukId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="publicatieId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="hoofdstuk" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="inleiding" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="PublicatieHoofdstuk_UC" isPrimary="false">
+			<dcl:columnRef name="hoofdstuk" />
+			<dcl:columnRef name="publicatieId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="PublicatieHoofdstuk_PK" isPrimary="true">
+			<dcl:columnRef name="publicatieHoofdstukId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="PublicatieHoofdstuk_FK1" targetTable="Publicatie">
+			<dcl:columnRef sourceName="publicatieId" targetName="publicatieId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PublicatieHoofdstuk_FK2" targetTable="ToepassingGroep">
+			<dcl:columnRef sourceName="hoofdstuk" targetName="toepassingGroepId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PublicatieHoofdstuk_FK3" targetTable="TekstItem">
+			<dcl:columnRef sourceName="inleiding" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="PublicatieTherapieGroep">
+		<dcl:column name="publicatieTherapieGroepId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="publicatieHoofdstukId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="therapieGroep" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="inleiding" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="PublicatieTherapieGroep_UC" isPrimary="false">
+			<dcl:columnRef name="publicatieHoofdstukId" />
+			<dcl:columnRef name="therapieGroep" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="PublicatieTherapieGroep_PK" isPrimary="true">
+			<dcl:columnRef name="publicatieTherapieGroepId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="PublicatieTherapieGroep_FK1" targetTable="PublicatieHoofdstuk">
+			<dcl:columnRef sourceName="publicatieHoofdstukId" targetName="publicatieHoofdstukId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PublicatieTherapieGroep_FK2" targetTable="ToepassingGroep">
+			<dcl:columnRef sourceName="therapieGroep" targetName="toepassingGroepId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PublicatieTherapieGroep_FK3" targetTable="TekstItem">
+			<dcl:columnRef sourceName="inleiding" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="PublicatieGeneriek">
+		<dcl:column name="publicatieGeneriekId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="publicatieTherapieGroepId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="generiekId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="generiekBijzonderheid" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="PublicatieGeneriek_UC" isPrimary="false">
+			<dcl:columnRef name="generiekId" />
+			<dcl:columnRef name="publicatieTherapieGroepId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="PublicatieGeneriek_PK" isPrimary="true">
+			<dcl:columnRef name="publicatieGeneriekId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="PublicatieGeneriek_FK1" targetTable="PublicatieTherapieGroep">
+			<dcl:columnRef sourceName="publicatieTherapieGroepId" targetName="publicatieTherapieGroepId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PublicatieGeneriek_FK2" targetTable="Generiek">
+			<dcl:columnRef sourceName="generiekId" targetName="generiekId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PublicatieGeneriek_FK3" targetTable="TekstItem">
+			<dcl:columnRef sourceName="generiekBijzonderheid" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="PublicatieRoute">
+		<dcl:column name="publicatieRouteId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="publicatieGeneriekId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="routeId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="routeDosering" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="bijzonderheid" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="PublicatieRoute_UC" isPrimary="false">
+			<dcl:columnRef name="publicatieGeneriekId" />
+			<dcl:columnRef name="routeId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="PublicatieRoute_PK" isPrimary="true">
+			<dcl:columnRef name="publicatieRouteId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="PublicatieRoute_FK1" targetTable="PublicatieGeneriek">
+			<dcl:columnRef sourceName="publicatieGeneriekId" targetName="publicatieGeneriekId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PublicatieRoute_FK2" targetTable="Route">
+			<dcl:columnRef sourceName="routeId" targetName="routeId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PublicatieRoute_FK3" targetTable="TekstItem">
+			<dcl:columnRef sourceName="routeDosering" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PublicatieRoute_FK4" targetTable="TekstItem">
+			<dcl:columnRef sourceName="bijzonderheid" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="PublicatieArtikel">
+		<dcl:column name="publicatieArtikelId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="publicatieRouteId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="artikelId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="artikelDosering" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="bijzonderheid" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="PublicatieArtikel_UC" isPrimary="false">
+			<dcl:columnRef name="publicatieRouteId" />
+			<dcl:columnRef name="artikelId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="PublicatieArtikel_PK" isPrimary="true">
+			<dcl:columnRef name="publicatieArtikelId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="PublicatieArtikel_FK1" targetTable="PublicatieRoute">
+			<dcl:columnRef sourceName="publicatieRouteId" targetName="publicatieRouteId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PublicatieArtikel_FK2" targetTable="Artikel">
+			<dcl:columnRef sourceName="artikelId" targetName="artikelId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PublicatieArtikel_FK3" targetTable="TekstItem">
+			<dcl:columnRef sourceName="artikelDosering" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PublicatieArtikel_FK4" targetTable="TekstItem">
+			<dcl:columnRef sourceName="bijzonderheid" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="PublicatieFormulariumTekst">
+		<dcl:column name="publicatieFormulariumTekstId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="publicatieId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="formulariumTekst" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="PublicatieFormulariumTekst_UC" isPrimary="false">
+			<dcl:columnRef name="publicatieId" />
+			<dcl:columnRef name="formulariumTekst" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="PublicatieFormulariumTekst_PK" isPrimary="true">
+			<dcl:columnRef name="publicatieFormulariumTekstId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="PublicatieFormulariumTekst_FK1" targetTable="Publicatie">
+			<dcl:columnRef sourceName="publicatieId" targetName="publicatieId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="PublicatieFormulariumTekst_FK2" targetTable="TekstItem">
+			<dcl:columnRef sourceName="formulariumTekst" targetName="tekstItemId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="Rol">
+		<dcl:column name="rolId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="naam" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER" length="30" />
+		</dcl:column>
+		<dcl:column name="versieTimeStamp" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="TIMESTAMP" />
+		</dcl:column>
+		<dcl:column name="omschrijving" isNullable="true" isIdentity="false">
+			<dcl:predefinedDataType name="CHARACTER VARYING" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="Rol_PK" isPrimary="true">
+			<dcl:columnRef name="rolId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Rol_UC1" isPrimary="false">
+			<dcl:columnRef name="naam" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="Rol_UC2" isPrimary="false">
+			<dcl:columnRef name="versieTimeStamp" />
+		</dcl:uniquenessConstraint>
+	</dcl:table>
+	<dcl:table name="GebruikerRol">
+		<dcl:column name="gebruikerRolId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="gebruikerId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="rolId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="GebruikerRol_UC" isPrimary="false">
+			<dcl:columnRef name="rolId" />
+			<dcl:columnRef name="gebruikerId" />
+		</dcl:uniquenessConstraint>
+		<dcl:uniquenessConstraint name="GebruikerRol_PK" isPrimary="true">
+			<dcl:columnRef name="gebruikerRolId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="GebruikerRol_FK1" targetTable="Gebruiker">
+			<dcl:columnRef sourceName="gebruikerId" targetName="gebruikerId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="GebruikerRol_FK2" targetTable="Rol">
+			<dcl:columnRef sourceName="rolId" targetName="rolId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+	<dcl:table name="Apotheker">
+		<dcl:column name="apothekerId" isNullable="false" isIdentity="true">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="gebruikerId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:column name="apotheekId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
+		<dcl:uniquenessConstraint name="Apotheker_PK" isPrimary="true">
+			<dcl:columnRef name="apothekerId" />
+		</dcl:uniquenessConstraint>
+		<dcl:referenceConstraint name="Apotheker_FK1" targetTable="Gebruiker">
+			<dcl:columnRef sourceName="gebruikerId" targetName="gebruikerId" />
+		</dcl:referenceConstraint>
+		<dcl:referenceConstraint name="Apotheker_FK2" targetTable="Apotheek">
+			<dcl:columnRef sourceName="apotheekId" targetName="apotheekId" />
+		</dcl:referenceConstraint>
+	</dcl:table>
+</dcl:schema>
