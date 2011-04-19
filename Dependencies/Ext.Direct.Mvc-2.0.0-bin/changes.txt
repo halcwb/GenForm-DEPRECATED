@@ -1,0 +1,160 @@
+﻿v2.0.0
+
+* Added support for multiple assemblies
+* Compiled with ASP.NET MVC 2.0 Final
+
+v1.0.0
+
+* Signed the assembly with a strong name (key file included)
+
+v0.9.1
+
+* Removed all DirectForm extention methods. The structure of return data should
+  always be the responsibility or choice of a developer.
+* Includes binaries precompiled with ASP.NET MVC 1.0 and 2.0 RC 2.
+* Bug fixes and code clean-up.
+
+v0.9.0
+
+* Changed configuration requirements. Made it much easier to configure. Setting
+  apiUrl and routerUrl config options is no longer required and should be
+  deleted from Web.config of your web project. The API path is now hardcoded to
+  "/Direct/Api" and Router path is "/Direct/Router", and cannot be changed.
+* Removed DirectHttpModule class, it is not needed anymore. So the related
+  lines in Web.config file of your web project where you register this module
+  should also be deleted.
+* Removed DirectMvcRouteHandler.cs and DirectMvcHandler.cs - they are no longer
+  needed either.
+* Support for ASP.NET MVC 2.0 RC
+
+v0.8.4
+
+* Recompiled with Json.NET 3.5 Release 6.
+
+v0.8.3
+
+* Removed: DirectController class due to lack of necessity. Any controller is
+  considered a Direct controller unless marked with DirectIgnoreAttribute
+  which is extremely recommended.
+* Changed: Helper methods that were in DirectController are now implemented as
+  extension methods of Controller class, so you must reference Ext.Direct.Mvc
+  in your controller and call the helper methods with 'this' keyword.
+
+v0.8.2
+
+* Fixed: Binding DateTime, Enum, Guid and nullable types.
+* Misc: Lots of unnecessary code was removed.
+
+v0.8.1
+
+* Removed: Interception of every exception introduced in v0.8.0 (was a bad idea).
+* Added: DirectHandleErrorAttribute class which can be used to mark a whole
+  controller or an individual action with a [DirectHandleError] attribute to
+  intercept all exceptions and return a direct response of type "exception"
+  that contains the information about the exception.
+* Added: DirectException class for throwing custom exceptions that will always
+  return to the client as a direct response of type "exception".
+* Added: Suport for ActionNameAttribute. If an action is marked with this
+  attribute, then the specified name will be used when generating API and for
+  routing direct requests. Make sure that you use the name specified in this
+  attribute when calling the method from your JS code.
+* Added: New overloaded methods in DirectController. Check out DirectForm().
+* Renamed: exceptionData to errorData.
+* Fixed: Serialization of DirectResponse in file upload mode.
+* Misc: Other minor fixes and code optimizations.
+
+v0.8.0
+
+* Added: All exceptions now return to the client as a direct response with type
+  "exception" so they can be handled globally by listenening to the "exception"
+  event.
+* Added: New boolean configuration option called "debug" (optional, default to
+  false). When an exception occures on the server and this option is set to
+  true, the exception response contains a property called "where" with full
+  stack trace. This option should never be set to true in production
+  environment because of security concerns.
+* Added: Exception response can also contain a property called "exceptionData"
+  with additional user-defined information about the exception. It is set from
+  Exception.Data. To read about Exception.Data and how to set it see
+  http://msdn.microsoft.com/en-us/library/system.exception.data.aspx
+* Changed: Direct() method signatures. Converters are now passed as params
+  array as opposed to List<JsonConverter> as it was done before.
+* Added: Easy way to return a custom server-side events to the client. To do
+  that simply return the result of one of the DirectEvent() overloaded methods
+  from you action and listen to your event on the client as described in the
+  documentation to Ext.Direct class in "Server side events" section:
+  http://www.extjs.com/deploy/dev/docs/?class=Ext.Direct
+* Removed: DirectException class.
+* Fixed: Rare multithreading issue when registering routes
+* Misc: Other small fixes. Better code organization.
+
+v0.7.0
+
+* Added: Support for passing one-dimensional arrays of simple as well as
+  complex types.
+* Misc: Compiled with Json.NET 3.5 Release 5.
+
+v0.6.4
+
+* Added: Small adjustment for integration with the Ext Designer.
+
+v0.6.3
+
+* Added: dateFormat configuration attribute. Optional. Specifies format to use
+  when serializing dates by default. Supported values are "Iso" or "JavaScript"
+  to use Json.NET IsoDateTimeConverter or JavaScriptDateTimeConverter
+  respectively. If not specified or has value other than supported then the
+  default format is used which is the same as one used by Microsoft:
+  "\/Date(1198908717056)\/".
+  
+v0.6.2
+
+* Added: Ability to specify converters and serialization settings when returing
+  DirectResult from a direct method. Check the signatures of Direct() method in
+  DirectController class.
+  
+v0.6.1
+
+* Fixed: If cached DirectProvider API is flushed by IIS it is regenerated and
+  cached again.
+* Removed: DirectProviderCache class.
+
+v0.6.0
+
+* Added: Support for passing complex type objects (i.e. object literals).
+
+v0.5.2
+
+* Fixed: Crash when trying to deserialize Direct request(s) using Json.NET 3.5
+  beta 4 (and later).
+
+v0.5.1
+
+* Fixed: Custom direct routes would change the behaviour of Html.ActionLink.
+
+v0.5.0
+
+* Fixed: TestApplication didn't run in IIS 7.
+* Fixed: Direct routing from a subfolder (like /Home/Index).
+* Added: Buffer configuration option is made nullable.
+
+v0.4.0
+
+* Changed: DirectIgnoreAttribute can be used to mark classes (controllers).
+
+v0.3.0
+
+* Fixed: Controller actions marked with DirectIgnoreAttribute can now be
+  executed as regular actions via the default route.
+  
+v0.2.0
+
+* Changed: Moved the configuration related files to Configuration
+  folder/namespace.
+* Added: Created static DirectConfig class for easy configuration access.
+* Changed: Renamed DirectSectionHandler to DirectSection.
+* Added: Better exception handling.
+
+v0.1.0
+
+* Initial release.

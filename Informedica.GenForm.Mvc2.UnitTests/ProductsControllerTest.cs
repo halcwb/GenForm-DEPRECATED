@@ -1,7 +1,7 @@
-﻿using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Services;
+﻿using Informedica.GenForm.Library.Services;
 using Informedica.GenForm.Mvc2.Controllers;
 using Informedica.GenForm.Presentation.Products;
+using Informedica.GenForm.ServiceProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
