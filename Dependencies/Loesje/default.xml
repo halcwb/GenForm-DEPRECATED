@@ -1,0 +1,16 @@
+<logging>
+    <loggers>
+        <log method="socket">
+            <remoteIP>127.0.0.1</remoteIP>
+            <port>6666</port>
+            <logdebug>true</logdebug>
+            <logwarnings>true</logwarnings>
+            <logerrors>true</logerrors>
+            <loginfo>true</loginfo>
+            <logevent>true</logevent>
+            <logeventID>999</logeventID>
+            <maxlogrotates>10</maxlogrotates>
+            <maxlogfilesizeKB>10000</maxlogfilesizeKB>
+         </log>
+    </loggers>
+</logging>
