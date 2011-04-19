@@ -96,15 +96,15 @@ namespace Informedica.GenForm.Presentation.Tests
         internal virtual IForm CreateIForm()
         {
             // TODO: Instantiate an appropriate concrete class.
-            IForm target = PresentationMockProvider.Instance.Resolve<IForm>();
+            IForm target = Isolate.Fake.Instance<IForm>();
             
             return target;
         }
 
         private IButton CreateIButton()
         {
-            IButton button = PresentationMockProvider.Instance.Resolve<IButton>();
-            IForm target = PresentationMockProvider.Instance.Resolve<IForm>();
+            IButton button = Isolate.Fake.Instance<IButton>();
+            IForm target = Isolate.Fake.Instance<IForm>();
             Isolate.WhenCalled(() => target.Buttons.Count).WillReturn(1);
             return button;
         }

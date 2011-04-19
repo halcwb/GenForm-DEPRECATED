@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Repository;
-using Informedica.GenForm.Library.Services;
 using Informedica.GenForm.Mvc2.Controllers;
 using Informedica.GenForm.ServiceProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
