@@ -1,0 +1,77 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{819BA760-6C94-4203-8DB0-7F0AAA4B2159}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Informedica.GenForm.Tests</RootNamespace>
+    <AssemblyName>Informedica.GenForm.Tests</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Csla, Version=3.8.2.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Csla\Csla.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="TypeMock, Version=6.0.8.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
+    <Reference Include="Typemock.ArrangeActAssert, Version=6.0.8.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AcceptanceTests\CreateProductAcceptanceTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegressionTests\LoginAcceptanceTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AuthoringTests.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
+      <Project>{B8679F93-88AC-480F-8287-179F43685081}</Project>
+      <Name>Informedica.GenForm.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Mvc2\Informedica.GenForm.Mvc2.csproj">
+      <Project>{D5D0ACA6-5C07-4E08-A731-142D644DD0D1}</Project>
+      <Name>Informedica.GenForm.Mvc2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj">
+      <Project>{82D196C1-B130-4188-A363-458311D8BD89}</Project>
+      <Name>Informedica.GenForm.ServiceProviders</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
