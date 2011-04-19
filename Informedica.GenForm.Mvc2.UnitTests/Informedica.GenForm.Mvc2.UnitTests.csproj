@@ -31,26 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Csla, Version=3.8.2.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\Csla\Csla.dll</HintPath>
-    </Reference>
-    <Reference Include="Ext.Direct.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=2ec707a789ea209b, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\Ext.Direct.Mvc-2.0.0-bin\Bin\Ext.Direct.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="Informedica.GenForm.Database.ORM, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Informedica.GenForm.Database\bin\Debug\Informedica.GenForm.Database.ORM.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\MicrosoftEnterpriseLib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\MicrosoftEnterpriseLib\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\MicrosoftEnterpriseLib\Microsoft.Practices.Unity.dll</HintPath>
@@ -119,17 +99,9 @@
     <Compile Include="GenFormEndToEndTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Informedica.GenForm.DataAccess\Informedica.GenForm.DataAccess.csproj">
-      <Project>{639FEAD7-BD32-49FC-B900-04F9354296B9}</Project>
-      <Name>Informedica.GenForm.DataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
       <Project>{B8679F93-88AC-480F-8287-179F43685081}</Project>
       <Name>Informedica.GenForm.Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Mocking\Informedica.GenForm.Mocking.csproj">
-      <Project>{0BE4E1C3-039F-4816-A559-ABE4F2DCA729}</Project>
-      <Name>Informedica.GenForm.Mocking</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Mvc2\Informedica.GenForm.Mvc2.csproj">
       <Project>{D5D0ACA6-5C07-4E08-A731-142D644DD0D1}</Project>

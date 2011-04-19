@@ -46,12 +46,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DomainModel\Users\IPharamcists.cs" />
+    <Compile Include="DomainModel\Users\IUser.cs" />
+    <Compile Include="DomainModel\Users\IUserInfoList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ILoginServices.cs" />
+    <Compile Include="Security\ILoginUser.cs" />
+    <Compile Include="Services\IProductServices.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DomainModel\" />
-    <Folder Include="Security\" />
-    <Folder Include="Services\" />
+    <Folder Include="DomainModel\Products\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

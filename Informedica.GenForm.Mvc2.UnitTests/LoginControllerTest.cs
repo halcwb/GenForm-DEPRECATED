@@ -3,6 +3,7 @@ using Informedica.GenForm.Library.Security;
 using Informedica.GenForm.Library.Services;
 using Informedica.GenForm.Mvc2.Controllers;
 using Informedica.GenForm.PresentationLayer.Security;
+using Informedica.GenForm.ServiceProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Mvc;
 using TypeMock.ArrangeActAssert;
@@ -94,14 +95,25 @@ namespace Informedica.GenForm.Mvc2.UnitTests
         public  void SystemUserCanLogin()
         {
             // Setup
-            ILoginServices loginServices = GenFormServiceProvider.Instance.Resolve<ILoginServices>();
-            Isolate.WhenCalled(() => loginServices.Login(LoginUser.NewLoginUser(ValidUser, ValidPassword))).IgnoreCall();
-            Isolate.WhenCalled(() => loginServices.IsLoggedIn(LoginUser.NewLoginUser(ValidUser))).WillReturn(true);
+            var user = GetUser();
+            var loginServices = GetLoginServices();
+            Isolate.WhenCalled(() => loginServices.Login(user)).IgnoreCall();
+            Isolate.WhenCalled(() => loginServices.IsLoggedIn(user)).WillReturn(true);
             var controller = new LoginController();
 
             var response = controller.Login(ValidUser, ValidPassword);
 
             Assert.IsTrue(GetSuccessValueFromActionResult(response));
+        }
+
+        private static ILoginUser GetUser()
+        {
+            return GenFormServiceProvider.Instance.Resolve<ILoginUser>();
+        }
+
+        private static ILoginServices GetLoginServices()
+        {
+            return GenFormServiceProvider.Instance.Resolve<ILoginServices>();
         }
 
         [Isolated]
@@ -110,12 +122,12 @@ namespace Informedica.GenForm.Mvc2.UnitTests
         {
             ILoginController controller = new LoginController();
             var loginServices = GenFormServiceProvider.Instance.Resolve<ILoginServices>();
-            Assert.IsTrue(loginServices.IsLoggedIn(LoginUser.NewLoginUser(ValidUser)), "Cannot log in");
+            Assert.IsTrue(loginServices.IsLoggedIn(GetUser()), "Cannot log in");
 
-            Isolate.WhenCalled(() => loginServices.ChangePassword(LoginUser.NewLoginUser(ValidUser, ValidPassword), TempPassword)).WillReturn(false);
+            Isolate.WhenCalled(() => loginServices.ChangePassword(GetUser(), TempPassword)).WillReturn(false);
 
             var response = controller.ChangePassword(ValidUser, ValidPassword, TempPassword);
-            Isolate.Verify.WasCalledWithExactArguments(() => loginServices.ChangePassword(LoginUser.NewLoginUser( ValidUser, ValidPassword), TempPassword));            
+            Isolate.Verify.WasCalledWithExactArguments(() => loginServices.ChangePassword(GetUser(), TempPassword));            
 
             Assert.IsTrue(GetSuccessValueFromActionResult(response), "Password was not changed");
         }
@@ -127,10 +139,10 @@ namespace Informedica.GenForm.Mvc2.UnitTests
             ILoginController controller = new LoginController();
             var loginServices = GenFormServiceProvider.Instance.Resolve<ILoginServices>();
 
-            Isolate.WhenCalled(() => loginServices.ChangePassword(LoginUser.NewLoginUser(InvalidUser, InvalidPassword), "newpassword")).WillReturn(true);
+            Isolate.WhenCalled(() => loginServices.ChangePassword(GetUser(), "newpassword")).WillReturn(true);
 
             var response = controller.ChangePassword("foo", "oldpassword", "newpassword");
-            Isolate.Verify.WasCalledWithExactArguments(() => loginServices.ChangePassword(LoginUser.NewLoginUser("foo", "oldpassword"), "newpassword"));
+            Isolate.Verify.WasCalledWithExactArguments(() => loginServices.ChangePassword(GetUser(), "newpassword"));
 
             Assert.IsFalse(GetSuccessValueFromActionResult(response));
         }
