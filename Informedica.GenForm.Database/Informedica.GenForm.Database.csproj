@@ -197,7 +197,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Formularium2010.bak" />
     <None Include="LINQtoSQL2\CompleteDatabase.dbml.layout">
       <DependentUpon>CompleteDatabase.dbml</DependentUpon>
     </None>

@@ -44,8 +44,8 @@
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="TypeMock, Version=6.0.8.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
-    <Reference Include="Typemock.ArrangeActAssert, Version=6.0.8.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
+    <Reference Include="TypeMock, Version=6.0.7.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
+    <Reference Include="Typemock.ArrangeActAssert, Version=6.0.7.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IFormTest.cs" />
@@ -55,10 +55,6 @@
     <Content Include="AuthoringTests.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Informedica.GenForm.Mocking\Informedica.GenForm.Mocking.csproj">
-      <Project>{0BE4E1C3-039F-4816-A559-ABE4F2DCA729}</Project>
-      <Name>Informedica.GenForm.Mocking</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Presentation\Informedica.GenForm.Presentation.csproj">
       <Project>{63800128-7BE0-4B57-A789-27CB9E5EED3B}</Project>
       <Name>Informedica.GenForm.Presentation</Name>

@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ext.Direct.Mvc, Version=2.2.0.20795, Culture=neutral, PublicKeyToken=2ec707a789ea209b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Ext.Direct.Mvc-2.0.0-bin\Ext.Direct.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\MicrosoftEnterpriseLib\Microsoft.Practices.Unity.dll</HintPath>
@@ -50,7 +54,7 @@
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\Ext.Direct.Mvc-2.0.0-bin\Bin\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\Dependencies\Ext.Direct.Mvc-2.0.0-bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -85,18 +89,13 @@
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="TypeMock, Version=6.0.8.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
-    <Reference Include="Typemock.ArrangeActAssert, Version=6.0.8.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
+    <Reference Include="TypeMock, Version=6.0.7.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
+    <Reference Include="Typemock.ArrangeActAssert, Version=6.0.7.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionResultParserTest.cs" />
-    <Compile Include="AdministrationControllerTest.cs" />
     <Compile Include="LoginControllerTest.cs" />
-    <Compile Include="ProductsControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HomeControllerTest.cs" />
-    <Compile Include="Controllers\AccountControllerTest.cs" />
-    <Compile Include="GenFormEndToEndTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
@@ -115,6 +114,9 @@
       <Project>{82D196C1-B130-4188-A363-458311D8BD89}</Project>
       <Name>Informedica.GenForm.ServiceProviders</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

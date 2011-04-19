@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Practices.Unity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -82,8 +83,7 @@ namespace Informedica.GenForm.Services.Tests
             IUnityContainer container = new UnityContainer();
             container.RegisterInstance("test", testclass);
             
-            var result = container.Registrations.FirstOrDefault(r => r.Name == "test");
-            
+           
             Assert.IsNotNull(container.Registrations.First(r => r.Name == "test"));
         }
 
