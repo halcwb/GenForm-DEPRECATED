@@ -6,7 +6,11 @@ namespace Informedica.GenForm.Library.Security
 {
     internal class GenFormPrincipal: IGenFormPrincipal
     {
-        public GenFormPrincipal(IIdentity identity)
+        private static IGenFormPrincipal _principal;
+
+        #region Factory Methods
+
+        private GenFormPrincipal(IIdentity identity)
         {
             Identity = identity;
         }
@@ -16,7 +20,7 @@ namespace Informedica.GenForm.Library.Security
             SetPrincipal(GetIdentity(user));
         }
 
-        private static IIdentity GetIdentity(ILoginUser user)
+        private static IGenFormIdentity GetIdentity(ILoginUser user)
         {
             return GenFormIdentity.GetIdentity(user);
         }
@@ -31,14 +35,21 @@ namespace Informedica.GenForm.Library.Security
             throw new NotImplementedException();
         }
 
-        private static void SetPrincipal(IIdentity identity)
+        private static void SetPrincipal(IGenFormIdentity identity)
         {
             if (identity.IsAuthenticated)
             {
-                GenFormPrincipal principal = new GenFormPrincipal(identity);
-                Thread.CurrentPrincipal = principal;
+                _principal = new GenFormPrincipal(identity);
+                Thread.CurrentPrincipal = _principal;
             }
+        } 
+
+        public static IGenFormPrincipal GetPrincipal()
+        {
+            return _principal;
         }
+
+        #endregion
 
         #region Implementation of IPrincipal
 
@@ -48,6 +59,16 @@ namespace Informedica.GenForm.Library.Security
         }
 
         public IIdentity Identity { get; private set; }
+
+        public void ChangePassword(string oldPassword, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckPassword(string password)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     }

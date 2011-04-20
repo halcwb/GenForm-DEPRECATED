@@ -1,9 +1,13 @@
-﻿using System.Security.Principal;
+﻿using System;
+using System.Security.Principal;
 
 namespace Informedica.GenForm.Library.Security
 {
-    internal interface IGenFormPrincipal: IPrincipal
+    public interface IGenFormPrincipal: IPrincipal
     {
-
+        bool IsInRole(String role);
+        IIdentity Identity { get; }
+        void ChangePassword(String oldPassword, String newPassword);
+        bool CheckPassword(String password);
     }
 }

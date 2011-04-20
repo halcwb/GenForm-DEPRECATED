@@ -18,22 +18,42 @@ namespace Informedica.GenForm.Library.Services
             return GenFormPrincipal.IsLoggedIn();
         }
 
-        public Boolean Logout(ILoginUser user)
+        public void Logout(ILoginUser user)
         {
             if (GenFormIdentity.GetIdentity(user.UserName) == null) throw new Exception();
 
             GenFormPrincipal.Logout();
-            return true;
         }
 
-        public Boolean ChangePassword(ILoginUser loginUser, String newPassword)
+        public void ChangePassword(ILoginUser loginUser, string newPassword)
         {
-            throw new NotImplementedException();
+            Principal.ChangePassword(loginUser.Password, newPassword);
         }
 
-        public ILoginUser GetLoginUser(String userName, String password)
+        public bool CheckPassword(String password)
+        {
+            return Principal.CheckPassword(password);
+        }
+
+        private static IGenFormPrincipal Principal
+        {
+            get { return GenFormPrincipal.GetPrincipal(); }
+        }
+
+        public ILoginUser CreateLoginUser(String userName, String password)
         {
             return LoginUser.NewLoginUser(userName, password);
+        }
+
+        #endregion
+
+        #region LoginServices Factory Methods
+
+        private LoginServices() {}
+
+        public static ILoginServices NewLoginServices()
+        {
+            return new LoginServices();
         }
 
         #endregion

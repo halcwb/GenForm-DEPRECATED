@@ -6,7 +6,7 @@ namespace Informedica.GenForm.ServiceProviders.LoginServices
     {
         public static ILoginServices CreateLoginServices()
         {
-            return new Library.Services.LoginServices();
+            return Library.Services.LoginServices.NewLoginServices();
         }
     }
 }
