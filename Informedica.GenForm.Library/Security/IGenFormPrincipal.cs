@@ -5,8 +5,7 @@ namespace Informedica.GenForm.Library.Security
 {
     public interface IGenFormPrincipal: IPrincipal
     {
-        bool IsInRole(String role);
-        IIdentity Identity { get; }
+        new bool IsInRole(String role);
         void ChangePassword(String oldPassword, String newPassword);
         bool CheckPassword(String password);
     }

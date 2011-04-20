@@ -1,14 +1,15 @@
 ﻿using System;
+using Informedica.GenForm.Library.Security;
 
 namespace Informedica.GenForm.Library.DomainModel.Users
 {
-    public interface IUser
+    public interface IUser: IGenFormIdentity
     {
-        String UserName { get; }
-        String Password { get; }
-        String LastName { get; }
-        String FirstName { get; }
-        String Email { get; }
-        String Pager { get; }
+        String UserName { get; set; }
+        String Password { get; set; }
+        String LastName { get; set; }
+        String FirstName { get; set; }
+        String Email { get; set; }
+        String Pager { get; set; }
     }
 }
