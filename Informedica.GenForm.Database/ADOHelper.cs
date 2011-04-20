@@ -15,11 +15,9 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 
-using Csla.Data;
-
 #endregion
 
-namespace Informedica.GenForm.Database
+namespace Informedica.GenForm.Database.ORM
 {
     public static class ADOHelper
     {

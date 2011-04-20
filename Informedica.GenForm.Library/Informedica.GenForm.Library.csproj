@@ -45,17 +45,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="DomainModel\Users\IPharamcists.cs" />
     <Compile Include="DomainModel\Users\IUser.cs" />
     <Compile Include="DomainModel\Users\IUserInfoList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\GenFormIdentity.cs" />
+    <Compile Include="Security\GenFormPrincipal.cs" />
+    <Compile Include="Security\IGenFormIdentity.cs" />
+    <Compile Include="Security\IGenFormPrincipal.cs" />
+    <Compile Include="Security\LoginUser.cs" />
     <Compile Include="Services\ILoginServices.cs" />
     <Compile Include="Security\ILoginUser.cs" />
     <Compile Include="Services\IProductServices.cs" />
+    <Compile Include="Services\LoginServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DomainModel\Products\" />
+    <Folder Include="ServiceProviders\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

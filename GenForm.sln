@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Present
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Mvc2", "Informedica.GenForm.Mvc2\Informedica.GenForm.Mvc2.csproj", "{D5D0ACA6-5C07-4E08-A731-142D644DD0D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Mvc2.UnitTests", "Informedica.GenForm.Mvc2.UnitTests\Informedica.GenForm.Mvc2.UnitTests.csproj", "{7A87B746-06AA-4DBF-918D-1371C27AF744}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Mvc2.Tests", "Informedica.GenForm.Mvc2.UnitTests\Informedica.GenForm.Mvc2.Tests.csproj", "{7A87B746-06AA-4DBF-918D-1371C27AF744}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.ServiceProviders", "Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj", "{82D196C1-B130-4188-A363-458311D8BD89}"
 EndProject
@@ -19,7 +19,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Tests", "Informedica.GenForm.Tests\Informedica.GenForm.Tests.csproj", "{819BA760-6C94-4203-8DB0-7F0AAA4B2159}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F981F9D-1E8A-4342-B1A5-CE121FA6969B}"
+	ProjectSection(SolutionItems) = preProject
+		GenForm.vsmdi = GenForm.vsmdi
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = GenForm.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
