@@ -19,7 +19,7 @@ namespace Informedica.GenForm.Library.Security
             throw new NotImplementedException();
         }
 
-        internal static IIdentity GetIdentity(ILoginUser user)
+        internal static IGenFormIdentity GetIdentity(ILoginUser user)
         {
             // ToDo: Go to repository to loolup identity by name an password
             throw new NotImplementedException();

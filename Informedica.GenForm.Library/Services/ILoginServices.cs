@@ -6,9 +6,10 @@ namespace Informedica.GenForm.Library.Services
     public interface ILoginServices
     {
         void Login(ILoginUser user);
-        bool Logout(ILoginUser user);
-        bool ChangePassword(ILoginUser user, String newPassword);
+        void Logout(ILoginUser user);
+        void ChangePassword(ILoginUser user, String newPassword);
+        bool CheckPassword(String password);
         bool IsLoggedIn(ILoginUser user);
-        ILoginUser GetLoginUser(String userName, String password);
+        ILoginUser CreateLoginUser(String userName, String password);
     }
 }

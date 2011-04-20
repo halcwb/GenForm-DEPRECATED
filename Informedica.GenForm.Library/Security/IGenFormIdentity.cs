@@ -1,6 +1,8 @@
-﻿namespace Informedica.GenForm.Library.Security
+﻿using System.Security.Principal;
+
+namespace Informedica.GenForm.Library.Security
 {
-    internal interface IGenFormIdentity
+    public interface IGenFormIdentity: IIdentity
     {
     }
 }
