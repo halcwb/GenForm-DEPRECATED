@@ -2,16 +2,16 @@
 using Informedica.GenForm.Library.Services;
 using TypeMock.ArrangeActAssert;
 
-namespace Informedica.GenForm.ServiceProviders
+namespace Informedica.GenForm.ServiceProviders.LoginServices
 {
-    public class GenFormServiceProvider : ServiceProvider
+    public class LoginServiceProvider : ServiceProvider
     {
 #pragma warning disable 649
-        private static GenFormServiceProvider _instance;
+        private static LoginServiceProvider _instance;
 #pragma warning restore 649
         private static readonly object LockThis = new object();
 
-        private GenFormServiceProvider() { Initialize(); }
+        private LoginServiceProvider() { Initialize(); }
 
         public static IServiceProvider Instance
         {

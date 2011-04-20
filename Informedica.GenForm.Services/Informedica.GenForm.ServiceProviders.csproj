@@ -65,8 +65,9 @@
   <ItemGroup>
     <Compile Include="ConcreteServiceProvider.cs" />
     <Compile Include="ConcreteServiceProvider2.cs" />
-    <Compile Include="GenFormServiceProvider.cs" />
+    <Compile Include="LoginServices\LoginServiceProvider.cs" />
     <Compile Include="IServiceProvider.cs" />
+    <Compile Include="LoginServices\LoginServicesFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceProvider.cs" />
   </ItemGroup>
