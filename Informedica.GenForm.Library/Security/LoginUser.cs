@@ -17,9 +17,7 @@ namespace Informedica.GenForm.Library.Security
 
         public static ILoginUser NewLoginUser(String name, String password)
         {
-            var user = new LoginUser();
-            user.UserName = name;
-            user.Password = password;
+            var user = new LoginUser {UserName = name, Password = password};
 
             return user;
         } 

@@ -4,13 +4,13 @@ using System.Threading;
 
 namespace Informedica.GenForm.Library.Security
 {
-    internal class GenFormPrincipal: IGenFormPrincipal
+    internal class GenFormPrincipal: GenericPrincipal, IGenFormPrincipal
     {
         private static IGenFormPrincipal _principal;
 
         #region Factory Methods
 
-        private GenFormPrincipal(IIdentity identity)
+        private GenFormPrincipal(IGenFormIdentity identity): base(identity, new String[] {})
         {
             Identity = identity;
         }

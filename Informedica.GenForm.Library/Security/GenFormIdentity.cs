@@ -1,28 +1,33 @@
 ﻿using System;
 using System.Security.Principal;
+using Informedica.GenForm.Library.DomainModel.Users;
 
 namespace Informedica.GenForm.Library.Security
 {
     internal class GenFormIdentity: GenericIdentity, IGenFormIdentity
     {
-        internal GenFormIdentity(String name) : base(name)
+        private GenFormIdentity(String name) : base(name)
         {
         }
 
-        internal GenFormIdentity(String name, String type) : base(name, type)
+        private GenFormIdentity(String name, String type) : base(name, type)
         {
         }
 
         internal static IGenFormIdentity GetIdentity(String name)
         {
-            // ToDo: Go to repository to lookup identity by name
-            throw new NotImplementedException();
+            return CreateIdentity(name);
+        }
+
+        private static IGenFormIdentity CreateIdentity(string name)
+        {
+            var user = User.GetUser(name);
+            return new GenFormIdentity(user.Name);
         }
 
         internal static IGenFormIdentity GetIdentity(ILoginUser user)
         {
-            // ToDo: Go to repository to loolup identity by name an password
-            throw new NotImplementedException();
+            return CreateIdentity(user.UserName);
         }
     }
 }
