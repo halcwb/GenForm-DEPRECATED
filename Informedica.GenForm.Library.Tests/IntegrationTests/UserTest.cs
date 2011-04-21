@@ -1,4 +1,6 @@
-﻿using Informedica.GenForm.Library.DomainModel.Users;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Users;
 using Informedica.GenForm.Library.ServiceProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Informedica.GenForm.Library.DataAccess;
@@ -73,15 +75,15 @@ namespace Informedica.GenForm.Library.Tests
 
             ArrangeFakeRepository(name);
 
-            Assert.IsTrue(User.GetUser(name).Name == name);
+            Assert.IsTrue(User.GetUser(name).FirstOrDefault().Name == name);
         }
 
         private static void ArrangeFakeRepository(string name)
         {
             var repos = Isolate.Fake.Instance<IRepository<IUser>>();
             DalServiceProvider.Instance.RegisterInstanceOfType(repos);
-            var user = Isolate.Fake.Instance<IUser>();
-            Isolate.WhenCalled(() => user.Name).WillReturn(name);
+            var user = new List<IUser>() {Isolate.Fake.Instance<IUser>()};
+            Isolate.WhenCalled(() => user.FirstOrDefault().Name).WillReturn(name);
             Isolate.WhenCalled(() => repos.GetByName(name)).WillReturn(user);
         }
     }

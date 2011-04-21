@@ -1,5 +1,9 @@
 ﻿using System;
+using Informedica.GenForm.DataAccess.Repositories;
+using Informedica.GenForm.Library.DataAccess;
+using Informedica.GenForm.Library.DomainModel.Users;
 using Informedica.GenForm.Library.Security;
+using Informedica.GenForm.Library.ServiceProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
@@ -52,10 +56,12 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         //}
         //
         //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
+        [TestInitialize()]
+        public void MyTestInitialize()
+        {
+            var repository = (IRepository<IUser>) new UserRepository();
+            DalServiceProvider.Instance.RegisterInstanceOfType(repository);
+        }
         //
         //Use TestCleanup to run code after each test has run
         //[TestCleanup()]
@@ -65,21 +71,22 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         //
         #endregion
 
-
+        [Isolated]
         [TestMethod]
         public void Login_system_user_results_in_PrincipalIdentity()
         {
-            ILoginUser user = CreateSystemUser();
+            ILoginCriteria user = CreateSystemUser();
             GenFormPrincipal.Login(user);
 
             Assert.IsNotNull(GenFormPrincipal.GetPrincipal().Identity, "Principal identity should be set");
         }
 
-        private static ILoginUser CreateSystemUser()
+        private static ILoginCriteria CreateSystemUser()
         {
             return LoginUser.NewLoginUser("Admin", "Admin");
         }
 
+        [Isolated]
         [TestMethod]
         public void Login_calls_SetPrincipal_with_identity()
         {

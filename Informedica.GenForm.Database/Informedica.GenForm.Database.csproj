@@ -64,6 +64,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CompleteDatabase.dbml</DependentUpon>
     </Compile>
+    <Compile Include="LinqToSQL3\GenFormDataContext.cs" />
     <Compile Include="LinqToSQL3\GenFormDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

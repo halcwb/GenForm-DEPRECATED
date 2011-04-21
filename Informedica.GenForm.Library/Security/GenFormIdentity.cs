@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Principal;
+using System.Threading;
 using Informedica.GenForm.Library.DomainModel.Users;
 
 namespace Informedica.GenForm.Library.Security
@@ -19,13 +21,17 @@ namespace Informedica.GenForm.Library.Security
             return CreateIdentity(name);
         }
 
-        private static IGenFormIdentity CreateIdentity(string name)
+        private static IGenFormIdentity CreateIdentity(String name)
         {
-            var user = User.GetUser(name);
+            if (name == null) throw new ArgumentNullException("name");
+
+            var user = User.GetUser(name).FirstOrDefault();
+            if (user == null) throw new NullReferenceException("User could not be found");
+
             return new GenFormIdentity(user.Name);
         }
 
-        internal static IGenFormIdentity GetIdentity(ILoginUser user)
+        internal static IGenFormIdentity GetIdentity(ILoginCriteria user)
         {
             return CreateIdentity(user.UserName);
         }

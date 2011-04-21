@@ -1,28 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Informedica.GenForm.DataAccess.DataContexts;
+using Informedica.GenForm.DataAccess.DataMappers;
+using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DataAccess;
 using Informedica.GenForm.Library.DomainModel.Users;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class UserRepository: IRepository<IUser>
+    public class UserRepository : IRepository<IUser>
     {
         #region Implementation of IRepository<IUser>
 
-        public IUser GetById(int id)
+        public IEnumerable<IUser> GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IUser GetByName(string name)
+        public IEnumerable<IUser> GetByName(string name)
         {
-            var user = User.NewUser();
-            user.UserName = name;
-            return user;
+            IList<IUser> list = new List<IUser>();
+
+            using (var dataContext = DataContextFactory.CreateGenFormDataContext())
+            {
+                var users = FindUsersByName(dataContext, name);
+                MapUsersToList(users, list);
+            }
+
+            return list;
         }
 
+        private static IEnumerable<GenFormUser> FindUsersByName(GenFormDataContext dataContext, String name)
+        {
+            return dataContext.GenFormUser.Where(u => u.UserName == name);
+        }
+
+        private static void MapUsersToList(IEnumerable<GenFormUser> users, ICollection<IUser> list)
+        {
+            if (list == null) throw new ArgumentNullException("list");
+
+            foreach (var genFormUser in users)
+            {
+                var user = User.NewUser();
+                Mapper.MapFromDaoToBo(genFormUser, user);   
+                list.Add(user);
+            }
+        }
+
+        private static IDataMapper<IUser, GenFormUser> Mapper { get { return new UserDataMapper(); } }
+
         #endregion
+
+
     }
 }

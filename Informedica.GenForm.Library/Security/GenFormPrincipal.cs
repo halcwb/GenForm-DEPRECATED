@@ -15,19 +15,19 @@ namespace Informedica.GenForm.Library.Security
             Identity = identity;
         }
 
-        internal static void Login(ILoginUser user)
+        internal static void Login(ILoginCriteria user)
         {
             SetPrincipal(GetIdentity(user));
         }
 
-        private static IGenFormIdentity GetIdentity(ILoginUser user)
+        private static IGenFormIdentity GetIdentity(ILoginCriteria user)
         {
             return GenFormIdentity.GetIdentity(user);
         }
 
-        internal static bool IsLoggedIn()
+        public bool IsLoggedIn()
         {
-            throw new NotImplementedException();
+            return Thread.CurrentPrincipal == this;
         }
 
         internal static void Logout()

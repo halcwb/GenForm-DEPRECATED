@@ -58,7 +58,7 @@
     <Compile Include="Security\LoginUser.cs" />
     <Compile Include="ServiceProviders\DalServiceProvider.cs" />
     <Compile Include="Services\ILoginServices.cs" />
-    <Compile Include="Security\ILoginUser.cs" />
+    <Compile Include="Security\ILoginCriteria.cs" />
     <Compile Include="Services\IProductServices.cs" />
     <Compile Include="Services\LoginServices.cs" />
   </ItemGroup>
