@@ -8,5 +8,6 @@ namespace Informedica.GenForm.Library.Security
         new bool IsInRole(String role);
         void ChangePassword(String oldPassword, String newPassword);
         bool CheckPassword(String password);
+        bool IsLoggedIn();
     }
 }

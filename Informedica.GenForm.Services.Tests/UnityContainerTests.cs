@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.Practices.Unity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TypeMock.ArrangeActAssert;
 
 namespace Informedica.GenForm.Services.Tests
 {
@@ -58,6 +59,7 @@ namespace Informedica.GenForm.Services.Tests
         //
         #endregion
 
+        [Isolated]
         [TestMethod]
         public void Resolution_of_inherited_interface()
         {
@@ -76,6 +78,7 @@ namespace Informedica.GenForm.Services.Tests
             }
         }
 
+        [Isolated]
         [TestMethod]
         public void Try_to_find_generic_typed_interface_without_specifying_type()
         {

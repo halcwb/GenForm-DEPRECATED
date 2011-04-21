@@ -67,10 +67,10 @@ namespace Informedica.GenForm.Library.DomainModel.Users
 
         public static IUser NewUser()
         {
-            return default(IUser);
+            return new User();
         }
 
-        public static IUser GetUser(String name)
+        public static IEnumerable<IUser> GetUser(String name)
         {
             return Repository.GetByName(name);
         }

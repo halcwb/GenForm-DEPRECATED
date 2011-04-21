@@ -8,24 +8,24 @@ namespace Informedica.GenForm.Library.Services
     {
         #region Implementation of ILoginServices
 
-        public void Login(ILoginUser user)
+        public void Login(ILoginCriteria user)
         {
             GenFormPrincipal.Login(user);
         }
 
-        public Boolean IsLoggedIn(ILoginUser user)
+        public Boolean IsLoggedIn(ILoginCriteria user)
         {
-            return GenFormPrincipal.IsLoggedIn();
+            return GenFormPrincipal.GetPrincipal().IsLoggedIn();
         }
 
-        public void Logout(ILoginUser user)
+        public void Logout(ILoginCriteria user)
         {
             if (GenFormIdentity.GetIdentity(user.UserName) == null) throw new Exception();
 
             GenFormPrincipal.Logout();
         }
 
-        public void ChangePassword(ILoginUser loginUser, string newPassword)
+        public void ChangePassword(ILoginCriteria loginUser, string newPassword)
         {
             Principal.ChangePassword(loginUser.Password, newPassword);
         }
@@ -40,7 +40,7 @@ namespace Informedica.GenForm.Library.Services
             get { return GenFormPrincipal.GetPrincipal(); }
         }
 
-        public ILoginUser CreateLoginUser(String userName, String password)
+        public ILoginCriteria CreateLoginUser(String userName, String password)
         {
             return LoginUser.NewLoginUser(userName, password);
         }

@@ -2,7 +2,7 @@
 
 namespace Informedica.GenForm.Library.Security
 {
-    public class LoginUser: ILoginUser
+    public class LoginUser: ILoginCriteria
     {
         #region Implementation of ILoginUser
 
@@ -15,7 +15,7 @@ namespace Informedica.GenForm.Library.Security
 
         private LoginUser() {}
 
-        public static ILoginUser NewLoginUser(String name, String password)
+        public static ILoginCriteria NewLoginUser(String name, String password)
         {
             var user = new LoginUser {UserName = name, Password = password};
 

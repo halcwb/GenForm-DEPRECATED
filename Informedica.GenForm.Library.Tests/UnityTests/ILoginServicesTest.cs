@@ -71,21 +71,21 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         public void System_user_should_be_loggedout_after_being_logged_in()
         {
             var target = CreateILoginServices(); 
-            var user = CreateSystemLoginUser();
+            var user = CreateSystemLoginCriteria();
 
-            SetUpSystemUserLogout(user);
+            IsolateSystemUserLogoutReturnsLoggedInFalse(user);
 
             target.Logout(user);
 
             Assert.IsFalse(target.IsLoggedIn(user), "User should be logged out, after logout");
         }
 
-        private static void SetUpSystemUserLogout(ILoginUser user)
+        private static void IsolateSystemUserLogoutReturnsLoggedInFalse(ILoginCriteria criteria)
         {
             var identity = Isolate.Fake.Instance<IGenFormIdentity>();
-            Isolate.WhenCalled(() => GenFormIdentity.GetIdentity(user)).WillReturn(identity);
+            Isolate.WhenCalled(() => GenFormIdentity.GetIdentity(criteria)).WillReturn(identity);
             Isolate.WhenCalled(() => GenFormPrincipal.Logout()).IgnoreCall();
-            Isolate.WhenCalled(() => GenFormPrincipal.IsLoggedIn()).WillReturn(false);
+            Isolate.WhenCalled(() => GenFormPrincipal.GetPrincipal().IsLoggedIn()).WillReturn(false);
         }
 
 
@@ -94,21 +94,21 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         public void IsLogged_returns_true_after_system_user_login()
         {
             var target = CreateILoginServices();
-            var user = CreateSystemLoginUser();
-            SetUpSystemUserLogin(user);
+            var user = CreateSystemLoginCriteria();
+            IsolateSystemUserLoginReturnsTrue(user);
 
             target.Login(user);
 
             Assert.IsTrue(target.IsLoggedIn(user));
         }
 
-        private static void SetUpSystemUserLogin(ILoginUser user)
+        private static void IsolateSystemUserLoginReturnsTrue(ILoginCriteria criteria)
         {
-            Isolate.WhenCalled(() => GenFormPrincipal.Login(user)).IgnoreCall();
-            Isolate.WhenCalled(() => GenFormPrincipal.IsLoggedIn()).WillReturn(true);
+            Isolate.WhenCalled(() => GenFormPrincipal.Login(criteria)).IgnoreCall();
+            Isolate.WhenCalled(() => GenFormPrincipal.GetPrincipal().IsLoggedIn()).WillReturn(true);
         }
 
-        private static ILoginUser CreateSystemLoginUser()
+        private static ILoginCriteria CreateSystemLoginCriteria()
         {
             return LoginUser.NewLoginUser("Admin", "Admin");
         }
@@ -118,10 +118,10 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         public void When_system_user_logs_in_LoggedIn_returns_true()
         {
             var target = CreateILoginServices();
-            var user = CreateSystemLoginUser();
-            SetUpSystemUserLogin(user);
+            var criteria = CreateSystemLoginCriteria();
+            IsolateSystemUserLoginReturnsTrue(criteria);
 
-            Assert.IsTrue(target.IsLoggedIn(user), "System User should be logged in");
+            Assert.IsTrue(target.IsLoggedIn(criteria), "System User should be logged in");
         }
 
 
@@ -130,16 +130,14 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
             return LoginServices.NewLoginServices();
         }
 
-        /// <summary>
-        ///A test for ChangePassword
-        ///</summary>
+        [Isolated]
         [TestMethod]
         public void System_user_can_change_password()
         {
             var target = CreateILoginServices();
-            var user = CreateSystemLoginUser();
-            SetUpSystemUserLogin(user);
-
+            var user = CreateSystemLoginCriteria();
+            IsolateSystemUserLoginReturnsTrue(user);
+            
             const string newPassword = "NewPassword";
             var oldPassword = user.Password;
 

@@ -1,8 +1,11 @@
-﻿using Informedica.GenForm.Library.DomainModel.Users;
+﻿using System;
+using System.Collections.Generic;
+using Informedica.GenForm.Library.DomainModel.Users;
 using Informedica.GenForm.Library.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
+
 
 namespace Informedica.GenForm.Library.Tests.UnityTests
 {
@@ -66,20 +69,19 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         #endregion
 
 
-        /// <summary>
-        ///A test for GetIdentity
-        ///</summary>
+        [Isolated]
         [TestMethod()]
         public void GetIdentity_calls_GetUser_of_User()
         {
-            var name = "Admin";
+            const String name = "Admin";
             var user = Isolate.Fake.Instance<IUser>();
-            Isolate.WhenCalled(() => User.GetUser(name)).WillReturn(user);
+            var users = (IEnumerable<IUser>) new List<IUser> { user };
+            Isolate.WhenCalled(() => User.GetUser(name)).WillReturn(users);
 
             try
             {
                 GenFormIdentity.GetIdentity(name);
-                Isolate.Verify.WasCalledWithArguments(() => User.GetUser(name));
+                Isolate.Verify.WasCalledWithExactArguments(() => User.GetUser(name));
 
             }
             catch (VerifyException e)

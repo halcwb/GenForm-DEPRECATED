@@ -2,7 +2,7 @@
 
 namespace Informedica.GenForm.Library.Security
 {
-    public interface ILoginUser
+    public interface ILoginCriteria
     {
         String UserName { get; set; }
         String Password { get; set; }
