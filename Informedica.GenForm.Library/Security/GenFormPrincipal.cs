@@ -27,7 +27,7 @@ namespace Informedica.GenForm.Library.Security
 
         public bool IsLoggedIn()
         {
-            return Thread.CurrentPrincipal == this;
+            return Thread.CurrentPrincipal == this && Identity.IsAuthenticated;
         }
 
         internal static void Logout()
@@ -37,15 +37,15 @@ namespace Informedica.GenForm.Library.Security
 
         private static void SetPrincipal(IGenFormIdentity identity)
         {
-            if (identity.IsAuthenticated)
-            {
-                _principal = new GenFormPrincipal(identity);
-                Thread.CurrentPrincipal = _principal;
-            }
+            _principal = new GenFormPrincipal(identity);
+            Thread.CurrentPrincipal = _principal;
         } 
 
         public static IGenFormPrincipal GetPrincipal()
         {
+            if (_principal != null) return _principal;
+
+            SetPrincipal(new AnonymousIdentity());
             return _principal;
         }
 

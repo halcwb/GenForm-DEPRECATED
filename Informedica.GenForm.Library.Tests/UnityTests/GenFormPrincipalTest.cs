@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Library.DataAccess;
 using Informedica.GenForm.Library.DomainModel.Users;
@@ -91,7 +92,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         public void Login_calls_SetPrincipal_with_identity()
         {
             var user = CreateSystemUser();
-            var identity = Isolate.Fake.Instance<IGenFormIdentity>();
+            var identity = CreateFakeGenFormIdentity();
             Isolate.WhenCalled(() => GenFormIdentity.GetIdentity(user)).WillReturn(identity);
             Isolate.NonPublic.WhenCalled(typeof(GenFormPrincipal), "SetPrincipal").CallOriginal();
 
@@ -104,6 +105,29 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
             {
                 Assert.Fail("SetPrincipal was not called using a fake identity: " + e);
             }
+        }
+
+        private static IGenFormIdentity CreateFakeGenFormIdentity()
+        {
+            return Isolate.Fake.Instance<IGenFormIdentity>();
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void IsLoggedIn_returns_false_for_anonymousidentity()
+        {
+            var principal = GenFormPrincipal.GetPrincipal();
+
+            Assert.IsFalse(principal.IsLoggedIn(), "Principal that is not logged in should return false");
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void GetGenFormPrincipal_should_not_return_null_when_threadprincipal_is_set_to_null()
+        {
+            Thread.CurrentPrincipal = null;
+
+            Assert.IsNotNull(GenFormPrincipal.GetPrincipal(), "GetPrincipal should never return null");
         }
     }
 }

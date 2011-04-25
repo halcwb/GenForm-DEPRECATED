@@ -15,12 +15,12 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
     ///This is a test class for GenFormIdentityTest and is intended
     ///to contain all GenFormIdentityTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class GenFormIdentityTest
     {
 
 
-        private TestContext testContextInstance;
+        private TestContext _testContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -30,11 +30,11 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         {
             get
             {
-                return testContextInstance;
+                return _testContextInstance;
             }
             set
             {
-                testContextInstance = value;
+                _testContextInstance = value;
             }
         }
 
@@ -70,13 +70,13 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
 
 
         [Isolated]
-        [TestMethod()]
+        [TestMethod]
         public void GetIdentity_calls_GetUser_of_User()
         {
             const String name = "Admin";
-            var user = Isolate.Fake.Instance<IUser>();
-            var users = (IEnumerable<IUser>) new List<IUser> { user };
-            Isolate.WhenCalled(() => User.GetUser(name)).WillReturn(users);
+            var user = CreateFakeIuser();
+            var users = CreateUserListWithUser(user);
+            IsolateGetUserName(users, name);
 
             try
             {
@@ -88,6 +88,40 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
             {
                 Assert.Fail("GenFormIdentity did not call User.GetUser: " + e);
             }
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void GetIdentity_of_nonexistent_user_creates_AnonymousIdentity()
+        {
+            const String name = "foo";
+            var users = CreateEmptyUserList();
+            IsolateGetUserName(users, name);
+
+            var result = GenFormIdentity.GetIdentity(name);
+
+            Assert.IsInstanceOfType(result, typeof(IAnonymousIdentity), "Getidentity with nonexisting user did not return AnonymousIdentity");
+            Assert.IsFalse(result.IsAuthenticated, "AnonymousIdentity should not be authenticated");
+        }
+
+        private static IUser CreateFakeIuser()
+        {
+            return Isolate.Fake.Instance<IUser>();
+        }
+
+        private static IEnumerable<IUser> CreateEmptyUserList()
+        {
+            return new List<IUser>();
+        }
+
+        private static IEnumerable<IUser> CreateUserListWithUser(IUser user)
+        {
+            return new List<IUser> {user};
+        }
+
+        private static void IsolateGetUserName(IEnumerable<IUser> users, String name)
+        {
+            Isolate.WhenCalled(() => User.GetUser(name)).WillReturn(users);
         }
     }
 }
