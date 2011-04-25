@@ -61,18 +61,53 @@ namespace Informedica.GenForm.Tests.RegressionTests
         #endregion
 
         [TestMethod]
-        public void LoginSystemUserReturnsLoggedIn()
+        public void System_user_can_login()
         {
             // Setup
-            ILoginController loginController = new LoginController();
+            var loginController = CreateLoginController();
             
             // Execute
             var result = loginController.Login(SystemUserName, SystemUserPassword);
             
             // Verify
-            Assert.IsTrue(ActionResultParser.GetSuccessValueFromActionResult(result), "System user successfully logged in");
+            Assert.IsTrue(ActionResultParser.GetSuccessValueFromActionResult(result), "System user could not successfully log in");
 
             // No Teardown
+        }
+
+        [TestMethod]
+        public void User_foo_cannot_login_with_password_bar()
+        {
+            var loginController = CreateLoginController();
+
+            var result = loginController.Login("foo", "bar");
+
+            Assert.IsFalse(ActionResultParser.GetSuccessValueFromActionResult(result), "User foo cannot login with password bar (if not added as users)");
+        }
+
+        private static ILoginController CreateLoginController()
+        {
+            return new LoginController();
+        }
+
+        [TestMethod]
+        public void User_without_username_cannot_login()
+        {
+            var loginController = CreateLoginController();
+
+            var result = loginController.Login("", "bar");
+
+            Assert.IsFalse(ActionResultParser.GetSuccessValueFromActionResult(result), "User without username cannot log in");
+        }
+
+        [TestMethod]
+        public  void User_without_password_cannot_login()
+        {
+            var loginController = CreateLoginController();
+
+            var result = loginController.Login("foo", "");
+
+            Assert.IsFalse(ActionResultParser.GetSuccessValueFromActionResult(result), "User without a password cannot login");
         }
     }
 }

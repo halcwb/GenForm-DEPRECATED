@@ -25,10 +25,8 @@ namespace Informedica.GenForm.Library.Security
         {
             if (name == null) throw new ArgumentNullException("name");
 
-            var user = User.GetUser(name).FirstOrDefault();
-            if (user == null) throw new NullReferenceException("User could not be found");
-
-            return new GenFormIdentity(user.Name);
+            if (User.GetUser(name).Count() != 1) return new AnonymousIdentity();
+            return new GenFormIdentity(name);
         }
 
         internal static IGenFormIdentity GetIdentity(ILoginCriteria user)

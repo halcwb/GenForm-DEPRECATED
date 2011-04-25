@@ -51,8 +51,10 @@
     <Compile Include="DomainModel\Users\IUserInfoList.cs" />
     <Compile Include="DomainModel\Users\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AnonymousIdentity.cs" />
     <Compile Include="Security\GenFormIdentity.cs" />
     <Compile Include="Security\GenFormPrincipal.cs" />
+    <Compile Include="Security\IAnonymousIdentity.cs" />
     <Compile Include="Security\IGenFormIdentity.cs" />
     <Compile Include="Security\IGenFormPrincipal.cs" />
     <Compile Include="Security\LoginUser.cs" />
