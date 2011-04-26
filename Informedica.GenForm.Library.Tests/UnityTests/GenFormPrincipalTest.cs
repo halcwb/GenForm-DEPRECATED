@@ -89,6 +89,18 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
 
         [Isolated]
         [TestMethod]
+        public void Login_with_system_user_and_password_bar_should_return_false()
+        {
+            var user = CreateSystemUser();
+            user.Password = "bar";
+            GenFormPrincipal.Login(user);
+
+            Assert.IsFalse(GenFormPrincipal.GetPrincipal().IsLoggedIn(), "System user should not be able to login with password bar");
+
+        }
+
+        [Isolated]
+        [TestMethod]
         public void Login_calls_SetPrincipal_with_identity()
         {
             var user = CreateSystemUser();
