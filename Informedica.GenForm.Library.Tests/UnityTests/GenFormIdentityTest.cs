@@ -76,7 +76,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
             const String name = "Admin";
             var user = CreateFakeIuser();
             var users = CreateUserListWithUser(user);
-            IsolateGetUserName(users, name);
+            IsolateGetUserByName(users, name);
 
             try
             {
@@ -92,11 +92,28 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
 
         [Isolated]
         [TestMethod]
+        public void GetIdentity_of_system_user_with_wrong_password_should_return_AnonymousIdentity()
+        {
+            const String name = "Admin";
+            var user = CreateFakeIuser();
+            Isolate.WhenCalled(() => user.Name).WillReturn("Admin");
+            Isolate.WhenCalled(() => user.Password).WillReturn("lkjlj");
+            var users = CreateUserListWithUser(user);
+            IsolateGetUserByName(users, name);
+
+            var result = GenFormIdentity.GetIdentity(name);
+
+            Assert.IsInstanceOfType(result, typeof(AnonymousIdentity), "When passwords do not match an anonymous identity should be returned");
+            Assert.IsFalse(result.IsAuthenticated, "If passwords do not match, IsAuthenticated should return false");
+        }
+
+        [Isolated]
+        [TestMethod]
         public void GetIdentity_of_nonexistent_user_creates_AnonymousIdentity()
         {
             const String name = "foo";
             var users = CreateEmptyUserList();
-            IsolateGetUserName(users, name);
+            IsolateGetUserByName(users, name);
 
             var result = GenFormIdentity.GetIdentity(name);
 
@@ -119,7 +136,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
             return new List<IUser> {user};
         }
 
-        private static void IsolateGetUserName(IEnumerable<IUser> users, String name)
+        private static void IsolateGetUserByName(IEnumerable<IUser> users, String name)
         {
             Isolate.WhenCalled(() => User.GetUser(name)).WillReturn(users);
         }

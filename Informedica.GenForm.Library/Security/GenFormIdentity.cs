@@ -18,20 +18,21 @@ namespace Informedica.GenForm.Library.Security
 
         internal static IGenFormIdentity GetIdentity(String name)
         {
-            return CreateIdentity(name);
+            return CreateIdentity(name, String.Empty);
         }
 
-        private static IGenFormIdentity CreateIdentity(String name)
+        private static IGenFormIdentity CreateIdentity(String name, String password)
         {
             if (name == null) throw new ArgumentNullException("name");
 
-            if (User.GetUser(name).Count() != 1) return new AnonymousIdentity();
+            var users = User.GetUser(name);
+            if (users.Count() != 1 || users.First().Password != password) return new AnonymousIdentity();
             return new GenFormIdentity(name);
         }
 
-        internal static IGenFormIdentity GetIdentity(ILoginCriteria user)
+        internal static IGenFormIdentity GetIdentity(ILoginCriteria criteria)
         {
-            return CreateIdentity(user.UserName);
+            return CreateIdentity(criteria.UserName, criteria.Password);
         }
     }
 }

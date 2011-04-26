@@ -76,6 +76,16 @@ namespace Informedica.GenForm.Tests.RegressionTests
         }
 
         [TestMethod]
+        public void System_user_cannot_login_with_password_bar()
+        {
+            var loginController = CreateLoginController();
+
+            var result = loginController.Login(SystemUserName, "bar");
+
+            Assert.IsFalse(ActionResultParser.GetSuccessValueFromActionResult(result), "System should not be able with password bar");
+        }
+
+        [TestMethod]
         public void User_foo_cannot_login_with_password_bar()
         {
             var loginController = CreateLoginController();
