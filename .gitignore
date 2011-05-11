@@ -27,3 +27,7 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
+
+Informedica.GenForm.Mvc2/Client/Library/Ext4
+Informedica.GenForm.Mvc2/Client/Library/extjs
+Informedica.GenForm.Mvc2/Client/Library/platform
