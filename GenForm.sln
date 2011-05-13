@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Tests",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F981F9D-1E8A-4342-B1A5-CE121FA6969B}"
 	ProjectSection(SolutionItems) = preProject
-		GenForm.vsmdi = GenForm.vsmdi
+		genform.vsmdi = genform.vsmdi
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 	EndProjectSection
 EndProject
