@@ -1,6 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Informedica.GenForm.DataAccess.DataContexts;
 using Informedica.GenForm.DataAccess.Repositories;
+using Informedica.GenForm.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TypeMock.ArrangeActAssert;
 
 namespace Informedica.GenForm.DataAccess.Tests.IntegrationTests
 {
@@ -57,10 +61,13 @@ namespace Informedica.GenForm.DataAccess.Tests.IntegrationTests
         //
         #endregion
 
+        [Isolated]
         [TestMethod]
         public void GetUserByName_with_system_admin_name_returns_AdminUser()
         {
             var repository = new UserRepository();
+            IEnumerable<GenFormUser> users = CreateListWithAdminUser();
+            IsolateRepositoryFromDataContext(users);
 
             var list = repository.GetByName("Admin");
 
@@ -68,11 +75,25 @@ namespace Informedica.GenForm.DataAccess.Tests.IntegrationTests
             Assert.IsTrue(list.FirstOrDefault().Name == "Admin", "The User should have name Admin");
         }
 
+        private IEnumerable<GenFormUser> CreateListWithAdminUser()
+        {
+            var adminUser = new GenFormUser {UserName = "Admin"};
+            return new List<GenFormUser> {adminUser};
+        }
+
+        private void IsolateRepositoryFromDataContext(IEnumerable<GenFormUser> users)
+        {
+            var context = Isolate.Fake.Instance<GenFormDataContext>();
+            Isolate.NonPublic.WhenCalled(typeof(UserRepository), "FindUsersByName").WillReturn(users);
+            Isolate.WhenCalled(() => DataContextFactory.CreateGenFormDataContext()).WillReturn(context);
+        }
+
+        [Isolated]
         [TestMethod]
         public void GetUserByName_with_name_Foo_should_return_emptyList()
         {
             var repository = new UserRepository();
-
+            IsolateRepositoryFromDataContext(new List<GenFormUser>());
             var list = repository.GetByName("foo");
 
             Assert.IsTrue(list.Count() == 0, "A user with name foo should not exist in the database");

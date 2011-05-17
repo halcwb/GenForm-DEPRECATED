@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="GenForm">
+</Property><Property Name="Solution File" Value="C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\GenForm.sln">
+</Property><Property Name="Date" Value="Saturday, May 14, 2011">
+</Property><Property Name="Time" Value="10:03 AM">
+</Property></Properties><Event ErrorLevel="0" Project="Informedica.GenForm.Library" Source="Informedica.GenForm.Library\Informedica.GenForm.Library.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Informedica.GenForm.Library" Source="Informedica.GenForm.Library\Informedica.GenForm.Library.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Database" Source="Informedica.GenForm.Database\Informedica.GenForm.Database.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Informedica.GenForm.Database" Source="Informedica.GenForm.Database\Informedica.GenForm.Database.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Presentation" Source="Informedica.GenForm.Presentation\Informedica.GenForm.Presentation.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Informedica.GenForm.Presentation" Source="Informedica.GenForm.Presentation\Informedica.GenForm.Presentation.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Presentation.Tests" Source="Informedica.GenForm.Presentation.Tests\Informedica.GenForm.Presentation.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Informedica.GenForm.Presentation.Tests" Source="Informedica.GenForm.Presentation.Tests\Informedica.GenForm.Presentation.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Mvc2" Source="Informedica.GenForm.Mvc2\Informedica.GenForm.Mvc2.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Informedica.GenForm.Mvc2" Source="Informedica.GenForm.Mvc2\Informedica.GenForm.Mvc2.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.ServiceProviders" Source="Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Informedica.GenForm.ServiceProviders" Source="Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.ServiceProviders.Tests" Source="Informedica.GenForm.Services.Tests\Informedica.GenForm.ServiceProviders.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Informedica.GenForm.ServiceProviders.Tests" Source="Informedica.GenForm.Services.Tests\Informedica.GenForm.ServiceProviders.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Tests" Source="Informedica.GenForm.Tests\Informedica.GenForm.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Informedica.GenForm.Tests" Source="Informedica.GenForm.Tests\Informedica.GenForm.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Mvc2.Tests" Source="Informedica.GenForm.Mvc2.Tests\Informedica.GenForm.Mvc2.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Informedica.GenForm.Mvc2.Tests" Source="Informedica.GenForm.Mvc2.Tests\Informedica.GenForm.Mvc2.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Library.Tests" Source="Informedica.GenForm.Library.Tests\Informedica.GenForm.Library.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Informedica.GenForm.Library.Tests" Source="Informedica.GenForm.Library.Tests\Informedica.GenForm.Library.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.DataAccess" Source="Informedica.GenForm.DataAccess\Informedica.GenForm.DataAccess.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Informedica.GenForm.DataAccess" Source="Informedica.GenForm.DataAccess\Informedica.GenForm.DataAccess.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Assembler" Source="Informedica.GenForm.Assembler\Informedica.GenForm.Assembler.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Informedica.GenForm.Assembler" Source="Informedica.GenForm.Assembler\Informedica.GenForm.Assembler.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.DataAccess.Tests" Source="Informedica.GenForm.DataAccess.Tests\Informedica.GenForm.DataAccess.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Informedica.GenForm.DataAccess.Tests" Source="Informedica.GenForm.DataAccess.Tests\Informedica.GenForm.DataAccess.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="GenForm.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="GenForm.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Library" Source="Informedica.GenForm.Library\Informedica.GenForm.Library.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Database" Source="Informedica.GenForm.Database\Informedica.GenForm.Database.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Presentation" Source="Informedica.GenForm.Presentation\Informedica.GenForm.Presentation.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="3" Project="" Source="genform.vsmdi" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="genform.vsmdi" Description="The file was converted to the current format.">
+</Event><Event ErrorLevel="3" Project="" Source="LocalTestRun.testrunconfig" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="LocalTestRun.testrunconfig" Description="The file was converted to the current format.">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Presentation.Tests" Source="Informedica.GenForm.Presentation.Tests\Informedica.GenForm.Presentation.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Mvc2" Source="Informedica.GenForm.Mvc2\Informedica.GenForm.Mvc2.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.ServiceProviders" Source="Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.ServiceProviders.Tests" Source="Informedica.GenForm.Services.Tests\Informedica.GenForm.ServiceProviders.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Tests" Source="Informedica.GenForm.Tests\Informedica.GenForm.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Mvc2.Tests" Source="Informedica.GenForm.Mvc2.Tests\Informedica.GenForm.Mvc2.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Library.Tests" Source="Informedica.GenForm.Library.Tests\Informedica.GenForm.Library.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.DataAccess" Source="Informedica.GenForm.DataAccess\Informedica.GenForm.DataAccess.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.Assembler" Source="Informedica.GenForm.Assembler\Informedica.GenForm.Assembler.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Informedica.GenForm.DataAccess.Tests" Source="Informedica.GenForm.DataAccess.Tests\Informedica.GenForm.DataAccess.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

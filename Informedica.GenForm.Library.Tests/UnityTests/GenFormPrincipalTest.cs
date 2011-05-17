@@ -77,9 +77,16 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         public void Login_system_user_results_in_PrincipalIdentity()
         {
             ILoginCriteria user = CreateSystemUser();
+            IsolateGetIdentity();
             GenFormPrincipal.Login(user);
 
             Assert.IsNotNull(GenFormPrincipal.GetPrincipal().Identity, "Principal identity should be set");
+        }
+
+        private void IsolateGetIdentity()
+        {
+            var identity = Isolate.Fake.Instance<GenFormIdentity>();
+            Isolate.NonPublic.WhenCalled(typeof(GenFormPrincipal), "GetIdentity").WillReturn(identity);
         }
 
         private static ILoginCriteria CreateSystemUser()
