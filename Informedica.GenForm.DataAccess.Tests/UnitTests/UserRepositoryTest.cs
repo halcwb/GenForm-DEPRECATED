@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Informedica.GenForm.DataAccess.DataContexts;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -82,38 +84,39 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         [TestMethod]
         public void Get_User_by_system_username_returns_instance_of_IUser_with_that_name()
         {
-            var repository = CreateUserRepository();
-            string name = IsolateRepositoryGetByName();
+            var name = "Test";
+            IsolateRepositoryFromDataContext(CreateUserListWithName(name));
 
-            var result = repository.GetByName(name).FirstOrDefault();
+            var result = CreateUserRepository().GetByName(name).FirstOrDefault();
 
             Assert.IsInstanceOfType(result, typeof(IUser), "The correct type was not returned");
             Assert.IsTrue(result.Name == name, "The returned user should have name Admin");
         }
 
-        private static string IsolateRepositoryGetByName()
+        private IEnumerable<GenFormUser> CreateUserListWithName(String name)
         {
-            var name = "Admin";
-            var user = Isolate.Fake.Instance<IUser>();
-            var genformUser = Isolate.Fake.Instance<GenFormUser>();
-            var mapper = Isolate.Fake.Instance<IDataMapper<IUser, GenFormUser>>();
-            Isolate.WhenCalled(() => User.NewUser()).WillReturn(user);
-            Isolate.WhenCalled(() => user.Name).WillReturn(name);
-            Isolate.NonPublic.Property.WhenGetCalled(typeof(UserRepository), "Mapper").WillReturn(mapper);
-            Isolate.WhenCalled(() => mapper.MapFromDaoToBo(genformUser, user)).IgnoreCall();
-            return name;
+            var adminUser = new GenFormUser { UserName = name };
+            return new List<GenFormUser> { adminUser };
         }
+
+        private void IsolateRepositoryFromDataContext(IEnumerable<GenFormUser> users)
+        {
+            var context = Isolate.Fake.Instance<GenFormDataContext>();
+            Isolate.NonPublic.WhenCalled(typeof(UserRepository), "FindUsersByName").WillReturn(users);
+            Isolate.WhenCalled(() => DataContextFactory.CreateGenFormDataContext()).WillReturn(context);
+        }
+
 
         [Isolated]
         [TestMethod]
         public void Get_UserByName_calls_Mapper_MapFromDaoToBo()
         {
             var repository = CreateUserRepository();
-            var name = IsolateRepositoryGetByName();
+            IsolateRepositoryFromDataContext(CreateUserListWithName(String.Empty));
 
             try
             {
-                repository.GetByName(name);
+                repository.GetByName(String.Empty);
             }
             catch (VerifyException e)
             {

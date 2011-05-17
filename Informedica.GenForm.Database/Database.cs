@@ -27,7 +27,7 @@ namespace Informedica.GenForm.Database
                     catch (Exception e)
                     {
                         // Temporary solution because Linqpad cannot locate app.config
-                        connection = "Data Source=HAL-2008;Initial Catalog=Formularium2010;Integrated Security=True";
+                        connection = @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=Formularium2010;Integrated Security=True";
                     }
                     break;
                 case DatabaseName.GenForm:
@@ -38,7 +38,7 @@ namespace Informedica.GenForm.Database
                     catch (Exception e)
                     {
                         // Temporary solution because Linqpad cannot locate app.config
-                        connection = "Data Source=HAL-2008;Initial Catalog=GenForm;Integrated Security=True";
+                        connection = @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
                     }
                     break;
                 default:
