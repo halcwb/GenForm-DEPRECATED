@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\IRepository.cs" />
+    <Compile Include="DomainModel\Products\IProduct.cs" />
+    <Compile Include="DomainModel\Products\Product.cs" />
     <Compile Include="DomainModel\Users\IPharamcists.cs" />
     <Compile Include="DomainModel\Users\IUser.cs" />
     <Compile Include="DomainModel\Users\IUserInfoList.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Security\ILoginCriteria.cs" />
     <Compile Include="Services\IProductServices.cs" />
     <Compile Include="Services\LoginServices.cs" />
+    <Compile Include="Services\ProductServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj">
@@ -74,9 +77,7 @@
       <Name>Informedica.GenForm.ServiceProviders</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DomainModel\Products\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

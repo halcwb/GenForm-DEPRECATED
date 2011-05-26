@@ -6,12 +6,12 @@
  * To change this template use File | Settings | File Templates.
  */
 
-Ext.define('GenForm.store.product.GenericNameStore', {
+Ext.define('GenForm.store.product.GenericName', {
     extend: 'Ext.data.Store',
     alias: 'widget.genericnamestore',
     storeId: 'genericnamestore',
     
-    model: 'GenForm.model.product.GenericNameModel',
+    model: 'GenForm.model.product.GenericName',
     autoLoad: true
 
 });

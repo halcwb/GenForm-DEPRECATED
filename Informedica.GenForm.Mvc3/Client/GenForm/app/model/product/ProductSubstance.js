@@ -5,7 +5,7 @@
  * Time: 11:47
  * To change this template use File | Settings | File Templates.
  */
-Ext.define('GenForm.model.product.ProductSubstanceModel', {
+Ext.define('GenForm.model.product.ProductSubstance', {
     extend: 'Ext.data.Model',
 
     fields: [

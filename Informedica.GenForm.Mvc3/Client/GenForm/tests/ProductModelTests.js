@@ -5,11 +5,11 @@
  * Time: 9:42
  * To change this template use File | Settings | File Templates.
  */
-describe('GenForm.model.product.ProductModel', function () {
-    var getProductModel, loadProductModel,  productModel, createProductModel;
+describe('GenForm.model.product.Product', function () {
+    var getProductModel, loadProductModel,  productModel, createProductModel, createProxy;
 
     getProductModel = function () {
-        return Ext.ModelManager.getModel('GenForm.model.product.ProductModel');
+        return Ext.ModelManager.getModel('GenForm.model.product.Product');
     };
 
     createProductModel = function () {
@@ -27,12 +27,21 @@ describe('GenForm.model.product.ProductModel', function () {
             Unit: 'mg'
         };
 
-        return Ext.ModelManager.create(testProduct, 'GenForm.model.product.ProductModel');
+        return Ext.ModelManager.create(testProduct, 'GenForm.model.product.Product');
+    };
+
+    createProxy = function () {
+        return Ext.create('Ext.data.proxy.Direct', {
+            type: 'direct',
+            api: {
+                save: Product.SaveProduct
+            }
+        });
     };
 
     loadProductModel = function () {
         productModel = null;
-        getProductModel().load('0', {
+        getProductModel().load('1', {
             callback: function(result) {
                 productModel = result;
             }
@@ -99,4 +108,71 @@ describe('GenForm.model.product.ProductModel', function () {
         expect(createProductModel().routes).toBeDefined(); 
     });
 
+    it('createProxy should return a proxy', function () {
+        expect(createProxy().$className).toBe('Ext.data.proxy.Direct');    
+    });
+    
+/*
+    Does not work yet???
+    it('should if a product is save/failure message is returned', function () {
+        var proxy, model, result = null;
+        model = createProductModel();
+        proxy = createProxy();
+        model.setProxy(proxy);
+        console.log(model.getProxy());
+
+        createProductModel().save({
+            scope: this,
+            callback: function (record, operation) {
+                result = record
+            }
+        });
+
+        waitsFor(function () {
+            return result ? true : fals;
+        }, "waiting for result of save to return")
+    });
+*/
+    it('should get a success message upon saving the productmodel', function () {
+        var model = createProductModel(), result;
+        Product.SaveProduct(model.data, function (record) {
+            result = record
+         });
+
+        waitsFor(function () {
+           return result ? true: false;
+        }, 'waiting for callback of Product.Save', 1000);
+    });
+
+    it('should post a valid ProductModel', function () {
+        var model = createProductModel(), callData;
+        spyOn(Product.SaveProduct.directCfg.method, 'getCallData').andCallFake(
+                function () {
+                    callData = arguments;
+                });
+
+        try {
+            Product.SaveProduct(model.data, function (record) {
+            });
+        } catch(e) {
+            console.log(e);
+        }
+
+        expect(callData).toBeDefined();
+    });
+
+    it ('loading a productmodel from the server with id = 1', function () {
+        var result;
+        getProductModel().load('2', {
+            callback: function (record) {
+                console.log(record);
+                result = record;
+            }
+        });
+
+        waitsFor(function () {
+            return result ? true: false;
+        }, 'waiting for product with id = 1', 1000);
+
+    })
 });

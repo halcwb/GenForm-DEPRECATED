@@ -5,11 +5,11 @@
  * Time: 8:49
  * To change this template use File | Settings | File Templates.
  */
-describe('GenForm.store.product.ProductSubstanceStoreTests', function () {
+describe('GenForm.store.product.ProductSubstance', function () {
     var createProductSubstanceStore, getProductSubstanceStore;
 
     createProductSubstanceStore = function () {
-        return Ext.create('GenForm.store.product.ProductSubstanceStore');
+        return Ext.create('GenForm.store.product.ProductSubstance');
     };
 
     getProductSubstanceStore = function () {

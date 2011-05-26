@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
 
-namespace Informedica.GenForm.Mvc2.Controllers
+namespace Informedica.GenForm.Mvc3.Controllers
 {
     public interface ILoginController
     {

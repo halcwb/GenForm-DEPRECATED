@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "GenForm Tests";
+}
+
+<!DOCTYPE html>
+<html> 
+
+<style>
+body div
+{
+	display:none !important;
+}
+body .jasmine_reporter
+{
+    display:block !important;
+}
+body .jasmine_reporter div
+{
+	display:block !important;
+}
+</style>
+
+<head>
+  <title>Jasmine Test Runner</title>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/Tests/lib/jasmine-1.0.2/jasmine.css")" />
+
+    <script type="text/javascript" src="@Url.Content("~/Client/Tests/lib/jasmine-1.0.2/jasmine.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/Tests/lib/jasmine-1.0.2/jasmine-html.js")"></script>
+
+    <!-- include source files here... -->
+    <script type="text/javascript" src="@Url.Content("~/Client/Library/Ext4/ext-all-debug.js") "></script>
+    <script type="text/javascript" src="@Url.Content("~/Direct/Api")"></script>
+    
+    <script type="text/javascript">Ext.Direct.addProvider(Ext.app.REMOTING_API);</script>
+  
+    <script type="text/javascript">
+        Ext.Loader.setConfig({ enabled: true, paths: { GenForm: '../Client/GenForm/app'} });  
+    </script>
+
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/view/component/SaveCancelToolBar.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/model/validation/ValidationRule.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/model/user/Login.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/model/product/GenericName.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/model/product/BrandName.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/model/product/ProductSubstance.js")"></script>  
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/model/product/Product.js")"></script>
+  
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/store/product/GenericName.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/store/product/ProductSubstance.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/view/product/ProductSubstanceGrid.js")"></script>      
+  
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/controller/product/Product.js")"></script>  
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/controller/user/Login.js")"></script>  
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/Application.js")"></script>  
+  
+    <!-- include spec files here... -->
+@*
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ExtLoaderTests.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/Ext.ComponentQueryTests.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ModelTests.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/LoginModelTests.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/StoreTests.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/GenericNameModelTests.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/BrandNameModelTests.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ProductSubstanceModelTests.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ProductSubstanceStoreTests.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/GenericNameStoreTests.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ProductSubstanceGridTests.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ProductModelTests.js")"></script>
+*@
+
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ProductControllerTests.js")"></script>   
+</head>
+
+<body>
+
+<script type="text/javascript">
+    Ext.onReady(function () {
+        jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+        jasmine.getEnv().execute();
+    });
+</script>
+
+</body>
+</html>

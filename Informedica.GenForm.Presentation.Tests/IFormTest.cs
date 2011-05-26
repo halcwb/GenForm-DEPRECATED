@@ -69,7 +69,7 @@ namespace Informedica.GenForm.Presentation.Tests
         ///A test for Fields
         ///</summary>
         [TestMethod()]
-        public void FieldsTest()
+        public void Presentation_has_fields()
         {
             IForm target = CreateIForm(); // TODO: Initialize to an appropriate value
             IList<IFormField> expected = null; // TODO: Initialize to an appropriate value
@@ -82,7 +82,7 @@ namespace Informedica.GenForm.Presentation.Tests
         ///A test for Caption
         ///</summary>
         [TestMethod()]
-        public void CaptionTest()
+        public void Caption_of_presentation_can_be_set_to_test()
         {
             IForm target = CreateIForm(); // Get Fake Instance
             string caption = "Test";
@@ -110,7 +110,7 @@ namespace Informedica.GenForm.Presentation.Tests
         }
 
         [TestMethod]
-        public void AddButtonTest()
+        public void A_button_can_be_added_to_a_presentation()
         {
             IForm target = CreateIForm();
             target.AddButton(CreateIButton());
@@ -122,7 +122,7 @@ namespace Informedica.GenForm.Presentation.Tests
         ///A test for Buttons
         ///</summary>
         [TestMethod()]
-        public void ButtonsTest()
+        public void A_presentation_has_a_collection_of_buttons()
         {
             IForm target = CreateIForm(); // TODO: Initialize to an appropriate value
             IList<IButton> expected = null; // TODO: Initialize to an appropriate value

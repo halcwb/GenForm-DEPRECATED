@@ -10,7 +10,7 @@ Ext.define('GenForm.view.product.ProductSubstanceGrid', {
     alias: 'widget.productsubstancegrid',
 
     testStore: 'GenForm.data.ProductSubstanceTestData',
-    productionStore: 'GenForm.store.product.ProductSubstanceStore',
+    productionStore: 'GenForm.store.product.ProductSubstance',
 
     initComponent: function () {
         this.store = this.store || this.getProductSubstanceStore();

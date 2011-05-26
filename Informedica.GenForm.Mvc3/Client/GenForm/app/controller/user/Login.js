@@ -5,12 +5,12 @@
  * Time: 10:30
  * To change this template use File | Settings | File Templates.
  */
-Ext.define('GenForm.controller.user.LoginController', {
+Ext.define('GenForm.controller.user.Login', {
     extend: 'Ext.app.Controller',
     alias: 'widget.logincontroller',
 
     views: [
-        'GenForm.view.user.LoginWindow'
+        'user.LoginWindow'
     ],
 
     loggedIn: false,

@@ -85,21 +85,21 @@
   <ItemGroup>
     <Content Include="Client\Application\Images\medicalbanner.jpg" />
     <Content Include="Client\GenForm\app\Application.js" />
-    <Content Include="Client\GenForm\app\controller\product\ProductController.js" />
-    <Content Include="Client\GenForm\app\controller\user\LoggedInUser.js" />
-    <Content Include="Client\GenForm\app\controller\user\LoginController.js" />
+    <Content Include="Client\GenForm\app\controller\product\Product.js" />
+    <Content Include="Client\GenForm\app\model\user\LoggedInUser.js" />
+    <Content Include="Client\GenForm\app\controller\user\Login.js" />
     <Content Include="Client\GenForm\app\data\ProductSubstanceTestData.js" />
-    <Content Include="Client\GenForm\app\model\product\BrandNameModel.js" />
-    <Content Include="Client\GenForm\app\model\product\GenericNameModel.js" />
-    <Content Include="Client\GenForm\app\model\product\PackageNameModel.js" />
-    <Content Include="Client\GenForm\app\model\product\ProductModel.js" />
-    <Content Include="Client\GenForm\app\model\product\ProductRouteModel.js" />
-    <Content Include="Client\GenForm\app\model\product\ProductSubstanceModel.js" />
-    <Content Include="Client\GenForm\app\model\product\ShapeNameModel.js" />
-    <Content Include="Client\GenForm\app\model\user\LoginModel.js" />
-    <Content Include="Client\GenForm\app\model\validation\ValidationRuleModel.js" />
-    <Content Include="Client\GenForm\app\store\product\GenericNameStore.js" />
-    <Content Include="Client\GenForm\app\store\product\ProductSubstanceStore.js" />
+    <Content Include="Client\GenForm\app\model\product\BrandName.js" />
+    <Content Include="Client\GenForm\app\model\product\GenericName.js" />
+    <Content Include="Client\GenForm\app\model\product\PackageName.js" />
+    <Content Include="Client\GenForm\app\model\product\Product.js" />
+    <Content Include="Client\GenForm\app\model\product\ProductRoute.js" />
+    <Content Include="Client\GenForm\app\model\product\ProductSubstance.js" />
+    <Content Include="Client\GenForm\app\model\product\ShapeName.js" />
+    <Content Include="Client\GenForm\app\model\user\Login.js" />
+    <Content Include="Client\GenForm\app\model\validation\ValidationRule.js" />
+    <Content Include="Client\GenForm\app\store\product\GenericName.js" />
+    <Content Include="Client\GenForm\app\store\product\ProductSubstance.js" />
     <Content Include="Client\GenForm\app\view\component\SaveCancelToolBar.js" />
     <Content Include="Client\GenForm\app\view\product\ProductForm.js" />
     <Content Include="Client\GenForm\app\view\product\ProductSubstanceForm.js" />
@@ -113,11 +113,13 @@
     <Content Include="Client\GenForm\tests\GenericNameModelTests.js" />
     <Content Include="Client\GenForm\tests\GenericNameStoreTests.js" />
     <Content Include="Client\GenForm\tests\LoginModelTests.js" />
+    <Content Include="Client\GenForm\tests\ModelTests.js" />
     <Content Include="Client\GenForm\tests\ProductControllerTests.js" />
     <Content Include="Client\GenForm\tests\ProductModelTests.js" />
     <Content Include="Client\GenForm\tests\ProductSubstanceGridTests.js" />
     <Content Include="Client\GenForm\tests\ProductSubstanceModelTests.js" />
     <Content Include="Client\GenForm\tests\ProductSubstanceStoreTests.js" />
+    <Content Include="Client\GenForm\tests\StoreTests.js" />
     <Content Include="Client\Library\Ext4\bootstrap.js" />
     <Content Include="Client\Library\Ext4\builds\ext-all-sandbox-debug.js" />
     <Content Include="Client\Library\Ext4\builds\ext-all-sandbox.js" />
@@ -3254,6 +3256,7 @@
     <None Include="Client\Library\platform\core\test\unit\spec\Ext-mess.backup" />
     <None Include="Client\Tests\lib\jasmine-1.0.2\MIT.LICENSE" />
     <None Include="readme.txt" />
+    <Content Include="Views\Tests\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

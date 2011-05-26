@@ -5,7 +5,7 @@
  * Time: 20:13
  * To change this template use File | Settings | File Templates.
  */
-Ext.define('GenForm.model.product.BrandNameModel', {
+Ext.define('GenForm.model.product.BrandName', {
     extend: 'Ext.data.Model',
     alias: 'widget.brandnamemodel',
 

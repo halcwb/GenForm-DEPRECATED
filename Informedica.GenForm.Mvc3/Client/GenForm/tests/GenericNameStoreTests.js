@@ -5,7 +5,7 @@
  * Time: 9:31
  * To change this template use File | Settings | File Templates.
  */
-describe('GenForm.store.product.GenericNameStore', function() {
+describe('GenForm.store.product.GenericName', function() {
     var getGenericNameStore, createGenericNameStore, addItemToGenericNameStore;
 
     getGenericNameStore = function () {
@@ -17,7 +17,7 @@ describe('GenForm.store.product.GenericNameStore', function() {
     };
 
     createGenericNameStore = function () {
-        return Ext.create('GenForm.store.product.GenericNameStore');
+        return Ext.create('GenForm.store.product.GenericName');
     }
 
     it('GenForm.store.product.GenericNameStore can be created', function () {

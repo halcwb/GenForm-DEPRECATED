@@ -5,7 +5,7 @@
  * Time: 13:12
  * To change this template use File | Settings | File Templates.
  */
-Ext.define('GenForm.model.user.LoginModel',  {
+Ext.define('GenForm.model.user.Login',  {
     extend: 'Ext.data.Model',
 
     constructor: function (config) {
@@ -16,7 +16,7 @@ Ext.define('GenForm.model.user.LoginModel',  {
     },
 
     associations: [
-        { type: 'hasMany', model: 'GenForm.model.validation.ValidationRuleModel', name: 'validationRules'}
+        { type: 'hasMany', model: 'GenForm.model.validation.ValidationRule', name: 'validationRules'}
     ],
 
     createFields: function () {
@@ -29,13 +29,13 @@ Ext.define('GenForm.model.user.LoginModel',  {
     createAssociations: function() {
         this.checkValidationModelRegistration();
         return [
-            { type: 'hasMany', model: 'GenForm.model.validation.ValidationRuleModel', name: 'validationRules'}
+            { type: 'hasMany', model: 'GenForm.model.validation.ValidationRule', name: 'validationRules'}
         ]
     },
 
     checkValidationModelRegistration: function () {
-        if (!Ext.ModelManager.getModel('GenForm.model.validation.ValidationRuleModel')) {
-            Ext.create('GenForm.model.validation.ValidationRuleModel');
+        if (!Ext.ModelManager.getModel('GenForm.model.validation.ValidationRule')) {
+            Ext.create('GenForm.model.validation.ValidationRule');
         }
     },
 
