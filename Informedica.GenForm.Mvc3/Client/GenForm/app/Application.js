@@ -5,8 +5,8 @@
     appFolder: './Client/GenForm/app',
 
     controllers: [
-        'GenForm.controller.user.LoginController',
-        'GenForm.controller.product.ProductController'
+        'user.Login',
+        'product.Product'
     ],
 
     launch: function() {
@@ -24,11 +24,7 @@
     },
 
     showProductWindow: function () {
-        this.createProductWindow().show();
-    },
-
-    createProductWindow: function () {
-        return Ext.create('GenForm.view.product.ProductWindow');
+        this.getController('product.Product').showProductWindow();
     }
 });
 

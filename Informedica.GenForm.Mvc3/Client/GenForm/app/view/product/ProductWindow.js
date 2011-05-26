@@ -26,6 +26,14 @@ Ext.define('GenForm.view.product.ProductWindow', {
     
     createSaveCancelToolBar: function () {
         return Ext.create('GenForm.view.component.SaveCancelToolBar', { dock: 'bottom'});
+    },
+
+    getProductForm: function () {
+        return this.items.items[0];
+    },
+
+    loadWithProduct: function (product) {
+        this.getProductForm().getForm().loadRecord(product);
     }
 
 });

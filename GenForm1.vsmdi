@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestLists xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestList name="Regression" id="0a9d60d5-ca48-4141-97cd-457a0343069b" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <TestLinks>
+      <TestLink id="675aaeeb-93ca-6861-b3ce-c4cf5b707fa5" name="System_user_cannot_login_with_password_bar" storage="informedica.genform.tests\bin\debug\informedica.genform.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="f54d8bcf-1c59-9159-3acc-1f99c87f8f02" name="User_without_password_cannot_login" storage="informedica.genform.tests\bin\debug\informedica.genform.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="2acfc460-c243-cc95-3778-34a347125aef" name="User_foo_cannot_login_with_password_bar" storage="informedica.genform.tests\bin\debug\informedica.genform.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="66db7d5d-afca-e0f5-e06e-46bda9c61243" name="User_without_username_cannot_login" storage="informedica.genform.tests\bin\debug\informedica.genform.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    </TestLinks>
+  </TestList>
+  <TestList name="Lists of Tests" id="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <RunConfiguration id="a593ac19-167a-4b88-a7a8-54ec87fa8f81" name="Local Test Run" storage="localtestrun.testrunconfig" type="Microsoft.VisualStudio.TestTools.Common.TestRunConfiguration, Microsoft.VisualStudio.QualityTools.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestList>
+  <TestList name="Passed" id="e3848f36-6b15-41e4-8acf-5987dc2e3835" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6" />
+</TestLists>

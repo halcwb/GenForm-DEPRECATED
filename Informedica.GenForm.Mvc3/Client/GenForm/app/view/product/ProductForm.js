@@ -9,10 +9,12 @@ Ext.define('GenForm.view.product.ProductForm', {
     extend: 'Ext.form.FormPanel',
     alias: 'widget.productform',
 
+    waitMsgTarget: true,
+    
     initComponent: function () {
         this.items = this.createItems();
 
-        this.callParent(arguments);
+        this.callParent();
     },
 
     createItems: function () {
@@ -55,6 +57,7 @@ Ext.define('GenForm.view.product.ProductForm', {
         return Ext.create('GenForm.view.product.ProductSubstanceGrid', config);
     },
 
+    
     createRowEditor: function () {
         return Ext.create('Ext.grid.plugin.RowEditing', {
             clicksToMoveEditor: 1,
@@ -104,15 +107,21 @@ Ext.define('GenForm.view.product.ProductForm', {
 
     createProductDetails: function () {
         return [
-            { xtype: 'textfield', fieldLabel: 'Artikel Naam', name:'productname', margin: '10 0 10 10' },
-            { xtype: 'textfield', fieldLabel: 'Artikel Code', name: 'productcode', margin: '0 0 10 10' },
-            { xtype: 'combobox',  displayField: 'GenericName', fieldLabel: 'Generiek', store: 'GenForm.store.product.GenericNameStore', margin: '0 0 10 10' },
-            { xtype: 'combobox',  displayField: 'BrandName', fieldLabel: 'Merk', store: 'GenForm.store.product.GenericNameStore', margin: '0 0 10 10' },
-            { xtype: 'combobox',  displayField: 'ShapeName', fieldLabel: 'Vorm', store: 'GenForm.store.product.GenericNameStore', margin: '0 0 10 10' },
-            { xtype: 'numberfield', fieldLabel: 'Hoeveelheid', name: 'Quantity', margin: '0 0 10 10' },
-            { xtype: 'combobox',  displayField: 'UnitName', fieldLabel: 'Eenheid', store: 'GenForm.store.product.GenericNameStore', margin: '0 0 10 10' },
-            { xtype: 'combobox',  displayField: 'PackageName', fieldLabel: 'Verpakking', store: 'GenForm.store.product.GenericNameStore', margin: '0 0 10 10' }
+            { xtype: 'textfield',   name:'ProductName',   fieldLabel: 'Artikel Naam', margin: '10 0 10 10' },
+            { xtype: 'textfield',   name: 'ProductCode',  fieldLabel: 'Artikel Code', margin: '10 0 10 10' },
+            { xtype: 'combobox',    name: 'GenericName',  fieldLabel: 'Generiek',     margin: '10 0 10 10',  displayField: 'GenericName',  store: 'product.GenericName'},
+            { xtype: 'combobox',    name: 'BrandName',    fieldLabel: 'Merk',         margin: '10 0 10 10',  displayField: 'BrandName',    store: 'product.GenericName'},
+            { xtype: 'combobox',    name: 'ShapeName',    fieldLabel: 'Vorm',         margin: '10 0 10 10',  displayField: 'ShapeName',    store: 'product.GenericName' },
+            { xtype: 'numberfield', name: 'Quantity',     fieldLabel: 'Hoeveelheid',  margin: '10 0 10 10' },
+            { xtype: 'combobox',    name: 'UnitName',     fieldLabel: 'Eenheid',      margin: '10 0 10 10',  displayField: 'UnitName',     store: 'product.GenericName' },
+            { xtype: 'combobox',    name: 'PackageName',  fieldLabel: 'Verpakking',   margin: '10 0 10 10' , displayField: 'PackageName',  store: 'product.GenericName'}
         ];
+    },
+
+    getProduct: function () {
+        var record = this.getRecord();
+        this.getForm().updateRecord(record);
+        return record;
     }
 
 });

@@ -5,11 +5,11 @@
  * Time: 20:16
  * To change this template use File | Settings | File Templates.
  */
-describe('GenForm.model.product.BrandNameModel', function () {
+describe('GenForm.model.product.BrandName', function () {
     var getBrandNameModel, loadBrandNameModel, brandNameModel;
 
     getBrandNameModel = function () {
-        return Ext.ModelManager.getModel('GenForm.model.product.BrandNameModel');
+        return Ext.ModelManager.getModel('GenForm.model.product.BrandName');
     };
 
     loadBrandNameModel = function () {

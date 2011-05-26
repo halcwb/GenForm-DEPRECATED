@@ -6,15 +6,15 @@
  * To change this template use File | Settings | File Templates.
  */
 
-describe("GenForm.model.product.GenericNameModel", function () {
+describe("GenForm.model.product.GenericName", function () {
     var callbackObject, setUpCallBackObject, genericNameModel, getGenericNameModelClass,  getGenericNameModel, loadGenericNameModel;
 
     getGenericNameModel = function () {
-        return Ext.ModelManager.getModel('GenForm.model.product.GenericNameModel');
+        return Ext.ModelManager.getModel('GenForm.model.product.GenericName');
     };
 
     getGenericNameModelClass = function () {
-        return Ext.ClassManager.get('GenForm.model.product.GenericNameModel');
+        return Ext.ClassManager.get('GenForm.model.product.GenericName');
     };
 
     loadGenericNameModel = function () {
@@ -27,7 +27,7 @@ describe("GenForm.model.product.GenericNameModel", function () {
     };
 
     it('Should exist in ClassManager', function () {
-       expect(getGenericNameModelClass().modelName).toEqual('GenForm.model.product.GenericNameModel');
+       expect(getGenericNameModelClass().modelName).toEqual('GenForm.model.product.GenericName');
     });
 
     it('ModelManager should return constructor for GenericNameModel', function() {

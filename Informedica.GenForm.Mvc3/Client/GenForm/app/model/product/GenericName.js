@@ -5,7 +5,7 @@
  * Time: 15:33
  * To change this template use File | Settings | File Templates.
  */
-Ext.define('GenForm.model.product.GenericNameModel', {
+Ext.define('GenForm.model.product.GenericName', {
     extend: 'Ext.data.Model',
     alias: 'widget.genericnamemodel',
 
@@ -15,4 +15,4 @@ Ext.define('GenForm.model.product.GenericNameModel', {
         type: 'direct',
         directFn: Product.GetGenericNames
     }
-})
+});

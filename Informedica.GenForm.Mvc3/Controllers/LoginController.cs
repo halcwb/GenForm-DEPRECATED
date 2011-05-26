@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
+using Newtonsoft.Json.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.Security;
 using Informedica.GenForm.Library.Services;
 using Informedica.GenForm.PresentationLayer.Security;
 
-namespace Informedica.GenForm.Mvc2.Controllers
+namespace Informedica.GenForm.Mvc3.Controllers
 {
     public class LoginController : Controller, ILoginController
     {
@@ -14,7 +15,7 @@ namespace Informedica.GenForm.Mvc2.Controllers
         #region ILoginController Members
 
         [ActionName("Login2")]
-        public ActionResult Login(Newtonsoft.Json.Linq.JObject jObject)
+        public ActionResult Login(JObject jObject)
         {
             if (jObject.Count == 0) return this.Direct(
                 new

@@ -9,11 +9,11 @@ describe('Ext.Loader', function () {
     var createLoginModel, createValidationRuleModel;
 
     createLoginModel = function () {
-        return Ext.create('GenForm.model.user.LoginModel');
+        return Ext.create('GenForm.model.user.Login');
     };
 
     createValidationRuleModel = function () {
-        return Ext.create('GenForm.model.validation.ValidationRuleModel');
+        return Ext.create('GenForm.model.validation.ValidationRule');
     };
 
     it('should be enabled', function () {

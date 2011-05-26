@@ -5,7 +5,7 @@
  * Time: 20:07
  * To change this template use File | Settings | File Templates.
  */
-Ext.define('GenForm.model.validation.ValidationRuleModel', {
+Ext.define('GenForm.model.validation.ValidationRule', {
     extend: 'Ext.data.Model',
 
     fields: [
@@ -14,7 +14,7 @@ Ext.define('GenForm.model.validation.ValidationRuleModel', {
     ],
 
     associations: [
-        { type: 'belongsTo', model: 'GenForm.model.user.LoginModel', name: 'login'}
+        { type: 'belongsTo', model: 'GenForm.model.user.Login', name: 'login'}
     ]
 
 });

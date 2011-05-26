@@ -5,10 +5,10 @@
  * Time: 11:53
  * To change this template use File | Settings | File Templates.
  */
-Ext.define('GenForm.store.product.ProductSubstanceStore', {
+Ext.define('GenForm.store.product.ProductSubstance', {
     extend: 'Ext.data.Store',
     alias: 'widget.productsubstancestore',
     storeId: 'productsubstancestore',
 
-    model: 'GenForm.model.product.ProductSubstanceModel'
+    model: 'GenForm.model.product.ProductSubstance'
 });

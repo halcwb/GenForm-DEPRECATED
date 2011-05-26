@@ -10,7 +10,7 @@ Ext.define('GenForm.data.ProductSubstanceTestData', {
     storeId: 'productSubstanceTestStore',
     fields: [ 'OrderNumber', 'GenericName', 'Quantity', 'Unit'],
 
-    model: 'GenForm.model.product.ProductSubstanceModel',
+    model: 'GenForm.model.product.ProductSubstance',
 
     data: {
         'items' : [

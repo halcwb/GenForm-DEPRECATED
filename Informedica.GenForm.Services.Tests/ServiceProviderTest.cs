@@ -101,7 +101,7 @@ namespace Informedica.GenForm.Services.Tests
         }
 
         [TestMethod]
-        public void ResolveTest()
+        public void A_server_provider_can_resolve_by_type()
         {
             ResolveTestHelper<GenericParameterHelper>();
         }
