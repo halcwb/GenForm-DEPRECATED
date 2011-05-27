@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Informedica.GenForm.Library.DataAccess;
+using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.ServiceProviders;
 
 namespace Informedica.GenForm.Library.DomainModel.Users

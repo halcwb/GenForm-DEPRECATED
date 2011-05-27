@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
 using Informedica.GenForm.DataAccess.Repositories;
-using Informedica.GenForm.Library.DataAccess;
 using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Security;
 using Informedica.GenForm.Library.ServiceProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

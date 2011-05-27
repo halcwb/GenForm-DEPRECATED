@@ -1,11 +1,11 @@
 ﻿using Informedica.GenForm.DataAccess.Repositories;
-using Informedica.GenForm.Library.DataAccess;
 using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.ServiceProviders;
 
 namespace Informedica.GenForm.Assembler
 {
-    public class LoginAssembler
+    public static class LoginAssembler
     {
         public static void RegisterDependencies()
         {

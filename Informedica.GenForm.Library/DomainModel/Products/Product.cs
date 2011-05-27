@@ -1,4 +1,6 @@
-﻿namespace Informedica.GenForm.Library.DomainModel.Products
+﻿using System;
+
+namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class Product : IProduct
     {
