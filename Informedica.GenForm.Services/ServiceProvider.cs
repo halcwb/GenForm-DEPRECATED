@@ -36,7 +36,15 @@ namespace Informedica.GenForm.ServiceProviders
 
         public T Resolve<T>()
         {
-            return _container.Resolve<T>();
+            try
+            {
+                return _container.Resolve<T>();
+
+            }
+            catch (Exception)
+            {
+                return default(T);
+            }
         }
 
         #endregion

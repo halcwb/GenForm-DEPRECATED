@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
-using Informedica.GenForm.Presentation.Forms;
 
-namespace Informedica.GenForm.Mvc2.Controllers
+namespace Informedica.GenForm.Mvc3.Controllers
 {
     public class ActionResultParser
     {

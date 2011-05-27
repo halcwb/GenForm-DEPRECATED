@@ -56,11 +56,11 @@ body .jasmine_reporter div
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/Application.js")"></script>  
   
     <!-- include spec files here... -->
-@*
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ExtLoaderTests.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/Ext.ComponentQueryTests.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ModelTests.js")"></script>
 
+@*    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ExtLoaderTests.js")"></script>
+*@    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/Ext.ComponentQueryTests.js")"></script>
+@*    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ModelTests.js")"></script>
+*@@*
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/LoginModelTests.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/StoreTests.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/GenericNameModelTests.js")"></script>
@@ -70,9 +70,10 @@ body .jasmine_reporter div
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/GenericNameStoreTests.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ProductSubstanceGridTests.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ProductModelTests.js")"></script>
-*@
+
 
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/ProductControllerTests.js")"></script>   
+*@
 </head>
 
 <body>

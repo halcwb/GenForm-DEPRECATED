@@ -71,15 +71,6 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         #endregion
 
 
-        /// <summary>
-        ///A test for GetById
-        ///</summary>
-        [TestMethod]
-        public void GetByIdTest()
-        {
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
         [Isolated]
         [TestMethod]
         public void Get_User_by_system_username_returns_instance_of_IUser_with_that_name()

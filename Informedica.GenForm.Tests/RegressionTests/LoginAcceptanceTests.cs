@@ -1,5 +1,5 @@
 ﻿using System;
-using Informedica.GenForm.Mvc2.Controllers;
+using Informedica.GenForm.Mvc3.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Tests.RegressionTests

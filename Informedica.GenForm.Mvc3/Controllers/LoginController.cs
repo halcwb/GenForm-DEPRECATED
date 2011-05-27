@@ -29,9 +29,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
                     }
                 }
             );
-
-            LoginAssembler.RegisterDependencies();
-
             var user = GetUser(jObject["username"].ToString(), jObject["password"].ToString());
             GetLoginServices().Login(user);
 

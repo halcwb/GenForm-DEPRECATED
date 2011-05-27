@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Informedica.GenForm.IoC;
 
 namespace Informedica.GenForm.Mvc3
 {
@@ -35,6 +36,8 @@ namespace Informedica.GenForm.Mvc3
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            ContainerBootstrapper.BootstrapStructureMap();
         }
     }
 }
