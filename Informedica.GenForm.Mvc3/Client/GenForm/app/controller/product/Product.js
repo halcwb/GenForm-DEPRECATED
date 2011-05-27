@@ -67,14 +67,13 @@ Ext.define('GenForm.controller.product.Product', {
 
     saveProduct: function (button) {
         var me = this,
-            product = this.getProduct(button);
+            product = me.getProduct(button);
 
-        Product.SaveProduct(product.data, this.onProductSaved.bind(me));
+        Product.SaveProduct(product.data, {scope: me, callback: me.onProductSaved});
     },
 
     onProductSaved: function (result) {
-        console.log(result);
-        Ext.MessageBox.alert('Product saved', result.data);
+        Ext.MessageBox.alert('Product saved: ' + result.data.ProductName);
     },
 
     showCancelMessage: function () {

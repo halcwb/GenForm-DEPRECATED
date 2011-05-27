@@ -56,7 +56,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="TypeMock, Version=6.0.9.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\TypeMock\TypeMock.dll</HintPath>
@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcceptanceTests\ProductEditAcceptanceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegressionTests\LoginAcceptanceTests.cs" />
   </ItemGroup>
@@ -78,18 +79,16 @@
       <Project>{B8679F93-88AC-480F-8287-179F43685081}</Project>
       <Name>Informedica.GenForm.Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Mvc2\Informedica.GenForm.Mvc2.csproj">
-      <Project>{D5D0ACA6-5C07-4E08-A731-142D644DD0D1}</Project>
-      <Name>Informedica.GenForm.Mvc2</Name>
+    <ProjectReference Include="..\Informedica.GenForm.Mvc3\Informedica.GenForm.Mvc3.csproj">
+      <Project>{76148642-857A-4186-8A7B-C4AFC05E0152}</Project>
+      <Name>Informedica.GenForm.Mvc3</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj">
       <Project>{82D196C1-B130-4188-A363-458311D8BD89}</Project>
       <Name>Informedica.GenForm.ServiceProviders</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AcceptanceTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>

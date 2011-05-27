@@ -100,14 +100,16 @@ namespace Informedica.GenForm.Services.Tests
             return provider;
         }
 
+        [Isolated]
         [TestMethod]
         public void A_server_provider_can_resolve_by_type()
         {
             ResolveTestHelper<GenericParameterHelper>();
         }
 
+        [Isolated]
         [TestMethod]
-        public void ConcreteServiceProvider2Test()
+        public void Service_provider_returns_two_seperate_instances()
         {
             IServiceProvider provider1 = GetServiceProvider();
             IServiceProvider provider2 = ConcreteServiceProvider2.Provider;

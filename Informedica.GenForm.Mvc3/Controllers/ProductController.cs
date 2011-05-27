@@ -65,7 +65,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
                                   ShapeName = productData.Value<String>("ShapeName"),
                                   UnitName = productData.Value<String>("UnitName")
                               };
-            product = GetProductServices().SaveProduct(product);
+            //product = GetProductServices().SaveProduct(product);
 
             return this.Direct(new {success = !String.IsNullOrEmpty(product.ProductName), data = product});
         }
