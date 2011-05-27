@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Mvc3", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.IoC", "Informedica.GenForm.IoC\Informedica.GenForm.IoC.csproj", "{23C6439B-83BC-41DB-B97E-F698DB52CEF5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Assembler.Tests", "Informedica.GenForm.Assembler.Tests\Informedica.GenForm.Assembler.Tests.csproj", "{7579F04C-9F75-4770-8114-A6EC6A7E1462}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.Utilities", "Informedica.Utilities\Informedica.Utilities.csproj", "{A1C3A418-F89E-41A3-9D32-E05C7E38577F}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = GenForm1.vsmdi
@@ -200,6 +204,26 @@ Global
 		{23C6439B-83BC-41DB-B97E-F698DB52CEF5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{23C6439B-83BC-41DB-B97E-F698DB52CEF5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{23C6439B-83BC-41DB-B97E-F698DB52CEF5}.Release|x86.ActiveCfg = Release|Any CPU
+		{7579F04C-9F75-4770-8114-A6EC6A7E1462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7579F04C-9F75-4770-8114-A6EC6A7E1462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7579F04C-9F75-4770-8114-A6EC6A7E1462}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7579F04C-9F75-4770-8114-A6EC6A7E1462}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7579F04C-9F75-4770-8114-A6EC6A7E1462}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7579F04C-9F75-4770-8114-A6EC6A7E1462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7579F04C-9F75-4770-8114-A6EC6A7E1462}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7579F04C-9F75-4770-8114-A6EC6A7E1462}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7579F04C-9F75-4770-8114-A6EC6A7E1462}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7579F04C-9F75-4770-8114-A6EC6A7E1462}.Release|x86.ActiveCfg = Release|Any CPU
+		{A1C3A418-F89E-41A3-9D32-E05C7E38577F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1C3A418-F89E-41A3-9D32-E05C7E38577F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1C3A418-F89E-41A3-9D32-E05C7E38577F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A1C3A418-F89E-41A3-9D32-E05C7E38577F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A1C3A418-F89E-41A3-9D32-E05C7E38577F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A1C3A418-F89E-41A3-9D32-E05C7E38577F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1C3A418-F89E-41A3-9D32-E05C7E38577F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1C3A418-F89E-41A3-9D32-E05C7E38577F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A1C3A418-F89E-41A3-9D32-E05C7E38577F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A1C3A418-F89E-41A3-9D32-E05C7E38577F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

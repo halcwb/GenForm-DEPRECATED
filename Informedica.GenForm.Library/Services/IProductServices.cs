@@ -11,5 +11,6 @@ namespace Informedica.GenForm.Library.Services
         IProduct GetProduct(Int32 productId);
         IProduct SaveProduct(IProduct product);
         void DeleteProduct(Int32 productId);
+        IProduct GetEmptyProduct();
     }
 }

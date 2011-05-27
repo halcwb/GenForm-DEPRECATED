@@ -57,6 +57,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -71,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnityTests\IProductServicesTest.cs" />
     <Compile Include="UnityTests\GenFormIdentityTest.cs" />
     <Compile Include="UnityTests\GenFormPrincipalTest.cs" />
     <Compile Include="UnityTests\ILoginServicesTest.cs" />
@@ -81,9 +83,17 @@
     <Content Include="AuthoringTests.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Informedica.GenForm.Assembler\Informedica.GenForm.Assembler.csproj">
+      <Project>{DB3FE453-4FEA-43EC-BAC7-B0679A432BE2}</Project>
+      <Name>Informedica.GenForm.Assembler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.DataAccess\Informedica.GenForm.DataAccess.csproj">
       <Project>{9EC2E9E4-CEEF-4A78-A8DE-EB12F8C6DAE1}</Project>
       <Name>Informedica.GenForm.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.IoC\Informedica.GenForm.IoC.csproj">
+      <Project>{23C6439B-83BC-41DB-B97E-F698DB52CEF5}</Project>
+      <Name>Informedica.GenForm.IoC</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
       <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
@@ -92,6 +102,10 @@
     <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj">
       <Project>{82D196C1-B130-4188-A363-458311D8BD89}</Project>
       <Name>Informedica.GenForm.ServiceProviders</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.Utilities\Informedica.Utilities.csproj">
+      <Project>{A1C3A418-F89E-41A3-9D32-E05C7E38577F}</Project>
+      <Name>Informedica.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

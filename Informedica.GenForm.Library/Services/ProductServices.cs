@@ -22,6 +22,11 @@ namespace Informedica.GenForm.Library.Services
             throw new NotImplementedException();
         }
 
+        public IProduct GetEmptyProduct()
+        {
+            return new Product();
+        }
+
         #endregion
     }
 }

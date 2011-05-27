@@ -1,21 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Informedica.GenForm.Library.DomainModel.Users;
+﻿using Informedica.GenForm.IoC.Factory;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
-using Informedica.GenForm.Library.ServiceProviders;
+using Informedica.GenForm.Library.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TypeMock.ArrangeActAssert;
 
-namespace Informedica.GenForm.Library.Tests
+namespace Informedica.GenForm.Assembler.Tests
 {
     
     
     /// <summary>
-    ///This is a test class for UserTest and is intended
-    ///to contain all UserTest Unit Tests
+    ///This is a test class for ProductAssemblerTest and is intended
+    ///to contain all ProductAssemblerTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class UserTest
+    public class ProductAssemblerTest
     {
 
 
@@ -54,11 +52,12 @@ namespace Informedica.GenForm.Library.Tests
         //}
         //
         //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
-        //
+        [TestInitialize()]
+        public void MyTestInitialize()
+        {
+            ProductAssembler.RegisterDependencies();
+        }
+        
         //Use TestCleanup to run code after each test has run
         //[TestCleanup()]
         //public void MyTestCleanup()
@@ -67,24 +66,23 @@ namespace Informedica.GenForm.Library.Tests
         //
         #endregion
 
-        [Isolated]
-        [TestMethod]
-        public void GetUser_by_name_Admin_returns_AdminUser()
+
+        [TestMethod()]
+        public void An_implementation_for_product_can_be_get()
         {
-            const string name = "Admin";
-
-            ArrangeFakeRepository(name);
-
-            Assert.IsTrue(User.GetUser(name).FirstOrDefault().Name == name);
+            Assert.IsInstanceOfType(LibraryObjectFactory.GetImplementationFor<IProduct>(), typeof (IProduct), "no implementation for product was found");
         }
 
-        private static void ArrangeFakeRepository(string name)
+        [TestMethod]
+        public void An_implementation_for_product_services_can_be_get()
         {
-            var repos = Isolate.Fake.Instance<IRepository<IUser>>();
-            DalServiceProvider.Instance.RegisterInstanceOfType(repos);
-            var user = new List<IUser>() {Isolate.Fake.Instance<IUser>()};
-            Isolate.WhenCalled(() => user.FirstOrDefault().Name).WillReturn(name);
-            Isolate.WhenCalled(() => repos.GetByName(name)).WillReturn(user);
+            Assert.IsInstanceOfType(LibraryObjectFactory.GetImplementationFor<IProductServices>(), typeof(IProductServices), "no implementation for product services was found");
+        }
+
+        [TestMethod]
+        public void An_implementation_for_product_repository_can_be_get()
+        {
+            Assert.IsInstanceOfType(LibraryObjectFactory.GetImplementationFor<IProductRepository>(), typeof(IProductRepository), "no implementation for product repository was found");
         }
     }
 }

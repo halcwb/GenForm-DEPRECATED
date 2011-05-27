@@ -4,8 +4,8 @@ using System.Linq;
 using Informedica.GenForm.DataAccess.DataContexts;
 using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.Database;
-using Informedica.GenForm.Library.DataAccess;
 using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.Repositories;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
