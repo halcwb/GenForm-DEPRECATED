@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.IoC;
+using Informedica.GenForm.IoC.Registries;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services;

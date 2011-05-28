@@ -1,9 +1,11 @@
-﻿using System;
-using Informedica.GenForm.Assembler;
-using Informedica.GenForm.IoC.Factory;
+﻿using Informedica.GenForm.Assembler;
+using Informedica.GenForm.IoC;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Services;
 using Informedica.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TypeMock.ArrangeActAssert;
+
 
 namespace Informedica.GenForm.Tests.AcceptanceTests
 {
@@ -65,7 +67,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private static IProductServices GetProductServices()
         {
-            return LibraryObjectFactory.GetImplementationFor<IProductServices>();
+            return ObjectFactory.GetImplementationFor<IProductServices>();
         }
 
         [TestMethod]
@@ -78,12 +80,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         }
 
 
-        [TestMethod]
-        public void User_can_see_if_entered_values_are_valid()
-        {
-            Assert.Fail("User could not see whether entered values were valid");
-        }
-
+        [Isolated]
         [TestMethod]
         public void User_can_save_product_with_values_entered()
         {
@@ -95,20 +92,11 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             product.UnitName = "stuk";
             product.PackageName = "tablet";
 
-            try
-            {
-                GetProductServices().SaveProduct(product);
-            }
-            catch (Exception)
-            {
-                Assert.Fail("product with values entered (valid product) could not be saved");
-            }
+
+            GetProductServices().SaveProduct(product);
+
+            Assert.AreEqual(product, GetProductServices().GetProduct(product.ProductName));
         }
 
-        [TestMethod]
-        public void When_product_is_save_the_saved_version_of_product_is_returned()
-        {
-            Assert.Fail("after save, no saved version of the product was returned");
-        }
     }
 }

@@ -43,8 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LibraryRegistry.cs" />
-    <Compile Include="Factory\LibraryObjectFactory.cs" />
+    <Compile Include="Registries\DatabaseRegistry.cs" />
+    <Compile Include="Registries\LibraryRegistry.cs" />
+    <Compile Include="ObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

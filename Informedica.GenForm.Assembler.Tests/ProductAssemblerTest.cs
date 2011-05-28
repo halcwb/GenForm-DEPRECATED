@@ -1,4 +1,4 @@
-﻿using Informedica.GenForm.IoC.Factory;
+﻿using Informedica.GenForm.IoC;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services;
@@ -40,11 +40,13 @@ namespace Informedica.GenForm.Assembler.Tests
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
-        //
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            ProductAssembler.RegisterDependencies();
+            ObjectFactory.Initialize();
+        }
+        
         //Use ClassCleanup to run code after all tests in a class have run
         //[ClassCleanup()]
         //public static void MyClassCleanup()
@@ -52,11 +54,11 @@ namespace Informedica.GenForm.Assembler.Tests
         //}
         //
         //Use TestInitialize to run code before running each test
-        [TestInitialize()]
-        public void MyTestInitialize()
-        {
-            ProductAssembler.RegisterDependencies();
-        }
+        //[TestInitialize()]
+        //public void MyTestInitialize()
+        //{
+        //    ProductAssembler.RegisterDependencies();
+        //}
         
         //Use TestCleanup to run code after each test has run
         //[TestCleanup()]
@@ -70,19 +72,19 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod()]
         public void An_implementation_for_product_can_be_get()
         {
-            Assert.IsInstanceOfType(LibraryObjectFactory.GetImplementationFor<IProduct>(), typeof (IProduct), "no implementation for product was found");
+            Assert.IsInstanceOfType(ObjectFactory.GetImplementationFor<IProduct>(), typeof (IProduct), "no implementation for product was found");
         }
 
         [TestMethod]
         public void An_implementation_for_product_services_can_be_get()
         {
-            Assert.IsInstanceOfType(LibraryObjectFactory.GetImplementationFor<IProductServices>(), typeof(IProductServices), "no implementation for product services was found");
+            Assert.IsInstanceOfType(ObjectFactory.GetImplementationFor<IProductServices>(), typeof(IProductServices), "no implementation for product services was found");
         }
 
         [TestMethod]
         public void An_implementation_for_product_repository_can_be_get()
         {
-            Assert.IsInstanceOfType(LibraryObjectFactory.GetImplementationFor<IProductRepository>(), typeof(IProductRepository), "no implementation for product repository was found");
+            Assert.IsInstanceOfType(ObjectFactory.GetImplementationFor<IProductRepository>(), typeof(IProductRepository), "no implementation for product repository was found");
         }
     }
 }

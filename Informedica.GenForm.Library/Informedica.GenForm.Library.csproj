@@ -59,7 +59,6 @@
     <Compile Include="DomainModel\Users\IUserInfoList.cs" />
     <Compile Include="DomainModel\Users\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Security\AnonymousIdentity.cs" />
     <Compile Include="Security\GenFormIdentity.cs" />
     <Compile Include="Security\GenFormPrincipal.cs" />
@@ -75,6 +74,10 @@
     <Compile Include="Services\ProductServices.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Informedica.GenForm.IoC\Informedica.GenForm.IoC.csproj">
+      <Project>{23C6439B-83BC-41DB-B97E-F698DB52CEF5}</Project>
+      <Name>Informedica.GenForm.IoC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj">
       <Project>{82D196C1-B130-4188-A363-458311D8BD89}</Project>
       <Name>Informedica.GenForm.ServiceProviders</Name>
