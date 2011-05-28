@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Informedica.Utilities;
 using Informedica.GenForm.Library.DomainModel.Products;
+using TypeMock.ArrangeActAssert;
 
 namespace Informedica.GenForm.Library.Tests.UnityTests
 {
@@ -83,6 +84,13 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         {
             IProductServices services = CreateIProductServices(); 
             Assert.IsTrue(ObjectExaminer.ObjectHasEmptyProperties(services.GetEmptyProduct()), "services did not return an empty product");
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void Product_services_use_product_repository_to_save_product()
+        {
+            
         }
 
         [TestMethod]

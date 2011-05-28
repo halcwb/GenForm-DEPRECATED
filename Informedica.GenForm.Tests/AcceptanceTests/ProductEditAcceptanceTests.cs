@@ -13,13 +13,6 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
     [TestClass]
     public class ProductEditAcceptanceTests
     {
-        public ProductEditAcceptanceTests()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         private TestContext testContextInstance;
 
         /// <summary>
@@ -109,7 +102,6 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             catch (Exception)
             {
                 Assert.Fail("product with values entered (valid product) could not be saved");
-                throw;
             }
         }
 
