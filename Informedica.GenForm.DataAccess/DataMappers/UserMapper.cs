@@ -5,7 +5,7 @@ using Informedica.GenForm.Library.DomainModel.Users;
 
 namespace Informedica.GenForm.DataAccess.DataMappers
 {
-    public class UserDataMapper: IDataMapper<IUser, GenFormUser>
+    public class UserMapper: IDataMapper<IUser, GenFormUser>
     {
         #region Implementation of IDataMapper<IUser,IUserDao>
 

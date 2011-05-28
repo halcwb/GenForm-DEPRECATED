@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Security.Principal;
+using Informedica.GenForm.IoC;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.Repositories;
 
 namespace Informedica.GenForm.Library.Services
 {
@@ -12,9 +15,15 @@ namespace Informedica.GenForm.Library.Services
             throw new NotImplementedException();
         }
 
-        public IProduct SaveProduct(IProduct product)
+        public IProduct GetProduct(String productName)
         {
             throw new NotImplementedException();
+        }
+
+        public void SaveProduct(IProduct product)
+        {
+            var repository = ObjectFactory.GetImplementationFor<IProductRepository>();
+            repository.SaveProduct(product);
         }
 
         public void DeleteProduct(int productId)

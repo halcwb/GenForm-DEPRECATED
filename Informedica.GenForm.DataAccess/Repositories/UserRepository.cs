@@ -48,7 +48,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
             }
         }
 
-        private static IDataMapper<IUser, GenFormUser> Mapper { get { return new UserDataMapper(); } }
+        private static IDataMapper<IUser, GenFormUser> Mapper { get { return new UserMapper(); } }
 
         #endregion
 
