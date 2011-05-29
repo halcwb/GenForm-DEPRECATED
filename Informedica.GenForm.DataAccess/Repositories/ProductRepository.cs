@@ -43,6 +43,10 @@ namespace Informedica.GenForm.DataAccess.Repositories
                         {
                             ctx.SubmitChanges();
                         }
+                        catch(Exception e)
+                        {
+                            throw;
+                        }
                         finally
                         {
                             transaction.Rollback();

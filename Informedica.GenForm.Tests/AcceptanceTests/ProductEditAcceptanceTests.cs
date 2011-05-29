@@ -86,8 +86,10 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         public void User_can_save_product_with_values_entered()
         {
             var product = GetProductServices().GetEmptyProduct();
+
             product.ProductName = "paracetamol 500 mg tablet";
             product.GenericName = "paracetamol";
+            product.BrandName = "Paracetamol";
             product.ShapeName = "tablet";
             product.Quantity = 1;
             product.UnitName = "stuk";
@@ -97,6 +99,25 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             GetProductServices().SaveProduct(product);
 
             Assert.AreEqual(product, GetProductServices().GetProduct(product.ProductName));
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void User_cannot_save_product_with_mandatory_fields_not_filled_in()
+        {
+            var product = GetProductServices().GetEmptyProduct();
+
+            product.ProductName = "Test";
+
+            try
+            {
+                GetProductServices().SaveProduct(product);
+                Assert.Fail("a non valid product should not be saved");
+
+            }
+            catch
+            {
+            }
         }
 
     }
