@@ -1,19 +1,18 @@
 ﻿using Informedica.GenForm.IoC;
-using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Repositories;
-using Informedica.GenForm.Library.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using StructureMap.Exceptions;
 
 namespace Informedica.GenForm.Assembler.Tests
 {
     
     
     /// <summary>
-    ///This is a test class for ProductAssemblerTest and is intended
-    ///to contain all ProductAssemblerTest Unit Tests
+    ///This is a test class for ObjectFactoryTest and is intended
+    ///to contain all ObjectFactoryTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class ProductAssemblerTest
+    public class ObjectFactoryTest
     {
 
 
@@ -40,13 +39,11 @@ namespace Informedica.GenForm.Assembler.Tests
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
-        public static void MyClassInitialize(TestContext testContext)
-        {
-            ProductAssembler.RegisterDependencies();
-            ObjectFactory.Initialize();
-        }
-        
+        //[ClassInitialize()]
+        //public static void MyClassInitialize(TestContext testContext)
+        //{
+        //}
+        //
         //Use ClassCleanup to run code after all tests in a class have run
         //[ClassCleanup()]
         //public static void MyClassCleanup()
@@ -57,9 +54,8 @@ namespace Informedica.GenForm.Assembler.Tests
         //[TestInitialize()]
         //public void MyTestInitialize()
         //{
-        //    ProductAssembler.RegisterDependencies();
         //}
-        
+        //
         //Use TestCleanup to run code after each test has run
         //[TestCleanup()]
         //public void MyTestCleanup()
@@ -69,22 +65,30 @@ namespace Informedica.GenForm.Assembler.Tests
         #endregion
 
 
+        /// <summary>
+        ///A test for GetImplementationFor
+        ///</summary>
+        public void GetImplementationForTestHelper<T>()
+        {
+            try
+            {
+                ObjectFactory.GetInstanceFor<T>();
+                Assert.Fail("a non registered type cannot be retrieved");
+
+            }
+            catch (Exception e)
+            {
+                if (e.GetType() != typeof(MissingPluginFamilyException))
+                {
+                    Assert.Fail("not the expected exception: " + e);
+                }
+            }
+        }
+
         [TestMethod()]
-        public void An_implementation_for_product_can_be_get()
+        public void Get_implementation_for_a_type_that_is_not_registered_returns_exception()
         {
-            Assert.IsInstanceOfType(ObjectFactory.GetInstanceFor<IProduct>(), typeof (IProduct), "no implementation for product was found");
-        }
-
-        [TestMethod]
-        public void An_implementation_for_product_services_can_be_get()
-        {
-            Assert.IsInstanceOfType(ObjectFactory.GetInstanceFor<IProductServices>(), typeof(IProductServices), "no implementation for product services was found");
-        }
-
-        [TestMethod]
-        public void An_implementation_for_product_repository_can_be_get()
-        {
-            Assert.IsInstanceOfType(ObjectFactory.GetInstanceFor<IProductRepository>(), typeof(IProductRepository), "no implementation for product repository was found");
+            GetImplementationForTestHelper<GenericParameterHelper>();
         }
     }
 }

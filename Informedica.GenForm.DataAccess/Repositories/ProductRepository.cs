@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.Database;
+using Informedica.GenForm.IoC;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
 
@@ -25,15 +24,25 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         public void SaveProduct(IProduct product)
         {
-            var mapper = new ProductMapper();
-            using (var ctx = new Informedica.GenForm.Database.GenFormDataContext(Informedica.GenForm.Database.DatabaseConnection.GetConnectionString(DatabaseConnection.DatabaseName.GenForm)))
+            var mapper = GetMapper();
+            using (var ctx = GetDataContext())
             {
-                var dao = new Informedica.GenForm.Database.Product();
+                var dao = new Database.Product();
                 mapper.MapFromBoToDao(product, dao);
                 ctx.Product.InsertOnSubmit(dao);
 
                 ctx.SubmitChanges();
             }
+        }
+
+        private static ProductMapper GetMapper()
+        {
+            return ObjectFactory.GetInstanceFor<ProductMapper>();
+        }
+
+        private static GenFormDataContext GetDataContext()
+        {
+            return ObjectFactory.With(DatabaseConnection.DatabaseName.GenForm).GetInstance<GenFormDataContext>();
         }
 
         #endregion

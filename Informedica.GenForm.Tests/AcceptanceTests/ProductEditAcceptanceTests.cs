@@ -67,7 +67,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private static IProductServices GetProductServices()
         {
-            return ObjectFactory.GetImplementationFor<IProductServices>();
+            return ObjectFactory.GetInstanceFor<IProductServices>();
         }
 
         [TestMethod]
