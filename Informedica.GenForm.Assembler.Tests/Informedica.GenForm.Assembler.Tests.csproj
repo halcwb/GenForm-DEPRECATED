@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
@@ -51,6 +52,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseAssemblerTest.cs" />
     <Compile Include="ObjectFactoryTest.cs" />
     <Compile Include="ProductAssemblerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +65,10 @@
     <ProjectReference Include="..\Informedica.GenForm.DataAccess\Informedica.GenForm.DataAccess.csproj">
       <Project>{9EC2E9E4-CEEF-4A78-A8DE-EB12F8C6DAE1}</Project>
       <Name>Informedica.GenForm.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Database\Informedica.GenForm.Database.csproj">
+      <Project>{46C54F92-FF84-4F84-A6E0-CD141EAFBE60}</Project>
+      <Name>Informedica.GenForm.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.IoC\Informedica.GenForm.IoC.csproj">
       <Project>{23C6439B-83BC-41DB-B97E-F698DB52CEF5}</Project>

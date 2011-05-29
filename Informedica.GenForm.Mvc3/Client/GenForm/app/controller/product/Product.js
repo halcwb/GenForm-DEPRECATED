@@ -73,7 +73,11 @@ Ext.define('GenForm.controller.product.Product', {
     },
 
     onProductSaved: function (result) {
-        Ext.MessageBox.alert('Product saved: ' + result.data.ProductName);
+        if (result.success) {
+            Ext.MessageBox.alert('Product saved: ' + result.data.ProductName);
+        } else {
+            Ext.MessageBox.alert('Product could not be saved: ' + result.message);
+        }
     },
 
     showCancelMessage: function () {
