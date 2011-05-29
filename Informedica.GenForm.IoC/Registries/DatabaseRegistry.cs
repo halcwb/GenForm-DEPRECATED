@@ -18,5 +18,6 @@ namespace Informedica.GenForm.IoC.Registries
             _databaseRegistry.For<T>().Use<TC>();
         }
 
+
     }
 }

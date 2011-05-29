@@ -1,4 +1,5 @@
 ﻿using System;
+using Informedica.GenForm.IoC;
 using Informedica.GenForm.Library.Services;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
@@ -53,6 +54,8 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult SaveProduct(JObject productData)
         {
+            var success = true;
+            var message = String.Empty;
             IProduct product = new Product
                               {
                                   ProductName = productData.Value<String>("ProductName"),
@@ -65,14 +68,22 @@ namespace Informedica.GenForm.Mvc3.Controllers
                                   ShapeName = productData.Value<String>("ShapeName"),
                                   UnitName = productData.Value<String>("UnitName")
                               };
-            //product = GetProductServices().SaveProduct(product);
+            try
+            {
+                GetProductServices().SaveProduct(product);
 
-            return this.Direct(new {success = !String.IsNullOrEmpty(product.ProductName), data = product});
+            }
+            catch (Exception e)
+            {
+                success = false;
+                message = e.ToString();
+            }
+            return this.Direct(new {success, data = product, message});
         }
 
         private IProductServices GetProductServices()
         {
-            return new ProductServices();
+            return ObjectFactory.GetInstanceFor<IProductServices>();
         }
     }
 }
