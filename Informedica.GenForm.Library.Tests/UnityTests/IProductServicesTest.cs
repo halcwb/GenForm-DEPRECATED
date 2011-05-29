@@ -1,14 +1,13 @@
-﻿using System.Reflection;
-using Informedica.GenForm.Assembler;
+﻿using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess.Repositories;
-using Informedica.GenForm.IoC;
-using Informedica.GenForm.IoC.Registries;
+using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Informedica.Utilities;
 using Informedica.GenForm.Library.DomainModel.Products;
+using StructureMap;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
 
@@ -20,7 +19,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
     ///This is a test class for IProductServicesTest and is intended
     ///to contain all IProductServicesTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class IProductServicesTest
     {
 
@@ -48,11 +47,10 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            ProductAssembler.RegisterDependencies();
-            ObjectFactory.Initialize();
+            GenFormApplication.Initialize();
         }
         
         //Use ClassCleanup to run code after all tests in a class have run
@@ -79,13 +77,13 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
 
         internal virtual IProductServices GetProductServices()
         {
-            return ObjectFactory.GetInstanceFor<IProductServices>();
+            return ObjectFactory.GetInstance<IProductServices>();
         }
 
         /// <summary>
         ///A test for GetEmptyProduct
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void Product_services_can_return_an_empty_product()
         {
             var services = GetProductServices(); 
@@ -96,7 +94,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         [TestMethod]
         public void Test_helper_method_to_determine_whether_product_is_empty()
         {
-            IProduct product = ObjectFactory.GetInstanceFor<IProduct>();
+            IProduct product = ObjectFactory.GetInstance<IProduct>();
             Assert.IsTrue(ObjectExaminer.ObjectHasEmptyProperties(product), "helper method should return true");
 
             product.ProductName = "Not empty";
@@ -107,12 +105,12 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         [TestMethod]
         public void Save_product_calls_product_repository_to_save_the_product()
         {
-            var product = ObjectFactory.GetInstanceFor<IProduct>();
+            var product = ObjectFactory.GetInstance<IProduct>();
 
             try
             {
-                ProductRepository repos = GetFakeRepository(product);
-                LibraryRegistry.RegisterInstanceFor<IProductRepository>(repos);
+                var repos = GetFakeRepository(product);
+                ObjectFactory.Inject<IProductRepository>(repos);
 
                 GetProductServices().SaveProduct(product);
                 Isolate.Verify.WasCalledWithExactArguments(() => repos.SaveProduct(product));

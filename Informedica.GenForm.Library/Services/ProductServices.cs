@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Security.Principal;
-using Informedica.GenForm.IoC;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
+using StructureMap;
 
 namespace Informedica.GenForm.Library.Services
 {
@@ -22,7 +21,7 @@ namespace Informedica.GenForm.Library.Services
 
         public void SaveProduct(IProduct product)
         {
-            var repository = ObjectFactory.GetInstanceFor<IProductRepository>();
+            var repository = ObjectFactory.GetInstance<IProductRepository>();
             repository.SaveProduct(product);
         }
 

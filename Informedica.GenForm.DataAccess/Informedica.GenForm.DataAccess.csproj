@@ -67,10 +67,6 @@
       <Project>{46C54F92-FF84-4F84-A6E0-CD141EAFBE60}</Project>
       <Name>Informedica.GenForm.Database</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.IoC\Informedica.GenForm.IoC.csproj">
-      <Project>{23C6439B-83BC-41DB-B97E-F698DB52CEF5}</Project>
-      <Name>Informedica.GenForm.IoC</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
       <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
       <Name>Informedica.GenForm.Library</Name>
