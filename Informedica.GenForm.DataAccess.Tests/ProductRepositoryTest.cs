@@ -2,10 +2,10 @@
 using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Database;
-using Informedica.GenForm.IoC;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Informedica.GenForm.Library.DomainModel.Products;
+using StructureMap;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
 using Product = Informedica.GenForm.Database.Product;
@@ -49,8 +49,7 @@ namespace Informedica.GenForm.DataAccess.Tests
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            ProductAssembler.RegisterDependencies();
-            ObjectFactory.Initialize();
+            GenFormApplication.Initialize();
         }
         
         //Use ClassCleanup to run code after all tests in a class have run
@@ -78,7 +77,7 @@ namespace Informedica.GenForm.DataAccess.Tests
         public void Save_product_saves_calls_product_mapper_to_map_product_to_database()
         {
             var repository = CreateProductRepository();
-            var product = ObjectFactory.GetInstanceFor<IProduct>();
+            var product = ObjectFactory.GetInstance<IProduct>();
 
             var mapper = CreateFakeProductMapper();
             var dao = CreateFakeProductDao();
@@ -104,7 +103,7 @@ namespace Informedica.GenForm.DataAccess.Tests
         public void Product_repository_submits_product_to_datacontext()
         {
             var repository = CreateProductRepository();
-            var product = ObjectFactory.GetInstanceFor<IProduct>();
+            var product = ObjectFactory.GetInstance<IProduct>();
 
             var mapper = CreateFakeProductMapper();
             var dao = CreateFakeProductDao();
@@ -134,14 +133,14 @@ namespace Informedica.GenForm.DataAccess.Tests
         private static ProductMapper CreateFakeProductMapper()
         {
             var mapper = Isolate.Fake.Instance<ProductMapper>();
-            ObjectFactory.InjectInstanceFor(mapper);
+            ObjectFactory.Inject(mapper);
             return mapper;
         }
 
         private static GenFormDataContext CreateFakeDatabaseContext()
         {
             var context = Isolate.Fake.Instance<GenFormDataContext>();
-            ObjectFactory.InjectInstanceFor(context);
+            ObjectFactory.Inject(context);
 
             return context;
         }

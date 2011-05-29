@@ -6,730 +6,730 @@ GO
 
 CREATE TABLE GenFormDatabase.Pharmacy
 (
-	pharmacyId INTEGER IDENTITY (1, 1) NOT NULL,
-	pharmacyName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	CONSTRAINT Pharmacy_PK PRIMARY KEY(pharmacyId),
-	CONSTRAINT Pharmacy_UC UNIQUE(pharmacyName)
+	PharmacyId INTEGER IDENTITY (1, 1) NOT NULL,
+	PharmacyName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	CONSTRAINT Pharmacy_PK PRIMARY KEY(PharmacyId),
+	CONSTRAINT Pharmacy_UC UNIQUE(PharmacyName)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.Pharmacist
 (
-	pharmacistId INTEGER IDENTITY (1, 1) NOT NULL,
-	userId INTEGER NOT NULL,
-	pharmacyId INTEGER NOT NULL,
-	CONSTRAINT Pharmacist_PK PRIMARY KEY(pharmacistId),
-	CONSTRAINT Pharmacist_UC UNIQUE(userId)
+	PharmacistId INTEGER IDENTITY (1, 1) NOT NULL,
+	UserId INTEGER NOT NULL,
+	PharmacyId INTEGER NOT NULL,
+	CONSTRAINT Pharmacist_PK PRIMARY KEY(PharmacistId),
+	CONSTRAINT Pharmacist_UC UNIQUE(UserId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.Formularium
 (
-	formulariumId INTEGER IDENTITY (1, 1) NOT NULL,
-	formulariumName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	pharmacistId INTEGER NOT NULL,
-	CONSTRAINT Formularium_PK PRIMARY KEY(formulariumId),
-	CONSTRAINT Formularium_UC UNIQUE(formulariumName)
+	FormulariumId INTEGER IDENTITY (1, 1) NOT NULL,
+	FormulariumName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	PharmacistId INTEGER NOT NULL,
+	CONSTRAINT Formularium_PK PRIMARY KEY(FormulariumId),
+	CONSTRAINT Formularium_UC UNIQUE(FormulariumName)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.FormulariumPharmacist
 (
-	formulariumPharmacistId INTEGER IDENTITY (1, 1) NOT NULL,
-	pharmacistId INTEGER NOT NULL,
-	formulariumId INTEGER NOT NULL,
-	CONSTRAINT FormulariumPharmacist_UC UNIQUE(pharmacistId, formulariumId),
-	CONSTRAINT FormulariumPharmacist_PK PRIMARY KEY(formulariumPharmacistId)
+	FormulariumPharmacistId INTEGER IDENTITY (1, 1) NOT NULL,
+	PharmacistId INTEGER NOT NULL,
+	FormulariumId INTEGER NOT NULL,
+	CONSTRAINT FormulariumPharmacist_UC UNIQUE(PharmacistId, FormulariumId),
+	CONSTRAINT FormulariumPharmacist_PK PRIMARY KEY(FormulariumPharmacistId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.GenFormUser
 (
-	userId INTEGER IDENTITY (1, 1) NOT NULL,
-	userName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	email NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	passWord NATIONAL CHARACTER VARYING(255) NOT NULL,
-	firstName NATIONAL CHARACTER VARYING(125),
-	lastName NATIONAL CHARACTER VARYING(125),
-	pagerNumber NATIONAL CHARACTER VARYING(30),
-	CONSTRAINT GenFormUser_PK PRIMARY KEY(userId),
-	CONSTRAINT GenFormUser_UC1 UNIQUE(userName),
-	CONSTRAINT GenFormUser_UC4 UNIQUE(email)
+	UserId INTEGER IDENTITY (1, 1) NOT NULL,
+	UserName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	Email NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	PassWord NATIONAL CHARACTER VARYING(255) NOT NULL,
+	FirstName NATIONAL CHARACTER VARYING(125),
+	LastName NATIONAL CHARACTER VARYING(125),
+	PagerNumber NATIONAL CHARACTER VARYING(30),
+	CONSTRAINT GenFormUser_PK PRIMARY KEY(UserId),
+	CONSTRAINT GenFormUser_UC1 UNIQUE(UserName),
+	CONSTRAINT GenFormUser_UC4 UNIQUE(Email)
 )
 GO
 
 
-CREATE VIEW GenFormDatabase.GenFormUser_UC2 (firstName, lastName)
+CREATE VIEW GenFormDatabase.GenFormUser_UC2 (FirstName, LastName)
 WITH SCHEMABINDING
 AS
-	SELECT firstName, lastName
+	SELECT FirstName, LastName
 	FROM 
 		GenFormDatabase.GenFormUser
-	WHERE firstName IS NOT NULL AND lastName IS NOT NULL
+	WHERE FirstName IS NOT NULL AND LastName IS NOT NULL
 GO
 
 
-CREATE UNIQUE CLUSTERED INDEX GenFormUser_UC2Index ON GenFormDatabase.GenFormUser_UC2(firstName, lastName)
+CREATE UNIQUE CLUSTERED INDEX GenFormUser_UC2Index ON GenFormDatabase.GenFormUser_UC2(FirstName, LastName)
 GO
 
 
-CREATE VIEW GenFormDatabase.GenFormUser_UC3 (pagerNumber)
+CREATE VIEW GenFormDatabase.GenFormUser_UC3 (PagerNumber)
 WITH SCHEMABINDING
 AS
-	SELECT pagerNumber
+	SELECT PagerNumber
 	FROM 
 		GenFormDatabase.GenFormUser
-	WHERE pagerNumber IS NOT NULL
+	WHERE PagerNumber IS NOT NULL
 GO
 
 
-CREATE UNIQUE CLUSTERED INDEX GenFormUser_UC3Index ON GenFormDatabase.GenFormUser_UC3(pagerNumber)
+CREATE UNIQUE CLUSTERED INDEX GenFormUser_UC3Index ON GenFormDatabase.GenFormUser_UC3(PagerNumber)
 GO
 
 
 CREATE TABLE GenFormDatabase.Role
 (
-	roleId INTEGER IDENTITY (1, 1) NOT NULL,
-	roleName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	roleDescription NATIONAL CHARACTER VARYING(1000),
-	CONSTRAINT Role_PK PRIMARY KEY(roleId),
-	CONSTRAINT Role_UC UNIQUE(roleName)
+	RoleId INTEGER IDENTITY (1, 1) NOT NULL,
+	RoleName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	RoleDescription NATIONAL CHARACTER VARYING(1000),
+	CONSTRAINT Role_PK PRIMARY KEY(RoleId),
+	CONSTRAINT Role_UC UNIQUE(RoleName)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.UserRole
 (
-	userRoleId INTEGER IDENTITY (1, 1) NOT NULL,
-	userId INTEGER NOT NULL,
-	roleId INTEGER NOT NULL,
-	CONSTRAINT UserRole_UC UNIQUE(userId, roleId),
-	CONSTRAINT UserRole_PK PRIMARY KEY(userRoleId)
+	UserRoleId INTEGER IDENTITY (1, 1) NOT NULL,
+	UserId INTEGER NOT NULL,
+	RoleId INTEGER NOT NULL,
+	CONSTRAINT UserRole_UC UNIQUE(UserId, RoleId),
+	CONSTRAINT UserRole_PK PRIMARY KEY(UserRoleId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.Product
 (
-	productId INTEGER IDENTITY (1, 1) NOT NULL,
-	displayName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	shapeId INTEGER NOT NULL,
-	packageId INTEGER NOT NULL,
-	substanceId INTEGER NOT NULL,
-	unitId INTEGER NOT NULL,
-	productName NATIONAL CHARACTER VARYING(255),
-	productKey NATIONAL CHARACTER VARYING(255),
-	productQuantity DOUBLE PRECISION,
-	tradeProductCode NATIONAL CHARACTER VARYING(255),
-	productCode NATIONAL CHARACTER VARYING(255),
-	divisor INTEGER CHECK (divisor >= 0),
-	brandId INTEGER,
-	CONSTRAINT Product_PK PRIMARY KEY(productId),
-	CONSTRAINT Product_UC2 UNIQUE(displayName)
+	ProductId INTEGER IDENTITY (1, 1) NOT NULL,
+	DisplayName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	ShapeId INTEGER NOT NULL,
+	PackageId INTEGER NOT NULL,
+	GenericId INTEGER NOT NULL,
+	UnitId INTEGER NOT NULL,
+	ProductName NATIONAL CHARACTER VARYING(255),
+	ProductKey NATIONAL CHARACTER VARYING(255),
+	ProductQuantity DECIMAL(38,12),
+	TradeProductCode NATIONAL CHARACTER VARYING(255),
+	ProductCode NATIONAL CHARACTER VARYING(255),
+	Divisor INTEGER CHECK (Divisor >= 0),
+	BrandId INTEGER,
+	CONSTRAINT Product_PK PRIMARY KEY(ProductId),
+	CONSTRAINT Product_UC2 UNIQUE(DisplayName)
 )
 GO
 
 
-CREATE VIEW GenFormDatabase.Product_UC1 (productName)
+CREATE VIEW GenFormDatabase.Product_UC1 (ProductName)
 WITH SCHEMABINDING
 AS
-	SELECT productName
+	SELECT ProductName
 	FROM 
 		GenFormDatabase.Product
-	WHERE productName IS NOT NULL
+	WHERE ProductName IS NOT NULL
 GO
 
 
-CREATE UNIQUE CLUSTERED INDEX Product_UC1Index ON GenFormDatabase.Product_UC1(productName)
+CREATE UNIQUE CLUSTERED INDEX Product_UC1Index ON GenFormDatabase.Product_UC1(ProductName)
 GO
 
 
-CREATE VIEW GenFormDatabase.Product_UC3 (productKey)
+CREATE VIEW GenFormDatabase.Product_UC3 (ProductKey)
 WITH SCHEMABINDING
 AS
-	SELECT productKey
+	SELECT ProductKey
 	FROM 
 		GenFormDatabase.Product
-	WHERE productKey IS NOT NULL
+	WHERE ProductKey IS NOT NULL
 GO
 
 
-CREATE UNIQUE CLUSTERED INDEX Product_UC3Index ON GenFormDatabase.Product_UC3(productKey)
+CREATE UNIQUE CLUSTERED INDEX Product_UC3Index ON GenFormDatabase.Product_UC3(ProductKey)
 GO
 
 
 CREATE TABLE GenFormDatabase.ProductCombination
 (
-	productCombinationId INTEGER IDENTITY (1, 1) NOT NULL,
-	productId INTEGER NOT NULL,
-	component INTEGER NOT NULL,
-	productCombinationName NATIONAL CHARACTER VARYING(255),
-	CONSTRAINT ProductCombination_UC UNIQUE(component, productId),
-	CONSTRAINT ProductCombination_PK PRIMARY KEY(productCombinationId)
+	ProductCombinationId INTEGER IDENTITY (1, 1) NOT NULL,
+	ProductId INTEGER NOT NULL,
+	Component INTEGER NOT NULL,
+	ProductCombinationName NATIONAL CHARACTER VARYING(255),
+	CONSTRAINT ProductCombination_UC UNIQUE(Component, ProductId),
+	CONSTRAINT ProductCombination_PK PRIMARY KEY(ProductCombinationId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.Package
 (
-	packageId INTEGER IDENTITY (1, 1) NOT NULL,
-	packageName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	CONSTRAINT Package_PK PRIMARY KEY(packageId),
-	CONSTRAINT Package_UC UNIQUE(packageName)
+	PackageId INTEGER IDENTITY (1, 1) NOT NULL,
+	PackageName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	CONSTRAINT Package_PK PRIMARY KEY(PackageId),
+	CONSTRAINT Package_UC UNIQUE(PackageName)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.Shape
 (
-	shapeId INTEGER IDENTITY (1, 1) NOT NULL,
-	shapeName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	CONSTRAINT Shape_PK PRIMARY KEY(shapeId),
-	CONSTRAINT Shape_UC UNIQUE(shapeName)
+	ShapeId INTEGER IDENTITY (1, 1) NOT NULL,
+	ShapeName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	CONSTRAINT Shape_PK PRIMARY KEY(ShapeId),
+	CONSTRAINT Shape_UC UNIQUE(ShapeName)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.Unit
 (
-	unitId INTEGER IDENTITY (1, 1) NOT NULL,
-	unitName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	multiplier DOUBLE PRECISION NOT NULL,
-	unitAbbreviation NATIONAL CHARACTER VARYING(255),
-	divisor INTEGER CHECK (divisor >= 0),
-	isReference BIT,
-	unitGroupId INTEGER,
-	CONSTRAINT Unit_PK PRIMARY KEY(unitId),
-	CONSTRAINT Unit_UC1 UNIQUE(unitName)
+	UnitId INTEGER IDENTITY (1, 1) NOT NULL,
+	UnitName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	Multiplier DECIMAL(38,19) NOT NULL,
+	UnitAbbreviation NATIONAL CHARACTER VARYING(255),
+	Divisor INTEGER CHECK (Divisor >= 0),
+	IsReference BIT,
+	UnitGroupId INTEGER,
+	CONSTRAINT Unit_PK PRIMARY KEY(UnitId),
+	CONSTRAINT Unit_UC1 UNIQUE(UnitName)
 )
 GO
 
 
-CREATE VIEW GenFormDatabase.Unit_UC2 (unitAbbreviation)
+CREATE VIEW GenFormDatabase.Unit_UC2 (UnitAbbreviation)
 WITH SCHEMABINDING
 AS
-	SELECT unitAbbreviation
+	SELECT UnitAbbreviation
 	FROM 
 		GenFormDatabase.Unit
-	WHERE unitAbbreviation IS NOT NULL
+	WHERE UnitAbbreviation IS NOT NULL
 GO
 
 
-CREATE UNIQUE CLUSTERED INDEX Unit_UC2Index ON GenFormDatabase.Unit_UC2(unitAbbreviation)
+CREATE UNIQUE CLUSTERED INDEX Unit_UC2Index ON GenFormDatabase.Unit_UC2(UnitAbbreviation)
 GO
 
 
 CREATE TABLE GenFormDatabase.Brand
 (
-	brandId INTEGER IDENTITY (1, 1) NOT NULL,
-	brandName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	CONSTRAINT Brand_PK PRIMARY KEY(brandId),
-	CONSTRAINT Brand_UC UNIQUE(brandName)
+	BrandId INTEGER IDENTITY (1, 1) NOT NULL,
+	BrandName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	CONSTRAINT Brand_PK PRIMARY KEY(BrandId),
+	CONSTRAINT Brand_UC UNIQUE(BrandName)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.Substance
 (
-	substanceId INTEGER IDENTITY (1, 1) NOT NULL,
-	substanceName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	isGeneric BIT,
-	substanceGroupId INTEGER,
-	CONSTRAINT Substance_PK PRIMARY KEY(substanceId),
-	CONSTRAINT Substance_UC UNIQUE(substanceName)
+	SubstanceId INTEGER IDENTITY (1, 1) NOT NULL,
+	SubstanceName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	IsGeneric BIT,
+	SubstanceGroupId INTEGER,
+	CONSTRAINT Substance_PK PRIMARY KEY(SubstanceId),
+	CONSTRAINT Substance_UC UNIQUE(SubstanceName)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.ProductSubstance
 (
-	productSubstanceId INTEGER IDENTITY (1, 1) NOT NULL,
-	productId INTEGER NOT NULL,
-	substanceId INTEGER NOT NULL,
-	substanceOrdering INTEGER CHECK (substanceOrdering >= 0) NOT NULL,
-	concentration DOUBLE PRECISION,
-	substanceQuantity DOUBLE PRECISION,
-	unitId INTEGER,
-	CONSTRAINT ProductSubstance_UC UNIQUE(productId, substanceId),
-	CONSTRAINT ProductSubstance_PK PRIMARY KEY(productSubstanceId)
+	ProductSubstanceId INTEGER IDENTITY (1, 1) NOT NULL,
+	ProductId INTEGER NOT NULL,
+	SubstanceId INTEGER NOT NULL,
+	SubstanceOrdering INTEGER CHECK (SubstanceOrdering >= 0) NOT NULL,
+	Concentration DECIMAL(38,19),
+	SubstanceQuantity DECIMAL(38,16),
+	UnitId INTEGER,
+	CONSTRAINT ProductSubstance_UC UNIQUE(ProductId, SubstanceId),
+	CONSTRAINT ProductSubstance_PK PRIMARY KEY(ProductSubstanceId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.SubstanceGroup
 (
-	substanceGroupId INTEGER IDENTITY (1, 1) NOT NULL,
-	substanceGroupName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	mainSubstanceGroupId INTEGER,
-	CONSTRAINT SubstanceGroup_PK PRIMARY KEY(substanceGroupId),
-	CONSTRAINT SubstanceGroup_UC UNIQUE(substanceGroupName)
+	SubstanceGroupId INTEGER IDENTITY (1, 1) NOT NULL,
+	SubstanceGroupName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	MainSubstanceGroupId INTEGER,
+	CONSTRAINT SubstanceGroup_PK PRIMARY KEY(SubstanceGroupId),
+	CONSTRAINT SubstanceGroup_UC UNIQUE(SubstanceGroupName)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.UnitGroup
 (
-	unitGroupId INTEGER IDENTITY (1, 1) NOT NULL,
-	unitGroupName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	allowsConversion BIT,
-	CONSTRAINT UnitGroup_PK PRIMARY KEY(unitGroupId),
-	CONSTRAINT UnitGroup_UC UNIQUE(unitGroupName)
+	UnitGroupId INTEGER IDENTITY (1, 1) NOT NULL,
+	UnitGroupName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	AllowsConversion BIT,
+	CONSTRAINT UnitGroup_PK PRIMARY KEY(UnitGroupId),
+	CONSTRAINT UnitGroup_UC UNIQUE(UnitGroupName)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.ShapePackage
 (
-	shapePackageId INTEGER IDENTITY (1, 1) NOT NULL,
-	packageId INTEGER NOT NULL,
-	shapeId INTEGER NOT NULL,
-	CONSTRAINT ShapePackage_UC UNIQUE(shapeId, packageId),
-	CONSTRAINT ShapePackage_PK PRIMARY KEY(shapePackageId)
+	ShapePackageId INTEGER IDENTITY (1, 1) NOT NULL,
+	PackageId INTEGER NOT NULL,
+	ShapeId INTEGER NOT NULL,
+	CONSTRAINT ShapePackage_UC UNIQUE(ShapeId, PackageId),
+	CONSTRAINT ShapePackage_PK PRIMARY KEY(ShapePackageId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.ShapeUnit
 (
-	shapeUnitId INTEGER IDENTITY (1, 1) NOT NULL,
-	shapeId INTEGER NOT NULL,
-	unitId INTEGER NOT NULL,
-	CONSTRAINT ShapeUnit_UC UNIQUE(shapeId, unitId),
-	CONSTRAINT ShapeUnit_PK PRIMARY KEY(shapeUnitId)
+	ShapeUnitId INTEGER IDENTITY (1, 1) NOT NULL,
+	ShapeId INTEGER NOT NULL,
+	UnitId INTEGER NOT NULL,
+	CONSTRAINT ShapeUnit_UC UNIQUE(ShapeId, UnitId),
+	CONSTRAINT ShapeUnit_PK PRIMARY KEY(ShapeUnitId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.Chapter
 (
-	chapterId INTEGER IDENTITY (1, 1) NOT NULL,
-	chapterName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	CONSTRAINT Chapter_PK PRIMARY KEY(chapterId),
-	CONSTRAINT Chapter_UC UNIQUE(chapterName)
+	ChapterId INTEGER IDENTITY (1, 1) NOT NULL,
+	ChapterName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	CONSTRAINT Chapter_PK PRIMARY KEY(ChapterId),
+	CONSTRAINT Chapter_UC UNIQUE(ChapterName)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.FormulariumChapter
 (
-	formulariumChapterId INTEGER IDENTITY (1, 1) NOT NULL,
-	formulariumId INTEGER NOT NULL,
-	chapterId INTEGER NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	mainChapterId INTEGER,
-	CONSTRAINT FormulariumChapter_UC UNIQUE(formulariumId, chapterId),
-	CONSTRAINT FormulariumChapter_PK PRIMARY KEY(formulariumChapterId)
+	FormulariumChapterId INTEGER IDENTITY (1, 1) NOT NULL,
+	FormulariumId INTEGER NOT NULL,
+	ChapterId INTEGER NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	MainChapterId INTEGER,
+	CONSTRAINT FormulariumChapter_UC UNIQUE(FormulariumId, ChapterId),
+	CONSTRAINT FormulariumChapter_PK PRIMARY KEY(FormulariumChapterId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.SubstanceDosingAdvice
 (
-	substanceDosingAdviceId INTEGER IDENTITY (1, 1) NOT NULL,
-	textItemId INTEGER NOT NULL,
-	substanceId INTEGER NOT NULL,
-	formulariumId INTEGER,
-	indicationId INTEGER,
-	CONSTRAINT SubstanceDosingAdvice_PK PRIMARY KEY(substanceDosingAdviceId),
-	CONSTRAINT SubstanceDosingAdvice_UC UNIQUE(textItemId)
+	SubstanceDosingAdviceId INTEGER IDENTITY (1, 1) NOT NULL,
+	TextItemId INTEGER NOT NULL,
+	SubstanceId INTEGER NOT NULL,
+	FormulariumId INTEGER,
+	IndicationId INTEGER,
+	CONSTRAINT SubstanceDosingAdvice_PK PRIMARY KEY(SubstanceDosingAdviceId),
+	CONSTRAINT SubstanceDosingAdvice_UC UNIQUE(TextItemId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.Route
 (
-	routeId INTEGER IDENTITY (1, 1) NOT NULL,
-	routeName NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	routeAbbreviation NATIONAL CHARACTER VARYING(50),
-	CONSTRAINT Route_PK PRIMARY KEY(routeId),
-	CONSTRAINT Route_UC1 UNIQUE(routeName)
+	RouteId INTEGER IDENTITY (1, 1) NOT NULL,
+	RouteName NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	RouteAbbreviation NATIONAL CHARACTER VARYING(50),
+	CONSTRAINT Route_PK PRIMARY KEY(RouteId),
+	CONSTRAINT Route_UC1 UNIQUE(RouteName)
 )
 GO
 
 
-CREATE VIEW GenFormDatabase.Route_UC2 (routeAbbreviation)
+CREATE VIEW GenFormDatabase.Route_UC2 (RouteAbbreviation)
 WITH SCHEMABINDING
 AS
-	SELECT routeAbbreviation
+	SELECT RouteAbbreviation
 	FROM 
 		GenFormDatabase.Route
-	WHERE routeAbbreviation IS NOT NULL
+	WHERE RouteAbbreviation IS NOT NULL
 GO
 
 
-CREATE UNIQUE CLUSTERED INDEX Route_UC2Index ON GenFormDatabase.Route_UC2(routeAbbreviation)
+CREATE UNIQUE CLUSTERED INDEX Route_UC2Index ON GenFormDatabase.Route_UC2(RouteAbbreviation)
 GO
 
 
 CREATE TABLE GenFormDatabase.DosingAdviceChapter
 (
-	dosingAdviceChapterId INTEGER IDENTITY (1, 1) NOT NULL,
-	substanceDosingAdviceId INTEGER NOT NULL,
-	formulariumChapterId INTEGER NOT NULL,
-	CONSTRAINT DosingAdviceChapter_UC UNIQUE(substanceDosingAdviceId, formulariumChapterId),
-	CONSTRAINT DosingAdviceChapter_PK PRIMARY KEY(dosingAdviceChapterId)
+	DosingAdviceChapterId INTEGER IDENTITY (1, 1) NOT NULL,
+	SubstanceDosingAdviceId INTEGER NOT NULL,
+	FormulariumChapterId INTEGER NOT NULL,
+	CONSTRAINT DosingAdviceChapter_UC UNIQUE(SubstanceDosingAdviceId, FormulariumChapterId),
+	CONSTRAINT DosingAdviceChapter_PK PRIMARY KEY(DosingAdviceChapterId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.DosingAdviceRoute
 (
-	dosingAdviceRouteId INTEGER IDENTITY (1, 1) NOT NULL,
-	substanceDosingAdviceId INTEGER NOT NULL,
-	routeId INTEGER NOT NULL,
-	CONSTRAINT DosingAdviceRoute_UC UNIQUE(substanceDosingAdviceId, routeId),
-	CONSTRAINT DosingAdviceRoute_PK PRIMARY KEY(dosingAdviceRouteId)
+	DosingAdviceRouteId INTEGER IDENTITY (1, 1) NOT NULL,
+	SubstanceDosingAdviceId INTEGER NOT NULL,
+	RouteId INTEGER NOT NULL,
+	CONSTRAINT DosingAdviceRoute_UC UNIQUE(SubstanceDosingAdviceId, RouteId),
+	CONSTRAINT DosingAdviceRoute_PK PRIMARY KEY(DosingAdviceRouteId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.DosingAdviceProduct
 (
-	dosingAdviceProductId INTEGER IDENTITY (1, 1) NOT NULL,
-	substanceDosingAdviceId INTEGER NOT NULL,
-	productId INTEGER NOT NULL,
-	CONSTRAINT DosingAdviceProduct_UC UNIQUE(substanceDosingAdviceId, productId),
-	CONSTRAINT DosingAdviceProduct_PK PRIMARY KEY(dosingAdviceProductId)
+	DosingAdviceProductId INTEGER IDENTITY (1, 1) NOT NULL,
+	SubstanceDosingAdviceId INTEGER NOT NULL,
+	ProductId INTEGER NOT NULL,
+	CONSTRAINT DosingAdviceProduct_UC UNIQUE(SubstanceDosingAdviceId, ProductId),
+	CONSTRAINT DosingAdviceProduct_PK PRIMARY KEY(DosingAdviceProductId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.ProductRoute
 (
-	productRouteId INTEGER IDENTITY (1, 1) NOT NULL,
-	productId INTEGER NOT NULL,
-	routeId INTEGER NOT NULL,
-	CONSTRAINT ProductRoute_UC UNIQUE(productId, routeId),
-	CONSTRAINT ProductRoute_PK PRIMARY KEY(productRouteId)
+	ProductRouteId INTEGER IDENTITY (1, 1) NOT NULL,
+	ProductId INTEGER NOT NULL,
+	RouteId INTEGER NOT NULL,
+	CONSTRAINT ProductRoute_UC UNIQUE(ProductId, RouteId),
+	CONSTRAINT ProductRoute_PK PRIMARY KEY(ProductRouteId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.ShapeRoute
 (
-	shapeRouteId INTEGER IDENTITY (1, 1) NOT NULL,
-	shapeId INTEGER NOT NULL,
-	routeId INTEGER NOT NULL,
-	CONSTRAINT ShapeRoute_UC UNIQUE(shapeId, routeId),
-	CONSTRAINT ShapeRoute_PK PRIMARY KEY(shapeRouteId)
+	ShapeRouteId INTEGER IDENTITY (1, 1) NOT NULL,
+	ShapeId INTEGER NOT NULL,
+	RouteId INTEGER NOT NULL,
+	CONSTRAINT ShapeRoute_UC UNIQUE(ShapeId, RouteId),
+	CONSTRAINT ShapeRoute_PK PRIMARY KEY(ShapeRouteId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.TextItem
 (
-	textItemId INTEGER IDENTITY (1, 1) NOT NULL,
-	textType NATIONAL CHARACTER VARYING(50) NOT NULL,
-	textStatus NATIONAL CHARACTER VARYING(255) NOT NULL,
-	versionTimeStamp DATETIME NOT NULL,
-	text NATIONAL CHARACTER VARYING(MAX),
-	textHeading NATIONAL CHARACTER VARYING(255),
-	CONSTRAINT TextItem_PK PRIMARY KEY(textItemId)
+	TextItemId INTEGER IDENTITY (1, 1) NOT NULL,
+	TextType NATIONAL CHARACTER VARYING(50) NOT NULL,
+	TextStatus NATIONAL CHARACTER VARYING(255) NOT NULL,
+	VersionTimeStamp DATETIME NOT NULL,
+	Text NATIONAL CHARACTER VARYING(MAX),
+	TextHeading NATIONAL CHARACTER VARYING(255),
+	CONSTRAINT TextItem_PK PRIMARY KEY(TextItemId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.FormulariumText
 (
-	formulariumTextId INTEGER IDENTITY (1, 1) NOT NULL,
-	formulariumId INTEGER NOT NULL,
-	textItemId INTEGER NOT NULL,
-	CONSTRAINT FormulariumText_UC UNIQUE(formulariumId, textItemId),
-	CONSTRAINT FormulariumText_PK PRIMARY KEY(formulariumTextId)
+	FormulariumTextId INTEGER IDENTITY (1, 1) NOT NULL,
+	FormulariumId INTEGER NOT NULL,
+	TextItemId INTEGER NOT NULL,
+	CONSTRAINT FormulariumText_UC UNIQUE(FormulariumId, TextItemId),
+	CONSTRAINT FormulariumText_PK PRIMARY KEY(FormulariumTextId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.ProductFormulariumText
 (
-	productFormulariumTextId INTEGER IDENTITY (1, 1) NOT NULL,
-	productId INTEGER NOT NULL,
-	formulariumId INTEGER NOT NULL,
-	textItemId INTEGER NOT NULL,
-	CONSTRAINT ProductFormulariumText_UC UNIQUE(productId, formulariumId),
-	CONSTRAINT ProductFormulariumText_PK PRIMARY KEY(productFormulariumTextId)
+	ProductFormulariumTextId INTEGER IDENTITY (1, 1) NOT NULL,
+	ProductId INTEGER NOT NULL,
+	FormulariumId INTEGER NOT NULL,
+	TextItemId INTEGER NOT NULL,
+	CONSTRAINT ProductFormulariumText_UC UNIQUE(ProductId, FormulariumId),
+	CONSTRAINT ProductFormulariumText_PK PRIMARY KEY(ProductFormulariumTextId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.FormulariumSubstanceText
 (
-	formulariumSubstanceTextId INTEGER IDENTITY (1, 1) NOT NULL,
-	substanceId INTEGER NOT NULL,
-	formulariumId INTEGER NOT NULL,
-	textItemId INTEGER NOT NULL,
-	CONSTRAINT FormulariumSubstanceText_UC UNIQUE(formulariumId, substanceId),
-	CONSTRAINT FormulariumSubstanceText_PK PRIMARY KEY(formulariumSubstanceTextId)
+	FormulariumSubstanceTextId INTEGER IDENTITY (1, 1) NOT NULL,
+	SubstanceId INTEGER NOT NULL,
+	FormulariumId INTEGER NOT NULL,
+	TextItemId INTEGER NOT NULL,
+	CONSTRAINT FormulariumSubstanceText_UC UNIQUE(FormulariumId, SubstanceId),
+	CONSTRAINT FormulariumSubstanceText_PK PRIMARY KEY(FormulariumSubstanceTextId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.FormulariumChapterText
 (
-	formulariumChapterTextId INTEGER IDENTITY (1, 1) NOT NULL,
-	formulariumChapterId INTEGER NOT NULL,
-	textItemId INTEGER NOT NULL,
-	CONSTRAINT FormulariumChapterText_UC UNIQUE(textItemId, formulariumChapterId),
-	CONSTRAINT FormulariumChapterText_PK PRIMARY KEY(formulariumChapterTextId)
+	FormulariumChapterTextId INTEGER IDENTITY (1, 1) NOT NULL,
+	FormulariumChapterId INTEGER NOT NULL,
+	TextItemId INTEGER NOT NULL,
+	CONSTRAINT FormulariumChapterText_UC UNIQUE(TextItemId, FormulariumChapterId),
+	CONSTRAINT FormulariumChapterText_PK PRIMARY KEY(FormulariumChapterTextId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.TextLog
 (
-	textLogId INTEGER IDENTITY (1, 1) NOT NULL,
-	logData DATETIME NOT NULL,
-	formulariumId INTEGER NOT NULL,
-	textItemId INTEGER NOT NULL,
-	userId INTEGER NOT NULL,
-	action NATIONAL CHARACTER VARYING(MAX) NOT NULL,
-	CONSTRAINT TextLog_PK PRIMARY KEY(textLogId),
-	CONSTRAINT TextLog_UC UNIQUE(textItemId, userId, logData, formulariumId)
+	TextLogId INTEGER IDENTITY (1, 1) NOT NULL,
+	LogData DATETIME NOT NULL,
+	FormulariumId INTEGER NOT NULL,
+	TextItemId INTEGER NOT NULL,
+	UserId INTEGER NOT NULL,
+	Action NATIONAL CHARACTER VARYING(MAX) NOT NULL,
+	CONSTRAINT TextLog_PK PRIMARY KEY(TextLogId),
+	CONSTRAINT TextLog_UC UNIQUE(TextItemId, UserId, LogData, FormulariumId)
 )
 GO
 
 
 CREATE TABLE GenFormDatabase.Indication
 (
-	indicationId INTEGER IDENTITY (1, 1) NOT NULL,
-	indicationText NATIONAL CHARACTER VARYING(255) NOT NULL,
-	CONSTRAINT Indication_PK PRIMARY KEY(indicationId),
-	CONSTRAINT Indication_UC UNIQUE(indicationText)
+	IndicationId INTEGER IDENTITY (1, 1) NOT NULL,
+	IndicationText NATIONAL CHARACTER VARYING(255) NOT NULL,
+	CONSTRAINT Indication_PK PRIMARY KEY(IndicationId),
+	CONSTRAINT Indication_UC UNIQUE(IndicationText)
 )
 GO
 
 
-ALTER TABLE GenFormDatabase.Pharmacist ADD CONSTRAINT Pharmacist_FK1 FOREIGN KEY (pharmacyId) REFERENCES GenFormDatabase.Pharmacy (pharmacyId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.Pharmacist ADD CONSTRAINT Pharmacist_FK1 FOREIGN KEY (PharmacyId) REFERENCES GenFormDatabase.Pharmacy (PharmacyId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.Pharmacist ADD CONSTRAINT Pharmacist_FK2 FOREIGN KEY (userId) REFERENCES GenFormDatabase.GenFormUser (userId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.Pharmacist ADD CONSTRAINT Pharmacist_FK2 FOREIGN KEY (UserId) REFERENCES GenFormDatabase.GenFormUser (UserId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.Formularium ADD CONSTRAINT Formularium_FK FOREIGN KEY (pharmacistId) REFERENCES GenFormDatabase.Pharmacist (pharmacistId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.Formularium ADD CONSTRAINT Formularium_FK FOREIGN KEY (PharmacistId) REFERENCES GenFormDatabase.Pharmacist (PharmacistId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.FormulariumPharmacist ADD CONSTRAINT FormulariumPharmacist_FK1 FOREIGN KEY (pharmacistId) REFERENCES GenFormDatabase.Pharmacist (pharmacistId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.FormulariumPharmacist ADD CONSTRAINT FormulariumPharmacist_FK1 FOREIGN KEY (PharmacistId) REFERENCES GenFormDatabase.Pharmacist (PharmacistId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.FormulariumPharmacist ADD CONSTRAINT FormulariumPharmacist_FK2 FOREIGN KEY (formulariumId) REFERENCES GenFormDatabase.Formularium (formulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.FormulariumPharmacist ADD CONSTRAINT FormulariumPharmacist_FK2 FOREIGN KEY (FormulariumId) REFERENCES GenFormDatabase.Formularium (FormulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.UserRole ADD CONSTRAINT UserRole_FK1 FOREIGN KEY (userId) REFERENCES GenFormDatabase.GenFormUser (userId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.UserRole ADD CONSTRAINT UserRole_FK1 FOREIGN KEY (UserId) REFERENCES GenFormDatabase.GenFormUser (UserId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.UserRole ADD CONSTRAINT UserRole_FK2 FOREIGN KEY (roleId) REFERENCES GenFormDatabase.Role (roleId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.UserRole ADD CONSTRAINT UserRole_FK2 FOREIGN KEY (RoleId) REFERENCES GenFormDatabase.Role (RoleId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.Product ADD CONSTRAINT Product_FK1 FOREIGN KEY (shapeId) REFERENCES GenFormDatabase.Shape (shapeId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.Product ADD CONSTRAINT Product_FK1 FOREIGN KEY (ShapeId) REFERENCES GenFormDatabase.Shape (ShapeId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.Product ADD CONSTRAINT Product_FK2 FOREIGN KEY (packageId) REFERENCES GenFormDatabase.Package (packageId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.Product ADD CONSTRAINT Product_FK2 FOREIGN KEY (PackageId) REFERENCES GenFormDatabase.Package (PackageId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.Product ADD CONSTRAINT Product_FK3 FOREIGN KEY (brandId) REFERENCES GenFormDatabase.Brand (brandId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.Product ADD CONSTRAINT Product_FK3 FOREIGN KEY (BrandId) REFERENCES GenFormDatabase.Brand (BrandId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.Product ADD CONSTRAINT Product_FK4 FOREIGN KEY (substanceId) REFERENCES GenFormDatabase.Substance (substanceId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.Product ADD CONSTRAINT Product_FK4 FOREIGN KEY (GenericId) REFERENCES GenFormDatabase.Substance (SubstanceId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.Product ADD CONSTRAINT Product_FK5 FOREIGN KEY (unitId) REFERENCES GenFormDatabase.Unit (unitId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.Product ADD CONSTRAINT Product_FK5 FOREIGN KEY (UnitId) REFERENCES GenFormDatabase.Unit (UnitId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ProductCombination ADD CONSTRAINT ProductCombination_FK1 FOREIGN KEY (productId) REFERENCES GenFormDatabase.Product (productId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ProductCombination ADD CONSTRAINT ProductCombination_FK1 FOREIGN KEY (ProductId) REFERENCES GenFormDatabase.Product (ProductId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ProductCombination ADD CONSTRAINT ProductCombination_FK2 FOREIGN KEY (component) REFERENCES GenFormDatabase.Product (productId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ProductCombination ADD CONSTRAINT ProductCombination_FK2 FOREIGN KEY (Component) REFERENCES GenFormDatabase.Product (ProductId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.Unit ADD CONSTRAINT Unit_FK FOREIGN KEY (unitGroupId) REFERENCES GenFormDatabase.UnitGroup (unitGroupId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.Unit ADD CONSTRAINT Unit_FK FOREIGN KEY (UnitGroupId) REFERENCES GenFormDatabase.UnitGroup (UnitGroupId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.Substance ADD CONSTRAINT Substance_FK FOREIGN KEY (substanceGroupId) REFERENCES GenFormDatabase.SubstanceGroup (substanceGroupId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.Substance ADD CONSTRAINT Substance_FK FOREIGN KEY (SubstanceGroupId) REFERENCES GenFormDatabase.SubstanceGroup (SubstanceGroupId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ProductSubstance ADD CONSTRAINT ProductSubstance_FK1 FOREIGN KEY (productId) REFERENCES GenFormDatabase.Product (productId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ProductSubstance ADD CONSTRAINT ProductSubstance_FK1 FOREIGN KEY (ProductId) REFERENCES GenFormDatabase.Product (ProductId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ProductSubstance ADD CONSTRAINT ProductSubstance_FK2 FOREIGN KEY (substanceId) REFERENCES GenFormDatabase.Substance (substanceId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ProductSubstance ADD CONSTRAINT ProductSubstance_FK2 FOREIGN KEY (SubstanceId) REFERENCES GenFormDatabase.Substance (SubstanceId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ProductSubstance ADD CONSTRAINT ProductSubstance_FK3 FOREIGN KEY (unitId) REFERENCES GenFormDatabase.Unit (unitId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ProductSubstance ADD CONSTRAINT ProductSubstance_FK3 FOREIGN KEY (UnitId) REFERENCES GenFormDatabase.Unit (UnitId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.SubstanceGroup ADD CONSTRAINT SubstanceGroup_FK FOREIGN KEY (mainSubstanceGroupId) REFERENCES GenFormDatabase.SubstanceGroup (substanceGroupId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.SubstanceGroup ADD CONSTRAINT SubstanceGroup_FK FOREIGN KEY (MainSubstanceGroupId) REFERENCES GenFormDatabase.SubstanceGroup (SubstanceGroupId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ShapePackage ADD CONSTRAINT ShapePackage_FK1 FOREIGN KEY (packageId) REFERENCES GenFormDatabase.Package (packageId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ShapePackage ADD CONSTRAINT ShapePackage_FK1 FOREIGN KEY (PackageId) REFERENCES GenFormDatabase.Package (PackageId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ShapePackage ADD CONSTRAINT ShapePackage_FK2 FOREIGN KEY (shapeId) REFERENCES GenFormDatabase.Shape (shapeId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ShapePackage ADD CONSTRAINT ShapePackage_FK2 FOREIGN KEY (ShapeId) REFERENCES GenFormDatabase.Shape (ShapeId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ShapeUnit ADD CONSTRAINT ShapeUnit_FK1 FOREIGN KEY (shapeId) REFERENCES GenFormDatabase.Shape (shapeId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ShapeUnit ADD CONSTRAINT ShapeUnit_FK1 FOREIGN KEY (ShapeId) REFERENCES GenFormDatabase.Shape (ShapeId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ShapeUnit ADD CONSTRAINT ShapeUnit_FK2 FOREIGN KEY (unitId) REFERENCES GenFormDatabase.Unit (unitId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ShapeUnit ADD CONSTRAINT ShapeUnit_FK2 FOREIGN KEY (UnitId) REFERENCES GenFormDatabase.Unit (UnitId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.FormulariumChapter ADD CONSTRAINT FormulariumChapter_FK1 FOREIGN KEY (formulariumId) REFERENCES GenFormDatabase.Formularium (formulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.FormulariumChapter ADD CONSTRAINT FormulariumChapter_FK1 FOREIGN KEY (FormulariumId) REFERENCES GenFormDatabase.Formularium (FormulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.FormulariumChapter ADD CONSTRAINT FormulariumChapter_FK2 FOREIGN KEY (chapterId) REFERENCES GenFormDatabase.Chapter (chapterId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.FormulariumChapter ADD CONSTRAINT FormulariumChapter_FK2 FOREIGN KEY (ChapterId) REFERENCES GenFormDatabase.Chapter (ChapterId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.FormulariumChapter ADD CONSTRAINT FormulariumChapter_FK3 FOREIGN KEY (mainChapterId) REFERENCES GenFormDatabase.FormulariumChapter (formulariumChapterId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.FormulariumChapter ADD CONSTRAINT FormulariumChapter_FK3 FOREIGN KEY (MainChapterId) REFERENCES GenFormDatabase.FormulariumChapter (FormulariumChapterId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.SubstanceDosingAdvice ADD CONSTRAINT SubstanceDosingAdvice_FK1 FOREIGN KEY (formulariumId) REFERENCES GenFormDatabase.Formularium (formulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.SubstanceDosingAdvice ADD CONSTRAINT SubstanceDosingAdvice_FK1 FOREIGN KEY (FormulariumId) REFERENCES GenFormDatabase.Formularium (FormulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.SubstanceDosingAdvice ADD CONSTRAINT SubstanceDosingAdvice_FK2 FOREIGN KEY (substanceId) REFERENCES GenFormDatabase.Substance (substanceId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.SubstanceDosingAdvice ADD CONSTRAINT SubstanceDosingAdvice_FK2 FOREIGN KEY (SubstanceId) REFERENCES GenFormDatabase.Substance (SubstanceId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.SubstanceDosingAdvice ADD CONSTRAINT SubstanceDosingAdvice_FK3 FOREIGN KEY (indicationId) REFERENCES GenFormDatabase.Indication (indicationId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.SubstanceDosingAdvice ADD CONSTRAINT SubstanceDosingAdvice_FK3 FOREIGN KEY (IndicationId) REFERENCES GenFormDatabase.Indication (IndicationId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.SubstanceDosingAdvice ADD CONSTRAINT SubstanceDosingAdvice_FK4 FOREIGN KEY (textItemId) REFERENCES GenFormDatabase.TextItem (textItemId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.SubstanceDosingAdvice ADD CONSTRAINT SubstanceDosingAdvice_FK4 FOREIGN KEY (TextItemId) REFERENCES GenFormDatabase.TextItem (TextItemId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.DosingAdviceChapter ADD CONSTRAINT DosingAdviceChapter_FK1 FOREIGN KEY (substanceDosingAdviceId) REFERENCES GenFormDatabase.SubstanceDosingAdvice (substanceDosingAdviceId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.DosingAdviceChapter ADD CONSTRAINT DosingAdviceChapter_FK1 FOREIGN KEY (SubstanceDosingAdviceId) REFERENCES GenFormDatabase.SubstanceDosingAdvice (SubstanceDosingAdviceId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.DosingAdviceChapter ADD CONSTRAINT DosingAdviceChapter_FK2 FOREIGN KEY (formulariumChapterId) REFERENCES GenFormDatabase.FormulariumChapter (formulariumChapterId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.DosingAdviceChapter ADD CONSTRAINT DosingAdviceChapter_FK2 FOREIGN KEY (FormulariumChapterId) REFERENCES GenFormDatabase.FormulariumChapter (FormulariumChapterId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.DosingAdviceRoute ADD CONSTRAINT DosingAdviceRoute_FK1 FOREIGN KEY (substanceDosingAdviceId) REFERENCES GenFormDatabase.SubstanceDosingAdvice (substanceDosingAdviceId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.DosingAdviceRoute ADD CONSTRAINT DosingAdviceRoute_FK1 FOREIGN KEY (SubstanceDosingAdviceId) REFERENCES GenFormDatabase.SubstanceDosingAdvice (SubstanceDosingAdviceId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.DosingAdviceRoute ADD CONSTRAINT DosingAdviceRoute_FK2 FOREIGN KEY (routeId) REFERENCES GenFormDatabase.Route (routeId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.DosingAdviceRoute ADD CONSTRAINT DosingAdviceRoute_FK2 FOREIGN KEY (RouteId) REFERENCES GenFormDatabase.Route (RouteId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.DosingAdviceProduct ADD CONSTRAINT DosingAdviceProduct_FK1 FOREIGN KEY (substanceDosingAdviceId) REFERENCES GenFormDatabase.SubstanceDosingAdvice (substanceDosingAdviceId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.DosingAdviceProduct ADD CONSTRAINT DosingAdviceProduct_FK1 FOREIGN KEY (SubstanceDosingAdviceId) REFERENCES GenFormDatabase.SubstanceDosingAdvice (SubstanceDosingAdviceId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.DosingAdviceProduct ADD CONSTRAINT DosingAdviceProduct_FK2 FOREIGN KEY (productId) REFERENCES GenFormDatabase.Product (productId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.DosingAdviceProduct ADD CONSTRAINT DosingAdviceProduct_FK2 FOREIGN KEY (ProductId) REFERENCES GenFormDatabase.Product (ProductId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ProductRoute ADD CONSTRAINT ProductRoute_FK1 FOREIGN KEY (productId) REFERENCES GenFormDatabase.Product (productId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ProductRoute ADD CONSTRAINT ProductRoute_FK1 FOREIGN KEY (ProductId) REFERENCES GenFormDatabase.Product (ProductId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ProductRoute ADD CONSTRAINT ProductRoute_FK2 FOREIGN KEY (routeId) REFERENCES GenFormDatabase.Route (routeId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ProductRoute ADD CONSTRAINT ProductRoute_FK2 FOREIGN KEY (RouteId) REFERENCES GenFormDatabase.Route (RouteId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ShapeRoute ADD CONSTRAINT ShapeRoute_FK1 FOREIGN KEY (shapeId) REFERENCES GenFormDatabase.Shape (shapeId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ShapeRoute ADD CONSTRAINT ShapeRoute_FK1 FOREIGN KEY (ShapeId) REFERENCES GenFormDatabase.Shape (ShapeId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ShapeRoute ADD CONSTRAINT ShapeRoute_FK2 FOREIGN KEY (routeId) REFERENCES GenFormDatabase.Route (routeId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ShapeRoute ADD CONSTRAINT ShapeRoute_FK2 FOREIGN KEY (RouteId) REFERENCES GenFormDatabase.Route (RouteId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.FormulariumText ADD CONSTRAINT FormulariumText_FK1 FOREIGN KEY (formulariumId) REFERENCES GenFormDatabase.Formularium (formulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.FormulariumText ADD CONSTRAINT FormulariumText_FK1 FOREIGN KEY (FormulariumId) REFERENCES GenFormDatabase.Formularium (FormulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.FormulariumText ADD CONSTRAINT FormulariumText_FK2 FOREIGN KEY (textItemId) REFERENCES GenFormDatabase.TextItem (textItemId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.FormulariumText ADD CONSTRAINT FormulariumText_FK2 FOREIGN KEY (TextItemId) REFERENCES GenFormDatabase.TextItem (TextItemId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ProductFormulariumText ADD CONSTRAINT ProductFormulariumText_FK1 FOREIGN KEY (productId) REFERENCES GenFormDatabase.Product (productId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ProductFormulariumText ADD CONSTRAINT ProductFormulariumText_FK1 FOREIGN KEY (ProductId) REFERENCES GenFormDatabase.Product (ProductId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ProductFormulariumText ADD CONSTRAINT ProductFormulariumText_FK2 FOREIGN KEY (textItemId) REFERENCES GenFormDatabase.TextItem (textItemId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ProductFormulariumText ADD CONSTRAINT ProductFormulariumText_FK2 FOREIGN KEY (TextItemId) REFERENCES GenFormDatabase.TextItem (TextItemId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.ProductFormulariumText ADD CONSTRAINT ProductFormulariumText_FK3 FOREIGN KEY (formulariumId) REFERENCES GenFormDatabase.Formularium (formulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.ProductFormulariumText ADD CONSTRAINT ProductFormulariumText_FK3 FOREIGN KEY (FormulariumId) REFERENCES GenFormDatabase.Formularium (FormulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.FormulariumSubstanceText ADD CONSTRAINT FormulariumSubstanceText_FK1 FOREIGN KEY (substanceId) REFERENCES GenFormDatabase.Substance (substanceId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.FormulariumSubstanceText ADD CONSTRAINT FormulariumSubstanceText_FK1 FOREIGN KEY (SubstanceId) REFERENCES GenFormDatabase.Substance (SubstanceId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.FormulariumSubstanceText ADD CONSTRAINT FormulariumSubstanceText_FK2 FOREIGN KEY (textItemId) REFERENCES GenFormDatabase.TextItem (textItemId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.FormulariumSubstanceText ADD CONSTRAINT FormulariumSubstanceText_FK2 FOREIGN KEY (TextItemId) REFERENCES GenFormDatabase.TextItem (TextItemId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.FormulariumSubstanceText ADD CONSTRAINT FormulariumSubstanceText_FK3 FOREIGN KEY (formulariumId) REFERENCES GenFormDatabase.Formularium (formulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.FormulariumSubstanceText ADD CONSTRAINT FormulariumSubstanceText_FK3 FOREIGN KEY (FormulariumId) REFERENCES GenFormDatabase.Formularium (FormulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.FormulariumChapterText ADD CONSTRAINT FormulariumChapterText_FK1 FOREIGN KEY (formulariumChapterId) REFERENCES GenFormDatabase.FormulariumChapter (formulariumChapterId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.FormulariumChapterText ADD CONSTRAINT FormulariumChapterText_FK1 FOREIGN KEY (FormulariumChapterId) REFERENCES GenFormDatabase.FormulariumChapter (FormulariumChapterId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.FormulariumChapterText ADD CONSTRAINT FormulariumChapterText_FK2 FOREIGN KEY (textItemId) REFERENCES GenFormDatabase.TextItem (textItemId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.FormulariumChapterText ADD CONSTRAINT FormulariumChapterText_FK2 FOREIGN KEY (TextItemId) REFERENCES GenFormDatabase.TextItem (TextItemId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.TextLog ADD CONSTRAINT TextLog_FK1 FOREIGN KEY (formulariumId) REFERENCES GenFormDatabase.Formularium (formulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.TextLog ADD CONSTRAINT TextLog_FK1 FOREIGN KEY (FormulariumId) REFERENCES GenFormDatabase.Formularium (FormulariumId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.TextLog ADD CONSTRAINT TextLog_FK2 FOREIGN KEY (textItemId) REFERENCES GenFormDatabase.TextItem (textItemId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.TextLog ADD CONSTRAINT TextLog_FK2 FOREIGN KEY (TextItemId) REFERENCES GenFormDatabase.TextItem (TextItemId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 
-ALTER TABLE GenFormDatabase.TextLog ADD CONSTRAINT TextLog_FK3 FOREIGN KEY (userId) REFERENCES GenFormDatabase.GenFormUser (userId) ON DELETE NO ACTION ON UPDATE NO ACTION
+ALTER TABLE GenFormDatabase.TextLog ADD CONSTRAINT TextLog_FK3 FOREIGN KEY (UserId) REFERENCES GenFormDatabase.GenFormUser (UserId) ON DELETE NO ACTION ON UPDATE NO ACTION
 GO
 
 

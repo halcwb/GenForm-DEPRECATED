@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.Database;
-using Informedica.GenForm.IoC;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
+using StructureMap;
 using Product = Informedica.GenForm.Database.Product;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class ProductRepository: IProductRepository
+    public class ProductRepository : IProductRepository
     {
         #region Implementation of IRepository<IProduct>
 
@@ -28,29 +29,53 @@ namespace Informedica.GenForm.DataAccess.Repositories
             var mapper = GetMapper();
             using (var ctx = GetDataContext())
             {
-                var transaction = ctx.Connection.BeginTransaction();
-                var dao = GetProductDao();
-                mapper.MapFromBoToDao(product, dao);
-                ctx.Product.InsertOnSubmit(dao);
+                ctx.Connection.Open();
+                try
+                {
+                    using (var transaction = ctx.Connection.BeginTransaction(IsolationLevel.Unspecified))
+                    {
+                        ctx.Transaction = transaction;
+                        var dao = GetProductDao();
+                        mapper.MapFromBoToDao(product, dao);
+                        ctx.Product.InsertOnSubmit(dao);
 
-                ctx.SubmitChanges();
-                transaction.Rollback();
+                        try
+                        {
+                            ctx.SubmitChanges();
+                        }
+                        finally
+                        {
+                            transaction.Rollback();
+                        }
+                    }
+
+                }
+                finally
+                {
+                    ctx.Connection.Close();
+                }
             }
         }
 
         private Product GetProductDao()
         {
-            return ObjectFactory.GetInstanceFor<Product>();
+            return ObjectFactory.GetInstance<Product>();
         }
 
         private static ProductMapper GetMapper()
         {
-            return ObjectFactory.GetInstanceFor<ProductMapper>();
+            return ObjectFactory.GetInstance<ProductMapper>();
         }
 
         private static GenFormDataContext GetDataContext()
         {
-            return ObjectFactory.With(DatabaseConnection.DatabaseName.GenForm).GetInstance<GenFormDataContext>();
+            var connection = GetConnectionString();
+            return ObjectFactory.With<String>(connection).GetInstance<GenFormDataContext>();
+        }
+
+        private static String GetConnectionString()
+        {
+            return DatabaseConnection.GetConnectionString(DatabaseConnection.DatabaseName.GenForm);
         }
 
         #endregion

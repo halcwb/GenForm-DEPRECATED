@@ -1,29 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Informedica.GenForm.DataAccess.Repositories;
-using Informedica.GenForm.IoC;
-using Informedica.GenForm.IoC.Registries;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services;
+using StructureMap.Configuration.DSL;
 
 namespace Informedica.GenForm.Assembler
 {
     public static class ProductAssembler
     {
         private static Boolean _hasBeenCalled;
+        private static Registry _registry;
 
-        public static void RegisterDependencies()
+        public static Registry RegisterDependencies()
         {
-            if (_hasBeenCalled) return;
+            if (_hasBeenCalled) return _registry;
+            _registry = new Registry();
 
-            LibraryRegistry.RegisterTypeFor<IProduct, Product>();
-            LibraryRegistry.RegisterTypeFor<IProductServices, ProductServices>();
-            LibraryRegistry.RegisterTypeFor<IProductRepository, ProductRepository>();
+            _registry.For<IProduct>().Use<Product>();
+            _registry.For<IProductServices>().Use<ProductServices>();
+            _registry.For<IProductRepository>().Use<ProductRepository>();
 
             _hasBeenCalled = true;
+            return _registry;
         }
     }
 }

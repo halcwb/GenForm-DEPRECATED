@@ -1,4 +1,4 @@
-﻿using Informedica.GenForm.IoC;
+﻿using StructureMap;
 
 namespace Informedica.GenForm.Assembler
 {
@@ -6,11 +6,12 @@ namespace Informedica.GenForm.Assembler
     {
         public static void Initialize()
         {
+            ObjectFactory.Initialize(x =>
+            {
+                x.AddRegistry(DatabaseAssembler.RegisterDependencies());
+                x.AddRegistry(ProductAssembler.RegisterDependencies());
+            });
             LoginAssembler.RegisterDependencies();
-            ProductAssembler.RegisterDependencies();
-            DatabaseAssembler.RegisterDependencies();
-
-            ObjectFactory.Initialize();
         }
     }
 }

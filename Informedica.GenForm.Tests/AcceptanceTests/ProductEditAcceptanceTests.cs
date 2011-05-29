@@ -1,9 +1,8 @@
 ﻿using Informedica.GenForm.Assembler;
-using Informedica.GenForm.IoC;
-using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Services;
 using Informedica.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StructureMap;
 using TypeMock.ArrangeActAssert;
 
 
@@ -38,19 +37,21 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
+        [ClassInitialize]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            GenFormApplication.Initialize();
+        }
+        
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
         //
         // Use TestInitialize to run code before running each test 
-        [TestInitialize()]
-        public void MyTestInitialize()
-        {
-            ProductAssembler.RegisterDependencies();
-        }
+        //[TestInitialize()]
+        //public void MyTestInitialize()
+        //{
+        //}
         
         // Use TestCleanup to run code after each test has run
         // [TestCleanup()]
@@ -67,7 +68,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private static IProductServices GetProductServices()
         {
-            return ObjectFactory.GetInstanceFor<IProductServices>();
+            return ObjectFactory.GetInstance<IProductServices>();
         }
 
         [TestMethod]

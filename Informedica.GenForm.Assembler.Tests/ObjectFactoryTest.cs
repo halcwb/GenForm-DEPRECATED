@@ -1,6 +1,6 @@
-﻿using Informedica.GenForm.IoC;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using StructureMap;
 using StructureMap.Exceptions;
 
 namespace Informedica.GenForm.Assembler.Tests
@@ -11,7 +11,7 @@ namespace Informedica.GenForm.Assembler.Tests
     ///This is a test class for ObjectFactoryTest and is intended
     ///to contain all ObjectFactoryTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class ObjectFactoryTest
     {
 
@@ -72,7 +72,7 @@ namespace Informedica.GenForm.Assembler.Tests
         {
             try
             {
-                ObjectFactory.GetInstanceFor<T>();
+                ObjectFactory.GetInstance<T>();
                 Assert.Fail("a non registered type cannot be retrieved");
 
             }
@@ -85,7 +85,7 @@ namespace Informedica.GenForm.Assembler.Tests
             }
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void Get_implementation_for_a_type_that_is_not_registered_returns_exception()
         {
             GetImplementationForTestHelper<GenericParameterHelper>();

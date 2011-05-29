@@ -1,11 +1,11 @@
 ﻿using System;
-using Informedica.GenForm.IoC;
 using Informedica.GenForm.Library.Services;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.DomainModel.Products;
+using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
@@ -83,7 +83,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         private IProductServices GetProductServices()
         {
-            return ObjectFactory.GetInstanceFor<IProductServices>();
+            return ObjectFactory.GetInstance<IProductServices>();
         }
     }
 }
