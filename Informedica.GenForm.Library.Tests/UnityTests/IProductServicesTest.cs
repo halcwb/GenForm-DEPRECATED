@@ -79,7 +79,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
 
         internal virtual IProductServices GetProductServices()
         {
-            return ObjectFactory.GetImplementationFor<IProductServices>();
+            return ObjectFactory.GetInstanceFor<IProductServices>();
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         [TestMethod]
         public void Test_helper_method_to_determine_whether_product_is_empty()
         {
-            IProduct product = ObjectFactory.GetImplementationFor<IProduct>();
+            IProduct product = ObjectFactory.GetInstanceFor<IProduct>();
             Assert.IsTrue(ObjectExaminer.ObjectHasEmptyProperties(product), "helper method should return true");
 
             product.ProductName = "Not empty";
@@ -107,12 +107,12 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         [TestMethod]
         public void Save_product_calls_product_repository_to_save_the_product()
         {
-            var product = ObjectFactory.GetImplementationFor<IProduct>();
+            var product = ObjectFactory.GetInstanceFor<IProduct>();
 
             try
             {
                 ProductRepository repos = GetFakeRepository(product);
-                LibraryRegistry.RegisterImplementationFor<IProductRepository>(repos);
+                LibraryRegistry.RegisterInstanceFor<IProductRepository>(repos);
 
                 GetProductServices().SaveProduct(product);
                 Isolate.Verify.WasCalledWithExactArguments(() => repos.SaveProduct(product));

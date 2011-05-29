@@ -22,7 +22,7 @@ namespace Informedica.GenForm.Library.Services
 
         public void SaveProduct(IProduct product)
         {
-            var repository = ObjectFactory.GetImplementationFor<IProductRepository>();
+            var repository = ObjectFactory.GetInstanceFor<IProductRepository>();
             repository.SaveProduct(product);
         }
 

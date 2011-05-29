@@ -1,5 +1,4 @@
-﻿using StructureMap;
-using StructureMap.Configuration.DSL;
+﻿using StructureMap.Configuration.DSL;
 
 namespace Informedica.GenForm.IoC.Registries
 {
@@ -9,22 +8,15 @@ namespace Informedica.GenForm.IoC.Registries
 
         public static Registry Instance { get { return _libraryRegistry; } }
 
-        public static void RegisterImplementationFor<T>(T implementation)
+        public static void RegisterInstanceFor<T>(T instance)
         {
-            _libraryRegistry.For<T>().Use(implementation);
-            // StructureMap.ObjectFactory.Configure(x => x.For<T>().Use(implementation));
+            _libraryRegistry.For<T>().Use(instance);
         }
 
         public static void RegisterTypeFor<T, TC>() where TC: T
         {
             _libraryRegistry.For<T>().Use<TC>();
-            // StructureMap.ObjectFactory.Configure(x => x.For<T>().Use<TC>());
         }
-
-        //public static T GetImplementationFor<T>()
-        //{
-        //    return StructureMap.ObjectFactory.GetInstance<T>();
-        //}
 
 
     }

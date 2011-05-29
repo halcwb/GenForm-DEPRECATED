@@ -8,6 +8,7 @@ using System;
 using Informedica.GenForm.Library.DomainModel.Products;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
+using Product = Informedica.GenForm.Database.Product;
 
 namespace Informedica.GenForm.DataAccess.Tests
 {
@@ -17,7 +18,7 @@ namespace Informedica.GenForm.DataAccess.Tests
     ///This is a test class for ProductRepositoryTest and is intended
     ///to contain all ProductRepositoryTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class ProductRepositoryTest
     {
 
@@ -45,7 +46,7 @@ namespace Informedica.GenForm.DataAccess.Tests
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
             ProductAssembler.RegisterDependencies();
@@ -73,14 +74,18 @@ namespace Informedica.GenForm.DataAccess.Tests
         #endregion
 
         [Isolated]
-        [TestMethod()]
+        [TestMethod]
         public void Save_product_saves_calls_product_mapper_to_map_product_to_database()
         {
             var repository = CreateProductRepository();
-            var product = ObjectFactory.GetImplementationFor<IProduct>();
-            var mapper = Isolate.Fake.Instance<ProductMapper>();
-            var dao = Isolate.Fake.Instance<Database.Product>();
+            var product = ObjectFactory.GetInstanceFor<IProduct>();
+
+            var mapper = CreateFakeProductMapper();
+            var dao = CreateFakeProductDao();
             Isolate.WhenCalled(() => mapper.MapFromBoToDao(product, dao)).IgnoreCall();
+
+            var context = CreateFakeDatabaseContext();
+            Isolate.WhenCalled(() => context.SubmitChanges()).IgnoreCall();
 
             try
             {
@@ -99,14 +104,45 @@ namespace Informedica.GenForm.DataAccess.Tests
         public void Product_repository_submits_product_to_datacontext()
         {
             var repository = CreateProductRepository();
-            var dao = Isolate.Fake.Instance<Database.Product>();
+            var product = ObjectFactory.GetInstanceFor<IProduct>();
+
+            var mapper = CreateFakeProductMapper();
+            var dao = CreateFakeProductDao();
+            Isolate.WhenCalled(() => mapper.MapFromBoToDao(product, dao)).IgnoreCall();
+
             var context = CreateFakeDatabaseContext();
+            Isolate.WhenCalled(() => context.SubmitChanges()).IgnoreCall();
+
+            try
+            {
+                repository.SaveProduct(product);
+                Isolate.Verify.WasCalledWithAnyArguments(() => context.SubmitChanges());
+            }
+            catch (Exception e)
+            {
+                if (e.GetType() != typeof(VerifyException)) throw;
+                Assert.Fail("product repository did not call product mapper to map dao to product");
+            }
+
         }
 
-        private GenFormDataContext CreateFakeDatabaseContext()
+        private static Product CreateFakeProductDao()
+        {
+            return Isolate.Fake.Instance<Product>();
+        }
+
+        private static ProductMapper CreateFakeProductMapper()
+        {
+            var mapper = Isolate.Fake.Instance<ProductMapper>();
+            ObjectFactory.InjectInstanceFor(mapper);
+            return mapper;
+        }
+
+        private static GenFormDataContext CreateFakeDatabaseContext()
         {
             var context = Isolate.Fake.Instance<GenFormDataContext>();
-            Isolate.WhenCalled(() => context.SubmitChanges()).IgnoreCall();
+            ObjectFactory.InjectInstanceFor(context);
+
             return context;
         }
 
@@ -114,5 +150,6 @@ namespace Informedica.GenForm.DataAccess.Tests
         {
             return new ProductRepository();
         }
+
     }
 }
