@@ -101,20 +101,23 @@ Ext.define('GenForm.view.product.ProductForm', {
         return {
             xtype: 'fieldset',
             title: 'Artikel Details',
+            defaults: {
+                width: 400
+            },
             items: this.createProductDetails()
         };
     },
 
     createProductDetails: function () {
         return [
-            { xtype: 'textfield',   name:'ProductName',   fieldLabel: 'Artikel Naam', margin: '10 0 10 10' },
-            { xtype: 'textfield',   name: 'ProductCode',  fieldLabel: 'Artikel Code', margin: '10 0 10 10' },
-            { xtype: 'combobox',    name: 'GenericName',  fieldLabel: 'Generiek',     margin: '10 0 10 10',  displayField: 'GenericName',  store: 'product.GenericName'},
-            { xtype: 'combobox',    name: 'BrandName',    fieldLabel: 'Merk',         margin: '10 0 10 10',  displayField: 'BrandName',    store: 'product.GenericName'},
-            { xtype: 'combobox',    name: 'ShapeName',    fieldLabel: 'Vorm',         margin: '10 0 10 10',  displayField: 'ShapeName',    store: 'product.GenericName' },
-            { xtype: 'numberfield', name: 'Quantity',     fieldLabel: 'Hoeveelheid',  margin: '10 0 10 10' },
-            { xtype: 'combobox',    name: 'UnitName',     fieldLabel: 'Eenheid',      margin: '10 0 10 10',  displayField: 'UnitName',     store: 'product.GenericName' },
-            { xtype: 'combobox',    name: 'PackageName',  fieldLabel: 'Verpakking',   margin: '10 0 10 10' , displayField: 'PackageName',  store: 'product.GenericName'}
+            { xtype: 'textfield',    name:'ProductName',   fieldLabel: 'Artikel Naam', margin: '10 0 10 10' },
+            { xtype: 'textfield',    name: 'ProductCode',  fieldLabel: 'Artikel Code', margin: '10 0 10 10' },
+            { xtype: 'editcombo',    name: 'GenericName',  fieldLabel: 'Generiek',     margin: '10 0 10 10',  displayField: 'GenericName',  store: 'product.GenericName'},
+            { xtype: 'editcombo',    name: 'BrandName',    fieldLabel: 'Merk',         margin: '10 0 10 10',  displayField: 'BrandName',    store: 'product.GenericName'},
+            { xtype: 'editcombo',    name: 'ShapeName',    fieldLabel: 'Vorm',         margin: '10 0 10 10',  displayField: 'ShapeName',    store: 'product.GenericName' },
+            { xtype: 'numberfield',  name: 'Quantity',     fieldLabel: 'Hoeveelheid',  margin: '10 0 10 10' },
+            { xtype: 'editcombo',    name: 'UnitName',     fieldLabel: 'Eenheid',      margin: '10 0 10 10',  displayField: 'UnitName',     store: 'product.GenericName' },
+            { xtype: 'editcombo',    name: 'PackageName',  fieldLabel: 'Verpakking',   margin: '10 0 10 10' , displayField: 'PackageName',  store: 'product.GenericName'}
         ];
     },
 

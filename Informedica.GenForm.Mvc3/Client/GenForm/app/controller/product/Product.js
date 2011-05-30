@@ -25,10 +25,11 @@ Ext.define('GenForm.controller.product.Product', {
     ],
 
     views: [
+        'component.EditableComboBox',
         'product.ProductWindow',
         'product.ProductForm',
         'product.ProductSubstanceForm',
-        'product.ProductSubstanceGrid'
+        'product.ProductSubstanceGrid',
     ],
 
     productWindow: null,
