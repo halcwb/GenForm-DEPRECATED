@@ -2234,6 +2234,7 @@
     <Content Include="Client\Library\extjs\resources\themes\images\default\window\window-default-corners.gif" />
     <Content Include="Client\Library\extjs\resources\themes\images\default\window\window-default-sides.gif" />
     <Content Include="Client\Library\extjs\resources\themes\templates\resources\css\my-ext-theme.css" />
+    <Content Include="Client\Library\extjs\s.gif" />
     <Content Include="Client\Library\extjs\src\Action.js" />
     <Content Include="Client\Library\extjs\src\button\Button.js" />
     <Content Include="Client\Library\extjs\src\button\Cycle.js" />

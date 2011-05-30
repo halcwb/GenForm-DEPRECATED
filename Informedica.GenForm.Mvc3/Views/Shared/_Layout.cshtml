@@ -1,5 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
+
+<style>
+ .x-form-add-trigger {
+   background-image: url(./Client/Library/extjs/resources/themes/images/default/form/search-trigger.gif) !important;
+ }
+</style>
+
 <head>
     <title></title>
 
@@ -20,14 +27,16 @@
     
     <script type="text/javascript">
 
-        Ext.require('Ext.direct.*');
+        Ext.require(['Ext.direct.*'
+        ]);
 
-        Ext.Loader.setConfig({
+        Ext.Loader.setConfig({  
             enabled: true,
             disableCaching: true
         });
 
         Ext.onReady(function () {
+            Ext.BLANK_IMAGE_URL = './Client/Library/extjs/s.gif';
             remoteApi.enableBuffer = 100;
             Ext.direct.Manager.addProvider(remoteApi);
         });
