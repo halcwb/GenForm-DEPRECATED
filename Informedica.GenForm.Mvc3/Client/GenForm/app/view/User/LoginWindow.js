@@ -36,8 +36,8 @@ Ext.define('GenForm.view.user.LoginWindow', {
             { xtype: 'panel', border: false, bodyPadding: 15, width:541,
                 items: [
                     {xtype:'form', items:[
-                        new Ext.form.Text({ fieldLabel: 'Gebruikersnaam', name:'username', margin: '10 0 10 10' }),
-                        new Ext.form.Text({ fieldLabel: 'Wachtwoord', name: 'password', margin: '0 0 10 10' })
+                        new Ext.form.Text({ fieldLabel: 'Gebruikersnaam', name:'username', margin: '10 0 10 10', value: 'Admin' }),
+                        new Ext.form.Text({ fieldLabel: 'Wachtwoord', name: 'password', margin: '0 0 10 10', value: 'Admin' })
                     ]}
                 ]
             }

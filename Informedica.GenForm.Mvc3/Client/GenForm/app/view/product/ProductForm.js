@@ -12,19 +12,22 @@ Ext.define('GenForm.view.product.ProductForm', {
     waitMsgTarget: true,
     
     initComponent: function () {
-        this.items = this.createItems();
+        var me = this;
+        me.items = this.createItems();
 
-        this.callParent();
+        me.callParent();
     },
 
     createItems: function () {
+        var me = this;
         return [
-            this.createProductFieldSet(),
-            this.createTabPanel()
+            me.createProductFieldSet(),
+            me.createTabPanel()
         ];
     },
 
     createTabPanel: function () {
+        var me = this;
         return {
             xtype: 'tabpanel',
             plain: true,
@@ -32,26 +35,27 @@ Ext.define('GenForm.view.product.ProductForm', {
             height: 235,
             defaults: { bodyStyle:'padding:10px' },
             items:[
-                this.createSubstanceTab(),
-                this.createRouteGrid(),
-                this.createProductTextEditor()
+                me.createSubstanceTab(),
+                me.createRouteGrid(),
+                me.createProductTextEditor()
             ]
         };
     },
 
     createSubstanceTab: function () {
-      return {
-        title: 'Stoffen',
-        layout: 'fit',
-        items: [ this.createSubstanceGrid() ]
-      };
+        var me = this;
+        return {
+            title: 'Stoffen',
+            layout: 'fit',
+            items: [ me.createSubstanceGrid() ]
+        };
     },
 
     createSubstanceGrid: function () {
-        var config;
+        var config, me = this;
 
         config = {
-            plugins: [ this.createRowEditor() ]
+            plugins: [ me.createRowEditor() ]
         };
 
         return Ext.create('GenForm.view.product.ProductSubstanceGrid', config);
@@ -98,13 +102,14 @@ Ext.define('GenForm.view.product.ProductForm', {
     },
 
     createProductFieldSet: function () {
+        var me = this;
         return {
             xtype: 'fieldset',
             title: 'Artikel Details',
             defaults: {
                 width: 400
             },
-            items: this.createProductDetails()
+            items: me.createProductDetails()
         };
     },
 
@@ -112,18 +117,19 @@ Ext.define('GenForm.view.product.ProductForm', {
         return [
             { xtype: 'textfield',    name:'ProductName',   fieldLabel: 'Artikel Naam', margin: '10 0 10 10' },
             { xtype: 'textfield',    name: 'ProductCode',  fieldLabel: 'Artikel Code', margin: '10 0 10 10' },
-            { xtype: 'editcombo',    name: 'GenericName',  fieldLabel: 'Generiek',     margin: '10 0 10 10',  displayField: 'GenericName',  store: 'product.GenericName'},
-            { xtype: 'editcombo',    name: 'BrandName',    fieldLabel: 'Merk',         margin: '10 0 10 10',  displayField: 'BrandName',    store: 'product.GenericName'},
-            { xtype: 'editcombo',    name: 'ShapeName',    fieldLabel: 'Vorm',         margin: '10 0 10 10',  displayField: 'ShapeName',    store: 'product.GenericName' },
+            { xtype: 'editcombo',    name: 'GenericName',  fieldLabel: 'Generiek',     margin: '10 0 10 10',  displayField: 'GenericName',  store: 'product.GenericName', queryMode: 'local'},
+            { xtype: 'editcombo',    name: 'BrandName',    fieldLabel: 'Merk',         margin: '10 0 10 10',  displayField: 'BrandName',    store: 'product.BrandName',   queryMode: 'local'},
+            { xtype: 'editcombo',    name: 'ShapeName',    fieldLabel: 'Vorm',         margin: '10 0 10 10',  displayField: 'ShapeName',    store: 'product.ShapeName' ,  queryMode: 'local'},
             { xtype: 'numberfield',  name: 'Quantity',     fieldLabel: 'Hoeveelheid',  margin: '10 0 10 10' },
-            { xtype: 'editcombo',    name: 'UnitName',     fieldLabel: 'Eenheid',      margin: '10 0 10 10',  displayField: 'UnitName',     store: 'product.GenericName' },
-            { xtype: 'editcombo',    name: 'PackageName',  fieldLabel: 'Verpakking',   margin: '10 0 10 10' , displayField: 'PackageName',  store: 'product.GenericName'}
+            { xtype: 'editcombo',    name: 'UnitName',     fieldLabel: 'Eenheid',      margin: '10 0 10 10',  displayField: 'UnitName',     store: 'product.UnitName',    queryMode: 'local' },
+            { xtype: 'editcombo',    name: 'PackageName',  fieldLabel: 'Verpakking',   margin: '10 0 10 10' , displayField: 'PackageName',  store: 'product.PackageName', queryMode: 'local'}
         ];
     },
 
     getProduct: function () {
-        var record = this.getRecord();
-        this.getForm().updateRecord(record);
+        var record = this.getRecord(), me = this;
+
+        me.getForm().updateRecord(record);
         return record;
     }
 

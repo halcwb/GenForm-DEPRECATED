@@ -23,10 +23,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="BrandName.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/store/product/BrandName.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="12" selection-start="368" selection-end="368" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PackageName.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/store/product/PackageName.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="4" selection-start="363" selection-end="363" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShapeName.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/store/product/ShapeName.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="34" selection-start="169" selection-end="169" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UnitName.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/store/product/UnitName.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="19" selection-start="346" selection-end="346" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Product.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controller/product/Product.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="35" selection-start="691" selection-end="691" vertical-scroll-proportion="0.0">
+            <state line="43" column="60" selection-start="1126" selection-end="1126" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -35,79 +71,43 @@
       <file leaf-file-name="ProductForm.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/product/ProductForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="9" selection-start="2266" selection-end="2266" vertical-scroll-proportion="0.0">
+            <state line="121" column="170" selection-start="3487" selection-end="3487" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GenericName.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/store/product/GenericName.js">
+      <file leaf-file-name="Product.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/model/product/Product.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="3" selection-start="362" selection-end="362" vertical-scroll-proportion="0.0">
+            <state line="35" column="0" selection-start="1634" selection-end="1634" vertical-scroll-proportion="0.59859157">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClearableCombo.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://Z:/hal On My Mac/Downloads/ClearableCombo/plugins/ClearableCombo.js">
+      <file leaf-file-name="BrandName.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/model/product/BrandName.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="9" selection-start="0" selection-end="696" vertical-scroll-proportion="0.0">
+            <state line="12" column="45" selection-start="307" selection-end="307" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProductWindow.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/view/product/ProductWindow.js">
+      <file leaf-file-name="UnitName.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/model/product/UnitName.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="31" selection-start="331" selection-end="331" vertical-scroll-proportion="0.0">
+            <state line="13" column="3" selection-start="301" selection-end="301" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Application.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Application.js">
+      <file leaf-file-name="PackageName.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/model/product/PackageName.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="25" selection-start="320" selection-end="320" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProductSubstanceForm.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/view/product/ProductSubstanceForm.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="17" selection-start="450" selection-end="450" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Login.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controller/user/Login.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="20" selection-start="320" selection-end="320" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EditableComboBox.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/view/component/EditableComboBox.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="39" selection-start="473" selection-end="473" vertical-scroll-proportion="0.20523138">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ComboBox.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Downloads/ext-4.0.1-commercial/ext-4.0.1/src/form/field/ComboBox.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="828" column="75" selection-start="30677" selection-end="30684" vertical-scroll-proportion="-37.4">
+            <state line="11" column="53" selection-start="304" selection-end="304" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -127,22 +127,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/view/product/ProductSubstanceGrid.js" />
-        <option value="$PROJECT_DIR$/app/data/ProductSubstanceTestData.js" />
-        <option value="$PROJECT_DIR$/app/model/product/GenericName.js" />
+        <option value="Z:/hal On My Mac/Downloads/ClearableCombo/plugins/ClearableCombo.js" />
         <option value="$PROJECT_DIR$/app/store/product/GenericName.js" />
-        <option value="$PROJECT_DIR$/tests/ModelTests.js" />
-        <option value="$PROJECT_DIR$/app/view/product/ProductWindow.js" />
-        <option value="$PROJECT_DIR$/app/model/product/Product.js" />
-        <option value="$PROJECT_DIR$/tests/ProductControllerTests.js" />
-        <option value="$PROJECT_DIR$/app/Application.js" />
-        <option value="$PROJECT_DIR$/../../Views/Shared/_Layout.cshtml" />
-        <option value="$PROJECT_DIR$/app/view/component/Ext.ux.ComboBoxAdd.js" />
-        <option value="$PROJECT_DIR$/app/view/component/ComboBoxAdd.js" />
-        <option value="$PROJECT_DIR$/app/view/component/EditableCombo.js" />
-        <option value="$PROJECT_DIR$/app/controller/product/Product.js" />
+        <option value="$USER_HOME$/Downloads/ext-4.0.1-commercial/ext-4.0.1/src/form/field/ComboBox.js" />
         <option value="$PROJECT_DIR$/app/view/component/EditableComboBox.js" />
+        <option value="$PROJECT_DIR$/app/store/product/BrandName.js" />
+        <option value="$PROJECT_DIR$/app/model/product/GenericName.js" />
+        <option value="$PROJECT_DIR$/app/model/product/PackageName.js" />
+        <option value="$PROJECT_DIR$/app/model/product/BrandName.js" />
+        <option value="$PROJECT_DIR$/app/model/product/UnitName.js" />
+        <option value="$PROJECT_DIR$/app/model/product/ShapeName.js" />
+        <option value="$PROJECT_DIR$/app/store/product/PackageName.js" />
+        <option value="$PROJECT_DIR$/app/store/product/ShapeName.js" />
+        <option value="$PROJECT_DIR$/app/store/product/UnitName.js" />
+        <option value="$PROJECT_DIR$/app/controller/product/Product.js" />
         <option value="$PROJECT_DIR$/app/view/product/ProductForm.js" />
+        <option value="$PROJECT_DIR$/app/model/product/Product.js" />
       </list>
     </option>
   </component>
@@ -323,6 +323,46 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="product" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -459,112 +499,114 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/Ext.ComponentQueryTests.js">
+    <entry file="file://$PROJECT_DIR$/app/view/product/ProductSubstanceForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="20" selection-start="360" selection-end="360" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/model/product/GenericName.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="12" selection-start="321" selection-end="321" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../Views/Shared/_Layout.cshtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="41" selection-start="867" selection-end="867" vertical-scroll-proportion="0.5444215">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/ext-4.0.1-commercial/ext-4.0.1/examples/ux/form/MultiSelect.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="0" selection-start="5401" selection-end="5401" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/User/LoginWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="3" selection-start="1265" selection-end="1265" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/component/SaveCancelToolBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="56" selection-start="190" selection-end="190" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controller/user/Login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="20" selection-start="320" selection-end="320" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="25" selection-start="320" selection-end="320" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/product/ProductWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="31" selection-start="331" selection-end="331" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Z:/hal On My Mac/Downloads/ClearableCombo/plugins/ClearableCombo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="9" selection-start="0" selection-end="696" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controller/product/Product.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="35" selection-start="691" selection-end="691" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/product/GenericName.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="3" selection-start="362" selection-end="362" vertical-scroll-proportion="0.0">
+        <state line="13" column="11" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Downloads/ext-4.0.1-commercial/ext-4.0.1/src/form/field/ComboBox.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="828" column="75" selection-start="30677" selection-end="30684" vertical-scroll-proportion="-37.4">
+        <state line="936" column="0" selection-start="34645" selection-end="34645" vertical-scroll-proportion="-18.36">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/product/ProductSubstanceForm.js">
+    <entry file="file://$PROJECT_DIR$/app/model/product/GenericName.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="17" selection-start="450" selection-end="450" vertical-scroll-proportion="0.0">
+        <state line="13" column="0" selection-start="308" selection-end="308" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/product/ProductForm.js">
+    <entry file="file://$PROJECT_DIR$/app/store/product/GenericName.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="9" selection-start="2266" selection-end="2266" vertical-scroll-proportion="0.0">
+        <state line="19" column="4" selection-start="447" selection-end="447" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/model/product/ShapeName.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="0" selection-start="301" selection-end="301" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/component/EditableComboBox.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="39" selection-start="473" selection-end="473" vertical-scroll-proportion="0.20523138">
+        <state line="24" column="75" selection-start="766" selection-end="767" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/store/product/ShapeName.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="34" selection-start="169" selection-end="169" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/model/product/BrandName.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="45" selection-start="307" selection-end="307" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/model/product/PackageName.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="53" selection-start="304" selection-end="304" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/store/product/UnitName.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="19" selection-start="346" selection-end="346" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/model/product/UnitName.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="3" selection-start="301" selection-end="301" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controller/product/Product.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="60" selection-start="1126" selection-end="1126" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/store/product/BrandName.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="12" selection-start="368" selection-end="368" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/store/product/PackageName.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="4" selection-start="363" selection-end="363" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/product/ProductForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="121" column="170" selection-start="3487" selection-end="3487" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/model/product/Product.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="0" selection-start="1634" selection-end="1634" vertical-scroll-proportion="0.59859157">
           <folding />
         </state>
       </provider>

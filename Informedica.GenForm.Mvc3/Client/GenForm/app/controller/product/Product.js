@@ -14,6 +14,7 @@ Ext.define('GenForm.controller.product.Product', {
         'product.GenericName',
         'product.BrandName',
         'product.ShapeName',
+        'product.UnitName',
         'product.PackageName',
         'product.ProductRoute',
         'product.ProductSubstance'
@@ -21,6 +22,10 @@ Ext.define('GenForm.controller.product.Product', {
 
     stores: [
         'product.GenericName',
+        'product.BrandName',
+        'product.ShapeName',
+        'product.UnitName',
+        'product.PackageName',
         'GenForm.data.ProductSubstanceTestData'//'GenForm.store.product.ProductSubstanceStore'
     ],
 
@@ -29,7 +34,7 @@ Ext.define('GenForm.controller.product.Product', {
         'product.ProductWindow',
         'product.ProductForm',
         'product.ProductSubstanceForm',
-        'product.ProductSubstanceGrid',
+        'product.ProductSubstanceGrid'
     ],
 
     productWindow: null,

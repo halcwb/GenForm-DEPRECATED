@@ -11,8 +11,4 @@ Ext.define('GenForm.model.product.ShapeName', {
 
     fields: [ {name: 'ShapeName', type: 'string' } ]
 
-/*    proxy: {
-        type: 'direct',
-        directFn: Product.GetShapeNames
-    }*/
 });

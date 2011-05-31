@@ -26,7 +26,11 @@
     <WarningLevel>4</WarningLevel>
     <PublishDatabases>false</PublishDatabases>
     <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
-    <DeployIisAppPath>Default Web Site/Informedica.GenForm.Mvc3</DeployIisAppPath>
+    <DeployIisAppPath>GenForm</DeployIisAppPath>
+    <PackageAsSingleFile>true</PackageAsSingleFile>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <IncludeAppPool>true</IncludeAppPool>
+    <DeployIisAppPhysicalPath />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -91,6 +95,7 @@
     <Content Include="Client\Application\Images\medicalbanner.jpg" />
     <Content Include="Client\GenForm\app\Application.js" />
     <Content Include="Client\GenForm\app\controller\product\Product.js" />
+    <Content Include="Client\GenForm\app\model\product\UnitName.js" />
     <Content Include="Client\GenForm\app\model\user\LoggedInUser.js" />
     <Content Include="Client\GenForm\app\controller\user\Login.js" />
     <Content Include="Client\GenForm\app\data\ProductSubstanceTestData.js" />
@@ -103,8 +108,13 @@
     <Content Include="Client\GenForm\app\model\product\ShapeName.js" />
     <Content Include="Client\GenForm\app\model\user\Login.js" />
     <Content Include="Client\GenForm\app\model\validation\ValidationRule.js" />
+    <Content Include="Client\GenForm\app\store\product\BrandName.js" />
     <Content Include="Client\GenForm\app\store\product\GenericName.js" />
+    <Content Include="Client\GenForm\app\store\product\PackageName.js" />
     <Content Include="Client\GenForm\app\store\product\ProductSubstance.js" />
+    <Content Include="Client\GenForm\app\store\product\ShapeName.js" />
+    <Content Include="Client\GenForm\app\store\product\UnitName.js" />
+    <Content Include="Client\GenForm\app\view\component\EditableComboBox.js" />
     <Content Include="Client\GenForm\app\view\component\SaveCancelToolBar.js" />
     <Content Include="Client\GenForm\app\view\product\ProductForm.js" />
     <Content Include="Client\GenForm\app\view\product\ProductSubstanceForm.js" />
@@ -1446,13 +1456,51 @@
     <Content Include="Client\Library\extjs\bootstrap\data-release.js" />
     <Content Include="Client\Library\extjs\bootstrap\data.js" />
     <Content Include="Client\Library\extjs\bootstrap\paths.js" />
-    <Content Include="Client\Library\extjs\build\all.html" />
-    <Content Include="Client\Library\extjs\build\bin\windows\hammerjs.exe" />
-    <Content Include="Client\Library\extjs\build\build-bootstrap-data.js" />
-    <Content Include="Client\Library\extjs\build\build-custom-jsb3.js" />
-    <Content Include="Client\Library\extjs\build\build-ext-all-jsb3.js" />
-    <Content Include="Client\Library\extjs\build\build-manifest.js" />
-    <Content Include="Client\Library\extjs\build\build-tests.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-af.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-bg.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-ca.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-cs.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-da.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-de.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-el_GR.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-en.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-en_GB.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-es.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-fa.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-fi.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-fr.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-fr_CA.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-gr.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-he.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-hr.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-hu.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-id.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-it.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-ja.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-ko.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-lt.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-lv.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-mk.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-nl.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-no_NB.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-no_NN.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-pl.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-pt.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-pt_BR.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-pt_PT.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-ro.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-ru.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-sk.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-sl.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-sr.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-sr_RS.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-sv_SE.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-th.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-tr.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-ukr.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-vn.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-zh_CN.js" />
+    <Content Include="Client\Library\extjs\locale\ext-lang-zh_TW.js" />
     <Content Include="Client\Library\extjs\resources\css\ext-all-access.css" />
     <Content Include="Client\Library\extjs\resources\css\ext-all-scoped.css" />
     <Content Include="Client\Library\extjs\resources\css\ext-all.css" />
@@ -3154,23 +3202,53 @@
     <None Include="Client\Library\Ext4\resources\themes\templates\resources\sass\my-ext-theme.scss" />
     <None Include="Client\Library\Ext4\src\core\test\unit\build.sh" />
     <None Include="Client\Library\Ext4\src\core\test\unit\spec\Ext-mess.backup" />
-    <None Include="Client\Library\extjs\build\bin\linux\hammerjs" />
-    <None Include="Client\Library\extjs\build\bin\mac\hammerjs" />
-    <None Include="Client\Library\extjs\build\bin\mac\phantomjs" />
-    <None Include="Client\Library\extjs\build\build-all-jsb3.sh" />
-    <None Include="Client\Library\extjs\build\build-bootstrap.sh" />
-    <None Include="Client\Library\extjs\build\build-custom.sh" />
-    <None Include="Client\Library\extjs\build\build-tests.sh" />
-    <None Include="Client\Library\extjs\build\build.bat" />
-    <None Include="Client\Library\extjs\build\build.sh" />
-    <None Include="Client\Library\extjs\build\Ext3-manifest.json" />
-    <None Include="Client\Library\extjs\build\Ext4-manifest.json" />
-    <None Include="Client\Library\extjs\build\ignore.json" />
-    <None Include="Client\Library\extjs\build\sdk.jsb3" />
-    <None Include="Client\Library\extjs\build\tests\core.tpl" />
-    <None Include="Client\Library\extjs\build\tests\ext4.tpl" />
-    <None Include="Client\Library\extjs\build\tests\indexes.json" />
-    <None Include="Client\Library\extjs\build\tests\platform.tpl" />
+    <None Include="Client\Library\extjs\locale\.svn\all-wcprops" />
+    <None Include="Client\Library\extjs\locale\.svn\entries" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-af.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-bg.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-ca.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-cs.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-da.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-de.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-el_GR.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-en.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-en_GB.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-es.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-fa.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-fi.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-fr.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-fr_CA.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-gr.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-he.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-hr.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-hu.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-id.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-it.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-ja.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-ko.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-lt.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-lv.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-mk.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-nl.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-no_NB.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-no_NN.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-pl.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-pt.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-pt_BR.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-pt_PT.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-ro.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-ru.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-sk.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-sl.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-sr.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-sr_RS.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-sv_SE.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-th.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-tr.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-ukr.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-vn.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-zh_CN.js.svn-base" />
+    <None Include="Client\Library\extjs\locale\.svn\text-base\ext-lang-zh_TW.js.svn-base" />
     <None Include="Client\Library\extjs\resources\psd\clear-trigger.psd" />
     <None Include="Client\Library\extjs\resources\psd\date-trigger.psd" />
     <None Include="Client\Library\extjs\resources\psd\search-trigger.psd" />
@@ -3266,6 +3344,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Client\Library\extjs\locale\.svn\prop-base\" />
+    <Folder Include="Client\Library\extjs\locale\.svn\props\" />
+    <Folder Include="Client\Library\extjs\locale\.svn\tmp\prop-base\" />
+    <Folder Include="Client\Library\extjs\locale\.svn\tmp\props\" />
+    <Folder Include="Client\Library\extjs\locale\.svn\tmp\text-base\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
