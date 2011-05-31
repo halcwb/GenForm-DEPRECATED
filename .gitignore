@@ -29,6 +29,7 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 
 *.svn
+.svn/
 
 [eE]xt*/
 Client/Library/
