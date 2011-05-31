@@ -9,10 +9,6 @@ Ext.define('GenForm.model.product.PackageName', {
     extend: 'Ext.data.Model',
     alias: 'widget.packagenamemodel',
 
-    fields: [ {name: 'PackageName', type: 'string' }],
+    fields: [ {name: 'PackageName', type: 'string' }]
 
-    proxy: {
-        type: 'direct',
-        directFn: Product.GetPackageNames
-    }
 });

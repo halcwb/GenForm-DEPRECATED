@@ -16,23 +16,75 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult GetGenericNames()
         {
-            return this.Direct( new [] { new  {GenericName = "paracetamol"}, new {GenericName = "dopamine"} });
+            return this.Direct(
+                new[] { 
+                    new  {GenericName = "paracetamol"}, 
+                    new {GenericName = "dopamine"}, 
+                    new {GenericName = "amoxicilline/clavulaanzuur"},
+                    new {GenericName = "domperidon"},
+                    new {GenericName = "midazolam"},
+                    new {GenericName = "propofol"},
+                    new {GenericName = "rocuronium"}
+                }
+            );
         }
 
         public ActionResult GetBrandNames()
         {
-            return this.Direct( new [] { new  {BrandName = "Paracetamol"}, new {BrandName = "Dynatra"} });
+            return this.Direct(new[]
+                {
+                    new { BrandName = "Dormicum" }, 
+                    new { BrandName = "Esmeron" }, 
+                    new { BrandName = "Perfalgan" }, 
+                    new { BrandName = "Augmentin" }, 
+                    new { BrandName = "Motilium" }, 
+                    new { BrandName = "Dynatra" }
+                }
+            );
+        }
+
+        public ActionResult GetShapeNames()
+        {
+            return this.Direct(new[]
+                {
+                    new { ShapeName = "infusievloeistof"},
+                    new { ShapeName = "tablet"},
+                    new { ShapeName = "zetpil"}
+                }
+            );
+        }
+
+        public ActionResult GetPackageNames()
+        {
+            return this.Direct(new[]
+                {
+                    new { PackageName = "ampul"},
+                    new { PackageName = "fles"},
+                    new { PackageName = "tablet"},
+                    new { PackageName = "zetpil"}
+                }
+            );
+        }
+
+        public ActionResult GetUnitNames()
+        {
+            return this.Direct(new[]
+                {
+                    new { UnitName = "mL"},
+                    new { UnitName = "stuk"}
+                }
+            );
         }
 
         public ActionResult GetProducts()
         {
-            return this.Direct(new List<IProduct> {LoadProduct(0)});
+            return this.Direct(new List<IProduct> { LoadProduct(0) });
         }
 
         public ActionResult GetProduct(JObject productId)
         {
-            var product = productId.Value<String>("id") == null ? LoadProduct(0): LoadProduct(Int32.Parse(productId.Value<String>("id")));
-            return this.Direct(new {success = true, data = product});
+            var product = productId.Value<String>("id") == null ? LoadProduct(0) : LoadProduct(Int32.Parse(productId.Value<String>("id")));
+            return this.Direct(new { success = true, data = product });
         }
 
         public IProduct LoadProduct(Int32 productId)
@@ -78,7 +130,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
                 success = false;
                 message = e.ToString();
             }
-            return this.Direct(new {success, data = product, message});
+            return this.Direct(new { success, data = product, message });
         }
 
         private IProductServices GetProductServices()
