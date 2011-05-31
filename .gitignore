@@ -31,5 +31,5 @@ _ReSharper*/
 *.svn
 .svn/
 
-[eE]xt*/
+[Ee]xt*/
 Client/Library/
