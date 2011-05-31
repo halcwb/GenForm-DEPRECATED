@@ -1451,11 +1451,6 @@
     <Content Include="Client\Library\Ext4\src\XTemplate.js" />
     <Content Include="Client\Library\Ext4\src\ZIndexManager.js" />
     <Content Include="Client\Library\extjs\bootstrap.js" />
-    <Content Include="Client\Library\extjs\bootstrap\core.js" />
-    <Content Include="Client\Library\extjs\bootstrap\data-release-base.js" />
-    <Content Include="Client\Library\extjs\bootstrap\data-release.js" />
-    <Content Include="Client\Library\extjs\bootstrap\data.js" />
-    <Content Include="Client\Library\extjs\bootstrap\paths.js" />
     <Content Include="Client\Library\extjs\locale\ext-lang-af.js" />
     <Content Include="Client\Library\extjs\locale\ext-lang-bg.js" />
     <Content Include="Client\Library\extjs\locale\ext-lang-ca.js" />
