@@ -1,4 +1,6 @@
-﻿using Informedica.GenForm.Assembler;
+﻿using System;
+using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Services;
 using Informedica.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -83,7 +85,48 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         [Isolated]
         [TestMethod]
-        public void User_can_save_product_with_values_entered()
+        public void When_user_saves_valid_product_no_error_is_thrown()
+        {
+            var product = GetValidProduct();
+
+            try
+            {
+                GetProductServices().SaveProduct(product);
+
+            }
+            catch (System.Exception e)
+            {
+                Assert.Fail("Saver product returned an error " + e.Message);
+            }
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void When_user_saves_invalid_product_an_error_is_thrown()
+        {
+            var product = GetInvalidProduct();
+
+            try
+            {
+                GetProductServices().SaveProduct(product);
+                Assert.Fail("Saving an invalid product should throw an exception");
+            }
+// ReSharper disable EmptyGeneralCatchClause
+            catch(Exception)
+// ReSharper restore EmptyGeneralCatchClause
+            {
+                
+            }
+        }
+
+        private IProduct GetInvalidProduct()
+        {
+            var product = GetValidProduct();
+            product.PackageName = "";
+            return product;
+        }
+
+        private IProduct GetValidProduct()
         {
             var product = GetProductServices().GetEmptyProduct();
 
@@ -94,11 +137,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             product.Quantity = 1;
             product.UnitName = "stuk";
             product.PackageName = "tablet";
-
-
-            GetProductServices().SaveProduct(product);
-
-            Assert.AreEqual(product, GetProductServices().GetProduct(product.ProductName));
+            return product;
         }
 
         [Isolated]

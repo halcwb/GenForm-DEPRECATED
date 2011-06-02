@@ -78,7 +78,7 @@ namespace Informedica.GenForm.Assembler.Tests
             }
             catch (Exception e)
             {
-                if (e.GetType() != typeof(MissingPluginFamilyException))
+                if (e.GetType() != typeof(StructureMapException))
                 {
                     Assert.Fail("not the expected exception: " + e);
                 }
@@ -88,7 +88,12 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public void Get_implementation_for_a_type_that_is_not_registered_returns_exception()
         {
-            GetImplementationForTestHelper<GenericParameterHelper>();
+            GetImplementationForTestHelper<IMissingPlugin>();
+        }
+
+        public interface IMissingPlugin
+        {
+            
         }
 
         
