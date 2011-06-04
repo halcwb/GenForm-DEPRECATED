@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Brand = Informedica.GenForm.Database.Brand;
 using Product = Informedica.GenForm.Database.Product;
 
 namespace Informedica.GenForm.DataAccess.DataMappers

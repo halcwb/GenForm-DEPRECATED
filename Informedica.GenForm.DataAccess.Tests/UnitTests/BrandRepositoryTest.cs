@@ -1,25 +1,24 @@
 ﻿using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess.DataMappers;
-using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Database;
+using Informedica.GenForm.Library.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Informedica.GenForm.Library.DomainModel.Products;
 using StructureMap;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
-using Product = Informedica.GenForm.Database.Product;
 
-namespace Informedica.GenForm.DataAccess.Tests
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests
 {
     
     
     /// <summary>
-    ///This is a test class for ProductRepositoryTest and is intended
-    ///to contain all ProductRepositoryTest Unit Tests
+    ///This is a test class for BrandRepositoryTest and is intended
+    ///to contain all BrandRepositoryTest Unit Tests
     ///</summary>
     [TestClass]
-    public class ProductRepositoryTest
+    public class BrandRepositoryTest
     {
 
 
@@ -74,70 +73,57 @@ namespace Informedica.GenForm.DataAccess.Tests
 
         [Isolated]
         [TestMethod]
-        public void Save_product_saves_calls_product_mapper_to_map_product_to_database()
+        public void Save_brand_calls_data_mapper_to_map_bo_to_dao()
         {
-            var repository = CreateProductRepository();
-            var product = ObjectFactory.GetInstance<IProduct>();
+            var repos = CreateBrandRepository();
+            var brand = ObjectFactory.GetInstance<IBrand>();
 
-            var mapper = CreateFakeProductMapper();
-            var dao = CreateFakeProductDao();
-            Isolate.WhenCalled(() => mapper.MapFromBoToDao(product, dao)).IgnoreCall();
+            var mapper = CreateFakeBrandMapper();
+            var dao = CreateFakeBrandDao();
+            Isolate.WhenCalled(() => mapper.MapFromBoToDao(brand, dao)).IgnoreCall();
 
             var context = CreateFakeDatabaseContext();
             Isolate.WhenCalled(() => context.SubmitChanges()).IgnoreCall();
 
             try
             {
-                repository.SaveProduct(product);
-                Isolate.Verify.WasCalledWithAnyArguments(() => mapper.MapFromBoToDao(product, dao));
+                repos.Insert(brand);
+                Isolate.Verify.WasCalledWithAnyArguments(() => mapper.MapFromBoToDao(brand, dao));
             }
             catch (Exception e)
             {
                 if (e.GetType() != typeof(VerifyException)) throw;
-                Assert.Fail("product repository did not call product mapper to map dao to product");
+                Assert.Fail("brand repository did not call brand mapper to map dao to bo");
             }
         }
 
         [Isolated]
         [TestMethod]
-        public void Product_repository_submits_product_to_datacontext()
+        public void Brand_repository_submits_brand_to_datacontext()
         {
-            var repository = CreateProductRepository();
-            var product = ObjectFactory.GetInstance<IProduct>();
+            var repos = CreateBrandRepository();
+            var brand = ObjectFactory.GetInstance<IBrand>();
 
-            var mapper = CreateFakeProductMapper();
-            var dao = CreateFakeProductDao();
-            Isolate.WhenCalled(() => mapper.MapFromBoToDao(product, dao)).IgnoreCall();
+            var mapper = CreateFakeBrandMapper();
+            var dao = CreateFakeBrandDao();
+            Isolate.WhenCalled(() => mapper.MapFromBoToDao(brand, dao)).IgnoreCall();
 
             var context = CreateFakeDatabaseContext();
             Isolate.WhenCalled(() => context.SubmitChanges()).IgnoreCall();
 
             try
             {
-                repository.SaveProduct(product);
-                Isolate.Verify.WasCalledWithAnyArguments(() => context.SubmitChanges());
+
             }
             catch (Exception e)
             {
                 if (e.GetType() != typeof(VerifyException)) throw;
-                Assert.Fail("product repository did not call product mapper to map dao to product");
+                Assert.Fail("brand repository did not call brand mapper to map brand to dao");
             }
 
         }
 
-        private static Product CreateFakeProductDao()
-        {
-            return Isolate.Fake.Instance<Product>();
-        }
-
-        private static ProductMapper CreateFakeProductMapper()
-        {
-            var mapper = Isolate.Fake.Instance<ProductMapper>();
-            ObjectFactory.Inject(mapper);
-            return mapper;
-        }
-
-        private static GenFormDataContext CreateFakeDatabaseContext()
+        private GenFormDataContext CreateFakeDatabaseContext()
         {
             var context = Isolate.Fake.Instance<GenFormDataContext>();
             ObjectFactory.Inject(context);
@@ -145,10 +131,21 @@ namespace Informedica.GenForm.DataAccess.Tests
             return context;
         }
 
-        private static ProductRepository CreateProductRepository()
+        private Database.Brand CreateFakeBrandDao()
         {
-            return new ProductRepository();
+            return Isolate.Fake.Instance<Database.Brand>();
         }
 
+        private BrandMapper CreateFakeBrandMapper()
+        {
+            var mapper = Isolate.Fake.Instance<BrandMapper>();
+            ObjectFactory.Inject(mapper);
+            return mapper;
+        }
+
+        private IBrandRepository CreateBrandRepository()
+        {
+            return ObjectFactory.GetInstance<IBrandRepository>();
+        }
     }
 }

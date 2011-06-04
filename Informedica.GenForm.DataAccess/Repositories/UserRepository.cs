@@ -13,12 +13,12 @@ namespace Informedica.GenForm.DataAccess.Repositories
     {
         #region Implementation of IRepository<IUser>
 
-        public IEnumerable<IUser> GetById(int id)
+        public IEnumerable<IUser> Fetch(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IUser> GetByName(string name)
+        public IEnumerable<IUser> Fetch(string name)
         {
             IList<IUser> list = new List<IUser>();
 
@@ -29,6 +29,21 @@ namespace Informedica.GenForm.DataAccess.Repositories
             }
 
             return list;
+        }
+
+        public void Insert(IUser item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(IUser item)
+        {
+            throw new NotImplementedException();
         }
 
         private static IEnumerable<GenFormUser> FindUsersByName(GenFormDataContext dataContext, String name)

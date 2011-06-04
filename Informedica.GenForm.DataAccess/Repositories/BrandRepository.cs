@@ -4,32 +4,32 @@ using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
-using Product = Informedica.GenForm.Database.Product;
+using Brand = Informedica.GenForm.Database.Brand;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class ProductRepository: Repository<IProduct, Product>, IProductRepository
+    public class BrandRepository: Repository<IBrand, Brand>, IBrandRepository
     {
-        #region Implementation of IRepository<IProduct>
+        #region Implementation of IRepository<IBrand>
 
-        public override IEnumerable<IProduct> Fetch(int id)
+        public override IEnumerable<IBrand> Fetch(int id)
         {
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<IProduct> Fetch(string name)
+        public override IEnumerable<IBrand> Fetch(string name)
         {
             throw new NotImplementedException();
         }
 
-        public override void Insert(IProduct item)
+        public override void Insert(IBrand item)
         {
-            Insert<ProductMapper>(item);
+            Insert<BrandMapper>(item);
         }
 
-        protected override void InsertOnSubmit(GenFormDataContext ctx, Product dao)
+        protected override void InsertOnSubmit(GenFormDataContext ctx, Brand dao)
         {
-            ctx.Product.InsertOnSubmit(dao);
+            ctx.Brand.InsertOnSubmit(dao);
         }
 
         public override void Delete(int id)
@@ -37,7 +37,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public override void Delete(IProduct item)
+        public override void Delete(IBrand item)
         {
             throw new NotImplementedException();
         }

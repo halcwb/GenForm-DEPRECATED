@@ -20,6 +20,8 @@ namespace Informedica.GenForm.Assembler
             _registry.For<IProduct>().Use<Product>();
             _registry.For<IProductServices>().Use<ProductServices>();
             _registry.For<IProductRepository>().Use<ProductRepository>();
+            _registry.For<IBrand>().Use<Brand>();
+            _registry.For<IBrandRepository>().Use<BrandRepository>();
 
             _hasBeenCalled = true;
             return _registry;

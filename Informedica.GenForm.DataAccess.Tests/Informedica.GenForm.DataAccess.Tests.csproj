@@ -79,9 +79,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnitTests\BrandRepositoryTest.cs" />
     <Compile Include="IntegrationTests\UserRepositoryTest.cs" />
     <Compile Include="IsolatedProductRepository.cs" />
-    <Compile Include="ProductRepositoryTest.cs" />
+    <Compile Include="UnitTests\ProductRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\UserRepositoryTest.cs" />
   </ItemGroup>

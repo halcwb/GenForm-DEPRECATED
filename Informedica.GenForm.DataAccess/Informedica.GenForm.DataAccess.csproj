@@ -55,11 +55,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContexts\DataContextFactory.cs" />
+    <Compile Include="DataMappers\BrandMapper.cs" />
     <Compile Include="DataMappers\ProductMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataMappers\IDataMapper.cs" />
     <Compile Include="DataMappers\UserMapper.cs" />
+    <Compile Include="Repositories\BrandRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

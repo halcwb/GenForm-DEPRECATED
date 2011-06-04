@@ -84,7 +84,7 @@ namespace Informedica.GenForm.Library.Tests
             DalServiceProvider.Instance.RegisterInstanceOfType(repos);
             var user = new List<IUser>() {Isolate.Fake.Instance<IUser>()};
             Isolate.WhenCalled(() => user.FirstOrDefault().Name).WillReturn(name);
-            Isolate.WhenCalled(() => repos.GetByName(name)).WillReturn(user);
+            Isolate.WhenCalled(() => repos.Fetch(name)).WillReturn(user);
         }
     }
 }

@@ -72,7 +72,7 @@ namespace Informedica.GenForm.Library.DomainModel.Users
 
         public static IEnumerable<IUser> GetUser(String name)
         {
-            return Repository.GetByName(name);
+            return Repository.Fetch(name);
         }
 
         #endregion
