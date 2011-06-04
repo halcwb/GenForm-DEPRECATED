@@ -19,10 +19,16 @@ namespace Informedica.GenForm.Library.Services
             throw new NotImplementedException();
         }
 
+        public void AddNewBrand(IBrand brand)
+        {
+            var repository = ObjectFactory.GetInstance<IBrandRepository>();
+            repository.Insert(brand);
+        }
+
         public void SaveProduct(IProduct product)
         {
             var repository = ObjectFactory.GetInstance<IProductRepository>();
-            repository.SaveProduct(product);
+            repository.Insert(product);
         }
 
         public void DeleteProduct(int productId)

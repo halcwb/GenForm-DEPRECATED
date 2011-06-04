@@ -78,7 +78,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
             var name = "Test";
             IsolateRepositoryFromDataContext(CreateUserListWithName(name));
 
-            var result = CreateUserRepository().GetByName(name).FirstOrDefault();
+            var result = CreateUserRepository().Fetch(name).FirstOrDefault();
 
             Assert.IsInstanceOfType(result, typeof(IUser), "The correct type was not returned");
             Assert.IsTrue(result.Name == name, "The returned user should have name Admin");
@@ -107,7 +107,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
 
             try
             {
-                repository.GetByName(String.Empty);
+                repository.Fetch(String.Empty);
             }
             catch (VerifyException e)
             {

@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainModel\Products\Brand.cs" />
+    <Compile Include="DomainModel\Products\IBrand.cs" />
+    <Compile Include="Repositories\IBrandRepository.cs" />
     <Compile Include="Repositories\IProductRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="DomainModel\Products\IProduct.cs" />

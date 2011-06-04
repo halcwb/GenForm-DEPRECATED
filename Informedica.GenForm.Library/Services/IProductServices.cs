@@ -13,5 +13,6 @@ namespace Informedica.GenForm.Library.Services
         void DeleteProduct(Int32 productId);
         IProduct GetEmptyProduct();
         IProduct GetProduct(String productName);
+        void AddNewBrand(IBrand brand);
     }
 }

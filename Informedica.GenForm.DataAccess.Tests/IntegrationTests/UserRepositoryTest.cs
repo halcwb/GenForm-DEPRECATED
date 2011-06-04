@@ -69,7 +69,7 @@ namespace Informedica.GenForm.DataAccess.Tests.IntegrationTests
             IEnumerable<GenFormUser> users = CreateListWithAdminUser();
             IsolateRepositoryFromDataContext(users);
 
-            var list = repository.GetByName("Admin");
+            var list = repository.Fetch("Admin");
 
             Assert.IsTrue(list.Count() > 0, "A user with name Admin should exist in the database");
             Assert.IsTrue(list.FirstOrDefault().Name == "Admin", "The User should have name Admin");
@@ -94,7 +94,7 @@ namespace Informedica.GenForm.DataAccess.Tests.IntegrationTests
         {
             var repository = new UserRepository();
             IsolateRepositoryFromDataContext(new List<GenFormUser>());
-            var list = repository.GetByName("foo");
+            var list = repository.Fetch("foo");
 
             Assert.IsTrue(list.Count() == 0, "A user with name foo should not exist in the database");
 

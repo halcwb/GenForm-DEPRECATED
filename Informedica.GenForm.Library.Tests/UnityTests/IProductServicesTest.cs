@@ -107,13 +107,13 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         {
             var product = ObjectFactory.GetInstance<IProduct>();
 
+            var repos = GetFakeRepository<IProductRepository, IProduct>(product);
+            ObjectFactory.Inject(repos);
+
             try
             {
-                var repos = GetFakeRepository(product);
-                ObjectFactory.Inject<IProductRepository>(repos);
-
                 GetProductServices().SaveProduct(product);
-                Isolate.Verify.WasCalledWithExactArguments(() => repos.SaveProduct(product));
+                Isolate.Verify.WasCalledWithExactArguments(() => repos.Insert(product));
             }
             catch (Exception e)
             {
@@ -122,11 +122,36 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
             }
         }
 
-        private ProductRepository GetFakeRepository(IProduct product)
+        [Isolated]
+        [TestMethod]
+        public void Add_new_brand_calls_product_repository_to_add_new_brand()
         {
-            var repos = Isolate.Fake.Instance<ProductRepository>();
-            Isolate.WhenCalled(() => repos.SaveProduct(product)).IgnoreCall();
+            var brand = ObjectFactory.GetInstance<IBrand>();
+
+            var repos = GetFakeRepository<IBrandRepository, IBrand>(brand);
+            ObjectFactory.Inject(repos);
+
+            try
+            {
+                GetProductServices().AddNewBrand(brand);
+                Isolate.Verify.WasCalledWithExactArguments(() => repos.Insert(brand));
+            }
+            catch (Exception e)
+            {
+                if (e.GetType() != typeof(VerifyException)) throw;
+                Assert.Fail("Brand repository was not called to add brand");
+            }
+
+        }
+
+
+        private T GetFakeRepository<T, TC>(TC item) where T: IRepository<TC>
+        {
+            var repos = Isolate.Fake.Instance<T>();
+            Isolate.WhenCalled(() => repos.Insert(item)).IgnoreCall();
+
             return repos;
         }
+
     }
 }
