@@ -2,18 +2,23 @@ Ext.define('GenForm.view.component.EditableComboBox',{
     extend:'Ext.form.field.ComboBox',
     alias:['widget.editablecombo', 'widget.editcombo'],
     
-    trigger1Cls:Ext.baseCSSPrefix+'form-clear-trigger',
-    trigger2Cls:Ext.baseCSSPrefix+'form-arrow-trigger',
+    trigger1Cls:Ext.baseCSSPrefix + 'form-clear-trigger',
+    trigger2Cls:Ext.baseCSSPrefix + 'form-arrow-trigger',
     trigger3Cls:Ext.baseCSSPrefix + 'form-search-trigger',
-/*
-    trigger4Cls:Ext.baseCSSPrefix + 'form-edit-trigger',
-*/
 
     multiSelect: false,
 
     initComponent: function () {
         var me = this;
-        me.callParent();
+        me.addEvents('editoradd');
+        //debugger;
+        me.callParent(arguments);
+    },
+
+    onTrigger1Click:function(){
+    	var me=this;
+
+    	me.clearValue();
     },
 
     onTrigger2Click:function(){
@@ -29,12 +34,10 @@ Ext.define('GenForm.view.component.EditableComboBox',{
         }
     },
 
-    onTrigger1Click:function(){
-    	var me=this;
-    	me.clearValue();
-    },
-
     onTrigger3Click: function () {
-        Ext.MessageBox.alert('Edit or Add item');
+        var me = this;
+        me.fireEvent('editoradd', me);
+
+        //Ext.MessageBox.alert('Edit or Add item');
     }
 });

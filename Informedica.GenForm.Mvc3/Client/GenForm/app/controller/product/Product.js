@@ -34,21 +34,83 @@ Ext.define('GenForm.controller.product.Product', {
         'product.ProductWindow',
         'product.ProductForm',
         'product.ProductSubstanceForm',
-        'product.ProductSubstanceGrid'
+        'product.ProductSubstanceGrid',
+        'product.BrandWindow',
+        'product.BrandForm'
     ],
 
     productWindow: null,
     
     init: function() {
-        this.control({
+        var me = this;
+        
+        me.control({
             'productwindow > toolbar button[action=save]': {
-                click: this.saveProduct
+                click: me.saveProduct
             },
             'productwindow > toolbar button[action=cancel]': {
-                click: this.showCancelMessage
+                click: me.showCancelMessage
+            },
+            'productwindow > productform > fieldset > combobox[name="GenericName"]':
+            {
+                editoradd: me.editOrAddGeneric
+            },
+            'productwindow > productform > fieldset > combobox[name="BrandName"]':
+            {
+                editoradd: me.editOrAddBrand
+            },
+            'productwindow > productform > fieldset > combobox[name="ShapeName"]':
+            {
+                editoradd: me.editOrAddShape
+            },
+            'productwindow > productform > fieldset > combobox[name="PackageName"]':
+            {
+                editoradd: me.editOrAddPackage
+            },
+            'productwindow > productform > fieldset > combobox[name="UnitName"]':
+            {
+                editoradd: me.editOrAddUnit
+            },
+            'brandwindow > toolbar button[action=save]': {
+                click: me.saveBrand
+            },
+            'brandwindow > toolbar button[action=cancel]': {
+                click: me.showCancelMessage
             }
         });
 
+    },
+
+    editOrAddGeneric: function () {
+        Ext.MessageBox.alert('Edit or add Generic');
+    },
+
+    showBrandWindow: function () {
+        var me = this,
+            window = me.createBrandWindow();
+        
+        window.show();
+    },
+
+    createBrandWindow: function () {
+        return Ext.create(this.getProductBrandWindowView());
+    },
+
+    editOrAddBrand: function () {
+        var me = this;
+        me.showBrandWindow();
+    },
+
+    editOrAddShape: function () {
+        Ext.MessageBox.alert('Edit or add Shape');
+    },
+
+    editOrAddPackage: function () {
+        Ext.MessageBox.alert('Edit or add Package');
+    },
+
+    editOrAddUnit: function () {
+        Ext.MessageBox.alert('Edit or add Unit');
     },
 
     showProductWindow: function () {
@@ -76,6 +138,11 @@ Ext.define('GenForm.controller.product.Product', {
             product = me.getProduct(button);
 
         Product.SaveProduct(product.data, {scope: me, callback: me.onProductSaved});
+    },
+
+    saveBrand: function (button) {
+        var me = this;
+        Ext.MessageBox.alert('Brand is saved?');
     },
 
     onProductSaved: function (result) {
