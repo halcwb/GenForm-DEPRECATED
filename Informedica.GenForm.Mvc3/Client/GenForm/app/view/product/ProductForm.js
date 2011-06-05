@@ -15,11 +15,12 @@ Ext.define('GenForm.view.product.ProductForm', {
         var me = this;
         me.items = this.createItems();
 
-        me.callParent();
+        me.callParent(arguments);
     },
 
     createItems: function () {
         var me = this;
+
         return [
             me.createProductFieldSet(),
             me.createTabPanel()
