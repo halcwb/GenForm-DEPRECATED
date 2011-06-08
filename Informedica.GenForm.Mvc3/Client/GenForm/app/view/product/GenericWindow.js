@@ -1,13 +1,13 @@
 /**
  * Created by JetBrains WebStorm.
  * User: halcwb
- * Date: 6/5/11
- * Time: 12:35 PM
+ * Date: 6/8/11
+ * Time: 10:54 AM
  * To change this template use File | Settings | File Templates.
  */
-Ext.define('GenForm.view.product.BrandWindow', {
+Ext.define('GenForm.view.product.GenericWindow', {
     extend: 'Ext.Window',
-    alias: 'widget.brandwindow',
+    alias: 'widget.genericwindow',
 
     width: 300,
     height: 300,
@@ -15,25 +15,25 @@ Ext.define('GenForm.view.product.BrandWindow', {
 
     initComponent: function() {
         this.dockedItems = this.createSaveCancelToolBar();
-        this.items = this.createBrandForm();
+        this.items = this.createGenericForm();
 
         this.callParent(arguments);
     },
 
-    createBrandForm: function () {
-        return { xtype: 'brandform' };
+    createGenericForm: function () {
+        return { xtype: 'genericform' };
     },
 
     createSaveCancelToolBar: function () {
         return Ext.create('GenForm.view.component.SaveCancelToolBar', { dock: 'bottom'});
     },
 
-    getBrandForm: function () {
+    getGenericForm: function () {
         return this.items.items[0];
     },
 
-    loadWithBrand: function (brand) {
-        this.getBrandForm().getForm().loadRecord(brand);
+    loadWithGeneric: function (generic) {
+        this.getGenericForm().getForm().loadRecord(generic);
     }
 
 });

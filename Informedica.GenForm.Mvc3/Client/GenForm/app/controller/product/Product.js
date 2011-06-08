@@ -36,11 +36,17 @@ Ext.define('GenForm.controller.product.Product', {
         'product.ProductSubstanceForm',
         'product.ProductSubstanceGrid',
         'product.BrandWindow',
-        'product.BrandForm'
+        'product.BrandForm',
+        'product.GenericWindow',
+        'product.GenericForm',
+        'product.ShapeWindow',
+        'product.ShapeForm',
+        'product.PackageWindow',
+        'product.PackageForm',
+        'product.UnitWindow',
+        'product.UnitForm'
     ],
 
-    productWindow: null,
-    
     init: function() {
         var me = this;
         
@@ -76,20 +82,44 @@ Ext.define('GenForm.controller.product.Product', {
             },
             'brandwindow > toolbar button[action=cancel]': {
                 click: me.showCancelMessage
+            },
+            'genericwindow > toolbar button[action=save]': {
+                click: me.saveGeneric
+            },
+            'genericwindow > toolbar button[action=cancel]': {
+                click: me.showCancelMessage
+            },
+            'shapewindow > toolbar button[action=save]': {
+                click: me.saveShape
+            },
+            'shapewindow > toolbar button[action=cancel]': {
+                click: me.showCancelMessage
+            },
+            'packagewindow > toolbar button[action=save]': {
+                click: me.savePackage
+            },
+            'packagewindow > toolbar button[action=cancel]': {
+                click: me.showCancelMessage
+            },
+            'unitwindow > toolbar button[action=save]': {
+                click: me.saveUnit
+            },
+            'unitwindow > toolbar button[action=cancel]': {
+                click: me.showCancelMessage
             }
         });
 
     },
 
     editOrAddGeneric: function () {
-        Ext.MessageBox.alert('Edit or add Generic');
+        var me = this;
+        me.getGenericWindow().show();
     },
 
     showBrandWindow: function () {
-        var me = this,
-            window = me.createBrandWindow();
-        
-        window.show();
+        var me = this;
+
+        me.getBrandWindow().show();
     },
 
     createBrandWindow: function () {
@@ -102,15 +132,18 @@ Ext.define('GenForm.controller.product.Product', {
     },
 
     editOrAddShape: function () {
-        Ext.MessageBox.alert('Edit or add Shape');
+        var me = this;
+        me.getShapeWindow().show();
     },
 
     editOrAddPackage: function () {
-        Ext.MessageBox.alert('Edit or add Package');
+        var me = this;
+        me.getPackageWindow().show();
     },
 
     editOrAddUnit: function () {
-        Ext.MessageBox.alert('Edit or add Unit');
+        var me = this;
+        me.getUnitWindow().show();
     },
 
     showProductWindow: function () {
@@ -118,19 +151,95 @@ Ext.define('GenForm.controller.product.Product', {
     },
 
     getProductWindow: function () {
-        if(!this.productWindow) {
-            this.productWindow = this.createProductWindow();
-            this.loadEmptyProduct(this.productWindow);
-        }
-        return this.productWindow;
+        var me = this, form;
+
+        form = me.createProductWindow();
+        me.loadEmptyProduct(form);
+        return form;
+    },
+
+    getBrandWindow: function () {
+        var me = this, form;
+
+        form = me.createBrandWindow();
+        me.loadEmptyBrand(form);
+        return form;
+    },
+
+    getGenericWindow: function () {
+        var me = this, form;
+
+        form = me.createGenericWindow();
+        me.loadEmptyGeneric(form);
+        return form;
+    },
+
+    getShapeWindow: function () {
+        var me = this, form;
+
+        form = me.createShapeWindow();
+        me.loadEmptyShape(form);
+        return form;
+    },
+
+    getPackageWindow: function () {
+        var me = this, form;
+
+        form = me.createPackageWindow();
+        me.loadEmptyPackage(form);
+        return form;
+    },
+
+    getUnitWindow: function () {
+        var me = this, form;
+
+        form = me.createUnitWindow();
+        me.loadEmptyUnit(form);
+        return form;
     },
 
     createProductWindow: function () {
         return Ext.create(this.getProductProductWindowView());    
     },
 
+    createGenericWindow: function () {
+        return Ext.create(this.getProductGenericWindowView());
+    },
+
+    createShapeWindow: function () {
+        return Ext.create(this.getProductShapeWindowView());
+    },
+
+    createPackageWindow: function () {
+        return Ext.create(this.getProductPackageWindowView());
+    },
+
+    createUnitWindow: function () {
+        return Ext.create(this.getProductUnitWindowView());
+    },
+
     getProduct: function (button) {
         return button.up('panel').down('form').getProduct()
+    },
+
+    getBrand: function (button) {
+        return button.up('panel').down('form').getBrand();
+    },
+
+    getGeneric: function (button) {
+        return button.up('panel').down('form').getGeneric();
+    },
+
+    getShape: function (button) {
+        return button.up('panel').down('form').getShape();
+    },
+
+    getPackage: function (button) {
+        return button.up('panel').down('form').getPackage();
+    },
+
+    getUnit: function (button) {
+        return button.up('panel').down('form').getUnit();
     },
 
     saveProduct: function (button) {
@@ -141,8 +250,38 @@ Ext.define('GenForm.controller.product.Product', {
     },
 
     saveBrand: function (button) {
-        var me = this;
-        Ext.MessageBox.alert('Brand is saved?');
+        var me = this,
+            brand = me.getBrand(button);
+
+        Product.AddNewBrand(brand.data, {scope: me, callback:me.onBrandSaved});
+    },
+
+    saveGeneric: function (button) {
+        var me = this,
+            generic = me.getGeneric(button);
+
+        Product.AddNewGeneric(generic.data, {scope: me, callback:me.onGenericSaved});
+    },
+
+    saveShape: function (button) {
+        var me = this,
+            shape = me.getShape(button);
+
+        Product.AddNewShape(shape.data, {scope: me, callback:me.onShapeSaved});
+    },
+
+    savePackage: function (button) {
+        var me = this,
+            package = me.getPackage(button);
+
+        Product.AddNewPackage(package.data, {scope: me, callback:me.onPackageSaved});
+    },
+
+    saveUnit: function (button) {
+        var me = this,
+            unit = me.getUnit(button);
+
+        Product.AddNewUnit(unit.data, {scope: me, callback:me.onUnitSaved});
     },
 
     onProductSaved: function (result) {
@@ -153,6 +292,131 @@ Ext.define('GenForm.controller.product.Product', {
         }
     },
 
+    onBrandSaved: function (result) {
+        var me = this,
+            window = Ext.ComponentQuery.query('brandwindow')[0];
+
+        if (result.success) {
+            Ext.MessageBox.alert('Brand saved: ' + result.data.BrandName);
+            me.addBrandToStore(result.data.BrandName);
+            if (window) window.close();
+        } else {
+            Ext.MessageBox.alert('Brand could not be saved: ' + result.message);
+        }
+    },
+
+    onGenericSaved: function (result) {
+        var me = this,
+            window = Ext.ComponentQuery.query('genericwindow')[0];
+
+        if (result.success) {
+            Ext.MessageBox.alert('Generic saved: ' + result.data.GenericName);
+            me.addGenericToStore(result.data.GenericName);
+            if (window) window.close();
+        } else {
+            Ext.MessageBox.alert('Generic could not be saved: ' + result.message);
+        }
+    },
+
+    onShapeSaved: function (result) {
+        var me = this,
+            window = Ext.ComponentQuery.query('shapewindow')[0];
+
+        if (result.success) {
+            Ext.MessageBox.alert('Shape saved: ' + result.data.ShapeName);
+            me.addShapeToStore(result.data.ShapeName);
+            if (window) window.close();
+        } else {
+            Ext.MessageBox.alert('Shape could not be saved: ' + result.message);
+        }
+    },
+
+    onPackageSaved: function (result) {
+        var me = this,
+            window = Ext.ComponentQuery.query('packagewindow')[0];
+
+        if (result.success) {
+            Ext.MessageBox.alert('Package saved: ' + result.data.PackageName);
+            me.addPackageToStore(result.data.PackageName);
+            if (window) window.close();
+        } else {
+            Ext.MessageBox.alert('Package could not be saved: ' + result.message);
+        }
+    },
+
+    onUnitSaved: function (result) {
+        var me = this,
+            window = Ext.ComponentQuery.query('unitwindow')[0];
+
+        if (result.success) {
+            Ext.MessageBox.alert('Unit saved: ' + result.data.UnitName);
+            me.addUnitToStore(result.data.UnitName);
+            if (window) window.close();
+        } else {
+            Ext.MessageBox.alert('Unit could not be saved: ' + result.message);
+        }
+    },
+
+    addBrandToStore: function (brand) {
+        var me = this,
+            store = me.getBrandStore();
+
+        store.add({BrandName: brand});
+    },
+
+    addGenericToStore: function (generic) {
+        var me = this,
+            store = me.getBrandStore();
+
+        store.add({BrandName: generic});
+    },
+
+    addShapeToStore: function (shape) {
+        var me = this,
+            store = me.getBrandStore();
+
+        store.add({BrandName: shape});
+    },
+
+    addPackageToStore: function (package) {
+        var me = this,
+            store = me.getBrandStore();
+
+        store.add({BrandName: package});
+    },
+
+    addUnitToStore: function (unit) {
+        var me = this,
+            store = me.getBrandStore();
+
+        store.add({BrandName: unit});
+    },
+
+    getBrandStore: function () {
+        var me = this;
+        return me.getProductBrandNameStore();
+    },
+
+    getGenericStore: function () {
+        var me = this;
+        return me.getProductGenericNameStore();
+    },
+
+    getShapeStore: function () {
+        var me = this;
+        return me.getProductShapeNameStore();
+    },
+
+    getPackageStore: function () {
+        var me = this;
+        return me.getProductPackageNameStore();
+    },
+
+    getUnitStore: function () {
+        var me = this;
+        return me.getProductUnitNameStore();
+    },
+
     showCancelMessage: function () {
         Ext.MessageBox.alert('Cancel Product');
     },
@@ -161,8 +425,48 @@ Ext.define('GenForm.controller.product.Product', {
         return Ext.ModelManager.create({}, 'GenForm.model.product.Product');
     },
 
+    createEmptyBrand: function () {
+        return Ext.ModelManager.create({}, 'GenForm.model.product.BrandName');
+    },
+
+    createEmptyShape: function () {
+        return Ext.ModelManager.create({}, 'GenForm.model.product.ShapeName');
+    },
+
+    createEmptyGeneric: function () {
+        return Ext.ModelManager.create({}, 'GenForm.model.product.GenericName');
+    },
+
+    createEmptyPackage: function () {
+        return Ext.ModelManager.create({}, 'GenForm.model.product.PackageName');
+    },
+
+    createEmptyUnit: function () {
+        return Ext.ModelManager.create({}, 'GenForm.model.product.UnitName');
+    },
+
     loadEmptyProduct: function (window) {
         window.loadWithProduct(this.createEmptyProduct());
+    },
+
+    loadEmptyGeneric: function (window) {
+        window.loadWithGeneric(this.createEmptyGeneric());
+    },
+
+    loadEmptyShape: function (window) {
+        window.loadWithShape(this.createEmptyShape());
+    },
+
+    loadEmptyPackage: function (window) {
+        window.loadWithPackage(this.createEmptyPackage());
+    },
+
+    loadEmptyUnit: function (window) {
+        window.loadWithUnit(this.createEmptyUnit());
+    },
+
+    loadEmptyBrand: function (window) {
+        window.loadWithBrand(this.createEmptyBrand());
     }
 
 });
