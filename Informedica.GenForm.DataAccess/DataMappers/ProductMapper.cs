@@ -3,7 +3,10 @@ using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Brand = Informedica.GenForm.Database.Brand;
+using Package = Informedica.GenForm.Database.Package;
 using Product = Informedica.GenForm.Database.Product;
+using Shape = Informedica.GenForm.Database.Shape;
+using Unit = Informedica.GenForm.Database.Unit;
 
 namespace Informedica.GenForm.DataAccess.DataMappers
 {

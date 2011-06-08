@@ -128,7 +128,8 @@ Ext.define('GenForm.view.product.ProductForm', {
     },
 
     getProduct: function () {
-        var record = this.getRecord(), me = this;
+        var me = this,
+            record = me.getRecord();
 
         me.getForm().updateRecord(record);
         return record;

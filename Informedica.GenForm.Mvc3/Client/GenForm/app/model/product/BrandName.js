@@ -10,7 +10,7 @@ Ext.define('GenForm.model.product.BrandName', {
     alias: 'widget.brandnamemodel',
 
     fields: [
-        { name: 'BrandName', type: 'string' }
+        {name: 'BrandName', type: 'string'}
     ]
 
 });

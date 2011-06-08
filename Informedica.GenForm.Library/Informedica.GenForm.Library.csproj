@@ -55,7 +55,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainModel\Products\Brand.cs" />
+    <Compile Include="DomainModel\Products\Generic.cs" />
     <Compile Include="DomainModel\Products\IBrand.cs" />
+    <Compile Include="DomainModel\Products\IGeneric.cs" />
+    <Compile Include="DomainModel\Products\IPackage.cs" />
+    <Compile Include="DomainModel\Products\IShape.cs" />
+    <Compile Include="DomainModel\Products\IUnit.cs" />
+    <Compile Include="DomainModel\Products\Package.cs" />
+    <Compile Include="DomainModel\Products\Shape.cs" />
+    <Compile Include="DomainModel\Products\Unit.cs" />
     <Compile Include="Repositories\IBrandRepository.cs" />
     <Compile Include="Repositories\IProductRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />

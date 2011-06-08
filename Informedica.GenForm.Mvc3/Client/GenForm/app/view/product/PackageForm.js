@@ -1,13 +1,13 @@
 /**
  * Created by JetBrains WebStorm.
  * User: halcwb
- * Date: 6/4/11
- * Time: 9:11 PM
+ * Date: 6/8/11
+ * Time: 10:52 AM
  * To change this template use File | Settings | File Templates.
  */
-Ext.define('GenForm.view.product.BrandForm', {
+Ext.define('GenForm.view.product.PackageForm', {
     extend: 'Ext.form.Panel',
-    alias: 'widget.brandform',
+    alias: 'widget.packageform',
 
     initComponent: function () {
         var me = this;
@@ -18,13 +18,13 @@ Ext.define('GenForm.view.product.BrandForm', {
 
     createItems: function () {
         var items = [
-            { xtype: 'textfield', name:'BrandName',   fieldLabel: 'Merk Naam', margin: '10 0 10 10' }
+            { xtype: 'textfield', name:'PakageName',   fieldLabel: 'Verpakking Naam', margin: '10 0 10 10' }
         ];
 
         return items;
     },
 
-    getBrand: function () {
+    getPackage: function () {
         var me = this,
             record = me.getRecord();
 
