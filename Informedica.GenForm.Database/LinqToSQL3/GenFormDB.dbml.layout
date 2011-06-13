@@ -1,0 +1,594 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.5, 37.25" name="GenFormDB">
+  <DataContextMoniker Name="/GenFormDataContext" />
+  <nestedChildShapes>
+    <classShape Id="e29a2bf1-2cff-487a-a374-2ee35d87a0c7" absoluteBounds="3.75, 1, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/GenFormDataContext/Brand" />
+      <nestedChildShapes>
+        <elementListCompartment Id="254a02e6-cf5a-472a-a221-eff7d9e8f2d6" absoluteBounds="3.765, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9c511147-d43c-4c28-b6f5-5021fe5d809e" absoluteBounds="6.75, 19.375, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/GenFormDataContext/Chapter" />
+      <nestedChildShapes>
+        <elementListCompartment Id="233181ad-e834-4fa3-af1f-a93714a31ee2" absoluteBounds="6.765, 19.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4263bd8f-8ae6-4654-938b-33eb69393b0a" absoluteBounds="12.25, 23, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/GenFormDataContext/DosingAdviceChapter" />
+      <nestedChildShapes>
+        <elementListCompartment Id="33487e2e-2aba-4901-9668-2aa4cc7c9b5f" absoluteBounds="12.265, 23.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2feddd7d-3b68-45e6-9f3b-2204811acc8f" absoluteBounds="9.25, 9.75, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/GenFormDataContext/DosingAdviceProduct" />
+      <nestedChildShapes>
+        <elementListCompartment Id="094937ae-b246-43e5-b6e8-c11546e8e873" absoluteBounds="9.265, 10.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="945583f3-4cff-49d5-991c-444ad5d6c656" absoluteBounds="9.25, 16.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/GenFormDataContext/DosingAdviceRoute" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cbb21b3e-ca70-48d3-b3d4-39105907edc3" absoluteBounds="9.265, 17.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d0629637-c2ad-4d1c-82f9-ead4daed0fe6" absoluteBounds="3.75, 24.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/GenFormDataContext/Formularium" />
+      <nestedChildShapes>
+        <elementListCompartment Id="39f7e0e5-4f64-46f0-8839-c73c60ea50a6" absoluteBounds="3.765, 24.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e6b039ca-3149-4299-8663-8d47c4408408" absoluteBounds="9.5, 21.125, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/GenFormDataContext/FormulariumChapter" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3fa76d99-3325-4a66-bfe3-baace3efd66c" absoluteBounds="9.515, 21.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="68893f88-4f8c-49ab-b916-7dfffdf03fc1" absoluteBounds="12.25, 26.875, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/GenFormDataContext/FormulariumChapterText" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9f9ecf90-d972-4995-88e7-11ecd9aafbe7" absoluteBounds="12.265, 27.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="34221a0d-ed09-4c02-af8e-220a423b9eda" absoluteBounds="6.5, 22.375, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/GenFormDataContext/FormulariumPharmacist" />
+      <nestedChildShapes>
+        <elementListCompartment Id="96402469-9acf-4128-9e0f-cbc856ac5c85" absoluteBounds="6.515, 22.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="41d12dd2-a5c4-44ac-830a-7a30971be0b4" absoluteBounds="9.5, 23.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/GenFormDataContext/FormulariumSubstanceText" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a040d08d-e774-4dab-9bfd-6c273c0fc0c1" absoluteBounds="9.515, 24.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="028fe4a8-da1e-4192-b33a-287fbc24b72e" absoluteBounds="7.5, 28.5, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/GenFormDataContext/FormulariumText" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ed024f77-a8fb-43d8-a430-25c947a6139a" absoluteBounds="7.515, 28.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b45ca7e6-5136-49fb-9f72-4083dd61931e" absoluteBounds="1.75, 29, 2, 2.3478011067708309">
+      <DataClassMoniker Name="/GenFormDataContext/GenFormUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="527b2a79-22f7-4bec-9fae-a37e56d2da97" absoluteBounds="1.7650000000000001, 29.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ddcb6d8e-9b00-41f0-a14e-ec628277b752" absoluteBounds="3.75, 20.875, 2, 1.1939925130208309">
+      <DataClassMoniker Name="/GenFormDataContext/Indication" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8d148234-53cb-490a-8497-889c89671297" absoluteBounds="3.765, 21.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d28c5c9a-a7fe-4aab-8f80-ad3bd712d62c" absoluteBounds="3.75, 3.875, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/GenFormDataContext/Package" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cc4056e3-6f79-4044-97f8-315f3020831a" absoluteBounds="3.765, 4.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="73fa411f-340a-418f-afbc-2ae70df23a29" absoluteBounds="1, 24.375, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/GenFormDataContext/Pharmacist" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cb905ee6-71ab-4890-bca2-2dbb382637ea" absoluteBounds="1.0150000000000001, 24.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="756d7adc-ed1c-4993-b5cb-b1b9b320628f" absoluteBounds="1.75, 26.875, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/GenFormDataContext/Pharmacy" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0d2c3a2e-f832-4db1-bcd9-257d73c135b5" absoluteBounds="1.7650000000000001, 27.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a6410ffd-a727-44d7-91d6-2cbfdccfb233" absoluteBounds="6.5, 8.75, 2, 3.5016097005208344">
+      <DataClassMoniker Name="/GenFormDataContext/Product" />
+      <nestedChildShapes>
+        <elementListCompartment Id="972caeb9-f907-4d83-b1c4-ac5fafda6d0d" absoluteBounds="6.515, 9.21, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ccf958b9-74d2-4320-b8d9-cca3dd6b5b2a" absoluteBounds="9.25, 13.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/GenFormDataContext/ProductCombination" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8595f617-6cbc-40f7-a2dc-95210e764ecf" absoluteBounds="9.265, 14.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9d75c443-bc12-462e-bd6a-4a8edfe196e6" absoluteBounds="12.25, 9.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/GenFormDataContext/ProductFormulariumText" />
+      <nestedChildShapes>
+        <elementListCompartment Id="25ba9f6d-742d-4e22-9ea1-ede34d4cda0c" absoluteBounds="12.265, 10.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="09823059-9836-45b4-b40e-30e071acd4aa" absoluteBounds="9.25, 6.75, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/GenFormDataContext/ProductRoute" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cea5ace6-789a-4363-9c2e-bbe142dd9d0f" absoluteBounds="9.265, 7.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="22bda14e-0514-4d42-8c30-22c1ee47d357" absoluteBounds="12.25, 6.375, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/GenFormDataContext/ProductSubstance" />
+      <nestedChildShapes>
+        <elementListCompartment Id="39fddf38-66bb-4109-9986-2179a0b21194" absoluteBounds="12.265, 6.835, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cec1112d-6edc-47a8-a118-2618c83469cf" absoluteBounds="1.75, 35.375, 2, 1.5785953776041737">
+      <DataClassMoniker Name="/GenFormDataContext/Role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bc7afa03-3df6-4364-a223-13094c961876" absoluteBounds="1.7650000000000001, 35.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6af36654-6d3d-4edb-a92b-9ae5af6f3916" absoluteBounds="0.75, 6.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/GenFormDataContext/Route" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b358d115-8a4c-4cc4-a2a1-0524d990fc00" absoluteBounds="0.765, 7.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6c869494-24cc-4631-a667-0cad25feb71e" absoluteBounds="0.75, 9.75, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/GenFormDataContext/Shape" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c8e1c352-dbb3-4cb9-be2c-4dd52ac46497" absoluteBounds="0.765, 10.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="20b6b168-7c8f-4596-95c1-3055459da565" absoluteBounds="3.5, 9.75, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/GenFormDataContext/ShapePackage" />
+      <nestedChildShapes>
+        <elementListCompartment Id="307f5b82-88f0-462f-9178-bf40c0dcd954" absoluteBounds="3.515, 10.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a23447e9-2b80-42ea-9f06-a6f17d6df6c3" absoluteBounds="3.5, 6.75, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/GenFormDataContext/ShapeRoute" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8ca83308-3b59-4dea-b296-21629a664940" absoluteBounds="3.515, 7.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="865f7da5-a6dd-4e99-bea5-f10461de78aa" absoluteBounds="3.5, 12.75, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/GenFormDataContext/ShapeUnit" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f1eacaca-d0ad-41db-8233-4b6eb799f08c" absoluteBounds="3.515, 13.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e8dbc4b5-bb1e-4c95-bf0b-4ae6995451ab" absoluteBounds="3.75, 15.125, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/GenFormDataContext/Substance" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9afba656-8f98-4174-9126-597ef9b43434" absoluteBounds="3.765, 15.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9432daf6-6bf1-4650-9378-f59992d56aca" absoluteBounds="6.5, 24.5, 2, 1.7708968098958309">
+      <DataClassMoniker Name="/GenFormDataContext/SubstanceDosingAdvice" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ce8886a8-d45f-4d4d-be46-61b6e5b2e174" absoluteBounds="6.515, 24.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="11b6fec1-7d3a-4965-8dc8-7c1adf5a300c" absoluteBounds="1, 15.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/GenFormDataContext/SubstanceGroup" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b07ce76c-4042-421f-b28a-4a346f867dc4" absoluteBounds="1.0150000000000001, 15.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c7b69288-c280-4f51-987b-dd069d478470" absoluteBounds="3.75, 32, 2, 1.9631982421875023">
+      <DataClassMoniker Name="/GenFormDataContext/TextItem" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fa69654f-9ba5-4f48-9af7-021422129cfa" absoluteBounds="3.765, 32.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f8b1f9c2-e9bf-4530-b8b3-5c7fe6ba7961" absoluteBounds="7.5, 31.125, 2, 1.9631982421875023">
+      <DataClassMoniker Name="/GenFormDataContext/TextLog" />
+      <nestedChildShapes>
+        <elementListCompartment Id="08cf907c-6ca1-47a9-9965-c29c13ec20db" absoluteBounds="7.515, 31.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7347ce75-da82-4657-8816-ebea78118dfe" absoluteBounds="3.75, 17.625, 2, 2.3478011067708309">
+      <DataClassMoniker Name="/GenFormDataContext/Unit" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6722fea5-bb09-41bd-83a1-43fa1199b4b7" absoluteBounds="3.765, 18.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3750252b-9878-435e-9799-a85367b489ff" absoluteBounds="1, 18, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/GenFormDataContext/UnitGroup" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4bb5c6d6-335e-4ca3-9d66-f4948f0f97e1" absoluteBounds="1.0150000000000001, 18.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="52f7a1bd-e55e-4157-ab11-21cd77b57c24" absoluteBounds="4.5, 29.375, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/GenFormDataContext/UserRole" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0b5a5a06-6059-4357-9b26-0446ce087095" absoluteBounds="4.515, 29.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(11.5 : 22.0104484049479); (12.0416666666667 : 22.0104484049479 : JumpStart); (12.2083333333333 : 22.0104484049479 : JumpEnd); (12.6666671666667 : 22.0104484049479 : JumpStart); (12.8333338333333 : 22.0104484049479 : JumpEnd); (13.25 : 22.0104484049479); (13.25 : 23)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/FormulariumChapter/FormulariumChapter_DosingAdviceChapter" />
+      <nodes>
+        <classShapeMoniker Id="e6b039ca-3149-4299-8663-8d47c4408408" />
+        <classShapeMoniker Id="4263bd8f-8ae6-4654-938b-33eb69393b0a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 24.25); (6.125 : 23.875); (6.125 : 21.7187505); (8.91666666666667 : 21.7187505 : JumpStart); (9.20833333333333 : 21.7187505 : JumpEnd); (9.26041666666667 : 21.7187505 : JumpStart); (9.42708333333333 : 21.7187505 : JumpEnd); (9.5 : 21.7187505)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Formularium/Formularium_FormulariumChapter" />
+      <nodes>
+        <classShapeMoniker Id="d0629637-c2ad-4d1c-82f9-ead4daed0fe6" />
+        <classShapeMoniker Id="e6b039ca-3149-4299-8663-8d47c4408408" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.75 : 20.0681469726563); (9.04166666666667 : 20.0681469726563 : JumpStart); (9.20833333333333 : 20.0681469726563 : JumpEnd); (9.26041666666667 : 20.0681469726563 : JumpStart); (9.42708333333333 : 20.0681469726563 : JumpEnd); (10.5 : 20.0681469726563); (10.5 : 21.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Chapter/Chapter_FormulariumChapter" />
+      <nodes>
+        <classShapeMoniker Id="9c511147-d43c-4c28-b6f5-5021fe5d809e" />
+        <classShapeMoniker Id="e6b039ca-3149-4299-8663-8d47c4408408" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.2055298715445 : 22.8958968098958); (10.2055298715445 : 23.1458968098958); (10.8084925155248 : 23.1458968098958); (10.8084925155248 : 22.8958968098958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/GenFormDataContext/FormulariumChapter/FormulariumChapter_FormulariumChapter" />
+      <nodes>
+        <classShapeMoniker Id="e6b039ca-3149-4299-8663-8d47c4408408" />
+        <classShapeMoniker Id="e6b039ca-3149-4299-8663-8d47c4408408" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.5 : 22.8958968098958); (11.875 : 23.2708968098958); (11.875 : 27.5681469726563); (12.0416666666667 : 27.5681469726563 : JumpStart); (12.2083333333333 : 27.5681469726563 : JumpEnd); (12.25 : 27.5681469726563)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/FormulariumChapter/FormulariumChapter_FormulariumChapterText" />
+      <nodes>
+        <classShapeMoniker Id="e6b039ca-3149-4299-8663-8d47c4408408" />
+        <classShapeMoniker Id="68893f88-4f8c-49ab-b916-7dfffdf03fc1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.7187475 : 24.25); (4.7187475 : 23.0681469726563); (6.04166666666667 : 23.0681469726563 : JumpStart); (6.42708333333333 : 23.0681469726563 : JumpEnd); (6.5 : 23.0681469726563)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Formularium/Formularium_FormulariumPharmacist" />
+      <nodes>
+        <classShapeMoniker Id="d0629637-c2ad-4d1c-82f9-ead4daed0fe6" />
+        <classShapeMoniker Id="34221a0d-ed09-4c02-af8e-220a423b9eda" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 24.3750025); (6.10416666666667 : 24.3750025 : JumpStart); (6.42708333333333 : 24.3750025 : JumpEnd); (7.41666666666667 : 24.3750025 : JumpStart); (7.58333333333333 : 24.3750025 : JumpEnd); (9.26041666666667 : 24.3750025 : JumpStart); (9.42708333333333 : 24.3750025 : JumpEnd); (9.5 : 24.3750025)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Formularium/Formularium_FormulariumSubstanceText" />
+      <nodes>
+        <classShapeMoniker Id="d0629637-c2ad-4d1c-82f9-ead4daed0fe6" />
+        <classShapeMoniker Id="41d12dd2-a5c4-44ac-830a-7a30971be0b4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.125 : 25.8285953776042); (4.125 : 28.90625); (4.19791666666667 : 28.90625 : JumpStart); (4.36458333333333 : 28.90625 : JumpEnd); (6.82291666666667 : 28.90625 : JumpStart); (6.98958333333333 : 28.90625 : JumpEnd); (7.29166666666667 : 28.90625 : JumpStart); (7.45833333333333 : 28.90625 : JumpEnd); (7.5 : 28.90625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Formularium/Formularium_FormulariumText" />
+      <nodes>
+        <classShapeMoniker Id="d0629637-c2ad-4d1c-82f9-ead4daed0fe6" />
+        <classShapeMoniker Id="028fe4a8-da1e-4192-b33a-287fbc24b72e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3 : 25.0681469726563); (3.75 : 25.0681469726563)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Pharmacist/Pharmacist_Formularium" />
+      <nodes>
+        <classShapeMoniker Id="73fa411f-340a-418f-afbc-2ae70df23a29" />
+        <classShapeMoniker Id="d0629637-c2ad-4d1c-82f9-ead4daed0fe6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2 : 24.375); (2 : 23.4459729589844); (4.63541416666667 : 23.4459729589844 : JumpStart); (4.80208083333333 : 23.4459729589844 : JumpEnd); (6.04166666666667 : 23.4459729589844 : JumpStart); (6.42708333333333 : 23.4459729589844 : JumpEnd); (6.5 : 23.4459729589844)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Pharmacist/Pharmacist_FormulariumPharmacist" />
+      <nodes>
+        <classShapeMoniker Id="73fa411f-340a-418f-afbc-2ae70df23a29" />
+        <classShapeMoniker Id="34221a0d-ed09-4c02-af8e-220a423b9eda" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 30.1739005533854); (1.3749995 : 30.1739005533854); (1.3749995 : 25.7612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/GenFormUser/GenFormUser_Pharmacist" />
+      <nodes>
+        <classShapeMoniker Id="b45ca7e6-5136-49fb-9f72-4083dd61931e" />
+        <classShapeMoniker Id="73fa411f-340a-418f-afbc-2ae70df23a29" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.375 : 26.875); (2.375 : 25.7612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Pharmacy/Pharmacy_Pharmacist" />
+      <nodes>
+        <classShapeMoniker Id="756d7adc-ed1c-4993-b5cb-b1b9b320628f" />
+        <classShapeMoniker Id="73fa411f-340a-418f-afbc-2ae70df23a29" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 10.4431469726562); (8.91666666666667 : 10.4431469726562 : JumpStart); (9.08333333333333 : 10.4431469726562 : JumpEnd); (9.25 : 10.4431469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Product/Product_DosingAdviceProduct" />
+      <nodes>
+        <classShapeMoniker Id="a6410ffd-a727-44d7-91d6-2cbfdccfb233" />
+        <classShapeMoniker Id="2feddd7d-3b68-45e6-9f3b-2204811acc8f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.65625 : 5.2612939453125); (5.65625 : 11.7252018229167); (6.5 : 11.7252018229167)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Package/Package_Product" />
+      <nodes>
+        <classShapeMoniker Id="d28c5c9a-a7fe-4aab-8f80-ad3bd712d62c" />
+        <classShapeMoniker Id="a6410ffd-a727-44d7-91d6-2cbfdccfb233" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 1.69314697265625); (7.5 : 1.69314697265625); (7.5 : 8.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Brand/Brand_Product" />
+      <nodes>
+        <classShapeMoniker Id="e29a2bf1-2cff-487a-a374-2ee35d87a0c7" />
+        <classShapeMoniker Id="a6410ffd-a727-44d7-91d6-2cbfdccfb233" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.5 : 12.2516097005208); (7.5 : 14.6642976888021); (8.91666666666667 : 14.6642976888021 : JumpStart); (9.20833333333333 : 14.6642976888021 : JumpEnd); (9.25 : 14.6642976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Product/Product_ProductCombination" />
+      <nodes>
+        <classShapeMoniker Id="a6410ffd-a727-44d7-91d6-2cbfdccfb233" />
+        <classShapeMoniker Id="ccf958b9-74d2-4320-b8d9-cca3dd6b5b2a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.0312525 : 12.2516097005208); (8.0312525 : 14.238396344401); (8.91666666666667 : 14.238396344401 : JumpStart); (9.20833333333333 : 14.238396344401 : JumpEnd); (9.25 : 14.238396344401)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Product/Product_ProductCombination1" />
+      <nodes>
+        <classShapeMoniker Id="a6410ffd-a727-44d7-91d6-2cbfdccfb233" />
+        <classShapeMoniker Id="ccf958b9-74d2-4320-b8d9-cca3dd6b5b2a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 9.65625); (8.91666666666667 : 9.65625 : JumpStart); (9.08333333333333 : 9.65625 : JumpEnd); (11.6666666666667 : 9.65625 : JumpStart); (11.8333333333333 : 9.65625 : JumpEnd); (12.25 : 9.65625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Product/Product_ProductFormulariumText" />
+      <nodes>
+        <classShapeMoniker Id="a6410ffd-a727-44d7-91d6-2cbfdccfb233" />
+        <classShapeMoniker Id="9d75c443-bc12-462e-bd6a-4a8edfe196e6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 25.1330509388021); (5.91666666666667 : 25.1330509388021 : JumpStart); (6.08333333333333 : 25.1330509388021 : JumpEnd); (6.25 : 25.1330509388021); (6.25 : 24); (6.26041666666667 : 24 : JumpStart); (6.42708333333333 : 24 : JumpEnd); (9.04166666666667 : 24 : JumpStart); (9.20833333333333 : 24 : JumpEnd); (9.25 : 24); (9.25 : 23.5); (9.26041666666667 : 23.5 : JumpStart); (9.42708333333333 : 23.5 : JumpEnd); (10.4166666666667 : 23.5 : JumpStart); (10.5833333333333 : 23.5 : JumpEnd); (11.7916666666667 : 23.5 : JumpStart); (11.9583333333333 : 23.5 : JumpEnd); (12 : 23.5); (12 : 22.75); (12.0416666666667 : 22.75 : JumpStart); (12.2083333333333 : 22.75 : JumpEnd); (12.7500005 : 22.75); (12.7500005 : 11.2035953776042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Formularium/Formularium_ProductFormulariumText" />
+      <nodes>
+        <classShapeMoniker Id="d0629637-c2ad-4d1c-82f9-ead4daed0fe6" />
+        <classShapeMoniker Id="9d75c443-bc12-462e-bd6a-4a8edfe196e6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.0312525 : 8.75); (8.0312525 : 7.44314697265625); (9.25 : 7.44314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Product/Product_ProductRoute" />
+      <nodes>
+        <classShapeMoniker Id="a6410ffd-a727-44d7-91d6-2cbfdccfb233" />
+        <classShapeMoniker Id="09823059-9836-45b4-b40e-30e071acd4aa" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.9687475 : 8.75); (6.9687475 : 8.36464680989583); (7.41666666666667 : 8.36464680989583 : JumpStart); (7.58333333333333 : 8.36464680989583 : JumpEnd); (7.94791916666667 : 8.36464680989583 : JumpStart); (8.11458583333333 : 8.36464680989583 : JumpEnd); (12.25 : 8.36464680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Product/Product_ProductSubstance" />
+      <nodes>
+        <classShapeMoniker Id="a6410ffd-a727-44d7-91d6-2cbfdccfb233" />
+        <classShapeMoniker Id="22bda14e-0514-4d42-8c30-22c1ee47d357" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.41429768880208); (3.25 : 7.41429768880208); (3.25 : 8.5112939453125); (5.52604166666667 : 8.5112939453125 : JumpStart); (5.73958333333333 : 8.5112939453125 : JumpEnd); (6.04166666666667 : 8.5112939453125 : JumpStart); (6.20833333333333 : 8.5112939453125 : JumpEnd); (6.88541416666667 : 8.5112939453125 : JumpStart); (7.05208083333333 : 8.5112939453125 : JumpEnd); (7.41666666666667 : 8.5112939453125 : JumpStart); (7.58333333333333 : 8.5112939453125 : JumpEnd); (7.94791916666667 : 8.5112939453125 : JumpStart); (8.11458583333333 : 8.5112939453125 : JumpEnd); (9 : 8.5112939453125); (9 : 16.375); (9.04166666666667 : 16.375 : JumpStart); (9.20833333333333 : 16.375 : JumpEnd); (10.25 : 16.375); (10.25 : 16.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Route/Route_DosingAdviceRoute" />
+      <nodes>
+        <classShapeMoniker Id="6af36654-6d3d-4edb-a92b-9ae5af6f3916" />
+        <classShapeMoniker Id="945583f3-4cff-49d5-991c-444ad5d6c656" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.62621330413662); (3.125 : 6.25121330413662); (3.125 : 6.375); (5.57291666666667 : 6.375 : JumpStart); (5.73958333333333 : 6.375 : JumpEnd); (6.04166666666667 : 6.375 : JumpStart); (6.20833333333333 : 6.375 : JumpEnd); (7.41666666666667 : 6.375 : JumpStart); (7.58333333333333 : 6.375 : JumpEnd); (8.875 : 6.375); (9.25 : 6.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/GenFormDataContext/Route/Route_ProductRoute" />
+      <nodes>
+        <classShapeMoniker Id="6af36654-6d3d-4edb-a92b-9ae5af6f3916" />
+        <classShapeMoniker Id="09823059-9836-45b4-b40e-30e071acd4aa" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 11.1362939453125); (1.75 : 11.3994958841146); (2.19791916666667 : 11.3994958841146 : JumpStart); (2.36458583333333 : 11.3994958841146 : JumpEnd); (5.52604166666667 : 11.3994958841146 : JumpStart); (5.78645833333333 : 11.3994958841146 : JumpEnd); (6.5 : 11.3994958841146)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Shape/Shape_Product" />
+      <nodes>
+        <classShapeMoniker Id="6c869494-24cc-4631-a667-0cad25feb71e" />
+        <classShapeMoniker Id="a6410ffd-a727-44d7-91d6-2cbfdccfb233" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 5.2612939453125); (6.125 : 5.6362939453125); (6.125 : 9.375); (5.875 : 9.375); (5.76205056509888 : 9.48794943490112 : JumpStart); (5.55044943490112 : 9.69955056509888 : JumpEnd); (5.5 : 9.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/GenFormDataContext/Package/Package_ShapePackage" />
+      <nodes>
+        <classShapeMoniker Id="d28c5c9a-a7fe-4aab-8f80-ad3bd712d62c" />
+        <classShapeMoniker Id="20b6b168-7c8f-4596-95c1-3055459da565" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 10.4431469726562); (3.5 : 10.4431469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Shape/Shape_ShapePackage" />
+      <nodes>
+        <classShapeMoniker Id="6c869494-24cc-4631-a667-0cad25feb71e" />
+        <classShapeMoniker Id="20b6b168-7c8f-4596-95c1-3055459da565" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 9.75); (3.125 : 9.375); (3.125 : 7.77529531705729); (3.16666666666667 : 7.77529531705729 : JumpStart); (3.33333333333333 : 7.77529531705729 : JumpEnd); (3.5 : 7.77529531705729)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Shape/Shape_ShapeRoute" />
+      <nodes>
+        <classShapeMoniker Id="6c869494-24cc-4631-a667-0cad25feb71e" />
+        <classShapeMoniker Id="a23447e9-2b80-42ea-9f06-a6f17d6df6c3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.01964884440104); (3.5 : 7.01964884440104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Route/Route_ShapeRoute" />
+      <nodes>
+        <classShapeMoniker Id="6af36654-6d3d-4edb-a92b-9ae5af6f3916" />
+        <classShapeMoniker Id="a23447e9-2b80-42ea-9f06-a6f17d6df6c3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.2812525 : 11.1362939453125); (2.2812525 : 13.4431469726562); (3.5 : 13.4431469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Shape/Shape_ShapeUnit" />
+      <nodes>
+        <classShapeMoniker Id="6c869494-24cc-4631-a667-0cad25feb71e" />
+        <classShapeMoniker Id="865f7da5-a6dd-4e99-bea5-f10461de78aa" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 15.9455476888021); (6.29166666666667 : 15.9455476888021 : JumpStart); (6.45833333333333 : 15.9455476888021 : JumpEnd); (6.51041666666667 : 15.9455476888021 : JumpStart); (6.67708333333333 : 15.9455476888021 : JumpEnd); (8.91666666666667 : 15.9455476888021 : JumpStart); (9.20833333333333 : 15.9455476888021 : JumpEnd); (11.5 : 15.9455476888021); (11.5 : 20.875); (10.5833333333333 : 20.875 : JumpStart); (10.4166666666667 : 20.875 : JumpEnd); (9.42708333333333 : 20.875 : JumpStart); (9.26041666666667 : 20.875 : JumpEnd); (9.20833333333333 : 20.875 : JumpStart); (9.04166666666667 : 20.875 : JumpEnd); (9 : 20.875); (9 : 23.375); (9.04166666666667 : 23.375 : JumpStart); (9.20833333333333 : 23.375 : JumpEnd); (9.26041666666667 : 23.375 : JumpStart); (9.42708333333333 : 23.375 : JumpEnd); (10.5 : 23.375); (10.5 : 23.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Substance/Substance_FormulariumSubstanceText" />
+      <nodes>
+        <classShapeMoniker Id="e8dbc4b5-bb1e-4c95-bf0b-4ae6995451ab" />
+        <classShapeMoniker Id="41d12dd2-a5c4-44ac-830a-7a30971be0b4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.703125 : 15.125); (5.703125 : 9.0625); (6.04166666666667 : 9.0625 : JumpStart); (6.20833333333333 : 9.0625 : JumpEnd); (6.5 : 9.0625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Substance/Substance_Product" />
+      <nodes>
+        <classShapeMoniker Id="e8dbc4b5-bb1e-4c95-bf0b-4ae6995451ab" />
+        <classShapeMoniker Id="a6410ffd-a727-44d7-91d6-2cbfdccfb233" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.609375 : 15.125); (5.609375 : 6.53125); (6.04166666666667 : 6.53125 : JumpStart); (6.20833333333333 : 6.53125 : JumpEnd); (7.41666666666667 : 6.53125 : JumpStart); (7.58333333333333 : 6.53125 : JumpEnd); (8.94791666666667 : 6.53125 : JumpStart); (9.11458333333333 : 6.53125 : JumpEnd); (12.25 : 6.53125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Substance/Substance_ProductSubstance" />
+      <nodes>
+        <classShapeMoniker Id="e8dbc4b5-bb1e-4c95-bf0b-4ae6995451ab" />
+        <classShapeMoniker Id="22bda14e-0514-4d42-8c30-22c1ee47d357" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 25.83099609375); (10.4479166666667 : 25.83099609375 : JumpStart); (10.6145833333333 : 25.83099609375 : JumpEnd); (11.7916666666667 : 25.83099609375 : JumpStart); (11.9583333333333 : 25.83099609375 : JumpEnd); (12.0416666666667 : 25.83099609375 : JumpStart); (12.2083333333333 : 25.83099609375 : JumpEnd); (13.25 : 25.83099609375); (13.25 : 24.3862939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/SubstanceDosingAdvice/SubstanceDosingAdvice_DosingAdviceChapter" />
+      <nodes>
+        <classShapeMoniker Id="9432daf6-6bf1-4650-9378-f59992d56aca" />
+        <classShapeMoniker Id="4263bd8f-8ae6-4654-938b-33eb69393b0a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.5 : 24.5); (7.5 : 24.1362939453125); (9.125 : 24.1362939453125); (9.125 : 10.8209724589844); (9.25 : 10.8209724589844)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/SubstanceDosingAdvice/SubstanceDosingAdvice_DosingAdviceProduct" />
+      <nodes>
+        <classShapeMoniker Id="9432daf6-6bf1-4650-9378-f59992d56aca" />
+        <classShapeMoniker Id="2feddd7d-3b68-45e6-9f3b-2204811acc8f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 25.5797932356771); (9.34375 : 25.5797932356771); (9.34375 : 18.1362939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/SubstanceDosingAdvice/SubstanceDosingAdvice_DosingAdviceRoute" />
+      <nodes>
+        <classShapeMoniker Id="9432daf6-6bf1-4650-9378-f59992d56aca" />
+        <classShapeMoniker Id="945583f3-4cff-49d5-991c-444ad5d6c656" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 25.5433231582031); (5.91666666666667 : 25.5433231582031 : JumpStart); (6.08333333333333 : 25.5433231582031 : JumpEnd); (6.10416666666667 : 25.5433231582031 : JumpStart); (6.27083333333333 : 25.5433231582031 : JumpEnd); (6.5 : 25.5433231582031)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Formularium/Formularium_SubstanceDosingAdvice" />
+      <nodes>
+        <classShapeMoniker Id="d0629637-c2ad-4d1c-82f9-ead4daed0fe6" />
+        <classShapeMoniker Id="9432daf6-6bf1-4650-9378-f59992d56aca" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 16.8345955357071); (6.1875 : 17.2720955357071); (6.1875 : 25.9383619840495); (6.5 : 25.9383619840495)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Substance/Substance_SubstanceDosingAdvice" />
+      <nodes>
+        <classShapeMoniker Id="e8dbc4b5-bb1e-4c95-bf0b-4ae6995451ab" />
+        <classShapeMoniker Id="9432daf6-6bf1-4650-9378-f59992d56aca" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 22.0368455607472); (6.06607443490112 : 22.3529199956483 : JumpStart); (6.24642556509888 : 22.5332711258461 : JumpEnd); (6.34375 : 22.6305955607472); (6.34375 : 24.816525969401); (6.5 : 24.816525969401)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Indication/Indication_SubstanceDosingAdvice" />
+      <nodes>
+        <classShapeMoniker Id="ddcb6d8e-9b00-41f0-a14e-ec628277b752" />
+        <classShapeMoniker Id="9432daf6-6bf1-4650-9378-f59992d56aca" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3 : 16.0392976888021); (3.75 : 16.0392976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/SubstanceGroup/SubstanceGroup_Substance" />
+      <nodes>
+        <classShapeMoniker Id="11b6fec1-7d3a-4965-8dc8-7c1adf5a300c" />
+        <classShapeMoniker Id="e8dbc4b5-bb1e-4c95-bf0b-4ae6995451ab" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.70242346379207 : 16.8285953776042); (1.70242346379207 : 17.0785953776042); (2.31174684745593 : 17.0785953776042); (2.31174684745593 : 16.8285953776042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/GenFormDataContext/SubstanceGroup/SubstanceGroup_SubstanceGroup" />
+      <nodes>
+        <classShapeMoniker Id="11b6fec1-7d3a-4965-8dc8-7c1adf5a300c" />
+        <classShapeMoniker Id="11b6fec1-7d3a-4965-8dc8-7c1adf5a300c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.28125 : 32); (4.28125 : 27.9459729589844); (5.91666666666667 : 27.9459729589844 : JumpStart); (6.08333333333333 : 27.9459729589844 : JumpEnd); (6.82291666666667 : 27.9459729589844 : JumpStart); (6.98958333333333 : 27.9459729589844 : JumpEnd); (10.4479166666667 : 27.9459729589844 : JumpStart); (10.6145833333333 : 27.9459729589844 : JumpEnd); (12.0416666666667 : 27.9459729589844 : JumpStart); (12.2083333333333 : 27.9459729589844 : JumpEnd); (12.25 : 27.9459729589844)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/TextItem/TextItem_FormulariumChapterText" />
+      <nodes>
+        <classShapeMoniker Id="c7b69288-c280-4f51-987b-dd069d478470" />
+        <classShapeMoniker Id="68893f88-4f8c-49ab-b916-7dfffdf03fc1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 33.5569482421875); (6.07291666666667 : 33.5569482421875 : JumpStart); (6.23958333333333 : 33.5569482421875 : JumpEnd); (10.53125 : 33.5569482421875); (10.53125 : 25.3285953776042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/TextItem/TextItem_FormulariumSubstanceText" />
+      <nodes>
+        <classShapeMoniker Id="c7b69288-c280-4f51-987b-dd069d478470" />
+        <classShapeMoniker Id="41d12dd2-a5c4-44ac-830a-7a30971be0b4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.96875 : 32); (3.96875 : 29.1406275); (4.19791666666667 : 29.1406275 : JumpStart); (4.36458333333333 : 29.1406275 : JumpEnd); (6.82291666666667 : 29.1406275 : JumpStart); (6.98958333333333 : 29.1406275 : JumpEnd); (7.29166666666667 : 29.1406275 : JumpStart); (7.45833333333333 : 29.1406275 : JumpEnd); (7.5 : 29.1406275)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/TextItem/TextItem_FormulariumText" />
+      <nodes>
+        <classShapeMoniker Id="c7b69288-c280-4f51-987b-dd069d478470" />
+        <classShapeMoniker Id="028fe4a8-da1e-4192-b33a-287fbc24b72e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 32.7472221210937); (6.07291666666667 : 32.7472221210937 : JumpStart); (6.23958333333333 : 32.7472221210937 : JumpEnd); (6.82291666666667 : 32.7472221210937 : JumpStart); (6.98958333333333 : 32.7472221210937 : JumpEnd); (7.25 : 32.7472221210937); (7.25 : 30.875); (8.41666666666667 : 30.875 : JumpStart); (8.58333333333333 : 30.875 : JumpEnd); (10.4479166666667 : 30.875 : JumpStart); (10.6145833333333 : 30.875 : JumpEnd); (12.125 : 30.875); (12.125 : 11.5785953776042); (12.6666671666667 : 11.5785953776042 : JumpStart); (12.8333338333333 : 11.5785953776042 : JumpEnd); (13.53125225 : 11.5785953776042); (13.53125225 : 11.2035953776042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/TextItem/TextItem_ProductFormulariumText" />
+      <nodes>
+        <classShapeMoniker Id="c7b69288-c280-4f51-987b-dd069d478470" />
+        <classShapeMoniker Id="9d75c443-bc12-462e-bd6a-4a8edfe196e6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 33.3225707421875); (6.07291666666667 : 33.3225707421875 : JumpStart); (6.23958333333333 : 33.3225707421875 : JumpEnd); (6.90625 : 33.3225707421875); (6.90625 : 26.2708968098958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/TextItem/TextItem_SubstanceDosingAdvice" />
+      <nodes>
+        <classShapeMoniker Id="c7b69288-c280-4f51-987b-dd069d478470" />
+        <classShapeMoniker Id="9432daf6-6bf1-4650-9378-f59992d56aca" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 24.754026719401); (6 : 24.754026719401); (6 : 28.25); (6.82291666666667 : 28.25 : JumpStart); (6.98958333333333 : 28.25 : JumpEnd); (7.375 : 28.25); (7.375 : 30.5); (8.5 : 30.5); (8.5 : 31.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Formularium/Formularium_TextLog" />
+      <nodes>
+        <classShapeMoniker Id="d0629637-c2ad-4d1c-82f9-ead4daed0fe6" />
+        <classShapeMoniker Id="f8b1f9c2-e9bf-4530-b8b3-5c7fe6ba7961" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 32.3111110605469); (6.07291666666667 : 32.3111110605469 : JumpStart); (6.23958333333333 : 32.3111110605469 : JumpEnd); (6.82291666666667 : 32.3111110605469 : JumpStart); (6.98958333333333 : 32.3111110605469 : JumpEnd); (7.16666666666667 : 32.3111110605469 : JumpStart); (7.33333333333333 : 32.3111110605469 : JumpEnd); (7.5 : 32.3111110605469)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/TextItem/TextItem_TextLog" />
+      <nodes>
+        <classShapeMoniker Id="c7b69288-c280-4f51-987b-dd069d478470" />
+        <classShapeMoniker Id="f8b1f9c2-e9bf-4530-b8b3-5c7fe6ba7961" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.71875 : 31.3478011067708); (2.71875 : 31.6426510533854); (3.88541666666667 : 31.6426510533854 : JumpStart); (4.05208333333333 : 31.6426510533854 : JumpEnd); (4.19791666666667 : 31.6426510533854 : JumpStart); (4.36458333333333 : 31.6426510533854 : JumpEnd); (6.07291666666667 : 31.6426510533854 : JumpStart); (6.23958333333333 : 31.6426510533854 : JumpEnd); (6.82291666666667 : 31.6426510533854 : JumpStart); (6.98958333333333 : 31.6426510533854 : JumpEnd); (7.16666666666667 : 31.6426510533854 : JumpStart); (7.33333333333333 : 31.6426510533854 : JumpEnd); (7.5 : 31.6426510533854)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/GenFormUser/GenFormUser_TextLog" />
+      <nodes>
+        <classShapeMoniker Id="b45ca7e6-5136-49fb-9f72-4083dd61931e" />
+        <classShapeMoniker Id="f8b1f9c2-e9bf-4530-b8b3-5c7fe6ba7961" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 18.46875); (6.10416666666667 : 18.46875 : JumpStart); (6.27083333333333 : 18.46875 : JumpEnd); (6.59375 : 18.46875); (6.59375 : 12.2516097005208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Unit/Unit_Product" />
+      <nodes>
+        <classShapeMoniker Id="7347ce75-da82-4657-8816-ebea78118dfe" />
+        <classShapeMoniker Id="a6410ffd-a727-44d7-91d6-2cbfdccfb233" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 18.9218775); (6.10416666666667 : 18.9218775 : JumpStart); (6.27083333333333 : 18.9218775 : JumpEnd); (9.04166666666667 : 18.9218775 : JumpStart); (9.20833333333333 : 18.9218775 : JumpEnd); (9.26041666666667 : 18.9218775 : JumpStart); (9.42708333333333 : 18.9218775 : JumpEnd); (11.4166666666667 : 18.9218775 : JumpStart); (11.5833333333333 : 18.9218775 : JumpEnd); (11.75 : 18.9218775); (11.75 : 8.90549967447917); (13.25 : 8.90549967447917); (13.25 : 8.53049967447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Unit/Unit_ProductSubstance" />
+      <nodes>
+        <classShapeMoniker Id="7347ce75-da82-4657-8816-ebea78118dfe" />
+        <classShapeMoniker Id="22bda14e-0514-4d42-8c30-22c1ee47d357" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 17.625); (6.375 : 17); (6.375 : 14.5112939453125); (5.875 : 14.5112939453125); (5.76205056509888 : 14.3983445104114 : JumpStart); (5.55044943490112 : 14.1867433802136 : JumpEnd); (5.5 : 14.1362939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/GenFormDataContext/Unit/Unit_ShapeUnit" />
+      <nodes>
+        <classShapeMoniker Id="7347ce75-da82-4657-8816-ebea78118dfe" />
+        <classShapeMoniker Id="865f7da5-a6dd-4e99-bea5-f10461de78aa" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3 : 18.7892976888021); (3.75 : 18.7892976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/UnitGroup/UnitGroup_Unit" />
+      <nodes>
+        <classShapeMoniker Id="3750252b-9878-435e-9799-a85367b489ff" />
+        <classShapeMoniker Id="7347ce75-da82-4657-8816-ebea78118dfe" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.75 : 30.0681469726563); (3.88541666666667 : 30.0681469726563 : JumpStart); (4.05208333333333 : 30.0681469726563 : JumpEnd); (4.19791666666667 : 30.0681469726563 : JumpStart); (4.36458333333333 : 30.0681469726563 : JumpEnd); (4.5 : 30.0681469726563)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/GenFormUser/GenFormUser_UserRole" />
+      <nodes>
+        <classShapeMoniker Id="b45ca7e6-5136-49fb-9f72-4083dd61931e" />
+        <classShapeMoniker Id="52f7a1bd-e55e-4157-ab11-21cd77b57c24" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.75 : 36.1642976888021); (6.15625 : 36.1642976888021); (6.15625 : 30.7612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/GenFormDataContext/Role/Role_UserRole" />
+      <nodes>
+        <classShapeMoniker Id="cec1112d-6edc-47a8-a118-2618c83469cf" />
+        <classShapeMoniker Id="52f7a1bd-e55e-4157-ab11-21cd77b57c24" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

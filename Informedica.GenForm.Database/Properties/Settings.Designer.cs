@@ -62,5 +62,16 @@ namespace Informedica.GenForm.Database.ORM.Properties {
                 return ((string)(this["GenFormConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HAL-WIN7\\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True" +
+            "")]
+        public string GenFormConnectionString1 {
+            get {
+                return ((string)(this["GenFormConnectionString1"]));
+            }
+        }
     }
 }

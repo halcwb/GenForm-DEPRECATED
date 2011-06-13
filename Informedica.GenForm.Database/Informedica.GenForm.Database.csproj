@@ -216,6 +216,7 @@
       <DependentUpon>GenFormDB.dbml</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup Condition="Exists('ORM/GenFormDatabase.orm')">
     <None Include="ORM\GenFormDatabase.DCIL.xml">
       <AutoGen>True</AutoGen>
@@ -233,7 +234,6 @@
       <ORMGenerator>DDILtoSQLServer</ORMGenerator>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

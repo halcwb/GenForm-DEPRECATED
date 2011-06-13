@@ -6,19 +6,17 @@
  * To change this template use File | Settings | File Templates.
  */
 describe('GenForm.model.product.BrandName', function () {
-    var getBrandNameModel, loadBrandNameModel, brandNameModel;
+    var getBrandNameModel,
+        waitingTime = 100;
 
     getBrandNameModel = function () {
-        return Ext.ModelManager.getModel('GenForm.model.product.BrandName');
-    };
+        var model = Ext.ModelManager.getModel('GenForm.model.product.BrandName');
+        model.setProxy({
+            type: 'direct',
+            directFn: Product.GetBrandNames
+        })
 
-    loadBrandNameModel = function () {
-        brandNameModel = null;
-        getBrandNameModel().load('', {
-            callback: function (result) {
-                brandNameModel = result;
-            }
-        });
+        return model;
     };
 
     it('BrandNameModel should be defined', function () {
@@ -26,15 +24,36 @@ describe('GenForm.model.product.BrandName', function () {
     });
 
     it('After calling load an Instance of BrandNameModel should be created', function () {
-        loadBrandNameModel();
+        var model;
+
+        getBrandNameModel().load('', {
+            callback: function (record) {
+                model = record;
+            }
+        })
 
         waitsFor(function () {
-            return brandNameModel;
-        }, 'fetching BrandNameModel');
+            return model ? true: false;
+        }, 'fetching BrandNameModel', waitingTime);
     });
 
     it('BrandModel data contains a BrandName', function () {
-        expect(brandNameModel.data.BrandName === 'Paracetamol').toBe(true);
+        var model;
+
+        getBrandNameModel().load('', {
+            callback: function (result) {
+                model = result;
+            }
+        });
+
+        waitsFor(function () {
+            if (model) {
+                if (model.data) {
+                    return model.data['BrandName'] !== undefined ? true: false;
+                }
+            }
+            return false;
+        }, 'checking if model contains BrandName prop', waitingTime);
     });
 
 });

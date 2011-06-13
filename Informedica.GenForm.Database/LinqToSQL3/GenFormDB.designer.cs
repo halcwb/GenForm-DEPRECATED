@@ -138,7 +138,7 @@ namespace Informedica.GenForm.Database
     #endregion
 		
 		public GenFormDataContext() : 
-				base(global::Informedica.GenForm.Database.ORM.Properties.Settings.Default.GenFormConnectionString, mappingSource)
+				base(global::Informedica.GenForm.Database.ORM.Properties.Settings.Default.GenFormConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -465,7 +465,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _BrandName;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private EntitySet<Product> _Product;
 		
@@ -477,8 +477,8 @@ namespace Informedica.GenForm.Database
     partial void OnBrandIdChanged();
     partial void OnBrandNameChanging(string value);
     partial void OnBrandNameChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     #endregion
 		
 		public Brand()
@@ -527,22 +527,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -603,7 +603,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _ChapterName;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private EntitySet<FormulariumChapter> _FormulariumChapter;
 		
@@ -615,8 +615,8 @@ namespace Informedica.GenForm.Database
     partial void OnChapterIdChanged();
     partial void OnChapterNameChanging(string value);
     partial void OnChapterNameChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     #endregion
 		
 		public Chapter()
@@ -665,22 +665,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -1317,7 +1317,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _FormulariumName;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private int _PharmacistId;
 		
@@ -1345,8 +1345,8 @@ namespace Informedica.GenForm.Database
     partial void OnFormulariumIdChanged();
     partial void OnFormulariumNameChanging(string value);
     partial void OnFormulariumNameChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     partial void OnPharmacistIdChanging(int value);
     partial void OnPharmacistIdChanged();
     #endregion
@@ -1404,22 +1404,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -1690,7 +1690,7 @@ namespace Informedica.GenForm.Database
 		
 		private int _ChapterId;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private System.Nullable<int> _MainChapterId;
 		
@@ -1716,8 +1716,8 @@ namespace Informedica.GenForm.Database
     partial void OnFormulariumIdChanged();
     partial void OnChapterIdChanging(int value);
     partial void OnChapterIdChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     partial void OnMainChapterIdChanging(System.Nullable<int> value);
     partial void OnMainChapterIdChanged();
     #endregion
@@ -1801,22 +1801,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -2888,7 +2888,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _Email;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private string _PassWord;
 		
@@ -2914,8 +2914,8 @@ namespace Informedica.GenForm.Database
     partial void OnUserNameChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     partial void OnPassWordChanging(string value);
     partial void OnPassWordChanged();
     partial void OnFirstNameChanging(string value);
@@ -2994,22 +2994,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -3314,7 +3314,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _PackageName;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private EntitySet<Product> _Product;
 		
@@ -3328,8 +3328,8 @@ namespace Informedica.GenForm.Database
     partial void OnPackageIdChanged();
     partial void OnPackageNameChanging(string value);
     partial void OnPackageNameChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     #endregion
 		
 		public Package()
@@ -3379,22 +3379,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -3728,7 +3728,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _PharmacyName;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private EntitySet<Pharmacist> _Pharmacist;
 		
@@ -3740,8 +3740,8 @@ namespace Informedica.GenForm.Database
     partial void OnPharmacyIdChanged();
     partial void OnPharmacyNameChanging(string value);
     partial void OnPharmacyNameChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     #endregion
 		
 		public Pharmacy()
@@ -3790,22 +3790,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -3866,7 +3866,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _DisplayName;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private int _ShapeId;
 		
@@ -3920,8 +3920,8 @@ namespace Informedica.GenForm.Database
     partial void OnProductIdChanged();
     partial void OnDisplayNameChanging(string value);
     partial void OnDisplayNameChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     partial void OnShapeIdChanging(int value);
     partial void OnShapeIdChanged();
     partial void OnPackageIdChanging(int value);
@@ -4002,22 +4002,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -5607,7 +5607,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _RoleName;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private string _RoleDescription;
 		
@@ -5621,8 +5621,8 @@ namespace Informedica.GenForm.Database
     partial void OnRoleIdChanged();
     partial void OnRoleNameChanging(string value);
     partial void OnRoleNameChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     partial void OnRoleDescriptionChanging(string value);
     partial void OnRoleDescriptionChanged();
     #endregion
@@ -5673,22 +5673,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -5769,7 +5769,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _RouteName;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private string _RouteAbbreviation;
 		
@@ -5787,8 +5787,8 @@ namespace Informedica.GenForm.Database
     partial void OnRouteIdChanged();
     partial void OnRouteNameChanging(string value);
     partial void OnRouteNameChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     partial void OnRouteAbbreviationChanging(string value);
     partial void OnRouteAbbreviationChanged();
     #endregion
@@ -5841,22 +5841,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -5987,7 +5987,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _ShapeName;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private EntitySet<Product> _Product;
 		
@@ -6005,8 +6005,8 @@ namespace Informedica.GenForm.Database
     partial void OnShapeIdChanged();
     partial void OnShapeNameChanging(string value);
     partial void OnShapeNameChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     #endregion
 		
 		public Shape()
@@ -6058,22 +6058,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -6785,7 +6785,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _SubstanceName;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private System.Nullable<bool> _IsGeneric;
 		
@@ -6809,8 +6809,8 @@ namespace Informedica.GenForm.Database
     partial void OnSubstanceIdChanged();
     partial void OnSubstanceNameChanging(string value);
     partial void OnSubstanceNameChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     partial void OnIsGenericChanging(System.Nullable<bool> value);
     partial void OnIsGenericChanged();
     partial void OnSubstanceGroupIdChanging(System.Nullable<int> value);
@@ -6867,22 +6867,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -7502,7 +7502,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _SubstanceGroupName;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private System.Nullable<int> _MainSubstanceGroupId;
 		
@@ -7520,8 +7520,8 @@ namespace Informedica.GenForm.Database
     partial void OnSubstanceGroupIdChanged();
     partial void OnSubstanceGroupNameChanging(string value);
     partial void OnSubstanceGroupNameChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     partial void OnMainSubstanceGroupIdChanging(System.Nullable<int> value);
     partial void OnMainSubstanceGroupIdChanged();
     #endregion
@@ -7574,22 +7574,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -7735,7 +7735,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _TextStatus;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private string _Text;
 		
@@ -7763,8 +7763,8 @@ namespace Informedica.GenForm.Database
     partial void OnTextTypeChanged();
     partial void OnTextStatusChanging(string value);
     partial void OnTextStatusChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     partial void OnTextChanging(string value);
     partial void OnTextChanged();
     partial void OnTextHeadingChanging(string value);
@@ -7842,22 +7842,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -8388,17 +8388,17 @@ namespace Informedica.GenForm.Database
 		
 		private string _UnitName;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private decimal _Multiplier;
+		
+		private int _UnitGroupId;
 		
 		private string _UnitAbbreviation;
 		
 		private System.Nullable<int> _Divisor;
 		
 		private System.Nullable<bool> _IsReference;
-		
-		private System.Nullable<int> _UnitGroupId;
 		
 		private EntitySet<Product> _Product;
 		
@@ -8416,18 +8416,18 @@ namespace Informedica.GenForm.Database
     partial void OnUnitIdChanged();
     partial void OnUnitNameChanging(string value);
     partial void OnUnitNameChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     partial void OnMultiplierChanging(decimal value);
     partial void OnMultiplierChanged();
+    partial void OnUnitGroupIdChanging(int value);
+    partial void OnUnitGroupIdChanged();
     partial void OnUnitAbbreviationChanging(string value);
     partial void OnUnitAbbreviationChanged();
     partial void OnDivisorChanging(System.Nullable<int> value);
     partial void OnDivisorChanged();
     partial void OnIsReferenceChanging(System.Nullable<bool> value);
     partial void OnIsReferenceChanged();
-    partial void OnUnitGroupIdChanging(System.Nullable<int> value);
-    partial void OnUnitGroupIdChanged();
     #endregion
 		
 		public Unit()
@@ -8479,22 +8479,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}
@@ -8515,6 +8515,30 @@ namespace Informedica.GenForm.Database
 					this._Multiplier = value;
 					this.SendPropertyChanged("Multiplier");
 					this.OnMultiplierChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitGroupId", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+		public int UnitGroupId
+		{
+			get
+			{
+				return this._UnitGroupId;
+			}
+			set
+			{
+				if ((this._UnitGroupId != value))
+				{
+					if (this._UnitGroup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUnitGroupIdChanging(value);
+					this.SendPropertyChanging();
+					this._UnitGroupId = value;
+					this.SendPropertyChanged("UnitGroupId");
+					this.OnUnitGroupIdChanged();
 				}
 			}
 		}
@@ -8575,30 +8599,6 @@ namespace Informedica.GenForm.Database
 					this._IsReference = value;
 					this.SendPropertyChanged("IsReference");
 					this.OnIsReferenceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitGroupId", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> UnitGroupId
-		{
-			get
-			{
-				return this._UnitGroupId;
-			}
-			set
-			{
-				if ((this._UnitGroupId != value))
-				{
-					if (this._UnitGroup.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUnitGroupIdChanging(value);
-					this.SendPropertyChanging();
-					this._UnitGroupId = value;
-					this.SendPropertyChanged("UnitGroupId");
-					this.OnUnitGroupIdChanged();
 				}
 			}
 		}
@@ -8669,7 +8669,7 @@ namespace Informedica.GenForm.Database
 					}
 					else
 					{
-						this._UnitGroupId = default(Nullable<int>);
+						this._UnitGroupId = default(int);
 					}
 					this.SendPropertyChanged("UnitGroup");
 				}
@@ -8743,7 +8743,7 @@ namespace Informedica.GenForm.Database
 		
 		private string _UnitGroupName;
 		
-		private System.Data.Linq.Binary _VersionTimeStamp;
+		private System.Data.Linq.Binary _versionTimeStamp;
 		
 		private System.Nullable<bool> _AllowsConversion;
 		
@@ -8757,8 +8757,8 @@ namespace Informedica.GenForm.Database
     partial void OnUnitGroupIdChanged();
     partial void OnUnitGroupNameChanging(string value);
     partial void OnUnitGroupNameChanged();
-    partial void OnVersionTimeStampChanging(System.Data.Linq.Binary value);
-    partial void OnVersionTimeStampChanged();
+    partial void OnversionTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnversionTimeStampChanged();
     partial void OnAllowsConversionChanging(System.Nullable<bool> value);
     partial void OnAllowsConversionChanged();
     #endregion
@@ -8809,22 +8809,22 @@ namespace Informedica.GenForm.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VersionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary VersionTimeStamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_versionTimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary versionTimeStamp
 		{
 			get
 			{
-				return this._VersionTimeStamp;
+				return this._versionTimeStamp;
 			}
 			set
 			{
-				if ((this._VersionTimeStamp != value))
+				if ((this._versionTimeStamp != value))
 				{
-					this.OnVersionTimeStampChanging(value);
+					this.OnversionTimeStampChanging(value);
 					this.SendPropertyChanging();
-					this._VersionTimeStamp = value;
-					this.SendPropertyChanged("VersionTimeStamp");
-					this.OnVersionTimeStampChanged();
+					this._versionTimeStamp = value;
+					this.SendPropertyChanged("versionTimeStamp");
+					this.OnversionTimeStampChanged();
 				}
 			}
 		}

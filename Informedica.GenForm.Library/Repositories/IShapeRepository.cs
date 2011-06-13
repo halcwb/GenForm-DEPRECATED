@@ -2,8 +2,7 @@
 
 namespace Informedica.GenForm.Library.Repositories
 {
-    public interface IBrandRepository: IRepository<IBrand>
+    public interface IShapeRepository: IRepository<IShape>
     {
-
     }
 }

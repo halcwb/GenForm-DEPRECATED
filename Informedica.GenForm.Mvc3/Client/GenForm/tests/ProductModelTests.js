@@ -165,7 +165,6 @@ describe('GenForm.model.product.Product', function () {
         var result;
         getProductModel().load('2', {
             callback: function (record) {
-                console.log(record);
                 result = record;
             }
         });

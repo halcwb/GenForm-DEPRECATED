@@ -22,6 +22,15 @@ namespace Informedica.GenForm.Assembler
             _registry.For<IProductRepository>().Use<ProductRepository>();
             _registry.For<IBrand>().Use<Brand>();
             _registry.For<IBrandRepository>().Use<BrandRepository>();
+            _registry.For<IGeneric>().Use<Generic>();
+            _registry.For<IGenericRepository>().Use<GenericRepository>();
+            _registry.For<IShape>().Use<Shape>();
+            _registry.For<IShapeRepository>().Use<ShapeRepository>();
+            _registry.For<IPackage>().Use<Package>();
+            _registry.For<IPackageRepository>().Use<PackageRepository>();
+            _registry.For<IUnit>().Use<Unit>();
+            _registry.For<IUnitRepository>().Use<UnitRepository>();
+
 
             _hasBeenCalled = true;
             return _registry;

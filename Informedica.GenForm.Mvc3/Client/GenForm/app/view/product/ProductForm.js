@@ -108,7 +108,7 @@ Ext.define('GenForm.view.product.ProductForm', {
             xtype: 'fieldset',
             title: 'Artikel Details',
             defaults: {
-                width: 400
+                width: 600
             },
             items: me.createProductDetails()
         };
@@ -118,12 +118,12 @@ Ext.define('GenForm.view.product.ProductForm', {
         return [
             { xtype: 'textfield',    name:'ProductName',   fieldLabel: 'Artikel Naam', margin: '10 0 10 10' },
             { xtype: 'textfield',    name: 'ProductCode',  fieldLabel: 'Artikel Code', margin: '10 0 10 10' },
-            { xtype: 'editcombo',    name: 'GenericName',  fieldLabel: 'Generiek',     margin: '10 0 10 10',  displayField: 'GenericName',  store: 'product.GenericName', queryMode: 'local'},
-            { xtype: 'editcombo',    name: 'BrandName',    fieldLabel: 'Merk',         margin: '10 0 10 10',  displayField: 'BrandName',    store: 'product.BrandName',   queryMode: 'local'},
-            { xtype: 'editcombo',    name: 'ShapeName',    fieldLabel: 'Vorm',         margin: '10 0 10 10',  displayField: 'ShapeName',    store: 'product.ShapeName' ,  queryMode: 'local'},
+            { xtype: 'editcombo',    name: 'GenericName',  fieldLabel: 'Generiek',     margin: '10 0 10 10',  displayField: 'GenericName',  store: 'product.GenericName', queryMode: 'local', editable: false},
+            { xtype: 'editcombo',    name: 'BrandName',    fieldLabel: 'Merk',         margin: '10 0 10 10',  displayField: 'BrandName',    store: 'product.BrandName',   queryMode: 'local', editable: false},
+            { xtype: 'editcombo',    name: 'ShapeName',    fieldLabel: 'Vorm',         margin: '10 0 10 10',  displayField: 'ShapeName',    store: 'product.ShapeName' ,  queryMode: 'local', editable: false},
             { xtype: 'numberfield',  name: 'Quantity',     fieldLabel: 'Hoeveelheid',  margin: '10 0 10 10' },
-            { xtype: 'editcombo',    name: 'UnitName',     fieldLabel: 'Eenheid',      margin: '10 0 10 10',  displayField: 'UnitName',     store: 'product.UnitName',    queryMode: 'local' },
-            { xtype: 'editcombo',    name: 'PackageName',  fieldLabel: 'Verpakking',   margin: '10 0 10 10' , displayField: 'PackageName',  store: 'product.PackageName', queryMode: 'local'}
+            { xtype: 'editcombo',    name: 'UnitName',     fieldLabel: 'Eenheid',      margin: '10 0 10 10',  displayField: 'UnitName',     store: 'product.UnitName',    queryMode: 'local', editable: false},
+            { xtype: 'editcombo',    name: 'PackageName',  fieldLabel: 'Verpakking',   margin: '10 0 10 10' , displayField: 'PackageName',  store: 'product.PackageName', queryMode: 'local', editable: false}
         ];
     },
 

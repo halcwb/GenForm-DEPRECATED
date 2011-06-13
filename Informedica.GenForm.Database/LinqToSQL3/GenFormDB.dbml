@@ -1,11 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Database Name="GenForm" EntityNamespace="Informedica.GenForm.Database" ContextNamespace="Informedica.GenForm.Database" Class="GenFormDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=hal-2008;Initial Catalog=GenForm;Integrated Security=True" SettingsObjectName="Informedica.GenForm.Database.ORM.Properties.Settings" SettingsPropertyName="GenFormConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GenForm" EntityNamespace="Informedica.GenForm.Database" ContextNamespace="Informedica.GenForm.Database" Class="GenFormDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True" SettingsObjectName="Informedica.GenForm.Database.ORM.Properties.Settings" SettingsPropertyName="GenFormConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Brand" Member="Brand">
     <Type Name="Brand">
       <Column Name="BrandId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="BrandName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Association Name="Brand_Product" Member="Product" ThisKey="BrandId" OtherKey="BrandId" Type="Product" />
     </Type>
   </Table>
@@ -13,7 +12,7 @@
     <Type Name="Chapter">
       <Column Name="ChapterId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ChapterName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Association Name="Chapter_FormulariumChapter" Member="FormulariumChapter" ThisKey="ChapterId" OtherKey="ChapterId" Type="FormulariumChapter" />
     </Type>
   </Table>
@@ -48,7 +47,7 @@
     <Type Name="Formularium">
       <Column Name="FormulariumId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="FormulariumName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="PharmacistId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Formularium_FormulariumChapter" Member="FormulariumChapter" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="FormulariumChapter" />
       <Association Name="Formularium_FormulariumPharmacist" Member="FormulariumPharmacist" ThisKey="FormulariumId" OtherKey="FormulariumId" Type="FormulariumPharmacist" />
@@ -65,7 +64,7 @@
       <Column Name="FormulariumChapterId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="FormulariumId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ChapterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="MainChapterId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="FormulariumChapter_DosingAdviceChapter" Member="DosingAdviceChapter" ThisKey="FormulariumChapterId" OtherKey="FormulariumChapterId" Type="DosingAdviceChapter" />
       <Association Name="FormulariumChapter_FormulariumChapter" Member="FormulariumChapter2" ThisKey="FormulariumChapterId" OtherKey="MainChapterId" Type="FormulariumChapter" />
@@ -118,7 +117,7 @@
       <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UserName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="PassWord" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="FirstName" Type="System.String" DbType="NVarChar(125)" CanBeNull="true" />
       <Column Name="LastName" Type="System.String" DbType="NVarChar(125)" CanBeNull="true" />
@@ -139,7 +138,7 @@
     <Type Name="Package">
       <Column Name="PackageId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PackageName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Association Name="Package_Product" Member="Product" ThisKey="PackageId" OtherKey="PackageId" Type="Product" />
       <Association Name="Package_ShapePackage" Member="ShapePackage" ThisKey="PackageId" OtherKey="PackageId" Type="ShapePackage" />
     </Type>
@@ -159,7 +158,7 @@
     <Type Name="Pharmacy">
       <Column Name="PharmacyId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PharmacyName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Association Name="Pharmacy_Pharmacist" Member="Pharmacist" ThisKey="PharmacyId" OtherKey="PharmacyId" Type="Pharmacist" />
     </Type>
   </Table>
@@ -167,7 +166,7 @@
     <Type Name="Product">
       <Column Name="ProductId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="DisplayName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="ShapeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="PackageId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="GenericId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -240,7 +239,7 @@
     <Type Name="Role">
       <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="RoleName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="RoleDescription" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
       <Association Name="Role_UserRole" Member="UserRole" ThisKey="RoleId" OtherKey="RoleId" Type="UserRole" />
     </Type>
@@ -249,7 +248,7 @@
     <Type Name="Route">
       <Column Name="RouteId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="RouteName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="RouteAbbreviation" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Route_DosingAdviceRoute" Member="DosingAdviceRoute" ThisKey="RouteId" OtherKey="RouteId" Type="DosingAdviceRoute" />
       <Association Name="Route_ProductRoute" Member="ProductRoute" ThisKey="RouteId" OtherKey="RouteId" Type="ProductRoute" />
@@ -260,7 +259,7 @@
     <Type Name="Shape">
       <Column Name="ShapeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ShapeName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Association Name="Shape_Product" Member="Product" ThisKey="ShapeId" OtherKey="ShapeId" Type="Product" />
       <Association Name="Shape_ShapePackage" Member="ShapePackage" ThisKey="ShapeId" OtherKey="ShapeId" Type="ShapePackage" />
       <Association Name="Shape_ShapeRoute" Member="ShapeRoute" ThisKey="ShapeId" OtherKey="ShapeId" Type="ShapeRoute" />
@@ -298,7 +297,7 @@
     <Type Name="Substance">
       <Column Name="SubstanceId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="SubstanceName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="IsGeneric" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="SubstanceGroupId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Substance_FormulariumSubstanceText" Member="FormulariumSubstanceText" ThisKey="SubstanceId" OtherKey="SubstanceId" Type="FormulariumSubstanceText" />
@@ -328,7 +327,7 @@
     <Type Name="SubstanceGroup">
       <Column Name="SubstanceGroupId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="SubstanceGroupName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="MainSubstanceGroupId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SubstanceGroup_Substance" Member="Substance" ThisKey="SubstanceGroupId" OtherKey="SubstanceGroupId" Type="Substance" />
       <Association Name="SubstanceGroup_SubstanceGroup" Member="SubstanceGroup2" ThisKey="SubstanceGroupId" OtherKey="MainSubstanceGroupId" Type="SubstanceGroup" />
@@ -340,7 +339,7 @@
       <Column Name="TextItemId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TextType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="TextStatus" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="Text" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="TextHeading" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Association Name="TextItem_FormulariumChapterText" Member="FormulariumChapterText" ThisKey="TextItemId" OtherKey="TextItemId" Type="FormulariumChapterText" />
@@ -368,12 +367,12 @@
     <Type Name="Unit">
       <Column Name="UnitId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UnitName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="Multiplier" Type="System.Decimal" DbType="Decimal(38,19) NOT NULL" CanBeNull="false" />
+      <Column Name="UnitGroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="UnitAbbreviation" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Divisor" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IsReference" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="UnitGroupId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Unit_Product" Member="Product" ThisKey="UnitId" OtherKey="UnitId" Type="Product" />
       <Association Name="Unit_ProductSubstance" Member="ProductSubstance" ThisKey="UnitId" OtherKey="UnitId" Type="ProductSubstance" />
       <Association Name="Unit_ShapeUnit" Member="ShapeUnit" ThisKey="UnitId" OtherKey="UnitId" Type="ShapeUnit" />
@@ -384,7 +383,7 @@
     <Type Name="UnitGroup">
       <Column Name="UnitGroupId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UnitGroupName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="VersionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="versionTimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="AllowsConversion" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="UnitGroup_Unit" Member="Unit" ThisKey="UnitGroupId" OtherKey="UnitGroupId" Type="Unit" />
     </Type>
