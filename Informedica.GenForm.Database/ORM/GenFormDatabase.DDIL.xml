@@ -585,6 +585,12 @@
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
+		<ddl:columnDefinition name="UnitGroupId">
+			<ddt:exactNumeric type="INTEGER" />
+			<ddl:columnConstraintDefinition>
+				<ddl:notNullKeyword />
+			</ddl:columnConstraintDefinition>
+		</ddl:columnDefinition>
 		<ddl:columnDefinition name="UnitAbbreviation">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 		</ddl:columnDefinition>
@@ -593,9 +599,6 @@
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="IsReference">
 			<ddt:boolean type="BOOLEAN" />
-		</ddl:columnDefinition>
-		<ddl:columnDefinition name="UnitGroupId">
-			<ddt:exactNumeric type="INTEGER" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Unit_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">

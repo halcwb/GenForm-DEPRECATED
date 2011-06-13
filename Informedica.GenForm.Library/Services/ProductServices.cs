@@ -25,6 +25,30 @@ namespace Informedica.GenForm.Library.Services
             repository.Insert(brand);
         }
 
+        public void AddNewGeneric(IGeneric generic)
+        {
+            var repository = ObjectFactory.GetInstance<IGenericRepository>();
+            repository.Insert(generic);
+        }
+
+        public void AddNewShape(IShape shape)
+        {
+            var repository = ObjectFactory.GetInstance<IShapeRepository>();
+            repository.Insert(shape);
+        }
+
+        public void AddNewPackage(IPackage package)
+        {
+            var repository = ObjectFactory.GetInstance<IPackageRepository>();
+            repository.Insert(package);
+        }
+
+        public void AddNewUnit(IUnit unit)
+        {
+            var repository = ObjectFactory.GetInstance<IUnitRepository>();
+            repository.Insert(unit);
+        }
+
         public void SaveProduct(IProduct product)
         {
             var repository = ObjectFactory.GetInstance<IProductRepository>();

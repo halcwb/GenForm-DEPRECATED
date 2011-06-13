@@ -8,9 +8,9 @@
 
 
 describe('Ext.data.Model', function () {
-    var createTestModelInstance, getTestModel;
+    var createTestModelInstance, getTestModel, waitingTime = 200;
 
-    Ext.define('TestDataModel', {
+    Ext.define('Test.modeltests.TestModel', {
         extend: 'Ext.data.Model',
 
         fields: [
@@ -41,11 +41,11 @@ describe('Ext.data.Model', function () {
             fields: [
                 {name: 'Test', type: 'string'}
             ]
-        }, 'TestDataModel');
+        }, 'Test.modeltests.TestModel');
     };
 
     getTestModel = function () {
-        return Ext.ModelManager.getModel('TestDataModel');
+        return Ext.ModelManager.getModel('Test.modeltests.TestModel');
     };
 
     it('a test model should be created', function () {
@@ -75,22 +75,26 @@ describe('Ext.data.Model', function () {
 
         waitsFor(function () {
             return record ? true: false;
-        }, 'waiting for Product.GetProduct', 1000);
+        }, 'waiting for Product.GetProduct', waitingTime);
     });
 
     it('testing the model with a store', function () {
-        var store = Ext.create('Ext.data.DirectStore', {
-            model: 'TestDataModel'
+        var result,
+            store = Ext.create('Ext.data.DirectStore', {
+            model: 'Test.modeltests.TestModel'
         });
 
-        // I need to pass the proxy from model to store otherwise I get the error
-        console.log(getTestModel().getProxy());
         store.setProxy(getTestModel().getProxy());
 
-        store.load('1', {
-            callback: function (result) {
-                console.log(result);
+        // Note, do not pass a selection string like in model.load!!
+        store.load({
+            callback: function (record) {
+                result = record;
             }
         });
+
+        waitsFor(function () {
+            return result ? true: false;
+        }, 'waiting for loading of store', waitingTime)
     });
 });

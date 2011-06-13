@@ -56,13 +56,21 @@
   <ItemGroup>
     <Compile Include="DataContexts\DataContextFactory.cs" />
     <Compile Include="DataMappers\BrandMapper.cs" />
+    <Compile Include="DataMappers\GenericMapper.cs" />
+    <Compile Include="DataMappers\PackageMapper.cs" />
     <Compile Include="DataMappers\ProductMapper.cs" />
+    <Compile Include="DataMappers\ShapeMapper.cs" />
+    <Compile Include="DataMappers\UnitMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataMappers\IDataMapper.cs" />
     <Compile Include="DataMappers\UserMapper.cs" />
     <Compile Include="Repositories\BrandRepository.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\PackageRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\ShapeRepository.cs" />
+    <Compile Include="Repositories\UnitRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

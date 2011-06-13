@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Library.Services
@@ -14,5 +11,9 @@ namespace Informedica.GenForm.Library.Services
         IProduct GetEmptyProduct();
         IProduct GetProduct(String productName);
         void AddNewBrand(IBrand brand);
+        void AddNewGeneric(IGeneric generic);
+        void AddNewShape(IShape shape);
+        void AddNewPackage(IPackage package);
+        void AddNewUnit(IUnit unit);
     }
 }

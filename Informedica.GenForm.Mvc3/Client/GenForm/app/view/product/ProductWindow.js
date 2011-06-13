@@ -7,9 +7,13 @@
  */
 Ext.define('GenForm.view.product.ProductWindow', {
     extend: 'Ext.Window',
+/*
+    ToDo: find out why the below code is not working
+    requires: ['GenForm.view.component.SaveCancelToolbar'],
+*/
     alias: 'widget.productwindow',
 
-    width: 500,
+    width: 700,
     height: 500,
     layout: 'fit',
 

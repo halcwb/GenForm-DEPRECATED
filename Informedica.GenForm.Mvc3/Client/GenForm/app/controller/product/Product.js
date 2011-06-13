@@ -286,9 +286,9 @@ Ext.define('GenForm.controller.product.Product', {
 
     onProductSaved: function (result) {
         if (result.success) {
-            Ext.MessageBox.alert('Product saved: ' + result.data.ProductName);
+            Ext.MessageBox.alert('Product saved: ', result.data.ProductName);
         } else {
-            Ext.MessageBox.alert('Product could not be saved: ' + result.message);
+            Ext.MessageBox.alert('Product could not be saved: ', result.message);
         }
     },
 
@@ -310,11 +310,11 @@ Ext.define('GenForm.controller.product.Product', {
             window = Ext.ComponentQuery.query('genericwindow')[0];
 
         if (result.success) {
-            Ext.MessageBox.alert('Generic saved: ' + result.data.GenericName);
+            Ext.MessageBox.alert('Generic saved: ', result.data.GenericName);
             me.addGenericToStore(result.data.GenericName);
             if (window) window.close();
         } else {
-            Ext.MessageBox.alert('Generic could not be saved: ' + result.message);
+            Ext.MessageBox.alert('Generic could not be saved: ', result.message);
         }
     },
 
@@ -323,11 +323,11 @@ Ext.define('GenForm.controller.product.Product', {
             window = Ext.ComponentQuery.query('shapewindow')[0];
 
         if (result.success) {
-            Ext.MessageBox.alert('Shape saved: ' + result.data.ShapeName);
+            Ext.MessageBox.alert('Shape saved: ', result.data.ShapeName);
             me.addShapeToStore(result.data.ShapeName);
             if (window) window.close();
         } else {
-            Ext.MessageBox.alert('Shape could not be saved: ' + result.message);
+            Ext.MessageBox.alert('Shape could not be saved: ', result.message);
         }
     },
 
@@ -336,11 +336,11 @@ Ext.define('GenForm.controller.product.Product', {
             window = Ext.ComponentQuery.query('packagewindow')[0];
 
         if (result.success) {
-            Ext.MessageBox.alert('Package saved: ' + result.data.PackageName);
+            Ext.MessageBox.alert('Package saved: ', result.data.PackageName);
             me.addPackageToStore(result.data.PackageName);
             if (window) window.close();
         } else {
-            Ext.MessageBox.alert('Package could not be saved: ' + result.message);
+            Ext.MessageBox.alert('Package could not be saved: ', result.message);
         }
     },
 
@@ -349,11 +349,11 @@ Ext.define('GenForm.controller.product.Product', {
             window = Ext.ComponentQuery.query('unitwindow')[0];
 
         if (result.success) {
-            Ext.MessageBox.alert('Unit saved: ' + result.data.UnitName);
+            Ext.MessageBox.alert('Unit saved: ', result.data.UnitName);
             me.addUnitToStore(result.data.UnitName);
             if (window) window.close();
         } else {
-            Ext.MessageBox.alert('Unit could not be saved: ' + result.message);
+            Ext.MessageBox.alert('Unit could not be saved: ', result.message);
         }
     },
 
@@ -366,30 +366,30 @@ Ext.define('GenForm.controller.product.Product', {
 
     addGenericToStore: function (generic) {
         var me = this,
-            store = me.getBrandStore();
+            store = me.getGenericStore();
 
-        store.add({BrandName: generic});
+        store.add({GenericName: generic});
     },
 
     addShapeToStore: function (shape) {
         var me = this,
-            store = me.getBrandStore();
+            store = me.getShapeStore();
 
-        store.add({BrandName: shape});
+        store.add({ShapeName: shape});
     },
 
     addPackageToStore: function (package) {
         var me = this,
-            store = me.getBrandStore();
+            store = me.getPackageStore();
 
-        store.add({BrandName: package});
+        store.add({PackageName: package});
     },
 
     addUnitToStore: function (unit) {
         var me = this,
-            store = me.getBrandStore();
+            store = me.getUnitStore();
 
-        store.add({BrandName: unit});
+        store.add({UnitName: unit});
     },
 
     getBrandStore: function () {

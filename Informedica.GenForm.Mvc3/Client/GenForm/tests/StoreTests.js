@@ -6,28 +6,27 @@
  * To change this template use File | Settings | File Templates.
  */
 describe('Ext.data.Store', function () {
-    var createTestStore;
+    var createTestStore, waitingTime = 200, modelName = 'Test.storetests.TestModel';
 
-    Ext.define('TestStoreModel', {
+    Ext.define(modelName, {
         extend: 'Ext.data.Model',
 
         fields: [
             {name: 'id', type: 'integer', mapping: 'ProductId'},
             {name: 'Test', type: 'string', mapping: 'ProductName'}
-        ]
-    });
+        ],
 
-    Ext.define('TestStore', {
-        extend: 'Ext.data.Store',
-        storeId: 'teststore',
-        model: 'TestStoreModel',
-
-        autoLoad: false,
+        // I can mover proxy and reader over to store and it keeps working
+        // however I cannot alter the config of proxy and/or reader??
         proxy: {
             type: 'direct',
             paramsAsHash: true,
-            paramOrder: 'id',
-            directFn: Product.GetProducts
+            // If I omit the below line, store test throws an error, but not model tests
+            directFn: Product.GetProduct,
+            api: {
+                read: Product.GetProduct,
+                submit: Product.SaveProduct
+            }
         },
         reader: {
             type: 'direct',
@@ -36,9 +35,21 @@ describe('Ext.data.Store', function () {
         }
     });
 
+    Ext.define('Test.storetests.TestStore', {
+        extend: 'Ext.data.Store',
+        storeId: 'teststore',
+        model: modelName,
+
+        autoLoad: false
+    });
+
     createTestStore = function () {
-        return Ext.create('TestStore');
+        return Ext.create('Test.storetests.TestStore');
     };
+
+    it('a test model is defined', function () {
+        expect(Ext.ModelManager.getModel(modelName)).toBeDefined();
+    })
 
     it('teststore is created', function () {
         expect(createTestStore()).toBeDefined();
@@ -49,14 +60,13 @@ describe('Ext.data.Store', function () {
         createTestStore().load({
             scope: me,
             callback: function (records, operation, success) {
-                console.log('is called back');
                 isCalledBack = true;
             }
         });
             
         waitsFor(function () {
             return isCalledBack;
-        }, 'waiting for loading of teststore', 1000)
+        }, 'waiting for loading of teststore', waitingTime)
 
     });
 });

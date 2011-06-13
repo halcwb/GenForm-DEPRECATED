@@ -7,10 +7,17 @@
  */
 
 describe("GenForm.model.product.GenericName", function () {
-    var callbackObject, setUpCallBackObject, genericNameModel, getGenericNameModelClass,  getGenericNameModel, loadGenericNameModel;
+    var callbackObject, setUpCallBackObject, getGenericNameModelClass,  getGenericNameModel, loadGenericNameModel,
+        waitingTime = 100,
+        proxy = {
+            type: 'direct',
+            directFn: Product.GetGenericNames
+        };
 
     getGenericNameModel = function () {
-        return Ext.ModelManager.getModel('GenForm.model.product.GenericName');
+        var model = Ext.ModelManager.getModel('GenForm.model.product.GenericName');
+        model.setProxy(proxy);
+        return model;
     };
 
     getGenericNameModelClass = function () {
@@ -35,22 +42,23 @@ describe("GenForm.model.product.GenericName", function () {
     });
 
     it('Calling load on model constructor should call doRequest of proxy', function() {
-        spyOn(getGenericNameModel().getProxy(), 'doRequest');
+        var model = getGenericNameModel();
+        spyOn(model.getProxy(), 'doRequest');
 
-        getGenericNameModel().load();
+        model.load();
 
-        expect(getGenericNameModel().getProxy().doRequest).toHaveBeenCalled();
+        expect(model.getProxy().doRequest).toHaveBeenCalled();
     });
 
     it('Calling load on model constructor should invoke a callback function', function () {
         setUpCallBackObject();
-        
+
         getGenericNameModel().load('', {
             scope: callbackObject,
             callback: callbackObject.setCalledBackToTrue
         });
 
-        waitsFor(callbackObject.getCalledBack, 'Calling proxy of GenericNameModel');
+        waitsFor(callbackObject.getCalledBack, 'Calling proxy of GenericNameModel', waitingTime);
     });
 
     setUpCallBackObject = function () {
@@ -68,23 +76,23 @@ describe("GenForm.model.product.GenericName", function () {
     };
 
     it('After load an instance of GenericNameModel should be created', function () {
+        var model;
+
         getGenericNameModel().load('', {
             callback: function (result) {
-                genericNameModel = result;
+                model = result;
             }
         });
 
         waitsFor(function () { 
-            if (genericNameModel) {
-                if (genericNameModel.data) {
-                    if (genericNameModel.data.GenericName) {
-                        return true;
-                    }
+            if (model) {
+                if (model.data) {
+                    return model.data.GenericName === '' ? true: false;
                 }
             }
 
             return false;
-        }, 'Fetching GenericNameModel');
+        }, 'Fetching GenericNameModel', waitingTime);
     });
     
 });

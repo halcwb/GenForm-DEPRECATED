@@ -336,6 +336,9 @@
 		<dcl:column name="Multiplier" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="DECIMAL" precision="38" scale="19" />
 		</dcl:column>
+		<dcl:column name="UnitGroupId" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
+		</dcl:column>
 		<dcl:column name="UnitAbbreviation" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
@@ -344,9 +347,6 @@
 		</dcl:column>
 		<dcl:column name="IsReference" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="BOOLEAN" />
-		</dcl:column>
-		<dcl:column name="UnitGroupId" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Unit_PK" isPrimary="true">
 			<dcl:columnRef name="UnitId" />

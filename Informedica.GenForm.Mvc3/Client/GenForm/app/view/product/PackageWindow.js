@@ -9,7 +9,7 @@ Ext.define('GenForm.view.product.PackageWindow', {
     extend: 'Ext.Window',
     alias: 'widget.packagewindow',
 
-    width: 300,
+    width: 500,
     height: 300,
     layout: 'fit',
 
