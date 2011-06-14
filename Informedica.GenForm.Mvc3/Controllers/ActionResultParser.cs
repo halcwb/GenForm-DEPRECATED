@@ -5,12 +5,12 @@ namespace Informedica.GenForm.Mvc3.Controllers
 {
     public class ActionResultParser
     {
-        public static bool GetSuccessValueFromActionResult(ActionResult response)
+        public static bool GetSuccessValue(ActionResult response)
         {
             var json = CastToJsonResult(response);
             try
             {
-                return (bool)GetValueFromProperty(json, "success");
+                return (bool)GetPropertyValue(json, "success");
             }
             catch (Exception)
             {
@@ -18,7 +18,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             }
         }
 
-        private static object GetValueFromProperty(JsonResult json, String propertyName)
+        private static object GetPropertyValue(JsonResult json, String propertyName)
         {
             return json.Data.GetType().GetProperty(propertyName).GetValue(json.Data, null);
         }
@@ -36,13 +36,13 @@ namespace Informedica.GenForm.Mvc3.Controllers
             }
         }
 
-        public static T GetValueFromActionResult<T>(ActionResult result, System.String propertyName)
+        public static T GetPropertyValue<T>(ActionResult result, System.String propertyName)
         {
             var json = CastToJsonResult(result);
 
             try
             {
-                return (T) GetValueFromProperty(json, propertyName);
+                return (T) GetPropertyValue(json, propertyName);
             }
             catch (Exception)
             {

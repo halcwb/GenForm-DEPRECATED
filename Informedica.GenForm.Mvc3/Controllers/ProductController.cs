@@ -17,28 +17,15 @@ namespace Informedica.GenForm.Mvc3.Controllers
         public ActionResult GetGenericNames()
         {
             return this.Direct(
-                new[] { 
-                    new  {GenericName = "paracetamol"}, 
-                    new {GenericName = "dopamine"}, 
-                    new {GenericName = "amoxicilline/clavulaanzuur"},
-                    new {GenericName = "domperidon"},
-                    new {GenericName = "midazolam"},
-                    new {GenericName = "propofol"},
-                    new {GenericName = "rocuronium"}
-                }
+                new[] { new {}} 
             );
         }
 
         public ActionResult GetBrandNames()
         {
             return this.Direct(new[]
-                {
-                    new { BrandName = "Dormicum" }, 
-                    new { BrandName = "Esmeron" }, 
-                    new { BrandName = "Perfalgan" }, 
-                    new { BrandName = "Augmentin" }, 
-                    new { BrandName = "Motilium" }, 
-                    new { BrandName = "Dynatra" }
+                { 
+                    new {}
                 }
             );
         }
@@ -47,9 +34,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
         {
             return this.Direct(new[]
                 {
-                    new { ShapeName = "infusievloeistof"},
-                    new { ShapeName = "tablet"},
-                    new { ShapeName = "zetpil"}
+                    new {}
                 }
             );
         }
@@ -58,10 +43,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
         {
             return this.Direct(new[]
                 {
-                    new { PackageName = "ampul"},
-                    new { PackageName = "fles"},
-                    new { PackageName = "tablet"},
-                    new { PackageName = "zetpil"}
+                    new {}
                 }
             );
         }
@@ -70,15 +52,14 @@ namespace Informedica.GenForm.Mvc3.Controllers
         {
             return this.Direct(new[]
                 {
-                    new { UnitName = "mL"},
-                    new { UnitName = "stuk"}
+                    new {}
                 }
             );
         }
 
         public ActionResult GetProducts()
         {
-            return this.Direct(new List<IProduct> { LoadProduct(0) });
+            return this.Direct(new {success = true});
         }
 
         public ActionResult GetProduct(JObject productId)
@@ -108,18 +89,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
         {
             var success = true;
             var message = String.Empty;
-            IProduct product = new Product
-                              {
-                                  ProductName = productData.Value<String>("ProductName"),
-                                  BrandName = productData.Value<String>("BrandName"),
-                                  GenericName = productData.Value<String>("GenericName"),
-                                  PackageName = productData.Value<String>("PackageName"),
-                                  ProductCode = productData.Value<String>("ProductCode"),
-                                  ProductId = productData.Value<Int32>("ProductId"),
-                                  Quantity = productData.Value<Double>("Quantity"),
-                                  ShapeName = productData.Value<String>("ShapeName"),
-                                  UnitName = productData.Value<String>("UnitName")
-                              };
+            var product = GetProductFromJObject(productData);
             try
             {
                 GetProductServices().SaveProduct(product);
@@ -133,9 +103,166 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new { success, data = product, message });
         }
 
+        private IProduct GetProductFromJObject(JObject productData)
+        {
+            return new Product
+                       {
+                           ProductName = productData.Value<String>("ProductName"),
+                           BrandName = productData.Value<String>("BrandName"),
+                           GenericName = productData.Value<String>("GenericName"),
+                           PackageName = productData.Value<String>("PackageName"),
+                           ProductCode = productData.Value<String>("ProductCode"),
+                           ProductId = productData.Value<Int32>("ProductId"),
+                           Quantity = productData.Value<Double>("Quantity"),
+                           ShapeName = productData.Value<String>("ShapeName"),
+                           UnitName = productData.Value<String>("UnitName")
+                       };
+        }
+
         private IProductServices GetProductServices()
         {
             return ObjectFactory.GetInstance<IProductServices>();
         }
+
+        public ActionResult AddNewBrand(JObject brandDto)
+        {
+            var success = true;
+            var message = String.Empty;
+            var brand = GetBrandFromJObject(brandDto);
+            
+            try
+            {
+                GetProductServices().AddNewBrand(brand);
+
+            }
+            catch (Exception e)
+            {
+                success = false;
+                message = e.ToString();
+            }
+            
+            return this.Direct(new {success, data = brand, message});
+        }
+
+        public ActionResult AddNewGeneric(JObject genericDto)
+        {
+            var success = true;
+            var message = String.Empty;
+            var generic = GetGenericFromJObject(genericDto);
+            
+            try
+            {
+                GetProductServices().AddNewGeneric(generic);
+
+            }
+            catch (Exception e)
+            {
+                success = false;
+                message = e.ToString();
+            }
+            
+            return this.Direct(new {success, data = generic, message});
+        }
+
+        public ActionResult AddNewShape(JObject shapeDto)
+        {
+            var success = true;
+            var message = String.Empty;
+            var shape = GetShapeFromJObject(shapeDto);
+            
+            try
+            {
+                GetProductServices().AddNewShape(shape);
+
+            }
+            catch (Exception e)
+            {
+                success = false;
+                message = e.ToString();
+            }
+            
+            return this.Direct(new {success, data = shape, message});
+        }
+
+        public ActionResult AddNewPackage(JObject packageDto)
+        {
+            var success = true;
+            var message = String.Empty;
+            var package = GetPackageFromJObject(packageDto);
+            
+            try
+            {
+                GetProductServices().AddNewPackage(package);
+
+            }
+            catch (Exception e)
+            {
+                success = false;
+                message = e.ToString();
+            }
+            
+            return this.Direct(new {success, data = package, message});
+        }
+
+        public ActionResult AddNewUnit(JObject unitDto)
+        {
+            var success = true;
+            var message = String.Empty;
+            var unit = GetUnitFromJObject(unitDto);
+            
+            try
+            {
+                GetProductServices().AddNewUnit(unit);
+
+            }
+            catch (Exception e)
+            {
+                success = false;
+                message = e.ToString();
+            }
+            
+            return this.Direct(new {success, data = unit, message});
+        }
+
+        private IBrand GetBrandFromJObject(JObject brand)
+        {
+            return new Brand
+                       {
+                           BrandName = brand.Value<String>("BrandName")
+                       };
+        }
+
+        private IShape GetShapeFromJObject(JObject shape)
+        {
+            return new Shape
+                       {
+                           ShapeName = shape.Value<String>("ShapeName")
+                       };
+        }
+
+        private IPackage GetPackageFromJObject(JObject package)
+        {
+            return new Package
+                       {
+                           PackageName= package.Value<String>("PackageName")
+                       };
+        }
+
+        private IGeneric GetGenericFromJObject(JObject generic)
+        {
+            return new Generic
+                       {
+                           GenericName = generic.Value<String>("GenericName")
+                       };
+        }
+
+        private IUnit GetUnitFromJObject(JObject unit)
+        {
+            return new Unit
+                       {
+                           UnitName = unit.Value<String>("UnitName")
+                       };
+        }
+
     }
 }
