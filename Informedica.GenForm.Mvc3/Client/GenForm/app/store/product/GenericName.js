@@ -12,10 +12,5 @@ Ext.define('GenForm.store.product.GenericName', {
     storeId: 'genericnamestore',
     
     model: 'GenForm.model.product.GenericName',
-    autoLoad: true,
-    
-    proxy: {
-        type: 'direct',
-        directFn: Product.GetGenericNames
-    }
+    autoLoad: true
 });

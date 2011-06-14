@@ -6,7 +6,24 @@
  * To change this template use File | Settings | File Templates.
  */
 describe('GenForm.controller.product.Product', function () {
-    var getProductController, testController;
+    var getProductController, testController, copyObject,
+        waitingTime = 200;
+        testProduct = {
+            ProductName: '',
+            ProductCode: '',
+            GenericName: '',
+            BrandName: '',
+            ShapeName: '',
+            Quantity: '',
+            Unit: '',
+            PackageName: ''
+        };
+
+    copyObject = function (model, data) {
+        for each (var prop in model.data) {
+            prop = data[prop];
+        }
+    }
 
     getProductController = function () {
         if (!testController) {
@@ -76,13 +93,15 @@ describe('GenForm.controller.product.Product', function () {
     it('should save a product', function () {
         var form = getProductController().getProductWindow().getProductForm(),
             record = form.getRecord(), controller = getProductController();
-        record.data.ProductName = 'paracetamol 500 mg';
-        record.data.GenericName = 'paracetamol';
-        record.data.BrandName = 'Paracetamol';
-        record.data.ShapeName = 'tablet';
-        record.data.Quantity = '1';
-        record.data.Unit = 'stuk';
-        record.data.PackageName = 'tablet';
+
+        testProduct.ProductName = 'paracetamol 500 mg';
+        testProduct.GenericName = 'paracetamol';
+        testProduct.BrandName = 'Paracetamol';
+        testProduct.ShapeName = 'tablet';
+        testProduct.Quantity = '1';
+        testProduct.Unit = 'stuk';
+        testProduct.PackageName = 'tablet';
+        copyObject(record, testProduct);
 
         form.loadRecord(record);
 
@@ -92,6 +111,31 @@ describe('GenForm.controller.product.Product', function () {
         waitsFor(function () {
             return controller.onProductSaved.wasCalled;
         }, 'waiting for onProductSaved call', 1000);
+    });
+
+    it('should have a saveGenericName function', function () {
+       expect(getProductController().saveGeneric).toBeDefined();
+    });
+
+    it('saveGeneric should be able to save a valid Generic', function () {
+        var controller = getProductController(),
+            form = controller.getGenericWindow().getGenericForm(),
+            model = form.getRecord(),
+            validGeneric = {
+                GenericName: 'paracetamol'
+            };
+        console.log(model.getProxy());
+        copyObject(model, validGeneric);
+
+        form.load(model);
+
+        spyOn(controller, 'onGenericSaved');
+        controller.saveGeneric(form.up('panel').down('toolbar').down('button'));
+
+        waitsFor(function () {
+            return controller.onGenericSaved.wasCalled;
+        }, 'waiting for onGenericSaved call', waitingTime)
+
     });
 
 });

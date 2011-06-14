@@ -1,0 +1,1 @@
+C:\Users\halcwb\Documents\jsbuilder\jsbuilder\jsbuilder.bat --projectFile "C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.Mvc3\Client\Library\extjs\build\sdk.jsb3" --deployDir deployment --verbose
