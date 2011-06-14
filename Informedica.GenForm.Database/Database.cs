@@ -32,12 +32,12 @@ namespace Informedica.GenForm.Database
                 case DatabaseName.GenForm:
                     try
                     {
-                        connection = System.Configuration.ConfigurationManager.ConnectionStrings[GetConnectionName(database)].ConnectionString;
+                        connection = @"Data Source=INDURAIN;Initial Catalog=GenForm;User ID=genform; Password=genform";
                     }
                     catch (Exception e)
                     {
-                        connection = @"Data Source=INDURAIN;Initial Catalog=GenForm;User ID=genform; Password=genform";
-                        //connection = @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
+                        // connection = @"Data Source=INDURAIN;Initial Catalog=GenForm;User ID=genform; Password=genform";
+                        connection = @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
                     }
                     break;
                 default:
