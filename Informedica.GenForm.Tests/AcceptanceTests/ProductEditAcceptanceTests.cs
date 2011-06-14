@@ -2,8 +2,10 @@
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Services;
+using Informedica.GenForm.Mvc3.Controllers;
 using Informedica.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Linq;
 using StructureMap;
 using TypeMock.ArrangeActAssert;
 
@@ -16,7 +18,12 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
     [TestClass]
     public class ProductEditAcceptanceTests
     {
+        private const String Penicilline = "penicilline";
+        private const String Sintrom = "Sintrom";
         private TestContext testContextInstance;
+        private const  String Mmol = "Mmol";
+        private const String Ampul = "Ampul";
+        private const String Tablet = "tablet";
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -88,16 +95,23 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         public void When_user_saves_valid_product_no_error_is_thrown()
         {
             var product = GetValidProduct();
+            var result = GetProductController().SaveProduct(CreateJObjectFrom(product));
 
-            try
-            {
-                GetProductServices().SaveProduct(product);
+            Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "Save product returned an error ");
+        }
 
-            }
-            catch (System.Exception e)
-            {
-                Assert.Fail("Saver product returned an error " + e.Message);
-            }
+        private JObject CreateJObjectFrom(Object product)
+        {
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(product);
+            var jobj = JObject.Parse(json);
+
+            return jobj;
+
+        }
+
+        private ProductController GetProductController()
+        {
+            return ObjectFactory.GetInstance<ProductController>();
         }
 
         [Isolated]
@@ -108,7 +122,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
             try
             {
-                GetProductServices().SaveProduct(product);
+                GetProductController().SaveProduct(CreateJObjectFrom(product));
                 Assert.Fail("Saving an invalid product should throw an exception");
             }
 // ReSharper disable EmptyGeneralCatchClause
@@ -145,19 +159,144 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         public void User_cannot_save_product_with_mandatory_fields_not_filled_in()
         {
             var product = GetProductServices().GetEmptyProduct();
-
             product.ProductName = "Test";
 
+            var result = GetProductController().SaveProduct(CreateJObjectFrom(product));
+            Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "a non valid product should not be saved");
+
+        }
+
+        [TestMethod]
+        public void User_can_add_new_brand_name()
+        {
+            var brand = CreateNewBrand(Sintrom);
             try
             {
-                GetProductServices().SaveProduct(product);
-                Assert.Fail("a non valid product should not be saved");
+                var result = GetProductController().AddNewBrand(CreateJObjectFrom(brand));
+
+                Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New brand " + Sintrom + " could not be added");
 
             }
-            catch
+            catch (Exception e)
             {
+                Assert.Fail("an error was throw: " + e);
+                throw;
             }
         }
 
+        [TestMethod]
+        public void User_can_add_new_generic_name()
+        {
+            var generic = CreateNewGeneric(Penicilline);
+            try
+            {
+                var result = GetProductController().AddNewGeneric(CreateJObjectFrom(generic));
+
+                Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New generic " + Penicilline + " could not be added");
+
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("an error was thrown: " + e);
+            }
+        }
+
+        private IGeneric CreateNewGeneric(string name)
+        {
+            var generic = ObjectFactory.GetInstance<IGeneric>();
+            generic.GenericName = name;
+
+            return generic;
+        }
+
+        [TestMethod]
+        public void User_can_add_new_shape_name()
+        {
+            try
+            {
+                var shape = CreateNewShape(Tablet);
+                var result = GetProductController().AddNewShape(CreateJObjectFrom(shape));
+
+                Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New shape" + Tablet + " could not be added");
+
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("an error was thrown: " + e);
+            }
+        }
+
+        private IShape CreateNewShape(String name)
+        {
+            var shape = ObjectFactory.GetInstance<IShape>();
+            shape.ShapeName = name;
+
+            return shape;
+        }
+
+        [TestMethod]
+        public void User_can_add_new_package_name()
+        {
+            try
+            {
+                var package = CreateNewPackage(Ampul);
+                var result = GetProductController().AddNewPackage(CreateJObjectFrom(package));
+
+                Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New package " + Ampul + " could not be added");
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("an error was thrown: " + e);
+            }
+        }
+
+        private IPackage CreateNewPackage(String name)
+        {
+            var package = ObjectFactory.GetInstance<IPackage>();
+            package.PackageName = name;
+
+            return package;
+        }
+
+        [TestMethod]
+        public void User_can_add_new_unit_name()
+        {
+            try
+            {
+                var unit = CreateNewUnit(Mmol);
+                var result = GetProductController().AddNewUnit(CreateJObjectFrom(unit));
+
+                Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New unit: " + Mmol + " could not be added");
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("an error was thrown: " + e);
+            }
+        }
+
+        private IUnit CreateNewUnit(string name)
+        {
+            var unit = ObjectFactory.GetInstance<IUnit>();
+            unit.UnitName = name;
+
+            return unit;
+        }
+
+        [TestMethod]
+        public void User_cannot_add_invalid_empty_brand()
+        {
+            var brand = CreateNewBrand(String.Empty);
+            var result = GetProductController().AddNewBrand(CreateJObjectFrom(brand));
+
+            Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "brand with empty name can not be added");
+        }
+
+        private IBrand CreateNewBrand(String name)
+        {
+            var brand = ObjectFactory.GetInstance<IBrand>();
+            brand.BrandName = name;
+
+            return brand;
+        }
     }
 }
