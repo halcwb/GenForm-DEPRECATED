@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ActionResultParser.cs" />
+    <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ILoginController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -585,6 +586,7 @@
     <None Include="Client\Tests\lib\jasmine-1.0.2\MIT.LICENSE" />
     <None Include="readme.txt" />
     <Content Include="Views\Tests\Index.cshtml" />
+    <Content Include="Views\Debug\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
