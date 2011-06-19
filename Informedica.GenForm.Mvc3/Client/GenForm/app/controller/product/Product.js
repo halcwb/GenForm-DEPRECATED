@@ -30,8 +30,7 @@ Ext.define('GenForm.controller.product.Product', {
     ],
 
     views: [
-        'component.EditableComboBox',
-        'product.ProductWindow',
+        'product.ProductWindow'/*,
         'product.ProductForm',
         'product.ProductSubstanceForm',
         'product.ProductSubstanceGrid',
@@ -44,12 +43,17 @@ Ext.define('GenForm.controller.product.Product', {
         'product.PackageWindow',
         'product.PackageForm',
         'product.UnitWindow',
-        'product.UnitForm'
+        'product.UnitForm'*/
     ],
+
+    constructor: function () {
+        debugger;
+    },
 
     init: function() {
         var me = this;
         
+/*
         me.control({
             'productwindow > toolbar button[action=save]': {
                 click: me.saveProduct
@@ -108,6 +112,7 @@ Ext.define('GenForm.controller.product.Product', {
                 click: me.showCancelMessage
             }
         });
+*/
 
     },
 

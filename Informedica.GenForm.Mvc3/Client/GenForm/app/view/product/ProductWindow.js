@@ -6,11 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 Ext.define('GenForm.view.product.ProductWindow', {
-    extend: 'Ext.Window',
-/*
-    ToDo: find out why the below code is not working
-    requires: ['GenForm.view.component.SaveCancelToolbar'],
-*/
+    extend: 'GenForm.lib.view.window.SaveCancelWindow',
     alias: 'widget.productwindow',
 
     width: 700,
@@ -18,7 +14,6 @@ Ext.define('GenForm.view.product.ProductWindow', {
     layout: 'fit',
 
     initComponent: function() {
-        this.dockedItems = this.createSaveCancelToolBar();
         this.items = this.createProductForm();
 
         this.callParent(arguments);
@@ -28,10 +23,6 @@ Ext.define('GenForm.view.product.ProductWindow', {
         return { xtype: 'productform' };
     },
     
-    createSaveCancelToolBar: function () {
-        return Ext.create('GenForm.view.component.SaveCancelToolBar', { dock: 'bottom'});
-    },
-
     getProductForm: function () {
         return this.items.items[0];
     },

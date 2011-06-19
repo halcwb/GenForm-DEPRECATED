@@ -5,7 +5,7 @@
  * Time: 10:43
  * To change this template use File | Settings | File Templates.
  */
-Ext.define('GenForm.view.component.SaveCancelToolBar', {
+Ext.define('GenForm.lib.view.component.SaveCancelToolBar', {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.savecanceltoolbar',
 
