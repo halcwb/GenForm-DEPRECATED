@@ -9,6 +9,10 @@ Ext.define('GenForm.view.product.ProductForm', {
     extend: 'Ext.form.FormPanel',
     alias: 'widget.productform',
 
+    requires: [
+        'GenForm.lib.view.component.EditableComboBox'
+    ],
+
     waitMsgTarget: true,
     
     initComponent: function () {

@@ -1,4 +1,4 @@
-Ext.define('GenForm.view.component.EditableComboBox',{
+Ext.define('GenForm.lib.view.component.EditableComboBox',{
     extend:'Ext.form.field.ComboBox',
     alias:['widget.editablecombo', 'widget.editcombo'],
     

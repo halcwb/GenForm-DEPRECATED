@@ -37,7 +37,7 @@ describe('GenForm.controller.product.Product', function () {
         }
         return testController;
     }
-/*
+
     it('can be created', function () {
         expect(getProductController()).toBeDefined();
     });
@@ -121,7 +121,7 @@ describe('GenForm.controller.product.Product', function () {
     it('should have a saveGenericName function', function () {
        expect(getProductController().saveGeneric).toBeDefined();
     });
-*/
+
     it('saveGeneric should be able to save a valid Generic', function () {
         var controller = getProductController(),
             form = controller.getGenericWindow().getGenericForm(),
