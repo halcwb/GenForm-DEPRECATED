@@ -20,8 +20,11 @@ describe('GenForm.controller.product.Product', function () {
         };
 
     copyObject = function (model, data) {
-        for each (var prop in model.data) {
-            prop = data[prop];
+        var prop;
+        if (!model.data) return;
+        
+        for (prop in model.data) {
+            if (data[prop]) prop = data[prop];
         }
     }
 
@@ -33,8 +36,8 @@ describe('GenForm.controller.product.Product', function () {
             });
         }
         return testController;
-    };
-
+    }
+/*
     it('can be created', function () {
         expect(getProductController()).toBeDefined();
     });
@@ -90,6 +93,7 @@ describe('GenForm.controller.product.Product', function () {
         expect(getProductController().saveProduct).toBeDefined();
     });
 
+
     it('should save a product', function () {
         var form = getProductController().getProductWindow().getProductForm(),
             record = form.getRecord(), controller = getProductController();
@@ -113,10 +117,11 @@ describe('GenForm.controller.product.Product', function () {
         }, 'waiting for onProductSaved call', 1000);
     });
 
+
     it('should have a saveGenericName function', function () {
        expect(getProductController().saveGeneric).toBeDefined();
     });
-
+*/
     it('saveGeneric should be able to save a valid Generic', function () {
         var controller = getProductController(),
             form = controller.getGenericWindow().getGenericForm(),
@@ -127,14 +132,15 @@ describe('GenForm.controller.product.Product', function () {
         console.log(model.getProxy());
         copyObject(model, validGeneric);
 
-        form.load(model);
-
+        form.loadRecord(model);
+/*
         spyOn(controller, 'onGenericSaved');
         controller.saveGeneric(form.up('panel').down('toolbar').down('button'));
 
         waitsFor(function () {
             return controller.onGenericSaved.wasCalled;
         }, 'waiting for onGenericSaved call', waitingTime)
+*/
 
     });
 
