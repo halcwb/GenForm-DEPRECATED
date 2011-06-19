@@ -8,28 +8,52 @@
 describe('Ext.Class', function () {
     var instance, getInstance;
 
+    Ext.define('Tests.BaseClass', {
+
+        config: {
+            name: 'baseClass'
+        }
+
+    });
+
+    Ext.define('Tests.MyCoolMixin', {
+       someUseFullFunction: function () {
+           console.log('I can do something usefull');
+       }
+    });
+
     Ext.define('Tests.MyClass', {
+        extend: 'Tests.BaseClass',
 
-         config: {
-              name: 'name of the instance'
+        mixins: {
+            somethingUseFull: 'Tests.MyCoolMixin'
+        },
+
+        config: {
+            name: 'name of the instance'
+        },
+
+        constructor: function (config) {
+            var me = this;
+            me = this.initConfig(config);
+            return me;
+        },
+
+        // Gets called before setName method
+        applyName: function (name) {
+        var me = this;
+        if (!Ext.isString(name) || name.length === 0) {
+           me.throwError();
+        }
+        // need to return name otherwise name does not get set!!
+        else {
+           return name;
+        }
          },
 
-         constructor: function (config) {
-              var me = this;
-              me = this.initConfig(config);
-              return me;
-         },
-
-         // Gets called before setName method
-         applyName: function (name) {
-              if (!Ext.isString(name)) {
-                   alert('Error: name is not a string');
-              }
-              // need to return name otherwise name does not get set!!
-              else {
-                   return name;
-              }
-         }
+        throwError: function () {
+            throw new Error('['+ Ext.getDisplayName(arguments.callee) +'] cannot have an empty string as a name');
+        }
     });
 
     getInstance = function (config) {
@@ -47,6 +71,47 @@ describe('Ext.Class', function () {
         
         expect(instance.getName).toBeDefined();
         expect(instance.setName).toBeDefined();
-    })
+    });
+
+    it('Tests.MyClass should not accept an empty string for name', function () {
+        var instance = getInstance({name: 'test'});
+
+        spyOn(instance, 'throwError');
+        instance.setName('');
+
+        expect(instance.throwError).toHaveBeenCalled();
+    });
+
+    it('a valid name can be set', function () {
+        var instance = getInstance({}), name = 'test';
+
+        instance.setName(name);
+
+        expect(instance.getName()).toBe(name);
+    });
+
+    it('the name property can be reset', function () {
+        var name = 'instance',
+            instance = getInstance({name: name});
+
+        expect(instance.getName()).toBe(name);
+        console.log(instance);
+
+        // This does not work! resetName is undefined?
+        // instance.resetName();
+        // expect(instance.getName() === name).toBeFalsy();
+    });
+
+    it('the test class should contain the method from the mixin', function () {
+        var instance = getInstance({});
+
+        expect(instance.someUseFullFunction).toBeDefined();
+
+        spyOn(instance, 'someUseFullFunction');
+        instance.someUseFullFunction();
+
+        expect(instance.someUseFullFunction).toHaveBeenCalled();
+
+    });
 
 });
