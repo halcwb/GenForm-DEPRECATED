@@ -96,6 +96,10 @@
     <Content Include="Client\Application\Images\medicalbanner.jpg" />
     <Content Include="Client\GenForm\app\Application.js" />
     <Content Include="Client\GenForm\app\controller\product\Product.js" />
+    <Content Include="Client\GenForm\app\Debug.js" />
+    <Content Include="Client\GenForm\app\lib\view\component\EditableComboBox.js" />
+    <Content Include="Client\GenForm\app\lib\view\component\SaveCancelToolBar.js" />
+    <Content Include="Client\GenForm\app\lib\view\window\SaveCancelWindow.js" />
     <Content Include="Client\GenForm\app\model\product\UnitName.js" />
     <Content Include="Client\GenForm\app\model\user\LoggedInUser.js" />
     <Content Include="Client\GenForm\app\controller\user\Login.js" />
@@ -115,8 +119,6 @@
     <Content Include="Client\GenForm\app\store\product\ProductSubstance.js" />
     <Content Include="Client\GenForm\app\store\product\ShapeName.js" />
     <Content Include="Client\GenForm\app\store\product\UnitName.js" />
-    <Content Include="Client\GenForm\app\view\component\EditableComboBox.js" />
-    <Content Include="Client\GenForm\app\view\component\SaveCancelToolBar.js" />
     <Content Include="Client\GenForm\app\view\product\BrandForm.js" />
     <Content Include="Client\GenForm\app\view\product\BrandWindow.js" />
     <Content Include="Client\GenForm\app\view\product\GenericForm.js" />
@@ -152,6 +154,7 @@
     <Content Include="Client\GenForm\tests\store\GenericNameStoreTests.js" />
     <Content Include="Client\GenForm\tests\store\ProductSubstanceStoreTests.js" />
     <Content Include="Client\GenForm\tests\view\ProductSubstanceGridTests.js" />
+    <Content Include="Client\GenForm\tests\view\SaveCancelWindowTests.js" />
     <Content Include="Client\Library\deployment\ext-all.js" />
     <Content Include="Client\Library\extjs\resources\css\ext-all.css" />
     <Content Include="Client\Library\extjs\resources\themes\images\default\boundlist\trigger-arrow.png" />
@@ -514,13 +517,13 @@
     <Content Include="Client\Library\extjs\resources\themes\images\default\window-header\window-header-default-top-sides.gif" />
     <Content Include="Client\Library\extjs\resources\themes\images\default\window\window-default-corners.gif" />
     <Content Include="Client\Library\extjs\resources\themes\images\default\window\window-default-sides.gif" />
-    <Content Include="Client\Tests\lib\jasmine-1.0.2\jasmine-html.js" />
-    <Content Include="Client\Tests\lib\jasmine-1.0.2\jasmine.css" />
-    <Content Include="Client\Tests\lib\jasmine-1.0.2\jasmine.js" />
-    <Content Include="Client\Tests\spec\PlayerSpec.js" />
-    <Content Include="Client\Tests\spec\SpecHelper.js" />
-    <Content Include="Client\Tests\src\Player.js" />
-    <Content Include="Client\Tests\src\Song.js" />
+    <Content Include="Client\Library\jasmine\lib\jasmine-1.0.2\jasmine-html.js" />
+    <Content Include="Client\Library\jasmine\lib\jasmine-1.0.2\jasmine.css" />
+    <Content Include="Client\Library\jasmine\lib\jasmine-1.0.2\jasmine.js" />
+    <Content Include="Client\Library\jasmine\spec\PlayerSpec.js" />
+    <Content Include="Client\Library\jasmine\spec\SpecHelper.js" />
+    <Content Include="Client\Library\jasmine\src\Player.js" />
+    <Content Include="Client\Library\jasmine\src\Song.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -589,13 +592,14 @@
     </Content>
     <Content Include="packages.config" />
     <None Include="Client\Library\buildExt4.bat" />
-    <None Include="Client\Tests\lib\jasmine-1.0.2\MIT.LICENSE" />
+    <None Include="Client\Library\jasmine\lib\jasmine-1.0.2\MIT.LICENSE" />
     <None Include="readme.txt" />
     <Content Include="Views\Tests\Index.cshtml" />
     <Content Include="Views\Debug\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Client\GenForm\app\lib\view\form\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
