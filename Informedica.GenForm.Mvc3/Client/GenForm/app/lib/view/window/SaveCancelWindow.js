@@ -9,12 +9,12 @@ Ext.define('GenForm.lib.view.window.SaveCancelWindow', {
     extend: 'Ext.window.Window',
 
     requires: [
-        //'GenForm.lib.view.component.SaveCancelToolbar'
+        'GenForm.lib.view.component.SaveCancelToolbar'
     ],
 
     constructor: function (config) {
         var me = this;
-
+        debugger;
         me.callParent(config);
     },
 
@@ -27,7 +27,7 @@ Ext.define('GenForm.lib.view.window.SaveCancelWindow', {
     },
 
     createSaveCancelToolBar: function () {
-        return Ext.create('GenForm.lib.view.component.SaveCancelToolBar', { dock: 'bottom'});
+        return Ext.create('GenForm.lib.view.component.SaveCancelToolbar', { dock: 'bottom'});
     }
 
 });
