@@ -14,14 +14,15 @@ Ext.define('GenForm.lib.view.window.SaveCancelWindow', {
 
     constructor: function (config) {
         var me = this;
-        debugger;
-        me.callParent(config);
+    
+        me = me.initConfig(config);
+        return me;
     },
 
     initComponent: function () {
         var me = this;
 
-        //me.dockedItems = me.createSaveCancelToolBar();
+        me.dockedItems = me.createSaveCancelToolBar();
 
         me.callParent(arguments);
     },
