@@ -12,6 +12,14 @@ describe('Ext.Class', function () {
 
         config: {
             name: 'baseClass'
+        },
+
+        constructor: function (config) {
+            var me = this;
+            console.log('Base Class gets constructed');
+            me.initConfig(config);
+
+            return me;
         }
 
     });
@@ -35,7 +43,8 @@ describe('Ext.Class', function () {
 
         constructor: function (config) {
             var me = this;
-            me = this.initConfig(config);
+            console.log('MyClass gets constructed');
+            me = me.initConfig(config);
             return me;
         },
 
@@ -113,5 +122,11 @@ describe('Ext.Class', function () {
         expect(instance.someUseFullFunction).toHaveBeenCalled();
 
     });
+
+    it('the constructor of the base class should be called upon construction of the derived class', function () {
+        var constructor = Ext.ClassManager.getClass('Tests.MyClass');
+
+        expect(typeof(constructor)).toBe('function');
+    })
 
 });
