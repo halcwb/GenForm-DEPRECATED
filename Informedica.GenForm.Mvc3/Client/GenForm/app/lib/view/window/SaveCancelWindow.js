@@ -16,18 +16,19 @@ Ext.define('GenForm.lib.view.window.SaveCancelWindow', {
         var me = this;
     
         me = me.initConfig(config);
+        me.callParent(arguments);
         return me;
     },
 
     initComponent: function () {
         var me = this;
 
-        me.dockedItems = me.createSaveCancelToolBar();
+        me.dockedItems = me.createSaveCancelToolbar();
 
         me.callParent(arguments);
     },
 
-    createSaveCancelToolBar: function () {
+    createSaveCancelToolbar: function () {
         return Ext.create('GenForm.lib.view.component.SaveCancelToolbar', { dock: 'bottom'});
     }
 

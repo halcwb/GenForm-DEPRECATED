@@ -1,0 +1,11 @@
+﻿body .jasmine_reporter
+{
+    position:absolute;
+    width:600px;
+    height:100%;
+    overflow:auto !important;
+    border:1px solid red;
+    top:0px;
+    right:0px;
+    z-index:1111111;
+}

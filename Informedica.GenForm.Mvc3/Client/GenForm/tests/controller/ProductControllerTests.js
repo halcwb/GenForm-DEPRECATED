@@ -129,7 +129,6 @@ describe('GenForm.controller.product.Product', function () {
             validGeneric = {
                 GenericName: 'paracetamol'
             };
-        console.log(model.getProxy());
         copyObject(model, validGeneric);
 
         form.loadRecord(model);
