@@ -5,42 +5,17 @@
 <!DOCTYPE html>
 <html> 
 
-<style>
-body div
-{
-	display:none !important;
-	overflow: visible;
-}
-body .jasmine_reporter
-{
-    display:block !important;
-}
-body .jasmine_reporter div
-{
-	display:block !important;
-}
-
-@* setting viewport overflow to visible, otherwise, not all tests are shown*@
-.x-viewport, .x-viewport body
-{
-    border: 0 none;
-    height: 100%;
-    margin: 0;
-    overflow: visible;
-    padding: 0;
-}
-
-</style>
 
 <head>
   <title>Jasmine Test Runner</title>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/GenForm/style/css/VisibleGuiTest.css")" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/Library/jasmine/lib/jasmine-1.0.2/jasmine.css")" />
 
     <script type="text/javascript" src="@Url.Content("~/Client/Library/jasmine/lib/jasmine-1.0.2/jasmine.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Client/Library/jasmine/lib/jasmine-1.0.2/jasmine-html.js")"></script>
 
     @* include source files here... *@
-    <script type="text/javascript" src="@Url.Content("~/Client/Library/Ext4/ext-all-debug.js") "></script>
+    <script type="text/javascript" src="@Url.Content("~/Client/Library/deployment/ext-all-debug.js") "></script>
     <script type="text/javascript" src="@Url.Content("~/Direct/Api")"></script>
     
     <script type="text/javascript">Ext.Direct.addProvider(Ext.app.REMOTING_API);</script>
@@ -67,7 +42,7 @@ body .jasmine_reporter div
   
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/controller/product/Product.js")"></script>  
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/controller/user/Login.js")"></script>  
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/Application.js")"></script>  
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/Debug.js")"></script>  
  
     @* Sencha tests *@    
 
@@ -95,17 +70,10 @@ body .jasmine_reporter div
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/model/ProductModelTests.js")"></script> 
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/controller/ProductControllerTests.js")"></script>   
 
-
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/RunJasmine.js")"></script>
 </head>
 
 <body>
-
-<script type="text/javascript">
-    Ext.onReady(function () {
-        jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-        jasmine.getEnv().execute();
-    });
-</script>
 
 </body>
 </html>
