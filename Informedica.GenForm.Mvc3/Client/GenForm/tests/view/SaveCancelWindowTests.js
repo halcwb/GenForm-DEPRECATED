@@ -24,6 +24,6 @@ describe('GenForm.lib.view.window.SaveCancelWindow', function () {
     });
 
     it('should have a savecancel toolbar', function () {
-       expect(getSaveCancelWindow().getSaveCancelToolbar()).toBeDefined();
+        expect(getSaveCancelWindow().getSaveCancelToolbar()).toBeDefined();
     });
 });

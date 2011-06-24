@@ -33,18 +33,23 @@ describe('Ext.Class', function () {
     Ext.define('Tests.MyClass', {
         extend: 'Tests.BaseClass',
 
+        testProperty: 'test property',
+
         mixins: {
             somethingUseFull: 'Tests.MyCoolMixin'
         },
 
         config: {
-            name: 'name of the instance'
+            name: 'name of the instance',
+            someOtherProp: 'some other prop'
         },
 
         constructor: function (config) {
             var me = this;
             console.log('MyClass gets constructed');
             me = me.initConfig(config);
+
+            me.callParent();
             return me;
         },
 
@@ -82,6 +87,7 @@ describe('Ext.Class', function () {
         expect(instance.setName).toBeDefined();
     });
 
+
     it('Tests.MyClass should not accept an empty string for name', function () {
         var instance = getInstance({name: 'test'});
 
@@ -104,7 +110,6 @@ describe('Ext.Class', function () {
             instance = getInstance({name: name});
 
         expect(instance.getName()).toBe(name);
-        console.log(instance);
 
         // This does not work! resetName is undefined?
         // instance.resetName();
@@ -123,10 +128,8 @@ describe('Ext.Class', function () {
 
     });
 
-    it('the constructor of the base class should be called upon construction of the derived class', function () {
-        var constructor = Ext.ClassManager.getClass('Tests.MyClass');
-
-        expect(typeof(constructor)).toBe('function');
-    })
+    it('the test class should have a testProperty', function () {
+        expect(getInstance().testProperty).toBeDefined();
+    });
 
 });
