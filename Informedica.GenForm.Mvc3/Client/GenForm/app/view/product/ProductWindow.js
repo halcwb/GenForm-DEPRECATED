@@ -6,23 +6,30 @@
  * To change this template use File | Settings | File Templates.
  */
 Ext.define('GenForm.view.product.ProductWindow', {
-    extend: 'GenForm.lib.view.window.SaveCancelWindow',
+    extend: 'Ext.window.Window',
     alias: 'widget.productwindow',
 
     width: 700,
     height: 500,
     layout: 'fit',
 
-    constructor: function (config) {
+/*    constructor: function (config) {
         var me = this;
         me = me.initConfig(config);
         return me;
     },
+*/
+    initComponent: function () {
+        var me = this;
 
-    initComponent: function() {
-        this.items = this.createProductForm();
+        me.dockedItems = me.createSaveCancelToolBar();
+        me.items = me.createProductForm();
+        
+        me.callParent(arguments);
+    },
 
-        this.callParent(arguments);
+    createSaveCancelToolBar: function () {
+        return Ext.create('GenForm.lib.view.component.SaveCancelToolbar', { dock: 'bottom'});
     },
 
     createProductForm: function () {

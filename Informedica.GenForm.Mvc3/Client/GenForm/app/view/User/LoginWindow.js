@@ -32,7 +32,7 @@ Ext.define('GenForm.view.user.LoginWindow', {
     
     createItems: function () {
         return [
-            { html: '<img src="Client/Application/Images/MedicalBanner.jpg" />', height: 180, xtype: 'box' },
+            { html: '<img src="./Client/Application/Images/MedicalBanner.jpg" />', height: 180, xtype: 'box' },
             { xtype: 'panel', border: false, bodyPadding: 15, width:541,
                 items: [
                     {xtype:'form', items:[

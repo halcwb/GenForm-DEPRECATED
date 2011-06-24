@@ -25,7 +25,7 @@ Ext.define('GenForm.view.product.BrandWindow', {
     },
 
     createSaveCancelToolBar: function () {
-        return Ext.create('GenForm.view.component.SaveCancelToolBar', { dock: 'bottom'});
+        return Ext.create('GenForm.lib.view.component.SaveCancelToolbar', { dock: 'bottom'});
     },
 
     getBrandForm: function () {
