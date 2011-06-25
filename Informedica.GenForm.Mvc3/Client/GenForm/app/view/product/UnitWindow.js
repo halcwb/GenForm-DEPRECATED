@@ -14,7 +14,6 @@ Ext.define('GenForm.view.product.UnitWindow', {
     layout: 'fit',
 
     initComponent: function() {
-        this.dockedItems = this.createSaveCancelToolBar();
         this.items = this.createUnitForm();
 
         this.callParent(arguments);
@@ -22,10 +21,6 @@ Ext.define('GenForm.view.product.UnitWindow', {
 
     createUnitForm: function () {
         return { xtype: 'unitform' };
-    },
-
-    createSaveCancelToolBar: function () {
-        return Ext.create('GenForm.lib.view.component.SaveCancelToolbar', { dock: 'bottom'});
     },
 
     getUnitForm: function () {

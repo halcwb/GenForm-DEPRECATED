@@ -23,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SaveCancelWindow.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/lib/view/window/SaveCancelWindow.js">
+      <file leaf-file-name="SaveCancelWindowTests.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/view/SaveCancelWindowTests.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="30" selection-start="718" selection-end="718" vertical-scroll-proportion="0.0">
+            <state line="14" column="24" selection-start="456" selection-end="456" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -35,16 +35,52 @@
       <file leaf-file-name="UnitWindow.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/product/UnitWindow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="54" selection-start="674" selection-end="674" vertical-scroll-proportion="0.0">
+            <state line="33" column="3" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SaveCancelWindowTests.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/view/SaveCancelWindowTests.js">
+      <file leaf-file-name="RunJasmine.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/RunJasmine.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="776" selection-end="776" vertical-scroll-proportion="0.0">
+            <state line="4" column="0" selection-start="0" selection-end="127" vertical-scroll-proportion="0.06827309">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="0" selection-start="407" selection-end="407" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InitializeApplication.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/InitializeApplication.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="0" selection-start="340" selection-end="340" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InitializeDebug.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/InitializeDebug.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="3" selection-start="157" selection-end="487" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InitializeTest.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/InitializeTest.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="0" selection-start="581" selection-end="581" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -53,61 +89,25 @@
       <file leaf-file-name="LoginWindow.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/User/LoginWindow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="27" selection-start="577" selection-end="577" vertical-scroll-proportion="0.0">
+            <state line="25" column="17" selection-start="519" selection-end="519" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProductWindow.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/view/product/ProductWindow.js">
+      <file leaf-file-name="Debug.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Debug.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="0" selection-start="628" selection-end="628" vertical-scroll-proportion="0.49497992">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Ext.ClassTests.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/extjs/Ext.ClassTests.js">
+      <file leaf-file-name="Application.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="0" selection-start="2887" selection-end="2887" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ModelTests.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/extjs/ModelTests.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="43" selection-start="2110" selection-end="2110" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProductControllerTests.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/controller/ProductControllerTests.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="133" column="31" selection-start="4828" selection-end="4828" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Module1.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/mvc/controller/module1/Module1.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="0" selection-start="508" selection-end="547" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SubModule1.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/mvc/controller/module1/controller/submodule1/SubModule1.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="8" selection-start="455" selection-end="455" vertical-scroll-proportion="0.0">
+            <state line="16" column="11" selection-start="0" selection-end="602" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -127,22 +127,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/lib/view/component/EditableComboBox.js" />
-        <option value="$PROJECT_DIR$/app/lib/window/SaveCancelWindow.js" />
-        <option value="$PROJECT_DIR$/app/view/product/ProductForm.js" />
-        <option value="$PROJECT_DIR$/app/controller/product/Product.js" />
-        <option value="$PROJECT_DIR$/app/lib/view/component/SaveCancelToolBar.js" />
+        <option value="$PROJECT_DIR$/tests/view/SaveCancelWindowTests.js" />
+        <option value="$PROJECT_DIR$/tests/extjs/Ext.ClassTests.js" />
+        <option value="$PROJECT_DIR$/app/lib/view/window/SaveCancelWindow.js" />
         <option value="$PROJECT_DIR$/app/view/product/BrandWindow.js" />
+        <option value="$PROJECT_DIR$/app/view/product/ProductWindow.js" />
         <option value="$PROJECT_DIR$/app/view/product/GenericWindow.js" />
         <option value="$PROJECT_DIR$/app/view/product/PackageWindow.js" />
         <option value="$PROJECT_DIR$/app/view/product/ShapeWindow.js" />
         <option value="$PROJECT_DIR$/app/view/product/UnitWindow.js" />
+        <option value="$PROJECT_DIR$/tests/RunJasmine.js" />
+        <option value="$PROJECT_DIR$/tests/TestApplication.js" />
+        <option value="$PROJECT_DIR$/app/Initialize.js" />
         <option value="$PROJECT_DIR$/app/view/User/LoginWindow.js" />
-        <option value="$PROJECT_DIR$/tests/controller/ProductControllerTests.js" />
-        <option value="$PROJECT_DIR$/tests/view/SaveCancelWindowTests.js" />
-        <option value="$PROJECT_DIR$/tests/extjs/Ext.ClassTests.js" />
-        <option value="$PROJECT_DIR$/app/lib/view/window/SaveCancelWindow.js" />
-        <option value="$PROJECT_DIR$/app/view/product/ProductWindow.js" />
+        <option value="$PROJECT_DIR$/app/InitializeDebug.js" />
+        <option value="$PROJECT_DIR$/app/Test.js" />
+        <option value="$PROJECT_DIR$/app/InitializeTest.js" />
       </list>
     </option>
   </component>
@@ -266,11 +266,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
+              <option name="myItemId" value="style" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -284,57 +280,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
+              <option name="myItemId" value="style" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenForm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenForm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="extjs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenForm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenForm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenForm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenForm" />
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -389,50 +339,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="User" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenForm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenForm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="product" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenForm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenForm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -519,9 +425,9 @@
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995194" sideWeight="0.67057675" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942328" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942328" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14842498" sideWeight="0.55718476" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14842498" sideWeight="0.19061583" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14842498" sideWeight="0.4349951" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14842498" sideWeight="0.80156404" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -576,114 +482,114 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Debug.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="3" selection-start="760" selection-end="760" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/view/product/BrandWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="10" selection-start="592" selection-end="592" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/product/GenericWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="10" selection-start="602" selection-end="602" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/product/PackageWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="54" selection-start="689" selection-end="689" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/product/ShapeWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="54" selection-start="679" selection-end="679" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/model/ProductModelTests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="157" column="12" selection-start="4776" selection-end="4776" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/controller/ProductControllerTests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="31" selection-start="4828" selection-end="4828" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/mvc/controller/module1/Module1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="508" selection-end="547" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/mvc/controller/module1/controller/submodule1/SubModule1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="8" selection-start="455" selection-end="455" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/product/UnitWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="54" selection-start="674" selection-end="674" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/User/LoginWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="27" selection-start="577" selection-end="577" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/extjs/ModelTests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="43" selection-start="2110" selection-end="2110" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/view/SaveCancelWindowTests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="776" selection-end="776" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/extjs/Ext.ClassTests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="0" selection-start="2887" selection-end="2887" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/lib/view/window/SaveCancelWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="30" selection-start="718" selection-end="718" vertical-scroll-proportion="0.0">
+        <state line="16" column="0" selection-start="381" selection-end="381" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/product/ProductWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="628" selection-end="628" vertical-scroll-proportion="0.49497992">
+        <state line="8" column="53" selection-start="198" selection-end="238" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/product/GenericForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="13" selection-start="219" selection-end="219" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/product/GenericWindow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="563" selection-end="563" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/product/PackageWindow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="563" selection-end="563" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/product/ShapeWindow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="523" selection-end="523" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/product/UnitWindow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="3" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/view/SaveCancelWindowTests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="24" selection-start="456" selection-end="456" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/User/LoginWindow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="17" selection-start="519" selection-end="519" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Debug.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="11" selection-start="0" selection-end="602" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/InitializeApplication.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="0" selection-start="340" selection-end="340" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/InitializeDebug.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="3" selection-start="157" selection-end="487" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="0" selection-start="407" selection-end="407" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/InitializeTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="581" selection-end="581" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/RunJasmine.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="0" selection-end="127" vertical-scroll-proportion="0.06827309">
           <folding />
         </state>
       </provider>

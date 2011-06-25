@@ -14,7 +14,6 @@ Ext.define('GenForm.view.product.ShapeWindow', {
     layout: 'fit',
 
     initComponent: function() {
-        this.dockedItems = this.createSaveCancelToolBar();
         this.items = this.createShapeForm();
 
         this.callParent(arguments);
@@ -22,10 +21,6 @@ Ext.define('GenForm.view.product.ShapeWindow', {
 
     createShapeForm: function () {
         return { xtype: 'shapeform' };
-    },
-
-    createSaveCancelToolBar: function () {
-        return Ext.create('GenForm.lib.view.component.SaveCancelToolbar', { dock: 'bottom'});
     },
 
     getShapeForm: function () {

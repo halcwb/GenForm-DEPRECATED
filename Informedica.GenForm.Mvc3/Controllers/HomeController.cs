@@ -10,7 +10,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+            ViewBag.Title = "GenForm Acceptatie";
 
             return View();
         }

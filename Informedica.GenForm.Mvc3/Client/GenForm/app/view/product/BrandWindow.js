@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 Ext.define('GenForm.view.product.BrandWindow', {
-    extend: 'Ext.Window',
+    extend: 'GenForm.lib.view.window.SaveCancelWindow',
     alias: 'widget.brandwindow',
 
     width: 300,
@@ -14,7 +14,6 @@ Ext.define('GenForm.view.product.BrandWindow', {
     layout: 'fit',
 
     initComponent: function() {
-        this.dockedItems = this.createSaveCancelToolBar();
         this.items = this.createBrandForm();
 
         this.callParent(arguments);
@@ -22,10 +21,6 @@ Ext.define('GenForm.view.product.BrandWindow', {
 
     createBrandForm: function () {
         return { xtype: 'brandform' };
-    },
-
-    createSaveCancelToolBar: function () {
-        return Ext.create('GenForm.lib.view.component.SaveCancelToolbar', { dock: 'bottom'});
     },
 
     getBrandForm: function () {

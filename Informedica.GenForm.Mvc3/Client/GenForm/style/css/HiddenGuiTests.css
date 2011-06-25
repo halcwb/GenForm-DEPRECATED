@@ -1,0 +1,26 @@
+body div
+{
+    display:none !important;
+}
+body .jasmine_reporter
+{
+    display:block !important;
+}
+body .jasmine_reporter div
+{
+    display:block !important;
+}
+body .jasmine_reporter
+{
+    position:absolute;
+    width:100%;
+    height:100%;
+    overflow:auto !important;
+    border:1px solid red;
+    top:0px;
+    right:0px;
+}
+body
+{
+    overflow: scroll !important;
+}

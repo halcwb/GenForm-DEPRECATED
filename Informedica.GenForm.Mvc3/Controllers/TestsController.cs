@@ -9,6 +9,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Title = "GenForm Tests";
             return View();
         }
 
