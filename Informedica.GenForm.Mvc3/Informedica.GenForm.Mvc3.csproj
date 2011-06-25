@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ActionResultParser.cs" />
+    <Compile Include="Controllers\AppTestController.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ILoginController.cs" />
@@ -98,7 +99,7 @@
     <Content Include="Client\GenForm\app\controller\product\Product.js" />
     <Content Include="Client\GenForm\app\Debug.js" />
     <Content Include="Client\GenForm\app\lib\view\component\EditableComboBox.js" />
-    <Content Include="Client\GenForm\app\lib\view\component\SaveCancelToolBar.js" />
+    <Content Include="Client\GenForm\app\lib\view\component\SaveCancelToolbar.js" />
     <Content Include="Client\GenForm\app\lib\view\window\SaveCancelWindow.js" />
     <Content Include="Client\GenForm\app\model\product\UnitName.js" />
     <Content Include="Client\GenForm\app\model\user\LoggedInUser.js" />
@@ -135,6 +136,7 @@
     <Content Include="Client\GenForm\app\view\product\UnitWindow.js" />
     <Content Include="Client\GenForm\app\view\User\LoginWindow.js" />
     <Content Include="Client\GenForm\app\view\Viewport.js" />
+    <Content Include="Client\GenForm\style\css\VisibleGuiTest.css" />
     <Content Include="Client\GenForm\tests\controller\ProductControllerTests.js" />
     <Content Include="Client\GenForm\tests\extjs\Ext.ClassTests.js" />
     <Content Include="Client\GenForm\tests\extjs\Ext.ComponentQueryTests.js" />
@@ -151,11 +153,13 @@
     <Content Include="Client\GenForm\tests\mvc\controller\module1\Module1.js" />
     <Content Include="Client\GenForm\tests\mvc\controller\module1\TestController.js" />
     <Content Include="Client\GenForm\tests\mvc\TestApplication.js" />
+    <Content Include="Client\GenForm\tests\RunJasmine.js" />
     <Content Include="Client\GenForm\tests\store\GenericNameStoreTests.js" />
     <Content Include="Client\GenForm\tests\store\ProductSubstanceStoreTests.js" />
     <Content Include="Client\GenForm\tests\view\ProductSubstanceGridTests.js" />
     <Content Include="Client\GenForm\tests\view\SaveCancelWindowTests.js" />
     <Content Include="Client\Library\deployment\ext-all.js" />
+    <Content Include="Client\Library\extjs\resources\css\ext-all-gray.css" />
     <Content Include="Client\Library\extjs\resources\css\ext-all.css" />
     <Content Include="Client\Library\extjs\resources\themes\images\default\boundlist\trigger-arrow.png" />
     <Content Include="Client\Library\extjs\resources\themes\images\default\box\corners-blue.gif" />
@@ -520,10 +524,7 @@
     <Content Include="Client\Library\jasmine\lib\jasmine-1.0.2\jasmine-html.js" />
     <Content Include="Client\Library\jasmine\lib\jasmine-1.0.2\jasmine.css" />
     <Content Include="Client\Library\jasmine\lib\jasmine-1.0.2\jasmine.js" />
-    <Content Include="Client\Library\jasmine\spec\PlayerSpec.js" />
-    <Content Include="Client\Library\jasmine\spec\SpecHelper.js" />
-    <Content Include="Client\Library\jasmine\src\Player.js" />
-    <Content Include="Client\Library\jasmine\src\Song.js" />
+    <Content Include="Client\Library\jasmine\lib\jasmine-1.0.2\json2.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -592,10 +593,10 @@
     </Content>
     <Content Include="packages.config" />
     <None Include="Client\Library\buildExt4.bat" />
-    <None Include="Client\Library\jasmine\lib\jasmine-1.0.2\MIT.LICENSE" />
     <None Include="readme.txt" />
     <Content Include="Views\Tests\Index.cshtml" />
     <Content Include="Views\Debug\Index.cshtml" />
+    <Content Include="Views\AppTest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

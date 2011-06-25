@@ -1,14 +1,17 @@
-﻿@{
-    ViewBag.Title = "GenForm Tests";
-}
+﻿@*
+Runs individual tests and hides the application
+*@
 
+@{
+    Layout = null;
+}
 <!DOCTYPE html>
 <html> 
 
 
 <head>
-  <title>Jasmine Test Runner</title>
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/GenForm/style/css/VisibleGuiTest.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/Library/extjs/resources/css/ext-all.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/GenForm/style/css/HiddenGuiTests.css")" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/Library/jasmine/lib/jasmine-1.0.2/jasmine.css")" />
 
     <script type="text/javascript" src="@Url.Content("~/Client/Library/jasmine/lib/jasmine-1.0.2/jasmine.js")"></script>
@@ -42,7 +45,7 @@
   
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/controller/product/Product.js")"></script>  
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/controller/user/Login.js")"></script>  
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/Debug.js")"></script>  
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/Application.js")"></script>  
  
     @* Sencha tests *@    
 
@@ -70,7 +73,9 @@
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/model/ProductModelTests.js")"></script> 
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/controller/ProductControllerTests.js")"></script>   
 
+    @* Run the Tests *@
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/RunJasmine.js")"></script>
+
 </head>
 
 <body>

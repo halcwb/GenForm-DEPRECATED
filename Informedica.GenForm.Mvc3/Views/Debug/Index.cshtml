@@ -1,7 +1,6 @@
-﻿@{
-    ViewBag.Title = "GenForm Debug";
-}
-
+﻿@*
+Debug version of GenForm, using dynamic loading of Ext classes
+*@
 <!DOCTYPE html>
 
 <html>
@@ -9,45 +8,10 @@
 
     <title></title>
 
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/Library/Ext4/resources/css/ext-standard.css")" />
-
-    <script type="text/javascript">
-        Ext = {};
-        Ext.app = {};
-    </script>    
-    
-    <script type="text/javascript" src="@Url.Content("~/Direct/Api")"></script>
-    
-    <script type="text/javascript">
-        var remoteApi = Ext.app.REMOTING_API;
-    </script>    
-
-    <script type="text/javascript" src="@Url.Content("~/Client/Library/extjs/bootstrap.js")"></script>
-    
-    <script type="text/javascript">
-
-        Ext.require([
-            'Ext.direct.*',
-            'Ext.container.Viewport',
-            'Ext.grid.plugin.RowEditing',
-            'Ext.form.FieldSet',
-            'Ext.tab.Panel',
-            'Ext.form.field.HtmlEditor'
-        ]);
-
-        Ext.Loader.setConfig({
-            enabled: true,
-            disableCaching: true
-        });
-
-        Ext.onReady(function () {
-            remoteApi.enableBuffer = 100;
-            Ext.direct.Manager.addProvider(remoteApi);
-        });
-        
-    </script>
-    
+    <script type="text/javascript" src="@Url.Content("~/Client/Library/extjs/bootstrap.js")"></script>    
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/InitializeDebug.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/Debug.js")"></script>
+
 </head>
 <body>
     <div>

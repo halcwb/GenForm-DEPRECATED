@@ -13,14 +13,6 @@ Ext.define('GenForm.view.product.ProductWindow', {
     height: 500,
     layout: 'fit',
 
-   constructor: function (config) {
-        var me = this;
-
-        me = me.initConfig(config);
-        me.callParent(arguments);
-        return me;
-    },
-
     initComponent: function () {
         var me = this;
 

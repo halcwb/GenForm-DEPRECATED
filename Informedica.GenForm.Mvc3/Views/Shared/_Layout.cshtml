@@ -1,17 +1,30 @@
-﻿<!DOCTYPE html>
+﻿@*
+General setup for all GenForm sites:
+- Home: The Acceptation/Production version
+- Debug: The Acceptation/Production version with Loader enabled for ExtJs
+- Tests: Runs individual tests
+- AppTest: Runs app specific use case scenario's
+*@
+
+<!DOCTYPE html>
+@* 
+    Add style element for the EditableComboBox class
+    TODO: generate special genform.css
+*@
 <style>
  .x-form-add-trigger {
    background-image: url(./Client/Library/extjs/resources/themes/images/default/form/search-trigger.gif) !important;
  }
 </style>
+
 <html>
 
-
 <head>
-    <title></title>
+    <title>@ViewBag.Title</title>
 
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/Library/extjs/resources/css/ext-all.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/Library/extjs/resources/css/ext-all-gray.css")" />
 
+@*Little hack to resolve problems with url resolution*@
     <script type="text/javascript">
         Ext = {};
         Ext.app = {};
@@ -21,30 +34,10 @@
     
     <script type="text/javascript">
         var remoteApi = Ext.app.REMOTING_API;
+        remoteApi.enableBuffer = 100;
     </script>    
 
-    <script type="text/javascript" src="@Url.Content("~/Client/Library/deployment/ext-all.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/Application.js")"></script>
     
-    <script type="text/javascript">
-
-        Ext.require(['Ext.direct.*'
-        ]);
-
-        Ext.Loader.setConfig({  
-            enabled: true,
-            disableCaching: true
-        });
-
-        Ext.onReady(function () {
-            remoteApi.enableBuffer = 100;
-            Ext.direct.Manager.addProvider(remoteApi);
-        });
-        
-    </script>
-    
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/Application.js")"></script>
-
 </head>
 <body>
     @RenderBody();
