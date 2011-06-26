@@ -94,7 +94,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Client\GenForm\app\lib\extjs\bootstrap.js" />
     <Content Include="Client\GenForm\style\css\HiddenGuiTests.css" />
     <Content Include="Client\GenForm\style\images\medicalbanner.jpg" />
     <Content Include="Client\GenForm\app\Application.js" />
