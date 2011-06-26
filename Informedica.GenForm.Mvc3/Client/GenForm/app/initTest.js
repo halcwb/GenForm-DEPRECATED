@@ -25,6 +25,7 @@ Ext.onReady(function () {
     Ext.app.config.appFolder = '../Client/GenForm/app';
     Ext.application(Ext.app.config);
 
-    setTimeout("jasmine.getEnv().addReporter(new jasmine.TrivialReporter());" +
+    setTimeout("jasmine.getEnv().addReporter(new jasmine.TrivialReporter()); " +
+               "jasmine.Queue(jasmine.getEnv()); " +
                "jasmine.getEnv().execute()", 3000);
 });

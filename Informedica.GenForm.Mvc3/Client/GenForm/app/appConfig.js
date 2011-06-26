@@ -30,6 +30,7 @@ Ext.app.config = {
     },
 
     showProductWindow: function () {
-        this.getController('product.Product').showProductWindow();
+        var me = this;
+        me.getController('product.Product').showProductWindow();
     }
 };

@@ -41,15 +41,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/test.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="17" selection-start="1683" selection-end="1683" vertical-scroll-proportion="0.8704819">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="initApp.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/initApp.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -71,7 +62,7 @@
       <file leaf-file-name="initTest.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/initTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="24" selection-start="404" selection-end="404" vertical-scroll-proportion="0.0">
+            <state line="28" column="26" selection-start="696" selection-end="696" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -80,7 +71,7 @@
       <file leaf-file-name="LoginWindow.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/User/LoginWindow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="17" selection-start="1510" selection-end="1510" vertical-scroll-proportion="0.0">
+            <state line="54" column="0" selection-start="1542" selection-end="1542" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -89,7 +80,7 @@
       <file leaf-file-name="Login.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controller/user/Login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="31" selection-start="657" selection-end="657" vertical-scroll-proportion="0.0">
+            <state line="54" column="47" selection-start="1354" selection-end="1354" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -98,7 +89,25 @@
       <file leaf-file-name="appConfig.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/appConfig.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="2" selection-start="719" selection-end="719" vertical-scroll-proportion="0.0">
+            <state line="33" column="64" selection-start="731" selection-end="731" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Product.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controller/product/Product.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="158" column="6" selection-start="4542" selection-end="4542" vertical-scroll-proportion="0.5973896">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="39" column="13" selection-start="1238" selection-end="1238" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -118,8 +127,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/Initialize.js" />
-        <option value="$PROJECT_DIR$/app/InitializeDebug.js" />
         <option value="$PROJECT_DIR$/app/InitializeTest.js" />
         <option value="$PROJECT_DIR$/app/InitializeApplication.js" />
         <option value="$PROJECT_DIR$/app/GenForm.js" />
@@ -127,13 +134,15 @@
         <option value="$PROJECT_DIR$/app/AppConfig.js" />
         <option value="$PROJECT_DIR$/app/InitiDebug.js" />
         <option value="$PROJECT_DIR$/app/InitApp.js" />
-        <option value="$PROJECT_DIR$/app/Test.js" />
         <option value="$PROJECT_DIR$/app/InitTest.js" />
         <option value="$PROJECT_DIR$/app/InitDebug.js" />
-        <option value="$PROJECT_DIR$/app/controller/user/Login.js" />
-        <option value="$PROJECT_DIR$/app/initTest.js" />
         <option value="$PROJECT_DIR$/app/view/User/LoginWindow.js" />
         <option value="$PROJECT_DIR$/app/test.js" />
+        <option value="$PROJECT_DIR$/app/initTest.js" />
+        <option value="$PROJECT_DIR$/app/Test.js" />
+        <option value="$PROJECT_DIR$/app/controller/user/Login.js" />
+        <option value="$PROJECT_DIR$/app/appConfig.js" />
+        <option value="$PROJECT_DIR$/app/controller/product/Product.js" />
       </list>
     </option>
   </component>
@@ -387,8 +396,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Library/extjs/src/button" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
@@ -453,22 +462,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995194" sideWeight="0.67057675" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942328" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942328" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14842498" sideWeight="0.19061583" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1500267" sideWeight="0.19648094" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14842498" sideWeight="0.80156404" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1500267" sideWeight="0.79569894" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942328" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -519,105 +528,92 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/view/product/ProductWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="53" selection-start="198" selection-end="238" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="8" column="53" selection-start="198" selection-end="238" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/product/GenericForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="13" selection-start="219" selection-end="219" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="8" column="13" selection-start="219" selection-end="219" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/product/GenericWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="563" selection-end="563" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="25" column="0" selection-start="563" selection-end="563" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/product/PackageWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="563" selection-end="563" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="25" column="0" selection-start="563" selection-end="563" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/product/ShapeWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="523" selection-end="523" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="25" column="0" selection-start="523" selection-end="523" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/product/UnitWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="3" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="33" column="3" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/view/SaveCancelWindowTests.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="24" selection-start="456" selection-end="456" vertical-scroll-proportion="0.0">
+        <state line="14" column="24" selection-start="456" selection-end="456" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/initApp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="293" selection-end="351" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/initDebug.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="436" selection-end="494" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/User/LoginWindow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="0" selection-start="1542" selection-end="1542" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/RunJasmine.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="127" selection-end="127" vertical-scroll-proportion="0.0">
+        <state line="4" column="0" selection-start="127" selection-end="127" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/initTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="26" selection-start="696" selection-end="696" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/appConfig.js">
+    <entry file="file://$PROJECT_DIR$/app/Test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="2" selection-start="719" selection-end="719" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/initApp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="293" selection-end="351" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/initDebug.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="436" selection-end="494" vertical-scroll-proportion="0.0">
+        <state line="39" column="13" selection-start="1238" selection-end="1238" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controller/user/Login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="31" selection-start="657" selection-end="657" vertical-scroll-proportion="0.0">
+        <state line="54" column="47" selection-start="1354" selection-end="1354" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/User/LoginWindow.js">
+    <entry file="file://$PROJECT_DIR$/app/appConfig.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="17" selection-start="1510" selection-end="1510" vertical-scroll-proportion="0.0">
+        <state line="33" column="64" selection-start="731" selection-end="731" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/initTest.js">
+    <entry file="file://$PROJECT_DIR$/app/controller/product/Product.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="24" selection-start="404" selection-end="404" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="17" selection-start="1683" selection-end="1683" vertical-scroll-proportion="0.8704819">
+        <state line="158" column="6" selection-start="4542" selection-end="4542" vertical-scroll-proportion="0.5973896">
           <folding />
         </state>
       </provider>
