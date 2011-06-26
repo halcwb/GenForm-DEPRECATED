@@ -94,7 +94,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Client\Application\Images\medicalbanner.jpg" />
+    <Content Include="Client\GenForm\app\lib\extjs\bootstrap.js" />
+    <Content Include="Client\GenForm\style\css\HiddenGuiTests.css" />
+    <Content Include="Client\GenForm\style\images\medicalbanner.jpg" />
     <Content Include="Client\GenForm\app\Application.js" />
     <Content Include="Client\GenForm\app\controller\product\Product.js" />
     <Content Include="Client\GenForm\app\Debug.js" />
@@ -600,6 +602,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Client\Application\Images\" />
     <Folder Include="Client\GenForm\app\lib\view\form\" />
     <Folder Include="Models\" />
   </ItemGroup>

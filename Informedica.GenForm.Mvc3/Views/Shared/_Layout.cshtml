@@ -24,7 +24,8 @@ General setup for all GenForm sites:
 
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/Library/extjs/resources/css/ext-all-gray.css")" />
 
-@*Little hack to resolve problems with url resolution*@
+    @RenderSection("CSS", false)
+
     <script type="text/javascript">
         Ext = {};
         Ext.app = {};
@@ -33,13 +34,15 @@ General setup for all GenForm sites:
     <script type="text/javascript" src="@Url.Content("~/Direct/Api")"></script>
     
     <script type="text/javascript">
-        var remoteApi = Ext.app.REMOTING_API;
-        remoteApi.enableBuffer = 100;
+       Ext.app.REMOTING_API.enableBuffer = 100;
     </script>    
 
+    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/AppConfig.js")"></script>
     
+    @RenderSection("Javascript", false)
+
 </head>
 <body>
-    @RenderBody();
+    @RenderBody()
 </body>
 </html>
