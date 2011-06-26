@@ -26,10 +26,6 @@ Ext.define('GenForm.controller.user.Login', {
 
     },
 
-    onLaunch: function() {
-
-    },
-
     validateLogin: function(button) {
         var win, form, record, vals;
 

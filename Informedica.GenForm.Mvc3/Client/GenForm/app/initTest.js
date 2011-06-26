@@ -2,7 +2,7 @@
  * Created by JetBrains WebStorm.
  * User: halcwb
  * Date: 6/25/11
- * Time: 1:10 PM
+ * Time: 1:36 PM
  * To change this template use File | Settings | File Templates.
  */
 Ext.require([
@@ -20,5 +20,11 @@ Ext.Loader.setConfig({
 });
 
 Ext.onReady(function () {
-    Ext.direct.Manager.addProvider(remoteApi);
+    Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
+
+    Ext.app.config.appFolder = '../Client/GenForm/app';
+    Ext.application(Ext.app.config);
+
+    setTimeout("jasmine.getEnv().addReporter(new jasmine.TrivialReporter());" +
+               "jasmine.getEnv().execute()", 3000);
 });

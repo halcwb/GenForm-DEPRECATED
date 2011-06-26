@@ -2,19 +2,8 @@
 Main Acceptation/Production View
 *@
 
-<!DOCTYPE html>
-<html>
-    <head>
-
-        <script type="text/javascript" src="@Url.Content("~/Client/Library/deployment/ext-all-debug.js")"></script>
-    
-        <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/InitializeApplication.js")"></script>
-        <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/Application.js")"></script>
-
-    </head>
-    <body>
-        <div>
-
-        </div>
-    </body>
-</html>
+@section Javascript
+{
+       <script type="text/javascript" src="@Url.Content("~/Client/Library/deployment/ext-all.js")"></script>
+       <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/initApp.js")"></script>
+}
