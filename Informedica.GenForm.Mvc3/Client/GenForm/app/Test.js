@@ -6,8 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
-describe('Login', function () {
-    var getLoginWindow, getLoginController, getLoginButton;
+describe('Login tests that', function () {
+    var getLoginWindow, getLoginController, getLoginButton, setTextField, checkLoginMessage, loginMessage;
 
     getLoginController = function () {
         return GenForm.application.getController('user.Login');
@@ -19,6 +19,27 @@ describe('Login', function () {
 
     getLoginButton = function () {
         return Ext.ComponentQuery.query('toolbar button[action=login]')[0];
+    };
+
+    setTextField = function (textfield, value) {
+        textfield.inputEl.dom.value = value;
+        textfield.value = value;
+        return true;
+    };
+
+    checkLoginMessage = function () {
+        var results = Ext.ComponentQuery.query('messagebox');
+        if (results.length > 0)
+        {
+            if (results[0].cfg) {
+                if (results[0].cfg.msg === loginMessage)
+                {
+                    setTimeout("Ext.ComponentQuery.query('button[text=OK]')[0].btnEl.dom.click();", 1000);
+                    return true;
+                }
+            }
+        }
+        return false
     };
 
     it('There should be a login controller', function () {
@@ -35,23 +56,31 @@ describe('Login', function () {
         expect(window.closable === false).toBeTruthy();
     });
 
-    it('Users cannot login using empty Username and Password', function () {
+    it('Only with a valid username and password, you can log in', function () {
         var button = getLoginButton(), results;
-        button.btnEl.dom.click();
 
-        waitsFor(function () {
-            results = Ext.ComponentQuery.query('messagebox');
-            if (results.length > 0)
-            {
-                if (results[0].cfg) {
-                    if (results[0].cfg.msg === "Login geweigerd")
-                    {
-                        setTimeout("Ext.ComponentQuery.query('button[text=OK]')[0].btnEl.dom.click();", 1000);
-                        return true;
-                    }
-                }
-            }
-            return false
-        }, 'waiting for a refusal message', 2000);
+        button.btnEl.dom.click();
+        loginMessage = "Login geweigerd";
+        waitsFor(checkLoginMessage, 'waiting for a refusal message', 2000);
     });
+
+    it('User can set username and password', function () {
+        var userField = Ext.ComponentQuery.query('textfield[name=username]')[0],
+            passwField = Ext.ComponentQuery.query('textfield[name=password]')[0];
+
+        setTextField(userField, "Admin");
+        setTextField(passwField, "Admin");
+
+        expect(userField.value).toBe("Admin");
+        expect(passwField.value).toBe("Admin");
+    });
+
+    it('User can login using a valid name and password', function () {
+        var button = getLoginButton();
+
+        button.btnEl.dom.click();
+        loginMessage = "Login succesvol";
+        waitsFor(checkLoginMessage, "waiting for successfull login", 2000);
+    });
+
 });

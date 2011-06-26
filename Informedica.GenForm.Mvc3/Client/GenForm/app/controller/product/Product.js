@@ -151,11 +151,11 @@ Ext.define('GenForm.controller.product.Product', {
     },
 
     getProductWindow: function () {
-        var me = this, form;
+        var me = this, window;
 
-        form = me.createProductWindow();
-        me.loadEmptyProduct(form);
-        return form;
+        window = me.createProductWindow();
+        me.loadEmptyProduct(window);
+        return window;
     },
 
     getBrandWindow: function () {

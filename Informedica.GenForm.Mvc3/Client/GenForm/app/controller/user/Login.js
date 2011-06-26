@@ -39,17 +39,19 @@ Ext.define('GenForm.controller.user.Login', {
     },
 
     loginCallBackFunction: function (result) {
-        this.loggedIn = result.success;
+        var me = this;
+        me.loggedIn = result.success;
         
         if (result.success) {
-            Ext.MessageBox.alert('Formularium 2011 Login', 'Login succesvol', this.closeLoginWindow, this);
+            Ext.MessageBox.alert('Formularium 2011 Login', 'Login succesvol', me.closeLoginWindow, me);
         }else{
             Ext.MessageBox.alert('Formularium 2011 Login', 'Login geweigerd');
         }
     },
 
     closeLoginWindow: function () {
-        this.loginWindow.close();
+        var me = this;
+        me.loginWindow.close();
         GenForm.application.showProductWindow();
     }
 
