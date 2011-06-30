@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 Ext.define('GenForm.view.product.UnitWindow', {
-    extend: 'Ext.Window',
+    extend: 'GenForm.lib.view.window.SaveCancelWindow',
     alias: 'widget.unitwindow',
 
     width: 300,

@@ -6,15 +6,13 @@
  * To change this template use File | Settings | File Templates.
  */
 Ext.define('GenForm.view.product.ProductForm', {
-    extend: 'Ext.form.FormPanel',
+    extend: 'Ext.form.Panel',
     alias: 'widget.productform',
 
     requires: [
         'GenForm.lib.view.component.EditableComboBox'
     ],
 
-    waitMsgTarget: true,
-    
     initComponent: function () {
         var me = this;
         me.items = this.createItems();

@@ -94,11 +94,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\GenForm\app\appConfig.js" />
+    <Content Include="Client\GenForm\app\initApp.js" />
+    <Content Include="Client\GenForm\app\initDebug.js" />
+    <Content Include="Client\GenForm\app\initTest.js" />
+    <Content Include="Client\GenForm\app\Test.js" />
+    <Content Include="Client\GenForm\app\test\LoginTest.js" />
+    <Content Include="Client\GenForm\app\test\NewProductTest.js" />
     <Content Include="Client\GenForm\style\css\HiddenGuiTests.css" />
     <Content Include="Client\GenForm\style\images\medicalbanner.jpg" />
-    <Content Include="Client\GenForm\app\Application.js" />
     <Content Include="Client\GenForm\app\controller\product\Product.js" />
-    <Content Include="Client\GenForm\app\Debug.js" />
     <Content Include="Client\GenForm\app\lib\view\component\EditableComboBox.js" />
     <Content Include="Client\GenForm\app\lib\view\component\SaveCancelToolbar.js" />
     <Content Include="Client\GenForm\app\lib\view\window\SaveCancelWindow.js" />

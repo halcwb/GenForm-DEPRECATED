@@ -9,9 +9,6 @@ Ext.define('GenForm.view.product.ProductSubstanceGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.productsubstancegrid',
 
-    testStore: 'GenForm.data.ProductSubstanceTestData',
-    productionStore: 'GenForm.store.product.ProductSubstance',
-
     initComponent: function () {
         this.store = this.store || this.getProductSubstanceStore();
         this.columns = this.createColumns();
@@ -29,6 +26,6 @@ Ext.define('GenForm.view.product.ProductSubstanceGrid', {
     },
 
     getProductSubstanceStore: function () {
-        return Ext.create(this.testStore);
+        return Ext.create('GenForm.store.product.ProductSubstance');
     }
 });

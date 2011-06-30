@@ -86,7 +86,6 @@ Ext.define('GenForm.view.product.ShapeForm', {
         return Ext.create('GenForm.view.product.PackageGrid', config);
     },
 
-
     createRowEditor: function () {
         return Ext.create('Ext.grid.plugin.RowEditing', {
             clicksToMoveEditor: 1,
