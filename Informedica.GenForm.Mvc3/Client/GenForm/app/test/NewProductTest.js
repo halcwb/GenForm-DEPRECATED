@@ -6,11 +6,11 @@ GenForm.test.NewProductTest.describe = 'NewProductTest tests that';
 GenForm.test.NewProductTest.fn  = function () {
     var me = this;
 
-    me.getTextField = function (fieldname) {
+    me.getFormField = function (fieldname) {
         return Ext.ComponentQuery.query('textfield[name=' + fieldname + ']')[0];
     };
 
-    me.setTextField = function (textfield, value) {
+    me.setFormField = function (textfield, value) {
         textfield.inputEl.dom.value = value;
         textfield.value = value;
         return true;
@@ -28,10 +28,20 @@ GenForm.test.NewProductTest.fn  = function () {
         expect(me.getProductWindow().isEmpty()).toBeTruthy();
     });
 
-    it('The user can enter a productname', function () {
+    it('User can enter a productname', function () {
         var productName = 'dopamine (Dynatra) infusievloeistof 200 mg / 5 ml ampul', value;
-        me.setTextField(me.getTextField('ProductName'), productName);
+        me.setFormField(me.getFormField('ProductName'), productName);
         
-        expect(me.getTextField('ProductName').value).toBe(productName)
+        expect(me.getFormField('ProductName').value).toBe(productName)
+    });
+
+    it('User can enter a product quantity', function () {
+        var quantity = 5;
+        me.setFormField(me.getFormField('Quantity'), quantity);
+        expect(me.getFormField('Quantity').value).toBe(quantity)
+    });
+
+    it('User can add a Generic', function () {
+
     });
 };

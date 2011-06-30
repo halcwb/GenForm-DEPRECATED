@@ -10,10 +10,11 @@ Ext.define('GenForm.view.product.ProductSubstanceGrid', {
     alias: 'widget.productsubstancegrid',
 
     initComponent: function () {
-        this.store = this.store || this.getProductSubstanceStore();
-        this.columns = this.createColumns();
+        var me = this;
+        me.store = me.store || this.getProductSubstanceStore();
+        me.columns = me.createColumns();
         
-        this.callParent(arguments)
+        me.callParent(arguments)
     },
 
     createColumns: function () {

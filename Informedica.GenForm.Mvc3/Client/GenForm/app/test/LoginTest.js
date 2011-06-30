@@ -22,11 +22,11 @@ GenForm.test.LoginTest.fn =  function () {
         return Ext.ComponentQuery.query('toolbar button[action=login]')[0];
     };
 
-    me.getTextField = function (fieldname) {
+    me.getFormField = function (fieldname) {
         return Ext.ComponentQuery.query('textfield[name=' + fieldname + ']')[0];
     };
 
-    me.setTextField = function (textfield, value) {
+    me.setFormField = function (textfield, value) {
         textfield.inputEl.dom.value = value;
         textfield.value = value;
         return true;
@@ -75,11 +75,11 @@ GenForm.test.LoginTest.fn =  function () {
     });
 
     it('User can set username and password', function () {
-        var userField = me.getTextField('username'),
-            passwField = me.getTextField('password');
+        var userField = me.getFormField('username'),
+            passwField = me.getFormField('password');
 
-        me.setTextField(userField, "Invalid");
-        me.setTextField(passwField, "Invalid");
+        me.setFormField(userField, "Invalid");
+        me.setFormField(passwField, "Invalid");
 
         expect(userField.value).toBe("Invalid");
         expect(passwField.value).toBe("Invalid");
@@ -95,11 +95,11 @@ GenForm.test.LoginTest.fn =  function () {
 
     it('User can login using a valid name and password', function () {
         var button = me.getLoginButton(),
-            userField = me.getTextField('username'),
-            passwField = me.getTextField('password');
+            userField = me.getFormField('username'),
+            passwField = me.getFormField('password');
 
-        me.setTextField(userField, "Admin");
-        me.setTextField(passwField, "Admin");
+        me.setFormField(userField, "Admin");
+        me.setFormField(passwField, "Admin");
 
         me.clickButton(button);
         loginMessage = successMessage;
