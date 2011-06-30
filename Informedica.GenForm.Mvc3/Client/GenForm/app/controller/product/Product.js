@@ -43,13 +43,17 @@ Ext.define('GenForm.controller.product.Product', {
         'product.PackageWindow',
         'product.PackageForm',
         'product.UnitWindow',
-        'product.UnitForm'
+        'product.UnitForm',
+        'product.ProductGrid'
     ],
 
     init: function() {
         var me = this;
 
         me.control({
+            'panel[region=west]': {
+                render: me.onRegionWestRendered
+            },
             'productwindow > toolbar button[action=save]': {
                 click: me.saveProduct
             },
@@ -107,8 +111,10 @@ Ext.define('GenForm.controller.product.Product', {
                 click: me.showCancelMessage
             }
         });
+    },
 
-        me.callParent(arguments);
+    onRegionWestRendered: function (westpanel) {
+        westpanel.add([ { xtype: 'productgrid'} ]);
     },
 
     editOrAddGeneric: function () {
