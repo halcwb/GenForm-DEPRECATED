@@ -26,7 +26,7 @@ Ext.define('GenForm.controller.product.Product', {
         'product.ShapeName',
         'product.UnitName',
         'product.PackageName',
-        'GenForm.data.ProductSubstanceTestData'//'GenForm.store.product.ProductSubstanceStore'
+        'product.ProductSubstance'
     ],
 
     views: [

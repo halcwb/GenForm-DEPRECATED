@@ -30,7 +30,26 @@ Ext.define('GenForm.view.product.ProductWindow', {
     },
 
     loadWithProduct: function (product) {
-        this.getProductForm().getForm().loadRecord(product);
+        var me = this;
+        me.getProductForm().getForm().loadRecord(product);
+    },
+
+    isEmpty: function () {
+        var me = this, values, value, prop, isEmpty = true;
+        values =  me.getProductForm().getForm().getFieldValues();
+        for (prop in values) {
+            if (values.hasOwnProperty(prop)) {
+                value = values[prop];
+                if (!me.isValueEmpty(value)) isEmpty = false;
+            }
+        }
+        if (Ext.ComponentQuery.query('productsubstancegrid')[0].getStore().getCount() !== 0) isEmpty = false;
+
+        return isEmpty;
+    },
+
+    isValueEmpty: function (value) {
+        return (value === '' || value === 0 || value === null || value === undefined);
     }
 
 });

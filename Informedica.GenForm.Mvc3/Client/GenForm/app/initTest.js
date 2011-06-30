@@ -27,5 +27,5 @@ Ext.onReady(function () {
 
     setTimeout("jasmine.getEnv().addReporter(new jasmine.TrivialReporter()); " +
                "jasmine.Queue(jasmine.getEnv()); " +
-               "jasmine.getEnv().execute()", 3000);
+               "jasmine.getEnv().execute()", 5000);
 });

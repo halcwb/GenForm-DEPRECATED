@@ -8,7 +8,7 @@
 Ext.app.config = {
     name: 'GenForm',
 
-    autoCreateViewport: false,
+    'autoCreateViewport': false,
 
     controllers: [
         'user.Login',
