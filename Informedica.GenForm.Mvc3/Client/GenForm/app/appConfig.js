@@ -1,10 +1,3 @@
-/**
- * Created by JetBrains WebStorm.
- * User: halcwb
- * Date: 6/25/11
- * Time: 7:22 PM
- * To change this template use File | Settings | File Templates.
- */
 Ext.app.config = {
     name: 'GenForm',
 
@@ -31,9 +24,11 @@ Ext.app.config = {
         return Ext.create('GenForm.view.user.LoginWindow');
     },
 
-    showProductWindow: function () {
+    startApplication: function () {
+/*
         var me = this;
         me.getController('product.Product').showProductWindow();
+*/
     },
 
     getViewPortItems: function () {
@@ -84,20 +79,34 @@ Ext.app.config = {
             'columns': 3,
             'title': 'Artikel Bewerken',
             'items': [
-               me.getNewProductButton()
+               me.getNewProductButton(),
+               me.getNewGenericButton()
             ]
         }
     },
 
     getNewProductButton: function () {
-        return  Ext.create('GenForm.lib.view.component.ToolbarButton', {
-                    'text': 'Nieuw',
-                    'height': 55,
-                    'scale': 'large',
-                    'rowspan': 3,
-                    'icon': 'newmedicine.png',
-                    'iconAlign': 'top'
-                });
+        return  Ext.create('GenForm.lib.view.button.ToolbarButton', {
+            'text': 'Nieuw Artikel',
+            'height': 55,
+            'width': 100,
+            'scale': 'large',
+            'rowspan': 3,
+            'icon': 'newmedicine.png',
+            'iconAlign': 'top'
+        });
+    },
+
+    getNewGenericButton: function () {
+        return  {
+            'xtype': 'toolbarbutton',
+            'text': 'Nieuw Generiek',
+            'scale': 'small',
+            'rowspan': 1,
+            'icon': 'add.gif',
+            'iconAlign': 'top',
+            'cls': 'x-button-as-arrow'
+        };
     }
 
 };

@@ -52,7 +52,7 @@ Ext.define('GenForm.controller.user.Login', {
     closeLoginWindow: function () {
         var me = this;
         me.loginWindow.close();
-        GenForm.application.showProductWindow();
+        GenForm.application.startApplication();
     }
 
 });

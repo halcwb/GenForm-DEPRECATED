@@ -2,9 +2,9 @@ Ext.define('GenForm.lib.view.component.EditableComboBox',{
     extend:'Ext.form.field.ComboBox',
     alias:['widget.editablecombo', 'widget.editcombo'],
     
-    trigger1Cls:Ext.baseCSSPrefix + 'form-clear-trigger',
-    trigger2Cls:Ext.baseCSSPrefix + 'form-arrow-trigger',
-    trigger3Cls:Ext.baseCSSPrefix + 'form-search-trigger',
+    trigger1Cls: Ext.baseCSSPrefix + 'form-clear-trigger',
+    trigger2Cls: Ext.baseCSSPrefix + 'form-arrow-trigger',
+    trigger3Cls: Ext.baseCSSPrefix + 'form-search-trigger',
 
     multiSelect: false,
 
