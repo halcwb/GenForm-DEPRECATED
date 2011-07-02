@@ -54,6 +54,12 @@ Ext.define('GenForm.controller.product.Product', {
             'panel[region=west]': {
                 render: me.onRegionWestRendered
             },
+            'panel[title=Menu] > buttongroup > button[text=Nieuw Artikel]': {
+                click: me.showProductWindow
+            },
+            'panel[title=Menu] > buttongroup > button[text=Nieuw Generiek]': {
+                click: me.editOrAddGeneric
+            },
             'productwindow > toolbar button[action=save]': {
                 click: me.saveProduct
             },

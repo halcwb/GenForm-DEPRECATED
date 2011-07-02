@@ -20,12 +20,34 @@ Ext.Loader.setConfig({
 });
 
 Ext.onReady(function () {
+    var newProductTest, loginTest;
+
     Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
 
     Ext.app.config.appFolder = '../Client/GenForm/app';
+    Ext.app.config.launch = function() {
+        var me = this;
+        GenForm.application = me;
+
+        Ext.create('Ext.container.Viewport', {
+            layout: 'border',
+            items: me.getViewPortItems()
+        });
+
+        me.createLoginWindow().show();
+
+        loginTest = Ext.create('GenForm.test.LoginTest');
+        describe(loginTest.describe, loginTest.fn);
+
+        newProductTest = Ext.create('GenForm.test.NewProductTest');
+        describe(newProductTest.describe, newProductTest.fn);
+
+        jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+        jasmine.Queue(jasmine.getEnv());
+        jasmine.getEnv().execute();
+
+    };
+
     Ext.application(Ext.app.config);
 
-    setTimeout("jasmine.getEnv().addReporter(new jasmine.TrivialReporter()); " +
-               "jasmine.Queue(jasmine.getEnv()); " +
-               "jasmine.getEnv().execute()", 5000);
 });

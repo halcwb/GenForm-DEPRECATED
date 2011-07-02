@@ -14,12 +14,6 @@ Ext.define('GenForm.view.product.ProductGrid', {
     },
 
     getProductInfoStore: function () {
-        return Ext.create('Ext.data.Store', {
-            fields:['ProductName'],
-            data:[
-                {ProductName: "Paracetamol"},
-                {ProductName: "Dopamine"}
-            ]
-        });
+        return Ext.create('GenForm.store.product.Product');
     }
 });
