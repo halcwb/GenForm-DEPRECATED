@@ -2,28 +2,14 @@ Ext.define('GenForm.test.NewProductTest', {
     describe: 'NewProductTest tests that',
 
     fn: function () {
-        var me = this, formQuery = Ext.create('GenForm.test.util.FormFieldQuery');
+        var me = this, queryHelper = Ext.create('GenForm.test.util.QueryHelper');
 
         me.getNewProductButton = function () {
-            return Ext.ComponentQuery.query('panel[title=Menu] > buttongroup > button[text=Nieuw Artikel]')[0];
+            return queryHelper.getButton('panel[title=Menu]','Nieuw Artikel');
         };
 
         me.getNewGenericButton = function () {
-            return Ext.ComponentQuery.query('panel[title=Menu] > buttongroup > button[text=Nieuw Generiek]')[0];
-        };
-
-        me.getFormField = function (form, fieldname) {
-            return Ext.ComponentQuery.query(form + ' textfield[name=' + fieldname + ']')[0];
-        };
-
-        me.setFormField = function (formfield, value) {
-            formfield.inputEl.dom.value = value;
-            formfield.value = value;
-            return true;
-        };
-
-        me.clickButton = function (button) {
-            button.btnEl.dom.click();
+            return queryHelper.getButton('panel[title=Menu]', 'Nieuw Generiek');
         };
 
         me.getProductWindow = function () {
@@ -35,7 +21,7 @@ Ext.define('GenForm.test.NewProductTest', {
         };
 
         it('User sees an empty Product window', function () {
-            me.clickButton(me.getNewProductButton());
+            queryHelper.clickButton(me.getNewProductButton());
             expect(me.getProductWindow()).toBeDefined();
         });
 
@@ -44,27 +30,35 @@ Ext.define('GenForm.test.NewProductTest', {
         });
 
         it('User can enter a productname', function () {
-            var productName = 'dopamine (Dynatra) infusievloeistof 200 mg / 5 ml ampul', value;
-            me.setFormField(me.getFormField('productform', 'ProductName'), productName);
+            var productName = 'dopamine (Dynatra) infusievloeistof 200 mg / 5 ml ampul';
+            queryHelper.setFormField(queryHelper.getFormTextField('productform', 'ProductName'), productName);
 
-            expect(me.getFormField('productform', 'ProductName').value).toBe(productName)
+            expect(queryHelper.getFormTextField('productform', 'ProductName').value).toBe(productName)
         });
 
         it('User can enter a product quantity', function () {
             var quantity = 5;
-            me.setFormField(Ext.ComponentQuery.query('productform' + ' numberfield[name=Quantity]')[0], quantity);
-            expect(Ext.ComponentQuery.query('productform' + ' numberfield[name=Quantity]')[0].value).toBe(quantity)
+            queryHelper.setFormField(queryHelper.getFormNumberField('productform', 'Quantity'), quantity);
+            expect(queryHelper.getFormNumberField('productform', 'Quantity').value).toBe(quantity)
         });
 
         it('User can open up a window to add a new generic', function () {
-            me.clickButton(me.getNewGenericButton());
+            queryHelper.clickButton(me.getNewGenericButton());
             expect(me.getGenericWindow()).toBeDefined();
         });
 
         it('User can enter a name for the new generic', function () {
             var name = 'paracetamol';
-            me.setFormField(me.getFormField('genericform', 'GenericName'), name);
-            expect(me.getFormField('genericform', 'GenericName').value).toBe(name);
+            queryHelper.setFormField(queryHelper.getFormTextField('genericform', 'GenericName'), name);
+            expect(queryHelper.getFormTextField('genericform', 'GenericName').value).toBe(name);
+        });
+
+        it('A new generic with a valid name can be saved', function () {
+            queryHelper.clickButton(queryHelper.getButton('genericwindow', 'Opslaan'));
+
+            waitsFor(function () {
+               queryHelper.getWindow('')
+            });
         });
     }
 });
