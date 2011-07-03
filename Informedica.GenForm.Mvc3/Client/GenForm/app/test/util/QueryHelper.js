@@ -21,7 +21,8 @@ Ext.define('GenForm.test.util.QueryHelper', {
     },
 
     getButton: function (container, buttontext) {
-        console.log(container + ' ' + button);
+        //console.log(container + ' ' + buttontext);
+        //debugger;
         return Ext.ComponentQuery.query(container + ' button[text=' + buttontext + ']')[0];
     },
 

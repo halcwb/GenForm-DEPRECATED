@@ -2,7 +2,7 @@ Ext.define('GenForm.test.LoginTest', {
     describe: 'Login tests that',
 
     fn: function () {
-        var me = GenForm.test.LoginTest,
+        var me = this,
             loginMessage = "",
             refusalMessage = "Login geweigerd",
             successMessage = "Login succesvol",
