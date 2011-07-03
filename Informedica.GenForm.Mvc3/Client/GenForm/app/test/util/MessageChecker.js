@@ -1,14 +1,23 @@
 Ext.define('GenForm.test.util.MessageChecker', {
-    queryHelper: Ext.create('GenForm.test.util.QueryHelper'),
+    queryHelper: null,
 
-    checkLoginMessage: function (message) {
-        var me = this, msgBox = me.queryHelper.getWindow('messagebox');
+    setQueryHelper: function () {
+        var me = this;
+        me.queryHelper = Ext.create('GenForm.test.util.QueryHelper');
+    },
+
+    checkMessage: function (message) {
+        var me = this, msgBox;
+        
+        if(!me.queryHelper) me.setQueryHelper();
+        msgBox = me.queryHelper.getWindow('messagebox');
+
         if (msgBox)
         {
             if (msgBox.cfg) {
                 if (msgBox.cfg.msg === message)
                 {
-                    me.queryHelper.getButton('messagebox', 'button[text=OK]').btnEl.dom.click();
+                    me.queryHelper.getButton('messagebox', 'OK').btnEl.dom.click();
                     return true;
                 }
             }

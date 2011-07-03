@@ -2,7 +2,12 @@ Ext.define('GenForm.test.NewProductTest', {
     describe: 'NewProductTest tests that',
 
     fn: function () {
-        var me = this, queryHelper = Ext.create('GenForm.test.util.QueryHelper');
+        console.log(this);
+        var me = this,
+            queryHelper = Ext.create('GenForm.test.util.QueryHelper'),
+            messageChecker = Ext.create('GenForm.test.util.MessageChecker'),
+            message = '',
+            waitingTime = 500;
 
         me.getNewProductButton = function () {
             return queryHelper.getButton('panel[title=Menu]','Nieuw Artikel');
@@ -18,6 +23,10 @@ Ext.define('GenForm.test.NewProductTest', {
 
         me.getGenericWindow = function () {
             return Ext.ComponentQuery.query('genericwindow')[0];
+        };
+
+        me.checkMessage = function () {
+            return messageChecker.checkMessage('paracetamol');
         };
 
         it('User sees an empty Product window', function () {
@@ -54,11 +63,11 @@ Ext.define('GenForm.test.NewProductTest', {
         });
 
         it('A new generic with a valid name can be saved', function () {
+            //var me = this;
             queryHelper.clickButton(queryHelper.getButton('genericwindow', 'Opslaan'));
 
-            waitsFor(function () {
-               queryHelper.getWindow('')
-            });
+            message = 'paracetamol';
+            waitsFor(me.checkMessage, "response of generic save", waitingTime);
         });
     }
 });
