@@ -309,7 +309,7 @@ Ext.define('GenForm.controller.product.Product', {
             window = Ext.ComponentQuery.query('brandwindow')[0];
 
         if (result.success) {
-            Ext.MessageBox.alert('Brand saved: ' + result.data.BrandName);
+            Ext.MessageBox.alert('Brand saved:',  result.data.BrandName);
             me.addBrandToStore(result.data.BrandName);
             if (window) window.close();
         } else {
@@ -340,7 +340,7 @@ Ext.define('GenForm.controller.product.Product', {
             if (window) window.close();
         } else {
             Ext.MessageBox.alert('Shape could not be saved: ', result.message);
-        }
+        }   
     },
 
     onPackageSaved: function (result) {

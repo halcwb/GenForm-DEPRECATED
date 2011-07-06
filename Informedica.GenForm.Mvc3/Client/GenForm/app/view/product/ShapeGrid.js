@@ -9,6 +9,11 @@ Ext.define('GenForm.view.product.ShapeGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.shapegrid',
 
+    // TODO: temp hack because of the me.loadMask.bindStore problem
+    viewConfig: {
+        loadMask: false
+    },
+
     initComponent: function () {
         var me = this;
 

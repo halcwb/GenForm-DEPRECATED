@@ -1,17 +1,22 @@
 Ext.define('GenForm.test.util.QueryHelper', {
 
-    getFormTextField: function (form, fieldname) {
+    getFormTextField: function (container, fieldname) {
         var me = this;
-        return me.getFormField(form, fieldname, 'textfield');
+        return me.getFormField(container, fieldname, 'textfield');
     },
 
-    getFormNumberField: function (form, fieldname) {
+    getFormNumberField: function (container, fieldname) {
         var me = this;
-        return me.getFormField(form, fieldname, 'numberfield');
+        return me.getFormField(container, fieldname, 'numberfield');
     },
 
-    getFormField: function (form, fieldname, type) {
-        return Ext.ComponentQuery.query(form + ' ' + type + '[name=' + fieldname + ']')[0];
+    getFormComboBox: function (container, fieldname) {
+        var me = this;
+        return me.getFormField(container, fieldname, 'combobox');
+    },
+
+    getFormField: function (container, fieldname, type) {
+        return Ext.ComponentQuery.query(container + ' ' + type + '[name=' + fieldname + ']')[0];
     },
 
     setFormField: function (formfield, value) {
@@ -21,8 +26,6 @@ Ext.define('GenForm.test.util.QueryHelper', {
     },
 
     getButton: function (container, buttontext) {
-        //console.log(container + ' ' + buttontext);
-        //debugger;
         return Ext.ComponentQuery.query(container + ' button[text=' + buttontext + ']')[0];
     },
 

@@ -9,6 +9,11 @@ Ext.define('GenForm.view.product.PackageGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.packagegrid',
 
+    // TODO: temp hack because of the me.loadMask.bindStore problem
+    viewConfig: {
+        loadMask: false
+    },
+
     initComponent: function () {
         var me = this;
 
