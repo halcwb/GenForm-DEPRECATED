@@ -1,10 +1,3 @@
-/**
- * Created by .
- * User: hal
- * Date: 24-4-11
- * Time: 21:29
- * To change this template use File | Settings | File Templates.
- */
 Ext.define('GenForm.view.user.LoginWindow', {
     extend: 'Ext.Window',
     alias: 'widget.userlogin',
@@ -12,8 +5,6 @@ Ext.define('GenForm.view.user.LoginWindow', {
     bodyPadding: 5,
     closable: false,
 
-    width: 555,
-    height: 350,
     title: 'GenForm Login',
 
     initComponent: function() {
@@ -30,27 +21,87 @@ Ext.define('GenForm.view.user.LoginWindow', {
     },
 
     createDockedItems: function () {
-        return [{
-            xtype: 'toolbar',
-            dock: 'bottom',
-            items: ['->', { text: 'Login', action: 'login'}]
-        }];
+        return [
+            {
+                xtype: 'toolbar',
+                dock: 'bottom',
+                items: ['->', { text: 'Login', action: 'login'}]
+            }
+        ];
     },
 
     createItems: function () {
-        var imagePath = GenForm.application.appFolder.replace("app", "style") + "/images/medicalbanner.jpg";
+        var me = this;
 
         return [
-            { html: '<img src=' + imagePath + ' />', height: 180, xtype: 'box' },
-            { xtype: 'panel', border: false, bodyPadding: 15, width:541,
-                items: [
-                    {xtype:'form', items:[
-                        new Ext.form.Text({ fieldLabel: 'Gebruikersnaam', name:'username', margin: '10 0 10 10', value: '' }),
-                        new Ext.form.Text({ fieldLabel: 'Wachtwoord', name: 'password', margin: '0 0 10 10', value: '' })
-                    ]}
-                ]
-            }
+            me.getHtmlImage(),
+            me.getLoginForm2()
         ];
+    },
+
+    getImagePath: function () {
+        return GenForm.application.appFolder.replace("app", "style") + "/images/medicalbanner.jpg";
+    },
+
+    getHtmlImage: function () {
+        var me = this, imagePath = me.getImagePath();
+        return { html: '<img src=' + imagePath + ' />', height: 180, xtype: 'box' }
+    },
+
+    getLoginForm: function () {
+        return {
+            xtype: 'panel', border: false, bodyPadding: 15, width:541,
+            items: [
+                {
+                    xtype:'form',
+                    defaults: {
+                        allowBlank: false
+                    },
+                    items:[
+                        { xtype: 'textfield', fieldLabel: 'Gebruikersnaam', name:'username',  margin: '10 0 10 10', value: '' },
+                        { xtype: 'textfield', inputType: 'password', fieldLabel: 'Wachtwoord',     name: 'password', margin: '0 0 10 10',  value: '' }
+                    ]}
+            ]
+        }
+    },
+
+    getLoginForm2: function () {
+        var me = this;
+        return {
+            xtype:'form',
+            border: false,
+            bodyPadding: 15,
+            width: 541,
+            defaults: {
+                allowBlank: false
+            },
+            items:[
+                { xtype: 'textfield', fieldLabel: 'Gebruikersnaam', name:'username', margin: '10 0 10 10', value: '' },
+                { xtype: 'textfield', inputType: 'password', fieldLabel: 'Wachtwoord', name: 'password', margin: '0 0 10 10',  value: '' },
+                me.advancedLoginFieldSet()
+            ]
+        };
+    },
+
+    advancedLoginFieldSet: function () {
+        var me = this;
+        return {
+            xtype: 'fieldset',
+            collapsible: true,
+            collapsed: true,
+            items: [
+                me.getDatabaseSelector()
+            ]
+        };
+    },
+
+    getDatabaseSelector: function () {
+        var me = this;
+        return {xtype: 'combo', name: 'database', fieldLabel: 'Database', displayField: 'DatabaseName', store:me.getDatabaseStore()};
+    },
+
+    getDatabaseStore: function () {
+        return Ext.create('GenForm.store.database.Database');
     }
 
 });
