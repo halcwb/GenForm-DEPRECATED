@@ -56,3 +56,11 @@ Ext.define('GenForm.controller.user.Login', {
     }
 
 });
+
+Ext.define('test.Database', {
+    extend: 'Ext.data.Model',
+
+    fields: [
+        'DatabaseName'
+    ]
+});

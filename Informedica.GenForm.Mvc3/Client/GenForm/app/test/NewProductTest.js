@@ -1,7 +1,7 @@
 Ext.define('GenForm.test.NewProductTest', {
     describe: 'NewProductTest tests that',
 
-    fn: function () {
+    tests: function () {
         console.log(this);
         var me = this,
             queryHelper = Ext.create('GenForm.test.util.QueryHelper'),
@@ -350,6 +350,11 @@ Ext.define('GenForm.test.NewProductTest', {
             message = product;
             me.clickSaveProductButton();
             waitsFor(me.checkMessage, 'response of product save', waitingTime);
+        });
+
+        it('After saving the product, the new product window is closed', function () {
+            var window = me.getProductWindow();
+            expect(window).toBeUndefined();
         });
         
     }

@@ -1,10 +1,3 @@
-/**
- * Created by JetBrains WebStorm.
- * User: halcwb
- * Date: 6/25/11
- * Time: 1:36 PM
- * To change this template use File | Settings | File Templates.
- */
 Ext.require([
     'Ext.direct.*',
     'Ext.container.Viewport',
@@ -20,7 +13,7 @@ Ext.Loader.setConfig({
 });
 
 Ext.onReady(function () {
-    var newProductTest, loginTest;
+    var newProductTest, loginTest, advancedLoginTest;
 
     Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
 
@@ -36,11 +29,14 @@ Ext.onReady(function () {
 
         me.createLoginWindow().show();
 
+        advancedLoginTest = Ext.create('GenForm.test.AdvancedLoginTest');
+        describe(advancedLoginTest.describe, advancedLoginTest.tests);
+        
         loginTest = Ext.create('GenForm.test.LoginTest');
-        describe(loginTest.describe, loginTest.fn);
+        describe(loginTest.describe, loginTest.tests);
 
         newProductTest = Ext.create('GenForm.test.NewProductTest');
-        describe(newProductTest.describe, newProductTest.fn);
+        describe(newProductTest.describe, newProductTest.tests);
 
         jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
         jasmine.Queue(jasmine.getEnv());

@@ -1,7 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.Library.Services;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.DomainModel.Products;
