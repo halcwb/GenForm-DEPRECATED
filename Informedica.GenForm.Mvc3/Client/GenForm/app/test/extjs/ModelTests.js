@@ -2,7 +2,8 @@ Ext.define('GenForm.test.extjs.ModelTests', {
     describe: 'Ext.data.Model',
 
     tests: function () {
-        var createTestModelInstance, getTestModel, waitingTime = 200;
+        //noinspection MagicNumberJS
+        var me = this, instance, waitingTime = 200;
 
         Ext.define('Test.modeltests.TestModel', {
             extend: 'Ext.data.Model',
@@ -38,37 +39,33 @@ Ext.define('GenForm.test.extjs.ModelTests', {
             ]
         });
 
-        createTestModelInstance = function () {
-
-            return Ext.ModelManager.create({
-                fields: [
-                    {name: 'Test', type: 'string'}
-                ]
-            }, 'Test.modeltests.TestModel');
+        me.createTestModelInstance = function () {
+            if (!instance) instance = Ext.create('Test.modeltests.TestModel');
+            return instance;
         };
 
-        getTestModel = function () {
+        me.getTestModel = function () {
             return Ext.ModelManager.getModel('Test.modeltests.TestModel');
         };
 
         it('a test model should be created', function () {
-           expect(createTestModelInstance()).toBeDefined();
+           expect(me.createTestModelInstance()).toBeDefined();
         });
 
         it('test model should have a Test field', function () {
-            expect(createTestModelInstance().data.Test).toBeDefined();
+            expect(me.createTestModelInstance().data.Test).toBeDefined();
         });
 
         it('test model should have a proxy', function () {
-            var model = createTestModelInstance();
+            var model = me.createTestModelInstance();
             expect(model.getProxy()).toBeDefined();
 
-            model = getTestModel();
+            model = me.getTestModel();
             expect(model.getProxy()).toBeDefined();
         });
 
         it('test model can be loaded using a direct proxy', function () {
-            var record, model = getTestModel();
+            var record, model = me.getTestModel();
 
             model.load('123456', {
                 callback: function (result) {
@@ -87,7 +84,7 @@ Ext.define('GenForm.test.extjs.ModelTests', {
                 model: 'Test.modeltests.TestModel'
             });
 
-            store.setProxy(getTestModel().getProxy());
+            store.setProxy(me.getTestModel().getProxy());
 
             // Note, do not pass a selection string like in model.load!!
             store.load({

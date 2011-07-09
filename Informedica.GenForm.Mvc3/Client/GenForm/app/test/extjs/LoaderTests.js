@@ -2,13 +2,13 @@ Ext.define('GenForm.test.extjs.LoaderTests', {
     describe: 'Ext.Loader',
 
     tests: function () {
-        var createLoginModel, createValidationRuleModel;
+        var me = this;
 
-        createLoginModel = function () {
+        me.createLoginModel = function () {
             return Ext.create('GenForm.model.user.Login');
         };
 
-        createValidationRuleModel = function () {
+        me.createValidationRuleModel = function () {
             return Ext.create('GenForm.model.validation.ValidationRule');
         };
 
@@ -21,16 +21,17 @@ Ext.define('GenForm.test.extjs.LoaderTests', {
         });
 
         it('GenForm.model.user.LoginModel can be created', function () {
-            expect(createLoginModel()).toBeDefined();
+            expect(me.createLoginModel()).toBeDefined();
         });
 
+        //TODO: Don't know why this test does not pass?
         it('LoginModel should have validationRules method', function () {
-            expect(createLoginModel().validationRules).toBeDefined();
+            expect(me.createLoginModel().validationRules).toBeDefined();
         });
 
         it('LoginModel should have validationRules after creating ValidationRuleModel', function () {
-            createValidationRuleModel();
-            expect(createLoginModel().validationRules).toBeDefined();
+            me.createValidationRuleModel();
+            expect(me.createLoginModel().validationRules).toBeDefined();
         });
     }
 });

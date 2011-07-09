@@ -9,7 +9,8 @@ Ext.define('GenForm.view.user.LoginWindow', {
 
     initComponent: function() {
         var me = this;
-        me.dockedItems = this.createDockedItems();
+        //noinspection JSUnusedGlobalSymbols
+        me.dockedItems = me.createDockedItems();
 
         me.items = this.createItems();
 
@@ -48,25 +49,10 @@ Ext.define('GenForm.view.user.LoginWindow', {
         return { html: '<img src=' + imagePath + ' />', height: 180, xtype: 'box' }
     },
 
-    getLoginForm: function () {
-        return {
-            xtype: 'panel', border: false, bodyPadding: 15, width:541,
-            items: [
-                {
-                    xtype:'form',
-                    defaults: {
-                        allowBlank: false
-                    },
-                    items:[
-                        { xtype: 'textfield', fieldLabel: 'Gebruikersnaam', name:'username',  margin: '10 0 10 10', value: '' },
-                        { xtype: 'textfield', inputType: 'password', fieldLabel: 'Wachtwoord',     name: 'password', margin: '0 0 10 10',  value: '' }
-                    ]}
-            ]
-        }
-    },
 
     getLoginForm2: function () {
         var me = this;
+        //noinspection JSUnusedGlobalSymbols
         return {
             xtype:'form',
             border: false,

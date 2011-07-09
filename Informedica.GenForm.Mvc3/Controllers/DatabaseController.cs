@@ -15,7 +15,11 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult GetDatabases()
         {
-            return this.Direct(new []{ new {DatabaseName = "TestDatabase Indurain"} });
+            return this.Direct(new []
+                                   {
+                                       new {DatabaseName = "Default Database"},
+                                       new {DatabaseName = "TestDatabase Indurain"}
+                                   });
         }
 
     }
