@@ -1,12 +1,8 @@
-/**
- * Created by .
- * User: hal
- * Date: 29-4-11
- * Time: 13:12
- * To change this template use File | Settings | File Templates.
- */
 Ext.define('GenForm.model.user.Login',  {
     extend: 'Ext.data.Model',
+    // This requires is necessary if Ext.Loader is enabled,
+    // otherwise this model is not defined
+    requires: 'GenForm.model.validation.ValidationRule',
 
     associations: [
         { type: 'hasMany', model: 'GenForm.model.validation.ValidationRule', name: 'validationRules'}
@@ -16,12 +12,6 @@ Ext.define('GenForm.model.user.Login',  {
         { name: 'username' , type: 'string' },
         { name: 'password', type: 'string'}
     ],
-
-    checkValidationModelRegistration: function () {
-        if (!Ext.ModelManager.getModel('GenForm.model.validation.ValidationRule')) {
-            Ext.create('GenForm.model.validation.ValidationRule');
-        }
-    },
 
     proxy: {
         type: 'direct',

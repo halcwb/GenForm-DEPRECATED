@@ -3,7 +3,8 @@ Ext.define('GenForm.test.extjs.StoreTests', {
     describe: 'Ext.data.Store',
 
     tests: function () {
-        var me = this, createTestStore, waitingTime = 200, modelName = 'Test.storetests.TestModel';
+        var me = this, waitingTime = 200, modelName = 'Test.storetests.TestModel',
+            isCalledBack = false;
 
         // Set up test fixture
         Ext.define(modelName, {
@@ -41,7 +42,7 @@ Ext.define('GenForm.test.extjs.StoreTests', {
             autoLoad: false
         });
 
-        createTestStore = function () {
+        me.createTestStore = function () {
             return Ext.create('Test.storetests.TestStore');
         };
 
@@ -50,15 +51,13 @@ Ext.define('GenForm.test.extjs.StoreTests', {
         });
 
         it('teststore is created', function () {
-            expect(createTestStore()).toBeDefined();
+            expect(me.createTestStore()).toBeDefined();
         });
 
         it('teststore can be loaded', function () {
-            var isCalledBack = false;
-            createTestStore().load({id: '1'}, {
-                scope: me,
+            //noinspection JSUnusedLocalSymbols
+            me.createTestStore().load({
                 callback: function (records, operation, success) {
-                    debugger;
                     isCalledBack = true;
                 }
             });

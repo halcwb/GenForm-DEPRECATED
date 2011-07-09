@@ -3,10 +3,10 @@ Ext.define('GenForm.test.model.BrandNameModelTests', {
     describe: 'GenForm.model.product.BrandName',
 
     tests: function () {
-        var getBrandNameModel,
-            waitingTime = 100;
+        var me = this,
+            waitingTime = 200;
 
-        getBrandNameModel = function () {
+        me.getBrandNameModel = function () {
             var model = Ext.ModelManager.getModel('GenForm.model.product.BrandName');
             model.setProxy({
                 type: 'direct',
@@ -17,13 +17,13 @@ Ext.define('GenForm.test.model.BrandNameModelTests', {
         };
 
         it('BrandNameModel should be defined', function () {
-            expect(getBrandNameModel()).toBeDefined();
+            expect(me.getBrandNameModel()).toBeDefined();
         });
 
         it('After calling load an Instance of BrandNameModel should be created', function () {
             var model;
 
-            getBrandNameModel().load('', {
+            me.getBrandNameModel().load('', {
                 callback: function (record) {
                     model = record;
                 }
@@ -37,7 +37,7 @@ Ext.define('GenForm.test.model.BrandNameModelTests', {
         it('BrandModel data contains a BrandName', function () {
             var model;
 
-            getBrandNameModel().load('', {
+            me.getBrandNameModel().load('', {
                 callback: function (result) {
                     model = result;
                 }

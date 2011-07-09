@@ -17,11 +17,12 @@ Ext.onReady(function () {
         storeTests, productControllerTests, brandNameModelTests,
         genericNameModelTests, loginModelTests, productModelTests,
         productSubstanceModelTests, genericNameStoreTests, productSubstanceStoreTests,
-        productSubstanceGridTests, saveCancelWindowTests;
+        productSubstanceGridTests, saveCancelWindowTests, loginControllerTests;
 
     Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
 
     Ext.app.config.appFolder = '../Client/GenForm/app';
+    //noinspection JSUnusedGlobalSymbols
     Ext.app.config.launch = function() {
         var me = this;
         GenForm.application = me;
@@ -47,6 +48,9 @@ Ext.onReady(function () {
         
         storeTests = Ext.create('GenForm.test.extjs.StoreTests');
         describe(storeTests.describe, storeTests.tests);
+
+        loginControllerTests = Ext.create('GenForm.test.controller.LoginControllerTests');
+        describe(loginControllerTests.describe, loginControllerTests.tests);
 
         productControllerTests = Ext.create('GenForm.test.controller.ProductControllerTests');
         describe(productControllerTests.describe, productControllerTests.tests);

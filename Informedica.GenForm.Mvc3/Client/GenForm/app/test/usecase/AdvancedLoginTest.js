@@ -16,10 +16,6 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
             return queryHelper.getFormComboBox('userlogin', 'database');
         };
 
-        me.comboContains = function (combo, value) {
-            return false;
-        };
-
         it('The user can select an advanced login option', function () {
             me.toggleAdvancedLogin();
             expect(me.getAdvancedLogin().collapsed).toBeFalsy();
@@ -29,11 +25,19 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
             expect(me.getSelectDatabaseCombo()).toBeDefined();
         });
 
+        it('A default database is selected', function () {
+            var database = 'Default Database',
+                comboBox = me.getSelectDatabaseCombo();
+
+            expect(comboBox.getValue()).toBe(database);
+        });
+
         it('The user can select a database to login', function () {
             var database = 'TestDatabase Indurain',
                 comboBox = me.getSelectDatabaseCombo();
-
-            expect(me.comboContains(comboBox, database)).toBeTruthy();
+            
+            queryHelper.setFormField(comboBox, database);
+            expect(comboBox.getValue()).toBe(database);
         });
     }
 });
