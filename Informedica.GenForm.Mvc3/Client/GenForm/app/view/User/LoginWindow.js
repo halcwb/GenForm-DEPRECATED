@@ -40,7 +40,7 @@ Ext.define('GenForm.view.user.LoginWindow', {
     },
 
     getImagePath: function () {
-        return GenForm.application.appFolder.replace("app", "style") + "/images/medicalbanner.jpg";
+        return GenForm.application.appFolder + "/style/images/medicalbanner.jpg";
     },
 
     getHtmlImage: function () {

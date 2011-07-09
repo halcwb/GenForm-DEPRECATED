@@ -63,8 +63,8 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult GetProduct(JObject productId)
         {
-            var product = productId.Value<String>("id") == null ? LoadProduct(0) : LoadProduct(Int32.Parse(productId.Value<String>("id")));
-            return this.Direct(new { success = true, data = product });
+            var product = String.IsNullOrEmpty(productId.Value<String>("id")) ? LoadProduct(0) : LoadProduct(Int32.Parse(productId.Value<String>("id")));
+            return this.Direct(new { success = true, data = (Object)product ?? new {} });
         }
 
         public IProduct LoadProduct(Int32 productId)

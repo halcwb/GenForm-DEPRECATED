@@ -2,83 +2,20 @@
 Runs individual tests and hides the application
 *@
 
-@{
-    Layout = null;
+@section CSS
+{
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/GenForm/app/style/css/HiddenGuiTests.css")" />
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/Library/jasmine/lib/jasmine-1.0.2/jasmine.css")" />
 }
-<!DOCTYPE html>
-<html> 
 
 
-<head>
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/Library/extjs/resources/css/ext-all.css")" />
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/GenForm/style/css/HiddenGuiTests.css")" />
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Client/Library/jasmine/lib/jasmine-1.0.2/jasmine.css")" />
+@section Javascript
+{
+        <script type="text/javascript" src="@Url.Content("~/Client/Library/jasmine/lib/jasmine-1.0.2/jasmine.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Client/Library/jasmine/lib/jasmine-1.0.2/jasmine-html.js")"></script>
 
-    <script type="text/javascript" src="@Url.Content("~/Client/Library/jasmine/lib/jasmine-1.0.2/jasmine.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/Library/jasmine/lib/jasmine-1.0.2/jasmine-html.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Client/Library/extjs/bootstrap.js")"></script>    
 
-    @* include source files here... *@
-    <script type="text/javascript" src="@Url.Content("~/Client/Library/deployment/ext-all-debug.js") "></script>
-    <script type="text/javascript" src="@Url.Content("~/Direct/Api")"></script>
-    
-    <script type="text/javascript">Ext.Direct.addProvider(Ext.app.REMOTING_API);</script>
-  
-    <script type="text/javascript">
-        Ext.Loader.setConfig({ enabled: true, paths: { GenForm: '../Client/GenForm/app'} });
-    </script>
+        <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/initTests.js")"></script>
 
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/lib/view/component/SaveCancelToolbar.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/lib/view/component/EditableComboBox.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/lib/view/window/SaveCancelWindow.js")"></script>
-
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/model/validation/ValidationRule.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/model/user/Login.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/model/product/GenericName.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/model/product/BrandName.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/model/product/ProductSubstance.js")"></script>  
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/model/product/Product.js")"></script>
-  
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/store/product/GenericName.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/store/product/ProductSubstance.js")"></script>
-
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/view/product/ProductSubstanceGrid.js")"></script>      
-  
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/controller/product/Product.js")"></script>  
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/controller/user/Login.js")"></script>  
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/app/Application.js")"></script>  
- 
-    @* Sencha tests *@    
-
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/extjs/Ext.ClassTests.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/extjs/ExtLoaderTests.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/extjs/Ext.ComponentQueryTests.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/extjs/ModelTests.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/extjs/StoreTests.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/mvc/TestApplication.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/mvc/ApplicationTests.js")"></script>
-
-    @* Lib tests *@
-
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/view/SaveCancelWindowTests.js")"></script>
-
-    @* App tests *@
-
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/model/LoginModelTests.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/model/GenericNameModelTests.js")"></script> 
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/model/BrandNameModelTests.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/model/ProductSubstanceModelTests.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/store/ProductSubstanceStoreTests.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/store/GenericNameStoreTests.js")"></script> 
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/view/ProductSubstanceGridTests.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/model/ProductModelTests.js")"></script> 
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/controller/ProductControllerTests.js")"></script>   
-
-    @* Run the Tests *@
-    <script type="text/javascript" src="@Url.Content("~/Client/GenForm/tests/RunJasmine.js")"></script>
-
-</head>
-
-<body>
-
-</body>
-</html>
+}
