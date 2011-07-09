@@ -8,30 +8,14 @@
 Ext.define('GenForm.model.user.Login',  {
     extend: 'Ext.data.Model',
 
-    constructor: function (config) {
-        this.fields = this.createFields();
-        //this.associations = this.createAssociations();
-
-        return this;
-    },
-
     associations: [
         { type: 'hasMany', model: 'GenForm.model.validation.ValidationRule', name: 'validationRules'}
     ],
 
-    createFields: function () {
-        return [
-            { name: 'username' , type: 'string' },
-            { name: 'password', type: 'string'}
-        ]
-    },
-
-    createAssociations: function() {
-        this.checkValidationModelRegistration();
-        return [
-            { type: 'hasMany', model: 'GenForm.model.validation.ValidationRule', name: 'validationRules'}
-        ]
-    },
+    fields: [
+        { name: 'username' , type: 'string' },
+        { name: 'password', type: 'string'}
+    ],
 
     checkValidationModelRegistration: function () {
         if (!Ext.ModelManager.getModel('GenForm.model.validation.ValidationRule')) {

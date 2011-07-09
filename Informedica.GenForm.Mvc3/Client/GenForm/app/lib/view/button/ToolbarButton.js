@@ -4,7 +4,7 @@ Ext.define('GenForm.lib.view.button.ToolbarButton', {
     alias: 'widget.toolbarbutton',
     text: '',
     scale: 'large',
-    location: Ext.app.config.appFolder + '/../style/images/',
+    location: Ext.app.config.appFolder + '/style/images/',
     iconAlign: 'top',
     disabled: false,
     width: 60,
