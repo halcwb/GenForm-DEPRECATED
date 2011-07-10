@@ -32,8 +32,6 @@ Ext.onReady(function () {
             items: me.getViewPortItems()
         });
 
-        me.createLoginWindow().show();
-
         classTests = Ext.create('GenForm.test.extjs.ClassTests');
         describe(classTests.describe, classTests.tests);
 

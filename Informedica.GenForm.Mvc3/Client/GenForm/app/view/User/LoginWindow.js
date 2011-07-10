@@ -6,6 +6,7 @@ Ext.define('GenForm.view.user.LoginWindow', {
     closable: false,
 
     title: 'GenForm Login',
+    defaultDatabase: 'Default Database',
 
     initComponent: function() {
         var me = this;
@@ -76,14 +77,14 @@ Ext.define('GenForm.view.user.LoginWindow', {
             collapsible: true,
             collapsed: true,
             items: [
-                me.getDatabaseSelector()
+                me.createDatabaseCombo()
             ]
         };
     },
 
-    getDatabaseSelector: function () {
+    createDatabaseCombo: function () {
         var me = this;
-        return {xtype: 'combo', name: 'database', fieldLabel: 'Database', displayField: 'DatabaseName', store:me.getDatabaseStore()};
+        return {xtype: 'combo', name: 'database', fieldLabel: 'Database', displayField: 'DatabaseName', store: me.getDatabaseStore()};
     },
 
     getDatabaseStore: function () {

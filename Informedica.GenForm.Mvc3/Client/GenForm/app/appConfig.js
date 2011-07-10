@@ -17,18 +17,18 @@ Ext.app.config = {
             items: me.getViewPortItems()
         });
 
-        me.createLoginWindow().show();
+        me.showLoginWindow();
     },
 
-    createLoginWindow: function () {
-        return Ext.create('GenForm.view.user.LoginWindow');
+    showLoginWindow: function () {
+        var me = this, window;
+        window = me.getLoginWindow().show();
+        me.getController('user.Login').setDefaultDatabase(window);
     },
 
-    startApplication: function () {
-/*
+    getLoginWindow: function () {
         var me = this;
-        me.getController('product.Product').showProductWindow();
-*/
+        return me.getController('user.Login').getLoginWindow();
     },
 
     getViewPortItems: function () {
