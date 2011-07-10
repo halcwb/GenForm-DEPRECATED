@@ -10,13 +10,26 @@ Ext.define('GenForm.controller.user.Login', {
     loginWindow: null,
 
     init: function() {
+        var me = this;
 
         this.control({
             'toolbar button[action=login]': {
                 click: this.validateLogin
             }
         });
+    },
 
+    getLoginWindow: function () {
+        var me = this, window;
+        window = me.getUserLoginWindowView().create();
+        return window;
+    },
+
+    setDefaultDatabase: function (window) {
+        var combo;
+        combo = Ext.ComponentQuery.query('window[title=' + window.title + '] combobox[name=database]')[0];
+        combo.setValue('Default Database');
+        console.log(combo);
     },
 
     validateLogin: function(button) {
@@ -45,7 +58,6 @@ Ext.define('GenForm.controller.user.Login', {
     closeLoginWindow: function () {
         var me = this;
         me.loginWindow.close();
-        GenForm.application.startApplication();
     }
 
 });

@@ -27,8 +27,8 @@ Ext.onReady(function () {
             items: me.getViewPortItems()
         });
 
-        me.createLoginWindow().show();
-
+        me.showLoginWindow();
+        
         advancedLoginTest = Ext.create('GenForm.test.usecase.AdvancedLoginTest');
         describe(advancedLoginTest.describe, advancedLoginTest.tests);
 
