@@ -22,5 +22,21 @@ namespace Informedica.GenForm.Mvc3.Controllers
                                    });
         }
 
+        public ActionResult SaveDatabaseRegistration(String databaseName, String machine, String connectionString)
+        {
+            SetSetting(machine, databaseName, connectionString);
+            return this.Direct(new {success = true, databaseName});
+        }
+
+
+        public Boolean SetSetting(string computerName, string name, string value)
+        {
+            Settings.SettingsManager.Instance.Initialize(HttpContext.ApplicationInstance.Server.MapPath("~/"));
+            Settings.SettingsManager.Instance.CreateSecureSetting(computerName, name, value);
+
+            return true;
+        }
+
+
     }
 }

@@ -1892,6 +1892,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Settings.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2037,6 +2038,10 @@
     <ProjectReference Include="..\Informedica.GenForm.Presentation\Informedica.GenForm.Presentation.csproj">
       <Project>{63800128-7BE0-4B57-A789-27CB9E5EED3B}</Project>
       <Name>Informedica.GenForm.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.Settings\Informedica.Settings.csproj">
+      <Project>{B30C5371-DDDD-46BE-827A-72798E743B60}</Project>
+      <Name>Informedica.Settings</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

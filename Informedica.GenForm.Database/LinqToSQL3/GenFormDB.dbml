@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GenForm" EntityNamespace="Informedica.GenForm.Database" ContextNamespace="Informedica.GenForm.Database" Class="GenFormDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True" SettingsObjectName="Informedica.GenForm.Database.ORM.Properties.Settings" SettingsPropertyName="GenFormConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True" SettingsObjectName="Informedica.GenForm.Database.Properties.Settings" SettingsPropertyName="GenFormConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Brand" Member="Brand">
     <Type Name="Brand">
       <Column Name="BrandId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

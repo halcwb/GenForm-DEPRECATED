@@ -74,10 +74,12 @@ Ext.define('GenForm.view.user.LoginWindow', {
         var me = this;
         return {
             xtype: 'fieldset',
+            layout: 'hbox',
             collapsible: true,
             collapsed: true,
             items: [
-                me.createDatabaseCombo()
+                me.createDatabaseCombo(),
+                me.createRegisterDatabaseButton()
             ]
         };
     },
@@ -89,6 +91,10 @@ Ext.define('GenForm.view.user.LoginWindow', {
 
     getDatabaseStore: function () {
         return Ext.create('GenForm.store.database.Database');
+    },
+
+    createRegisterDatabaseButton: function () {
+        return {xtype: 'button', text: 'Registreer Database', action: 'registerdatabase'};
     }
 
 });

@@ -17,7 +17,8 @@ Ext.onReady(function () {
         storeTests, productControllerTests, brandNameModelTests,
         genericNameModelTests, loginModelTests, productModelTests,
         productSubstanceModelTests, genericNameStoreTests, productSubstanceStoreTests,
-        productSubstanceGridTests, saveCancelWindowTests, loginControllerTests;
+        productSubstanceGridTests, saveCancelWindowTests, loginControllerTests,
+        databaseRegistrationWindowTests;
 
     Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
 
@@ -79,6 +80,9 @@ Ext.onReady(function () {
 
         saveCancelWindowTests = Ext.create('GenForm.test.view.SaveCancelWindowTests');
         describe(saveCancelWindowTests.describe, saveCancelWindowTests.tests);
+
+        databaseRegistrationWindowTests = Ext.create('GenForm.test.view.DatabaseRegistrationWindowTests');
+        describe(databaseRegistrationWindowTests.describe, databaseRegistrationWindowTests.tests);
 
         jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
         jasmine.Queue(jasmine.getEnv());

@@ -1,4 +1,4 @@
-Ext.define('GenForm.test.util.DomClicker', {
+Ext.define('GenForm.lib.util.DomClicker', {
 
     click: function (domelement) {
         var me = this;

@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -54,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Databases\DatabaseConnection.cs" />
+    <Compile Include="Databases\DatabaseSetting.cs" />
     <Compile Include="DataContexts\DataContextFactory.cs" />
     <Compile Include="DataMappers\BrandMapper.cs" />
     <Compile Include="DataMappers\GenericMapper.cs" />

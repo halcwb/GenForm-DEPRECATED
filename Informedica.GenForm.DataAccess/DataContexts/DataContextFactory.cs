@@ -1,4 +1,5 @@
-﻿using Informedica.GenForm.Database;
+﻿using Informedica.GenForm.DataAccess.Databases;
+using Informedica.GenForm.Database;
 
 namespace Informedica.GenForm.DataAccess.DataContexts
 {

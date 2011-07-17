@@ -1,4 +1,4 @@
-Ext.define('GenForm.test.util.QueryHelper', {
+Ext.define('GenForm.lib.util.QueryHelper', {
 
     getFormTextField: function (container, fieldname) {
         var me = this;

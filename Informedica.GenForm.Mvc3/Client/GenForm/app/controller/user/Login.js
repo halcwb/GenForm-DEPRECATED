@@ -3,7 +3,8 @@ Ext.define('GenForm.controller.user.Login', {
     alias: 'widget.logincontroller',
 
     views: [
-        'user.LoginWindow'
+        'user.LoginWindow',
+        'database.RegisterDatabaseWindow'
     ],
 
     loggedIn: false,
@@ -14,7 +15,13 @@ Ext.define('GenForm.controller.user.Login', {
 
         this.control({
             'toolbar button[action=login]': {
-                click: this.validateLogin
+                click: me.onClickValidateLogin
+            },
+            'button[action=registerdatabase]': {
+                click: me.showRegisterDatabaseWindow
+            },
+            'window[title="Registreer Database"] button[action=save]': {
+                click: me.onClickSaveDatabaseRegistration
             }
         });
     },
@@ -26,22 +33,22 @@ Ext.define('GenForm.controller.user.Login', {
     },
 
     setDefaultDatabase: function (window) {
-        var combo;
+        var combo, queryHelper = Ext.create('GenForm.lib.util.QueryHelper');
         combo = Ext.ComponentQuery.query('window[title=' + window.title + '] combobox[name=database]')[0];
-        combo.setValue('Default Database');
+        queryHelper.setFormField(combo, 'Default Database');
         console.log(combo);
     },
 
-    validateLogin: function(button) {
-        var win, form, record, vals;
+    onClickValidateLogin: function(button) {
+        var me = this, win, form, record, vals;
 
         win = button.up('window');
-        this.loginWindow = win;
+        me.loginWindow = win;
         form = win.down('form');
         record = form.getRecord();
         vals = form.getValues();
 
-        Login.Login(vals.username, vals.password, this.loginCallBackFunction, this);
+        Login.Login(vals.username, vals.password, this.loginCallBackFunction, me);
     },
 
     loginCallBackFunction: function (result) {
@@ -58,6 +65,39 @@ Ext.define('GenForm.controller.user.Login', {
     closeLoginWindow: function () {
         var me = this;
         me.loginWindow.close();
+    },
+
+    showRegisterDatabaseWindow: function () {
+        var me = this;
+        me.createRegisterDatabaseWindow().show();
+    },
+
+    createRegisterDatabaseWindow: function () {
+        var me = this;
+        return me.getDatabaseRegisterDatabaseWindowView().create();
+    },
+
+    onClickSaveDatabaseRegistration: function (button) {
+        var me = this;
+        Database.SaveDatabaseRegistration(me.getWindowFromButton(button).getDatabaseName(),
+                                          me.getWindowFromButton(button).getMachineName(),
+                                          me.getWindowFromButton(button).getConnectionString(),
+                                          me.onDatabaseRegistrationSaved);
+        me.getWindowFromButton(button).close();
+    },
+
+    getWindowFromButton: function (button) {
+        return button.up().up();
+    },
+
+    onDatabaseRegistrationSaved: function (result) {
+        var me = this;
+
+        if (result.success) {
+            Ext.MessageBox.alert('Database Registration', result.databaseName);
+        } else {
+            Ext.MessageBox.alert('Database Regstration', 'Database could not be registered');
+        }
     }
 
 });
