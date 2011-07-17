@@ -13,6 +13,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
     [TestClass]
     public class DatabaseConnectionShould
     {
+        private const string ValidConnectionString = @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
         private TestContext testContextInstance;
         private static IDatabaseConnection _databaseConnection;
 
@@ -41,6 +42,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         public static void MyClassInitialize(TestContext testContext)
         {
             ObjectFactory.Inject<IDatabaseConnection>(new DatabaseConnection());
+            ObjectFactory.Inject<IDatabaseSetting>(new DatabaseSetting());
 
             _databaseConnection = ObjectFactory.GetInstance<IDatabaseConnection>();
         }
@@ -62,18 +64,35 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         [TestMethod]
         public void ReturnFalseWhenConnectionStringCannotConnectToDatabase()
         {
-            var connectionString =
-                @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=Bogus;Integrated Security=True";
+            const string connectionString = @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=Bogus;Integrated Security=True";
             Assert.IsFalse(_databaseConnection.TestConnection(connectionString), "Using connection: " + connectionString + " test connection should return false");
         }
 
         [TestMethod] 
         public void ReturnTrueWhenConnectectionStringCanConnectToDatabase()
         {
-            var connectionString =
-                @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
+            const string connectionString = ValidConnectionString;
             Assert.IsTrue(_databaseConnection.TestConnection(connectionString), "Using connection: " + connectionString + " test connection should return true");
-            
+        }
+
+        [TestMethod]
+        public void RegisterValidDatabaseSetting()
+        {
+            IDatabaseSetting setting = GetValidDatabaseSetting();
+
+            _databaseConnection.RegisterSetting(setting);
+            Assert.IsTrue(_databaseConnection.GetConnectionString(setting.Name) == setting.ConnectionString);
+        }
+
+        private IDatabaseSetting GetValidDatabaseSetting()
+        {
+            var setting = ObjectFactory.GetInstance<IDatabaseSetting>();
+            setting.Name = "TestDatabase";
+            setting.ConnectionString =
+                ValidConnectionString;
+            setting.Machine = "HAL-WIN7";
+
+            return setting;
         }
     }
 

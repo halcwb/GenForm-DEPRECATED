@@ -1,18 +1,21 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Xml;
 
 namespace Informedica.Settings
 {
     public class SettingsManager
     {
-        static SettingsManager _instance = null;
-        static readonly object Padlock = new object();
-        private string _path = @"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.Mvc3\Settings.xml";
+        static SettingsManager _instance;
+        static readonly object LockThis = new object();
+
+        private string _path = @"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.Mvc3\";
         private readonly XmlDocument _settingsDoc = new XmlDocument();
         
-        private string _key = SecurityKey.Key;
+        private readonly string _key = SecurityKey.Key;
 
-        private SymCryptography _crypt = new SymCryptography(SymCryptography.ServiceProviderEnum.Rijndael);
+        private readonly SymCryptography _crypt = new SymCryptography(SymCryptography.ServiceProviderEnum.Rijndael);
 
         #region Singleton
 
@@ -23,22 +26,24 @@ namespace Informedica.Settings
         {
             get
             {
-                lock (Padlock)
+                lock (LockThis)
                 {
                     if (_instance == null)
                     {
                         _instance = new SettingsManager();
+                        _instance.Initialize();
                     }
                     return _instance;
                 }
             }
         }
+
         #endregion
 
         public void Initialize(string path)
         {
             _path = path;
-            string file = _path + "\\Settings.xml";
+            string file = _path + "Settings.xml";
             if (!System.IO.File.Exists(file))
             {
                 throw new Exception("Could not find settings file in path: " + file);
@@ -67,7 +72,7 @@ namespace Informedica.Settings
             {
                 computerName = Environment.MachineName;
             }
-            return _crypt.Encrypt(computerName.ToLower());
+            return computerName; //_crypt.Encrypt(computerName.ToLower());
         }
 
         private string GetSecureSetting(string value)
@@ -76,6 +81,7 @@ namespace Informedica.Settings
             return _crypt.Encrypt(value);
 
         }
+
         public string ReadSecureSetting(string name)
         {
             string machineCrypt = GetSecureMachineName("");
@@ -121,6 +127,19 @@ namespace Informedica.Settings
             newSettingsNode.InnerText = GetSecureSetting(value);
             machineNode.AppendChild(newSettingsNode);
             _settingsDoc.Save(_path + "Settings.xml");
+        }
+
+        public IEnumerable<String> GetNames()
+        {
+            var list = new List<String>();
+            foreach (System.Xml.XmlElement node in _settingsDoc.GetElementsByTagName("machine"))
+            {
+                foreach (System.Xml.XmlElement child in node.ChildNodes)
+                {
+                    if (child.Name != "key") list.Add(child.Name);
+                }
+            }
+            return list;
         }
     }
 }

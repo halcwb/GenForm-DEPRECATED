@@ -65,7 +65,7 @@
       <file leaf-file-name="RegisterDatabaseWindow.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/database/RegisterDatabaseWindow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="6" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.0">
+            <state line="50" column="22" selection-start="1383" selection-end="1383" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -89,28 +89,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdvancedLoginTest.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AdvancedLoginTest.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/test/usecase/AdvancedLoginTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="39" selection-start="1983" selection-end="1983" vertical-scroll-proportion="0.0">
+            <state line="20" column="10" selection-start="829" selection-end="829" vertical-scroll-proportion="0.34136546">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Login.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Database.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/store/database/Database.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Login.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controller/user/Login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="87" column="0" selection-start="2767" selection-end="2767" vertical-scroll-proportion="0.6415663">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShapeForm.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/view/product/ShapeForm.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="18" selection-start="2498" selection-end="2498" vertical-scroll-proportion="-32.04">
+            <state line="81" column="78" selection-start="2500" selection-end="2500" vertical-scroll-proportion="-21.16">
               <folding />
             </state>
           </provider>
@@ -142,10 +142,10 @@
         <option value="$PROJECT_DIR$/app/view/product/PackageForm.js" />
         <option value="$PROJECT_DIR$/app/view/product/GenericForm.js" />
         <option value="$PROJECT_DIR$/app/view/product/BrandForm.js" />
-        <option value="$PROJECT_DIR$/app/test/usecase/AdvancedLoginTest.js" />
         <option value="$PROJECT_DIR$/app/test/view/DatabaseRegistrationWindowTests.js" />
-        <option value="$PROJECT_DIR$/app/view/database/RegisterDatabaseWindow.js" />
         <option value="$PROJECT_DIR$/app/controller/user/Login.js" />
+        <option value="$PROJECT_DIR$/app/view/database/RegisterDatabaseWindow.js" />
+        <option value="$PROJECT_DIR$/app/test/usecase/AdvancedLoginTest.js" />
       </list>
     </option>
   </component>
@@ -272,6 +272,86 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="store" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="store" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -348,7 +428,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -412,13 +492,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/view/product/ShapeWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="35" selection-start="702" selection-end="702" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/view/product/ProductWindow.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="31" column="39" selection-start="785" selection-end="785" vertical-scroll-proportion="-21.08">
@@ -503,23 +576,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/database/RegisterDatabaseWindow.js">
+    <entry file="file://$PROJECT_DIR$/app/store/database/Database.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="6" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/test/usecase/AdvancedLoginTest.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="39" selection-start="1983" selection-end="1983" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controller/user/Login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="0" selection-start="2767" selection-end="2767" vertical-scroll-proportion="0.6415663">
+        <state line="81" column="78" selection-start="2500" selection-end="2500" vertical-scroll-proportion="-21.16">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/database/RegisterDatabaseWindow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="22" selection-start="1383" selection-end="1383" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/test/usecase/AdvancedLoginTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="10" selection-start="829" selection-end="829" vertical-scroll-proportion="0.34136546">
           <folding />
         </state>
       </provider>

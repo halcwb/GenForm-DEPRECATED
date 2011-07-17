@@ -10,6 +10,7 @@ namespace Informedica.GenForm.Assembler
             {
                 x.AddRegistry(DatabaseAssembler.RegisterDependencies());
                 x.AddRegistry(ProductAssembler.RegisterDependencies());
+                x.AddRegistry(DatabaseRegistrationAssembler.RegisterDependencies());
             });
             LoginAssembler.RegisterDependencies();
         }

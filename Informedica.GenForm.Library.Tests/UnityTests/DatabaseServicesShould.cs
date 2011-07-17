@@ -88,7 +88,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
 
         private static void SetUpValidDatabaseSetting()
         {
-            _databaseSetting.Name = "Productie Database";
+            _databaseSetting.Name = "ProductieDatabase";
             _databaseSetting.ConnectionString =
                 @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
             _databaseSetting.Machine = "HAL-WIN7";
@@ -98,8 +98,9 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         public void RegisterValidDatabaseSetting()
         {
             SetUpValidDatabaseSetting();
+            _databaseServices.RegisterDatabaseSetting(_databaseSetting);
 
-            Assert.IsTrue(_databaseServices.RegisterDatabaseSetting(_databaseSetting), "A valid database setting should be registered");
+            Assert.IsTrue(_databaseServices.TestDatabaseConnection(_databaseSetting), "A valid database setting should be registered");
         }
     }
 }

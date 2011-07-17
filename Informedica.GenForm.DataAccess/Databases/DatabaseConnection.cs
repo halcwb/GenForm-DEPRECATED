@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Databases;
+using Informedica.Settings;
 
 namespace Informedica.GenForm.DataAccess.Databases
 {
@@ -14,44 +16,9 @@ namespace Informedica.GenForm.DataAccess.Databases
 
         public static string GetConnectionString(DatabaseName database) 
         {
-            String connection;
-
-            switch (database){
-                case DatabaseName.Formularium2010:
-                    try
-                    {
-                        connection = System.Configuration.ConfigurationManager.ConnectionStrings[GetConnectionName(database)].ConnectionString;
-                    }
-                    catch (Exception)
-                    {
-                        connection = "";
-                    }
-                    break;
-                case DatabaseName.GenForm:
-                    try
-                    {
-                        //connection = @"Data Source=INDURAIN;Initial Catalog=GenForm;User ID=genform; Password=genform";
-                        connection = @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
-                    }
-                    catch (Exception)
-                    {
-                        // connection = @"Data Source=INDURAIN;Initial Catalog=GenForm;User ID=genform; Password=genform";
-                        connection = @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
-                    }
-                    break;
-                default:
-                    throw new Exception("Database not found");
-            }
-
-            return connection;
-            
+            var instance = new DatabaseConnection();
+            return instance.GetConnectionString(Enum.GetName(typeof(DatabaseName), database));
         }
-
-        private static string GetConnectionName(DatabaseName database) 
-        {
-            return (GetComputerName() + "_" + Enum.GetName(typeof(DatabaseName), database));
-        }
-
 
         public static string GetComputerName()
         {
@@ -79,7 +46,24 @@ namespace Informedica.GenForm.DataAccess.Databases
 
         public void RegisterSetting(IDatabaseSetting databaseSetting)
         {
-            throw new NotImplementedException();
+            SettingsManager.Instance.CreateSecureSetting(databaseSetting.Machine, 
+                                                         databaseSetting.Name,
+                                                         databaseSetting.ConnectionString);
+        }
+
+        public string GetConnectionString(String name)
+        {
+            return SettingsManager.Instance.ReadSecureSetting(name);
+        }
+
+        public void SetSettingsPath(string path)
+        {
+            SettingsManager.Instance.Initialize(path);
+        }
+
+        public IEnumerable<string> GetDatabases()
+        {
+            return SettingsManager.Instance.GetNames();
         }
 
         #endregion
