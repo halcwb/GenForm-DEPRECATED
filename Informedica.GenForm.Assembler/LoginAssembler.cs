@@ -11,6 +11,7 @@ namespace Informedica.GenForm.Assembler
         {
             var repository = (IRepository<IUser>)new UserRepository();
             DalServiceProvider.Instance.RegisterInstanceOfType(repository);
+
         }
     }
 }

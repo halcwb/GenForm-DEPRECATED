@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Informedica.GenForm.Library.DomainModel.Databases
 {
@@ -6,5 +7,8 @@ namespace Informedica.GenForm.Library.DomainModel.Databases
     {
         Boolean TestConnection(String connectionString);
         void RegisterSetting(IDatabaseSetting databaseSetting);
+        String GetConnectionString(String name);
+        void SetSettingsPath(string path);
+        IEnumerable<String> GetDatabases();
     }
 }

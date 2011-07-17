@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using Informedica.GenForm.Library.DomainModel.Databases;
 using Informedica.GenForm.Library.Services;
-using Newtonsoft.Json.Linq;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
-
-using System.Web.Mvc;
+using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
@@ -15,11 +15,13 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult GetDatabases()
         {
-            return this.Direct(new []
-                                   {
-                                       new {DatabaseName = "Default Database"},
-                                       new {DatabaseName = "TestDatabase Indurain"}
-                                   });
+            IEnumerable<String> names = GetDatabaseServices().GetDatabases();
+            IList<object> list = new List<object>();
+            foreach (var name in names)
+            {
+                list.Add(new {DatabaseName = name});
+            }           
+            return this.Direct(list);
         }
 
         public ActionResult SaveDatabaseRegistration(String databaseName, String machine, String connectionString)
@@ -29,12 +31,28 @@ namespace Informedica.GenForm.Mvc3.Controllers
         }
 
 
-        public Boolean SetSetting(string computerName, string name, string value)
+        public Boolean SetSetting(String computerName, String name, String value)
         {
-            Settings.SettingsManager.Instance.Initialize(HttpContext.ApplicationInstance.Server.MapPath("~/"));
-            Settings.SettingsManager.Instance.CreateSecureSetting(computerName, name, value);
+            var setting = CreateSettings(computerName, name, value);
+            GetDatabaseServices().MapSettingsPath(HttpContext.ApplicationInstance.Server.MapPath("~/"));
+            GetDatabaseServices().RegisterDatabaseSetting(setting);
 
             return true;
+        }
+
+        private static IDatabaseServices GetDatabaseServices()
+        {
+            return ObjectFactory.GetInstance<IDatabaseServices>();
+        }
+
+        private static IDatabaseSetting CreateSettings(String computerName, String name, String value)
+        {
+            var setting = ObjectFactory.GetInstance<IDatabaseSetting>();
+            setting.ConnectionString = value;
+            setting.Name = name;
+            setting.Machine = computerName;
+
+            return setting;
         }
 
 

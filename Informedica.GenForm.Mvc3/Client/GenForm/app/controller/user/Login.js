@@ -36,7 +36,6 @@ Ext.define('GenForm.controller.user.Login', {
         var combo, queryHelper = Ext.create('GenForm.lib.util.QueryHelper');
         combo = Ext.ComponentQuery.query('window[title=' + window.title + '] combobox[name=database]')[0];
         queryHelper.setFormField(combo, 'Default Database');
-        console.log(combo);
     },
 
     onClickValidateLogin: function(button) {

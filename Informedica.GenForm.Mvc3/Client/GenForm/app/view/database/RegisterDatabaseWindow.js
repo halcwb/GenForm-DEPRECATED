@@ -44,7 +44,7 @@ Ext.define('GenForm.view.database.RegisterDatabaseWindow', {
 
     getMachineName: function () {
         var me = this;
-        return me.getDatabaseNameField().value;
+        return me.getMachineNameField().value;
     },
 
     getMachineNameField: function () {

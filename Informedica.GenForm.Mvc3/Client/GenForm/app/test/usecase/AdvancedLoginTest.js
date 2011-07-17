@@ -5,12 +5,12 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
         var me = this,
             queryHelper = Ext.create('GenForm.lib.util.QueryHelper'),
             messageChecker = Ext.create('GenForm.lib.util.MessageChecker'),
-            databaseName = 'HAL-Win7 Test Database',
+            databaseName = 'TestDatabase',
             machine = 'HAL-WIN7',
             windowName = 'window[title=Registreer Database]',
             connection = 'Data Source=HAL-WIN7\\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True',
             message = '',
-            waitingTime = 200;
+            waitingTime = 500;
 
         me.getAdvancedLogin = function () {
             return Ext.ComponentQuery.query('userlogin fieldset')[0];
