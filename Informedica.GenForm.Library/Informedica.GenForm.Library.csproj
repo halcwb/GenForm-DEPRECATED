@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainModel\Databases\IDatabaseConnection.cs" />
+    <Compile Include="DomainModel\Databases\IDatabaseSetting.cs" />
     <Compile Include="DomainModel\Products\Brand.cs" />
     <Compile Include="DomainModel\Products\Generic.cs" />
     <Compile Include="DomainModel\Products\IBrand.cs" />
@@ -86,6 +88,8 @@
     <Compile Include="Security\IGenFormPrincipal.cs" />
     <Compile Include="Security\LoginUser.cs" />
     <Compile Include="ServiceProviders\DalServiceProvider.cs" />
+    <Compile Include="Services\DatabaseServices.cs" />
+    <Compile Include="Services\IDatabaseServices.cs" />
     <Compile Include="Services\ILoginServices.cs" />
     <Compile Include="Security\ILoginCriteria.cs" />
     <Compile Include="Services\IProductServices.cs" />

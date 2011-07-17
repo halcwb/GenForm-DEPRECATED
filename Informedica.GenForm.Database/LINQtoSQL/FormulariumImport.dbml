@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Database Name="FormulariumArthur" Class="FormulariumImportDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=hal-2008;Initial Catalog=FormulariumArthur;Integrated Security=True" SettingsObjectName="Informedica.GenForm.Database.ORM.Properties.Settings" SettingsPropertyName="FormulariumArthurConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FormulariumArthur" Class="FormulariumImportDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=hal-2008;Initial Catalog=FormulariumArthur;Integrated Security=True" SettingsObjectName="Informedica.GenForm.Database.Properties.Settings" SettingsPropertyName="FormulariumArthurConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Doseringsadvies" Member="Doseringsadvies">
     <Type Name="Doseringsadvies">
       <Column Name="doseringsadviesId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

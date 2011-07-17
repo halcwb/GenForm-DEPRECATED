@@ -1,32 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Informedica.GenForm.Library.DomainModel.Databases;
 
-namespace Informedica.GenForm.Database
+namespace Informedica.GenForm.DataAccess.Databases
 {
-    public static class DatabaseConnection
+    public class DatabaseConnection: IDatabaseConnection
     {
         public enum DatabaseName 
         {
-            FORMULARIUM2010,
-            GENPRES, 
+            Formularium2010,
+            Genpres, 
             GenForm
         }
 
         public static string GetConnectionString(DatabaseName database) 
         {
-            string connection = string.Empty;
+            String connection;
 
             switch (database){
-                case DatabaseName.FORMULARIUM2010:
+                case DatabaseName.Formularium2010:
                     try
                     {
                         connection = System.Configuration.ConfigurationManager.ConnectionStrings[GetConnectionName(database)].ConnectionString;
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
-                        // Temporary solution because Linqpad cannot locate app.config
+                        connection = "";
                     }
                     break;
                 case DatabaseName.GenForm:
@@ -35,10 +33,10 @@ namespace Informedica.GenForm.Database
                         //connection = @"Data Source=INDURAIN;Initial Catalog=GenForm;User ID=genform; Password=genform";
                         connection = @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         // connection = @"Data Source=INDURAIN;Initial Catalog=GenForm;User ID=genform; Password=genform";
-                        // connection = @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
+                        connection = @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
                     }
                     break;
                 default:
@@ -57,8 +55,33 @@ namespace Informedica.GenForm.Database
 
         public static string GetComputerName()
         {
-            return System.Environment.MachineName;
+            return Environment.MachineName;
         }
 
+        #region Implementation of IDatabaseConnection
+
+        public Boolean TestConnection(String connectionString)
+        {
+            try
+            {
+                using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    connection.Close();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }                            
+        }
+
+        public void RegisterSetting(IDatabaseSetting databaseSetting)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

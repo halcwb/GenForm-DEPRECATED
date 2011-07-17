@@ -77,6 +77,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnityTests\DatabaseConnectionShould.cs" />
+    <Compile Include="UnityTests\DatabaseServicesShould.cs" />
     <Compile Include="UnityTests\IProductServicesTest.cs" />
     <Compile Include="UnityTests\GenFormIdentityTest.cs" />
     <Compile Include="UnityTests\GenFormPrincipalTest.cs" />

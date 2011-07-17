@@ -2,11 +2,10 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
     describe: 'NewProductTest tests that',
 
     tests: function () {
-        console.log(this);
         var me = this,
-            queryHelper = Ext.create('GenForm.test.util.QueryHelper'),
-            messageChecker = Ext.create('GenForm.test.util.MessageChecker'),
-            domClicker = Ext.create('GenForm.test.util.DomClicker'),
+            queryHelper = Ext.create('GenForm.lib.util.QueryHelper'),
+            messageChecker = Ext.create('GenForm.lib.util.MessageChecker'),
+            domClicker = Ext.create('GenForm.lib.util.DomClicker'),
             message = '',
             waitingTime = 500,
             product = 'dopamine Dynatra infusievloeistof 5 mL ampul',
@@ -189,7 +188,6 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
             } else {
                 return false;
             }
-
         };
 
         me.clickAddGeneric = function () {
