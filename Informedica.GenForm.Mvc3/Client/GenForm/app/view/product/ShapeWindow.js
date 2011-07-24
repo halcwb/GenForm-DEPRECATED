@@ -1,10 +1,3 @@
-/**
- * Created by JetBrains WebStorm.
- * User: halcwb
- * Date: 6/8/11
- * Time: 10:57 AM
- * To change this template use File | Settings | File Templates.
- */
 Ext.define('GenForm.view.product.ShapeWindow', {
     extend: 'GenForm.lib.view.window.SaveCancelWindow',
     alias: 'widget.shapewindow',

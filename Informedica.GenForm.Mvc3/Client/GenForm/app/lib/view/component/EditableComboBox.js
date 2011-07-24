@@ -1,3 +1,4 @@
+//noinspection JSUnusedGlobalSymbols
 Ext.define('GenForm.lib.view.component.EditableComboBox',{
     extend:'Ext.form.field.ComboBox',
     alias:['widget.editablecombo', 'widget.editcombo'],
@@ -8,10 +9,17 @@ Ext.define('GenForm.lib.view.component.EditableComboBox',{
 
     multiSelect: false,
 
+    constructor: function (config) {
+        var me = this;
+        me.initConfig(config);
+
+        me.callParent(arguments);
+        return me;
+    },
+
     initComponent: function () {
         var me = this;
         me.addEvents('editoradd');
-        //debugger;
         me.callParent(arguments);
     },
 
@@ -37,7 +45,5 @@ Ext.define('GenForm.lib.view.component.EditableComboBox',{
     onTrigger3Click: function () {
         var me = this;
         me.fireEvent('editoradd', me);
-
-        //Ext.MessageBox.alert('Edit or Add item');
     }
 });

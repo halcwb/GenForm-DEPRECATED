@@ -15,5 +15,11 @@ namespace Informedica.GenForm.Library.Services
         void AddNewShape(IShape shape);
         void AddNewPackage(IPackage package);
         void AddNewUnit(IUnit unit);
+        void AddNewSubstance(ISubstance subst);
+    }
+
+    public interface ISubstance
+    {
+        String SubstanceName { get; set; }
     }
 }

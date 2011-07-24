@@ -223,6 +223,31 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new {success, data = unit, message});
         }
 
+        public ActionResult AddNewSubstance(JObject substanceDto)
+        {
+            var success = true;
+            var message = String.Empty;
+            var subst = GetSubstanceFromJObject(substanceDto);
+            
+            try
+            {
+                GetProductServices().AddNewSubstance(subst);
+
+            }
+            catch (Exception e)
+            {
+                success = false;
+                message = e.ToString();
+            }
+            
+            return this.Direct(new {success, data = subst, message});
+        }
+
+        private ISubstance GetSubstanceFromJObject(JObject substanceDto)
+        {
+            return new Substance {SubstanceName = substanceDto.Value<String>("SubstanceName")};
+        }
+
         private IBrand GetBrandFromJObject(JObject brand)
         {
             return new Brand

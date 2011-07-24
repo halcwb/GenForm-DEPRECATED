@@ -1,13 +1,11 @@
-/**
- * Created by .
- * User: hal
- * Date: 25-4-11
- * Time: 21:57
- * To change this template use File | Settings | File Templates.
- */
+//noinspection JSUnusedGlobalSymbols
 Ext.define('GenForm.controller.product.Product', {
     extend: 'Ext.app.Controller',
     alias: 'widget.productcontroller',
+
+    mixins: {
+        substanceHandler: 'GenForm.controller.mixin.SubstanceHandler'
+    },
 
     models: [
         'product.Product',
@@ -17,7 +15,8 @@ Ext.define('GenForm.controller.product.Product', {
         'product.UnitName',
         'product.PackageName',
         'product.ProductRoute',
-        'product.ProductSubstance'
+        'product.ProductSubstance',
+        'product.SubstanceName'
     ],
 
     stores: [
@@ -44,12 +43,16 @@ Ext.define('GenForm.controller.product.Product', {
         'product.PackageForm',
         'product.UnitWindow',
         'product.UnitForm',
-        'product.ProductGrid'
+        'product.ProductGrid',
+        'product.ProductSubstanceWindow',
+        'product.SubstanceWindow',
+        'product.SubstanceForm'
     ],
 
     init: function() {
         var me = this;
 
+        //noinspection JSUnusedGlobalSymbols
         me.control({
             'panel[region=west]': {
                 render: me.onRegionWestRendered
@@ -65,6 +68,9 @@ Ext.define('GenForm.controller.product.Product', {
             },
             'productwindow > toolbar button[action=cancel]': {
                 click: me.showCancelMessage
+            },
+            'productform button[text=Voeg stof toe]': {
+                click: me.showProductSubstanceWindow
             },
             'productwindow > productform > fieldset > combobox[name="GenericName"]':
             {
@@ -85,6 +91,10 @@ Ext.define('GenForm.controller.product.Product', {
             'productwindow > productform > fieldset > combobox[name="UnitName"]':
             {
                 editoradd: me.editOrAddUnit
+            },
+            'productsubstancewindow combobox[name="SubstanceName"]':
+            {
+                editoradd: me.editOrAddSubstance
             },
             'brandwindow > toolbar button[action=save]': {
                 click: me.saveBrand
@@ -114,6 +124,12 @@ Ext.define('GenForm.controller.product.Product', {
                 click: me.saveUnit
             },
             'unitwindow > toolbar button[action=cancel]': {
+                click: me.showCancelMessage
+            },
+            'substancewindow > toolbar button[action=save]': {
+                click: me.saveSubstance
+            },
+            'substancewindow > toolbar button[action=cancel]': {
                 click: me.showCancelMessage
             }
         });
@@ -210,8 +226,20 @@ Ext.define('GenForm.controller.product.Product', {
         return form;
     },
 
+    getProductSubstanceWindow: function () {
+        var me = this, window;
+
+        window = me.createProductSubstanceWindow();
+        me.loadEmptyProductSubstance(window);
+        return window;
+    },
+
     createProductWindow: function () {
         return Ext.create(this.getProductProductWindowView());    
+    },
+
+    createProductSubstanceWindow: function () {
+        return Ext.create(this.getProductProductSubstanceWindowView());
     },
 
     createGenericWindow: function () {
@@ -230,8 +258,16 @@ Ext.define('GenForm.controller.product.Product', {
         return Ext.create(this.getProductUnitWindowView());
     },
 
+    createSubstanceWindow: function () {
+        return Ext.create(this.getProductSubstanceWindowView());
+    },
+
     getProduct: function (button) {
         return button.up('panel').down('form').getProduct()
+    },
+
+    getProductSubstance: function (button) {
+        return button.up('panel').down('form').getProductSubstance()
     },
 
     getBrand: function (button) {
@@ -284,9 +320,9 @@ Ext.define('GenForm.controller.product.Product', {
 
     savePackage: function (button) {
         var me = this,
-            package = me.getPackage(button);
+            productPackage = me.getPackage(button);
 
-        Product.AddNewPackage(package.data, {scope: me, callback:me.onPackageSaved});
+        Product.AddNewPackage(productPackage.data, {scope: me, callback:me.onPackageSaved});
     },
 
     saveUnit: function (button) {
@@ -297,7 +333,6 @@ Ext.define('GenForm.controller.product.Product', {
     },
 
     onProductSaved: function (result) {
-        var me = this;
         if (result.success) {
             Ext.MessageBox.alert('Product saved: ', result.data.ProductName);
             Ext.ComponentQuery.query('productwindow')[0].close();
@@ -392,11 +427,11 @@ Ext.define('GenForm.controller.product.Product', {
         store.add({ShapeName: shape});
     },
 
-    addPackageToStore: function (package) {
+    addPackageToStore: function (productPackage) {
         var me = this,
             store = me.getPackageStore();
 
-        store.add({PackageName: package});
+        store.add({PackageName: productPackage});
     },
 
     addUnitToStore: function (unit) {
@@ -404,6 +439,13 @@ Ext.define('GenForm.controller.product.Product', {
             store = me.getUnitStore();
 
         store.add({UnitName: unit});
+    },
+
+    addProductSubstanceToStore: function (substance) {
+        var me = this,
+            store = me.getProductSubstanceStore();
+
+        store.add({UnitName: substance});
     },
 
     getBrandStore: function () {
@@ -431,12 +473,26 @@ Ext.define('GenForm.controller.product.Product', {
         return me.getProductUnitNameStore();
     },
 
+    getProductSubstanceStore: function () {
+        var me = this;
+        return me.getProductProductSubstanceStore();
+    },
+
     showCancelMessage: function () {
         Ext.MessageBox.alert('Cancel Product');
     },
 
+    showProductSubstanceWindow: function () {
+        var me = this;
+        me.getProductSubstanceWindow().show();
+    },
+
     createEmptyProduct: function () {
         return Ext.ModelManager.create({}, 'GenForm.model.product.Product');
+    },
+
+    createEmptyProductSubstance: function () {
+        return Ext.ModelManager.create({}, 'GenForm.model.product.ProductSubstance');
     },
 
     createEmptyBrand: function () {
@@ -461,6 +517,10 @@ Ext.define('GenForm.controller.product.Product', {
 
     loadEmptyProduct: function (window) {
         window.loadWithProduct(this.createEmptyProduct());
+    },
+
+    loadEmptyProductSubstance: function (window) {
+        window.loadWithSubstance(this.createEmptyProductSubstance());
     },
 
     loadEmptyGeneric: function (window) {

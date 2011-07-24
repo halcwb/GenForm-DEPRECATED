@@ -1,22 +1,17 @@
-﻿using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Repositories;
-using Informedica.GenForm.Library.Services;
+﻿using Informedica.GenForm.DataAccess.Databases;
+using Informedica.GenForm.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 
 namespace Informedica.GenForm.Assembler.Tests
-{
-    
-    
+{   
     /// <summary>
-    ///This is a test class for ProductAssemblerTest and is intended
-    ///to contain all ProductAssemblerTest Unit Tests
+    ///This is a test class for DatabaseAssemblerTest and is intended
+    ///to contain all DatabaseAssemblerTest Unit Tests
     ///</summary>
     [TestClass]
-    public class ProductAssemblerTest
+    public class DatabaseAssemblerShouldRegister
     {
-
-
         private TestContext testContextInstance;
 
         /// <summary>
@@ -43,7 +38,10 @@ namespace Informedica.GenForm.Assembler.Tests
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            GenFormApplication.Initialize();
+            ObjectFactory.Initialize(x =>
+            {
+                x.AddRegistry(DatabaseAssembler.RegisterDependencies());
+            });
         }
         
         //Use ClassCleanup to run code after all tests in a class have run
@@ -56,9 +54,8 @@ namespace Informedica.GenForm.Assembler.Tests
         //[TestInitialize()]
         //public void MyTestInitialize()
         //{
-        //    ProductAssembler.RegisterDependencies();
         //}
-        
+        //
         //Use TestCleanup to run code after each test has run
         //[TestCleanup()]
         //public void MyTestCleanup()
@@ -67,23 +64,14 @@ namespace Informedica.GenForm.Assembler.Tests
         //
         #endregion
 
-
+        /// <summary>
+        ///A test for RegisterDependencies
+        ///</summary>
         [TestMethod]
-        public void An_implementation_for_product_can_be_get()
+        public void AnInstanceOfGenFormDataContext()
         {
-            Assert.IsInstanceOfType(ObjectFactory.GetInstance<IProduct>(), typeof (IProduct), "no implementation for product was found");
-        }
-
-        [TestMethod]
-        public void An_implementation_for_product_services_can_be_get()
-        {
-            Assert.IsInstanceOfType(ObjectFactory.GetInstance<IProductServices>(), typeof(IProductServices), "no implementation for product services was found");
-        }
-
-        [TestMethod]
-        public void An_implementation_for_product_repository_can_be_get()
-        {
-            Assert.IsInstanceOfType(ObjectFactory.GetInstance<IProductRepository>(), typeof(IProductRepository), "no implementation for product repository was found");
+            var connection = DatabaseConnection.GetConnectionString(DatabaseConnection.DatabaseName.GenForm);
+            ObjectFactoryAssertUtility.AssertRegistationWith<string, GenFormDataContext>(connection);
         }
     }
 }
