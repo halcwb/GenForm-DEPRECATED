@@ -65,6 +65,7 @@
     <Compile Include="DomainModel\Products\IUnit.cs" />
     <Compile Include="DomainModel\Products\Package.cs" />
     <Compile Include="DomainModel\Products\Shape.cs" />
+    <Compile Include="DomainModel\Products\Substance.cs" />
     <Compile Include="DomainModel\Products\Unit.cs" />
     <Compile Include="Repositories\IBrandRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="DomainModel\Users\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IShapeRepository.cs" />
+    <Compile Include="Repositories\ISubstanceRepository.cs" />
     <Compile Include="Repositories\IUnitRepository.cs" />
     <Compile Include="Security\AnonymousIdentity.cs" />
     <Compile Include="Security\GenFormIdentity.cs" />

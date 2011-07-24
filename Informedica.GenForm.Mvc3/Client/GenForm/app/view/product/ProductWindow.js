@@ -3,7 +3,7 @@ Ext.define('GenForm.view.product.ProductWindow', {
     alias: 'widget.productwindow',
 
     width: 700,
-    height: 500,
+    height: 700,
     layout: 'fit',
 
     initComponent: function () {

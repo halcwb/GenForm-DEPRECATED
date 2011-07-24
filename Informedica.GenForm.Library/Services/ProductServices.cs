@@ -49,6 +49,12 @@ namespace Informedica.GenForm.Library.Services
             repository.Insert(unit);
         }
 
+        public void AddNewSubstance(ISubstance subst)
+        {
+            var repository = ObjectFactory.GetInstance<ISubstanceRepository>();
+            repository.Insert(subst);
+        }
+
         public void SaveProduct(IProduct product)
         {
             var repository = ObjectFactory.GetInstance<IProductRepository>();

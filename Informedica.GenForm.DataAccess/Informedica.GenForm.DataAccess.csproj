@@ -73,6 +73,7 @@
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\ShapeRepository.cs" />
+    <Compile Include="Repositories\SubstanceRepository.cs" />
     <Compile Include="Repositories\UnitRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>

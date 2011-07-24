@@ -1,10 +1,3 @@
-/**
- * Created by JetBrains WebStorm.
- * User: halcwb
- * Date: 6/19/11
- * Time: 10:06 AM
- * To change this template use File | Settings | File Templates.
- */
 Ext.define('GenForm.lib.view.window.SaveCancelWindow', {
     extend: 'Ext.window.Window',
 

@@ -1,10 +1,3 @@
-/**
- * Created by .
- * User: hal
- * Date: 28-4-11
- * Time: 13:45
- * To change this template use File | Settings | File Templates.
- */
 Ext.define('GenForm.model.product.Product', {
     extend: 'Ext.data.Model',
 

@@ -30,7 +30,8 @@ namespace Informedica.GenForm.Assembler
             _registry.For<IPackageRepository>().Use<PackageRepository>();
             _registry.For<IUnit>().Use<Unit>();
             _registry.For<IUnitRepository>().Use<UnitRepository>();
-
+            _registry.For<ISubstance>().Use<Substance>();
+            _registry.For<ISubstanceRepository>().Use<SubstanceRepository>();
 
             _hasBeenCalled = true;
             return _registry;

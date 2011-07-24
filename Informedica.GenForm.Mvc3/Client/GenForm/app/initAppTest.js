@@ -13,7 +13,7 @@ Ext.require([
 ]);
 
 Ext.onReady(function () {
-    var newProductTest, loginTest, advancedLoginTest;
+    var newProductTest, loginTest, advancedLoginTest, productListTest;
 
     Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
 
@@ -37,6 +37,9 @@ Ext.onReady(function () {
 
         newProductTest = Ext.create('GenForm.test.usecase.NewProductTest');
         describe(newProductTest.describe, newProductTest.tests);
+
+        productListTest = Ext.create('GenForm.test.usecase.ProductListTest');
+        describe(productListTest.describe, productListTest.tests);
 
         jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
         jasmine.Queue(jasmine.getEnv());

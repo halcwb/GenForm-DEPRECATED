@@ -79,7 +79,7 @@
   <ItemGroup>
     <Compile Include="UnityTests\DatabaseConnectionShould.cs" />
     <Compile Include="UnityTests\DatabaseServicesShould.cs" />
-    <Compile Include="UnityTests\IProductServicesTest.cs" />
+    <Compile Include="UnityTests\ProductServicesShould.cs" />
     <Compile Include="UnityTests\GenFormIdentityTest.cs" />
     <Compile Include="UnityTests\GenFormPrincipalTest.cs" />
     <Compile Include="UnityTests\ILoginServicesTest.cs" />
@@ -105,6 +105,10 @@
     <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
       <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
       <Name>Informedica.GenForm.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Mvc3\Informedica.GenForm.Mvc3.csproj">
+      <Project>{76148642-857A-4186-8A7B-C4AFC05E0152}</Project>
+      <Name>Informedica.GenForm.Mvc3</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj">
       <Project>{82D196C1-B130-4188-A363-458311D8BD89}</Project>

@@ -1,8 +1,7 @@
 ﻿using Informedica.GenForm.Assembler;
-using Informedica.GenForm.DataAccess.Repositories;
-using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services;
+using Informedica.GenForm.Mvc3.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Informedica.Utilities;
@@ -20,7 +19,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
     ///to contain all IProductServicesTest Unit Tests
     ///</summary>
     [TestClass]
-    public class IProductServicesTest
+    public class ProductServicesShould
     {
 
 
@@ -84,15 +83,16 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         ///A test for GetEmptyProduct
         ///</summary>
         [TestMethod]
-        public void Product_services_can_return_an_empty_product()
+        public void BeAbleToReturnAnEmptyProduct()
         {
             var services = GetProductServices(); 
-            Assert.IsTrue(ObjectExaminer.ObjectHasEmptyProperties(services.GetEmptyProduct()), "services did not return an empty product");
+            Assert.IsTrue(ObjectExaminer.ObjectHasEmptyProperties(services.GetEmptyProduct()), 
+                          "services did not return an empty product");
         }
 
 
         [TestMethod]
-        public void Test_helper_method_to_determine_whether_product_is_empty()
+        public void HaveAhelperClassToDetermineWhetherProductIsEmpty()
         {
             IProduct product = ObjectFactory.GetInstance<IProduct>();
             Assert.IsTrue(ObjectExaminer.ObjectHasEmptyProperties(product), "helper method should return true");
@@ -103,7 +103,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
 
         [Isolated]
         [TestMethod]
-        public void Save_product_calls_product_repository_to_save_the_product()
+        public void CallProductRepositoryToSaveAdrug()
         {
             var product = ObjectFactory.GetInstance<IProduct>();
 
@@ -117,14 +117,13 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
             }
             catch (Exception e)
             {
-                if (e.GetType() != typeof(VerifyException)) throw;
-                Assert.Fail("product repository was not called to save product");
+                AssertExceptionType(e, "product repository was not called to save product");
             }
         }
 
         [Isolated]
         [TestMethod]
-        public void Add_new_brand_calls_product_repository_to_add_new_brand()
+        public void CallProductRepositoryToAddAnewBrand()
         {
             var brand = ObjectFactory.GetInstance<IBrand>();
 
@@ -138,10 +137,51 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
             }
             catch (Exception e)
             {
-                if (e.GetType() != typeof(VerifyException)) throw;
-                Assert.Fail("Brand repository was not called to add brand");
+                AssertExceptionType(e, "Brand repository was not called to add brand");
             }
 
+        }
+
+        private void AssertExceptionType(Exception e, String message)
+        {
+            if (e.GetType() != typeof(VerifyException)) throw e;
+            Assert.Fail(message);
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void CallProductRepositoryToAddNewSubstance()
+        {
+            var substance = ObjectFactory.GetInstance<Substance>();
+
+            var repos = GetFakeRepository<ISubstanceRepository, ISubstance>(substance);
+            ObjectFactory.Inject(repos);
+
+            try
+            {
+                GetProductServices().AddNewSubstance(substance);
+                Isolate.Verify.WasCalledWithExactArguments(() => repos.Insert(substance));
+            }
+            catch (Exception e)
+            {
+                AssertExceptionType(e, "Substance repository was not called to save substance");
+            }
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void AddNewSubstanceToRepository()
+        {
+            var substance = ObjectFactory.GetInstance<ISubstance>();
+
+            try
+            {
+                GetProductServices().AddNewSubstance(substance);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("substance could not be inserted in repository: " + e);
+            }
         }
 
 

@@ -15,7 +15,8 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
             shape = 'infusievloeistof',
             quantity = 5,
             unit = 'mL',
-            package = 'ampul';
+            productPackage = 'ampul',
+            substance = 'dopamine';
 
         me.getNewProductButton = function () {
             return queryHelper.getButton('panel[title=Menu]','Nieuw Artikel');
@@ -43,6 +44,10 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
 
         me.clickSavePackageButton = function () {
             queryHelper.clickButton(queryHelper.getButton('packagewindow', 'Opslaan'));
+        };
+
+        me.clickSaveSubstanceButton = function () {
+            queryHelper.clickButton(queryHelper.getButton('substancewindow', 'Opslaan'));
         };
 
         me.clickSaveProductButton = function () {
@@ -75,6 +80,14 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
 
         me.getPackageWindow = function () {
             return Ext.ComponentQuery.query('packagewindow')[0];
+        };
+
+        me.getSubstanceWindow = function () {
+            return Ext.ComponentQuery.query('substancewindow')[0];
+        };
+
+        me.getProductSubstanceWindow = function () {
+            return Ext.ComponentQuery.query('productsubstancewindow')[0];
         };
 
         me.getProductName = function () {
@@ -133,13 +146,22 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
             queryHelper.setFormField(me.getPackageName(), name);
         };
 
+        me.getSubstanceName = function () {
+            return queryHelper.getFormTextField('substancewindow', 'SubstanceName');
+        };
+
+        me.setSubstanceName = function (name) {
+            queryHelper.setFormField(me.getSubstanceName(), name);
+        };
+
         me.setGenericCombo = function (name) {
             queryHelper.setFormField(me.getGenericCombo(), name);
         };
 
         me.getGenericCombo = function () {
             return queryHelper.getFormComboBox('productwindow', 'GenericName');
-        }
+        };
+
 
         me.setBrandCombo = function (name) {
             queryHelper.setFormField(me.getBrandCombo(), name);
@@ -169,8 +191,16 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
             queryHelper.setFormField(me.getPackageCombo(), name);
         };
 
+        me.setSubstanceCombo = function (name) {
+            queryHelper.setFormField(me.getSubstanceCombo(), name);
+        };
+
         me.getPackageCombo = function () {
             return queryHelper.getFormComboBox('productwindow', 'PackageName');
+        };
+
+        me.getSubstanceCombo = function () {
+            return queryHelper.getFormComboBox('productsubstanceform', 'SubstanceName');
         };
 
         me.getQuantity = function () {
@@ -206,12 +236,28 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
             domClicker.click(me.getAddButton('UnitName'))
         };
 
+        me.clickAddSubstance = function () {
+            domClicker.click(me.getAddSubstanceButton('SubstanceName'))
+        };
+
         me.clickAddPackage = function () {
             domClicker.click(me.getAddButton('PackageName'))
         };
 
         me.getAddButton = function (name) {
             return Ext.ComponentQuery.query('productwindow combobox[name=' + name +']')[0].triggerWrap.dom.childNodes[2]
+        };
+
+        me.getAddSubstanceButton = function (name) {
+            return Ext.ComponentQuery.query('productsubstancewindow combobox[name=' + name +']')[0].triggerWrap.dom.childNodes[2]
+        };
+
+        me.clickAddProductSubstance = function () {
+            queryHelper.clickButton(me.getAddProductSubstanceButton());
+        };
+
+        me.getAddProductSubstanceButton = function() {
+            return queryHelper.getButton('productwindow', 'Voeg stof toe');
         };
 
         it('User sees an empty Product window', function () {
@@ -324,24 +370,54 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         });
 
         it('User can enter a Package name', function () {
-            me.setPackageName(package);
-            expect(me.getPackageName().value).toBe(package);
+            me.setPackageName(productPackage);
+            expect(me.getPackageName().value).toBe(productPackage);
         });
 
         it('User can save the new Package', function () {
-            message = package;
+            message = productPackage;
             me.clickSavePackageButton();
             waitsFor(me.checkMessage, 'response of package save', waitingTime);
         });
 
         it('The new package can be set for the product', function () {
-            me.setPackageCombo(package);
-            expect(me.getPackageCombo().value).toBe(package);
+            me.setPackageCombo(productPackage);
+            expect(me.getPackageCombo().value).toBe(productPackage);
         });
 
         it('User can set the product code', function () {
             me.setProductCode(code);
             expect(me.getProductCode().value).toBe(code);
+        });
+
+        it('User open up a window to add a product substance', function () {
+            me.clickAddProductSubstance();
+            expect(me.getProductSubstanceWindow()).toBeDefined();
+        });
+
+        it('Productwindow has a combobox to enter substance', function () {
+            expect(me.getSubstanceCombo()).toBeDefined();
+        });
+
+        it('A substance can open a window to add a new substance', function () {
+            me.clickAddSubstance();
+            expect(me.getSubstanceWindow()).toBeDefined();
+        });
+
+        it('A new substance can be entered', function () {
+            me.setSubstanceName(substance);
+            expect(me.getSubstanceName().value).toBe(substance);
+        });
+
+        it('User can save the new Substance', function () {
+            message = substance;
+            me.clickSaveSubstanceButton();
+            waitsFor(me.checkMessage, 'response of unit save', waitingTime);
+        });
+
+        it('The new substance can be set for the productsubstance', function () {
+            me.setSubstanceCombo(substance);
+            expect(me.getSubstanceCombo().value).toBe(substance);
         });
 
         it('User can save the filled in Product', function () {

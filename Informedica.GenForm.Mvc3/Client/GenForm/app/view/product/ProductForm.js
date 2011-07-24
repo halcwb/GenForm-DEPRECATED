@@ -1,25 +1,9 @@
-/**
- * Created by .
- * User: hal
- * Date: 26-4-11
- * Time: 10:24
- * To change this template use File | Settings | File Templates.
- */
 Ext.define('GenForm.view.product.ProductForm', {
-    extend: 'Ext.form.Panel',
+    extend: 'GenForm.lib.view.form.FormBase',
     alias: 'widget.productform',
 
-    requires: [
-        'GenForm.lib.view.component.EditableComboBox'
-    ],
-
-    initComponent: function () {
-        var me = this;
-        me.items = this.createItems();
-
-        me.callParent(arguments);
-    },
-
+    height: 600,
+    
     createItems: function () {
         var me = this;
 
@@ -50,6 +34,13 @@ Ext.define('GenForm.view.product.ProductForm', {
         return {
             title: 'Stoffen',
             layout: 'fit',
+            dockedItems: {
+                xtype: 'toolbar',
+                dock: 'top',
+                items: [
+                    { text: 'Voeg stof toe', action: 'newproductsubstance' }
+                ]
+            },
             items: [ me.createSubstanceGrid() ]
         };
     },
@@ -117,24 +108,92 @@ Ext.define('GenForm.view.product.ProductForm', {
     },
 
     createProductDetails: function () {
+        var me = this, margin = '10 0 10 10';
         return [
-            { xtype: 'textfield',    name:'ProductName',   fieldLabel: 'Artikel Naam', margin: '10 0 10 10' },
-            { xtype: 'textfield',    name: 'ProductCode',  fieldLabel: 'Artikel Code', margin: '10 0 10 10' },
-            { xtype: 'editcombo',    name: 'GenericName',  fieldLabel: 'Generiek',     margin: '10 0 10 10',  displayField: 'GenericName',  store: 'product.GenericName', queryMode: 'local', editable: false},
-            { xtype: 'editcombo',    name: 'BrandName',    fieldLabel: 'Merk',         margin: '10 0 10 10',  displayField: 'BrandName',    store: 'product.BrandName',   queryMode: 'local', editable: false},
-            { xtype: 'editcombo',    name: 'ShapeName',    fieldLabel: 'Vorm',         margin: '10 0 10 10',  displayField: 'ShapeName',    store: 'product.ShapeName' ,  queryMode: 'local', editable: false},
-            { xtype: 'numberfield',  name: 'Quantity',     fieldLabel: 'Hoeveelheid',  margin: '10 0 10 10' },
-            { xtype: 'editcombo',    name: 'UnitName',     fieldLabel: 'Eenheid',      margin: '10 0 10 10',  displayField: 'UnitName',     store: 'product.UnitName',    queryMode: 'local', editable: false},
-            { xtype: 'editcombo',    name: 'PackageName',  fieldLabel: 'Verpakking',   margin: '10 0 10 10' , displayField: 'PackageName',  store: 'product.PackageName', queryMode: 'local', editable: false}
+            { xtype: 'textfield',    name:'ProductName',   fieldLabel: 'Artikel Naam', margin: margin},
+            { xtype: 'textfield',    name: 'ProductCode',  fieldLabel: 'Artikel Code', margin: margin },
+            me.createGenericNameCombo(margin),
+            me.createBrandNameCombo(margin),
+            me.createShapeNameCombo(margin),
+            { xtype: 'numberfield',  name: 'Quantity',     fieldLabel: 'Hoeveelheid',  margin: margin },
+            me.createUnitNameCombo(margin),
+            me.createPackageNameCombo(margin)
         ];
     },
 
-    getProduct: function () {
-        var me = this,
-            record = me.getRecord();
+    createGenericNameCombo: function (margin) {
+        var me = this, combo;
 
-        me.getForm().updateRecord(record);
-        return record;
+        combo = me.createEditCombo({
+            name: 'GenericName',
+            fieldLabel: 'Generiek',
+            margin: margin,
+            displayField: 'GenericName',
+            store: 'product.GenericName'
+        });
+
+        return combo;
+    },
+
+    createBrandNameCombo: function (margin) {
+        var me = this, combo;
+
+        combo = me.createEditCombo({
+            name: 'BrandName',
+            fieldLabel: 'Merk',
+            margin: margin,
+            displayField: 'BrandName',
+            store: 'product.BrandName'
+        });
+
+        return combo;
+    },
+
+    createShapeNameCombo: function (margin) {
+        var me = this, combo;
+
+        combo = me.createEditCombo({
+            name: 'ShapeName',
+            fieldLabel: 'Vorm',
+            margin: margin,
+            displayField: 'ShapeName',
+            store: 'product.ShapeName'
+        });
+
+        return combo;
+    },
+
+    createUnitNameCombo: function (margin) {
+        var me = this, combo;
+
+        combo = me.createEditCombo({
+            name: 'UnitName',
+            fieldLabel: 'Eenheid',
+            margin: margin,
+            displayField: 'UnitName',
+            store: 'product.UnitName'
+        });
+
+        return combo;
+    },
+
+    createPackageNameCombo: function (margin) {
+        var me = this, combo;
+
+        combo = me.createEditCombo({
+            name: 'PackageName',
+            fieldLabel: 'Verpakking',
+            margin: margin ,
+            displayField: 'PackageName',
+            store: 'product.PackageName'
+        });
+
+        return combo;
+    },
+
+    getProduct: function () {
+        var me = this;
+        return me.getFormData()
     }
 
 });

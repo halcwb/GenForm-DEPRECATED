@@ -2,6 +2,7 @@
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Substance = Informedica.GenForm.Database.Substance;
 
 namespace Informedica.GenForm.DataAccess.DataMappers
 {
