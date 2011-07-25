@@ -62,6 +62,7 @@
     <Compile Include="DomainModel\Products\IGeneric.cs" />
     <Compile Include="DomainModel\Products\IPackage.cs" />
     <Compile Include="DomainModel\Products\IShape.cs" />
+    <Compile Include="DomainModel\Products\ISubstance.cs" />
     <Compile Include="DomainModel\Products\IUnit.cs" />
     <Compile Include="DomainModel\Products\Package.cs" />
     <Compile Include="DomainModel\Products\Shape.cs" />

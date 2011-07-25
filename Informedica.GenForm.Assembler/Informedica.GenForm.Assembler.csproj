@@ -58,7 +58,7 @@
     <Compile Include="DatabaseAssembler.cs" />
     <Compile Include="DatabaseRegistrationAssembler.cs" />
     <Compile Include="GenFormApplication.cs" />
-    <Compile Include="LoginAssembler.cs" />
+    <Compile Include="UserAssembler.cs" />
     <Compile Include="ProductAssembler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

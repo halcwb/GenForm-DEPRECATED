@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
@@ -24,7 +23,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         public override void Insert(IProduct item)
         {
-            Insert<IDataMapper<IProduct, Product>>(item);
+            InsertUsingMapper<IDataMapper<IProduct, Product>>(item);
         }
 
         protected override void InsertOnSubmit(GenFormDataContext ctx, Product dao)

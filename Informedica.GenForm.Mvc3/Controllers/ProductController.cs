@@ -112,7 +112,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
                            PackageName = productData.Value<String>("PackageName"),
                            ProductCode = productData.Value<String>("ProductCode"),
                            ProductId = productData.Value<Int32>("ProductId"),
-                           Quantity = productData.Value<Double>("Quantity"),
+                           Quantity = productData.Value<Decimal>("Quantity"),
                            ShapeName = productData.Value<String>("ShapeName"),
                            UnitName = productData.Value<String>("UnitName")
                        };

@@ -15,7 +15,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         String GenericName { get; set; }
         String BrandName { get; set; }
         String ShapeName { get; set; }
-        Double Quantity { get; set; }
+        Decimal Quantity { get; set; }
         String UnitName { get; set; }
         String PackageName { get; set; }
     }

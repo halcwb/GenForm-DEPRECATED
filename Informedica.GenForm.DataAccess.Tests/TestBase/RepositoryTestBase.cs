@@ -1,4 +1,5 @@
 ﻿using System;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.Repositories;
@@ -7,7 +8,7 @@ using StructureMap;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
 
-namespace Informedica.GenForm.DataAccess.Tests
+namespace Informedica.GenForm.DataAccess.Tests.TestBase
 {
     [TestClass]
     public abstract class RepositoryTestBase<TRepos, TBo,TDao> 
@@ -26,15 +27,34 @@ namespace Informedica.GenForm.DataAccess.Tests
 
         private void IsolateRepositoryFromContext()
         {
-            Repos = CreateRepository();
-            Bo = ObjectFactory.GetInstance<TBo>();
+            InitializeGenForm();
+            SetupRepository();
+            IsolateFromMapper();
+            IsolateFromDataContext();
+        }
 
+        private static void InitializeGenForm()
+        {
+            GenFormApplication.Initialize();
+        }
+
+        private void IsolateFromDataContext()
+        {
+            Context = CreateFakeDatabaseContext();
+            Isolate.WhenCalled(() => Context.SubmitChanges()).IgnoreCall();
+        }
+
+        private void IsolateFromMapper()
+        {
             Mapper = CreateFakeMapper();
             Dao = CreateFakeDao();
             Isolate.WhenCalled(() => Mapper.MapFromBoToDao(Bo, Dao)).IgnoreCall();
+        }
 
-            Context = CreateFakeDatabaseContext();
-            Isolate.WhenCalled(() => Context.SubmitChanges()).IgnoreCall();
+        private void SetupRepository()
+        {
+            Repos = CreateRepository();
+            Bo = ObjectFactory.GetInstance<TBo>();
         }
 
         private static GenFormDataContext CreateFakeDatabaseContext()

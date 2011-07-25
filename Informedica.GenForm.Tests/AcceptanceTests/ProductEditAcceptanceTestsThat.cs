@@ -16,7 +16,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
     /// Summary description for ProductEditAcceptanceTests
     /// </summary>
     [TestClass]
-    public class ProductEditAcceptanceTests
+    public class ProductEditAcceptanceTestsThat
     {
         private const String Penicilline = "penicilline";
         private const String Sintrom = "Sintrom";
@@ -167,7 +167,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         }
 
         [TestMethod]
-        public void User_can_add_new_brand_name()
+        public void UserCanAddNewBrandName()
         {
             var brand = CreateNewBrand(Sintrom);
             try
@@ -180,7 +180,6 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             catch (Exception e)
             {
                 Assert.Fail("an error was throw: " + e);
-                throw;
             }
         }
 

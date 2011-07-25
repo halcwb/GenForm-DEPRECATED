@@ -1,7 +1,6 @@
 ﻿using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services;
-using Informedica.GenForm.Mvc3.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Informedica.Utilities;
@@ -142,7 +141,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
 
         }
 
-        private void AssertExceptionType(Exception e, String message)
+        private static void AssertExceptionType(Exception e, String message)
         {
             if (e.GetType() != typeof(VerifyException)) throw e;
             Assert.Fail(message);
@@ -185,7 +184,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         }
 
 
-        private T GetFakeRepository<T, TC>(TC item) where T: IRepository<TC>
+        private static T GetFakeRepository<T, TC>(TC item) where T: IRepository<TC>
         {
             var repos = Isolate.Fake.Instance<T>();
             Isolate.WhenCalled(() => repos.Insert(item)).IgnoreCall();

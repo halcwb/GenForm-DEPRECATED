@@ -12,7 +12,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public string GenericName { get; set; }
         public string BrandName { get; set; }
         public string ShapeName { get; set; }
-        public double Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public string UnitName { get; set; }
         public string PackageName { get; set; }
 

@@ -24,7 +24,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         public override void Insert(IUnit item)
         {
-            Insert<UnitMapper>(item);
+            InsertUsingMapper<UnitMapper>(item);
         }
 
         public override void Delete(int id)

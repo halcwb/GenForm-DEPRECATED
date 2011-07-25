@@ -79,11 +79,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RepositoryTestBase.cs" />
+    <Compile Include="TestBase\DataMapperTestBase.cs" />
+    <Compile Include="TestBase\RepositoryTestBase.cs" />
+    <Compile Include="UnitTests\BrandMapperShould.cs" />
     <Compile Include="UnitTests\BrandRepositoryShould.cs" />
     <Compile Include="IntegrationTests\UserRepositoryTest.cs" />
+    <Compile Include="UnitTests\GenericMapperShould.cs" />
+    <Compile Include="UnitTests\PackageMapperShould.cs" />
+    <Compile Include="UnitTests\ProductMapperShould.cs" />
     <Compile Include="UnitTests\ProductRepositoryShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTests\ShapeMapperShould.cs" />
+    <Compile Include="UnitTests\SubstanceMapperShould.cs" />
+    <Compile Include="UnitTests\SubstanceRepositoryShould.cs" />
+    <Compile Include="UnitTests\UnitMapperShould.cs" />
+    <Compile Include="UnitTests\UserMapperShould.cs" />
     <Compile Include="UnitTests\UserRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>

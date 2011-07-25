@@ -1,4 +1,4 @@
-﻿using Informedica.GenForm.Library.Services;
+﻿using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Library.Repositories
 {

@@ -1,8 +1,8 @@
-﻿using Informedica.GenForm.Library.DomainModel.Products;
+﻿using Informedica.GenForm.DataAccess.Repositories;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StructureMap;
 
 namespace Informedica.GenForm.Assembler.Tests
 {
@@ -41,10 +41,7 @@ namespace Informedica.GenForm.Assembler.Tests
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            ObjectFactory.Initialize(x =>
-            {
-                x.AddRegistry(ProductAssembler.RegisterDependencies());
-            });
+            GenFormApplication.Initialize();
         }
         
         //Use ClassCleanup to run code after all tests in a class have run
@@ -57,7 +54,7 @@ namespace Informedica.GenForm.Assembler.Tests
         //[TestInitialize()]
         //public void MyTestInitialize()
         //{
-        //    ProductAssembler.RegisterDependencies();
+        //    GenFormApplication.Initialize();
         //}
         
         //Use TestCleanup to run code after each test has run
@@ -71,81 +68,135 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public void AnImplementationOfProduct()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IProduct>("no implementation for product was found");
+            ObjectFactoryAssertUtility.AssertRegistration<IProduct>(
+                ObjectFactoryAssertUtility.GetMessageFor<IProduct>());
         }
 
         [TestMethod]
         public void AnImplementationOfProductServices()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IProductServices>("no implementation for product services was found");
+            ObjectFactoryAssertUtility.AssertRegistration<IProductServices>(
+                ObjectFactoryAssertUtility.GetMessageFor<IProductServices>());
         }
 
         [TestMethod]
         public void AnImplementationOfProductRepository()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IProductRepository>("no implementation for product repository was found");
+            ObjectFactoryAssertUtility.AssertRegistration<IProductRepository>(
+                ObjectFactoryAssertUtility.GetMessageFor<IProductRepository>());
+        }
+
+        [TestMethod]
+        public void AnImplementationOfProductMapper()
+        {
+            ObjectFactoryAssertUtility.AssertRegistration<IDataMapper<IProduct, Database.Product>>(
+                ObjectFactoryAssertUtility.GetMessageFor<IDataMapper<IProduct, Database.Product>>());
         }
 
         [TestMethod]
         public void AnImplementationOfBrand()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IBrand>("no implementation for brand was found");
+            ObjectFactoryAssertUtility.AssertRegistration<IBrand>(
+                ObjectFactoryAssertUtility.GetMessageFor<IBrand>());
         }
 
         [TestMethod]
         public void AnImplementationOfBrandRepository()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IBrandRepository>("no implementation for brand repository was found");
+            ObjectFactoryAssertUtility.AssertRegistration<IBrandRepository>(
+                ObjectFactoryAssertUtility.GetMessageFor<IBrandRepository>());
+        }
+
+        [TestMethod]
+        public void AnImplementationOfBrandMapper()
+        {
+            ObjectFactoryAssertUtility.AssertRegistration<IDataMapper<IBrand, Database.Brand>>(
+                ObjectFactoryAssertUtility.GetMessageFor<IDataMapper<IBrand, Database.Brand>>());
         }
 
         [TestMethod]
         public void AnImplementationOfGeneric()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IGeneric>("no implementation for brand was found");
+            ObjectFactoryAssertUtility.AssertRegistration<IGeneric>(
+                ObjectFactoryAssertUtility.GetMessageFor<IGeneric>());
         }
 
         [TestMethod]
         public void AnImplementationOfGenericRepository()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IGenericRepository>("no implementation for brand repository was found");
+            ObjectFactoryAssertUtility.AssertRegistration<IGenericRepository>(
+                ObjectFactoryAssertUtility.GetMessageFor<IGenericRepository>());
+        }
+
+        [TestMethod]
+        public void AnImplementationOfGenericMapper()
+        {
+            ObjectFactoryAssertUtility.AssertRegistration<IDataMapper<IGeneric, Database.Substance>>(
+                ObjectFactoryAssertUtility.GetMessageFor<IDataMapper<IGeneric, Database.Substance>>());
         }
 
         [TestMethod]
         public void AnImplementationOfShape()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IShape>("no implementation for brand was found");
+            ObjectFactoryAssertUtility.AssertRegistration<IShape>(
+                ObjectFactoryAssertUtility.GetMessageFor<IShape>());
         }
 
         [TestMethod]
         public void AnImplementationOfShapeRepository()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IShapeRepository>("no implementation for brand repository was found");
+            ObjectFactoryAssertUtility.AssertRegistration<IShapeRepository>(
+                ObjectFactoryAssertUtility.GetMessageFor<IShapeRepository>());
+        }
+
+        [TestMethod]
+        public void AnImplementationOfShapeMapper()
+        {
+            ObjectFactoryAssertUtility.AssertRegistration<IDataMapper<IShape, Database.Shape>>(
+                ObjectFactoryAssertUtility.GetMessageFor<IDataMapper<IShape, Database.Shape>>());
         }
 
         [TestMethod]
         public void AnImplementationOfUnit()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IUnit>("no implementation for brand was found");
+            ObjectFactoryAssertUtility.AssertRegistration<IUnit>(
+                ObjectFactoryAssertUtility.GetMessageFor<IUnit>());
         }
 
         [TestMethod]
         public void AnImplementationOfUnitRepository()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IUnitRepository>("no implementation for brand repository was found");
+            ObjectFactoryAssertUtility.AssertRegistration<IUnitRepository>(
+                ObjectFactoryAssertUtility.GetMessageFor<IUnitRepository>());
+        }
+
+        [TestMethod]
+        public void AnImplementationOfUnitMapper()
+        {
+            ObjectFactoryAssertUtility.AssertRegistration<IDataMapper<IUnit, Database.Unit>>(
+                ObjectFactoryAssertUtility.GetMessageFor<IDataMapper<IUnit,Database.Unit>>());
         }
 
         [TestMethod]
         public void AnImplementationOfSubstance()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<ISubstance>("no implementation for brand was found");
+            ObjectFactoryAssertUtility.AssertRegistration<ISubstance>(
+                ObjectFactoryAssertUtility.GetMessageFor<ISubstance>());
         }
 
         [TestMethod]
         public void AnImplementationOfSubstanceRepository()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<ISubstanceRepository>("no implementation for brand repository was found");
+            ObjectFactoryAssertUtility.AssertRegistration<ISubstanceRepository>(
+                ObjectFactoryAssertUtility.GetMessageFor<ISubstanceRepository>());
         }
 
+        [TestMethod]
+        public void AnImplementationOfSubstanceMapper()
+        {
+            ObjectFactoryAssertUtility.AssertRegistration<IDataMapper<ISubstance, Database.Substance>>(
+                ObjectFactoryAssertUtility.GetMessageFor<IDataMapper<ISubstance, Database.Substance>>());
+        }
 
     }
 }
