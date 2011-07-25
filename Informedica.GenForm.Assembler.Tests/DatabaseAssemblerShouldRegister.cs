@@ -38,10 +38,7 @@ namespace Informedica.GenForm.Assembler.Tests
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            ObjectFactory.Initialize(x =>
-            {
-                x.AddRegistry(DatabaseAssembler.RegisterDependencies());
-            });
+            GenFormApplication.Initialize();
         }
         
         //Use ClassCleanup to run code after all tests in a class have run

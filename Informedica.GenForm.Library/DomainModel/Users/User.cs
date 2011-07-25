@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.ServiceProviders;
 
@@ -51,7 +49,7 @@ namespace Informedica.GenForm.Library.DomainModel.Users
         public string Pager
         {
             get { return _pager; }
-            set { _password = value; }
+            set { _pager = value; }
         }
 
         private static IRepository<IUser> Repository
@@ -62,8 +60,6 @@ namespace Informedica.GenForm.Library.DomainModel.Users
         #endregion
 
         #region Factory Methods
-
-        private User() {}
 
         public static IUser NewUser()
         {

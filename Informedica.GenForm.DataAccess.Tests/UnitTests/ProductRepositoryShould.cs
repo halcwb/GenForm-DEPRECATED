@@ -1,4 +1,5 @@
 ﻿using Informedica.GenForm.Assembler;
+using Informedica.GenForm.DataAccess.Tests.TestBase;
 using Informedica.GenForm.Library.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

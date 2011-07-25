@@ -69,7 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcceptanceTests\ProductEditAcceptanceTests.cs" />
+    <Compile Include="AcceptanceTests\ProductEditAcceptanceTestsThat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegressionTests\LoginAcceptanceTests.cs" />
   </ItemGroup>

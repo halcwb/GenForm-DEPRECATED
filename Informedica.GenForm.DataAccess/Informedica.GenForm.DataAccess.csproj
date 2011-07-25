@@ -63,6 +63,7 @@
     <Compile Include="DataMappers\PackageMapper.cs" />
     <Compile Include="DataMappers\ProductMapper.cs" />
     <Compile Include="DataMappers\ShapeMapper.cs" />
+    <Compile Include="DataMappers\SubstanceMapper.cs" />
     <Compile Include="DataMappers\UnitMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataMappers\IDataMapper.cs" />

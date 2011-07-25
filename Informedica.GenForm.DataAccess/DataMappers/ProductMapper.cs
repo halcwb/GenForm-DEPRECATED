@@ -20,7 +20,7 @@ namespace Informedica.GenForm.DataAccess.DataMappers
             dao.Brand = new Brand {BrandName = bo.BrandName == String.Empty ? null: bo.BrandName};
             dao.DisplayName = bo.ProductName == String.Empty ? null: bo.ProductName;
             dao.Divisor = 1;
-            dao.Package = new Package {PackageName = bo.PackageName == String.Empty ? null : bo.ProductName};
+            dao.Package = new Package {PackageName = bo.PackageName == String.Empty ? null : bo.PackageName};
             dao.ProductCode = "1";
             dao.ProductKey = "1";
             dao.ProductName = dao.DisplayName;
@@ -48,7 +48,15 @@ namespace Informedica.GenForm.DataAccess.DataMappers
 
         public void MapFromDaoToBo(Product dao, IProduct bo)
         {
-            throw new NotImplementedException();
+            bo.BrandName = dao.Brand == null ? String.Empty: dao.Brand.BrandName;
+            bo.GenericName = dao.Substance.SubstanceName;
+            bo.PackageName = dao.Package.PackageName;
+            bo.ProductCode = dao.ProductCode;
+            bo.ProductId = dao.ProductId;
+            bo.ProductName = dao.ProductName;
+            bo.Quantity = dao.ProductQuantity ?? Decimal.Zero;
+            bo.ShapeName = dao.Shape.ShapeName;
+            bo.UnitName = dao.Unit.UnitName;
         }
 
         #endregion

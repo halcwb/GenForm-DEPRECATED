@@ -8,15 +8,15 @@ using StructureMap;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public abstract class Repository<BO, DAO>: IRepository<BO>
+    public abstract class Repository<TBo, TDao>: IRepository<TBo>
     {
         #region Implementation of IRepository<T>
 
-        public abstract IEnumerable<BO> Fetch(int id);
-        public abstract IEnumerable<BO> Fetch(string name);
-        public abstract void Insert(BO item);
+        public abstract IEnumerable<TBo> Fetch(int id);
+        public abstract IEnumerable<TBo> Fetch(string name);
+        public abstract void Insert(TBo item);
 
-        protected void Insert<TM>(BO item) where TM: IDataMapper<BO, DAO>
+        protected void InsertUsingMapper<TM>(TBo item) where TM: IDataMapper<TBo, TDao>
         {
             var mapper = GetMapper<TM>();
             using (var ctx = GetDataContext())
@@ -61,11 +61,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
             }
         }
 
-        protected abstract void InsertOnSubmit(GenFormDataContext ctx, DAO dao);
+        protected abstract void InsertOnSubmit(GenFormDataContext ctx, TDao dao);
 
-        protected DAO GetDao()
+        protected TDao GetDao()
         {
-            return ObjectFactory.GetInstance<DAO>();
+            return ObjectFactory.GetInstance<TDao>();
         }
 
         protected static GenFormDataContext GetDataContext()
@@ -85,7 +85,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
         }
 
         public abstract void Delete(int id);
-        public abstract void Delete(BO item);
+        public abstract void Delete(TBo item);
 
         #endregion
 

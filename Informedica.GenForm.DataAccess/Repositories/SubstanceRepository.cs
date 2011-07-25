@@ -1,35 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using Informedica.GenForm.Database;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
-using Informedica.GenForm.Library.Services;
+using Substance = Informedica.GenForm.Database.Substance;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class SubstanceRepository: ISubstanceRepository
+    public class SubstanceRepository:Repository<ISubstance, Database.Substance>, ISubstanceRepository
     {
-        #region Implementation of IRepository<ISubstance>
+        #region Overrides of Repository<ISubstance,Substance>
 
-        public IEnumerable<ISubstance> Fetch(int id)
+        public override IEnumerable<ISubstance> Fetch(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ISubstance> Fetch(string name)
+        public override IEnumerable<ISubstance> Fetch(string name)
         {
             throw new NotImplementedException();
         }
 
-        public void Insert(ISubstance item)
+        public override void Insert(ISubstance item)
+        {
+            InsertUsingMapper<IDataMapper<ISubstance, Substance>>(item);
+        }
+
+        public override void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public override void Delete(ISubstance item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(ISubstance item)
+        protected override void InsertOnSubmit(GenFormDataContext ctx, Substance dao)
         {
             throw new NotImplementedException();
         }

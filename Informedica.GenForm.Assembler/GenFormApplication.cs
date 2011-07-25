@@ -11,8 +11,11 @@ namespace Informedica.GenForm.Assembler
                 x.AddRegistry(DatabaseAssembler.RegisterDependencies());
                 x.AddRegistry(ProductAssembler.RegisterDependencies());
                 x.AddRegistry(DatabaseRegistrationAssembler.RegisterDependencies());
+                x.AddRegistry(UserAssembler.RegisterDependencies());
             });
-            LoginAssembler.RegisterDependencies();
+
+            // ToDo: switch this to using StructureMap
+            UserAssembler.SetupServiceProvider();
         }
     }
 }

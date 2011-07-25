@@ -24,7 +24,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         public override void Insert(IShape item)
         {
-            Insert<ShapeMapper>(item);
+            InsertUsingMapper<ShapeMapper>(item);
         }
 
         public override void Delete(int id)

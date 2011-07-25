@@ -11,7 +11,12 @@ namespace Informedica.GenForm.DataAccess.DataMappers
 
         public void MapFromBoToDao(IUser bo, GenFormUser dao)
         {
-            throw new NotImplementedException();
+            dao.Email = bo.Email;
+            dao.FirstName = bo.FirstName;
+            dao.LastName = bo.LastName;
+            dao.PagerNumber = bo.Pager;
+            dao.PassWord = bo.Password;
+            dao.UserName = bo.UserName;
         }
 
         public void MapFromDaoToBo(GenFormUser dao, IUser bo)
@@ -21,6 +26,7 @@ namespace Informedica.GenForm.DataAccess.DataMappers
             bo.Pager = dao.PagerNumber;
             bo.Password = dao.PassWord;
             bo.UserName = dao.UserName;
+            bo.Email = dao.Email;
         }
 
         #endregion
