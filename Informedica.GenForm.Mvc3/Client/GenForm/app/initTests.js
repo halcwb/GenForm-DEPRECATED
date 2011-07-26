@@ -13,79 +13,28 @@ Ext.require([
 ]);
 
 Ext.onReady(function () {
-    var classTests, componentQueryTests, loaderTests, modelTests,
-        storeTests, productControllerTests, brandNameModelTests,
-        genericNameModelTests, loginModelTests, productModelTests,
-        productSubstanceModelTests, genericNameStoreTests, productSubstanceStoreTests,
-        productSubstanceGridTests, saveCancelWindowTests, loginControllerTests,
-        databaseRegistrationWindowTests, productSubstanceFormTests;
 
     Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
 
     Ext.app.config.appFolder = '../Client/GenForm/app';
     //noinspection JSUnusedGlobalSymbols
     Ext.app.config.launch = function() {
-        var me = this;
+        var me = this, test,
+            testList = Ext.create('GenForm.test.TestList');
+
         GenForm.application = me;
 
+        // Set up app
         Ext.create('Ext.container.Viewport', {
             layout: 'border',
             items: me.getViewPortItems()
         });
 
-        classTests = Ext.create('GenForm.test.extjs.ClassTests');
-        describe(classTests.describe, classTests.tests);
-
-        componentQueryTests = Ext.create('GenForm.test.extjs.ComponentQueryTests');
-        describe(componentQueryTests.describe, componentQueryTests.tests);
-
-        loaderTests = Ext.create('GenForm.test.extjs.LoaderTests');
-        describe(loaderTests.describe, loaderTests.tests);
-        
-        modelTests = Ext.create('GenForm.test.extjs.ModelTests');
-        describe(modelTests.describe, modelTests.tests);
-        
-        storeTests = Ext.create('GenForm.test.extjs.StoreTests');
-        describe(storeTests.describe, storeTests.tests);
-
-        loginControllerTests = Ext.create('GenForm.test.controller.LoginControllerTests');
-        describe(loginControllerTests.describe, loginControllerTests.tests);
-
-        productControllerTests = Ext.create('GenForm.test.controller.ProductControllerTests');
-        describe(productControllerTests.describe, productControllerTests.tests);
-
-        brandNameModelTests = Ext.create('GenForm.test.model.BrandNameModelTests');
-        describe(brandNameModelTests.describe, brandNameModelTests.tests);
-
-        genericNameModelTests = Ext.create('GenForm.test.model.GenericNameModelTests');
-        describe(genericNameModelTests.describe, genericNameModelTests.tests);
-
-        loginModelTests = Ext.create('GenForm.test.model.LoginModelTests');
-        describe(loginModelTests.describe, loginModelTests.tests);
-
-        productModelTests = Ext.create('GenForm.test.model.ProductModelTests');
-        describe(productModelTests.describe, productModelTests.tests);
-
-        productSubstanceModelTests = Ext.create('GenForm.test.model.ProductSubstanceModelTests');
-        describe(productSubstanceModelTests.describe, productSubstanceModelTests.tests);
-
-        genericNameStoreTests = Ext.create('GenForm.test.store.GenericNameStoreTests');
-        describe(genericNameStoreTests.describe, genericNameStoreTests.tests);
-
-        productSubstanceStoreTests = Ext.create('GenForm.test.store.ProductSubstanceStoreTests');
-        describe(productSubstanceStoreTests.describe, productSubstanceStoreTests.tests);
-
-        productSubstanceGridTests = Ext.create('GenForm.test.view.ProductSubstanceGridTests');
-        describe(productSubstanceGridTests.describe, productSubstanceGridTests.tests);
-
-        saveCancelWindowTests = Ext.create('GenForm.test.view.SaveCancelWindowTests');
-        describe(saveCancelWindowTests.describe, saveCancelWindowTests.tests);
-
-        databaseRegistrationWindowTests = Ext.create('GenForm.test.view.DatabaseRegistrationWindowTests');
-        describe(databaseRegistrationWindowTests.describe, databaseRegistrationWindowTests.tests);
-
-        productSubstanceFormTests = Ext.create('GenForm.test.view.ProductSubstanceFormTests');
-        describe(productSubstanceFormTests.describe, productSubstanceFormTests.tests);
+        // Load tests
+        for (var i = 0; i < testList.tests.length; i++) {
+            test = Ext.create(testList.tests[i]);
+            describe(test.describe, test.tests);
+        }
 
         jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
         jasmine.Queue(jasmine.getEnv());
