@@ -38,7 +38,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         protected override void InsertOnSubmit(GenFormDataContext ctx, Substance dao)
         {
-            throw new NotImplementedException();
+            ctx.Substance.InsertOnSubmit(dao);
         }
 
         #endregion

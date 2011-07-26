@@ -3,9 +3,12 @@ Ext.define('GenForm.test.extjs.ModelTests', {
 
     tests: function () {
         //noinspection MagicNumberJS
-        var me = this, instance, waitingTime = 200;
+        var me = this, instance, waitingTime = 200,
+            namespace = 'GenForm.test.extjs.modeltests.',
+            testModel = (namespace + 'TestModel'),
+            testModelWithoutStore = (namespace + 'ModelWithoutStore');
 
-        Ext.define('Test.modeltests.TestModel', {
+        Ext.define(testModel, {
             extend: 'Ext.data.Model',
 
             fields: [
@@ -30,7 +33,7 @@ Ext.define('GenForm.test.extjs.ModelTests', {
             }
         });
 
-        Ext.define('Test.modeltests.ModelWithoutStore', {
+        Ext.define(testModelWithoutStore, {
            extend: 'Ext.data.Model',
 
             fields: [
@@ -40,12 +43,12 @@ Ext.define('GenForm.test.extjs.ModelTests', {
         });
 
         me.createTestModelInstance = function () {
-            if (!instance) instance = Ext.create('Test.modeltests.TestModel');
+            if (!instance) instance = Ext.create(testModel);
             return instance;
         };
 
         me.getTestModel = function () {
-            return Ext.ModelManager.getModel('Test.modeltests.TestModel');
+            return Ext.ModelManager.getModel(testModel);
         };
 
         it('a test model should be created', function () {
@@ -81,7 +84,7 @@ Ext.define('GenForm.test.extjs.ModelTests', {
         it('testing the model with a store', function () {
             var result,
                 store = Ext.create('Ext.data.DirectStore', {
-                model: 'Test.modeltests.TestModel'
+                model: testModel
             });
 
             store.setProxy(me.getTestModel().getProxy());

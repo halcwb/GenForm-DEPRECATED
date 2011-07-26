@@ -1,7 +1,6 @@
 ﻿using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StructureMap;
 
 namespace Informedica.GenForm.Assembler.Tests
 {   

@@ -2,16 +2,19 @@ Ext.define('GenForm.test.extjs.ClassTests', {
     describe:'Ext.Class',
 
     tests: function () {
-        var instance, getInstance;
+        var instance, getInstance,
+            namespace = 'GenForm.test.extjs.classtests.',
+            testBase = namespace + 'BaseClass',
+            mixin = namespace + 'MyCoolMixin',
+            testClass = namespace + 'MyClass';
 
-        Ext.define('Tests.BaseClass', {
+        Ext.define(testBase, {
             config: {
                 name: 'baseClass'
             },
 
             constructor: function (config) {
                 var me = this;
-                console.log('Base Class gets constructed');
                 me.initConfig(config);
 
                 return me;
@@ -19,19 +22,19 @@ Ext.define('GenForm.test.extjs.ClassTests', {
 
         });
 
-        Ext.define('Tests.MyCoolMixin', {
+        Ext.define(mixin, {
            someUseFullFunction: function () {
                console.log('I can do something usefull');
            }
         });
 
-        Ext.define('Tests.MyClass', {
-            extend: 'Tests.BaseClass',
+        Ext.define(testClass, {
+            extend: testBase,
 
             testProperty: 'test property',
 
             mixins: {
-                somethingUseFull: 'Tests.MyCoolMixin'
+                somethingUseFull: mixin
             },
 
             config: {
@@ -41,7 +44,6 @@ Ext.define('GenForm.test.extjs.ClassTests', {
 
             constructor: function (config) {
                 var me = this;
-                console.log('MyClass gets constructed');
                 me = me.initConfig(config);
 
                 me.callParent();
@@ -67,7 +69,7 @@ Ext.define('GenForm.test.extjs.ClassTests', {
 
         getInstance = function (config) {
             if (!instance) {
-                return Ext.create('Tests.MyClass', config);
+                return Ext.create(testClass, config);
             }
         };
 

@@ -23,10 +23,7 @@ Ext.define('GenForm.view.product.ProductSubstanceForm', {
                         fieldLabel: 'Hoeveelheid',
                         name: 'Quantity'
                     },
-                    {
-                        fieldLabel: 'Eenheid',
-                        name: 'Unit'
-                    }
+                    me.createUnitCombo()
                 ]
             }
         ];
@@ -40,11 +37,25 @@ Ext.define('GenForm.view.product.ProductSubstanceForm', {
             fieldLabel: 'Stof',
             margin: '10 10 10 10',
             displayField: 'ProductSubstance',
-            store: 'product.PackageName'
+            store: 'product.SubstanceName'
         });
 
         return combo;
 
+    },
+
+    createUnitCombo: function () {
+        var me = this, combo;
+
+        combo = me.createEditCombo({
+            name: 'UnitName',
+            fieldLabel: 'Eenheid',
+            margin: '10 10 10 10',
+            displayField: 'UnitName',
+            store: 'product.UnitName'
+        });
+        
+        return combo;
     }
 
 });

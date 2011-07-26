@@ -3,7 +3,10 @@ Ext.define('GenForm.test.extjs.StoreTests', {
     describe: 'Ext.data.Store',
 
     tests: function () {
-        var me = this, waitingTime = 200, modelName = 'Test.storetests.TestModel',
+        var me = this, waitingTime = 200,
+            namespace = 'GenForm.test.extjs.storetests.',
+            modelName = namespace + 'TestModel',
+            testStore = namespace + 'TestStore',
             isCalledBack = false;
 
         // Set up test fixture
@@ -34,7 +37,7 @@ Ext.define('GenForm.test.extjs.StoreTests', {
             }
         });
 
-        Ext.define('Test.storetests.TestStore', {
+        Ext.define(testStore, {
             extend: 'Ext.data.Store',
             storeId: 'teststore',
             model: modelName,
@@ -43,7 +46,7 @@ Ext.define('GenForm.test.extjs.StoreTests', {
         });
 
         me.createTestStore = function () {
-            return Ext.create('Test.storetests.TestStore');
+            return Ext.create(testStore);
         };
 
         it('a test model is defined', function () {

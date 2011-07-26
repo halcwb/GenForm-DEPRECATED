@@ -68,5 +68,21 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
             }
 
         }
+
+        [TestMethod]
+        public void CallSubmitChangesOnContext()
+        {
+            try
+            {
+                Bo.SubstanceName = "dopamine";
+                Repos.Insert(Bo);
+                Isolate.Verify.WasCalledWithAnyArguments(() => Context.SubmitChanges());
+            }
+            catch (Exception e)
+            {
+                AssertVerify(e, "Substance repository did not submit changes");
+                throw;
+            }
+        }
     }
 }

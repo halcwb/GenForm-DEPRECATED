@@ -25,7 +25,8 @@ Ext.define('GenForm.controller.product.Product', {
         'product.ShapeName',
         'product.UnitName',
         'product.PackageName',
-        'product.ProductSubstance'
+        'product.ProductSubstance',
+        'product.SubstanceName'
     ],
 
     views: [
@@ -263,6 +264,11 @@ Ext.define('GenForm.controller.product.Product', {
     },
 
     getProduct: function (button) {
+        var me = this;
+        if (!button) throw new Error('['+ Ext.getDisplayName(me) +'] button undefined');
+        if (!button.up('panel')) throw new Error('['+ Ext.getDisplayName(me) +'] panel undefined');
+        if (!button.up('panel').down('form')) throw new Error('['+ Ext.getDisplayName(me) +'] form undefined');
+
         return button.up('panel').down('form').getProduct()
     },
 
