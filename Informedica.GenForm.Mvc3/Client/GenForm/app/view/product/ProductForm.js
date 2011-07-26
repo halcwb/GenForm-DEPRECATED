@@ -110,85 +110,85 @@ Ext.define('GenForm.view.product.ProductForm', {
     createProductDetails: function () {
         var me = this, margin = '10 0 10 10';
         return [
-            { xtype: 'textfield',    name:'ProductName',   fieldLabel: 'Artikel Naam', margin: margin},
-            { xtype: 'textfield',    name: 'ProductCode',  fieldLabel: 'Artikel Code', margin: margin },
+            me.createTextField({name:'ProductName',   fieldLabel: 'Artikel Naam', margin: margin}),
+            me.createTextField({name: 'ProductCode',  fieldLabel: 'Artikel Code', margin: margin}),
             me.createGenericNameCombo(margin),
             me.createBrandNameCombo(margin),
             me.createShapeNameCombo(margin),
-            { xtype: 'numberfield',  name: 'Quantity',     fieldLabel: 'Hoeveelheid',  margin: margin },
+            me.createNumberField({name: 'Quantity',     fieldLabel: 'Hoeveelheid',  margin: margin }),
             me.createUnitNameCombo(margin),
             me.createPackageNameCombo(margin)
         ];
     },
 
     createGenericNameCombo: function (margin) {
-        var me = this, combo;
+        var me = this, config;
 
-        combo = me.createEditCombo({
+        config = {
             name: 'GenericName',
             fieldLabel: 'Generiek',
             margin: margin,
             displayField: 'GenericName',
             store: 'product.GenericName'
-        });
+        };
 
-        return combo;
+        return me.createComboBox(config);
     },
 
     createBrandNameCombo: function (margin) {
-        var me = this, combo;
+        var me = this, config;
 
-        combo = me.createEditCombo({
+        config = {
             name: 'BrandName',
             fieldLabel: 'Merk',
             margin: margin,
             displayField: 'BrandName',
             store: 'product.BrandName'
-        });
+        };
 
-        return combo;
+        return me.createComboBox(config);
     },
 
     createShapeNameCombo: function (margin) {
-        var me = this, combo;
+        var me = this, config;
 
-        combo = me.createEditCombo({
+        config = {
             name: 'ShapeName',
             fieldLabel: 'Vorm',
             margin: margin,
             displayField: 'ShapeName',
             store: 'product.ShapeName'
-        });
+        };
 
-        return combo;
+        return me.createComboBox(config);
     },
 
     createUnitNameCombo: function (margin) {
-        var me = this, combo;
+        var me = this, config;
 
-        combo = me.createEditCombo({
+        config = {
             name: 'UnitName',
             fieldLabel: 'Eenheid',
             margin: margin,
             displayField: 'UnitName',
             store: 'product.UnitName'
-        });
+        };
 
-        return combo;
+        return me.createComboBox(config);
     },
 
     createPackageNameCombo: function (margin) {
-        var me = this, combo;
+        var me = this, config;
 
-        combo = me.createEditCombo({
+        config = {
             name: 'PackageName',
             fieldLabel: 'Verpakking',
             margin: margin ,
             displayField: 'PackageName',
             store: 'product.PackageName'
-        });
+        };
 
-        return combo;
+        return me.createComboBox(config);
     },
 
     getProduct: function () {

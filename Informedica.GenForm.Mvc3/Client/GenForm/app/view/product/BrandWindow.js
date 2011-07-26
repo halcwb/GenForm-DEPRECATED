@@ -1,10 +1,3 @@
-/**
- * Created by JetBrains WebStorm.
- * User: halcwb
- * Date: 6/5/11
- * Time: 12:35 PM
- * To change this template use File | Settings | File Templates.
- */
 Ext.define('GenForm.view.product.BrandWindow', {
     extend: 'GenForm.lib.view.window.SaveCancelWindow',
     alias: 'widget.brandwindow',
@@ -14,9 +7,10 @@ Ext.define('GenForm.view.product.BrandWindow', {
     layout: 'fit',
 
     initComponent: function() {
-        this.items = this.createBrandForm();
+        var me = this;
+        me.items = this.createBrandForm();
 
-        this.callParent(arguments);
+        me.callParent(arguments);
     },
 
     createBrandForm: function () {

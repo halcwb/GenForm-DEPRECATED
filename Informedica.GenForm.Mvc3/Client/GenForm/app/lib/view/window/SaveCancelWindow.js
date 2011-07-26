@@ -1,13 +1,11 @@
 Ext.define('GenForm.lib.view.window.SaveCancelWindow', {
     extend: 'Ext.window.Window',
 
-    requires: [
-        'GenForm.lib.view.component.SaveCancelToolbar'
-    ],
+    mixins: ['GenForm.lib.util.mixin.FormCreator'],
 
     constructor: function (config) {
         var me = this;
-    
+        
         me = me.initConfig(config);
         me.callParent(arguments);
         return me;
@@ -15,14 +13,17 @@ Ext.define('GenForm.lib.view.window.SaveCancelWindow', {
 
     initComponent: function () {
         var me = this;
-
+        
+        me.toolbar = {};
         me.dockedItems = me.createSaveCancelToolbar();
 
         me.callParent(arguments);
     },
 
     createSaveCancelToolbar: function () {
-        return Ext.create('GenForm.lib.view.component.SaveCancelToolbar', { dock: 'bottom'});
+        var me = this;
+        me.toolbar = Ext.create('GenForm.lib.view.component.SaveCancelToolbar', { dock: 'bottom'});
+        return me.toolbar;
     }
 
 });

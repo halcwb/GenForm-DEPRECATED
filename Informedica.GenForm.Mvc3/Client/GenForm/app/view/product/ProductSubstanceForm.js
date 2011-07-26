@@ -13,49 +13,63 @@ Ext.define('GenForm.view.product.ProductSubstanceForm', {
                 padding: '10x',
 
                 items: [
-                    {
-                        fieldLabel: 'Volgorde',
-                        name: 'OrderNumber',
-                        allowBlank:true
-                    },
+                    me.createOrderNumberField(),
                     me.createSubstanceCombo(),
-                    {
-                        fieldLabel: 'Hoeveelheid',
-                        name: 'Quantity'
-                    },
+                    me.createQuantityField(),
                     me.createUnitCombo()
                 ]
             }
         ];
     },
 
-    createSubstanceCombo: function () {
-        var me = this, combo;
+    createQuantityField: function () {
+        var me = this, config;
 
-        combo = me.createEditCombo({
+        config = {
+            fieldLabel: 'Hoeveelheid',
+            name: 'Quantity'
+        };
+        return me.createNumberField(config);
+    },
+
+    createOrderNumberField: function () {
+        var me = this, config;
+
+        config = {
+            fieldLabel: 'Volgorde',
+            name: 'OrderNumber',
+            allowBlank:true
+        };
+
+        return me.createNumberField(config);
+    },
+
+    createSubstanceCombo: function () {
+        var me = this, config;
+
+        config = {
             name: 'SubstanceName',
             fieldLabel: 'Stof',
             margin: '10 10 10 10',
-            displayField: 'ProductSubstance',
+            displayField: 'SubstanceName',
             store: 'product.SubstanceName'
-        });
+        };
 
-        return combo;
-
+        return me.createComboBox(config);
     },
 
     createUnitCombo: function () {
-        var me = this, combo;
+        var me = this, config;
 
-        combo = me.createEditCombo({
+        config = ({
             name: 'UnitName',
             fieldLabel: 'Eenheid',
             margin: '10 10 10 10',
             displayField: 'UnitName',
             store: 'product.UnitName'
         });
-        
-        return combo;
+
+        return me.createComboBox(config);
     }
 
 });

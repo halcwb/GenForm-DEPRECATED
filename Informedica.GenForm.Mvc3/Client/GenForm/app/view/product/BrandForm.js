@@ -3,8 +3,9 @@ Ext.define('GenForm.view.product.BrandForm', {
     alias: 'widget.brandform',
 
     createItems: function () {
+        var me = this;
         return [
-            { xtype: 'textfield', name:'BrandName',   fieldLabel: 'Merk Naam', margin: '10 0 10 10' }
+            me.createTextField({name:'BrandName',   fieldLabel: 'Merk Naam', margin: '10 0 10 10' })
         ];
     },
 
