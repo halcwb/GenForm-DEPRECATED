@@ -3,7 +3,7 @@ Ext.define('GenForm.test.controller.ProductControllerTests', {
 
     tests: function () {
         var getProductController, testController, copyObject,
-            waitingTime = 200;
+            waitingTime = 200,
             testProduct = {
                 ProductName: '',
                 ProductCode: '',
@@ -106,7 +106,7 @@ Ext.define('GenForm.test.controller.ProductControllerTests', {
             form.loadRecord(record);
 
             spyOn(controller, 'onProductSaved');
-            controller.saveProduct(form.up('panel').down('toolbar').down('button'));
+            controller.saveProduct(Ext.ComponentQuery.query('productwindow button[text=Opslaan]')[0]);
 
             waitsFor(function () {
                 return controller.onProductSaved.wasCalled;

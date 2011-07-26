@@ -16,7 +16,8 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
             quantity = 5,
             unit = 'mL',
             productPackage = 'ampul',
-            substance = 'dopamine';
+            substance = 'dopamine',
+            substanceUnit = 'mg';
 
         me.getNewProductButton = function () {
             return queryHelper.getButton('panel[title=Menu]','Nieuw Artikel');
@@ -162,7 +163,6 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
             return queryHelper.getFormComboBox('productwindow', 'GenericName');
         };
 
-
         me.setBrandCombo = function (name) {
             queryHelper.setFormField(me.getBrandCombo(), name);
         };
@@ -185,6 +185,14 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
 
         me.getUnitCombo = function () {
             return queryHelper.getFormComboBox('productwindow', 'UnitName');
+        };
+
+        me.setSubstanceUnitCombo = function (name) {
+            queryHelper.setFormField(me.getUnitCombo(), name);
+        };
+
+        me.getSubstanceUnitCombo = function () {
+            return queryHelper.getFormComboBox('productsubstancewindow', 'UnitName');
         };
 
         me.setPackageCombo = function (name) {
@@ -225,15 +233,19 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.clickAddBrand = function () {
-            domClicker.click(me.getAddButton('BrandName'))
+            domClicker.click(me.getAddButton('BrandName'));
         };
 
         me.clickAddShape = function () {
-            domClicker.click(me.getAddButton('ShapeName'))
+            domClicker.click(me.getAddButton('ShapeName'));
         };
 
         me.clickAddUnit = function () {
-            domClicker.click(me.getAddButton('UnitName'))
+            domClicker.click(me.getAddButton('UnitName'));
+        };
+
+        me.clickAddSubstanceUnit = function () {
+            domClicker.click(me.getAddButtonInForm('productsubstancewindow', 'UnitName'));
         };
 
         me.clickAddSubstance = function () {
@@ -245,11 +257,15 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.getAddButton = function (name) {
-            return Ext.ComponentQuery.query('productwindow combobox[name=' + name +']')[0].triggerWrap.dom.childNodes[2]
+            return me.getAddButtonInForm('productwindow', name);
+        };
+
+        me.getAddButtonInForm = function (formName, comboName) {
+            return  Ext.ComponentQuery.query(formName + ' combobox[name=' + comboName + ']')[0].triggerWrap.dom.childNodes[2];
         };
 
         me.getAddSubstanceButton = function (name) {
-            return Ext.ComponentQuery.query('productsubstancewindow combobox[name=' + name +']')[0].triggerWrap.dom.childNodes[2]
+            return me.getAddButtonInForm('productsubstancewindow', name)
         };
 
         me.clickAddProductSubstance = function () {
@@ -390,7 +406,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
             expect(me.getProductCode().value).toBe(code);
         });
 
-        it('User open up a window to add a product substance', function () {
+        it('User can open up a window to add a product substance', function () {
             me.clickAddProductSubstance();
             expect(me.getProductSubstanceWindow()).toBeDefined();
         });
@@ -412,12 +428,33 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         it('User can save the new Substance', function () {
             message = substance;
             me.clickSaveSubstanceButton();
-            waitsFor(me.checkMessage, 'response of unit save', waitingTime);
+            waitsFor(me.checkMessage, 'response of substance save', waitingTime);
         });
 
         it('The new substance can be set for the productsubstance', function () {
             me.setSubstanceCombo(substance);
             expect(me.getSubstanceCombo().value).toBe(substance);
+        });
+
+        it('A unit can open a window to add a new unit', function () {
+            me.clickAddSubstanceUnit();
+            expect(me.getUnitWindow()).toBeDefined();
+        });
+
+        it('A new unit can be entered', function () {
+            me.setUnitName(substanceUnit);
+            expect(me.getUnitName().value).toBe(substanceUnit);
+        });
+
+        it('User can save the new substance unit', function () {
+            message = substanceUnit;
+            me.clickSaveUnitButton();
+            waitsFor(me.checkMessage, 'response of unit save', waitingTime);
+        });
+
+        it('The new unit can be set for the productsubstance unit', function () {
+            me.setSubstanceUnitCombo(substanceUnit);
+            expect(me.getSubstanceUnitCombo().value).toBe(substanceUnit);
         });
 
         it('User can save the filled in Product', function () {
