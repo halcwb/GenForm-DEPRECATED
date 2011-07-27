@@ -7,21 +7,21 @@ Ext.define('GenForm.view.product.ShapeWindow', {
     layout: 'fit',
 
     initComponent: function() {
-        this.items = this.createShapeForm();
+        var me = this;
+        me.forms = {};
+        me.items = me.createShapeForm();
 
-        this.callParent(arguments);
+        me.callParent(arguments);
     },
 
     createShapeForm: function () {
-        return { xtype: 'shapeform' };
-    },
-
-    getShapeForm: function () {
-        return this.items.items[0];
+        var me = this;
+        return me.createForm({ xtype: 'shapeform', name: 'ShapeForm' });
     },
 
     loadWithShape: function (shape) {
-        this.getShapeForm().getForm().loadRecord(shape);
+        var me = this;
+        me.forms.ShapeForm.loadRecord(shape);
     }
 
 });

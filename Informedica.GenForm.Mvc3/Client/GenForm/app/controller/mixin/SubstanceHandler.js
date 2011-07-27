@@ -1,5 +1,9 @@
 Ext.define('GenForm.controller.mixin.SubstanceHandler', {
 
+    createSubstanceWindow: function () {
+        return Ext.create(this.getProductSubstanceWindowView());
+    },
+
     editOrAddSubstance: function () {
         var me = this;
         me.getSubstanceWindow().show();

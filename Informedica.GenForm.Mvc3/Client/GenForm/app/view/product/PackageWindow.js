@@ -1,10 +1,3 @@
-/**
- * Created by JetBrains WebStorm.
- * User: halcwb
- * Date: 6/8/11
- * Time: 10:58 AM
- * To change this template use File | Settings | File Templates.
- */
 Ext.define('GenForm.view.product.PackageWindow', {
     extend: 'GenForm.lib.view.window.SaveCancelWindow',
     alias: 'widget.packagewindow',
@@ -14,21 +7,21 @@ Ext.define('GenForm.view.product.PackageWindow', {
     layout: 'fit',
 
     initComponent: function() {
-        this.items = this.createPackageForm();
+        var me = this;
+        me.forms = {};
+        me.items = me.createPackageForm();
 
-        this.callParent(arguments);
+        me.callParent(arguments);
     },
 
     createPackageForm: function () {
-        return { xtype: 'packageform' };
+        var me = this;
+        return me.createForm({ xtype: 'widget.packageform', name: 'PackageForm' });
     },
 
-    getPackageForm: function () {
-        return this.items.items[0];
-    },
-
-    loadWithPackage: function (package) {
-        this.getPackageForm().getForm().loadRecord(package);
+    loadWithPackage: function (productPackage) {
+        var me = this;
+        me.forms.PackageForm.loadRecord(productPackage);
     }
 
 });

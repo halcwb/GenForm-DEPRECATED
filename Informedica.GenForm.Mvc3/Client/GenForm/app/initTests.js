@@ -15,12 +15,13 @@ Ext.require([
 Ext.onReady(function () {
 
     Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
-
     Ext.app.config.appFolder = '../Client/GenForm/app';
+
     //noinspection JSUnusedGlobalSymbols
     Ext.app.config.launch = function() {
         var me = this, test,
-            testList = Ext.create('GenForm.test.TestList');
+            testList = Ext.create('GenForm.test.TestList'),
+            testLoader = Ext.create('GenForm.test.TestLoader');
 
         GenForm.application = me;
 
@@ -31,10 +32,7 @@ Ext.onReady(function () {
         });
 
         // Load tests
-        for (var i = 0; i < testList.tests.length; i++) {
-            test = Ext.create(testList.tests[i]);
-            describe(test.describe, test.tests);
-        }
+        testLoader.loadTests(testList);
 
         jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
         jasmine.Queue(jasmine.getEnv());

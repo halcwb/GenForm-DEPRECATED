@@ -10,7 +10,6 @@ Ext.define('GenForm.test.view.BrandFormTests', {
         });
 
         it('be defined', function () {
-            console.log(form);
             expect(form).toBeDefined();
         });
 

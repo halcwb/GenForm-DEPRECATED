@@ -1,37 +1,81 @@
 Ext.define('GenForm.test.store.GenericNameStoreTests', {
 
-    describe: 'GenForm.store.product.GenericName',
+    describe: 'GenericNameStoreShould',
 
     tests: function() {
-        var getGenericNameStore, createGenericNameStore, addItemToGenericNameStore;
+        var me = this, store,
+            storeName = 'GenForm.store.product.GenericName',
+            waitingTime = 200;
 
-        getGenericNameStore = function () {
-            return Ext.getStore('genericnamestore');
-        };
-
-        addItemToGenericNameStore = function () {
-            getGenericNameStore().add({ GenericName: 'test' });
-        };
-
-        createGenericNameStore = function () {
-            return Ext.create('GenForm.store.product.GenericName');
-        }
-
-        it('GenForm.store.product.GenericNameStore can be created', function () {
-            expect(createGenericNameStore()).toBeDefined();
-        })
-
-        it('GenForm.store.product.GenericNameStore should be defined', function () {
-            expect(getGenericNameStore()).toBeDefined();
+        beforeEach(function () {
+            if (!store) store = me.createStore();
         });
 
-        it('GenericNameStore should contain an item', function () {
-            addItemToGenericNameStore();
-            expect(getGenericNameStore().count() > 0).toBe(true);
+        me.createStore = function () {
+            return Ext.create(storeName);
+        };
+
+        me.setUpTestProxy = function () {
+            store.setProxy(me.getTestProxy());
+        };
+
+        me.getTestProxy = function () {
+            return Ext.create('Ext.data.proxy.Direct', {
+                type: 'direct',
+                directFn: Tests.GetGenericNames
+            });
+        };
+
+        it('be defined', function () {
+            expect(store).toBeDefined();
         });
 
-        it('GenericNameStore contains an item with GenericName test', function () {
-            expect(getGenericNameStore().findExact('GenericName', 'test') !== -1).toBe(true);
+        it('to have a direct function', function () {
+            expect(store.proxy.directFn).toBeDefined();
+        });
+
+        it('return an empty record with GenericName property', function () {
+            var record = store.create();
+            expect(record.data.GenericName).toBeDefined();
+        });
+
+        it('contain an item', function () {
+            store.add({GenericName: 'test'});
+            expect(store.count() > 0).toBeTruthy();
+        });
+
+        it('have an item with GenericName test', function () {
+            expect(store.findExact('GenericName', 'test') !== -1).toBe(true);
+        });
+
+        it('have test direct Fn defined', function () {
+           expect(Tests.GetGenericNames).toBeDefined();
+        });
+
+
+        it('load five test items', function () {
+            var result;
+            me.setUpTestProxy();
+            store.load({
+                scope   : this,
+                callback: function(records) {
+                    //the operation object contains all of the details of the load operation
+                    result = records;
+                }
+            });
+
+            waitsFor(function () {
+                return result && result.length == 5 || false;
+            }, 'GenericNameStore to load', waitingTime);
+        });
+
+        it('now contain a generic morfine', function () {
+            expect(store.findExact('GenericName', 'morfine') != -1).toBeTruthy();
+        });
+
+        it('also contain penicilline after load', function () {
+            var found = store.getAt(store.findExact('GenericName', 'penicilline'));
+            expect(found.data.GenericName).toBe('penicilline');
         });
 
     }

@@ -3,13 +3,13 @@ Ext.define('GenForm.model.product.SubstanceName', {
     alias: 'widget.substancenamemodel',
 
     fields: [
-        {name: 'SubstanceName', type: 'string', mapping: 'GenericName'}
+        {name: 'SubstanceName', type: 'string', mapping: 'SubstanceName'}
     ],
 
     // ToDo: Implement server side method Product.GetSubstanceNames
     proxy: {
         type: 'direct', 
-        directFn: Product.GetGenericNames
+        directFn: Tests.GetSubstanceNames
     }
 
 });
