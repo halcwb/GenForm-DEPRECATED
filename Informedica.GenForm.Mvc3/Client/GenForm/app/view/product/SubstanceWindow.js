@@ -8,23 +8,20 @@ Ext.define('GenForm.view.product.SubstanceWindow', {
 
     initComponent: function() {
         var me = this;
+        me.forms = {};
         me.items = me.createSubstanceForm();
 
         me.callParent(arguments);
     },
     
     createSubstanceForm: function () {
-        return { xtype: 'substanceform'};
-    },
-
-    getSubstanceForm: function () {
         var me = this;
-        return me.items.items[0];
+        return me.createForm({ xtype: 'substanceform', name: 'SubstanceForm'});
     },
 
     loadWithSubstance: function (substance) {
         var me = this;
-        me.getSubstanceForm().getForm().loadRecord(substance);
+        me.forms.SubstanceForm.loadRecord(substance);
     }
 
 });

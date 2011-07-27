@@ -8,28 +8,25 @@ Ext.define('GenForm.view.product.ProductWindow', {
 
     initComponent: function () {
         var me = this;
-
+        me.forms = {};
         me.items = me.createProductForm();
         me.callParent(arguments);
     },
 
     createProductForm: function () {
-        return { xtype: 'productform' };
-    },
-    
-    getProductForm: function () {
         var me = this;
-        return me.items.items[0];
+        return me.createForm({ xtype: 'productform', name: 'ProductForm' });
     },
+
 
     loadWithProduct: function (product) {
         var me = this;
-        me.getProductForm().getForm().loadRecord(product);
+        me.forms.ProductForm.loadRecord(product);
     },
 
     isEmpty: function () {
         var me = this, values, value, prop, isEmpty = true;
-        values =  me.getProductForm().getForm().getFieldValues();
+        values = me.forms.ProductForm.getForm().getFieldValues();
         for (prop in values) {
             if (values.hasOwnProperty(prop)) {
                 value = values[prop];
@@ -42,6 +39,7 @@ Ext.define('GenForm.view.product.ProductWindow', {
     },
 
     isValueEmpty: function (value) {
+        //noinspection OverlyComplexBooleanExpressionJS
         return (value === '' || value === 0 || value === null || value === undefined);
     }
 

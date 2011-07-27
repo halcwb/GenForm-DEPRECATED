@@ -7,21 +7,20 @@ Ext.define('GenForm.view.product.ProductSubstanceWindow', {
     layout: 'fit',
 
     initComponent: function() {
-        this.items = this.createProductSubstanceForm();
+        var me = this;
+        me.items = me.createProductSubstanceForm();
 
-        this.callParent(arguments);
+        me.callParent(arguments);
     },
 
     createProductSubstanceForm: function () {
-        return { xtype: 'productsubstanceform' };
-    },
-
-    getProductSubstanceForm: function () {
-        return this.items.items[0];
+        var me = this;
+        return me.createForm({ xtype: 'productsubstanceform', name: 'ProductSubstanceForm' });
     },
 
     loadWithSubstance: function (substance) {
-        this.getProductSubstanceForm().getForm().loadRecord(substance);
+        var me = this;
+        me.forms.ProductSubstanceForm.loadRecord(substance);
     }
 
 });

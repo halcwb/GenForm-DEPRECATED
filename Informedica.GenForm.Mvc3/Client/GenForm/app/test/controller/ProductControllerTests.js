@@ -1,9 +1,9 @@
 Ext.define('GenForm.test.controller.ProductControllerTests', {
-    describe: 'GenForm.controller.product.Product',
+    describe: 'ProductControllerShould',
 
     tests: function () {
-        var getProductController, testController, copyObject,
-            waitingTime = 200,
+        var me = this,
+            productController,
             testProduct = {
                 ProductName: '',
                 ProductCode: '',
@@ -15,84 +15,118 @@ Ext.define('GenForm.test.controller.ProductControllerTests', {
                 PackageName: ''
             };
 
-        copyObject = function (model, data) {
+        beforeEach(function () {
+           me.setProductController();
+        });
+
+        me.copyObject = function (model, data) {
             var prop;
             if (!model.data) return;
 
             for (prop in model.data) {
                 if (data[prop]) prop = data[prop];
             }
-        }
+        };
 
-        getProductController = function () {
-            if (!testController) {
-                testController = Ext.create('GenForm.controller.product.Product', {
-                    id: 'testProductController',
-                    application: GenForm.application
-                });
+        me.setProductController = function () {
+            if (!productController) {
+                productController = me.createProductController();
             }
-            return testController;
-        }
+        };
 
-        it('can be created', function () {
-            expect(getProductController()).toBeDefined();
+        me.createProductController = function () {
+            return Ext.create('GenForm.controller.product.Product', {
+                id: 'testProductController',
+                application: GenForm.application
+            });
+        };
+
+        it('be defined', function () {
+            expect(productController).toBeDefined();
+        });
+
+        it('have a productHandler', function () {
+            expect(productController.mixins.productHandler).toBeDefined();
+        });
+
+        it('have a productHandler with a productSubstanceHandler', function () {
+            expect(productController.mixins.productHandler.mixins.productSubstanceHandler).toBeDefined();
+        });
+
+        it('have a productHandler with a genericHandler', function () {
+            expect(productController.mixins.productHandler.mixins.genericHandler).toBeDefined();
+        });
+
+        it('have a productHandler with a shapeHandler', function () {
+            expect(productController.mixins.productHandler.mixins.shapeHandler).toBeDefined();
+        });
+
+        it('have a productHandler with a packageHandler', function () {
+            expect(productController.mixins.productHandler.mixins.packageHandler).toBeDefined();
+        });
+
+        it('have a productHandler with a brandHandler', function () {
+            expect(productController.mixins.productHandler.mixins.brandHandler).toBeDefined();
+        });
+
+        it('have a productHandler with a unitHandler', function () {
+            expect(productController.mixins.productHandler.mixins.unitHandler).toBeDefined();
         });
 
         it('should have a getGenFormModelProductProductModel', function () {
-            expect(getProductController().getProductProductModel).toBeDefined();
+            expect(productController.getProductProductModel).toBeDefined();
         });
 
         it('can return a GenFormModelProductProductModel', function () {
-            expect(getProductController().getProductProductModel().$className).toBe("GenForm.model.product.Product");
+            expect(productController.getProductProductModel().$className).toBe("GenForm.model.product.Product");
         });
 
         it('getProductProductModel should return a constructor, i.e. a function', function () {
-            expect(typeof getProductController().getProductProductModel()).toBe('function');
+            expect(typeof productController.getProductProductModel()).toBe('function');
         });
 
         it('can create and empty instance of a Product', function () {
-           expect(getProductController().createEmptyProduct()).toBeDefined();
+           expect(productController.createEmptyProduct()).toBeDefined();
         });
 
         it('should have a getProductProductWindow function', function () {
-            expect(getProductController().getProductProductWindowView).toBeDefined();
+            expect(productController.getProductProductWindowView).toBeDefined();
         });
 
         it('should have a getProductProductFormView', function () {
-            expect(getProductController().getProductProductFormView).toBeDefined();
+            expect(productController.getProductProductFormView).toBeDefined();
         });
 
         it('can fire up a productwindow', function () {
             var windowCount = Ext.ComponentQuery.query('window').length;
-            getProductController().showProductWindow();
+            productController.showProductWindow();
 
             expect(Ext.ComponentQuery.query('window').length === (windowCount + 1)).toBeTruthy();
         });
 
         it('should have a LoadEmptyProduct function to load the productform with an empty product', function () {
-            var controller = getProductController();
-            expect(controller.loadEmptyProduct).toBeDefined('loadEmptyProduct was not defined');
+            expect(productController.loadEmptyProduct).toBeDefined('loadEmptyProduct was not defined');
 
-            spyOn(controller, 'createEmptyProduct').andCallThrough();
-            controller.loadEmptyProduct(controller.getProductWindow());
+            spyOn(productController, 'createEmptyProduct').andCallThrough();
+            productController.loadEmptyProduct(productController.getProductWindow());
 
-            expect(controller.createEmptyProduct).toHaveBeenCalled();
-            expect(controller.getProductWindow().getProductForm().getForm().getRecord()).toBeDefined('Product form should have a record');
+            expect(productController.createEmptyProduct).toHaveBeenCalled();
+            expect(productController.getProductWindow().forms.ProductForm.getForm().getRecord()).toBeDefined('Product form should have a record');
         });
 
         it('when a form is created with an empty product, productname should be empty', function () {
-            var window = getProductController().getProductWindow();
-            expect(window.getProductForm().getProduct().data.ProductName === '').toBeTruthy();
+            var window = productController.getProductWindow();
+            expect(window.forms.ProductForm.getProduct().data.ProductName === '').toBeTruthy();
         });
 
         it('should have a saveProduct function', function () {
-            expect(getProductController().saveProduct).toBeDefined();
+            expect(productController.saveProduct).toBeDefined();
         });
 
 
         it('should save a product', function () {
-            var form = getProductController().getProductWindow().getProductForm(),
-                record = form.getRecord(), controller = getProductController();
+            var form = productController.getProductWindow().forms.ProductForm,
+                record = form.getRecord();
 
             testProduct.ProductName = 'paracetamol 500 mg';
             testProduct.GenericName = 'paracetamol';
@@ -101,31 +135,30 @@ Ext.define('GenForm.test.controller.ProductControllerTests', {
             testProduct.Quantity = '1';
             testProduct.Unit = 'stuk';
             testProduct.PackageName = 'tablet';
-            copyObject(record, testProduct);
+            me.copyObject(record, testProduct);
 
             form.loadRecord(record);
 
-            spyOn(controller, 'onProductSaved');
-            controller.saveProduct(Ext.ComponentQuery.query('productwindow button[text=Opslaan]')[0]);
+            spyOn(productController, 'onProductSaved');
+            productController.saveProduct(Ext.ComponentQuery.query('productwindow button[text=Opslaan]')[0]);
 
             waitsFor(function () {
-                return controller.onProductSaved.wasCalled;
+                return productController.onProductSaved.wasCalled;
             }, 'waiting for onProductSaved call', 1000);
         });
 
 
         it('should have a saveGenericName function', function () {
-           expect(getProductController().saveGeneric).toBeDefined();
+           expect(productController.saveGeneric).toBeDefined();
         });
 
         it('saveGeneric should be able to save a valid Generic', function () {
-            var controller = getProductController(),
-                form = controller.getGenericWindow().getGenericForm(),
-                model = form.getRecord(),
-                validGeneric = {
-                    GenericName: 'paracetamol'
-                };
-            copyObject(model, validGeneric);
+            var form = productController.getGenericWindow().forms.GenericForm,
+            model = form.getRecord(),
+            validGeneric = {
+                GenericName: 'paracetamol'
+            };
+            me.copyObject(model, validGeneric);
 
             form.loadRecord(model);
     /*

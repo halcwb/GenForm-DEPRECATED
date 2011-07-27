@@ -13,13 +13,16 @@ Ext.require([
 ]);
 
 Ext.onReady(function () {
-    var newProductTest, loginTest, advancedLoginTest, productListTest;
 
     Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
 
     Ext.app.config.appFolder = '../Client/GenForm/app';
+
     Ext.app.config.launch = function() {
-        var me = this;
+        var me = this, test,
+            testList = Ext.create('GenForm.test.UseCaseList'),
+            testLoader = Ext.create('GenForm.test.TestLoader');
+
         GenForm.application = me;
 
         Ext.create('Ext.container.Viewport', {
@@ -29,17 +32,7 @@ Ext.onReady(function () {
 
         me.showLoginWindow();
         
-        advancedLoginTest = Ext.create('GenForm.test.usecase.AdvancedLoginTest');
-        describe(advancedLoginTest.describe, advancedLoginTest.tests);
-
-        loginTest = Ext.create('GenForm.test.usecase.LoginTest');
-        describe(loginTest.describe, loginTest.tests);
-
-        newProductTest = Ext.create('GenForm.test.usecase.NewProductTest');
-        describe(newProductTest.describe, newProductTest.tests);
-
-        productListTest = Ext.create('GenForm.test.usecase.ProductListTest');
-        describe(productListTest.describe, productListTest.tests);
+        testLoader.loadTests(testList);
 
         jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
         jasmine.Queue(jasmine.getEnv());
