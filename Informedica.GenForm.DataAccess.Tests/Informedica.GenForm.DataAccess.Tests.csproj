@@ -84,6 +84,7 @@
     <Compile Include="UnitTests\BrandMapperShould.cs" />
     <Compile Include="UnitTests\BrandRepositoryShould.cs" />
     <Compile Include="IntegrationTests\UserRepositoryTest.cs" />
+    <Compile Include="UnitTests\DatabaseConnectionShould.cs" />
     <Compile Include="UnitTests\GenericMapperShould.cs" />
     <Compile Include="UnitTests\PackageMapperShould.cs" />
     <Compile Include="UnitTests\ProductMapperShould.cs" />

@@ -1,10 +1,10 @@
 ﻿using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Library.DomainModel.Databases;
-using Informedica.GenForm.Library.Services;
+using Informedica.GenForm.Library.Services.Databases;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 
-namespace Informedica.GenForm.Library.Tests.UnityTests
+namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 {
     /// <summary>
     /// Summary description for DatabaseServicesShould

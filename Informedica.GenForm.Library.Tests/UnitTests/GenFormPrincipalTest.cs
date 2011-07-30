@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Library.DomainModel.Users;
 using Informedica.GenForm.Library.Repositories;
@@ -9,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
 
-namespace Informedica.GenForm.Library.Tests.UnityTests
+namespace Informedica.GenForm.Library.Tests.UnitTests
 {
     
     

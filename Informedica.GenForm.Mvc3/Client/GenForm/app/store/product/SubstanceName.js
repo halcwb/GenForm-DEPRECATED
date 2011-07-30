@@ -4,5 +4,11 @@ Ext.define('GenForm.store.product.SubstanceName', {
     storeId: 'substancenamestore',
     
     model: 'GenForm.model.product.SubstanceName',
-    autoLoad: true
+    autoLoad: true,
+
+    proxy: {
+        type: 'direct',
+        directFn: Tests.GetSubstanceNames
+    }
+
 });

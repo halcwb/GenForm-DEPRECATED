@@ -21,10 +21,13 @@ namespace Informedica.Utilities
 
         public static Boolean PropertyIsEmpty(PropertyInfo property, Object product)
         {
+            var value = GetStringValueFromPropertyInfo(property, product);
 
-            if (String.IsNullOrEmpty(GetStringValueFromPropertyInfo(property, product))) return true;
-            if (GetStringValueFromPropertyInfo(property, product) == EmptyNumericalValue) return true;
-            return GetStringValueFromPropertyInfo(property, product) == EmptyBooleanValue;
+            if (String.IsNullOrEmpty(value)) return true;
+            if (value == EmptyNumericalValue) return true;
+            // ToDo solve examining objects with collections
+            if (value.Contains("System.Collections")) return true;
+            return value == EmptyBooleanValue;
         }
 
         public static string GetStringValueFromPropertyInfo(PropertyInfo property, object obj)

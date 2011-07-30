@@ -85,7 +85,6 @@
     <Compile Include="Controllers\DatabaseController.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ILoginController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\TestsController.cs" />
@@ -538,7 +537,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Client\GenForm\app\lib\view\form\" />
-    <Folder Include="Models\" />
+    <Folder Include="Models\Product\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Informedica.GenForm.Assembler\Informedica.GenForm.Assembler.csproj">

@@ -61,10 +61,12 @@
     <Compile Include="DomainModel\Products\IBrand.cs" />
     <Compile Include="DomainModel\Products\IGeneric.cs" />
     <Compile Include="DomainModel\Products\IPackage.cs" />
+    <Compile Include="DomainModel\Products\IProductSubstance.cs" />
     <Compile Include="DomainModel\Products\IShape.cs" />
     <Compile Include="DomainModel\Products\ISubstance.cs" />
     <Compile Include="DomainModel\Products\IUnit.cs" />
     <Compile Include="DomainModel\Products\Package.cs" />
+    <Compile Include="DomainModel\Products\ProductSubstance.cs" />
     <Compile Include="DomainModel\Products\Shape.cs" />
     <Compile Include="DomainModel\Products\Substance.cs" />
     <Compile Include="DomainModel\Products\Unit.cs" />
@@ -91,13 +93,16 @@
     <Compile Include="Security\IGenFormPrincipal.cs" />
     <Compile Include="Security\LoginUser.cs" />
     <Compile Include="ServiceProviders\DalServiceProvider.cs" />
-    <Compile Include="Services\DatabaseServices.cs" />
-    <Compile Include="Services\IDatabaseServices.cs" />
-    <Compile Include="Services\ILoginServices.cs" />
+    <Compile Include="Services\Databases\DatabaseServices.cs" />
+    <Compile Include="Services\Databases\IDatabaseServices.cs" />
+    <Compile Include="Services\Products\dto\ProductDto.cs" />
+    <Compile Include="Services\Products\dto\RouteDto.cs" />
+    <Compile Include="Services\Products\dto\SubstanceDto.cs" />
+    <Compile Include="Services\Users\ILoginServices.cs" />
     <Compile Include="Security\ILoginCriteria.cs" />
-    <Compile Include="Services\IProductServices.cs" />
-    <Compile Include="Services\LoginServices.cs" />
-    <Compile Include="Services\ProductServices.cs" />
+    <Compile Include="Services\Products\IProductServices.cs" />
+    <Compile Include="Services\Users\LoginServices.cs" />
+    <Compile Include="Services\Products\ProductServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj">

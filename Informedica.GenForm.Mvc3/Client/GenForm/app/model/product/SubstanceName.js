@@ -4,12 +4,6 @@ Ext.define('GenForm.model.product.SubstanceName', {
 
     fields: [
         {name: 'SubstanceName', type: 'string', mapping: 'SubstanceName'}
-    ],
-
-    // ToDo: Implement server side method Product.GetSubstanceNames
-    proxy: {
-        type: 'direct', 
-        directFn: Tests.GetSubstanceNames
-    }
+    ]
 
 });

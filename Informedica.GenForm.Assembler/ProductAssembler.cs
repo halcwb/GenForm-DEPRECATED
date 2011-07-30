@@ -2,7 +2,8 @@
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
-using Informedica.GenForm.Library.Services;
+using Informedica.GenForm.Library.Services.Products;
+using Informedica.GenForm.Library.Services.Products.dto;
 using StructureMap.Configuration.DSL;
 
 namespace Informedica.GenForm.Assembler

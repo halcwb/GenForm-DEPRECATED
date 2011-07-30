@@ -1,10 +1,3 @@
-/**
- * Created by .
- * User: hal
- * Date: 5-5-11
- * Time: 11:41
- * To change this template use File | Settings | File Templates.
- */
 Ext.define('GenForm.view.product.ProductSubstanceGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.productsubstancegrid',
@@ -19,10 +12,10 @@ Ext.define('GenForm.view.product.ProductSubstanceGrid', {
 
     createColumns: function () {
         return  [
-            { id: 'ordernumber', header: 'Volgorde', dataIndex: 'OrderNumber', field: 'numberfield'},
-            { id: 'genericname', header: 'Generiek', dataIndex: 'GenericName', field: 'textfield'},
-            { id: 'quantity', header: 'Hoeveelheid', dataIndex: 'Quantity', field: 'textfield'},
-            { id: 'unit', header: 'Eenheid', dataIndex: 'Unit', field: 'textfield'}
+            { id: 'ordernumber', header: 'Volgorde',    dataIndex: 'SortOrder', field: 'numberfield'},
+            { id: 'genericname', header: 'Generiek',    dataIndex: 'Substance', field: 'textfield'},
+            { id: 'quantity',    header: 'Hoeveelheid', dataIndex: 'Quantity',  field: 'textfield'},
+            { id: 'unit',        header: 'Eenheid',     dataIndex: 'Unit',      field: 'textfield'}
         ];
     },
 

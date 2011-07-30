@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
+using Informedica.GenForm.Library.Services.Users;
 using Newtonsoft.Json.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.Security;
@@ -9,10 +10,9 @@ using Informedica.GenForm.PresentationLayer.Security;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
-    public class LoginController : Controller, ILoginController
+    public class LoginController : Controller
     {
 
-        #region ILoginController Members
 
         [ActionName("Login2")]
         public ActionResult Login(JObject jObject)
@@ -102,6 +102,5 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new {success = true, data = form});
         }
 
-        #endregion
     }
 }

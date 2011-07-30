@@ -95,7 +95,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "User foo cannot login with password bar (if not added as users)");
         }
 
-        private static ILoginController CreateLoginController()
+        private static LoginController CreateLoginController()
         {
             return new LoginController();
         }

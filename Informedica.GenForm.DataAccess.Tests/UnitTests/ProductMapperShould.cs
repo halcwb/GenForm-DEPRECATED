@@ -1,6 +1,9 @@
-﻿using Informedica.GenForm.DataAccess.DataMappers;
+﻿using System;
+using System.Linq;
+using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.DataAccess.Tests.TestBase;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.Services.Products.dto;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Brand = Informedica.GenForm.Database.Brand;
 using Package = Informedica.GenForm.Database.Package;
@@ -18,15 +21,21 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
     public class ProductMapperShould: DataMapperTestBase<ProductMapper,IProduct,Product>
     {
         private const string ProductName = "dopamine (Dynatra) 200 mg in 5 mL infusievloeistof per ampul";
+        private const string DisplayName = "dopamine (Dynatra) 200 mg in 5 mL infusievloeistof per ampul";
         private const string Generic = "dopamine";
         private const string Shape = "infusievloeistof";
         private const string Package = "ampul";
-        private const int Quantity = 5;
-        private const string Unit = "mL";
+        private const Decimal ProductQuantity = 5;
+        private const Decimal SubstanceQuantity = 5;
+        private const string ProductUnit = "mL";
         private const string Code = "1";
         private const string Brand = "Dynatra";
+        private const Int32 SortOrder = 1;
+        private const String Substance = "dopamine";
+        private const String SubstanceUnit = "mg";
 
         private TestContext _testContextInstance;
+        private const string ProductCode = "1";
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -78,33 +87,62 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         public void MapDaoToProduct()
         {
             FillDao();
-            Mapper.MapFromDaoToBo(Dao, Bo);
+            Mapper.MapFromDaoToBo(Dao, (IMappable<IProduct>)Bo);
             AssertIsMapped();
+        }
+
+        [TestMethod]
+        public void MapProductWithSubstancesToDao()
+        {
+            FillProductWithSubstances();
+            Mapper.MapFromBoToDao(Bo, Dao);
+            AssertIsMapped();
+        }
+
+        private void FillProductWithSubstances()
+        {
+            FillProduct();
+            FillProductSubstance(Bo.AddSubstance());
+        }
+
+        private static void FillProductSubstance(IProductSubstance substance)
+        {
+            substance.Quantity = SubstanceQuantity;
+            substance.SortOrder = SortOrder;
+            substance.Substance = Substance;
+            substance.Unit = SubstanceUnit;
+            return;
         }
 
         private void FillDao()
         {
             Dao.Brand = new Brand {BrandName = Brand};
-            Dao.DisplayName = ProductName;
+            Dao.DisplayName = DisplayName;
             Dao.Package = new Package {PackageName = Package};
             Dao.ProductCode = Code;
             Dao.ProductName = ProductName;
-            Dao.ProductQuantity = Quantity;
+            Dao.ProductQuantity = ProductQuantity;
             Dao.Shape = new Shape {ShapeName = Shape};
-            Dao.Substance = new Substance {SubstanceName = Generic};
-            Dao.Unit = new Unit {UnitName = Unit};
+            Dao.Substance = new Substance {SubstanceName = Generic, IsGeneric = true};
+            Dao.Unit = new Unit {UnitName = ProductUnit};
         }
 
         private void FillProduct()
         {
-            Bo.ProductName = ProductName;
-            Bo.BrandName = Brand;
-            Bo.GenericName = Generic;
-            Bo.ShapeName = Shape;
-            Bo.PackageName = Package;
-            Bo.Quantity = Quantity;
-            Bo.UnitName = Unit;
-            Bo.ProductCode = Code;
+            var dto = new ProductDto
+                          {
+                              ProductCode = ProductCode,
+                              ProductName = ProductName,
+                              DisplayName = DisplayName,
+                              Generic = Generic,
+                              Shape = Shape,
+                              Unit = ProductUnit,
+                              Package = Package,
+                              Quantity = ProductQuantity,
+                              Brand = Brand,
+                              Id = 1
+                          };
+            Bo = GetBoWithDto(dto);
         }
 
         #region Overrides of DataMapperTestBase<ProductMapper,IProduct,Product>
@@ -112,13 +150,25 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         protected override bool IsMapped(IProduct bo, Product dao)
         {
             var isMapped = Bo.BrandName == (dao.Brand == null ? string.Empty: dao.Brand.BrandName);
-            isMapped = isMapped && Bo.GenericName == dao.Substance.SubstanceName;
+            isMapped = isMapped && Bo.GenericName == dao.Substance.SubstanceName && (dao.Substance.IsGeneric ?? false);
             isMapped = isMapped && Bo.PackageName == dao.Package.PackageName;
             isMapped = isMapped && Bo.ProductCode == dao.ProductCode;
             isMapped = isMapped && Bo.ProductName == dao.ProductName;
+            isMapped = isMapped && Bo.DisplayName == dao.DisplayName;
             isMapped = isMapped && Bo.Quantity == dao.ProductQuantity;
             isMapped = isMapped && Bo.ShapeName == dao.Shape.ShapeName;
             isMapped = isMapped && Bo.UnitName == dao.Unit.UnitName;
+
+            foreach (var substance in Bo.Substances)
+            {
+                var substance1 = substance;
+                var daoSubst =
+                    dao.ProductSubstance.SingleOrDefault(s => substance1.Substance == s.Substance.SubstanceName &&
+                                                              substance1.SortOrder == s.SubstanceOrdering &&
+                                                              substance1.Quantity == s.SubstanceQuantity &&
+                                                              substance1.Unit == s.Unit.UnitName);
+                isMapped = isMapped && daoSubst != null;
+            }
 
             return isMapped;
         }
