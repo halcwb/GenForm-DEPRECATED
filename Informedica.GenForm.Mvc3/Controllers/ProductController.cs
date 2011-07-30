@@ -1,5 +1,7 @@
 ﻿using System;
 using Informedica.GenForm.Library.Services;
+using Informedica.GenForm.Library.Services.Products;
+using Informedica.GenForm.Library.Services.Products.dto;
 using Newtonsoft.Json.Linq;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
@@ -84,11 +86,10 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return product;
         }
 
-        public ActionResult SaveProduct(JObject productData)
+        public ActionResult SaveProduct(ProductDto product)
         {
             var success = true;
             var message = String.Empty;
-            var product = GetProductFromJObject(productData);
             try
             {
                 GetProductServices().SaveProduct(product);
@@ -100,22 +101,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
                 message = e.ToString();
             }
             return this.Direct(new { success, data = product, message });
-        }
-
-        private IProduct GetProductFromJObject(JObject productData)
-        {
-            return new Product
-                       {
-                           ProductName = productData.Value<String>("ProductName"),
-                           BrandName = productData.Value<String>("BrandName"),
-                           GenericName = productData.Value<String>("GenericName"),
-                           PackageName = productData.Value<String>("PackageName"),
-                           ProductCode = productData.Value<String>("ProductCode"),
-                           ProductId = productData.Value<Int32>("ProductId"),
-                           Quantity = productData.Value<Decimal>("Quantity"),
-                           ShapeName = productData.Value<String>("ShapeName"),
-                           UnitName = productData.Value<String>("UnitName")
-                       };
         }
 
         private IProductServices GetProductServices()

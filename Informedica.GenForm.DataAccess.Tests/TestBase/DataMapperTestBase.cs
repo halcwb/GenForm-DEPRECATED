@@ -1,6 +1,7 @@
 ﻿using System;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess.Repositories;
+using Informedica.GenForm.Library.Services.Products.dto;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 
@@ -35,6 +36,11 @@ namespace Informedica.GenForm.DataAccess.Tests.TestBase
         private static TBo GetBo()
         {
             return ObjectFactory.GetInstance<TBo>();
+        }
+
+        protected static TBo GetBoWithDto(ProductDto dto)
+        {
+            return ObjectFactory.With(dto).GetInstance<TBo>();
         }
 
         private static TDao GetDao()

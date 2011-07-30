@@ -1,7 +1,8 @@
 ﻿using System;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Services;
+using Informedica.GenForm.Library.Services.Products;
+using Informedica.GenForm.Library.Services.Products.dto;
 using Informedica.GenForm.Mvc3.Controllers;
 using Informedica.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,7 +22,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         private const String Penicilline = "penicilline";
         private const String Sintrom = "Sintrom";
         private TestContext testContextInstance;
-        private const  String Mmol = "Mmol";
+        private const String Mmol = "Mmol";
         private const String Ampul = "Ampul";
         private const String Tablet = "tablet";
 
@@ -51,7 +52,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         {
             GenFormApplication.Initialize();
         }
-        
+
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
@@ -61,7 +62,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         //public void MyTestInitialize()
         //{
         //}
-        
+
         // Use TestCleanup to run code after each test has run
         // [TestCleanup()]
         // public void MyTestCleanup() { }
@@ -80,24 +81,15 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             return ObjectFactory.GetInstance<IProductServices>();
         }
 
-        [TestMethod]
-        public void User_can_change_fields_of_empty_product()
-        {
-            const string testName = "Test";
-            var product = GetProductServices().GetEmptyProduct();
-            product.ProductName = testName;
-            Assert.AreEqual(testName, product.ProductName,"User could not change the fields of an empty product");
-        }
-
-
         [Isolated]
         [TestMethod]
         public void When_user_saves_valid_product_no_error_is_thrown()
         {
             var product = GetValidProduct();
-            var result = GetProductController().SaveProduct(CreateJObjectFrom(product));
+            var result = GetProductController().SaveProduct(product);
 
-            Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "Save product returned an error ");
+            Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "Save product returned an error " + 
+                          ActionResultParser.GetPropertyValue<String>(result, "message"));
         }
 
         private JObject CreateJObjectFrom(Object product)
@@ -122,46 +114,48 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
             try
             {
-                GetProductController().SaveProduct(CreateJObjectFrom(product));
+                GetProductController().SaveProduct(product);
                 Assert.Fail("Saving an invalid product should throw an exception");
             }
-// ReSharper disable EmptyGeneralCatchClause
-            catch(Exception)
-// ReSharper restore EmptyGeneralCatchClause
+            // ReSharper disable EmptyGeneralCatchClause
+            catch (Exception)
+            // ReSharper restore EmptyGeneralCatchClause
             {
-                
+
             }
         }
 
-        private IProduct GetInvalidProduct()
+        private static ProductDto GetInvalidProduct()
         {
             var product = GetValidProduct();
-            product.PackageName = "";
+            product.Shape = "";
             return product;
         }
 
-        private IProduct GetValidProduct()
+        private static ProductDto GetValidProduct()
         {
-            var product = GetProductServices().GetEmptyProduct();
+            return new ProductDto
+            {
+                ProductName = "dopamine Dynatra infusievloeistof 200 mg 5 mL ampul",
+                DisplayName = "dopamine Dynatra infusievloeistof 200 mg 5 mL ampul",
+                Generic = "dopamine",
+                Brand = "Dynatra",
+                Shape = "infusievloeistof",
+                Quantity = 5,
+                Unit = "mL",
+                Package = "ampul"
+            };
 
-            product.ProductName = "paracetamol 500 mg tablet";
-            product.GenericName = "paracetamol";
-            product.BrandName = "Paracetamol";
-            product.ShapeName = "tablet";
-            product.Quantity = 1;
-            product.UnitName = "stuk";
-            product.PackageName = "tablet";
-            return product;
         }
 
         [Isolated]
         [TestMethod]
         public void User_cannot_save_product_with_mandatory_fields_not_filled_in()
         {
-            var product = GetProductServices().GetEmptyProduct();
+            var product = new ProductDto();
             product.ProductName = "Test";
 
-            var result = GetProductController().SaveProduct(CreateJObjectFrom(product));
+            var result = GetProductController().SaveProduct(product);
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "a non valid product should not be saved");
 
         }

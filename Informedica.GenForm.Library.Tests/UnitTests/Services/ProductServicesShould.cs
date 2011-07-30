@@ -1,15 +1,16 @@
-﻿using Informedica.GenForm.Assembler;
-using Informedica.GenForm.Library.Repositories;
-using Informedica.GenForm.Library.Services;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using Informedica.Utilities;
+﻿using System;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.Repositories;
+using Informedica.GenForm.Library.Services.Products;
+using Informedica.GenForm.Library.Services.Products.dto;
+using Informedica.Utilities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
 
-namespace Informedica.GenForm.Library.Tests.UnityTests
+namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 {
     
     
@@ -20,8 +21,6 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
     [TestClass]
     public class ProductServicesShould
     {
-
-
         private TestContext testContextInstance;
 
         /// <summary>
@@ -73,11 +72,6 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         #endregion
 
 
-        internal virtual IProductServices GetProductServices()
-        {
-            return ObjectFactory.GetInstance<IProductServices>();
-        }
-
         /// <summary>
         ///A test for GetEmptyProduct
         ///</summary>
@@ -89,14 +83,15 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
                           "services did not return an empty product");
         }
 
-
         [TestMethod]
         public void HaveAhelperClassToDetermineWhetherProductIsEmpty()
         {
-            IProduct product = ObjectFactory.GetInstance<IProduct>();
+            var dto = new ProductDto();
+            var product = ObjectFactory.With(dto).GetInstance<IProduct>();
             Assert.IsTrue(ObjectExaminer.ObjectHasEmptyProperties(product), "helper method should return true");
 
-            product.ProductName = "Not empty";
+            dto.ProductName = "Not Empty";
+            product = ObjectFactory.With(dto).GetInstance<IProduct>();
             Assert.IsFalse(ObjectExaminer.ObjectHasEmptyProperties(product), "helper method should return false");
         }
 
@@ -104,15 +99,16 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
         [TestMethod]
         public void CallProductRepositoryToSaveAdrug()
         {
-            var product = ObjectFactory.GetInstance<IProduct>();
+            var productDto = new ProductDto();
+            var product = Isolate.Fake.Instance<IProduct>();
 
             var repos = GetFakeRepository<IProductRepository, IProduct>(product);
             ObjectFactory.Inject(repos);
 
             try
             {
-                GetProductServices().SaveProduct(product);
-                Isolate.Verify.WasCalledWithExactArguments(() => repos.Insert(product));
+                GetProductServices().SaveProduct(productDto);
+                Isolate.Verify.WasCalledWithAnyArguments(() => repos.Insert(product));
             }
             catch (Exception e)
             {
@@ -122,7 +118,7 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
 
         [Isolated]
         [TestMethod]
-        public void CallProductRepositoryToAddAnewBrand()
+        public void CallBrandRepositoryToAddAnewBrand()
         {
             var brand = ObjectFactory.GetInstance<IBrand>();
 
@@ -141,15 +137,9 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
 
         }
 
-        private static void AssertExceptionType(Exception e, String message)
-        {
-            if (e.GetType() != typeof(VerifyException)) throw e;
-            Assert.Fail(message);
-        }
-
         [Isolated]
         [TestMethod]
-        public void CallProductRepositoryToAddNewSubstance()
+        public void CallSubstanceRepositoryToAddNewSubstance()
         {
             var substance = ObjectFactory.GetInstance<Substance>();
 
@@ -190,6 +180,17 @@ namespace Informedica.GenForm.Library.Tests.UnityTests
             Isolate.WhenCalled(() => repos.Insert(item)).IgnoreCall();
 
             return repos;
+        }
+
+        private static void AssertExceptionType(Exception e, String message)
+        {
+            if (e.GetType() != typeof(VerifyException)) throw e;
+            Assert.Fail(message);
+        }
+
+        private static IProductServices GetProductServices()
+        {
+            return ObjectFactory.GetInstance<IProductServices>();
         }
 
     }

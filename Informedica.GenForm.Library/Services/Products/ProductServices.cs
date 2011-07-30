@@ -1,9 +1,10 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
+using Informedica.GenForm.Library.Services.Products.dto;
 using StructureMap;
 
-namespace Informedica.GenForm.Library.Services
+namespace Informedica.GenForm.Library.Services.Products
 {
     public class ProductServices : IProductServices
     {
@@ -55,10 +56,15 @@ namespace Informedica.GenForm.Library.Services
             repository.Insert(subst);
         }
 
-        public void SaveProduct(IProduct product)
+        public void SaveProduct(ProductDto productDto)
         {
             var repository = ObjectFactory.GetInstance<IProductRepository>();
-            repository.Insert(product);
+            repository.Insert(NewProduct(productDto));
+        }
+
+        private static IProduct NewProduct(ProductDto productDto)
+        {
+            return ObjectFactory.With(productDto).GetInstance<IProduct>();
         }
 
         public void DeleteProduct(int productId)
@@ -68,7 +74,7 @@ namespace Informedica.GenForm.Library.Services
 
         public IProduct GetEmptyProduct()
         {
-            return new Product();
+            return ObjectFactory.GetInstance<IProduct>();
         }
 
         #endregion

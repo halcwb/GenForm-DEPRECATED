@@ -1,5 +1,8 @@
 ﻿using System.Web.Mvc;
 using Ext.Direct.Mvc;
+using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.Services.Products.dto;
+using Newtonsoft.Json.Linq;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
@@ -95,5 +98,30 @@ namespace Informedica.GenForm.Mvc3.Controllers
                                    });
         }
 
+        public ActionResult SaveProduct(ProductDto product)
+        {
+            return this.Direct(new { success = true, data = product});
+        }
+
+        public ActionResult GetProduct(JObject idObject)
+        {
+            return this.Direct(new { success = true, data = GetProduct() });
+        }
+
+        private static IProduct GetProduct()
+        {
+            return new Product
+                       {
+                           BrandName = "Dynatra",
+                           GenericName = "dopamine",
+                           PackageName = "ampul",
+                           ProductCode = "1",
+                           ProductId = 1,
+                           ProductName = "dopamine Dynatra 5 mL ampul",
+                           Quantity = 5,
+                           ShapeName = "infusievloeistof",
+                           UnitName = "mL"
+                       };
+        }
     }
 }

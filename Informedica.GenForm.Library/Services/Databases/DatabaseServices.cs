@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Databases;
 using StructureMap;
 
-namespace Informedica.GenForm.Library.Services
+namespace Informedica.GenForm.Library.Services.Databases
 {
     public class DatabaseServices : IDatabaseServices
     {

@@ -1,8 +1,11 @@
-﻿using Informedica.GenForm.DataAccess.Repositories;
+﻿using System.Linq;
+using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
-using Informedica.GenForm.Library.Services;
+using Informedica.GenForm.Library.Services.Products;
+using Informedica.GenForm.Library.Services.Products.dto;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StructureMap;
 
 namespace Informedica.GenForm.Assembler.Tests
 {
@@ -70,6 +73,17 @@ namespace Informedica.GenForm.Assembler.Tests
         {
             ObjectFactoryAssertUtility.AssertRegistration<IProduct>(
                 ObjectFactoryAssertUtility.GetMessageFor<IProduct>());
+        }
+
+        [TestMethod]
+        public void AspecificConstructorMethodForProduct()
+        {
+            const string productName = "dopamine Dynatra infusievloeistof 5 mL ampul";
+            var dto = new ProductDto{ ProductName = productName};
+            var product = ObjectFactory.With(dto).GetInstance<IProduct>();
+            
+            Assert.IsInstanceOfType(product, typeof(IProduct));
+            Assert.IsTrue(product.ProductName == productName);
         }
 
         [TestMethod]

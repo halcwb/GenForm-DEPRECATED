@@ -1,16 +1,11 @@
 Ext.define('GenForm.test.model.ProductModelTests', {
 
-    describe: 'GenForm.model.product.Product',
+    describe: 'ProductModelShould',
 
     tests: function () {
-        var getProductModel, loadProductModel,  productModel, createProductModel, createProxy;
-
-        getProductModel = function () {
-            return Ext.ModelManager.getModel('GenForm.model.product.Product');
-        };
-
-        createProductModel = function () {
-            var testProduct = {
+        var me = this, record,
+            modelName = 'GenForm.model.product.Product',
+            testProduct = {
                 ProductName: 'paracetamol 500 mg tablet',
                 BrandName: 'Paracetamol',
                 brands: [
@@ -24,115 +19,98 @@ Ext.define('GenForm.test.model.ProductModelTests', {
                 Unit: 'mg'
             };
 
-            return Ext.ModelManager.create(testProduct, 'GenForm.model.product.Product');
+        beforeEach(function () {
+           if (!record) record = Ext.create(modelName);
+        });
+
+        me.createTestRecord = function () {
+            return Ext.ModelManager.create(testProduct, modelName);
         };
 
-        createProxy = function () {
+        me.getModel = function () {
+            var model = Ext.ModelManager.getModel(modelName);
+            model.setProxy(me.getTestProxy());
+            return model;
+        };
+
+        me.setUpTestProxy = function () {
+            record.setProxy(me.getTestProxy());
+        };
+
+        me.getTestProxy = function () {
             return Ext.create('Ext.data.proxy.Direct', {
                 type: 'direct',
                 api: {
-                    save: Product.SaveProduct
+                    read: Tests.GetProduct,
+                    save: Tests.SaveProduct
                 }
             });
         };
 
-        loadProductModel = function () {
-            productModel = null;
-            getProductModel().load('1', {
-                callback: function(result) {
-                    productModel = result;
-                }
-            });
-        };
 
-        it('ProductModel should be defined', function () {
-            expect(getProductModel()).toBeDefined();
+        it('be defined', function () {
+            expect(record).toBeDefined();
         });
 
-        it('can be created using ModelManager.create', function () {
-            expect(createProductModel()).toBeDefined();
-        })
-
-        it('Should have a ProductName', function () {
-            expect(createProductModel().data.ProductName).toBeDefined();
+        it('be created using ModelManager.create', function () {
+            expect(me.createTestRecord()).toBeDefined();
         });
 
-        it('Should have a GenericName', function () {
-            expect(createProductModel().data.GenericName).toBeDefined();
+        it('have a ProductName', function () {
+            expect(record.data.ProductName).toBeDefined();
         });
 
-        it('GenericName should be paracetamol', function () {
-           expect(createProductModel().data.GenericName).toBe('paracetamol');
+        it('have a GenericName', function () {
+            expect(record.data.GenericName).toBeDefined();
         });
 
-        it('Should have a list of possible GenericNames', function () {
-            expect(createProductModel().generics).toBeDefined();
+        it('have GenericName is paracetamol', function () {
+           expect(me.createTestRecord().data.GenericName).toBe('paracetamol');
         });
 
-        it('Should have a BrandName', function () {
-            expect(createProductModel().data.BrandName).toBeDefined();
+        it('have a list of possible GenericNames', function () {
+            expect(record.generics).toBeDefined();
         });
 
-        it('Should have a list of brands', function () {
-            expect(createProductModel().brands).toBeDefined();
+        it('have a BrandName', function () {
+            expect(record.data.BrandName).toBeDefined();
         });
 
-        it('Should have a ShapeName', function () {
-            expect(createProductModel().data.ShapeName).toBeDefined();
+        it('have a list of brands', function () {
+            expect(record.brands).toBeDefined();
         });
 
-        it('Should have a list of shapes', function () {
-            expect(createProductModel().shapes).toBeDefined();
+        it('have a ShapeName', function () {
+            expect(record.data.ShapeName).toBeDefined();
         });
 
-        it('Should have a PackageName', function () {
-            expect(createProductModel().data.PackageName).toBeDefined();
+        it('have a list of shapes', function () {
+            expect(record.shapes).toBeDefined();
         });
 
-        it('Should have a list of packages', function () {
-            expect(createProductModel().packages).toBeDefined();
+        it('have a PackageName', function () {
+            expect(record.data.PackageName).toBeDefined();
         });
 
-        it('Should have a Quantity', function () {
-            expect(createProductModel().data.Quantity).toBeDefined();
+        it('have a list of packages', function () {
+            expect(record.packages).toBeDefined();
         });
 
-        it('should have substances', function () {
-            expect(createProductModel().substances).toBeDefined();
+        it('have a Quantity', function () {
+            expect(record.data.Quantity).toBeDefined();
         });
 
-        it('Product should have routes', function () {
-            expect(createProductModel().routes).toBeDefined();
+        it('have substances', function () {
+            expect(record.substances).toBeDefined();
         });
 
-        it('createProxy should return a proxy', function () {
-            expect(createProxy().$className).toBe('Ext.data.proxy.Direct');
+        it('should have routes', function () {
+            expect(record.routes).toBeDefined();
         });
 
-    /*
-        Does not work yet???
-        it('should if a product is save/failure message is returned', function () {
-            var proxy, model, result = null;
-            model = createProductModel();
-            proxy = createProxy();
-            model.setProxy(proxy);
-            console.log(model.getProxy());
-
-            createProductModel().save({
-                scope: this,
-                callback: function (record, operation) {
-                    result = record
-                }
-            });
-
-            waitsFor(function () {
-                return result ? true : fals;
-            }, "waiting for result of save to return")
-        });
-    */
-        it('should get a success message upon saving the productmodel', function () {
-            var model = createProductModel(), result;
-            Product.SaveProduct(model.data, function (record) {
+        it('get a success message upon saving the productmodel', function () {
+            var result;
+            Product.SaveProduct(record.data, function (record) {
                 result = record
              });
 
@@ -141,15 +119,15 @@ Ext.define('GenForm.test.model.ProductModelTests', {
             }, 'waiting for callback of Product.Save', 1000);
         });
 
-        it('should post a valid ProductModel', function () {
-            var model = createProductModel(), callData;
+        it('post a valid ProductModel', function () {
+            var callData;
             spyOn(Product.SaveProduct.directCfg.method, 'getCallData').andCallFake(
                     function () {
                         callData = arguments;
                     });
 
             try {
-                Product.SaveProduct(model.data, function (record) {
+                Product.SaveProduct(record.data, function () {
                 });
             } catch(e) {
                 console.log(e);
@@ -158,9 +136,9 @@ Ext.define('GenForm.test.model.ProductModelTests', {
             expect(callData).toBeDefined();
         });
 
-        it ('loading a productmodel from the server with id = 1', function () {
+        it ('be able to load a record using the model', function () {
             var result;
-            getProductModel().load('2', {
+            me.getModel().load('2', {
                 callback: function (record) {
                     result = record;
                 }
@@ -168,7 +146,7 @@ Ext.define('GenForm.test.model.ProductModelTests', {
 
             waitsFor(function () {
                 return result ? true: false;
-            }, 'waiting for product with id = 1', 1000);
+            }, 'product with id = 1', 1000);
 
         })
     }

@@ -77,14 +77,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnityTests\DatabaseConnectionShould.cs" />
-    <Compile Include="UnityTests\DatabaseServicesShould.cs" />
-    <Compile Include="UnityTests\ProductServicesShould.cs" />
-    <Compile Include="UnityTests\GenFormIdentityTest.cs" />
-    <Compile Include="UnityTests\GenFormPrincipalTest.cs" />
-    <Compile Include="UnityTests\ILoginServicesTest.cs" />
+    <Compile Include="UnitTests\DomainModel\NewlyCreatedProductShould.cs" />
+    <Compile Include="UnitTests\DomainModel\OjbectFactoryForProductShould.cs" />
+    <Compile Include="UnitTests\DomainModel\ProductTestBase.cs" />
+    <Compile Include="UnitTests\GenFormIdentityTest.cs" />
+    <Compile Include="UnitTests\GenFormPrincipalTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IntegrationTests\UserTest.cs" />
+    <Compile Include="UnitTests\Services\DatabaseServicesShould.cs" />
+    <Compile Include="UnitTests\Services\LoginServicesShould.cs" />
+    <Compile Include="UnitTests\Services\ProductServicesShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />
