@@ -27,6 +27,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
             InsertUsingMapper<IDataMapper<IBrand, Brand>>(item);
         }
 
+        protected override void UpdateBo(IBrand item, Brand dao)
+        {
+            item.BrandId = dao.BrandId;
+        }
+
         protected override void InsertOnSubmit(GenFormDataContext ctx, Brand dao)
         {
             ctx.Brand.InsertOnSubmit(dao);

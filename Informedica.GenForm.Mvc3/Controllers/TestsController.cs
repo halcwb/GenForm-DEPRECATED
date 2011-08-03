@@ -1,8 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Library.Services.Products.dto;
 using Newtonsoft.Json.Linq;
+using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
@@ -100,7 +103,32 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult SaveProduct(ProductDto product)
         {
-            return this.Direct(new { success = true, data = product});
+            var success = true;
+            var message = String.Empty;
+            try
+            {
+                product = GetProductServices().SaveProduct(product);
+
+            }
+            catch (Exception e)
+            {
+                success = false;
+                message = e.ToString();
+            }
+            return this.Direct(new { success, data = product, message });
+        }
+
+        public ActionResult DeleteProduct(Int32 id)
+        {
+            var success = false;
+            if (id > 0) success = true;
+
+            return this.Direct(new {success});
+        }
+
+        private IProductServices GetProductServices()
+        {
+            return ObjectFactory.GetInstance<IProductServices>();
         }
 
         public ActionResult GetProduct(JObject idObject)

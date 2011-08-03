@@ -37,6 +37,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+        protected override void UpdateBo(IPackage item, Package dao)
+        {
+            item.PackageId = dao.PackageId;
+        }
+
         protected override void InsertOnSubmit(GenFormDataContext ctx, Package dao)
         {
             ctx.Package.InsertOnSubmit(dao);

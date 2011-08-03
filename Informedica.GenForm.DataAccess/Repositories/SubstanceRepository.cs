@@ -7,8 +7,12 @@ using Substance = Informedica.GenForm.Database.Substance;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class SubstanceRepository:Repository<ISubstance, Database.Substance>, ISubstanceRepository
+    public class SubstanceRepository:Repository<ISubstance, Substance>, ISubstanceRepository
     {
+        public SubstanceRepository() {}
+
+        public SubstanceRepository(GenFormDataContext ctx): base(ctx) {}
+
         #region Overrides of Repository<ISubstance,Substance>
 
         public override IEnumerable<ISubstance> Fetch(int id)
@@ -34,6 +38,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
         public override void Delete(ISubstance item)
         {
             throw new NotImplementedException();
+        }
+
+        protected override void UpdateBo(ISubstance item, Substance dao)
+        {
+            item.SubstanceId = dao.SubstanceId;
         }
 
         protected override void InsertOnSubmit(GenFormDataContext ctx, Substance dao)

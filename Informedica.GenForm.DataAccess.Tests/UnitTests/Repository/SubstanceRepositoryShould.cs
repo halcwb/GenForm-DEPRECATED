@@ -1,19 +1,19 @@
 ﻿using System;
-using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.DataAccess.Tests.TestBase;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TypeMock.ArrangeActAssert;
 using Substance = Informedica.GenForm.Database.Substance;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
 {
     /// <summary>
-    /// Summary description for SubstanceMapperShould
+    /// Summary description for SubstanceRepositoryShould
     /// </summary>
     [TestClass]
-    public class SubstanceMapperShould: DataMapperTestBase<SubstanceMapper, ISubstance, Substance>
+    public class SubstanceRepositoryShould: RepositoryTestBase<ISubstanceRepository, ISubstance,Substance>
     {
-        private const string SubstanceName = "Test";
         private TestContext testContextInstance;
 
         /// <summary>
@@ -37,10 +37,9 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize]
-        //public static void MyClassInitialize(TestContext testContext) 
-        //{ GenFormApplication.Initialize(); }
-        
+        // [ClassInitialize()]
+        // public static void MyClassInitialize(TestContext testContext) { }
+        //
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
@@ -56,26 +55,34 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         #endregion
 
         [TestMethod]
-        public void MapSubstanceToDao()
+        public void CallSubstanceMappertoMapSubstanceToDao()
         {
-            Bo.SubstanceName = SubstanceName;
+            try
+            {
+                Repos.Insert(Bo);
+                Isolate.Verify.WasCalledWithAnyArguments(() => Mapper.MapFromBoToDao(Bo, Dao));
+            }
+            catch (Exception e)
+            {
+                AssertVerify(e, "substane repository did not call substance mapper to map dao to substance");
+            }
 
-            Mapper.MapFromBoToDao(Bo, Dao);
-            AssertIsMapped();
         }
 
         [TestMethod]
-        public void MapDaoToSubstance()
+        public void CallSubmitChangesOnContext()
         {
-            Dao.SubstanceName = SubstanceName;
-
-            Mapper.MapFromDaoToBo(Dao, Bo);
-            AssertIsMapped();
-        }
-
-        protected override Boolean IsMapped(ISubstance bo, Substance dao)
-        {
-            return bo.SubstanceName == dao.SubstanceName;
+            try
+            {
+                Bo.SubstanceName = "dopamine";
+                Repos.Insert(Bo);
+                Isolate.Verify.WasCalledWithAnyArguments(() => Context.SubmitChanges());
+            }
+            catch (Exception e)
+            {
+                AssertVerify(e, "Substance repository did not submit changes");
+                throw;
+            }
         }
     }
 }
