@@ -81,21 +81,25 @@
   <ItemGroup>
     <Compile Include="TestBase\DataMapperTestBase.cs" />
     <Compile Include="TestBase\RepositoryTestBase.cs" />
-    <Compile Include="UnitTests\BrandMapperShould.cs" />
-    <Compile Include="UnitTests\BrandRepositoryShould.cs" />
     <Compile Include="IntegrationTests\UserRepositoryTest.cs" />
+    <Compile Include="UnitTests\Command\InsertProductCommandShould.cs" />
+    <Compile Include="UnitTests\Command\SelectProductCommandShould.cs" />
     <Compile Include="UnitTests\DatabaseConnectionShould.cs" />
-    <Compile Include="UnitTests\GenericMapperShould.cs" />
-    <Compile Include="UnitTests\PackageMapperShould.cs" />
-    <Compile Include="UnitTests\ProductMapperShould.cs" />
-    <Compile Include="UnitTests\ProductRepositoryShould.cs" />
+    <Compile Include="UnitTests\Mapper\BrandMapperShould.cs" />
+    <Compile Include="UnitTests\Mapper\GenericMapperShould.cs" />
+    <Compile Include="UnitTests\Mapper\PackageMapperShould.cs" />
+    <Compile Include="UnitTests\Mapper\ProductMapperShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTests\ShapeMapperShould.cs" />
-    <Compile Include="UnitTests\SubstanceMapperShould.cs" />
-    <Compile Include="UnitTests\SubstanceRepositoryShould.cs" />
-    <Compile Include="UnitTests\UnitMapperShould.cs" />
-    <Compile Include="UnitTests\UserMapperShould.cs" />
-    <Compile Include="UnitTests\UserRepositoryTest.cs" />
+    <Compile Include="UnitTests\Mapper\ShapeMapperShould.cs" />
+    <Compile Include="UnitTests\Mapper\SubstanceMapperShould.cs" />
+    <Compile Include="UnitTests\Mapper\UnitMapperShould.cs" />
+    <Compile Include="UnitTests\Mapper\UserMapperShould.cs" />
+    <Compile Include="UnitTests\Repository\BrandRepositoryShould.cs" />
+    <Compile Include="UnitTests\Repository\ProductRepositoryShould.cs" />
+    <Compile Include="UnitTests\Repository\ProductRepostitoryConstructorShould.cs" />
+    <Compile Include="UnitTests\Repository\SubstanceRepositoryShould.cs" />
+    <Compile Include="UnitTests\Repository\UserRepositoryTest.cs" />
+    <Compile Include="UnitTests\TransActionMangerShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />
@@ -116,6 +120,10 @@
     <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
       <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
       <Name>Informedica.GenForm.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Tests\Informedica.GenForm.Tests.csproj">
+      <Project>{819BA760-6C94-4203-8DB0-7F0AAA4B2159}</Project>
+      <Name>Informedica.GenForm.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +148,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

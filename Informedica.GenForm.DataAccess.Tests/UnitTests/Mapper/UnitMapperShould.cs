@@ -2,18 +2,17 @@
 using Informedica.GenForm.DataAccess.Tests.TestBase;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Shape = Informedica.GenForm.Database.Shape;
+using Unit = Informedica.GenForm.Database.Unit;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mapper
 {
     /// <summary>
-    /// Summary description for ShapeMapperShould
+    /// Summary description for UnitMapperShould
     /// </summary>
     [TestClass]
-    public class ShapeMapperShould: DataMapperTestBase<ShapeMapper,IShape,Shape>
+    public class UnitMapperShould: DataMapperTestBase<UnitMapper,IUnit, Unit>
     {
-        private const string ShapeName = "infusievloeistof";
-
+        private const string UnitName = "mL";
         private TestContext testContextInstance;
 
         /// <summary>
@@ -55,26 +54,26 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         #endregion
 
         [TestMethod]
-        public void MapShapeToDao()
+        public void ShouldMapUnitToDao()
         {
-            Bo.ShapeName = ShapeName;
+            Bo.UnitName = UnitName;
             Mapper.MapFromBoToDao(Bo, Dao);
             AssertIsMapped();
         }
 
         [TestMethod]
-        public void MapDaoToShape()
+        public void ShouldMapDaoToUnit()
         {
-            Dao.ShapeName = ShapeName;
+            Dao.UnitName = UnitName;
             Mapper.MapFromDaoToBo(Dao, Bo);
             AssertIsMapped();
         }
 
-        #region Overrides of DataMapperTestBase<ShapeMapper,IShape,Shape>
+        #region Overrides of DataMapperTestBase<UnitMapper,IUnit,Unit>
 
-        protected override bool IsMapped(IShape bo, Shape dao)
+        protected override bool IsMapped(IUnit bo, Unit dao)
         {
-            return bo.ShapeName == dao.ShapeName;
+            return bo.UnitName == dao.UnitName;
         }
 
         #endregion

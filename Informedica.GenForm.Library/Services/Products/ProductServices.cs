@@ -56,10 +56,13 @@ namespace Informedica.GenForm.Library.Services.Products
             repository.Insert(subst);
         }
 
-        public void SaveProduct(ProductDto productDto)
+        public ProductDto SaveProduct(ProductDto productDto)
         {
             var repository = ObjectFactory.GetInstance<IProductRepository>();
-            repository.Insert(NewProduct(productDto));
+            var product = NewProduct(productDto);
+            repository.Insert(product);
+            productDto.Id = product.ProductId;
+            return productDto;
         }
 
         private static IProduct NewProduct(ProductDto productDto)

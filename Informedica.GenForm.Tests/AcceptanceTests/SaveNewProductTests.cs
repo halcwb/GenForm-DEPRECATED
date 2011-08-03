@@ -17,7 +17,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
     /// Summary description for ProductEditAcceptanceTests
     /// </summary>
     [TestClass]
-    public class ProductEditAcceptanceTestsThat
+    public class SaveNewProductTests
     {
         private const String Penicilline = "penicilline";
         private const String Sintrom = "Sintrom";
@@ -70,7 +70,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         #endregion
 
         [TestMethod]
-        public void User_can_start_with_a_new_empty_product()
+        public void ThatUserCanStartWithAnEmptyProduct()
         {
             var services = GetProductServices();
             Assert.IsTrue(ObjectExaminer.ObjectHasEmptyProperties(services.GetEmptyProduct()), "User could not start with empty product");
@@ -83,7 +83,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         [Isolated]
         [TestMethod]
-        public void When_user_saves_valid_product_no_error_is_thrown()
+        public void ThatNoErrorIsThrownWhenUserSavesAValidProduct()
         {
             var product = GetValidProduct();
             var result = GetProductController().SaveProduct(product);
@@ -108,7 +108,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         [Isolated]
         [TestMethod]
-        public void When_user_saves_invalid_product_an_error_is_thrown()
+        public void ThatAnErrorIsThrownWhenUserSavesAnInvalidProduct()
         {
             var product = GetInvalidProduct();
 
@@ -150,7 +150,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         [Isolated]
         [TestMethod]
-        public void User_cannot_save_product_with_mandatory_fields_not_filled_in()
+        public void ThatUserCannotSaveProductWithMandatoryFieldsNotFilledIn()
         {
             var product = new ProductDto();
             product.ProductName = "Test";
@@ -178,7 +178,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         }
 
         [TestMethod]
-        public void User_can_add_new_generic_name()
+        public void UserCanAddANewGenericName()
         {
             var generic = CreateNewGeneric(Penicilline);
             try
@@ -203,7 +203,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         }
 
         [TestMethod]
-        public void User_can_add_new_shape_name()
+        public void UserCanAddNewShapeName()
         {
             try
             {
@@ -228,7 +228,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         }
 
         [TestMethod]
-        public void User_can_add_new_package_name()
+        public void UserCanAddNewPackageName()
         {
             try
             {
@@ -252,7 +252,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         }
 
         [TestMethod]
-        public void User_can_add_new_unit_name()
+        public void UserCanAddNewUnitName()
         {
             try
             {
@@ -276,7 +276,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         }
 
         [TestMethod]
-        public void User_cannot_add_invalid_empty_brand()
+        public void UserCannotAddBrandWithoutBrandName()
         {
             var brand = CreateNewBrand(String.Empty);
             var result = GetProductController().AddNewBrand(CreateJObjectFrom(brand));

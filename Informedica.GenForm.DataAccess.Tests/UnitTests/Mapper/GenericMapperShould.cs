@@ -4,7 +4,7 @@ using Informedica.GenForm.Library.DomainModel.Products;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Substance = Informedica.GenForm.Database.Substance;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mapper
 {
     /// <summary>
     /// Summary description for GenericMapperShould

@@ -66,11 +66,63 @@ Ext.define('GenForm.test.server.ProductTests', {
 
             Tests.SaveProduct(testProduct, function (response) {
                 result = response;
+                if (!result.success) console.log(result.message);
             });
 
             waitsFor(function () {
                 return result;
             }, 'return of SaveProduct');
+
+            runs(function () {
+                expect(result.success).toBeTruthy();
+            });
+
+        });
+
+        it('return a saved product with id > 0', function () {
+            var result;
+
+            Tests.SaveProduct(testProduct, function (response) {
+                result = response;
+            });
+
+            waitsFor(function () {
+                return result;
+            }, 'return of saved product with id');
+
+            runs(function () {
+                expect(result.data.Id > 0).toBeTruthy();
+            });
+        });
+
+        it('not save an invalid product', function () {
+            var result;
+            
+            testProduct.Generic = "";
+            Tests.SaveProduct(testProduct, function (response) {
+                result = response;
+            });
+
+            waitsFor(function () {
+                return result;
+            }, 'return of save of invalid product');
+
+            runs(function () {
+                expect(result.success === false).toBeTruthy();
+            });
+        });
+
+        it('delete the saved product', function () {
+            var result;
+
+            testProduct.Id = 1;
+            Tests.DeleteProduct(testProduct.Id, function (response) {
+                result = response;
+            });
+            
+            waitsFor(function () {
+                return result;
+            });
 
             runs(function () {
                 expect(result.success).toBeTruthy();

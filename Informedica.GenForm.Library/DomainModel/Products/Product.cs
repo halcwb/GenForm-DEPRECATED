@@ -1,27 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Informedica.GenForm.Library.Services.Products.dto;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public interface IMappable<T>
-    {
-        int ProductId { set; }
-        string ProductName { set; }
-        string ProductCode { set; }
-        string GenericName { set; }
-        string BrandName { set; }
-        string ShapeName { set; }
-        decimal Quantity { set; }
-        string UnitName { set; }
-        string PackageName { set; }
-        string DisplayName { set; }
-        IEnumerable<IProductSubstance> Substances { get; }
-        Boolean NonInterfaceMethod();
-        IProductSubstance AddSubstance();
-    }
-
-    public class Product : IProduct, IMappable<IProduct>
+    public class Product : IProduct
     {
         private IList<IProductSubstance> _substances;
         private ProductDto _dto;
@@ -31,11 +13,22 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public Product(ProductDto dto)
         {
             _dto = dto.CloneDto();
+            if (dto.Substances == null) return;
+            
+            foreach (var substanceDto in dto.Substances)
+            {
+                GetSubstances().Add(NewSubstance(substanceDto));
+            }
+        }
+
+        private static IProductSubstance NewSubstance(SubstanceDto substanceDto)
+        {
+            return new ProductSubstance(substanceDto);
         }
 
         #region Implementation of IProduct
 
-        public int ProductId { get; set; }
+        public int ProductId { get { return _dto.Id; } set { _dto.Id = value; } }
         public string ProductName { get { return _dto.ProductName; } set { _dto.ProductName = value; } }
         public string ProductCode { get { return _dto.ProductCode; } set { _dto.ProductCode = value; } }
         public string GenericName { get { return _dto.Generic; } set { _dto.Generic = value; } }
@@ -46,14 +39,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public string PackageName { get { return _dto.Package; } set { _dto.Package = value; } }
         public string DisplayName { get { return _dto.DisplayName; } set { _dto.DisplayName = value; } }
 
-        public Boolean NonInterfaceMethod()
+        public IProductSubstance AddSubstance(SubstanceDto substanceDto)
         {
-            return true;
-        }
-        
-        public IProductSubstance AddSubstance()
-        {
-            IProductSubstance substance = new ProductSubstance();
+            IProductSubstance substance = new ProductSubstance(substanceDto);
             GetSubstances().Add(substance);
             return substance;
         }

@@ -5,7 +5,6 @@ using Informedica.GenForm.Library.Services.Users;
 using Newtonsoft.Json.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.Security;
-using Informedica.GenForm.Library.Services;
 using Informedica.GenForm.PresentationLayer.Security;
 
 namespace Informedica.GenForm.Mvc3.Controllers

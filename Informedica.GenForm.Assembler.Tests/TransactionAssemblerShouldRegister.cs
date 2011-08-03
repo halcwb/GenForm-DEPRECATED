@@ -1,18 +1,17 @@
-﻿using Informedica.GenForm.DataAccess.DataMappers;
-using Informedica.GenForm.DataAccess.Tests.TestBase;
-using Informedica.GenForm.Library.DomainModel.Products;
+﻿using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.Transactions;
+using Informedica.GenForm.Library.Transactions.Commands;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Unit = Informedica.GenForm.Database.Unit;
+using StructureMap;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests
+namespace Informedica.GenForm.Assembler.Tests
 {
     /// <summary>
-    /// Summary description for UnitMapperShould
+    /// Summary description for TransactionAssemblerShouldRegister
     /// </summary>
     [TestClass]
-    public class UnitMapperShould: DataMapperTestBase<UnitMapper,IUnit, Unit>
+    public class TransactionAssemblerShouldRegister
     {
-        private const string UnitName = "mL";
         private TestContext testContextInstance;
 
         /// <summary>
@@ -36,9 +35,9 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
+        [ClassInitialize]
+        public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
+        
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
@@ -54,28 +53,25 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         #endregion
 
         [TestMethod]
-        public void ShouldMapUnitToDao()
+        public void AnImplementationOfTransactionManager()
         {
-            Bo.UnitName = UnitName;
-            Mapper.MapFromBoToDao(Bo, Dao);
-            AssertIsMapped();
+            var list = new CommandList();
+            ObjectFactoryAssertUtility.AssertRegistrationWith<CommandList, ITransactionManager>(list);
         }
 
         [TestMethod]
-        public void ShouldMapDaoToUnit()
+        public void AnImplementationOfInsertProductCommand()
         {
-            Dao.UnitName = UnitName;
-            Mapper.MapFromDaoToBo(Dao, Bo);
-            AssertIsMapped();
+            var product = ObjectFactory.GetInstance<IProduct>();
+            ObjectFactoryAssertUtility.AssertRegistrationWith<IProduct, IInsertCommand<IProduct>>(product);
         }
 
-        #region Overrides of DataMapperTestBase<UnitMapper,IUnit,Unit>
-
-        protected override bool IsMapped(IUnit bo, Unit dao)
+        [TestMethod]
+        public void AnImplementationOfSelectProductCommand()
         {
-            return bo.UnitName == dao.UnitName;
+            ObjectFactoryAssertUtility.AssertRegistration<ISelectCommand<IProduct>>(
+                ObjectFactoryAssertUtility.GetMessageFor<ISelectCommand<IProduct>>());
         }
 
-        #endregion
     }
 }

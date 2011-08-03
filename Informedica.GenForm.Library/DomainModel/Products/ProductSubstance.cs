@@ -1,13 +1,23 @@
-﻿namespace Informedica.GenForm.Library.DomainModel.Products
+﻿using System;
+using Informedica.GenForm.Library.Services.Products.dto;
+
+namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class ProductSubstance : IProductSubstance
     {
+        private readonly SubstanceDto _dto;
+
+        public ProductSubstance(SubstanceDto substanceDto)
+        {
+            _dto = substanceDto;
+        }
+
         #region Implementation of IProductSubstance
 
-        public int SortOrder { get; set; }
-        public string Substance { get; set; }
-        public decimal Quantity { get; set; }
-        public string Unit { get; set; }
+        public int SortOrder { get { return _dto.SortOrder; } set { _dto.SortOrder = value; } }
+        public string Substance { get { return _dto.Substance; } set { _dto.Substance = value; } }
+        public decimal Quantity { get { return _dto.Quantity; } set { _dto.Quantity = value; } }
+        public string Unit { get { return _dto.Unit; } set { _dto.Unit = value; } }
 
         #endregion
     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.Repositories;
@@ -10,6 +9,15 @@ namespace Informedica.GenForm.DataAccess.Repositories
 {
     public abstract class Repository<TBo, TDao>: IRepository<TBo>
     {
+        private GenFormDataContext _context;
+
+        protected Repository(GenFormDataContext ctx)
+        {
+            _context = ctx;
+        }
+
+        protected Repository() {}
+
         #region Implementation of IRepository<T>
 
         public abstract IEnumerable<TBo> Fetch(int id);
@@ -18,22 +26,20 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         protected void InsertUsingMapper<TM>(TBo item) where TM: IDataMapper<TBo, TDao>
         {
-            var mapper = GetMapper<TM>();
             using (var ctx = GetDataContext())
             {
-                ctx.Connection.Open();
                 try
                 {
-                    using (var transaction = ctx.Connection.BeginTransaction(IsolationLevel.Unspecified))
-                    {
-                        ctx.Transaction = transaction;
+                        ctx.Connection.Open();
+                        ctx.Transaction = ctx.Connection.BeginTransaction();
                         var dao = GetDao();
-                        mapper.MapFromBoToDao(item, dao);
+                        GetMapper<TM>().MapFromBoToDao(item, dao);
                         InsertOnSubmit(ctx, dao);
 
                         try
                         {
                             ctx.SubmitChanges();
+                            UpdateBo(item, dao);
                         }
 // ReSharper disable RedundantCatchClause
                         catch (Exception)
@@ -43,9 +49,8 @@ namespace Informedica.GenForm.DataAccess.Repositories
 // ReSharper restore RedundantCatchClause
                         finally
                         {
-                            transaction.Rollback();
+                            ctx.Transaction.Rollback();
                         }
-                    }
 
                 }
 // ReSharper disable RedundantCatchClause
@@ -61,6 +66,18 @@ namespace Informedica.GenForm.DataAccess.Repositories
             }
         }
 
+        protected void InsertUsingContext<TM>(GenFormDataContext context, TBo item) where TM:IDataMapper<TBo,TDao>
+        {
+            var dao = GetDao();
+            GetMapper<TM>().MapFromBoToDao(item, dao);
+            InsertOnSubmit(context, dao);
+
+            context.SubmitChanges();
+            UpdateBo(item, dao);
+        }
+
+        protected abstract void UpdateBo(TBo item, TDao dao);
+
         protected abstract void InsertOnSubmit(GenFormDataContext ctx, TDao dao);
 
         protected TDao GetDao()
@@ -68,13 +85,22 @@ namespace Informedica.GenForm.DataAccess.Repositories
             return ObjectFactory.GetInstance<TDao>();
         }
 
-        protected static GenFormDataContext GetDataContext()
+        public GenFormDataContext GetDataContext()
+        {
+            if (_context == null) _context = CreateDataContext();
+            
+            var context = _context;
+            _context = null;
+            return context;
+        }
+
+        private GenFormDataContext CreateDataContext()
         {
             var connection = GetConnectionString();
             return ObjectFactory.With<String>(connection).GetInstance<GenFormDataContext>();
         }
 
-        protected static String GetConnectionString()
+        protected String GetConnectionString()
         {
             return DatabaseConnection.GetConnectionString(DatabaseConnection.DatabaseName.GenForm);
         }

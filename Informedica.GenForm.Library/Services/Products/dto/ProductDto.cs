@@ -14,8 +14,8 @@ namespace Informedica.GenForm.Library.Services.Products.dto
         public string Package;
         public string Unit;
         public decimal Quantity;
-        public IEnumerable<SubstanceDto> Substances;
-        public IEnumerable<RouteDto> Routes;
+        public IEnumerable<SubstanceDto> Substances = new List<SubstanceDto>();
+        public IEnumerable<RouteDto> Routes = new List<RouteDto>();
         public string ProductCode;
 
         #region Implementation of ICloneable

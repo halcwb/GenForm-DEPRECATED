@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Transactions\Commands\InsertProductCommand.cs" />
     <Compile Include="Databases\DatabaseConnection.cs" />
     <Compile Include="Databases\DatabaseSetting.cs" />
     <Compile Include="DataContexts\DataContextFactory.cs" />
@@ -77,6 +78,9 @@
     <Compile Include="Repositories\SubstanceRepository.cs" />
     <Compile Include="Repositories\UnitRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Transactions\Commands\SelectProductCommand.cs" />
+    <Compile Include="Transactions\IExecutable.cs" />
+    <Compile Include="Transactions\TransactionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Informedica.GenForm.Database\Informedica.GenForm.Database.csproj">
@@ -91,6 +95,9 @@
       <Project>{B30C5371-DDDD-46BE-827A-72798E743B60}</Project>
       <Name>Informedica.Settings</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Transactions\Selectors\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

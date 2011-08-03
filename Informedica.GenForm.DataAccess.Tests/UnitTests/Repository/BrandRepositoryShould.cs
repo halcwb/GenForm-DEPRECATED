@@ -1,20 +1,19 @@
-﻿using Informedica.GenForm.Assembler;
+﻿using System;
 using Informedica.GenForm.DataAccess.Tests.TestBase;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using Informedica.GenForm.Library.DomainModel.Products;
 using TypeMock.ArrangeActAssert;
-using Product = Informedica.GenForm.Database.Product;
+using Brand = Informedica.GenForm.Database.Brand;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
 {   
     /// <summary>
-    ///This is a test class for ProductRepositoryTest and is intended
-    ///to contain all ProductRepositoryTest Unit Tests
+    ///This is a test class for BrandRepositoryTest and is intended
+    ///to contain all BrandRepositoryTest Unit Tests
     ///</summary>
     [TestClass]
-    public class ProductRepositoryShould: RepositoryTestBase<IProductRepository, IProduct, Product>
+    public class BrandRepositoryShould: RepositoryTestBase<IBrandRepository, IBrand, Brand> 
     {
 
         private TestContext testContextInstance;
@@ -40,11 +39,10 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize]
-        public static void MyClassInitialize(TestContext testContext)
-        {
-            GenFormApplication.Initialize();
-        }
+        //[ClassInitialize]
+        //public static void MyClassInitialize(TestContext testContext)
+        //{
+        //}
         
         //Use ClassCleanup to run code after all tests in a class have run
         //[ClassCleanup()]
@@ -68,7 +66,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void CallProductMapperToMapProductToDao()
+        public void CallBrandDataMapperToMapBrand()
         {
             try
             {
@@ -77,14 +75,13 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
             }
             catch (Exception e)
             {
-                AssertVerify(e, "product repository did not call product mapper to map dao to product");
-                throw;
+                AssertVerify(e, "brand repository did not call brand mapper to map dao to bo");
             }
         }
 
         [Isolated]
         [TestMethod]
-        public void CallSubmitChangesOnContextToInsertProduct()
+        public void SubmitInsertedBrandToDatacontext()
         {
             try
             {
@@ -93,10 +90,9 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
             }
             catch (Exception e)
             {
-                AssertVerify(e, "product repository did not call submit changes on context");
+                AssertVerify(e, "brand repository did not call submitchanges on context");
             }
+
         }
-
-
     }
 }

@@ -19,10 +19,10 @@ namespace Informedica.GenForm.Assembler.Tests
             }
         }
 
-        public static void AssertRegistationWith<T,C>(T connection)
+        public static void AssertRegistrationWith<T,C>(T parameter)
         {
-            var context = ObjectFactory.With(connection).GetInstance<C>();
-            Assert.IsNotNull(context);
+            var instance = ObjectFactory.With(parameter).GetInstance<C>();
+            Assert.IsNotNull(instance);
         }
 
         public static String GetMessageFor<T>()

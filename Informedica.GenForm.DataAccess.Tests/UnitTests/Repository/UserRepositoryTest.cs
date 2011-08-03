@@ -4,12 +4,12 @@ using System.Linq;
 using Informedica.GenForm.DataAccess.DataContexts;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Database;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Informedica.GenForm.Library.DomainModel.Users;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
 {
     
     

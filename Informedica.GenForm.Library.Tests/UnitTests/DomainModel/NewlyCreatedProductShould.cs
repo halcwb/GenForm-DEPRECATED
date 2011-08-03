@@ -62,12 +62,30 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         #endregion
 
         [TestMethod]
-        public void NotBeChanchableByItsDto()
+        public void NotChangeWhenDtoIsChanged()
         {
             var dto = new ProductDto {ProductName = ProductName};
             var product = GetProduct(dto);
             dto.ProductName = "Cannot be changed";
             Assert.IsTrue(product.ProductName == ProductName, "product name was changed");
+        }
+
+        [TestMethod]
+        public void HaveOneSubstanceWhenDtoHasOneSubstance()
+        {
+            var dto = GetDtoWithOneSubstance();
+            var product = GetProduct(dto);
+            Assert.IsTrue(product.Substances.Count() == 1, "no substances");
+        }
+
+        private static ProductDto GetDtoWithOneSubstance()
+        {
+            return new ProductDto
+                       {
+                           ProductName = ProductName,
+                           Substances = new List<SubstanceDto>{new SubstanceDto{Id = 1, Quantity = 500, SortOrder = 1, Substance = "dopamine", Unit = "mg"}}
+                       };
+
         }
     }
 }

@@ -56,9 +56,16 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         public void CreateAnewProductInstanceFromAproductDto()
         {
             var dto = new ProductDto();
-            var product = GetProduct(dto);
+            try
+            {
+                var product = GetProduct(dto);
+                Assert.IsInstanceOfType(product, typeof(IProduct), "could not create an instanc of product");
 
-            Assert.IsInstanceOfType(product, typeof(IProduct), "could not create an instanc of product");
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.ToString());
+            }
         }
 
         [TestMethod]

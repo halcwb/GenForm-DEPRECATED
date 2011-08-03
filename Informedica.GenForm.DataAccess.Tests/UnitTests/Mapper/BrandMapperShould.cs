@@ -1,23 +1,18 @@
 ﻿using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.DataAccess.Tests.TestBase;
-using Informedica.GenForm.Database;
-using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Brand = Informedica.GenForm.Database.Brand;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mapper
 {
     /// <summary>
-    /// Summary description for UserMapperShould
+    /// Summary description for BrandMapperShould
     /// </summary>
     [TestClass]
-    public class UserMapperShould: DataMapperTestBase<UserMapper, IUser, GenFormUser>
+    public class BrandMapperShould: DataMapperTestBase<BrandMapper,IBrand,Brand>
     {
-        private const string Email = "halcwb@gmail.com";
-        private const string FirstName = "Casper";
-        private const string LastName = "Bollen";
-        private const string Pager = "5019";
-        private const string Password = "a secret";
-        private const string UserName = "cbollen";
+        private const string BrandName = "Dynatra";
         private TestContext testContextInstance;
 
         /// <summary>
@@ -59,52 +54,26 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         #endregion
 
         [TestMethod]
-        public void MapUserToDao()
+        public void ShouldMapBrandToDao()
         {
-            FillUser();
+            Bo.BrandName = BrandName;
             Mapper.MapFromBoToDao(Bo, Dao);
             AssertIsMapped();
         }
 
         [TestMethod]
-        public void MapDaoToUser()
+        public void ShouldMapDaoToBrand()
         {
-            FillDao();
+            Dao.BrandName = BrandName;
             Mapper.MapFromDaoToBo(Dao, Bo);
             AssertIsMapped();
         }
 
-        private void FillDao()
+        #region Overrides of DataMapperTestBase<BrandMapper,IBrand,Brand>
+
+        protected override bool IsMapped(IBrand bo, Brand dao)
         {
-            Dao.Email = Email;
-            Dao.FirstName = FirstName;
-            Dao.LastName = LastName;
-            Dao.PagerNumber = Pager;
-            Dao.PassWord = Password;
-            Dao.UserName = UserName;
-        }
-
-        private void FillUser()
-        {
-            Bo.Email = Email;
-            Bo.FirstName = FirstName;
-            Bo.LastName = LastName;
-            Bo.Pager = Pager;
-            Bo.Password = Password;
-            Bo.UserName = UserName;
-        }
-
-        #region Overrides of DataMapperTestBase<UserMapper,IUser,GenFormUser>
-
-        protected override bool IsMapped(IUser bo, GenFormUser dao)
-        {
-            var isMapped = bo.Email == dao.Email;
-            isMapped = isMapped && bo.FirstName == dao.FirstName;
-            isMapped = isMapped && bo.LastName == dao.LastName;
-            isMapped = isMapped && bo.Pager == dao.PagerNumber;
-            isMapped = isMapped && bo.Password == dao.PassWord;
-
-            return isMapped;
+            return bo.BrandName == dao.BrandName;
         }
 
         #endregion

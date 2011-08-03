@@ -37,6 +37,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+        protected override void UpdateBo(IUnit item, Unit dao)
+        {
+            item.UnitId = dao.UnitId;
+        }
+
         protected override void InsertOnSubmit(GenFormDataContext ctx, Unit dao)
         {
             ctx.Unit.InsertOnSubmit(dao);

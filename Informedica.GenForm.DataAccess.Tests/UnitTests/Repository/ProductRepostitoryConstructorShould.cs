@@ -1,18 +1,18 @@
 ﻿using System;
-using Informedica.GenForm.DataAccess.Tests.TestBase;
-using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Repositories;
+using Informedica.GenForm.Assembler;
+using Informedica.GenForm.DataAccess.Repositories;
+using Informedica.GenForm.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StructureMap;
 using TypeMock.ArrangeActAssert;
-using Substance = Informedica.GenForm.Database.Substance;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
 {
     /// <summary>
-    /// Summary description for SubstanceRepositoryShould
+    /// Summary description for ProductRepostitoryConstructorShould
     /// </summary>
     [TestClass]
-    public class SubstanceRepositoryShould: RepositoryTestBase<ISubstanceRepository, ISubstance,Substance>
+    public class ProductRepostitoryConstructorShould
     {
         private TestContext testContextInstance;
 
@@ -37,9 +37,9 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
+        [ClassInitialize]
+        public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
+        
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
@@ -55,34 +55,32 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         #endregion
 
         [TestMethod]
-        public void CallSubstanceMappertoMapSubstanceToDao()
+        public void CreateRepositoryWithDefaultDataContext()
         {
-            try
-            {
-                Repos.Insert(Bo);
-                Isolate.Verify.WasCalledWithAnyArguments(() => Mapper.MapFromBoToDao(Bo, Dao));
-            }
-            catch (Exception e)
-            {
-                AssertVerify(e, "substane repository did not call substance mapper to map dao to substance");
-            }
-
+            var repos = new ProductRepository();
+            Assert.IsInstanceOfType(repos.GetDataContext(), typeof(GenFormDataContext));
         }
 
         [TestMethod]
-        public void CallSubmitChangesOnContext()
+        public void BeAbleToCreateRepositoryWithOwnDataContext()
         {
-            try
-            {
-                Bo.SubstanceName = "dopamine";
-                Repos.Insert(Bo);
-                Isolate.Verify.WasCalledWithAnyArguments(() => Context.SubmitChanges());
-            }
-            catch (Exception e)
-            {
-                AssertVerify(e, "Substance repository did not submit changes");
-                throw;
-            }
+            var context = Isolate.Fake.Instance<GenFormDataContext>();
+            var repos = new ProductRepository(context);
+            Assert.AreEqual(String.Empty, repos.GetDataContext().Connection.ConnectionString);
         }
+
+        //ToDo: finish this test
+        [TestMethod]
+        public void UseInjectedDataContextOnlyOnce()
+        {
+            var context = Isolate.Fake.Instance<GenFormDataContext>();
+            var repos = new ProductRepository(context);
+
+            Assert.AreEqual(context, repos.GetDataContext());
+            Assert.AreNotEqual(context, repos.GetDataContext());
+
+            repos = ObjectFactory.GetInstance<ProductRepository>();
+        }
+
     }
 }

@@ -47,7 +47,7 @@
       <file leaf-file-name="ProductTests.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/test/server/ProductTests.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="0" selection-start="775" selection-end="775" vertical-scroll-proportion="0.42562592">
+            <state line="97" column="47" selection-start="2867" selection-end="2867" vertical-scroll-proportion="0.42415318">
               <folding />
             </state>
           </provider>
@@ -594,7 +594,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/test/server/ProductTests.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="775" selection-end="775" vertical-scroll-proportion="0.42562592">
+        <state line="97" column="47" selection-start="2867" selection-end="2867" vertical-scroll-proportion="0.42415318">
           <folding />
         </state>
       </provider>

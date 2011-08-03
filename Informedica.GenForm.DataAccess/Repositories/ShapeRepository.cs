@@ -37,6 +37,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+        protected override void UpdateBo(IShape item, Shape dao)
+        {
+            item.ShapeId = dao.ShapeId;
+        }
+
         protected override void InsertOnSubmit(GenFormDataContext ctx, Shape dao)
         {
             ctx.Shape.InsertOnSubmit(dao);

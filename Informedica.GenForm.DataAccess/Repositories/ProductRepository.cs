@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
@@ -9,6 +10,12 @@ namespace Informedica.GenForm.DataAccess.Repositories
 {
     public class ProductRepository: Repository<IProduct, Product>, IProductRepository
     {
+        public ProductRepository()
+        {}
+
+        public ProductRepository(GenFormDataContext ctx): base(ctx) 
+        {}
+ 
         #region Implementation of IRepository<IProduct>
 
         public override IEnumerable<IProduct> Fetch(int id)
@@ -26,6 +33,16 @@ namespace Informedica.GenForm.DataAccess.Repositories
             InsertUsingMapper<IDataMapper<IProduct, Product>>(item);
         }
 
+        public void Insert(GenFormDataContext context, IProduct item)
+        {
+            InsertUsingContext<IDataMapper<IProduct, Product>>(context, item);
+        }
+
+        protected override void UpdateBo(IProduct item, Product dao)
+        {
+            item.ProductId = dao.ProductId;
+        }
+
         protected override void InsertOnSubmit(GenFormDataContext ctx, Product dao)
         {
             ctx.Product.InsertOnSubmit(dao);
@@ -33,7 +50,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         public override void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var ctx = GetDataContext())
+            {
+                var dao = ctx.Product.Single(p => p.ProductId == id);
+                ctx.Product.DeleteOnSubmit(dao);
+            }
         }
 
         public override void Delete(IProduct item)
@@ -42,5 +63,10 @@ namespace Informedica.GenForm.DataAccess.Repositories
         }
 
         #endregion
+
+        public IEnumerable<IProduct> Fetch(GenFormDataContext context, Func<Product, bool> selector)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

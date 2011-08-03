@@ -1,5 +1,4 @@
 ﻿using System;
-using Informedica.GenForm.Library.Services;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Library.Services.Products.dto;
 using Newtonsoft.Json.Linq;
@@ -12,6 +11,15 @@ namespace Informedica.GenForm.Mvc3.Controllers
 {
     public class ProductController : Controller
     {
+        private IProductServices _services;
+
+        public ProductController(IProductServices services)
+        {
+            _services = services;
+        }
+
+        public ProductController(): this(ObjectFactory.GetInstance<IProductServices>()) {}
+
         //
         // GET: /Product/
 
@@ -92,7 +100,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             var message = String.Empty;
             try
             {
-                GetProductServices().SaveProduct(product);
+                _services.SaveProduct(product);
 
             }
             catch (Exception e)
@@ -103,11 +111,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new { success, data = product, message });
         }
 
-        private IProductServices GetProductServices()
-        {
-            return ObjectFactory.GetInstance<IProductServices>();
-        }
-
         public ActionResult AddNewBrand(JObject brandDto)
         {
             var success = true;
@@ -116,7 +119,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             
             try
             {
-                GetProductServices().AddNewBrand(brand);
+                _services.AddNewBrand(brand);
 
             }
             catch (Exception e)
@@ -136,7 +139,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             
             try
             {
-                GetProductServices().AddNewGeneric(generic);
+                _services.AddNewGeneric(generic);
 
             }
             catch (Exception e)
@@ -156,7 +159,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             
             try
             {
-                GetProductServices().AddNewShape(shape);
+                _services.AddNewShape(shape);
 
             }
             catch (Exception e)
@@ -176,7 +179,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             
             try
             {
-                GetProductServices().AddNewPackage(package);
+                _services.AddNewPackage(package);
 
             }
             catch (Exception e)
@@ -196,7 +199,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             
             try
             {
-                GetProductServices().AddNewUnit(unit);
+                _services.AddNewUnit(unit);
 
             }
             catch (Exception e)
@@ -216,7 +219,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             
             try
             {
-                GetProductServices().AddNewSubstance(subst);
+                _services.AddNewSubstance(subst);
 
             }
             catch (Exception e)
@@ -273,5 +276,22 @@ namespace Informedica.GenForm.Mvc3.Controllers
                        };
         }
 
+        public ActionResult DeleteProduct(Int32 id)
+        {
+            Boolean success;
+            var message = String.Empty;
+            try
+            {
+                _services.DeleteProduct(id);
+                success = true;
+            }
+            catch (Exception e)
+            {
+                success = false;
+                message = e.ToString();
+            }
+
+            return this.Direct(new {success, message});
+        }
     }
 }

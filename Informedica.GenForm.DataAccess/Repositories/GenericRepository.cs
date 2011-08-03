@@ -27,6 +27,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
             InsertUsingMapper<GenericMapper>(item);
         }
 
+        protected override void UpdateBo(IGeneric item, Substance dao)
+        {
+            item.GenericId = dao.SubstanceId;
+        }
+
         protected override void InsertOnSubmit(GenFormDataContext ctx, Substance dao)
         {
             ctx.Substance.InsertOnSubmit(dao);

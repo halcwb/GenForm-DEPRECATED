@@ -7,7 +7,7 @@ namespace Informedica.GenForm.Library.Services.Products
     public interface IProductServices
     {
         IProduct GetProduct(Int32 productId);
-        void SaveProduct(ProductDto product);
+        ProductDto SaveProduct(ProductDto product);
         void DeleteProduct(Int32 productId);
         IProduct GetEmptyProduct();
         IProduct GetProduct(String productName);

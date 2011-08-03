@@ -1,9 +1,12 @@
-﻿using System;
+﻿using System.Data;
 using System.Linq;
+using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.DataAccess.Tests.TestBase;
+using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Services.Products.dto;
+using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Brand = Informedica.GenForm.Database.Brand;
 using Package = Informedica.GenForm.Database.Package;
@@ -12,7 +15,7 @@ using Shape = Informedica.GenForm.Database.Shape;
 using Substance = Informedica.GenForm.Database.Substance;
 using Unit = Informedica.GenForm.Database.Unit;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mapper
 {
     /// <summary>
     /// Summary description for ProductMapperShould
@@ -20,22 +23,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
     [TestClass]
     public class ProductMapperShould: DataMapperTestBase<ProductMapper,IProduct,Product>
     {
-        private const string ProductName = "dopamine (Dynatra) 200 mg in 5 mL infusievloeistof per ampul";
-        private const string DisplayName = "dopamine (Dynatra) 200 mg in 5 mL infusievloeistof per ampul";
-        private const string Generic = "dopamine";
-        private const string Shape = "infusievloeistof";
-        private const string Package = "ampul";
-        private const Decimal ProductQuantity = 5;
-        private const Decimal SubstanceQuantity = 5;
-        private const string ProductUnit = "mL";
-        private const string Code = "1";
-        private const string Brand = "Dynatra";
-        private const Int32 SortOrder = 1;
-        private const String Substance = "dopamine";
-        private const String SubstanceUnit = "mg";
 
         private TestContext _testContextInstance;
-        private const string ProductCode = "1";
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -87,62 +76,94 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         public void MapDaoToProduct()
         {
             FillDao();
-            Mapper.MapFromDaoToBo(Dao, (IMappable<IProduct>)Bo);
+            Mapper.MapFromDaoToBo(Dao, Bo);
             AssertIsMapped();
         }
 
         [TestMethod]
-        public void MapProductWithSubstancesToDao()
+        public void MapProductWithOneSubstanceToDao()
         {
-            FillProductWithSubstances();
+            FillProductWithOneSubstance();
             Mapper.MapFromBoToDao(Bo, Dao);
             AssertIsMapped();
         }
 
-        private void FillProductWithSubstances()
+        [TestMethod]
+        public void ReferenceSameDaoSubstanceForGenericAndProductSubstance()
         {
-            FillProduct();
-            FillProductSubstance(Bo.AddSubstance());
+            FillProductWithOneSubstance();
+            Mapper.MapFromBoToDao(Bo, Dao);
+            Assert.AreSame(Dao.Substance, Dao.ProductSubstance.First().Substance, "substance should reference same substance");
         }
 
-        private static void FillProductSubstance(IProductSubstance substance)
+        [TestMethod]
+        public void ResultInMappedDaoThatCanBeSubmittedToDataContext()
         {
-            substance.Quantity = SubstanceQuantity;
-            substance.SortOrder = SortOrder;
-            substance.Substance = Substance;
-            substance.Unit = SubstanceUnit;
-            return;
+            SubmitProduct();
+        }
+
+        private void SubmitProduct()
+        {
+            using (var ctx = new GenFormDataContext(DatabaseConnection.GetConnectionString(DatabaseConnection.DatabaseName.GenForm)))
+            {
+                ctx.Connection.Open();
+                ctx.Transaction = ctx.Connection.BeginTransaction(IsolationLevel.Serializable);
+
+                FillProduct();
+                Dao = new Product();
+                Mapper.MapFromBoToDao(Bo, Dao);
+                ctx.Product.InsertOnSubmit(Dao);
+                try
+                {
+                    ctx.SubmitChanges();
+                }
+                catch (System.Exception e)
+                {
+                    Assert.Fail(e.ToString());
+                }
+                finally
+                {
+                    ctx.Transaction.Rollback();
+                    ctx.Connection.Close();
+                }
+            }
+        }
+
+        [TestMethod]
+        public void BeAbleToBeUsedInDifferentDataContexts()
+        {
+            SubmitProduct();   
+        }
+
+        private void FillProductWithOneSubstance()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithOneSubstance();
+
+            Bo = GetBoWithDto(dto);
         }
 
         private void FillDao()
         {
-            Dao.Brand = new Brand {BrandName = Brand};
-            Dao.DisplayName = DisplayName;
-            Dao.Package = new Package {PackageName = Package};
-            Dao.ProductCode = Code;
-            Dao.ProductName = ProductName;
-            Dao.ProductQuantity = ProductQuantity;
-            Dao.Shape = new Shape {ShapeName = Shape};
-            Dao.Substance = new Substance {SubstanceName = Generic, IsGeneric = true};
-            Dao.Unit = new Unit {UnitName = ProductUnit};
+            Dao.Brand = new Brand {BrandName = ProductTestFixtures.Brand};
+            Dao.DisplayName = ProductTestFixtures.DisplayName;
+            Dao.Package = new Package { PackageName = ProductTestFixtures.Package };
+            Dao.ProductCode = ProductTestFixtures.ProductCode;
+            Dao.ProductName = ProductTestFixtures.ProductName;
+            Dao.ProductQuantity = ProductTestFixtures.ProductQuantity;
+            Dao.Shape = new Shape { ShapeName = ProductTestFixtures.Shape };
+            Dao.Substance = new Substance { SubstanceName = ProductTestFixtures.Generic, IsGeneric = true };
+            Dao.Unit = new Unit { UnitName = ProductTestFixtures.ProductUnit };
         }
 
         private void FillProduct()
         {
-            var dto = new ProductDto
-                          {
-                              ProductCode = ProductCode,
-                              ProductName = ProductName,
-                              DisplayName = DisplayName,
-                              Generic = Generic,
-                              Shape = Shape,
-                              Unit = ProductUnit,
-                              Package = Package,
-                              Quantity = ProductQuantity,
-                              Brand = Brand,
-                              Id = 1
-                          };
+            var dto = GetDtoWithoutSubstance();
             Bo = GetBoWithDto(dto);
+        }
+
+        private ProductDto GetDtoWithoutSubstance()
+        {
+            return ProductTestFixtures.GetProductDtoWithNoSubstances();
         }
 
         #region Overrides of DataMapperTestBase<ProductMapper,IProduct,Product>

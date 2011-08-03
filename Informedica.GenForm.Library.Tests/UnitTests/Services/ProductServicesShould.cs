@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Library.Services.Products.dto;
+using Informedica.GenForm.Tests.Fixtures;
 using Informedica.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
@@ -21,6 +23,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
     [TestClass]
     public class ProductServicesShould
     {
+
         private TestContext testContextInstance;
 
         /// <summary>
@@ -114,6 +117,106 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
             {
                 AssertExceptionType(e, "product repository was not called to save product");
             }
+            finally
+            {
+                GenFormApplication.Initialize();
+            }
+        }
+
+        [TestMethod]
+        public void BeAbleToSaveAproductWithNoSubstances()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+
+            TrySaveProduct(dto);
+        }
+
+        private void TrySaveProduct(ProductDto dto)
+        {
+            try
+            {
+                GetProductServices().SaveProduct(dto);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("did not save: " + e);
+            }
+        }
+
+        [TestMethod]
+        public void NotBeAbleToSaveAnInvalidProduct()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            dto.Generic = null;
+
+            try
+            {
+                GetProductServices().SaveProduct(dto);
+                Assert.Fail("invalid product should not be saved");
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotNull(e.ToString());
+            }
+
+        }
+
+        [TestMethod]
+        public void BeAbleToSaveProductWithOneSubstance()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithOneSubstance();
+            
+            TrySaveProduct(dto);
+        }
+
+        [TestMethod]
+        public void NotBeAbleToSaveProductWithInvalidSubstance()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithOneSubstance();
+            dto.Substances.First().Substance = "";
+
+            try
+            {
+                TrySaveProduct(dto);
+                Assert.Fail("should not be able to save product with invalid substance");
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotNull(e);
+            }
+        }
+
+        [TestMethod]
+        public void BeAbleToSaveProductWithTwoSubstances()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithTwoSubstances();
+
+            TrySaveProduct(dto);
+        }
+
+        [TestMethod]
+        public void BeAbleToSaveProductWithTwoSubstancesAndAroute()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithTwoSubstancesAndRoute();
+
+            TrySaveProduct(dto);
+        }
+
+        [TestMethod]
+        public void NotBeAbleToSaveProductWithInvalidRoute()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithTwoSubstancesAndRoute();
+            dto.Routes.First().Route = "";
+
+            try
+            {
+                TrySaveProduct(dto);
+                Assert.Fail("should not be able to save route with invalid product");
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotNull(e);
+            }
         }
 
         [Isolated]
@@ -162,7 +265,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void AddNewSubstanceToRepository()
         {
             var substance = ObjectFactory.GetInstance<ISubstance>();
-
+            substance.SubstanceName = "dopamine";
             try
             {
                 GetProductServices().AddNewSubstance(substance);

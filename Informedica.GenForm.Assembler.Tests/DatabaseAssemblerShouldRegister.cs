@@ -67,7 +67,21 @@ namespace Informedica.GenForm.Assembler.Tests
         public void AnInstanceOfGenFormDataContext()
         {
             var connection = DatabaseConnection.GetConnectionString(DatabaseConnection.DatabaseName.GenForm);
-            ObjectFactoryAssertUtility.AssertRegistationWith<string, GenFormDataContext>(connection);
+            ObjectFactoryAssertUtility.AssertRegistrationWith<string, GenFormDataContext>(connection);
+        }
+
+        [TestMethod]
+        public void NotADefaultInstanceOfGenFormDataContext()
+        {
+            try
+            {
+                ObjectFactoryAssertUtility.AssertRegistration<GenFormDataContext>("default instance");
+                Assert.Fail("should not be able to create context without connection");
+            }
+            catch (System.Exception e)
+            {
+                Assert.IsNotNull(e);
+            }
         }
     }
 }

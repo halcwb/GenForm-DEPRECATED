@@ -33,7 +33,7 @@ namespace Informedica.GenForm.DataAccess.Tests.TestBase
             IsolateFromDataContext();
         }
 
-        private static void InitializeGenForm()
+        protected static void InitializeGenForm()
         {
             GenFormApplication.Initialize();
         }

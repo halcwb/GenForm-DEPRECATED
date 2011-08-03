@@ -1,19 +1,19 @@
-﻿using Informedica.GenForm.DataAccess.DataMappers;
+﻿using System;
+using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.DataAccess.Tests.TestBase;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Package = Informedica.GenForm.Database.Package;
+using Substance = Informedica.GenForm.Database.Substance;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mapper
 {
     /// <summary>
-    /// Summary description for PackageMapperShould
+    /// Summary description for SubstanceMapperShould
     /// </summary>
     [TestClass]
-    public class PackageMapperShould: DataMapperTestBase<PackageMapper,IPackage,Package>
+    public class SubstanceMapperShould: DataMapperTestBase<SubstanceMapper, ISubstance, Substance>
     {
-        private const string PackageName = "ampul";
-
+        private const string SubstanceName = "Test";
         private TestContext testContextInstance;
 
         /// <summary>
@@ -37,9 +37,10 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
+        //[ClassInitialize]
+        //public static void MyClassInitialize(TestContext testContext) 
+        //{ GenFormApplication.Initialize(); }
+        
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
@@ -55,28 +56,26 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         #endregion
 
         [TestMethod]
-        public void MapPackageToDao()
+        public void MapSubstanceToDao()
         {
-            Bo.PackageName = PackageName;
+            Bo.SubstanceName = SubstanceName;
+
             Mapper.MapFromBoToDao(Bo, Dao);
             AssertIsMapped();
         }
 
         [TestMethod]
-        public void MapDaoToPackage()
+        public void MapDaoToSubstance()
         {
-            Dao.PackageName = PackageName;
+            Dao.SubstanceName = SubstanceName;
+
             Mapper.MapFromDaoToBo(Dao, Bo);
             AssertIsMapped();
         }
 
-        #region Overrides of DataMapperTestBase<PackageMapper,IPackage,Package>
-
-        protected override bool IsMapped(IPackage bo, Package dao)
+        protected override Boolean IsMapped(ISubstance bo, Substance dao)
         {
-            return bo.PackageName == dao.PackageName;
+            return bo.SubstanceName == dao.SubstanceName;
         }
-
-        #endregion
     }
 }
