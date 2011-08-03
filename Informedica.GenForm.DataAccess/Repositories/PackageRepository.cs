@@ -37,6 +37,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+        public override IEnumerable<IPackage> Fetch(GenFormDataContext context, Func<Package, bool> selector)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void UpdateBo(IPackage item, Package dao)
         {
             item.PackageId = dao.PackageId;

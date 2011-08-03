@@ -1,4 +1,5 @@
-﻿using Informedica.GenForm.DataAccess.Transactions;
+﻿using System;
+using Informedica.GenForm.DataAccess.Transactions;
 using Informedica.GenForm.DataAccess.Transactions.Commands;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Transactions;
@@ -18,7 +19,8 @@ namespace Informedica.GenForm.Assembler
             _registry.For<ITransactionManager>().Use<TransactionManager>();
 
             _registry.For<IInsertCommand<IProduct>>().Use<InsertProductCommand>();
-            _registry.For<ISelectCommand<IProduct>>().Use<SelectProductCommand>();
+            _registry.For<IStringSelectCommand<IProduct>>().Use<SelectProductStringCommand>();
+            _registry.For<IIntSelectCommand<IProduct>>().Use<SelectProductIntCommand>();
 
             return _registry;
         }

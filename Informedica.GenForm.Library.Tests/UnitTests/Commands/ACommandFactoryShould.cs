@@ -64,5 +64,19 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Commands
 
             Assert.IsNotNull(command);
         }
+
+        [TestMethod]
+        public void BeAbleToCreateASelectCommandForStringCriteria()
+        {
+            var command = CommandFactory.CreateSelectCommand<IProduct, String>("test");
+            Assert.IsNotNull(command);
+        }
+
+        [TestMethod]
+        public void BeAbleToCreateASelectCommandForIntCriteria()
+        {
+            var command = CommandFactory.CreateSelectCommand<IProduct, int>(1);
+            Assert.IsNotNull(command);
+        }
     }
 }

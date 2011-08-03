@@ -62,11 +62,29 @@ namespace Informedica.GenForm.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        #endregion
-
-        public IEnumerable<IProduct> Fetch(GenFormDataContext context, Func<Product, bool> selector)
+        public override IEnumerable<IProduct> Fetch(GenFormDataContext context, Func<Product, Boolean> selector)
         {
-            throw new NotImplementedException();
+            var list = context.Product.Where(selector);
+            return CreateProductListFromDaoList(list);
         }
+
+        private IEnumerable<IProduct> CreateProductListFromDaoList(IEnumerable<Product> list)
+        {
+            IList<IProduct> productList = new List<IProduct>();
+            var mapper = GetMapper<IDataMapper<IProduct, Product>>();
+            foreach (var dao in list)
+            {
+                var bo = CreateNewProduct();
+                mapper.MapFromDaoToBo(dao, bo);
+            }
+            return productList;
+        }
+
+        private static IProduct CreateNewProduct()
+        {
+            return new Library.DomainModel.Products.Product();
+        }
+
+        #endregion
     }
 }

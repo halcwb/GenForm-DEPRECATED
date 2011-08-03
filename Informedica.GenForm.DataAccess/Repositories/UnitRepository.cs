@@ -37,6 +37,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+        public override IEnumerable<IUnit> Fetch(GenFormDataContext context, Func<Unit, bool> selector)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void UpdateBo(IUnit item, Unit dao)
         {
             item.UnitId = dao.UnitId;

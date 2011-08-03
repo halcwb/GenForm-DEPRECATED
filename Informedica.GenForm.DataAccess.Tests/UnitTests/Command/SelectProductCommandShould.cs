@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.DataAccess.Transactions;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Services.Products.dto;
 using Informedica.GenForm.Library.Transactions;
 using Informedica.GenForm.Library.Transactions.Commands;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -65,19 +65,42 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         //
         #endregion
 
+        [Isolated]
         [TestMethod]
         public void CallProductRepositoryToFindTheProduct()
         {
-            IsolateInsertCommand();
+            IsolateSelectCommand();
 
             ((IExecutable)_command).Execute(_fakeContext);
             Isolate.Verify.WasCalledWithAnyArguments(() => _fakeRepository.Fetch(_fakeContext, _selector));
         }
 
-        private void IsolateInsertCommand()
+        [TestMethod]
+        public void ReturnAnEmptyListForProductNameIsFoo()
+        {
+            GenFormApplication.Initialize();
+
+            _command = CommandFactory.CreateSelectCommand<IProduct, String>("foo");
+            ((IExecutable)_command).Execute(new GenFormDataContext());
+
+            Assert.IsTrue(_command.Result.Count() == 0);
+        }
+
+        [TestMethod]
+        public void ReturnAnEmptyListForProductIdIs0()
+        {
+            GenFormApplication.Initialize();
+
+            _command = CommandFactory.CreateSelectCommand<IProduct, Int32>(0);
+            ((IExecutable)_command).Execute(new GenFormDataContext());
+
+            Assert.IsTrue(_command.Result.Count() == 0);
+        }
+
+        private void IsolateSelectCommand()
         {
             _selector = new Func<Product, bool>(x => x.ProductId == 1);
-            _command = CommandFactory.CreateSelectCommand<IProduct>(1);
+            _command = CommandFactory.CreateSelectCommand<IProduct, Int32>(1);
             _fakeRepository = Isolate.Fake.Instance<ProductRepository>();
             _fakeContext = Isolate.Fake.Instance<GenFormDataContext>();
             ObjectFactory.Inject(_fakeRepository);

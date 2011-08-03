@@ -47,6 +47,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+        public override IEnumerable<IBrand> Fetch(GenFormDataContext context, Func<Brand, bool> selector)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }
