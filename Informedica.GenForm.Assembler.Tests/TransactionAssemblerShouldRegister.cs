@@ -1,4 +1,5 @@
-﻿using Informedica.GenForm.Library.DomainModel.Products;
+﻿using System;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Transactions;
 using Informedica.GenForm.Library.Transactions.Commands;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,7 +18,7 @@ namespace Informedica.GenForm.Assembler.Tests
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
-        ///</summary>
+        ///</summary>   
         public TestContext TestContext
         {
             get
@@ -67,10 +68,15 @@ namespace Informedica.GenForm.Assembler.Tests
         }
 
         [TestMethod]
-        public void AnImplementationOfSelectProductCommand()
+        public void AnImplementationOfSelectProductCommandWithString()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<ISelectCommand<IProduct>>(
-                ObjectFactoryAssertUtility.GetMessageFor<ISelectCommand<IProduct>>());
+            ObjectFactoryAssertUtility.AssertRegistrationWith<String, IStringSelectCommand<IProduct>>("foo");
+        }
+
+        [TestMethod]
+        public void AnImplementationOfSelectProductCommandWithInt()
+        {
+            ObjectFactoryAssertUtility.AssertRegistrationWith<Int32, IIntSelectCommand<IProduct>>(1);
         }
 
     }

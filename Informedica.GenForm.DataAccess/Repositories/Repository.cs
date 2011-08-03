@@ -22,6 +22,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         public abstract IEnumerable<TBo> Fetch(int id);
         public abstract IEnumerable<TBo> Fetch(string name);
+
         public abstract void Insert(TBo item);
 
         protected void InsertUsingMapper<TM>(TBo item) where TM: IDataMapper<TBo, TDao>
@@ -115,6 +116,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         #endregion
 
+        public abstract IEnumerable<TBo> Fetch(GenFormDataContext context, Func<TDao, bool> selector);
 
     }
 }

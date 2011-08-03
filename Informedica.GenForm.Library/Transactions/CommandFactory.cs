@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Management.Instrumentation;
 using Informedica.GenForm.Library.Transactions.Commands;
 using StructureMap;
 
@@ -11,9 +12,13 @@ namespace Informedica.GenForm.Library.Transactions
             return ObjectFactory.With(item).GetInstance<IInsertCommand<T>>();
         }
 
-        public static ISelectCommand<T> CreateSelectCommand<T>(Int32 id)
+        public static ISelectCommand<T> CreateSelectCommand<T,TC>(TC argument)
         {
-            return ObjectFactory.With(id).GetInstance<ISelectCommand<T>>();
+            if (typeof(TC) == typeof(String)) return  (ISelectCommand<T>)ObjectFactory.With(argument).GetInstance<IStringSelectCommand<T>>();
+            if (typeof(TC) == typeof(int))
+                return (ISelectCommand<T>) ObjectFactory.With(argument).GetInstance<IIntSelectCommand<T>>();
+
+            throw new InstanceNotFoundException();
         }
     }
 }

@@ -37,6 +37,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+        public override IEnumerable<IShape> Fetch(GenFormDataContext context, Func<Shape, bool> selector)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void UpdateBo(IShape item, Shape dao)
         {
             item.ShapeId = dao.ShapeId;

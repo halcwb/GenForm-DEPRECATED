@@ -78,7 +78,7 @@
     <Compile Include="Repositories\SubstanceRepository.cs" />
     <Compile Include="Repositories\UnitRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Transactions\Commands\SelectProductCommand.cs" />
+    <Compile Include="Transactions\Commands\SelectProductIntCommand.cs" />
     <Compile Include="Transactions\IExecutable.cs" />
     <Compile Include="Transactions\TransactionManager.cs" />
   </ItemGroup>

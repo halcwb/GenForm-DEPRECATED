@@ -40,6 +40,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+        public override IEnumerable<ISubstance> Fetch(GenFormDataContext context, Func<Substance, bool> selector)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void UpdateBo(ISubstance item, Substance dao)
         {
             item.SubstanceId = dao.SubstanceId;
