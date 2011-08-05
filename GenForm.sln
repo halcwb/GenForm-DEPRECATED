@@ -15,10 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Present
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Presentation.Tests", "Informedica.GenForm.Presentation.Tests\Informedica.GenForm.Presentation.Tests.csproj", "{C74AA5B9-0FC7-4933-8069-E6960DC323FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.ServiceProviders", "Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj", "{82D196C1-B130-4188-A363-458311D8BD89}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.ServiceProviders.Tests", "Informedica.GenForm.Services.Tests\Informedica.GenForm.ServiceProviders.Tests.csproj", "{63B1E010-0365-452C-87F5-4318155BA6AA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Tests", "Informedica.GenForm.Tests\Informedica.GenForm.Tests.csproj", "{819BA760-6C94-4203-8DB0-7F0AAA4B2159}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Library.Tests", "Informedica.GenForm.Library.Tests\Informedica.GenForm.Library.Tests.csproj", "{4B54E8E1-2205-4C86-81B8-70B3695CEA7E}"
@@ -92,26 +88,6 @@ Global
 		{C74AA5B9-0FC7-4933-8069-E6960DC323FA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C74AA5B9-0FC7-4933-8069-E6960DC323FA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C74AA5B9-0FC7-4933-8069-E6960DC323FA}.Release|x86.ActiveCfg = Release|Any CPU
-		{82D196C1-B130-4188-A363-458311D8BD89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82D196C1-B130-4188-A363-458311D8BD89}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82D196C1-B130-4188-A363-458311D8BD89}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{82D196C1-B130-4188-A363-458311D8BD89}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{82D196C1-B130-4188-A363-458311D8BD89}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{82D196C1-B130-4188-A363-458311D8BD89}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82D196C1-B130-4188-A363-458311D8BD89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{82D196C1-B130-4188-A363-458311D8BD89}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{82D196C1-B130-4188-A363-458311D8BD89}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{82D196C1-B130-4188-A363-458311D8BD89}.Release|x86.ActiveCfg = Release|Any CPU
-		{63B1E010-0365-452C-87F5-4318155BA6AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63B1E010-0365-452C-87F5-4318155BA6AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{63B1E010-0365-452C-87F5-4318155BA6AA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{63B1E010-0365-452C-87F5-4318155BA6AA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{63B1E010-0365-452C-87F5-4318155BA6AA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{63B1E010-0365-452C-87F5-4318155BA6AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{63B1E010-0365-452C-87F5-4318155BA6AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{63B1E010-0365-452C-87F5-4318155BA6AA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{63B1E010-0365-452C-87F5-4318155BA6AA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{63B1E010-0365-452C-87F5-4318155BA6AA}.Release|x86.ActiveCfg = Release|Any CPU
 		{819BA760-6C94-4203-8DB0-7F0AAA4B2159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{819BA760-6C94-4203-8DB0-7F0AAA4B2159}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{819BA760-6C94-4203-8DB0-7F0AAA4B2159}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

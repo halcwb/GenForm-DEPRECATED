@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Informedica.GenForm.DataAccess.Repositories.Delegates;
+using Informedica.GenForm.Database;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using StructureMap;
 using StructureMap.Exceptions;
@@ -86,16 +88,24 @@ namespace Informedica.GenForm.Assembler.Tests
         }
 
         [TestMethod]
-        public void Get_implementation_for_a_type_that_is_not_registered_returns_exception()
+        public void GetImplementationForNonRegisteredType()
         {
             GetImplementationForTestHelper<IMissingPlugin>();
         }
 
-        public interface IMissingPlugin
+        [TestMethod]
+        public  void ThatADelegateCanBeRegistered()
         {
-            
+            InsertOnSubmit<Product> insert = ProductDelegates.InsertOnSubmit;
+            ObjectFactory.Inject(insert);
+            Assert.IsNotNull(ObjectFactory.GetInstance<InsertOnSubmit<Product>>());
         }
 
-        
+
+    }
+
+    public interface IMissingPlugin
+    {
+            
     }
 }

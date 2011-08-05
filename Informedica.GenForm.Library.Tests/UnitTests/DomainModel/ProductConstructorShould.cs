@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Services.Products.dto;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -88,7 +88,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         public void NotLetProductChangeWhenDtoChanges()
         {
             SetupDtoWithoutSubstances();
-            _dto.Package = "different";
+            _dto.PackageName = "different";
             Assert.IsFalse(ProductIsPopulated(), "product was changed by change in dto!");
         }
 
@@ -103,16 +103,16 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
 
         private Boolean ProductIsPopulated()
         {
-            var isPopulated = _product.BrandName == _dto.Brand;
+            var isPopulated = _product.BrandName == _dto.BrandName;
             isPopulated = isPopulated && _product.DisplayName == _dto.DisplayName;
-            isPopulated = isPopulated && _product.GenericName == _dto.Generic;
-            isPopulated = isPopulated && _product.PackageName == _dto.Package;
+            isPopulated = isPopulated && _product.GenericName == _dto.GenericName;
+            isPopulated = isPopulated && _product.PackageName == _dto.PackageName;
             isPopulated = isPopulated && _product.ProductCode == _dto.ProductCode;
             isPopulated = isPopulated && _product.ProductId == _dto.Id;
             isPopulated = isPopulated && _product.ProductName == _dto.ProductName;
             isPopulated = isPopulated && _product.Quantity == _dto.Quantity;
-            isPopulated = isPopulated && _product.ShapeName == _dto.Shape;
-            isPopulated = isPopulated && _product.UnitName == _dto.Unit;
+            isPopulated = isPopulated && _product.ShapeName == _dto.ShapeName;
+            isPopulated = isPopulated && _product.UnitName == _dto.UnitName;
 
             foreach (var substance in _dto.Substances)
             {

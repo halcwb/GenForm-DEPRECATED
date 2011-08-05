@@ -3,7 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Informedica.GenForm.Assembler;
-using Informedica.GenForm.Library.Services.Products.dto;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
@@ -83,7 +83,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             return new ProductDto
                        {
                            ProductName = ProductName,
-                           Substances = new List<SubstanceDto>{new SubstanceDto{Id = 1, Quantity = 500, SortOrder = 1, Substance = "dopamine", Unit = "mg"}}
+                           Substances = new List<ProductSubstanceDto>{new ProductSubstanceDto{Id = 1, Quantity = 500, SortOrder = 1, Substance = "dopamine", Unit = "mg"}}
                        };
 
         }

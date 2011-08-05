@@ -5,6 +5,7 @@ using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.DataAccess.Tests.TestBase;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -19,7 +20,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
     ///to contain all ProductRepositoryTest Unit Tests
     ///</summary>
     [TestClass]
-    public class ProductRepositoryShould: RepositoryTestBase<IProductRepository, IProduct, Product>
+    public class ProductRepositoryShould: RepositoryTestBase<IRepository<IProduct>, IProduct, Product>
     {
 
         private TestContext testContextInstance;
@@ -116,7 +117,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         public void NotBeAbleToInsertAnInvalidProduct()
         {
             var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
-            dto.Generic = null;
+            dto.GenericName = null;
             Bo = ObjectFactory.With(dto).GetInstance<IProduct>();
 
             try
@@ -151,17 +152,40 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         }
 
         [TestMethod]
-        public void BeAbleToDeleteAJustInsertedProduct()
+        public void BeAbleToDeleteAJustInsertedProductWithNoSubstances()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            DeleteProduct(dto);
+        }
+
+        [TestMethod]
+        public void BeAbleToDeleteJustInsertedProductWithOneSubstance()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithOneSubstance();
+            DeleteProduct(dto);
+        }
+
+        private void DeleteProduct(ProductDto dto)
         {
             GenFormApplication.Initialize();
 
-            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
             Bo = ObjectFactory.With(dto).GetInstance<IProduct>();
             using (var ctx = GetContext())
             {
-                Repos = new ProductRepository(ctx);
-                Repos.Insert(Bo);
-                Repos.Delete(Bo.ProductId);
+                ctx.Connection.Open();
+                ctx.Transaction = ctx.Connection.BeginTransaction();
+                var repos = new Repository<IProduct, Product>();
+                try
+                {
+                    repos.Insert(ctx, Bo);
+                    repos.Delete(ctx, Bo.ProductId);
+                }
+                catch (Exception e)
+                {
+                    ctx.Transaction.Rollback();
+                    Assert.Fail(e.ToString());
+                } 
+                ctx.Transaction.Rollback();
             }
         }
 

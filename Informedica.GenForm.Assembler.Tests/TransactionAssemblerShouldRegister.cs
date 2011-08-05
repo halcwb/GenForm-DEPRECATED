@@ -56,8 +56,8 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public void AnImplementationOfTransactionManager()
         {
-            var list = new CommandList();
-            ObjectFactoryAssertUtility.AssertRegistrationWith<CommandList, ITransactionManager>(list);
+            var list = new CommandQueue();
+            ObjectFactoryAssertUtility.AssertRegistrationWith<CommandQueue, ITransactionManager>(list);
         }
 
         [TestMethod]
@@ -77,6 +77,25 @@ namespace Informedica.GenForm.Assembler.Tests
         public void AnImplementationOfSelectProductCommandWithInt()
         {
             ObjectFactoryAssertUtility.AssertRegistrationWith<Int32, IIntSelectCommand<IProduct>>(1);
+        }
+
+        [TestMethod]
+        public void AnImplementationOfDeleteProductCommandWithString()
+        {
+            ObjectFactoryAssertUtility.AssertRegistrationWith<String, IStringDeleteCommand<IProduct>>("foo");
+        }
+
+        [TestMethod]
+        public void AnImplementationOfDeleteProductCommandWithInt()
+        {
+            ObjectFactoryAssertUtility.AssertRegistrationWith<Int32, IIntDeleteCommand<IProduct>>(1);
+        }
+
+        [TestMethod]
+        public void AnImplementationOfSelectProductCommand()
+        {
+            ObjectFactoryAssertUtility.AssertRegistration<ISelectCommand<IProduct>>(
+                ObjectFactoryAssertUtility.GetMessageFor<IStringSelectCommand<IProduct>>());
         }
 
     }

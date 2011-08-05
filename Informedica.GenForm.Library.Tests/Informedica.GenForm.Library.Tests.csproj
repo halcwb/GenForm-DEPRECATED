@@ -79,7 +79,11 @@
   <ItemGroup>
     <Compile Include="UnitTests\Commands\ACommandFactoryShould.cs" />
     <Compile Include="UnitTests\Commands\CommandListShould.cs" />
-    <Compile Include="UnitTests\Commands\TransactionManagerWithInsertProductCommandShould.cs" />
+    <Compile Include="UnitTests\Commands\TransactionOfInsertSelectDeleteShould.cs" />
+    <Compile Include="UnitTests\Commands\TransactionWithInsertProductShould.cs" />
+    <Compile Include="UnitTests\Commands\TransactionWithInsertAndSelectShould.cs" />
+    <Compile Include="UnitTests\DomainModel\ADomainModelShouldHaveAnIdentifirer.cs" />
+    <Compile Include="UnitTests\DomainModel\DomainFactoryCanCreate.cs" />
     <Compile Include="UnitTests\DomainModel\NewlyCreatedProductShould.cs" />
     <Compile Include="UnitTests\DomainModel\OjbectFactoryForProductShould.cs" />
     <Compile Include="UnitTests\DomainModel\ProductConstructorShould.cs" />
@@ -115,10 +119,6 @@
     <ProjectReference Include="..\Informedica.GenForm.Mvc3\Informedica.GenForm.Mvc3.csproj">
       <Project>{76148642-857A-4186-8A7B-C4AFC05E0152}</Project>
       <Name>Informedica.GenForm.Mvc3</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj">
-      <Project>{82D196C1-B130-4188-A363-458311D8BD89}</Project>
-      <Name>Informedica.GenForm.ServiceProviders</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Tests\Informedica.GenForm.Tests.csproj">
       <Project>{819BA760-6C94-4203-8DB0-7F0AAA4B2159}</Project>

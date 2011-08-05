@@ -60,8 +60,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
         [ActionName("Login")]
         public ActionResult Login(String userName, String password)
         {
-            UserAssembler.SetupServiceProvider();
-
             var user = GetUser(userName, password);
             GetLoginServices().Login(user);
 

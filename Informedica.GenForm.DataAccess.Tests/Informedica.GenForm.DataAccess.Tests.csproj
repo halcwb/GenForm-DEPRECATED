@@ -82,8 +82,10 @@
     <Compile Include="TestBase\DataMapperTestBase.cs" />
     <Compile Include="TestBase\RepositoryTestBase.cs" />
     <Compile Include="IntegrationTests\UserRepositoryTest.cs" />
+    <Compile Include="UnitTests\Command\DeleteProductCommandShould.cs" />
     <Compile Include="UnitTests\Command\InsertProductCommandShould.cs" />
     <Compile Include="UnitTests\Command\SelectProductCommandShould.cs" />
+    <Compile Include="UnitTests\Command\SelectSubstanceCommandShould.cs" />
     <Compile Include="UnitTests\DatabaseConnectionShould.cs" />
     <Compile Include="UnitTests\Mapper\BrandMapperShould.cs" />
     <Compile Include="UnitTests\Mapper\GenericMapperShould.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="UnitTests\Repository\BrandRepositoryShould.cs" />
     <Compile Include="UnitTests\Repository\ProductRepositoryShould.cs" />
     <Compile Include="UnitTests\Repository\ProductRepostitoryConstructorShould.cs" />
+    <Compile Include="UnitTests\Repository\RepositoryShould.cs" />
     <Compile Include="UnitTests\Repository\SubstanceRepositoryShould.cs" />
     <Compile Include="UnitTests\Repository\UserRepositoryTest.cs" />
     <Compile Include="UnitTests\TransActionMangerShould.cs" />

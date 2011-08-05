@@ -1,8 +1,8 @@
 ﻿using System;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Services.Products;
-using Informedica.GenForm.Library.Services.Products.dto;
 using Informedica.GenForm.Mvc3.Controllers;
 using Informedica.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -128,7 +128,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         private static ProductDto GetInvalidProduct()
         {
             var product = GetValidProduct();
-            product.Shape = "";
+            product.ShapeName = "";
             return product;
         }
 
@@ -138,12 +138,12 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             {
                 ProductName = "dopamine Dynatra infusievloeistof 200 mg 5 mL ampul",
                 DisplayName = "dopamine Dynatra infusievloeistof 200 mg 5 mL ampul",
-                Generic = "dopamine",
-                Brand = "Dynatra",
-                Shape = "infusievloeistof",
+                GenericName = "dopamine",
+                BrandName = "Dynatra",
+                ShapeName = "infusievloeistof",
                 Quantity = 5,
-                Unit = "mL",
-                Package = "ampul"
+                UnitName = "mL",
+                PackageName = "ampul"
             };
 
         }

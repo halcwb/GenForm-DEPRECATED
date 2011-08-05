@@ -9,17 +9,17 @@ namespace Informedica.GenForm.DataAccess.Transactions
     public class TransactionManager: ITransactionManager
     {
         private readonly GenFormDataContext _context;
-        private CommandList _commandList;
+        private readonly CommandQueue _commandQueue;
 
 
-        public TransactionManager(GenFormDataContext context, CommandList commandList)
+        public TransactionManager(GenFormDataContext context, CommandQueue commandQueue)
         {
             _context = context;
-            _commandList = commandList;
+            _commandQueue = commandQueue;
         }
 
         [DefaultConstructor]
-        public TransactionManager(CommandList commandList): this(GetDataContext(), commandList)
+        public TransactionManager(CommandQueue commandList): this(GetDataContext(), commandList)
         {}
 
         private static GenFormDataContext GetDataContext()
@@ -54,7 +54,7 @@ namespace Informedica.GenForm.DataAccess.Transactions
 
         public void ExecuteCommands()
         {
-            foreach (var command in _commandList.Commands)
+            foreach (var command in _commandQueue.Commands)
             {
                 try
                 {

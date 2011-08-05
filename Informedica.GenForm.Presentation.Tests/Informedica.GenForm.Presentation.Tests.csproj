@@ -85,10 +85,6 @@
       <Project>{63800128-7BE0-4B57-A789-27CB9E5EED3B}</Project>
       <Name>Informedica.GenForm.Presentation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj">
-      <Project>{82D196C1-B130-4188-A363-458311D8BD89}</Project>
-      <Name>Informedica.GenForm.ServiceProviders</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

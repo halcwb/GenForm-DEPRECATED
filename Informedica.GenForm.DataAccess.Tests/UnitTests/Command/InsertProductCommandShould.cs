@@ -4,13 +4,16 @@ using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.DataAccess.Transactions;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Factories;
+using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Transactions;
 using Informedica.GenForm.Library.Transactions.Commands;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 using TypeMock.ArrangeActAssert;
-using Product = Informedica.GenForm.Library.DomainModel.Products.Product;
+using Product = Informedica.GenForm.Database.Product;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
 {
@@ -23,7 +26,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         private TestContext testContextInstance;
         private IInsertCommand<IProduct> _command;
         private IProduct _product;
-        private ProductRepository _fakeRepository;
+        private Repository<IProduct, Product> _fakeRepository;
         private GenFormDataContext _fakeContext;
 
         /// <summary>
@@ -85,8 +88,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         public void BeAddableToCommandList()
         {
             var command = GetInsertProductCommand(CreateNewProduct());
-            var list = new CommandList();
-            list.Add((ICommand)command);
+            var list = new CommandQueue();
+            list.Enqueue((ICommand)command);
 
             Assert.IsInstanceOfType(list.Commands.First(), typeof(ICommand));
         }
@@ -105,8 +108,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         public void BeExecutedByTransactionManager()
         {
             IsolateInsertCommand();
-            var list = new CommandList();
-            list.Add((ICommand)_command);
+            var list = new CommandQueue();
+            list.Enqueue((ICommand)_command);
             using (var transMgr = GetTransactionManager(list))
             {
                 transMgr.ExecuteCommands();
@@ -115,7 +118,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
 
         }
 
-        private ITransactionManager GetTransactionManager(CommandList list)
+        private ITransactionManager GetTransactionManager(CommandQueue list)
         {
             return ObjectFactory.With(list).GetInstance < ITransactionManager>();
         }
@@ -124,19 +127,19 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         {
             _product = CreateNewProduct();
             _command = GetInsertProductCommand(_product);
-            _fakeRepository = Isolate.Fake.Instance<ProductRepository>();
+            _fakeRepository = Isolate.Fake.Instance<Repository<IProduct, Product>>();
             _fakeContext = Isolate.Fake.Instance<GenFormDataContext>();
             ObjectFactory.Inject(_fakeRepository);
         }
 
         private static IProduct CreateNewProduct()
         {
-            return new Product(ProductTestFixtures.GetProductDtoWithNoSubstances());
+            return DomainFactory.Create<IProduct, ProductDto>(ProductTestFixtures.GetProductDtoWithNoSubstances());
         }
 
         private static IInsertCommand<IProduct> GetInsertProductCommand(IProduct product)
         {
-            return ObjectFactory.With(product).GetInstance<IInsertCommand<IProduct>>();
+            return (IInsertCommand<IProduct>)CommandFactory.CreateInsertCommand(product);
         }
     }
 }

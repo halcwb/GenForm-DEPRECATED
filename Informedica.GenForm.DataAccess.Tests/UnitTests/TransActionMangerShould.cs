@@ -57,7 +57,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         [TestMethod]
         public void DisposeDataContextAfterUse()
         {
-            var commandList = new CommandList();
+            var commandList = new CommandQueue();
             using (var transMgr = new TransactionManager(new GenFormDataContext(), commandList))
             {
                 transMgr.StartTransaction();
@@ -69,7 +69,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         public void UsesDefaultContextIfNotPassedInConstructor()
         {
             ObjectFactory.Inject(new GenFormDataContext());
-            var list = new CommandList();
+            var list = new CommandQueue();
             using (var transMgr = new TransactionManager(list))
             {
                 try
@@ -89,7 +89,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         {
             using (var context = new GenFormDataContext())
             {
-                var commandList = new CommandList();
+                var commandList = new CommandQueue();
                 using (var transMgr = new TransactionManager(context, commandList))
                 {
                     transMgr.StartTransaction();
@@ -103,7 +103,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         {
             using (var context = GetFakeDataContext())
             {
-                var commandList = new CommandList();
+                var commandList = new CommandQueue();
                 using (var transMgr = new TransactionManager(context, commandList))
                 {
                     transMgr.CommitTransaction();
@@ -119,7 +119,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         {
             using (var context = GetFakeDataContext())
             {
-                var commandList = new CommandList();
+                var commandList = new CommandQueue();
                 using (var transMgr = new TransactionManager(context, commandList))
                 {
                     transMgr.RollBackTransaction();
@@ -134,8 +134,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         {
             var command = Isolate.Fake.Instance<TestCommand>();
             var context = Isolate.Fake.Instance<GenFormDataContext>();
-            var list = new CommandList();
-            list.Add(command);
+            var list = new CommandQueue();
+            list.Enqueue(command);
 
             using (var transMgr = new TransactionManager(new GenFormDataContext(), list))
             {

@@ -1,4 +1,4 @@
-﻿namespace Informedica.GenForm.DataAccess.Repositories
+﻿namespace Informedica.GenForm.DataAccess.DataMappers
 {
     public interface IDataMapper<T, TC>
     {

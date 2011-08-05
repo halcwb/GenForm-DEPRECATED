@@ -1,15 +1,14 @@
-﻿using System;
-using Informedica.GenForm.Library.Services.Products.dto;
+﻿using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class ProductSubstance : IProductSubstance
     {
-        private readonly SubstanceDto _dto;
+        private readonly ProductSubstanceDto _dto;
 
-        public ProductSubstance(SubstanceDto substanceDto)
+        public ProductSubstance(ProductSubstanceDto productSubstanceDto)
         {
-            _dto = substanceDto;
+            _dto = productSubstanceDto;
         }
 
         #region Implementation of IProductSubstance

@@ -1,6 +1,6 @@
 ﻿using System;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Services.Products;
-using Informedica.GenForm.Library.Services.Products.dto;
 using Newtonsoft.Json.Linq;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
@@ -211,15 +211,14 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new {success, data = unit, message});
         }
 
-        public ActionResult AddNewSubstance(JObject substanceDto)
+        public ActionResult AddNewSubstance(SubstanceDto substanceDto)
         {
             var success = true;
             var message = String.Empty;
-            var subst = GetSubstanceFromJObject(substanceDto);
             
             try
             {
-                _services.AddNewSubstance(subst);
+                _services.AddNewSubstance(substanceDto);
 
             }
             catch (Exception e)
@@ -228,12 +227,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
                 message = e.ToString();
             }
             
-            return this.Direct(new {success, data = subst, message});
-        }
-
-        private ISubstance GetSubstanceFromJObject(JObject substanceDto)
-        {
-            return new Substance {SubstanceName = substanceDto.Value<String>("SubstanceName")};
+            return this.Direct(new {success, data = substanceDto, message});
         }
 
         private IBrand GetBrandFromJObject(JObject brand)

@@ -2,9 +2,10 @@
 using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services.Products;
-using Informedica.GenForm.Library.Services.Products.dto;
 using Informedica.GenForm.Tests.Fixtures;
 using Informedica.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -105,7 +106,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
             var productDto = new ProductDto();
             var product = Isolate.Fake.Instance<IProduct>();
 
-            var repos = GetFakeRepository<IProductRepository, IProduct>(product);
+            var repos = GetFakeRepository<IRepository<IProduct>, IProduct>(product);
             ObjectFactory.Inject(repos);
 
             try
@@ -147,7 +148,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void NotBeAbleToSaveAnInvalidProduct()
         {
             var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
-            dto.Generic = null;
+            dto.GenericName = null;
 
             try
             {
@@ -225,7 +226,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             var brand = ObjectFactory.GetInstance<IBrand>();
 
-            var repos = GetFakeRepository<IBrandRepository, IBrand>(brand);
+            var repos = GetFakeRepository<IRepository<IBrand>, IBrand>(brand);
             ObjectFactory.Inject(repos);
 
             try
@@ -244,15 +245,16 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void CallSubstanceRepositoryToAddNewSubstance()
         {
-            var substance = ObjectFactory.GetInstance<Substance>();
+            var dto = new SubstanceDto {SubstanceId = 0, SubstanceName = "test"};
+            var substance = DomainFactory.Create<ISubstance, SubstanceDto>(dto);
 
-            var repos = GetFakeRepository<ISubstanceRepository, ISubstance>(substance);
+            var repos = GetFakeRepository<IRepository<ISubstance>, ISubstance>(substance);
             ObjectFactory.Inject(repos);
 
             try
             {
-                GetProductServices().AddNewSubstance(substance);
-                Isolate.Verify.WasCalledWithExactArguments(() => repos.Insert(substance));
+                GetProductServices().AddNewSubstance(dto);
+                Isolate.Verify.WasCalledWithAnyArguments(() => repos.Insert(substance));
             }
             catch (Exception e)
             {
@@ -264,8 +266,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void AddNewSubstanceToRepository()
         {
-            var substance = ObjectFactory.GetInstance<ISubstance>();
-            substance.SubstanceName = "dopamine";
+            var substance = new SubstanceDto {SubstanceId = 0, SubstanceName = "test"};
             try
             {
                 GetProductServices().AddNewSubstance(substance);

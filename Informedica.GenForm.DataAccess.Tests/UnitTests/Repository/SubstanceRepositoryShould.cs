@@ -12,7 +12,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
     /// Summary description for SubstanceRepositoryShould
     /// </summary>
     [TestClass]
-    public class SubstanceRepositoryShould: RepositoryTestBase<ISubstanceRepository, ISubstance,Substance>
+    public class SubstanceRepositoryShould: RepositoryTestBase<IRepository<ISubstance>, ISubstance,Substance>
     {
         private TestContext testContextInstance;
 

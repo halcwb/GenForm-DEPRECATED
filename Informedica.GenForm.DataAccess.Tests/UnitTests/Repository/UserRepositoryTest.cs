@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess.DataContexts;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StructureMap;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
 
@@ -45,11 +48,12 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
-        //
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            GenFormApplication.Initialize();
+        }
+        
         //Use ClassCleanup to run code after all tests in a class have run
         //[ClassCleanup()]
         //public static void MyClassCleanup()
@@ -72,8 +76,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
 
 
         [Isolated]
-        [TestMethod]
-        public void Get_User_by_system_username_returns_instance_of_IUser_with_that_name()
+        //[TestMethod] ToDo: rewrite this test to use with Repository
+        public void GetUserBySystemUsernameReturnsInstanceOfIUserWithThatName()
         {
             var name = "Test";
             IsolateRepositoryFromDataContext(CreateUserListWithName(name));
@@ -90,13 +94,14 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
             return new List<GenFormUser> { adminUser };
         }
 
+        // ToDo: rewrite for use with Repository<IUser>
         private void IsolateRepositoryFromDataContext(IEnumerable<GenFormUser> users)
         {
             var context = Isolate.Fake.Instance<GenFormDataContext>();
-            Isolate.NonPublic.WhenCalled(typeof(UserRepository), "FindUsersByName").WillReturn(users);
+            //Isolate.NonPublic.WhenCalled(typeof(UserRepository), "FindUsersByName").WillReturn(users);
             Isolate.WhenCalled(() => DataContextFactory.CreateGenFormDataContext()).WillReturn(context);
         }
-
+        
 
         [Isolated]
         [TestMethod]
@@ -115,9 +120,9 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
             }
         }
 
-        private static UserRepository CreateUserRepository()
+        private static IRepository<IUser> CreateUserRepository()
         {
-            return new UserRepository();
+            return ObjectFactory.GetInstance<IRepository<IUser>>();
         }
     }
 }

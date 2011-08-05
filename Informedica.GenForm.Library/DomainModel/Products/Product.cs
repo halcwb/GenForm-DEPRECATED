@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Informedica.GenForm.Library.Services.Products.dto;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
@@ -21,9 +21,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             }
         }
 
-        private static IProductSubstance NewSubstance(SubstanceDto substanceDto)
+        private static IProductSubstance NewSubstance(ProductSubstanceDto productSubstanceDto)
         {
-            return new ProductSubstance(substanceDto);
+            return new ProductSubstance(productSubstanceDto);
         }
 
         #region Implementation of IProduct
@@ -31,17 +31,17 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public int ProductId { get { return _dto.Id; } set { _dto.Id = value; } }
         public string ProductName { get { return _dto.ProductName; } set { _dto.ProductName = value; } }
         public string ProductCode { get { return _dto.ProductCode; } set { _dto.ProductCode = value; } }
-        public string GenericName { get { return _dto.Generic; } set { _dto.Generic = value; } }
-        public string BrandName { get { return _dto.Brand; } set { _dto.Brand = value; } }
-        public string ShapeName { get { return _dto.Shape; } set { _dto.Shape = value; } }
+        public string GenericName { get { return _dto.GenericName; } set { _dto.GenericName = value; } }
+        public string BrandName { get { return _dto.BrandName; } set { _dto.BrandName = value; } }
+        public string ShapeName { get { return _dto.ShapeName; } set { _dto.ShapeName = value; } }
         public decimal Quantity { get { return _dto.Quantity; } set { _dto.Quantity = value; } }
-        public string UnitName { get { return _dto.Unit; } set { _dto.Unit = value; } }
-        public string PackageName { get { return _dto.Package; } set { _dto.Package = value; } }
-        public string DisplayName { get { return _dto.DisplayName; } set { _dto.DisplayName = value; } }
+        public string UnitName { get { return _dto.UnitName; } set { _dto.UnitName = value; } }
+        public string PackageName { get { return _dto.PackageName; } set { _dto.PackageName = value; } }
+        public string DisplayName { get { return _dto.DisplayName ?? _dto.ProductName; } set { _dto.DisplayName = value; } }
 
-        public IProductSubstance AddSubstance(SubstanceDto substanceDto)
+        public IProductSubstance AddSubstance(ProductSubstanceDto productSubstanceDto)
         {
-            IProductSubstance substance = new ProductSubstance(substanceDto);
+            IProductSubstance substance = new ProductSubstance(productSubstanceDto);
             GetSubstances().Add(substance);
             return substance;
         }

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Transactions;
+using Informedica.GenForm.Library.Transactions.Commands;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -39,7 +37,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Commands
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize();}
         
         // Use ClassCleanup to run code after all tests in a class have run
@@ -76,6 +74,27 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Commands
         public void BeAbleToCreateASelectCommandForIntCriteria()
         {
             var command = CommandFactory.CreateSelectCommand<IProduct, int>(1);
+            Assert.IsNotNull(command);
+        }
+
+        [TestMethod]
+        public void BeAbleToCreateADeleteCommandForStringCriteria()
+        {
+            var command = CommandFactory.CreateDeleteCommand<IProduct, String>("test");
+            Assert.IsNotNull(command);
+        }
+
+        [TestMethod]
+        public void BeAbleToCreateADeleteCommandForIntCriteria()
+        {
+            var command = CommandFactory.CreateDeleteCommand<IProduct, int>(1);
+            Assert.IsNotNull(command);
+        }
+
+        [TestMethod]
+        public void BeAbleToCreateAFetchAllCommand()
+        {
+            var command = CommandFactory.CreateSelectCommand<IProduct>();
             Assert.IsNotNull(command);
         }
     }

@@ -2,10 +2,10 @@
 using Informedica.GenForm.Library.DomainModel.Users;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Security;
-using Informedica.GenForm.Library.ServiceProviders;
 using Informedica.GenForm.Library.Services.Users;
 using Informedica.GenForm.Mvc3.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StructureMap;
 using TypeMock.ArrangeActAssert;
 
 namespace Informedica.GenForm.Mvc3.Tests.IntegrationTests
@@ -76,7 +76,7 @@ namespace Informedica.GenForm.Mvc3.Tests.IntegrationTests
             controller.Login("Admin", "Admin");
             try
             {
-                DalServiceProvider.Instance.Resolve<IRepository<IUser>>();
+                ObjectFactory.GetInstance<IRepository<IUser>>();
 
             }
             catch (Exception e)
