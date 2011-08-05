@@ -55,6 +55,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repositories\Delegates\BrandDelegates.cs" />
+    <Compile Include="Repositories\Delegates\CreateNameSelector.cs" />
+    <Compile Include="Repositories\Delegates\Delete.cs" />
+    <Compile Include="Repositories\Delegates\Fetch.cs" />
+    <Compile Include="Repositories\Delegates\GenericDelegates.cs" />
+    <Compile Include="Repositories\Delegates\CreateIdSelector.cs" />
+    <Compile Include="Repositories\Delegates\InsertOnSubmit.cs" />
+    <Compile Include="Repositories\Delegates\PackageDelegates.cs" />
+    <Compile Include="Repositories\Delegates\ProductDelegates.cs" />
+    <Compile Include="Repositories\Delegates\ShapeDelegates.cs" />
+    <Compile Include="Repositories\Delegates\SubstanceDelegates.cs" />
+    <Compile Include="Repositories\Delegates\UnitDelegates.cs" />
+    <Compile Include="Repositories\Delegates\UpdateBo.cs" />
+    <Compile Include="Repositories\Delegates\UserDelegates.cs" />
+    <Compile Include="Transactions\Commands\CommandBase.cs" />
+    <Compile Include="Transactions\Commands\DeleteProductCommand.cs" />
+    <Compile Include="Transactions\Commands\DeleteSubstanceCommand.cs" />
     <Compile Include="Transactions\Commands\InsertProductCommand.cs" />
     <Compile Include="Databases\DatabaseConnection.cs" />
     <Compile Include="Databases\DatabaseSetting.cs" />
@@ -69,16 +86,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataMappers\IDataMapper.cs" />
     <Compile Include="DataMappers\UserMapper.cs" />
-    <Compile Include="Repositories\BrandRepository.cs" />
-    <Compile Include="Repositories\GenericRepository.cs" />
-    <Compile Include="Repositories\PackageRepository.cs" />
-    <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="Repositories\ShapeRepository.cs" />
-    <Compile Include="Repositories\SubstanceRepository.cs" />
-    <Compile Include="Repositories\UnitRepository.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Transactions\Commands\SelectProductIntCommand.cs" />
+    <Compile Include="Transactions\Commands\InsertSubstanceCommand.cs" />
+    <Compile Include="Transactions\Commands\SelectProductCommand.cs" />
+    <Compile Include="Transactions\Commands\SelectSubstanceCommand.cs" />
     <Compile Include="Transactions\IExecutable.cs" />
     <Compile Include="Transactions\TransactionManager.cs" />
   </ItemGroup>

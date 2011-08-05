@@ -7,12 +7,12 @@ Ext.define('GenForm.test.server.ProductTests', {
             Id: 0,
             ProductName: 'dopamine Dynatra infusievloeistof 200 mg 5 mL ampul',
             DisplayName: 'dopamine Dynatra infusievloeistof 200 mg 5 mL ampul',
-            Brand: 'Dynatra',
-            Generic: 'dopamine',
-            Shape: 'infusievloeistof',
-            Package: 'ampul',
+            BrandName: 'Dynatra',
+            GenericName: 'dopamine',
+            ShapeName: 'infusievloeistof',
+            PackageName: 'ampul',
             Quantity: 5,
-            Unit: 'mL',
+            UnitName: 'mL',
             Substances: [
                 {Id: 0, SortOrder: 1, Substance: 'dopamine', Quantity: 200, Unit: 'mg'},
                 {Id: 0, SortOrder: 2, Substance: 'water', Quantity: 5, Unit: 'mL'}
@@ -21,7 +21,7 @@ Ext.define('GenForm.test.server.ProductTests', {
                 {Id: 0, Route: 'iv'}
             ]
         };
-
+    
 
         it('be defined', function () {
             expect(Product.GetProduct).toBeDefined();
@@ -98,7 +98,7 @@ Ext.define('GenForm.test.server.ProductTests', {
         it('not save an invalid product', function () {
             var result;
             
-            testProduct.Generic = "";
+            testProduct.GenericName = "";
             Tests.SaveProduct(testProduct, function (response) {
                 result = response;
             });

@@ -1,7 +1,8 @@
 ﻿using System;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Services.Products;
-using Informedica.GenForm.Library.Services.Products.dto;
 using Informedica.GenForm.Mvc3.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
@@ -133,11 +134,9 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
                           "new substance could not be submitted to the database: " + ActionResultParser.GetPropertyValue<String>(result, "message"));
         }
 
-        private static JObject GetSubstance()
+        private static SubstanceDto GetSubstance()
         {
-            var obj = Isolate.Fake.Instance<JObject>();
-            Isolate.WhenCalled(() => obj.Value<String>("SubstanceName")).WillReturn("dopamine");
-            return obj;
+            return new SubstanceDto {SubstanceId = 0, SubstanceName = "test"};
         }
 
         private void IsolateController()

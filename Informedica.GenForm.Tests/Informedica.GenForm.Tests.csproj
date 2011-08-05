@@ -90,10 +90,6 @@
       <Project>{76148642-857A-4186-8A7B-C4AFC05E0152}</Project>
       <Name>Informedica.GenForm.Mvc3</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj">
-      <Project>{82D196C1-B130-4188-A363-458311D8BD89}</Project>
-      <Name>Informedica.GenForm.ServiceProviders</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Informedica.Utilities\Informedica.Utilities.csproj">
       <Project>{A1C3A418-F89E-41A3-9D32-E05C7E38577F}</Project>
       <Name>Informedica.Utilities</Name>

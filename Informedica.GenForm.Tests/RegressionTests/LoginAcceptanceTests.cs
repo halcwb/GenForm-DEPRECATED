@@ -1,4 +1,5 @@
 ﻿using System;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Mvc3.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -43,9 +44,9 @@ namespace Informedica.GenForm.Tests.RegressionTests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
+        
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
@@ -111,7 +112,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         }
 
         [TestMethod]
-        public  void User_without_password_cannot_login()
+        public  void UserWithoutPasswordCannotLogin()
         {
             var loginController = CreateLoginController();
 

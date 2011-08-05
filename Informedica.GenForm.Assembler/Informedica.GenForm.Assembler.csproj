@@ -58,6 +58,7 @@
     <Compile Include="DatabaseAssembler.cs" />
     <Compile Include="DatabaseRegistrationAssembler.cs" />
     <Compile Include="GenFormApplication.cs" />
+    <Compile Include="RepositoryAssembler.cs" />
     <Compile Include="TransactionAssembler.cs" />
     <Compile Include="UserAssembler.cs" />
     <Compile Include="ProductAssembler.cs" />
@@ -75,10 +76,6 @@
     <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
       <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
       <Name>Informedica.GenForm.Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj">
-      <Project>{82D196C1-B130-4188-A363-458311D8BD89}</Project>
-      <Name>Informedica.GenForm.ServiceProviders</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

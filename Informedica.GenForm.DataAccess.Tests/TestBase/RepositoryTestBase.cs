@@ -1,5 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.Repositories;

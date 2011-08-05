@@ -1,6 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Services.Products.dto;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.Library.Services.Products
 {
@@ -16,6 +16,6 @@ namespace Informedica.GenForm.Library.Services.Products
         void AddNewShape(IShape shape);
         void AddNewPackage(IPackage package);
         void AddNewUnit(IUnit unit);
-        void AddNewSubstance(ISubstance subst);
+        void AddNewSubstance(SubstanceDto subst);
     }
 }

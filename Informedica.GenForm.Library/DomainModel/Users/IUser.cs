@@ -11,5 +11,6 @@ namespace Informedica.GenForm.Library.DomainModel.Users
         String FirstName { get; set; }
         String Email { get; set; }
         String Pager { get; set; }
+        Int32 UserId { get; set; }
     }
 }

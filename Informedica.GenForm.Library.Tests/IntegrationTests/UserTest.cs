@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Users;
-using Informedica.GenForm.Library.Repositories;
-using Informedica.GenForm.Library.ServiceProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock.ArrangeActAssert;
 
@@ -42,11 +40,12 @@ namespace Informedica.GenForm.Library.Tests
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
-        //
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            GenFormApplication.Initialize();
+        }
+        
         //Use ClassCleanup to run code after all tests in a class have run
         //[ClassCleanup()]
         //public static void MyClassCleanup()
@@ -69,22 +68,13 @@ namespace Informedica.GenForm.Library.Tests
 
         [Isolated]
         [TestMethod]
-        public void GetUser_by_name_Admin_returns_AdminUser()
+        public void GetUserByNameAdminReturnsAdminUser()
         {
             const string name = "Admin";
 
-            ArrangeFakeRepository(name);
+            //ArrangeFakeRepository(name);
 
             Assert.IsTrue(User.GetUser(name).FirstOrDefault().Name == name);
-        }
-
-        private static void ArrangeFakeRepository(string name)
-        {
-            var repos = Isolate.Fake.Instance<IRepository<IUser>>();
-            DalServiceProvider.Instance.RegisterInstanceOfType(repos);
-            var user = new List<IUser>() {Isolate.Fake.Instance<IUser>()};
-            Isolate.WhenCalled(() => user.FirstOrDefault().Name).WillReturn(name);
-            Isolate.WhenCalled(() => repos.Fetch(name)).WillReturn(user);
         }
     }
 }

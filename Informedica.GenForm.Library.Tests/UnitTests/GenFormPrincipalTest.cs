@@ -1,9 +1,6 @@
 ﻿using System.Threading;
-using Informedica.GenForm.DataAccess.Repositories;
-using Informedica.GenForm.Library.DomainModel.Users;
-using Informedica.GenForm.Library.Repositories;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.Security;
-using Informedica.GenForm.Library.ServiceProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
@@ -16,7 +13,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
     ///This is a test class for GenFormPrincipalTest and is intended
     ///to contain all GenFormPrincipalTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class GenFormPrincipalTest
     {
 
@@ -56,11 +53,10 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
         //}
         //
         //Use TestInitialize to run code before running each test
-        [TestInitialize()]
+        [TestInitialize]
         public void MyTestInitialize()
         {
-            var repository = (IRepository<IUser>) new UserRepository();
-            DalServiceProvider.Instance.RegisterInstanceOfType(repository);
+            GenFormApplication.Initialize();
         }
         //
         //Use TestCleanup to run code after each test has run

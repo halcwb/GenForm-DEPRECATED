@@ -56,7 +56,18 @@
   <ItemGroup>
     <Compile Include="DomainModel\Databases\IDatabaseConnection.cs" />
     <Compile Include="DomainModel\Databases\IDatabaseSetting.cs" />
+    <Compile Include="DomainModel\DataTransferObject.cs" />
+    <Compile Include="DomainModel\Identification\Identifier.cs" />
+    <Compile Include="DomainModel\Identification\IdentifierEquals.cs" />
+    <Compile Include="DomainModel\Identification\IdentityComparer.cs" />
+    <Compile Include="DomainModel\Identification\IEquals.cs" />
+    <Compile Include="DomainModel\Identification\IIdentifier.cs" />
+    <Compile Include="DomainModel\IDomainModel.cs" />
     <Compile Include="DomainModel\Products\Brand.cs" />
+    <Compile Include="DomainModel\Products\Data\ProductDto.cs" />
+    <Compile Include="DomainModel\Products\Data\ProductSubstanceDto.cs" />
+    <Compile Include="DomainModel\Products\Data\RouteDto.cs" />
+    <Compile Include="DomainModel\Products\Data\SubstanceDto.cs" />
     <Compile Include="DomainModel\Products\Generic.cs" />
     <Compile Include="DomainModel\Products\IBrand.cs" />
     <Compile Include="DomainModel\Products\IGeneric.cs" />
@@ -70,10 +81,9 @@
     <Compile Include="DomainModel\Products\Shape.cs" />
     <Compile Include="DomainModel\Products\Substance.cs" />
     <Compile Include="DomainModel\Products\Unit.cs" />
-    <Compile Include="Repositories\IBrandRepository.cs" />
-    <Compile Include="Repositories\IGenericRepository.cs" />
-    <Compile Include="Repositories\IPackageRepository.cs" />
-    <Compile Include="Repositories\IProductRepository.cs" />
+    <Compile Include="Factories\DomainFactory.cs" />
+    <Compile Include="Factories\ProductFactory.cs" />
+    <Compile Include="Factories\TransactionManagerFactory.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="DomainModel\Products\IProduct.cs" />
     <Compile Include="DomainModel\Products\Product.cs" />
@@ -82,9 +92,6 @@
     <Compile Include="DomainModel\Users\IUserInfoList.cs" />
     <Compile Include="DomainModel\Users\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IShapeRepository.cs" />
-    <Compile Include="Repositories\ISubstanceRepository.cs" />
-    <Compile Include="Repositories\IUnitRepository.cs" />
     <Compile Include="Security\AnonymousIdentity.cs" />
     <Compile Include="Security\GenFormIdentity.cs" />
     <Compile Include="Security\GenFormPrincipal.cs" />
@@ -92,29 +99,20 @@
     <Compile Include="Security\IGenFormIdentity.cs" />
     <Compile Include="Security\IGenFormPrincipal.cs" />
     <Compile Include="Security\LoginUser.cs" />
-    <Compile Include="ServiceProviders\DalServiceProvider.cs" />
     <Compile Include="Services\Databases\DatabaseServices.cs" />
     <Compile Include="Services\Databases\IDatabaseServices.cs" />
-    <Compile Include="Services\Products\dto\ProductDto.cs" />
-    <Compile Include="Services\Products\dto\RouteDto.cs" />
-    <Compile Include="Services\Products\dto\SubstanceDto.cs" />
     <Compile Include="Services\Users\ILoginServices.cs" />
     <Compile Include="Security\ILoginCriteria.cs" />
     <Compile Include="Services\Products\IProductServices.cs" />
     <Compile Include="Services\Users\LoginServices.cs" />
     <Compile Include="Services\Products\ProductServices.cs" />
     <Compile Include="Transactions\CommandFactory.cs" />
-    <Compile Include="Transactions\CommandList.cs" />
+    <Compile Include="Transactions\CommandQueue.cs" />
+    <Compile Include="Transactions\Commands\IDeleteCommand.cs" />
     <Compile Include="Transactions\Commands\IInsertCommand.cs" />
     <Compile Include="Transactions\Commands\ISelectCommand.cs" />
     <Compile Include="Transactions\ICommand.cs" />
     <Compile Include="Transactions\ITransactionManager.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.ServiceProviders.csproj">
-      <Project>{82D196C1-B130-4188-A363-458311D8BD89}</Project>
-      <Name>Informedica.GenForm.ServiceProviders</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

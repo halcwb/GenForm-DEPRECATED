@@ -1,7 +1,8 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Library.Repositories;
-using Informedica.GenForm.Library.Services.Products.dto;
 using StructureMap;
 
 namespace Informedica.GenForm.Library.Services.Products
@@ -22,43 +23,44 @@ namespace Informedica.GenForm.Library.Services.Products
 
         public void AddNewBrand(IBrand brand)
         {
-            var repository = ObjectFactory.GetInstance<IBrandRepository>();
+            var repository = ObjectFactory.GetInstance<IRepository<IBrand>>();
             repository.Insert(brand);
         }
 
         public void AddNewGeneric(IGeneric generic)
         {
-            var repository = ObjectFactory.GetInstance<IGenericRepository>();
+            var repository = ObjectFactory.GetInstance<IRepository<IGeneric>>();
             repository.Insert(generic);
         }
 
         public void AddNewShape(IShape shape)
         {
-            var repository = ObjectFactory.GetInstance<IShapeRepository>();
+            var repository = ObjectFactory.GetInstance<IRepository<IShape>>();
             repository.Insert(shape);
         }
 
         public void AddNewPackage(IPackage package)
         {
-            var repository = ObjectFactory.GetInstance<IPackageRepository>();
+            var repository = ObjectFactory.GetInstance<IRepository<IPackage>>();
             repository.Insert(package);
         }
 
         public void AddNewUnit(IUnit unit)
         {
-            var repository = ObjectFactory.GetInstance<IUnitRepository>();
+            var repository = ObjectFactory.GetInstance<IRepository<IUnit>>();
             repository.Insert(unit);
         }
 
-        public void AddNewSubstance(ISubstance subst)
+        public void AddNewSubstance(SubstanceDto substDto)
         {
-            var repository = ObjectFactory.GetInstance<ISubstanceRepository>();
+            var subst = DomainFactory.Create<ISubstance, SubstanceDto>(substDto);
+            var repository = ObjectFactory.GetInstance<IRepository<ISubstance>>();
             repository.Insert(subst);
         }
 
         public ProductDto SaveProduct(ProductDto productDto)
         {
-            var repository = ObjectFactory.GetInstance<IProductRepository>();
+            var repository = ObjectFactory.GetInstance<IRepository<IProduct>>();
             var product = NewProduct(productDto);
             repository.Insert(product);
             productDto.Id = product.ProductId;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Informedica.GenForm.Library.Repositories;
-using Informedica.GenForm.Library.ServiceProviders;
+using StructureMap;
 
 namespace Informedica.GenForm.Library.DomainModel.Users
 {
@@ -15,6 +15,7 @@ namespace Informedica.GenForm.Library.DomainModel.Users
         private string _firstName;
         private string _email;
         private string _pager;
+        private Int32 _userId;
 
         public string UserName
         {
@@ -52,9 +53,15 @@ namespace Informedica.GenForm.Library.DomainModel.Users
             set { _pager = value; }
         }
 
+        public int UserId
+        {
+            get { return _userId; }
+            set { _userId = value; }
+        }
+
         private static IRepository<IUser> Repository
         {
-            get { return DalServiceProvider.Instance.Resolve<IRepository<IUser>>(); }
+            get { return ObjectFactory.GetInstance<IRepository<IUser>>(); }
         }
 
         #endregion

@@ -1,6 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Services.Products.dto;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using StructureMap;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel

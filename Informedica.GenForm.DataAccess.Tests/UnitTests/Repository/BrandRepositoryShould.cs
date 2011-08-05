@@ -13,7 +13,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
     ///to contain all BrandRepositoryTest Unit Tests
     ///</summary>
     [TestClass]
-    public class BrandRepositoryShould: RepositoryTestBase<IBrandRepository, IBrand, Brand> 
+    public class BrandRepositoryShould: RepositoryTestBase<IRepository<IBrand>, IBrand, Brand> 
     {
 
         private TestContext testContextInstance;

@@ -1,7 +1,8 @@
 ﻿using System;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.DataAccess.Repositories;
-using Informedica.GenForm.Library.Services.Products.dto;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 

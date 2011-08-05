@@ -5,7 +5,7 @@ using Informedica.GenForm.DataAccess.DataMappers;
 using Informedica.GenForm.DataAccess.Tests.TestBase;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Services.Products.dto;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Brand = Informedica.GenForm.Database.Brand;

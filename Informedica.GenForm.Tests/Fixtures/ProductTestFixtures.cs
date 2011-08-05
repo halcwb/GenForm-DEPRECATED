@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Informedica.GenForm.Library.Services.Products.dto;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.Tests.Fixtures
 {
@@ -30,14 +29,14 @@ namespace Informedica.GenForm.Tests.Fixtures
             {
                 Id = 0,
                 ProductName = ProductName,
-                Brand = Brand,
+                BrandName = Brand,
                 DisplayName = DisplayName,
-                Generic = Generic,
-                Package = Package,
+                GenericName = Generic,
+                PackageName = Package,
                 ProductCode = ProductCode,
                 Quantity = ProductQuantity,
-                Shape = Shape,
-                Unit = ProductUnit
+                ShapeName = Shape,
+                UnitName = ProductUnit
             };
 
 
@@ -46,9 +45,9 @@ namespace Informedica.GenForm.Tests.Fixtures
         public static ProductDto GetProductDtoWithOneSubstance()
         {
             var dto = GetProductDtoWithNoSubstances();
-            dto.Substances = new List<SubstanceDto>
+            dto.Substances = new List<ProductSubstanceDto>
                                  {
-                                     new SubstanceDto
+                                     new ProductSubstanceDto
                                          {
                                              Id = 0, 
                                              Quantity = SubstanceQuantity, 
@@ -63,10 +62,10 @@ namespace Informedica.GenForm.Tests.Fixtures
         public static ProductDto GetProductDtoWithTwoSubstances()
         {
             var dto = GetProductDtoWithOneSubstance();
-            dto.Substances = new List<SubstanceDto>
+            dto.Substances = new List<ProductSubstanceDto>
                                  {
                                      dto.Substances.First(),
-                                     new SubstanceDto
+                                     new ProductSubstanceDto
                                          {
                                              Id = 0,
                                              Quantity = 5,
@@ -83,6 +82,32 @@ namespace Informedica.GenForm.Tests.Fixtures
             var dto = GetProductDtoWithTwoSubstances();
             dto.Routes = new List<RouteDto> {new RouteDto {Id = 0, Route = Route}};
             return dto;
+        }
+
+        public static IEnumerable<ProductDto> GetProductDtoListWithThreeItems()
+        {
+            var dto = GetProductDtoWithNoSubstances();
+            var list = new List<ProductDto>();
+            list.Add(dto);
+            dto = dto.CloneDto();
+            dto.ProductName = "paracetamol Paracetamol zetpil 1 stuk";
+            dto.BrandName = "Paracetamol";
+            dto.GenericName = "paracetamol";
+            dto.PackageName = "zetpil";
+            dto.Quantity = 500;
+            dto.ShapeName = "zetpil";
+            dto.UnitName = "stuk";
+            list.Add(dto);
+            dto = dto.CloneDto();
+            dto.ProductName = "lactulose Duphalac stroop 200 milliliter";
+            dto.BrandName = "Duphalac";
+            dto.GenericName = "lactulose";
+            dto.ShapeName = "stroop";
+            dto.Quantity = 200;
+            dto.UnitName = "milliliter";
+            list.Add(dto);
+
+            return list;
         }
     }
 }

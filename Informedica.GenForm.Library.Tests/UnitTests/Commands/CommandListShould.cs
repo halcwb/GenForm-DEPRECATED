@@ -57,9 +57,9 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Commands
         [TestMethod]
         public void QueueACommand()
         {
-            var list = new CommandList();
+            var list = new CommandQueue();
             var command = CreateCommand1();
-            list.Add((ICommand)command);
+            list.Enqueue((ICommand)command);
 
             Assert.AreEqual(list.Peek(), command);
         }
@@ -67,11 +67,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Commands
         [TestMethod]
         public void ReturnTheFirstCommandEnteredFirst()
         {
-            var list = new CommandList();
+            var list = new CommandQueue();
             var command1 = CreateCommand1();
             var command2 = CreateCommand2();
-            list.Add((ICommand)command1);
-            list.Add((ICommand)command2);
+            list.Enqueue((ICommand)command1);
+            list.Enqueue((ICommand)command2);
 
             Assert.AreEqual(list.Peek(), command1);
         }
@@ -79,11 +79,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Commands
         [TestMethod]
         public void IterateOverTheCommandsInOrderOfQueue()
         {
-            var list = new CommandList();
+            var list = new CommandQueue();
             var command1 = CreateCommand1();
             var command2 = CreateCommand2();
-            list.Add((ICommand)command1);
-            list.Add((ICommand)command2);
+            list.Enqueue((ICommand)command1);
+            list.Enqueue((ICommand)command2);
 
             var first = true;
             foreach (var command in list.Commands)

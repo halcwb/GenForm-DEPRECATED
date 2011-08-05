@@ -1,4 +1,5 @@
 ﻿using System;
+using Informedica.GenForm.Library.DomainModel.Identification;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
@@ -8,3 +9,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         String SubstanceName { get; set; }
     }
 }
+
+public interface IIdentifiable<T>
+{
+    IIdentifier<T> Identifier { get; }    
+}
+
