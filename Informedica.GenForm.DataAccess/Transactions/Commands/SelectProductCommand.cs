@@ -19,6 +19,7 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
 
         public SelectProductCommand(String name): this(p => p.ProductName == name){}
 
+        [DefaultConstructor]
         public SelectProductCommand(): this(p => true) {}
 
         public SelectProductCommand(Func<Product, Boolean> selector)

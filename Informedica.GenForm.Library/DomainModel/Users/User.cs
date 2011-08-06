@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Informedica.GenForm.Library.Repositories;
-using StructureMap;
 
 namespace Informedica.GenForm.Library.DomainModel.Users
 {
@@ -61,7 +60,7 @@ namespace Informedica.GenForm.Library.DomainModel.Users
 
         private static IRepository<IUser> Repository
         {
-            get { return ObjectFactory.GetInstance<IRepository<IUser>>(); }
+            get { return Factory.ObjectFactory.Instance.GetInstance<IRepository<IUser>>(); }
         }
 
         #endregion

@@ -19,7 +19,6 @@ namespace Informedica.GenForm.Assembler
 
             _registry.For<IInsertCommand<IProduct>>().Use<InsertProductCommand>();
             _registry.For<ISelectCommand<IProduct>>().Use<SelectProductCommand>();
-            _registry.SelectConstructor(() => new SelectProductCommand());
             _registry.For<IDeleteCommand<IProduct>>().Use<DeleteProductCommand>();
 
             _registry.For<IInsertCommand<ISubstance>>().Use<InsertSubstanceCommand>();

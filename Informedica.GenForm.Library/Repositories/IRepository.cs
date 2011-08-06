@@ -10,5 +10,10 @@ namespace Informedica.GenForm.Library.Repositories
         void Insert(T item);
         void Delete(Int32 id);
         void Delete(T item);
+        IRollbackObject Rollback { get; }
+    }
+
+    public interface IRollbackObject: IDisposable
+    {
     }
 }

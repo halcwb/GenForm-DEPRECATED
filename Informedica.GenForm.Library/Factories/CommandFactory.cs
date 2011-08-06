@@ -7,7 +7,7 @@ namespace Informedica.GenForm.Library.Factories
     {
         public static ICommand CreateInsertCommand<T>(T item)
         {
-            return (ICommand)Factory.ObjectFactory.Instance.GetInstanceWith<IInsertCommand<T>, T>(item);
+            return (ICommand)Factory.ObjectFactory.Instance.With(item).GetInstance<IInsertCommand<T>>();
         }
 
         public static ICommand CreateSelectCommand<T>()

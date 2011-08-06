@@ -3,7 +3,6 @@ using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Library.Repositories;
-using StructureMap;
 
 namespace Informedica.GenForm.Library.Services.Products
 {
@@ -23,44 +22,44 @@ namespace Informedica.GenForm.Library.Services.Products
 
         public void AddNewBrand(IBrand brand)
         {
-            var repository = ObjectFactory.GetInstance<IRepository<IBrand>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<IBrand>>();
             repository.Insert(brand);
         }
 
         public void AddNewGeneric(IGeneric generic)
         {
-            var repository = ObjectFactory.GetInstance<IRepository<IGeneric>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<IGeneric>>();
             repository.Insert(generic);
         }
 
         public void AddNewShape(IShape shape)
         {
-            var repository = ObjectFactory.GetInstance<IRepository<IShape>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<IShape>>();
             repository.Insert(shape);
         }
 
         public void AddNewPackage(IPackage package)
         {
-            var repository = ObjectFactory.GetInstance<IRepository<IPackage>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<IPackage>>();
             repository.Insert(package);
         }
 
         public void AddNewUnit(IUnit unit)
         {
-            var repository = ObjectFactory.GetInstance<IRepository<IUnit>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<IUnit>>();
             repository.Insert(unit);
         }
 
         public void AddNewSubstance(SubstanceDto substDto)
         {
             var subst = DomainFactory.Create<ISubstance, SubstanceDto>(substDto);
-            var repository = ObjectFactory.GetInstance<IRepository<ISubstance>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<ISubstance>>();
             repository.Insert(subst);
         }
 
         public ProductDto SaveProduct(ProductDto productDto)
         {
-            var repository = ObjectFactory.GetInstance<IRepository<IProduct>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<IProduct>>();
             var product = NewProduct(productDto);
             repository.Insert(product);
             productDto.Id = product.ProductId;
@@ -69,7 +68,7 @@ namespace Informedica.GenForm.Library.Services.Products
 
         private static IProduct NewProduct(ProductDto productDto)
         {
-            return ObjectFactory.With(productDto).GetInstance<IProduct>();
+            return Factory.ObjectFactory.Instance.With(productDto).GetInstance<IProduct>();
         }
 
         public void DeleteProduct(int productId)
@@ -79,7 +78,7 @@ namespace Informedica.GenForm.Library.Services.Products
 
         public IProduct GetEmptyProduct()
         {
-            return ObjectFactory.GetInstance<IProduct>();
+            return Factory.ObjectFactory.Instance.GetInstance<IProduct>();
         }
 
         #endregion
