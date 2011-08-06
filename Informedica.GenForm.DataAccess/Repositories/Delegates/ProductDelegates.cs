@@ -9,12 +9,12 @@ namespace Informedica.GenForm.DataAccess.Repositories.Delegates
 {
     public static class ProductDelegates
     {
-        public static void InsertOnSubmit(GenFormDataContext context, Product item)
+        public static void Insert(GenFormDataContext context, Product item)
         {
             context.Product.InsertOnSubmit(item);
         }
 
-        public static void UpdateBo(IProduct bo, Product dao)
+        public static void Refresh(IProduct bo, Product dao)
         {
             bo.ProductId = dao.ProductId;
         }

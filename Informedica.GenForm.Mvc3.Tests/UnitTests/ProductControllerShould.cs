@@ -2,6 +2,7 @@
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Mvc3.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -128,10 +129,17 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public void SaveANewSubstanceToDatabase()
         {
-            var result = _controller.AddNewSubstance(GetSubstance());
-            
-            Assert.IsTrue(ActionResultParser.GetSuccessValue(result), 
-                          "new substance could not be submitted to the database: " + ActionResultParser.GetPropertyValue<String>(result, "message"));
+            var repos = ObjectFactory.GetInstance<IRepository<ISubstance>>();
+            ObjectFactory.Inject(typeof(IRepository<ISubstance>), repos);
+            using (repos.Rollback)
+            {
+                var result = _controller.AddNewSubstance(GetSubstance());
+
+
+                Assert.IsTrue(ActionResultParser.GetSuccessValue(result),
+                              "new substance could not be submitted to the database: " +
+                              ActionResultParser.GetPropertyValue<String>(result, "message"));
+            }
         }
 
         private static SubstanceDto GetSubstance()

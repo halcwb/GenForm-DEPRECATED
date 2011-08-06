@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Databases;
-using StructureMap;
 
 namespace Informedica.GenForm.Library.Services.Databases
 {
@@ -34,7 +33,7 @@ namespace Informedica.GenForm.Library.Services.Databases
 
         private IDatabaseConnection GetDatabaseConnection()
         {
-            return ObjectFactory.GetInstance<IDatabaseConnection>();
+            return Factory.ObjectFactory.Instance.GetInstance<IDatabaseConnection>();
         }
 
         #endregion

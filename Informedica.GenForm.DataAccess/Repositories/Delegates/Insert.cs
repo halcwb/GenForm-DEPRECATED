@@ -2,5 +2,5 @@
 
 namespace Informedica.GenForm.DataAccess.Repositories.Delegates
 {
-    public delegate void InsertOnSubmit<T>(GenFormDataContext context, T item);
+    public delegate void Insert<T>(GenFormDataContext context, T item);
 }

@@ -9,9 +9,10 @@ using StructureMap;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class Repository<TBo, TDao>: IRepository<TBo> 
+    public class Repository<TBo, TDao> : IRepository<TBo>
     {
         private GenFormDataContext _context;
+        private RollbackObject _rollback;
 
         public Repository(GenFormDataContext context)
         {
@@ -19,81 +20,86 @@ namespace Informedica.GenForm.DataAccess.Repositories
         }
 
         [DefaultConstructor]
-        public Repository() {}
+        public Repository() { }
 
         #region Insert
 
         public void Insert(TBo item)
         {
-            InsertUsingMapper<IDataMapper<TBo, TDao>>(item);
+            Insert<IDataMapper<TBo, TDao>>(item);
         }
 
         public void Insert(GenFormDataContext context, TBo item)
         {
-            InsertUsingContext<IDataMapper<TBo, TDao>>(context, item);
+            Insert<IDataMapper<TBo, TDao>>(context, item);
         }
 
-        private void InsertUsingMapper<TM>(TBo item) where TM: IDataMapper<TBo, TDao>
+        private void Insert<TM>(TBo item) where TM : IDataMapper<TBo, TDao>
         {
-            using (var ctx = GetDataContext())
+            using (var context = GetDataContext())
             {
                 try
                 {
-                        ctx.Connection.Open();
-                        ctx.Transaction = ctx.Connection.BeginTransaction();
-                        var dao = GetDao();
-                        GetMapper<TM>().MapFromBoToDao(item, dao);
-                        InsertOnSubmit(ctx, dao);
+                    context.Connection.Open();
+                    context.Transaction = context.Connection.BeginTransaction();
+                    var dao = GetDao();
+                    GetMapper<TM>().MapFromBoToDao(item, dao);
+                    InsertOnSubmit(context, dao);
                     try
                     {
-                        ctx.SubmitChanges();
-                        UpdateBo(item, dao);
+                        context.SubmitChanges();
+                        RefreshBo(item, dao);
                     }
-// ReSharper disable RedundantCatchClause
-                        catch (Exception)
+                    catch (Exception)
+                    {
+                        _rollback = new RollbackObject(this);
+                        throw;
+                    }
+                    finally
+                    {
+                        if (_rollback != null) context.Transaction.Rollback();
+                        else
                         {
-                            throw;
+                            context.Transaction.Commit();
                         }
-// ReSharper restore RedundantCatchClause
-                        finally
-                        {
-                            ctx.Transaction.Rollback();
-                        }
+                    }
 
                 }
-// ReSharper disable RedundantCatchClause
-                catch (Exception)
-                {
-                    throw;
-                }
-// ReSharper restore RedundantCatchClause
                 finally
                 {
-                    ctx.Connection.Close();
+                    context.Connection.Close();
                 }
             }
         }
 
-        private static void UpdateBo(TBo item, TDao dao)
+        private static void RefreshBo(TBo bo, TDao dao)
         {
-            var update = ObjectFactory.GetInstance<UpdateBo<TBo, TDao>>();
-            update(item, dao);
+            GetRefreshMethod()(bo, dao);
+        }
+
+        private static Refresh<TBo, TDao> GetRefreshMethod()
+        {
+            return ObjectFactory.GetInstance<Refresh<TBo, TDao>>();
         }
 
         private static void InsertOnSubmit(GenFormDataContext ctx, TDao dao)
         {
-            var insert = ObjectFactory.GetInstance<InsertOnSubmit<TDao>>();
-            insert(ctx, dao);
+            GetInsertMethod()(ctx, dao);
         }
 
-        private void InsertUsingContext<TM>(GenFormDataContext context, TBo item) where TM : IDataMapper<TBo, TDao>
+        private static Insert<TDao> GetInsertMethod()
+        {
+            return ObjectFactory.GetInstance<Insert<TDao>>();
+        }
+
+        private void Insert<TM>(GenFormDataContext context, TBo item) where TM : IDataMapper<TBo, TDao>
         {
             var dao = GetDao();
             GetMapper<TM>().MapFromBoToDao(item, dao);
             InsertOnSubmit(context, dao);
 
             context.SubmitChanges();
-            UpdateBo(item, dao);
+            RefreshBo(item, dao);
         }
 
         #endregion
@@ -106,23 +112,20 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         public void Delete(int id)
         {
-            using (var ctx = GetDataContext())
+            using (var context = GetDataContext())
             {
-                var selector = GetIdSelector(id);
-                Delete(ctx, selector);
+                Delete(context, GetIdSelector(id));
             }
         }
 
         public void Delete(String name)
         {
-            var selector = GetNameSelector(name);
-            Delete(GetDataContext(), selector);
+            Delete(GetDataContext(), GetNameSelector(name));
         }
 
         public void Delete(GenFormDataContext context, Int32 id)
         {
-            var selector = GetIdSelector(id);
-            Delete(context, selector);
+            Delete(context, GetIdSelector(id));
         }
 
         public void Delete(TBo item)
@@ -132,8 +135,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         public void Delete(GenFormDataContext context, Func<TDao, Boolean> selector)
         {
-            var delete = GetDeleteMethod();
-            delete(context, selector);
+            GetDeleteMethod()(context, selector);
             context.SubmitChanges();
         }
 
@@ -142,7 +144,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
             return ObjectFactory.GetInstance<Delete<TDao>>();
         }
 
-        #endregion 
+        #endregion
 
         #region Fetch
 
@@ -155,14 +157,12 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         public IEnumerable<TBo> Fetch(int id)
         {
-            var selector = GetIdSelector(id);
-            return Fetch(GetDataContext(), selector);
+            return Fetch(GetDataContext(), GetIdSelector(id));
         }
 
         public IEnumerable<TBo> Fetch(string name)
         {
-            var selector = GetNameSelector(name);
-            return Fetch(GetDataContext(), selector);
+            return Fetch(GetDataContext(), GetNameSelector(name));
         }
 
         private IEnumerable<TBo> CreateBoListFromDaoList(IEnumerable<TDao> list)
@@ -219,9 +219,9 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         #region Helper
 
-        private static Func<TDao, bool> GetIdSelector(int id)
+        private static Func<TDao, Boolean> GetIdSelector(Int32 id)
         {
-            return ObjectFactory.GetInstance<CreateIdSelector<TDao>>()(id);
+            return ObjectFactory.GetInstance<SelectorOfInt<TDao>>()(id);
         }
 
         private static TBo CreateNewBo()
@@ -229,9 +229,34 @@ namespace Informedica.GenForm.DataAccess.Repositories
             return ObjectFactory.GetInstance<TBo>();
         }
 
-        private static Func<TDao, bool> GetNameSelector(string name)
+        private static Func<TDao, Boolean> GetNameSelector(String name)
         {
-            return ObjectFactory.GetInstance<CreateNameSelector<TDao>>()(name);
+            return ObjectFactory.GetInstance<SelectorOfString<TDao>>()(name);
+        }
+
+        #endregion
+
+        #region RollbackObject
+
+        public IRollbackObject Rollback
+        {
+            get { return _rollback ?? (_rollback = new RollbackObject(this)); }
+        }
+
+        public class RollbackObject : IRollbackObject
+        {
+            private Repository<TBo, TDao> _repository;
+
+            public RollbackObject(Repository<TBo, TDao> repository)
+            {
+                _repository = repository;
+            }
+
+            public void Dispose()
+            {
+                _repository._rollback = null;
+                _repository = null;
+            }
         }
 
         #endregion

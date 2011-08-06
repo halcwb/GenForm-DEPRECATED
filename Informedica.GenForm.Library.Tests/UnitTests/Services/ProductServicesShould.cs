@@ -111,7 +111,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 
             try
             {
-                GetProductServices().SaveProduct(productDto);
+                using (repos.Rollback)
+                {
+                    GetProductServices().SaveProduct(productDto);
+
+                } 
                 Isolate.Verify.WasCalledWithAnyArguments(() => repos.Insert(product));
             }
             catch (Exception e)
@@ -134,9 +138,14 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 
         private void TrySaveProduct(ProductDto dto)
         {
+            var repos = ObjectFactory.GetInstance<IRepository<IProduct>>();
+            ObjectFactory.Inject(typeof(IRepository<IProduct>), repos);
             try
             {
-                GetProductServices().SaveProduct(dto);
+                using (repos.Rollback)
+                {
+                    GetProductServices().SaveProduct(dto);
+                }
             }
             catch (Exception e)
             {
@@ -152,7 +161,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 
             try
             {
-                GetProductServices().SaveProduct(dto);
+                TrySaveProduct(dto);
                 Assert.Fail("invalid product should not be saved");
             }
             catch (Exception e)
@@ -231,7 +240,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 
             try
             {
-                GetProductServices().AddNewBrand(brand);
+                using (repos.Rollback)
+                {
+                    GetProductServices().AddNewBrand(brand);
+
+                } 
                 Isolate.Verify.WasCalledWithExactArguments(() => repos.Insert(brand));
             }
             catch (Exception e)
@@ -253,7 +266,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 
             try
             {
-                GetProductServices().AddNewSubstance(dto);
+                using (repos.Rollback)
+                {
+                    GetProductServices().AddNewSubstance(dto);
+
+                } 
                 Isolate.Verify.WasCalledWithAnyArguments(() => repos.Insert(substance));
             }
             catch (Exception e)
@@ -267,9 +284,16 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void AddNewSubstanceToRepository()
         {
             var substance = new SubstanceDto {SubstanceId = 0, SubstanceName = "test"};
+
+            var repos = ObjectFactory.GetInstance<IRepository<ISubstance>>();
+            ObjectFactory.Inject(typeof(IRepository<ISubstance>), repos);
+
             try
             {
-                GetProductServices().AddNewSubstance(substance);
+                using (repos.Rollback)
+                {
+                    GetProductServices().AddNewSubstance(substance);
+                }
             }
             catch (Exception e)
             {

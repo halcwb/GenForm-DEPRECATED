@@ -2,6 +2,7 @@
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Mvc3.Controllers;
 using Informedica.Utilities;
@@ -86,10 +87,18 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         public void ThatNoErrorIsThrownWhenUserSavesAValidProduct()
         {
             var product = GetValidProduct();
-            var result = GetProductController().SaveProduct(product);
 
-            Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "Save product returned an error " + 
-                          ActionResultParser.GetPropertyValue<String>(result, "message"));
+            var repos = ObjectFactory.GetInstance<IRepository<IProduct>>();
+            ObjectFactory.Inject(typeof(IRepository<IProduct>), repos);
+
+            using (repos.Rollback)
+            {
+                var result = GetProductController().SaveProduct(product);
+
+                Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "Save product returned an error " +
+                              ActionResultParser.GetPropertyValue<String>(result, "message"));
+
+            }
         }
 
         private JObject CreateJObjectFrom(Object product)
@@ -166,10 +175,15 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             var brand = CreateNewBrand(Sintrom);
             try
             {
-                var result = GetProductController().AddNewBrand(CreateJObjectFrom(brand));
+                var repos = ObjectFactory.GetInstance<IRepository<IBrand>>();
+                ObjectFactory.Inject(typeof(IRepository<IBrand>), repos);
 
-                Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New brand " + Sintrom + " could not be added");
+                using (repos.Rollback)
+                {
+                    var result = GetProductController().AddNewBrand(CreateJObjectFrom(brand));
 
+                    Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New brand " + Sintrom + " could not be added");
+                }
             }
             catch (Exception e)
             {
@@ -183,10 +197,15 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             var generic = CreateNewGeneric(Penicilline);
             try
             {
-                var result = GetProductController().AddNewGeneric(CreateJObjectFrom(generic));
+                var repos = ObjectFactory.GetInstance<IRepository<IGeneric>>();
+                ObjectFactory.Inject(typeof(IRepository<IGeneric>), repos);
 
-                Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New generic " + Penicilline + " could not be added");
+                using (repos.Rollback)
+                {
+                    var result = GetProductController().AddNewGeneric(CreateJObjectFrom(generic));
 
+                    Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New generic " + Penicilline + " could not be added");
+                }
             }
             catch (Exception e)
             {
@@ -208,10 +227,14 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             try
             {
                 var shape = CreateNewShape(Tablet);
-                var result = GetProductController().AddNewShape(CreateJObjectFrom(shape));
+                var repos = ObjectFactory.GetInstance<IRepository<IShape>>();
+                ObjectFactory.Inject(typeof(IRepository<IShape>), repos);
+                using (repos.Rollback)
+                {
+                    var result = GetProductController().AddNewShape(CreateJObjectFrom(shape));
 
-                Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New shape" + Tablet + " could not be added");
-
+                    Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New shape" + Tablet + " could not be added");
+                }
             }
             catch (Exception e)
             {
@@ -233,9 +256,17 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             try
             {
                 var package = CreateNewPackage(Ampul);
-                var result = GetProductController().AddNewPackage(CreateJObjectFrom(package));
+                var repos = ObjectFactory.GetInstance<IRepository<IPackage>>();
+                ObjectFactory.Inject(typeof(IRepository<IPackage>), repos);
 
-                Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New package " + Ampul + " could not be added");
+                using (repos.Rollback)
+                {
+                    var result = GetProductController().AddNewPackage(CreateJObjectFrom(package));
+
+
+                    Assert.IsTrue(ActionResultParser.GetSuccessValue(result),
+                                  "New package " + Ampul + " could not be added");
+                }
             }
             catch (Exception e)
             {
@@ -257,9 +288,18 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             try
             {
                 var unit = CreateNewUnit(Mmol);
-                var result = GetProductController().AddNewUnit(CreateJObjectFrom(unit));
 
-                Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New unit: " + Mmol + " could not be added");
+                var repos = ObjectFactory.GetInstance<IRepository<IUnit>>();
+                ObjectFactory.Inject(typeof(IRepository<IUnit>), repos);
+
+                using (repos.Rollback)
+                {
+                    var result = GetProductController().AddNewUnit(CreateJObjectFrom(unit));
+
+
+                    Assert.IsTrue(ActionResultParser.GetSuccessValue(result),
+                                  "New unit: " + Mmol + " could not be added");
+                }
             }
             catch (Exception e)
             {

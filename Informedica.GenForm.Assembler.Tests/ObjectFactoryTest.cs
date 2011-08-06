@@ -96,9 +96,9 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public  void ThatADelegateCanBeRegistered()
         {
-            InsertOnSubmit<Product> insert = ProductDelegates.InsertOnSubmit;
+            Insert<Product> insert = ProductDelegates.Insert;
             ObjectFactory.Inject(insert);
-            Assert.IsNotNull(ObjectFactory.GetInstance<InsertOnSubmit<Product>>());
+            Assert.IsNotNull(ObjectFactory.GetInstance<Insert<Product>>());
         }
 
 

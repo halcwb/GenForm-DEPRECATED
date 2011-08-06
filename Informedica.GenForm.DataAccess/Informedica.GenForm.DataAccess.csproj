@@ -48,18 +48,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Repositories\Delegates\BrandDelegates.cs" />
-    <Compile Include="Repositories\Delegates\CreateNameSelector.cs" />
+    <Compile Include="Repositories\Delegates\SelectorOfString.cs" />
     <Compile Include="Repositories\Delegates\Delete.cs" />
     <Compile Include="Repositories\Delegates\Fetch.cs" />
     <Compile Include="Repositories\Delegates\GenericDelegates.cs" />
-    <Compile Include="Repositories\Delegates\CreateIdSelector.cs" />
-    <Compile Include="Repositories\Delegates\InsertOnSubmit.cs" />
+    <Compile Include="Repositories\Delegates\SelectorOfInt.cs" />
+    <Compile Include="Repositories\Delegates\Insert.cs" />
     <Compile Include="Repositories\Delegates\PackageDelegates.cs" />
     <Compile Include="Repositories\Delegates\ProductDelegates.cs" />
     <Compile Include="Repositories\Delegates\ShapeDelegates.cs" />
     <Compile Include="Repositories\Delegates\SubstanceDelegates.cs" />
     <Compile Include="Repositories\Delegates\UnitDelegates.cs" />
-    <Compile Include="Repositories\Delegates\UpdateBo.cs" />
+    <Compile Include="Repositories\Delegates\Refresh.cs" />
     <Compile Include="Repositories\Delegates\UserDelegates.cs" />
     <Compile Include="Transactions\Commands\CommandBase.cs" />
     <Compile Include="Transactions\Commands\DeleteProductCommand.cs" />

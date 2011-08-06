@@ -78,7 +78,11 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         {
             try
             {
-                Repos.Insert(Bo);
+                using (Repos.Rollback)
+                {
+                    Repos.Insert(Bo);
+                    
+                } 
                 Isolate.Verify.WasCalledWithAnyArguments(() => Mapper.MapFromBoToDao(Bo, Dao));
             }
             catch (Exception e)
@@ -94,7 +98,11 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         {
             try
             {
-                Repos.Insert(Bo);
+                using (Repos.Rollback)
+                {
+                    Repos.Insert(Bo);
+
+                } 
                 Isolate.Verify.WasCalledWithAnyArguments(() => Context.SubmitChanges());
             }
             catch (Exception e)
@@ -122,7 +130,11 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
 
             try
             {
-                Repos.Insert(Bo);
+                using (Repos.Rollback)
+                {
+                    Repos.Insert(Bo);
+
+                } 
                 Assert.Fail("could insert invalid product");
             }
             catch (Exception e)
@@ -199,7 +211,10 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         {
             try
             {
-                Repos.Insert(product);
+                using (Repos.Rollback)
+                {
+                    Repos.Insert(product);
+                }
             }
             catch (Exception e)
             {

@@ -58,16 +58,16 @@ namespace Informedica.Factory
 
         #endregion
 
-        #region StructureMap
+        #region StructureMapDelegation
 
         public T GetInstance<T>()
         {
             return StructureMap.ObjectFactory.GetInstance<T>();
         }
 
-        public T GetInstanceWith<T, TC>(TC arg)
+        public StructureMap.ExplicitArgsExpression With<T>(T arg)
         {
-            return StructureMap.ObjectFactory.With(arg).GetInstance<T>();
+            return StructureMap.ObjectFactory.With(arg);
         }
 
         #endregion

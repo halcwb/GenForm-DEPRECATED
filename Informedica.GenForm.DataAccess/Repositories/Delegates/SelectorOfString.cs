@@ -2,5 +2,5 @@
 
 namespace Informedica.GenForm.DataAccess.Repositories.Delegates
 {
-    public delegate Func<T, Boolean> CreateIdSelector<T>(Int32 id);
+    public delegate Func<T, Boolean> SelectorOfString<T>(String name);
 }
