@@ -7,9 +7,9 @@ namespace Informedica.GenForm.Library.Repositories
     {
         IEnumerable<T> Fetch(Int32 id);
         IEnumerable<T> Fetch(String name);
-        void Insert(T item);
+        void Insert(T bo);
         void Delete(Int32 id);
-        void Delete(T item);
+        void Delete(T bo);
         IRollbackObject Rollback { get; }
     }
 

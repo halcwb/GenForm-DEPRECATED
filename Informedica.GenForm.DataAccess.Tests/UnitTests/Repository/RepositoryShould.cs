@@ -60,11 +60,11 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
             Func<Test,Boolean> fakeSelector = (x => x.name == "Test");
             var repos = new Repository<ITest, Test>(fakeContext);
 
-            Isolate.WhenCalled(() => repos.Delete(fakeContext, fakeSelector)).WithExactArguments().IgnoreCall();
+            Isolate.NonPublic.WhenCalled(repos, "Delete").IgnoreCall();
             Isolate.NonPublic.WhenCalled(typeof(Repository<ITest,Test>), "GetNameSelector").WillReturn(fakeSelector);
 
             repos.Delete("Test");
-            Isolate.Verify.WasCalledWithAnyArguments(() => repos.Delete(fakeContext, fakeSelector));
+            Isolate.Verify.NonPublic.WasCalled(repos, "Delete");
         }
     }
 
