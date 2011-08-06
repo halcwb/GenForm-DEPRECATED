@@ -13,6 +13,10 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
         [DefaultConstructor]
         public SelectSubstanceCommand(): this(s => true) {}
 
+        public SelectSubstanceCommand(String name): this(s => s.SubstanceName == name) {}
+
+        public SelectSubstanceCommand(Int32 id) : this(s => s.SubstanceId == id) {}
+
         public SelectSubstanceCommand(Func<Substance,Boolean> selector): base(selector) {}
 
         public override void Execute(GenFormDataContext context)
@@ -24,13 +28,6 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
         {
             get { return Items; }
         }
-    }
-    public class SelectSubstanceIntCommand : SelectSubstanceCommand
-    {
-    }
-
-    public class SelectSubstanceStringCommand : SelectSubstanceCommand
-    {
     }
 
 }

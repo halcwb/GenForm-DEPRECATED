@@ -83,7 +83,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
 
         private void IsolateDeleteCommand()
         {
-            _command = (IDeleteCommand<IProduct>)CommandFactory.CreateDeleteCommand<IProduct, String>(ProductTestFixtures.GetProductDtoWithTwoSubstancesAndRoute().ProductName);
+            _command = (IDeleteCommand<IProduct>)CommandFactory.CreateDeleteCommand<IProduct>(ProductTestFixtures.GetProductDtoWithTwoSubstancesAndRoute().ProductName);
             _fakeRepository = Isolate.Fake.Instance<Repository<IProduct, Product>>();
             _fakeContext = Isolate.Fake.Instance<GenFormDataContext>();
             ObjectFactory.Inject(_fakeRepository);

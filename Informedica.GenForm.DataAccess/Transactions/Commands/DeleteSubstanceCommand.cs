@@ -17,12 +17,5 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
 
     }
 
-    public class DeleteSubstanceIntCommand: DeleteSubstanceCommand
-    {
-    }
-
-    public class DeleteSubstanceStringCommand: DeleteSubstanceCommand
-    {
-    }
 
 }

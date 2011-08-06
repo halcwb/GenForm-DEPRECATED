@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
@@ -62,8 +61,8 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Commands
         {
             var product = ProductFactory.CreateProduct(ProductTestFixtures.GetProductDtoWithTwoSubstancesAndRoute());
             var commandQueue = new CommandQueue();
-            commandQueue.Enqueue((ICommand)CommandFactory.CreateInsertCommand(product));
-            commandQueue.Enqueue((ICommand)CommandFactory.CreateSelectCommand<IProduct,String>(ProductTestFixtures.ProductName));
+            commandQueue.Enqueue(CommandFactory.CreateInsertCommand(product));
+            commandQueue.Enqueue(CommandFactory.CreateSelectCommand<IProduct>(ProductTestFixtures.ProductName));
 
             using (var transMgr = TransactionManagerFactory.CreateTransactionManager(commandQueue))
             {

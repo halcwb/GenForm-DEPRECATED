@@ -63,9 +63,9 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Commands
             var product = ProductFactory.CreateProduct(ProductTestFixtures.GetProductDtoWithTwoSubstancesAndRoute());
             var commandQueue = new CommandQueue();
             commandQueue.Enqueue(CommandFactory.CreateInsertCommand(product));
-            commandQueue.Enqueue(CommandFactory.CreateSelectCommand<IProduct, String>(ProductTestFixtures.ProductName));
-            commandQueue.Enqueue(CommandFactory.CreateDeleteCommand<IProduct, String>(ProductTestFixtures.ProductName));
-            commandQueue.Enqueue(CommandFactory.CreateSelectCommand<IProduct, String>(ProductTestFixtures.ProductName));
+            commandQueue.Enqueue(CommandFactory.CreateSelectCommand<IProduct>(ProductTestFixtures.ProductName));
+            commandQueue.Enqueue(CommandFactory.CreateDeleteCommand<IProduct>(ProductTestFixtures.ProductName));
+            commandQueue.Enqueue(CommandFactory.CreateSelectCommand<IProduct>(ProductTestFixtures.ProductName));
 
             using (var transMgr = TransactionManagerFactory.CreateTransactionManager(commandQueue))
             {
