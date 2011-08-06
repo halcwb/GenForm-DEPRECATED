@@ -15,6 +15,10 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
         private readonly Func<Product, Boolean> _selector;
         private IEnumerable<IProduct> _resultList;
 
+        public SelectProductCommand(Int32 id): this(p => p.ProductId == id){}
+
+        public SelectProductCommand(String name): this(p => p.ProductName == name){}
+
         public SelectProductCommand(): this(p => true) {}
 
         public SelectProductCommand(Func<Product, Boolean> selector)
@@ -38,13 +42,4 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
         }
     }
 
-    public class SelectProductIntCommand: SelectProductCommand
-    {
-        public SelectProductIntCommand(Int32 id): base(x => x.ProductId == id) {}
-    }
-
-    public class SelectProductStringCommand: SelectProductCommand
-    {
-        public SelectProductStringCommand(String name): base(x => x.ProductName.Contains(name)) {}
-    }
 }

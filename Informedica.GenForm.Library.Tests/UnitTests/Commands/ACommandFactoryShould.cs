@@ -1,6 +1,7 @@
 ﻿using System;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Library.Transactions;
 using Informedica.GenForm.Library.Transactions.Commands;
 using Informedica.GenForm.Tests.Fixtures;
@@ -66,28 +67,28 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Commands
         [TestMethod]
         public void BeAbleToCreateASelectCommandForStringCriteria()
         {
-            var command = CommandFactory.CreateSelectCommand<IProduct, String>("test");
+            var command = CommandFactory.CreateSelectCommand<IProduct>("test");
             Assert.IsNotNull(command);
         }
 
         [TestMethod]
         public void BeAbleToCreateASelectCommandForIntCriteria()
         {
-            var command = CommandFactory.CreateSelectCommand<IProduct, int>(1);
+            var command = CommandFactory.CreateSelectCommand<IProduct>(1);
             Assert.IsNotNull(command);
         }
 
         [TestMethod]
         public void BeAbleToCreateADeleteCommandForStringCriteria()
         {
-            var command = CommandFactory.CreateDeleteCommand<IProduct, String>("test");
+            var command = CommandFactory.CreateDeleteCommand<IProduct>("test");
             Assert.IsNotNull(command);
         }
 
         [TestMethod]
         public void BeAbleToCreateADeleteCommandForIntCriteria()
         {
-            var command = CommandFactory.CreateDeleteCommand<IProduct, int>(1);
+            var command = CommandFactory.CreateDeleteCommand<IProduct>(1);
             Assert.IsNotNull(command);
         }
 
@@ -96,6 +97,20 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Commands
         {
             var command = CommandFactory.CreateSelectCommand<IProduct>();
             Assert.IsNotNull(command);
+        }
+
+        [TestMethod]
+        public void BeAbleToCreateASelectSubstanceCommandsWithNoArguments()
+        {
+            var command = CommandFactory.CreateSelectCommand<ISubstance>();
+            Assert.IsInstanceOfType(command, typeof(ISelectCommand<ISubstance>));
+        }
+
+        [TestMethod]
+        public void BeAbleToCreateASelectSubstanceCommandByName()
+        {
+            var command = CommandFactory.CreateSelectCommand<ISubstance>("paracetamol");
+            Assert.IsInstanceOfType(command, typeof(ISelectCommand<ISubstance>));
         }
     }
 }

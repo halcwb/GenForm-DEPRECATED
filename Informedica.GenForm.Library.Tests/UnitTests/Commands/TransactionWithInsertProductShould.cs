@@ -1,6 +1,7 @@
 ﻿using System;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Library.Transactions;
 using Informedica.GenForm.Library.Transactions.Commands;
 using Informedica.GenForm.Tests.Fixtures;

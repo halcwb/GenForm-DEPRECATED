@@ -84,7 +84,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         {
             GenFormApplication.Initialize();
 
-            _command = (ISelectCommand<IProduct>)CommandFactory.CreateSelectCommand<IProduct, String>("foo");
+            _command = (ISelectCommand<IProduct>)CommandFactory.CreateSelectCommand<IProduct>("foo");
             ((IExecutable)_command).Execute(new GenFormDataContext());
 
             Assert.IsTrue(_command.Result.Count() == 0);
@@ -95,7 +95,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         {
             GenFormApplication.Initialize();
 
-            _command = (ISelectCommand<IProduct>)CommandFactory.CreateSelectCommand<IProduct, String>("foo");
+            _command = (ISelectCommand<IProduct>)CommandFactory.CreateSelectCommand<IProduct>("foo");
             ((IExecutable)_command).Execute(new GenFormDataContext());
 
             Assert.IsNotNull(_command.Result);
@@ -106,7 +106,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         {
             GenFormApplication.Initialize();
 
-            _command = (ISelectCommand<IProduct>)CommandFactory.CreateSelectCommand<IProduct, Int32>(0);
+            _command = (ISelectCommand<IProduct>)CommandFactory.CreateSelectCommand<IProduct>(0);
             ((IExecutable)_command).Execute(new GenFormDataContext());
 
             Assert.IsTrue(_command.Result.Count() == 0);
@@ -164,7 +164,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         private void IsolateSelectCommand()
         {
             _selector = new Func<Product, bool>(x => x.ProductId == 1);
-            _command = (ISelectCommand<IProduct>)CommandFactory.CreateSelectCommand<IProduct, Int32>(1);
+            _command = (ISelectCommand<IProduct>)CommandFactory.CreateSelectCommand<IProduct>(1);
             _fakeRepository = Isolate.Fake.Instance<Repository<IProduct, Product>>();
             _fakeContext = Isolate.Fake.Instance<GenFormDataContext>();
             ObjectFactory.Inject(_fakeRepository);

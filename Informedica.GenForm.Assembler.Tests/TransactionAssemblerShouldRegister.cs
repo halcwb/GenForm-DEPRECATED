@@ -70,32 +70,34 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public void AnImplementationOfSelectProductCommandWithString()
         {
-            ObjectFactoryAssertUtility.AssertRegistrationWith<String, IStringSelectCommand<IProduct>>("foo");
+            ObjectFactoryAssertUtility.AssertRegistrationWith<String, ISelectCommand<IProduct>>("foo");
         }
 
         [TestMethod]
         public void AnImplementationOfSelectProductCommandWithInt()
         {
-            ObjectFactoryAssertUtility.AssertRegistrationWith<Int32, IIntSelectCommand<IProduct>>(1);
+            ObjectFactoryAssertUtility.AssertRegistrationWith<Int32, ISelectCommand<IProduct>>(1);
         }
 
         [TestMethod]
         public void AnImplementationOfDeleteProductCommandWithString()
         {
-            ObjectFactoryAssertUtility.AssertRegistrationWith<String, IStringDeleteCommand<IProduct>>("foo");
+            var command = Factory.ObjectFactory.Instance.Create<IDeleteCommand<IProduct>>("test");
+            Assert.IsInstanceOfType(command, typeof(IDeleteCommand<IProduct>));
         }
 
         [TestMethod]
         public void AnImplementationOfDeleteProductCommandWithInt()
         {
-            ObjectFactoryAssertUtility.AssertRegistrationWith<Int32, IIntDeleteCommand<IProduct>>(1);
+            var command = Factory.ObjectFactory.Instance.Create<IDeleteCommand<IProduct>>(1);
+            Assert.IsInstanceOfType(command, typeof(IDeleteCommand<IProduct>));
         }
 
         [TestMethod]
         public void AnImplementationOfSelectProductCommand()
         {
             ObjectFactoryAssertUtility.AssertRegistration<ISelectCommand<IProduct>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IStringSelectCommand<IProduct>>());
+                ObjectFactoryAssertUtility.GetMessageFor<ISelectCommand<IProduct>>());  
         }
 
     }

@@ -2,16 +2,8 @@
 
 namespace Informedica.GenForm.Library.Transactions.Commands
 {
-    public interface ISelectCommand<T>: IStringSelectCommand<T>, IIntSelectCommand<T>
+    public interface ISelectCommand<T>
     {
         IEnumerable<T> Result { get; }
-    }
-
-    public interface IIntSelectCommand<T>
-    {
-    }
-
-    public interface IStringSelectCommand<T>
-    {
     }
 }

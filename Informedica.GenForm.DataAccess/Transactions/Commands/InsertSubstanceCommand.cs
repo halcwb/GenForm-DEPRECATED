@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
@@ -12,7 +11,7 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
     public class InsertSubstanceCommand: CommandBase<ISubstance, Substance>, IInsertCommand<ISubstance>
     {
         [DefaultConstructor]
-        public InsertSubstanceCommand(ISubstance product): base(new List<ISubstance>{product}) {}
+        public InsertSubstanceCommand(ISubstance substance): base(new List<ISubstance>{substance}) {}
 
         public override void Execute(GenFormDataContext context)
         {
