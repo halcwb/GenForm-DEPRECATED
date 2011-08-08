@@ -1,9 +1,44 @@
-﻿using StructureMap;
+﻿using System;
+using Informedica.GenForm.DataAccess;
+using NHibernate;
+using StructureMap;
 
 namespace Informedica.GenForm.Assembler
 {
-    public static class GenFormApplication
+    public class GenFormApplication
     {
+        private static GenFormApplication _instance;
+        private static readonly Object LockThis = new object();
+        private static ISessionFactory _factory;
+
+        private GenFormApplication() {}
+
+        public static GenFormApplication Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    lock (LockThis)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new GenFormApplication();
+                        }
+                    }
+                return _instance;
+            }
+        }
+
+        public ISessionFactory SessionFactory
+        {
+            get { return _factory ?? (_factory = CreateSessionFactory()); }
+        }
+
+        private static ISessionFactory CreateSessionFactory()
+        {
+            return SessionFactoryCreator.CreateSessionFactory();            
+        }
+
         public static void Initialize()
         {
             ObjectFactory.Initialize(x =>
@@ -15,7 +50,6 @@ namespace Informedica.GenForm.Assembler
                 x.AddRegistry(TransactionAssembler.RegisterDependencies());
                 x.AddRegistry(RepositoryAssembler.RegisterDependencies());
             });
-
         }
     }
 }

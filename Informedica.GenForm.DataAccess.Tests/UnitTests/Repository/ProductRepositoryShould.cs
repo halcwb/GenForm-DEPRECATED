@@ -10,8 +10,6 @@ using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
-using TypeMock.ArrangeActAssert;
-using Product = Informedica.GenForm.Database.Product;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
 {   
@@ -20,7 +18,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
     ///to contain all ProductRepositoryTest Unit Tests
     ///</summary>
     [TestClass]
-    public class ProductRepositoryShould: RepositoryTestBase<IRepository<IProduct>, IProduct, Product>
+    public class ProductRepositoryShould: RepositoryTestBase<IRepository<IProduct>, IProduct>
     {
 
         private TestContext testContextInstance;
@@ -72,45 +70,6 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         //
         #endregion
 
-        [Isolated]
-        [TestMethod]
-        public void CallProductMapperToMapProductToDao()
-        {
-            try
-            {
-                using (Repos.Rollback)
-                {
-                    Repos.Insert(Bo);
-                    
-                } 
-                Isolate.Verify.WasCalledWithAnyArguments(() => Mapper.MapFromBoToDao(Bo, Dao));
-            }
-            catch (Exception e)
-            {
-                AssertVerify(e, "product repository did not call product mapper to map dao to product");
-                throw;
-            }
-        }
-
-        [Isolated]
-        [TestMethod]
-        public void CallSubmitChangesOnContextToInsertProduct()
-        {
-            try
-            {
-                using (Repos.Rollback)
-                {
-                    Repos.Insert(Bo);
-
-                } 
-                Isolate.Verify.WasCalledWithAnyArguments(() => Context.SubmitChanges());
-            }
-            catch (Exception e)
-            {
-                AssertVerify(e, "product repository did not call submit changes on context");
-            }
-        }
-
         [TestMethod]
         public void BeAbleToInsertAvalidProductWithNoSubstances()
         {
@@ -153,17 +112,6 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         }
 
         [TestMethod]
-        public void GiveAnInsertedProductAnId()
-        {
-            GenFormApplication.Initialize();
-
-            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
-            Bo = ObjectFactory.With(dto).GetInstance<IProduct>();
-            TryInsertProduct(Bo);
-            Assert.IsTrue(Bo.ProductId != 0, "Product id should not be 0");
-        }
-
-        [TestMethod]
         public void BeAbleToDeleteAJustInsertedProductWithNoSubstances()
         {
             var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
@@ -186,7 +134,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
             {
                 ctx.Connection.Open();
                 ctx.Transaction = ctx.Connection.BeginTransaction();
-                var repos = new Repository<IProduct, Product>();
+                var repos = new Repository<IProduct>();
                 try
                 {
                     repos.Insert(ctx, Bo);

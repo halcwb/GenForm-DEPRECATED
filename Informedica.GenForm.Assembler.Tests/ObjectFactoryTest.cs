@@ -1,4 +1,5 @@
-﻿using Informedica.GenForm.DataAccess.Repositories.Delegates;
+﻿using Informedica.GenForm.DataAccess.Repositories;
+using Informedica.GenForm.DataAccess.Repositories.Delegates;
 using Informedica.GenForm.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

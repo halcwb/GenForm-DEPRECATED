@@ -1,0 +1,20 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Products.UnitGroup, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`UnitGroup`">
+    <id name="Id" type="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" />
+      <generator class="guid.comb" />
+    </id>
+    <bag name="Units">
+      <key>
+        <column name="UnitGroup_id" />
+      </key>
+      <one-to-many class="Informedica.GenForm.Library.DomainModel.Products.Unit, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    </bag>
+    <property name="UnitGroupName" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="UnitGroupName" />
+    </property>
+    <property name="AllowsConversion" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="AllowsConversion" />
+    </property>
+  </class>
+</hibernate-mapping>

@@ -115,9 +115,9 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         public static IEnumerable<SubstanceDto> GetSubstanceDtoListWithThreeItems()
         {
             var list = new List<SubstanceDto>();
-            list.Add(new SubstanceDto{SubstanceName = "paracetamol"});
-            list.Add(new SubstanceDto{SubstanceName = "dopamine"});
-            list.Add(new SubstanceDto{SubstanceName = "lactulose"});
+            list.Add(new SubstanceDto{Name = "paracetamol"});
+            list.Add(new SubstanceDto{Name = "dopamine"});
+            list.Add(new SubstanceDto{Name = "lactulose"});
 
             return list;
         }

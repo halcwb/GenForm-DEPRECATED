@@ -62,7 +62,7 @@ namespace Informedica.GenForm.Library.Services.Products
             var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<IProduct>>();
             var product = NewProduct(productDto);
             repository.Insert(product);
-            productDto.Id = product.ProductId;
+            productDto.ProductId = product.ProductId;
             return productDto;
         }
 

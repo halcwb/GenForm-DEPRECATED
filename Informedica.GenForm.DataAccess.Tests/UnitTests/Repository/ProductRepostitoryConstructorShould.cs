@@ -1,12 +1,5 @@
-﻿using System;
-using Informedica.GenForm.Assembler;
-using Informedica.GenForm.DataAccess.Repositories;
-using Informedica.GenForm.Database;
-using Informedica.GenForm.Library.DomainModel.Products;
+﻿using Informedica.GenForm.Assembler;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StructureMap;
-using TypeMock.ArrangeActAssert;
-using Product = Informedica.GenForm.Database.Product;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
 {
@@ -56,33 +49,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         //
         #endregion
 
-        [TestMethod]
-        public void CreateRepositoryWithDefaultDataContext()
-        {
-            var repos = new Repository<IProduct, Product>();
-            Assert.IsInstanceOfType(repos.GetDataContext(), typeof(GenFormDataContext));
-        }
 
-        [TestMethod]
-        public void BeAbleToCreateRepositoryWithOwnDataContext()
-        {
-            var context = Isolate.Fake.Instance<GenFormDataContext>();
-            var repos = new Repository<IProduct, Product>(context);
-            Assert.AreEqual(String.Empty, repos.GetDataContext().Connection.ConnectionString);
-        }
-
-        //ToDo: finish this test
-        [TestMethod]
-        public void UseInjectedDataContextOnlyOnce()
-        {
-            var context = Isolate.Fake.Instance<GenFormDataContext>();
-            var repos = new Repository<IProduct, Product>(context);
-
-            Assert.AreEqual(context, repos.GetDataContext());
-            Assert.AreNotEqual(context, repos.GetDataContext());
-
-            repos = ObjectFactory.GetInstance<Repository<IProduct, Product>>();
-        }
 
     }
 }

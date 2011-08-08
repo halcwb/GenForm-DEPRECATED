@@ -50,9 +50,9 @@
     <Compile Include="DomainModel\Databases\IDatabaseConnection.cs" />
     <Compile Include="DomainModel\Databases\IDatabaseSetting.cs" />
     <Compile Include="DomainModel\DataTransferObject.cs" />
+    <Compile Include="DomainModel\Entity.cs" />
     <Compile Include="DomainModel\Identification\Identifier.cs" />
     <Compile Include="DomainModel\Identification\IdentifierEquals.cs" />
-    <Compile Include="DomainModel\Identification\IdentityComparer.cs" />
     <Compile Include="DomainModel\Identification\IEquals.cs" />
     <Compile Include="DomainModel\Identification\IIdentifier.cs" />
     <Compile Include="DomainModel\IDomainModel.cs" />
@@ -69,11 +69,14 @@
     <Compile Include="DomainModel\Products\IShape.cs" />
     <Compile Include="DomainModel\Products\ISubstance.cs" />
     <Compile Include="DomainModel\Products\IUnit.cs" />
+    <Compile Include="DomainModel\Products\IUnitGroup.cs" />
     <Compile Include="DomainModel\Products\Package.cs" />
     <Compile Include="DomainModel\Products\ProductSubstance.cs" />
     <Compile Include="DomainModel\Products\Shape.cs" />
     <Compile Include="DomainModel\Products\Substance.cs" />
+    <Compile Include="DomainModel\Products\SubstanceGroup.cs" />
     <Compile Include="DomainModel\Products\Unit.cs" />
+    <Compile Include="DomainModel\Products\UnitGroup.cs" />
     <Compile Include="Factories\CommandFactory.cs" />
     <Compile Include="Factories\DomainFactory.cs" />
     <Compile Include="Factories\ICommandFactory.cs" />

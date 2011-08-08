@@ -6,37 +6,85 @@ using Informedica.GenForm.Library.DomainModel.Users;
 
 namespace Informedica.GenForm.DataAccess.Repositories.Delegates
 {
-    public class UserDelegates
+    public class UserDelegates: RepositoryDelegates<IUser, GenFormUser>
     {
-        public static void InsertOnSubmit(GenFormDataContext context, GenFormUser item)
+        #region Singleton
+
+        private UserDelegates() { }
+
+        private static UserDelegates Instance
         {
-            context.GenFormUser.InsertOnSubmit(item);
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (LockThis)
+                    {
+                        if (_instance == null) _instance = new UserDelegates();
+                    }
+                }
+                return (UserDelegates)_instance;
+            }
         }
 
-        public static void UpdateBo(IUser bo, GenFormUser dao)
+        #endregion
+
+        #region Static Access to Singleton
+
+        public static void Insert(GenFormDataContext context, GenFormUser dao)
         {
-            bo.UserId = dao.UserId;
+            Instance.InsertDelegate(context, dao);
         }
 
         public static IEnumerable<GenFormUser> Fetch(GenFormDataContext context, Func<GenFormUser, Boolean> selector)
         {
-            return context.GenFormUser.Where(selector);
+            return Instance.FetchDelegate(context, selector);
         }
 
         public static void Delete(GenFormDataContext context, Func<GenFormUser, Boolean> selector)
         {
-            var dao = context.GenFormUser.Single(selector);
-            context.GenFormUser.DeleteOnSubmit(dao);
+            Instance.DeleteDelegate(context, selector);
         }
 
         public static Func<GenFormUser, Boolean> GetIdSelector(Int32 id)
         {
+            return Instance.GetIdSelectorDelegate(id);
+        }
+
+        public static Func<GenFormUser, Boolean> GetNameSelector(String name)
+        {
+            return Instance.GetNameSelectorDelegate(name);
+        }
+
+        #endregion
+
+        #region Overrides of RepositoryDelegates<IUser,User>
+
+        protected override void InsertDelegate(GenFormDataContext context, GenFormUser dao)
+        {
+            context.GenFormUser.InsertOnSubmit(dao);
+        }
+
+        protected override IEnumerable<GenFormUser> FetchDelegate(GenFormDataContext context, Func<GenFormUser, bool> selector)
+        {
+            return context.GenFormUser.Where(selector);
+        }
+
+        protected override void DeleteDelegate(GenFormDataContext context, Func<GenFormUser, bool> selector)
+        {
+            context.GenFormUser.DeleteAllOnSubmit(FetchDelegate(context, selector));
+        }
+
+        protected override Func<GenFormUser, bool> GetIdSelectorDelegate(int id)
+        {
             return (user => user.UserId == id);
         }
 
-        public static Func<GenFormUser, Boolean> CreateNameSelector(String name)
+        protected override Func<GenFormUser, bool> GetNameSelectorDelegate(string name)
         {
             return (user => user.UserName == name);
         }
+
+        #endregion
     }
 }

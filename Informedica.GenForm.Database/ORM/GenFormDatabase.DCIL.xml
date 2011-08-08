@@ -1,5 +1,131 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <dcl:schema name="dbo" xmlns:dcl="http://schemas.orm.net/DIL/DCIL" xmlns:dil="http://schemas.orm.net/DIL/DIL" xmlns:ddt="http://schemas.orm.net/DIL/DILDT" xmlns:dep="http://schemas.orm.net/DIL/DILEP" xmlns:dml="http://schemas.orm.net/DIL/DMIL" xmlns:ddl="http://schemas.orm.net/DIL/DDIL">
+	<dcl:domain name="Pharmacy_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Pharmacy_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="Pharmacist_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Pharmacist_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="PharmacyVersion">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="PharmacyVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="Formularium_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Formularium_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="User_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="User_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="FormulariumPharmacist_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="FormulariumPharmacist_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="Role_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Role_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="UserRole_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="UserRole_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="RoleVersion">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="RoleVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="Product_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Product_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="ProductCombination_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="ProductCombination_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="Package_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Package_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="Shape_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Shape_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="Unit_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Unit_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
 	<dcl:domain name="Divisor">
 		<dcl:predefinedDataType name="INTEGER" />
 		<dcl:checkConstraint name="Divisor_Unsigned_Chk">
@@ -9,9 +135,324 @@
 			</dep:comparisonPredicate>
 		</dcl:checkConstraint>
 	</dcl:domain>
-	<dcl:domain name="SubstanceOrdering">
+	<dcl:domain name="ProductVersion">
 		<dcl:predefinedDataType name="INTEGER" />
-		<dcl:checkConstraint name="SubstanceOrdering_Unsigned_Chk">
+		<dcl:checkConstraint name="ProductVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="Brand_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Brand_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="Substance_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Substance_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="ProductSubstance_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="ProductSubstance_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="SortOrder">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="SortOrder_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="FormulariumVersion">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="FormulariumVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="BrandVersion">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="BrandVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="ShapeVersion">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="ShapeVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="SubstanceVersion">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="SubstanceVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="SubstanceGroup_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="SubstanceGroup_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="SubstanceGroupVersion">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="SubstanceGroupVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="UnitGroup_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="UnitGroup_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="UnitGroupVersion">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="UnitGroupVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="UnitVersion">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="UnitVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="ShapePackage_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="ShapePackage_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="ShapeUnit_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="ShapeUnit_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="Chapter_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Chapter_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="FormulariumChapter_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="FormulariumChapter_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="ChapterVersion">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="ChapterVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="FormulariumChapterVersion">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="FormulariumChapterVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="SubstanceDosingAdvice_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="SubstanceDosingAdvice_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="Route_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Route_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="DosingAdviceProduct_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="DosingAdviceProduct_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="DosingAdviceRoute_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="DosingAdviceRoute_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="DosingAdviceChapter_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="DosingAdviceChapter_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="RouteVersion">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="RouteVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="ProductRoute_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="ProductRoute_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="TextItem_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="TextItem_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="FormulariumText_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="FormulariumText_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="ProductFormulariumText_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="ProductFormulariumText_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="FormulariumSubstanceText_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="FormulariumSubstanceText_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="TextItemVersion">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="TextItemVersion_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="FormulariumChapterText_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="FormulariumChapterText_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="TextLog_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="TextLog_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="Indication_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="Indication_Id_Unsigned_Chk">
+			<dep:comparisonPredicate operator="greaterThanOrEquals">
+				<dep:valueKeyword />
+				<ddt:exactNumericLiteral value="0" />
+			</dep:comparisonPredicate>
+		</dcl:checkConstraint>
+	</dcl:domain>
+	<dcl:domain name="ShapeRoute_Id">
+		<dcl:predefinedDataType name="INTEGER" />
+		<dcl:checkConstraint name="ShapeRoute_Id_Unsigned_Chk">
 			<dep:comparisonPredicate operator="greaterThanOrEquals">
 				<dep:valueKeyword />
 				<ddt:exactNumericLiteral value="0" />
@@ -19,104 +460,104 @@
 		</dcl:checkConstraint>
 	</dcl:domain>
 	<dcl:table name="Pharmacy">
-		<dcl:column name="PharmacyId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Pharmacy_Id" />
 		</dcl:column>
-		<dcl:column name="PharmacyName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="PharmacyVersion" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Pharmacy_PK" isPrimary="true">
-			<dcl:columnRef name="PharmacyId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Pharmacy_UC" isPrimary="false">
-			<dcl:columnRef name="PharmacyName" />
+			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
 	</dcl:table>
 	<dcl:table name="Pharmacist">
-		<dcl:column name="PharmacistId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Pharmacist_Id" />
 		</dcl:column>
 		<dcl:column name="UserId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="User_Id" />
 		</dcl:column>
 		<dcl:column name="PharmacyId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Pharmacy_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Pharmacist_PK" isPrimary="true">
-			<dcl:columnRef name="PharmacistId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Pharmacist_UC" isPrimary="false">
 			<dcl:columnRef name="UserId" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="Pharmacist_FK1" targetTable="Pharmacy">
-			<dcl:columnRef sourceName="PharmacyId" targetName="PharmacyId" />
+			<dcl:columnRef sourceName="PharmacyId" targetName="Id" />
 		</dcl:referenceConstraint>
-		<dcl:referenceConstraint name="Pharmacist_FK2" targetTable="GenFormUser">
-			<dcl:columnRef sourceName="UserId" targetName="UserId" />
+		<dcl:referenceConstraint name="Pharmacist_FK2" targetTable="&quot;User&quot;">
+			<dcl:columnRef sourceName="UserId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="Formularium">
-		<dcl:column name="FormulariumId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Formularium_Id" />
 		</dcl:column>
-		<dcl:column name="FormulariumName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="FormulariumVersion" />
 		</dcl:column>
 		<dcl:column name="PharmacistId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Pharmacist_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Formularium_PK" isPrimary="true">
-			<dcl:columnRef name="FormulariumId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Formularium_UC" isPrimary="false">
-			<dcl:columnRef name="FormulariumName" />
+			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="Formularium_FK" targetTable="Pharmacist">
-			<dcl:columnRef sourceName="PharmacistId" targetName="PharmacistId" />
+			<dcl:columnRef sourceName="PharmacistId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="FormulariumPharmacist">
-		<dcl:column name="FormulariumPharmacistId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="FormulariumPharmacist_Id" />
 		</dcl:column>
 		<dcl:column name="PharmacistId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Pharmacist_Id" />
 		</dcl:column>
 		<dcl:column name="FormulariumId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Formularium_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="FormulariumPharmacist_UC" isPrimary="false">
 			<dcl:columnRef name="PharmacistId" />
 			<dcl:columnRef name="FormulariumId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="FormulariumPharmacist_PK" isPrimary="true">
-			<dcl:columnRef name="FormulariumPharmacistId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="FormulariumPharmacist_FK1" targetTable="Pharmacist">
-			<dcl:columnRef sourceName="PharmacistId" targetName="PharmacistId" />
+			<dcl:columnRef sourceName="PharmacistId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="FormulariumPharmacist_FK2" targetTable="Formularium">
-			<dcl:columnRef sourceName="FormulariumId" targetName="FormulariumId" />
+			<dcl:columnRef sourceName="FormulariumId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
-	<dcl:table name="GenFormUser">
-		<dcl:column name="UserId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+	<dcl:table name="&quot;User&quot;" requestedName="User">
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="User_Id" />
 		</dcl:column>
-		<dcl:column name="UserName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
 		<dcl:column name="Email" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:column name="PassWord" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
@@ -130,90 +571,90 @@
 		<dcl:column name="PagerNumber" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="30" />
 		</dcl:column>
-		<dcl:uniquenessConstraint name="GenFormUser_PK" isPrimary="true">
-			<dcl:columnRef name="UserId" />
+		<dcl:uniquenessConstraint name="User_PK" isPrimary="true">
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
-		<dcl:uniquenessConstraint name="GenFormUser_UC1" isPrimary="false">
-			<dcl:columnRef name="UserName" />
+		<dcl:uniquenessConstraint name="User_UC1" isPrimary="false">
+			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
-		<dcl:uniquenessConstraint name="GenFormUser_UC2" isPrimary="false">
+		<dcl:uniquenessConstraint name="User_UC2" isPrimary="false">
 			<dcl:columnRef name="FirstName" />
 			<dcl:columnRef name="LastName" />
 		</dcl:uniquenessConstraint>
-		<dcl:uniquenessConstraint name="GenFormUser_UC3" isPrimary="false">
+		<dcl:uniquenessConstraint name="User_UC3" isPrimary="false">
 			<dcl:columnRef name="PagerNumber" />
 		</dcl:uniquenessConstraint>
-		<dcl:uniquenessConstraint name="GenFormUser_UC4" isPrimary="false">
+		<dcl:uniquenessConstraint name="User_UC4" isPrimary="false">
 			<dcl:columnRef name="Email" />
 		</dcl:uniquenessConstraint>
 	</dcl:table>
 	<dcl:table name="Role">
-		<dcl:column name="RoleId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Role_Id" />
 		</dcl:column>
-		<dcl:column name="RoleName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="RoleVersion" />
 		</dcl:column>
-		<dcl:column name="RoleDescription" isNullable="true" isIdentity="false">
+		<dcl:column name="Description" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="1000" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Role_PK" isPrimary="true">
-			<dcl:columnRef name="RoleId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Role_UC" isPrimary="false">
-			<dcl:columnRef name="RoleName" />
+			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
 	</dcl:table>
 	<dcl:table name="UserRole">
-		<dcl:column name="UserRoleId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="UserRole_Id" />
 		</dcl:column>
 		<dcl:column name="UserId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="User_Id" />
 		</dcl:column>
 		<dcl:column name="RoleId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Role_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="UserRole_UC" isPrimary="false">
 			<dcl:columnRef name="UserId" />
 			<dcl:columnRef name="RoleId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="UserRole_PK" isPrimary="true">
-			<dcl:columnRef name="UserRoleId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
-		<dcl:referenceConstraint name="UserRole_FK1" targetTable="GenFormUser">
-			<dcl:columnRef sourceName="UserId" targetName="UserId" />
+		<dcl:referenceConstraint name="UserRole_FK1" targetTable="&quot;User&quot;">
+			<dcl:columnRef sourceName="UserId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="UserRole_FK2" targetTable="Role">
-			<dcl:columnRef sourceName="RoleId" targetName="RoleId" />
+			<dcl:columnRef sourceName="RoleId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="Product">
-		<dcl:column name="ProductId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Product_Id" />
 		</dcl:column>
 		<dcl:column name="DisplayName" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="ProductVersion" />
 		</dcl:column>
 		<dcl:column name="ShapeId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Shape_Id" />
 		</dcl:column>
 		<dcl:column name="PackageId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Package_Id" />
 		</dcl:column>
 		<dcl:column name="GenericId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Substance_Id" />
 		</dcl:column>
 		<dcl:column name="UnitId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Unit_Id" />
 		</dcl:column>
-		<dcl:column name="ProductName" isNullable="true" isIdentity="false">
+		<dcl:column name="Name" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
 		<dcl:column name="ProductKey" isNullable="true" isIdentity="false">
@@ -232,13 +673,13 @@
 			<dcl:domainRef name="Divisor" />
 		</dcl:column>
 		<dcl:column name="BrandId" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Brand_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Product_PK" isPrimary="true">
-			<dcl:columnRef name="ProductId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Product_UC1" isPrimary="false">
-			<dcl:columnRef name="ProductName" />
+			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Product_UC2" isPrimary="false">
 			<dcl:columnRef name="DisplayName" />
@@ -247,32 +688,32 @@
 			<dcl:columnRef name="ProductKey" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="Product_FK1" targetTable="Shape">
-			<dcl:columnRef sourceName="ShapeId" targetName="ShapeId" />
+			<dcl:columnRef sourceName="ShapeId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="Product_FK2" targetTable="Package">
-			<dcl:columnRef sourceName="PackageId" targetName="PackageId" />
+			<dcl:columnRef sourceName="PackageId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="Product_FK3" targetTable="Brand">
-			<dcl:columnRef sourceName="BrandId" targetName="BrandId" />
+			<dcl:columnRef sourceName="BrandId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="Product_FK4" targetTable="Substance">
-			<dcl:columnRef sourceName="GenericId" targetName="SubstanceId" />
+			<dcl:columnRef sourceName="GenericId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="Product_FK5" targetTable="Unit">
-			<dcl:columnRef sourceName="UnitId" targetName="UnitId" />
+			<dcl:columnRef sourceName="UnitId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="ProductCombination">
-		<dcl:column name="ProductCombinationId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="ProductCombination_Id" />
 		</dcl:column>
 		<dcl:column name="ProductId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Product_Id" />
 		</dcl:column>
 		<dcl:column name="Component" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Product_Id" />
 		</dcl:column>
-		<dcl:column name="ProductCombinationName" isNullable="true" isIdentity="false">
+		<dcl:column name="Name" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="ProductCombination_UC" isPrimary="false">
@@ -280,66 +721,66 @@
 			<dcl:columnRef name="ProductId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="ProductCombination_PK" isPrimary="true">
-			<dcl:columnRef name="ProductCombinationId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="ProductCombination_FK1" targetTable="Product">
-			<dcl:columnRef sourceName="ProductId" targetName="ProductId" />
+			<dcl:columnRef sourceName="ProductId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="ProductCombination_FK2" targetTable="Product">
-			<dcl:columnRef sourceName="Component" targetName="ProductId" />
+			<dcl:columnRef sourceName="Component" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="Package">
-		<dcl:column name="PackageId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Package_Id" />
 		</dcl:column>
-		<dcl:column name="PackageName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:predefinedDataType name="INTEGER" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Package_PK" isPrimary="true">
-			<dcl:columnRef name="PackageId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Package_UC" isPrimary="false">
-			<dcl:columnRef name="PackageName" />
+			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
 	</dcl:table>
 	<dcl:table name="Shape">
-		<dcl:column name="ShapeId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Shape_Id" />
 		</dcl:column>
-		<dcl:column name="ShapeName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="ShapeVersion" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Shape_PK" isPrimary="true">
-			<dcl:columnRef name="ShapeId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Shape_UC" isPrimary="false">
-			<dcl:columnRef name="ShapeName" />
+			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
 	</dcl:table>
 	<dcl:table name="Unit">
-		<dcl:column name="UnitId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Unit_Id" />
 		</dcl:column>
-		<dcl:column name="UnitName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="UnitVersion" />
 		</dcl:column>
 		<dcl:column name="Multiplier" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="DECIMAL" precision="38" scale="19" />
 		</dcl:column>
 		<dcl:column name="UnitGroupId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="UnitGroup_Id" />
 		</dcl:column>
-		<dcl:column name="UnitAbbreviation" isNullable="true" isIdentity="false">
+		<dcl:column name="Abbreviation" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
 		<dcl:column name="Divisor" isNullable="true" isIdentity="false">
@@ -349,571 +790,571 @@
 			<dcl:predefinedDataType name="BOOLEAN" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Unit_PK" isPrimary="true">
-			<dcl:columnRef name="UnitId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Unit_UC1" isPrimary="false">
-			<dcl:columnRef name="UnitName" />
+			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Unit_UC2" isPrimary="false">
-			<dcl:columnRef name="UnitAbbreviation" />
+			<dcl:columnRef name="Abbreviation" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="Unit_FK" targetTable="UnitGroup">
-			<dcl:columnRef sourceName="UnitGroupId" targetName="UnitGroupId" />
+			<dcl:columnRef sourceName="UnitGroupId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="Brand">
-		<dcl:column name="BrandId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Brand_Id" />
 		</dcl:column>
-		<dcl:column name="BrandName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="BrandVersion" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Brand_PK" isPrimary="true">
-			<dcl:columnRef name="BrandId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Brand_UC" isPrimary="false">
-			<dcl:columnRef name="BrandName" />
+			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
 	</dcl:table>
 	<dcl:table name="Substance">
-		<dcl:column name="SubstanceId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Substance_Id" />
 		</dcl:column>
 		<dcl:column name="SubstanceName" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
 		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+			<dcl:domainRef name="SubstanceVersion" />
 		</dcl:column>
 		<dcl:column name="IsGeneric" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="BOOLEAN" />
 		</dcl:column>
 		<dcl:column name="SubstanceGroupId" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="SubstanceGroup_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Substance_PK" isPrimary="true">
-			<dcl:columnRef name="SubstanceId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Substance_UC" isPrimary="false">
 			<dcl:columnRef name="SubstanceName" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="Substance_FK" targetTable="SubstanceGroup">
-			<dcl:columnRef sourceName="SubstanceGroupId" targetName="SubstanceGroupId" />
+			<dcl:columnRef sourceName="SubstanceGroupId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="ProductSubstance">
-		<dcl:column name="ProductSubstanceId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="ProductSubstance_Id" />
 		</dcl:column>
 		<dcl:column name="ProductId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Product_Id" />
 		</dcl:column>
 		<dcl:column name="SubstanceId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Substance_Id" />
 		</dcl:column>
-		<dcl:column name="SubstanceOrdering" isNullable="false" isIdentity="false">
-			<dcl:domainRef name="SubstanceOrdering" />
+		<dcl:column name="SortOrder" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="SortOrder" />
 		</dcl:column>
 		<dcl:column name="Concentration" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="DECIMAL" precision="38" scale="19" />
 		</dcl:column>
-		<dcl:column name="SubstanceQuantity" isNullable="true" isIdentity="false">
+		<dcl:column name="Quantity" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="DECIMAL" precision="38" scale="16" />
 		</dcl:column>
 		<dcl:column name="UnitId" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Unit_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="ProductSubstance_UC" isPrimary="false">
 			<dcl:columnRef name="ProductId" />
 			<dcl:columnRef name="SubstanceId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="ProductSubstance_PK" isPrimary="true">
-			<dcl:columnRef name="ProductSubstanceId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="ProductSubstance_FK1" targetTable="Product">
-			<dcl:columnRef sourceName="ProductId" targetName="ProductId" />
+			<dcl:columnRef sourceName="ProductId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="ProductSubstance_FK2" targetTable="Substance">
-			<dcl:columnRef sourceName="SubstanceId" targetName="SubstanceId" />
+			<dcl:columnRef sourceName="SubstanceId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="ProductSubstance_FK3" targetTable="Unit">
-			<dcl:columnRef sourceName="UnitId" targetName="UnitId" />
+			<dcl:columnRef sourceName="UnitId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="SubstanceGroup">
-		<dcl:column name="SubstanceGroupId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="SubstanceGroup_Id" />
 		</dcl:column>
-		<dcl:column name="SubstanceGroupName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="SubstanceGroupVersion" />
 		</dcl:column>
 		<dcl:column name="MainSubstanceGroupId" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="SubstanceGroup_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="SubstanceGroup_PK" isPrimary="true">
-			<dcl:columnRef name="SubstanceGroupId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="SubstanceGroup_UC" isPrimary="false">
-			<dcl:columnRef name="SubstanceGroupName" />
+			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="SubstanceGroup_FK" targetTable="SubstanceGroup">
-			<dcl:columnRef sourceName="MainSubstanceGroupId" targetName="SubstanceGroupId" />
+			<dcl:columnRef sourceName="MainSubstanceGroupId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="UnitGroup">
-		<dcl:column name="UnitGroupId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="UnitGroup_Id" />
 		</dcl:column>
-		<dcl:column name="UnitGroupName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="UnitGroupVersion" />
 		</dcl:column>
 		<dcl:column name="AllowsConversion" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="BOOLEAN" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="UnitGroup_PK" isPrimary="true">
-			<dcl:columnRef name="UnitGroupId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="UnitGroup_UC" isPrimary="false">
-			<dcl:columnRef name="UnitGroupName" />
+			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
 	</dcl:table>
 	<dcl:table name="ShapePackage">
-		<dcl:column name="ShapePackageId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="ShapePackage_Id" />
 		</dcl:column>
 		<dcl:column name="PackageId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Package_Id" />
 		</dcl:column>
 		<dcl:column name="ShapeId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Shape_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="ShapePackage_UC" isPrimary="false">
 			<dcl:columnRef name="ShapeId" />
 			<dcl:columnRef name="PackageId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="ShapePackage_PK" isPrimary="true">
-			<dcl:columnRef name="ShapePackageId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="ShapePackage_FK1" targetTable="Package">
-			<dcl:columnRef sourceName="PackageId" targetName="PackageId" />
+			<dcl:columnRef sourceName="PackageId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="ShapePackage_FK2" targetTable="Shape">
-			<dcl:columnRef sourceName="ShapeId" targetName="ShapeId" />
+			<dcl:columnRef sourceName="ShapeId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="ShapeUnit">
-		<dcl:column name="ShapeUnitId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="ShapeUnit_Id" />
 		</dcl:column>
 		<dcl:column name="ShapeId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Shape_Id" />
 		</dcl:column>
 		<dcl:column name="UnitId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Unit_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="ShapeUnit_UC" isPrimary="false">
 			<dcl:columnRef name="ShapeId" />
 			<dcl:columnRef name="UnitId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="ShapeUnit_PK" isPrimary="true">
-			<dcl:columnRef name="ShapeUnitId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="ShapeUnit_FK1" targetTable="Shape">
-			<dcl:columnRef sourceName="ShapeId" targetName="ShapeId" />
+			<dcl:columnRef sourceName="ShapeId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="ShapeUnit_FK2" targetTable="Unit">
-			<dcl:columnRef sourceName="UnitId" targetName="UnitId" />
+			<dcl:columnRef sourceName="UnitId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="Chapter">
-		<dcl:column name="ChapterId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Chapter_Id" />
 		</dcl:column>
-		<dcl:column name="ChapterName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="ChapterVersion" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Chapter_PK" isPrimary="true">
-			<dcl:columnRef name="ChapterId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Chapter_UC" isPrimary="false">
-			<dcl:columnRef name="ChapterName" />
+			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
 	</dcl:table>
 	<dcl:table name="FormulariumChapter">
-		<dcl:column name="FormulariumChapterId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="FormulariumChapter_Id" />
 		</dcl:column>
 		<dcl:column name="FormulariumId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Formularium_Id" />
 		</dcl:column>
 		<dcl:column name="ChapterId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Chapter_Id" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="FormulariumChapterVersion" />
 		</dcl:column>
 		<dcl:column name="MainChapterId" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="FormulariumChapter_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="FormulariumChapter_UC" isPrimary="false">
 			<dcl:columnRef name="FormulariumId" />
 			<dcl:columnRef name="ChapterId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="FormulariumChapter_PK" isPrimary="true">
-			<dcl:columnRef name="FormulariumChapterId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="FormulariumChapter_FK1" targetTable="Formularium">
-			<dcl:columnRef sourceName="FormulariumId" targetName="FormulariumId" />
+			<dcl:columnRef sourceName="FormulariumId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="FormulariumChapter_FK2" targetTable="Chapter">
-			<dcl:columnRef sourceName="ChapterId" targetName="ChapterId" />
+			<dcl:columnRef sourceName="ChapterId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="FormulariumChapter_FK3" targetTable="FormulariumChapter">
-			<dcl:columnRef sourceName="MainChapterId" targetName="FormulariumChapterId" />
+			<dcl:columnRef sourceName="MainChapterId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="SubstanceDosingAdvice">
-		<dcl:column name="SubstanceDosingAdviceId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="SubstanceDosingAdvice_Id" />
 		</dcl:column>
 		<dcl:column name="TextItemId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="TextItem_Id" />
 		</dcl:column>
 		<dcl:column name="SubstanceId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Substance_Id" />
 		</dcl:column>
 		<dcl:column name="FormulariumId" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Formularium_Id" />
 		</dcl:column>
 		<dcl:column name="IndicationId" isNullable="true" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Indication_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="SubstanceDosingAdvice_PK" isPrimary="true">
-			<dcl:columnRef name="SubstanceDosingAdviceId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="SubstanceDosingAdvice_UC" isPrimary="false">
 			<dcl:columnRef name="TextItemId" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="SubstanceDosingAdvice_FK1" targetTable="Formularium">
-			<dcl:columnRef sourceName="FormulariumId" targetName="FormulariumId" />
+			<dcl:columnRef sourceName="FormulariumId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="SubstanceDosingAdvice_FK2" targetTable="Substance">
-			<dcl:columnRef sourceName="SubstanceId" targetName="SubstanceId" />
+			<dcl:columnRef sourceName="SubstanceId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="SubstanceDosingAdvice_FK3" targetTable="Indication">
-			<dcl:columnRef sourceName="IndicationId" targetName="IndicationId" />
+			<dcl:columnRef sourceName="IndicationId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="SubstanceDosingAdvice_FK4" targetTable="TextItem">
-			<dcl:columnRef sourceName="TextItemId" targetName="TextItemId" />
+			<dcl:columnRef sourceName="TextItemId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="Route">
-		<dcl:column name="RouteId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Route_Id" />
 		</dcl:column>
-		<dcl:column name="RouteName" isNullable="false" isIdentity="false">
+		<dcl:column name="Name" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="RouteVersion" />
 		</dcl:column>
-		<dcl:column name="RouteAbbreviation" isNullable="true" isIdentity="false">
+		<dcl:column name="Abbreviation" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="50" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Route_PK" isPrimary="true">
-			<dcl:columnRef name="RouteId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Route_UC1" isPrimary="false">
-			<dcl:columnRef name="RouteName" />
+			<dcl:columnRef name="Name" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Route_UC2" isPrimary="false">
-			<dcl:columnRef name="RouteAbbreviation" />
+			<dcl:columnRef name="Abbreviation" />
 		</dcl:uniquenessConstraint>
 	</dcl:table>
 	<dcl:table name="DosingAdviceChapter">
-		<dcl:column name="DosingAdviceChapterId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="DosingAdviceChapter_Id" />
 		</dcl:column>
 		<dcl:column name="SubstanceDosingAdviceId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="SubstanceDosingAdvice_Id" />
 		</dcl:column>
 		<dcl:column name="FormulariumChapterId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="FormulariumChapter_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="DosingAdviceChapter_UC" isPrimary="false">
 			<dcl:columnRef name="SubstanceDosingAdviceId" />
 			<dcl:columnRef name="FormulariumChapterId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="DosingAdviceChapter_PK" isPrimary="true">
-			<dcl:columnRef name="DosingAdviceChapterId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="DosingAdviceChapter_FK1" targetTable="SubstanceDosingAdvice">
-			<dcl:columnRef sourceName="SubstanceDosingAdviceId" targetName="SubstanceDosingAdviceId" />
+			<dcl:columnRef sourceName="SubstanceDosingAdviceId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="DosingAdviceChapter_FK2" targetTable="FormulariumChapter">
-			<dcl:columnRef sourceName="FormulariumChapterId" targetName="FormulariumChapterId" />
+			<dcl:columnRef sourceName="FormulariumChapterId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="DosingAdviceRoute">
-		<dcl:column name="DosingAdviceRouteId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="DosingAdviceRoute_Id" />
 		</dcl:column>
 		<dcl:column name="SubstanceDosingAdviceId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="SubstanceDosingAdvice_Id" />
 		</dcl:column>
 		<dcl:column name="RouteId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Route_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="DosingAdviceRoute_UC" isPrimary="false">
 			<dcl:columnRef name="SubstanceDosingAdviceId" />
 			<dcl:columnRef name="RouteId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="DosingAdviceRoute_PK" isPrimary="true">
-			<dcl:columnRef name="DosingAdviceRouteId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="DosingAdviceRoute_FK1" targetTable="SubstanceDosingAdvice">
-			<dcl:columnRef sourceName="SubstanceDosingAdviceId" targetName="SubstanceDosingAdviceId" />
+			<dcl:columnRef sourceName="SubstanceDosingAdviceId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="DosingAdviceRoute_FK2" targetTable="Route">
-			<dcl:columnRef sourceName="RouteId" targetName="RouteId" />
+			<dcl:columnRef sourceName="RouteId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="DosingAdviceProduct">
-		<dcl:column name="DosingAdviceProductId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="DosingAdviceProduct_Id" />
 		</dcl:column>
 		<dcl:column name="SubstanceDosingAdviceId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="SubstanceDosingAdvice_Id" />
 		</dcl:column>
 		<dcl:column name="ProductId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Product_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="DosingAdviceProduct_UC" isPrimary="false">
 			<dcl:columnRef name="SubstanceDosingAdviceId" />
 			<dcl:columnRef name="ProductId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="DosingAdviceProduct_PK" isPrimary="true">
-			<dcl:columnRef name="DosingAdviceProductId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="DosingAdviceProduct_FK1" targetTable="SubstanceDosingAdvice">
-			<dcl:columnRef sourceName="SubstanceDosingAdviceId" targetName="SubstanceDosingAdviceId" />
+			<dcl:columnRef sourceName="SubstanceDosingAdviceId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="DosingAdviceProduct_FK2" targetTable="Product">
-			<dcl:columnRef sourceName="ProductId" targetName="ProductId" />
+			<dcl:columnRef sourceName="ProductId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="ProductRoute">
-		<dcl:column name="ProductRouteId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="ProductRoute_Id" />
 		</dcl:column>
 		<dcl:column name="ProductId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Product_Id" />
 		</dcl:column>
 		<dcl:column name="RouteId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Route_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="ProductRoute_UC" isPrimary="false">
 			<dcl:columnRef name="ProductId" />
 			<dcl:columnRef name="RouteId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="ProductRoute_PK" isPrimary="true">
-			<dcl:columnRef name="ProductRouteId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="ProductRoute_FK1" targetTable="Product">
-			<dcl:columnRef sourceName="ProductId" targetName="ProductId" />
+			<dcl:columnRef sourceName="ProductId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="ProductRoute_FK2" targetTable="Route">
-			<dcl:columnRef sourceName="RouteId" targetName="RouteId" />
+			<dcl:columnRef sourceName="RouteId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="ShapeRoute">
-		<dcl:column name="ShapeRouteId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="ShapeRoute_Id" />
 		</dcl:column>
 		<dcl:column name="ShapeId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Shape_Id" />
 		</dcl:column>
 		<dcl:column name="RouteId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Route_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="ShapeRoute_UC" isPrimary="false">
 			<dcl:columnRef name="ShapeId" />
 			<dcl:columnRef name="RouteId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="ShapeRoute_PK" isPrimary="true">
-			<dcl:columnRef name="ShapeRouteId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="ShapeRoute_FK1" targetTable="Shape">
-			<dcl:columnRef sourceName="ShapeId" targetName="ShapeId" />
+			<dcl:columnRef sourceName="ShapeId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="ShapeRoute_FK2" targetTable="Route">
-			<dcl:columnRef sourceName="RouteId" targetName="RouteId" />
+			<dcl:columnRef sourceName="RouteId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="TextItem">
-		<dcl:column name="TextItemId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="TextItem_Id" />
 		</dcl:column>
-		<dcl:column name="TextType" isNullable="false" isIdentity="false">
+		<dcl:column name="Type" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="50" />
 		</dcl:column>
-		<dcl:column name="TextStatus" isNullable="false" isIdentity="false">
+		<dcl:column name="Status" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
-		<dcl:column name="VersionTimeStamp" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="TIMESTAMP" />
+		<dcl:column name="Version" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="TextItemVersion" />
 		</dcl:column>
 		<dcl:column name="Text" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" />
 		</dcl:column>
-		<dcl:column name="TextHeading" isNullable="true" isIdentity="false">
+		<dcl:column name="Caption" isNullable="true" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="TextItem_PK" isPrimary="true">
-			<dcl:columnRef name="TextItemId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 	</dcl:table>
 	<dcl:table name="FormulariumText">
-		<dcl:column name="FormulariumTextId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="FormulariumText_Id" />
 		</dcl:column>
 		<dcl:column name="FormulariumId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Formularium_Id" />
 		</dcl:column>
 		<dcl:column name="TextItemId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="TextItem_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="FormulariumText_UC" isPrimary="false">
 			<dcl:columnRef name="FormulariumId" />
 			<dcl:columnRef name="TextItemId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="FormulariumText_PK" isPrimary="true">
-			<dcl:columnRef name="FormulariumTextId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="FormulariumText_FK1" targetTable="Formularium">
-			<dcl:columnRef sourceName="FormulariumId" targetName="FormulariumId" />
+			<dcl:columnRef sourceName="FormulariumId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="FormulariumText_FK2" targetTable="TextItem">
-			<dcl:columnRef sourceName="TextItemId" targetName="TextItemId" />
+			<dcl:columnRef sourceName="TextItemId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="ProductFormulariumText">
-		<dcl:column name="ProductFormulariumTextId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="ProductFormulariumText_Id" />
 		</dcl:column>
 		<dcl:column name="ProductId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Product_Id" />
 		</dcl:column>
 		<dcl:column name="FormulariumId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Formularium_Id" />
 		</dcl:column>
 		<dcl:column name="TextItemId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="TextItem_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="ProductFormulariumText_UC" isPrimary="false">
 			<dcl:columnRef name="ProductId" />
 			<dcl:columnRef name="FormulariumId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="ProductFormulariumText_PK" isPrimary="true">
-			<dcl:columnRef name="ProductFormulariumTextId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="ProductFormulariumText_FK1" targetTable="Product">
-			<dcl:columnRef sourceName="ProductId" targetName="ProductId" />
+			<dcl:columnRef sourceName="ProductId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="ProductFormulariumText_FK2" targetTable="TextItem">
-			<dcl:columnRef sourceName="TextItemId" targetName="TextItemId" />
+			<dcl:columnRef sourceName="TextItemId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="ProductFormulariumText_FK3" targetTable="Formularium">
-			<dcl:columnRef sourceName="FormulariumId" targetName="FormulariumId" />
+			<dcl:columnRef sourceName="FormulariumId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="FormulariumSubstanceText">
-		<dcl:column name="FormulariumSubstanceTextId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="FormulariumSubstanceText_Id" />
 		</dcl:column>
 		<dcl:column name="SubstanceId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Substance_Id" />
 		</dcl:column>
 		<dcl:column name="FormulariumId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Formularium_Id" />
 		</dcl:column>
 		<dcl:column name="TextItemId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="TextItem_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="FormulariumSubstanceText_UC" isPrimary="false">
 			<dcl:columnRef name="FormulariumId" />
 			<dcl:columnRef name="SubstanceId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="FormulariumSubstanceText_PK" isPrimary="true">
-			<dcl:columnRef name="FormulariumSubstanceTextId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="FormulariumSubstanceText_FK1" targetTable="Substance">
-			<dcl:columnRef sourceName="SubstanceId" targetName="SubstanceId" />
+			<dcl:columnRef sourceName="SubstanceId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="FormulariumSubstanceText_FK2" targetTable="TextItem">
-			<dcl:columnRef sourceName="TextItemId" targetName="TextItemId" />
+			<dcl:columnRef sourceName="TextItemId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="FormulariumSubstanceText_FK3" targetTable="Formularium">
-			<dcl:columnRef sourceName="FormulariumId" targetName="FormulariumId" />
+			<dcl:columnRef sourceName="FormulariumId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="FormulariumChapterText">
-		<dcl:column name="FormulariumChapterTextId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="FormulariumChapterText_Id" />
 		</dcl:column>
 		<dcl:column name="FormulariumChapterId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="FormulariumChapter_Id" />
 		</dcl:column>
 		<dcl:column name="TextItemId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="TextItem_Id" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="FormulariumChapterText_UC" isPrimary="false">
 			<dcl:columnRef name="TextItemId" />
 			<dcl:columnRef name="FormulariumChapterId" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="FormulariumChapterText_PK" isPrimary="true">
-			<dcl:columnRef name="FormulariumChapterTextId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="FormulariumChapterText_FK1" targetTable="FormulariumChapter">
-			<dcl:columnRef sourceName="FormulariumChapterId" targetName="FormulariumChapterId" />
+			<dcl:columnRef sourceName="FormulariumChapterId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="FormulariumChapterText_FK2" targetTable="TextItem">
-			<dcl:columnRef sourceName="TextItemId" targetName="TextItemId" />
+			<dcl:columnRef sourceName="TextItemId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="TextLog">
-		<dcl:column name="TextLogId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="TextLog_Id" />
 		</dcl:column>
 		<dcl:column name="LogData" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="TIMESTAMP" />
 		</dcl:column>
 		<dcl:column name="FormulariumId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="Formularium_Id" />
 		</dcl:column>
 		<dcl:column name="TextItemId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="TextItem_Id" />
 		</dcl:column>
 		<dcl:column name="UserId" isNullable="false" isIdentity="false">
-			<dcl:predefinedDataType name="INTEGER" />
+			<dcl:domainRef name="User_Id" />
 		</dcl:column>
 		<dcl:column name="Action" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="TextLog_PK" isPrimary="true">
-			<dcl:columnRef name="TextLogId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="TextLog_UC" isPrimary="false">
 			<dcl:columnRef name="TextItemId" />
@@ -922,27 +1363,27 @@
 			<dcl:columnRef name="FormulariumId" />
 		</dcl:uniquenessConstraint>
 		<dcl:referenceConstraint name="TextLog_FK1" targetTable="Formularium">
-			<dcl:columnRef sourceName="FormulariumId" targetName="FormulariumId" />
+			<dcl:columnRef sourceName="FormulariumId" targetName="Id" />
 		</dcl:referenceConstraint>
 		<dcl:referenceConstraint name="TextLog_FK2" targetTable="TextItem">
-			<dcl:columnRef sourceName="TextItemId" targetName="TextItemId" />
+			<dcl:columnRef sourceName="TextItemId" targetName="Id" />
 		</dcl:referenceConstraint>
-		<dcl:referenceConstraint name="TextLog_FK3" targetTable="GenFormUser">
-			<dcl:columnRef sourceName="UserId" targetName="UserId" />
+		<dcl:referenceConstraint name="TextLog_FK3" targetTable="&quot;User&quot;">
+			<dcl:columnRef sourceName="UserId" targetName="Id" />
 		</dcl:referenceConstraint>
 	</dcl:table>
 	<dcl:table name="Indication">
-		<dcl:column name="IndicationId" isNullable="false" isIdentity="true">
-			<dcl:predefinedDataType name="INTEGER" />
+		<dcl:column name="Id" isNullable="false" isIdentity="false">
+			<dcl:domainRef name="Indication_Id" />
 		</dcl:column>
-		<dcl:column name="IndicationText" isNullable="false" isIdentity="false">
+		<dcl:column name="Text" isNullable="false" isIdentity="false">
 			<dcl:predefinedDataType name="CHARACTER VARYING" length="255" />
 		</dcl:column>
 		<dcl:uniquenessConstraint name="Indication_PK" isPrimary="true">
-			<dcl:columnRef name="IndicationId" />
+			<dcl:columnRef name="Id" />
 		</dcl:uniquenessConstraint>
 		<dcl:uniquenessConstraint name="Indication_UC" isPrimary="false">
-			<dcl:columnRef name="IndicationText" />
+			<dcl:columnRef name="Text" />
 		</dcl:uniquenessConstraint>
 	</dcl:table>
 </dcl:schema>

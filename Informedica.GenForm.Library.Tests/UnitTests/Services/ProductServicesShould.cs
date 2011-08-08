@@ -258,7 +258,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void CallSubstanceRepositoryToAddNewSubstance()
         {
-            var dto = new SubstanceDto {SubstanceId = 0, SubstanceName = "test"};
+            var dto = new SubstanceDto {Id = Guid.Empty, Name = "test"};
             var substance = DomainFactory.Create<ISubstance, SubstanceDto>(dto);
 
             var repos = GetFakeRepository<IRepository<ISubstance>, ISubstance>(substance);
@@ -283,7 +283,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void AddNewSubstanceToRepository()
         {
-            var substance = new SubstanceDto {SubstanceId = 0, SubstanceName = "test"};
+            var substance = new SubstanceDto { Id = Guid.Empty, Name = "test"};
 
             var repos = ObjectFactory.GetInstance<IRepository<ISubstance>>();
             ObjectFactory.Inject(typeof(IRepository<ISubstance>), repos);

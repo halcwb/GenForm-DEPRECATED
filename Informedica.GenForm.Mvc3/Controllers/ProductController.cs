@@ -18,7 +18,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             _services = services;
         }
 
-        public ProductController(): this(ObjectFactory.GetInstance<IProductServices>()) {}
+        public ProductController() : this(ObjectFactory.GetInstance<IProductServices>()) { }
 
         //
         // GET: /Product/
@@ -26,7 +26,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
         public ActionResult GetGenericNames()
         {
             return this.Direct(
-                new[] { new {}} 
+                new[] { new { } }
             );
         }
 
@@ -68,20 +68,20 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult GetProducts()
         {
-            return this.Direct(new {success = true});
+            return this.Direct(new { success = true });
         }
 
         public ActionResult GetProduct(JObject productId)
         {
             var product = String.IsNullOrEmpty(productId.Value<String>("id")) ? LoadProduct(0) : LoadProduct(Int32.Parse(productId.Value<String>("id")));
-            return this.Direct(new { success = true, data = (Object)product ?? new {} });
+            return this.Direct(new { success = true, data = (Object)product ?? new { } });
         }
 
         public IProduct LoadProduct(Int32 productId)
         {
             var product = new Product
                               {
-                                  ProductId = productId,
+                                  ProductProductId = productId,
                                   ProductName = "dopamine (Dynatra) infusievloeistof 200 mg/mL 5 mL ampul",
                                   GenericName = "dopamine",
                                   BrandName = "Dynatra",
@@ -116,7 +116,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             var success = true;
             var message = String.Empty;
             var brand = GetBrandFromJObject(brandDto);
-            
+
             try
             {
                 _services.AddNewBrand(brand);
@@ -127,8 +127,8 @@ namespace Informedica.GenForm.Mvc3.Controllers
                 success = false;
                 message = e.ToString();
             }
-            
-            return this.Direct(new {success, data = brand, message});
+
+            return this.Direct(new { success, data = brand, message });
         }
 
         public ActionResult AddNewGeneric(JObject genericDto)
@@ -136,7 +136,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             var success = true;
             var message = String.Empty;
             var generic = GetGenericFromJObject(genericDto);
-            
+
             try
             {
                 _services.AddNewGeneric(generic);
@@ -147,8 +147,8 @@ namespace Informedica.GenForm.Mvc3.Controllers
                 success = false;
                 message = e.ToString();
             }
-            
-            return this.Direct(new {success, data = generic, message});
+
+            return this.Direct(new { success, data = generic, message });
         }
 
         public ActionResult AddNewShape(JObject shapeDto)
@@ -156,7 +156,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             var success = true;
             var message = String.Empty;
             var shape = GetShapeFromJObject(shapeDto);
-            
+
             try
             {
                 _services.AddNewShape(shape);
@@ -167,8 +167,8 @@ namespace Informedica.GenForm.Mvc3.Controllers
                 success = false;
                 message = e.ToString();
             }
-            
-            return this.Direct(new {success, data = shape, message});
+
+            return this.Direct(new { success, data = shape, message });
         }
 
         public ActionResult AddNewPackage(JObject packageDto)
@@ -176,7 +176,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             var success = true;
             var message = String.Empty;
             var package = GetPackageFromJObject(packageDto);
-            
+
             try
             {
                 _services.AddNewPackage(package);
@@ -187,8 +187,8 @@ namespace Informedica.GenForm.Mvc3.Controllers
                 success = false;
                 message = e.ToString();
             }
-            
-            return this.Direct(new {success, data = package, message});
+
+            return this.Direct(new { success, data = package, message });
         }
 
         public ActionResult AddNewUnit(JObject unitDto)
@@ -196,7 +196,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             var success = true;
             var message = String.Empty;
             var unit = GetUnitFromJObject(unitDto);
-            
+
             try
             {
                 _services.AddNewUnit(unit);
@@ -207,15 +207,15 @@ namespace Informedica.GenForm.Mvc3.Controllers
                 success = false;
                 message = e.ToString();
             }
-            
-            return this.Direct(new {success, data = unit, message});
+
+            return this.Direct(new { success, data = unit, message });
         }
 
         public ActionResult AddNewSubstance(SubstanceDto substanceDto)
         {
             var success = true;
             var message = String.Empty;
-            
+
             try
             {
                 _services.AddNewSubstance(substanceDto);
@@ -226,16 +226,17 @@ namespace Informedica.GenForm.Mvc3.Controllers
                 success = false;
                 message = e.ToString();
             }
-            
-            return this.Direct(new {success, data = substanceDto, message});
+
+            return this.Direct(new { success, data = substanceDto, message });
         }
 
         private IBrand GetBrandFromJObject(JObject brand)
         {
             return new Brand
+                       (new BrandDto
                        {
-                           BrandName = brand.Value<String>("BrandName")
-                       };
+                           Name = brand.Value<String>("BrandName")
+                       });
         }
 
         private IShape GetShapeFromJObject(JObject shape)
@@ -250,7 +251,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
         {
             return new Package
                        {
-                           PackageName= package.Value<String>("PackageName")
+                           PackageName = package.Value<String>("PackageName")
                        };
         }
 
@@ -264,10 +265,10 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         private IUnit GetUnitFromJObject(JObject unit)
         {
-            return new Unit
+            return new Unit(new UnitDto
                        {
-                           UnitName = unit.Value<String>("UnitName")
-                       };
+                           Name = unit.Value<String>("UnitName")
+                       });
         }
 
         public ActionResult DeleteProduct(Int32 id)
@@ -285,7 +286,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
                 message = e.ToString();
             }
 
-            return this.Direct(new {success, message});
+            return this.Direct(new { success, message });
         }
     }
 }

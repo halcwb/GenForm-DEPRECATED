@@ -21,7 +21,8 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
 
         public override void Execute(GenFormDataContext context)
         {
-            _items = GetRepository().Fetch(context, Selector);
+            throw new NotImplementedException();
+            //_items = GetRepository().Fetch(context, Selector);
         }
 
         public IEnumerable<ISubstance> Result

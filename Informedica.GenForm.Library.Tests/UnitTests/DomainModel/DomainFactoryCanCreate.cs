@@ -1,4 +1,5 @@
-﻿using Informedica.GenForm.Assembler;
+﻿using System;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
@@ -55,7 +56,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         [TestMethod]
         public void Substance()
         {
-            var subst = DomainFactory.Create<ISubstance, SubstanceDto>(new SubstanceDto { SubstanceId = 0, SubstanceName = "test"});
+            var subst = DomainFactory.Create<ISubstance, SubstanceDto>(new SubstanceDto { Id = Guid.NewGuid(), Name = "test"});
 
             Assert.IsNotNull(subst);
         }

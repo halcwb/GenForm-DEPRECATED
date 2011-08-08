@@ -16,10 +16,11 @@ namespace Informedica.GenForm.Assembler
             _registry.For<IProductServices>().Use<ProductServices>();
             _registry.For<IBrand>().Use<Brand>();
             _registry.For<IGeneric>().Use<Generic>();
+            _registry.For<ISubstance>().Use<Substance>();
             _registry.For<IShape>().Use<Shape>();
             _registry.For<IPackage>().Use<Package>();
             _registry.For<IUnit>().Use<Unit>();
-            _registry.For<ISubstance>().Use<Substance>();
+            _registry.For<IUnitGroup>().Use<UnitGroup>();
 
             return _registry;
         }

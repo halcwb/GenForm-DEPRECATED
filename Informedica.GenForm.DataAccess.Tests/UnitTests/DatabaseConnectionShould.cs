@@ -82,6 +82,13 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
             Assert.IsTrue(_databaseConnection.GetConnectionString(setting.Name) == setting.ConnectionString);
         }
 
+        [TestMethod]
+        public void ConnectToLocalTestDatabase()
+        {
+            var connection = @"Data Source=hal-win7\informedica;Initial Catalog=GenFormTest;Integrated Security=True";
+            Assert.AreEqual(connection, DatabaseConnection.GetLocalConnectionString(DatabaseConnection.DatabaseName.GenFormTest));
+        }
+
         private IDatabaseSetting GetValidDatabaseSetting()
         {
             var setting = ObjectFactory.GetInstance<IDatabaseSetting>();

@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="AcceptanceTests\SaveNewProductTests.cs" />
     <Compile Include="Fixtures\ProductTestFixtures.cs" />
+    <Compile Include="Fixtures\UnitTestFixtures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegressionTests\LoginAcceptanceTests.cs" />
   </ItemGroup>

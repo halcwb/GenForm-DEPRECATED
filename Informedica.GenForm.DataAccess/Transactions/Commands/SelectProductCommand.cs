@@ -12,7 +12,6 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
 {
     public class SelectProductCommand : ISelectCommand<IProduct>, ICommand, IExecutable
     {
-        private readonly Func<Product, Boolean> _selector;
         private IEnumerable<IProduct> _resultList;
 
         public SelectProductCommand(Int32 id): this(p => p.ProductId == id){}
@@ -24,7 +23,7 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
 
         public SelectProductCommand(Func<Product, Boolean> selector)
         {
-            _selector = selector;
+            throw new NotImplementedException(selector.ToString());
         }
 
         public IEnumerable<IProduct> Result
@@ -34,12 +33,12 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
 
         public void Execute(GenFormDataContext context)
         {
-            _resultList = GetProductRepository().Fetch(context, _selector);
+            _resultList = GetProductRepository().Fetch("");
         }
 
-        private static Repository<IProduct, Product> GetProductRepository()
+        private static Repository<IProduct> GetProductRepository()
         {
-            return ObjectFactory.GetInstance<Repository<IProduct, Product>>();
+            return ObjectFactory.GetInstance<Repository<IProduct>>();
         }
     }
 

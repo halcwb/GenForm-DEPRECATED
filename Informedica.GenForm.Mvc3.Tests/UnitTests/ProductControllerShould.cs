@@ -144,7 +144,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         private static SubstanceDto GetSubstance()
         {
-            return new SubstanceDto {SubstanceId = 0, SubstanceName = "test"};
+            return new SubstanceDto {SubstanceId = 0, Name = "test"};
         }
 
         private void IsolateController()

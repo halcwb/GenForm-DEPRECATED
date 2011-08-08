@@ -1,50 +1,43 @@
 ﻿using System;
-using Informedica.GenForm.Library.DomainModel.Identification;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using StructureMap;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Substance : ISubstance, IDomainModel<Substance, Int32>
+    public class Substance : Entity<Guid, SubstanceDto>, ISubstance
     {
-        private SubstanceDto _dto;
-        private IIdentifier<Int32> _identifier;
+        private SubstanceGroup _group; 
 
-        public Substance(SubstanceDto substanceDto)
+        protected Substance(): base(new SubstanceDto()) {}
+
+        [DefaultConstructor]
+        public Substance(SubstanceDto substanceDto): base(substanceDto.CloneDto())
         {
-            _dto = substanceDto.CloneDto();
+            if (Dto.SubstanceGroupName == null) return;
+            
+            _group = new SubstanceGroup(new SubstanceGroupDto
+                                            {
+                                                Id =  Dto.SubstanceGroupId,
+                                                Name = Dto.SubstanceGroupName
+                                            });
         }
 
-        public int SubstanceId
+        public virtual int SubstanceId
         {
-            get { return _dto.SubstanceId; }
-            set { _dto.SubstanceId = value; }
+            get { return Dto.SubstanceId; }
+            set { Dto.SubstanceId = value; }
         }
 
-        public String SubstanceName
+        public virtual String Name
         {
-            get { return _dto.SubstanceName; }
-            set { _dto.SubstanceName = value; }
+            get { return Dto.Name; }
+            set { Dto.Name = value; }
         }
 
-        public IIdentifier<Int32> Identifier
+        public virtual SubstanceGroup SubstanceGroup
         {
-            get { return _identifier ?? (CreateIdentifier()); }
+            get { return _group; }
+            set { _group = value; }
         }
-
-        private IIdentifier<Int32> CreateIdentifier()
-        {
-            return _identifier = new Identifier<Int32, String>(SubstanceId, SubstanceName, GetEquals());
-        }
-
-        private IdentifierEquals<Int32> GetEquals()
-        {
-            return (s => s.Id == SubstanceId && s.Name == SubstanceName);
-        }
-
-        public Boolean Equals(Substance substance)
-        {
-            return substance.Identifier.Equals(Identifier);
-        }
-
     }
 }

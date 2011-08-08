@@ -2,15 +2,18 @@
 
 namespace Informedica.GenForm.Library.DomainModel.Products.Data
 {
-    public class SubstanceDto: DataTransferObject
+    public class SubstanceDto: DataTransferObject<SubstanceDto, Guid>
     {
-        public String SubstanceName { get; set; }
+        public Guid SubstanceGroupId;
+        public String SubstanceGroupName;
+        public String Name { get; set; }
 
         public int SubstanceId { get; set; }
 
-        public SubstanceDto CloneDto()
+        public override SubstanceDto CloneDto()
         {
-            return CloneDto<SubstanceDto>();
+            return CreateClone();
         }
+
     }
 }

@@ -2,16 +2,20 @@
 
 namespace Informedica.GenForm.Library.DomainModel
 {
-    public abstract class DataTransferObject: ICloneable
+    public abstract class DataTransferObject<TClone, TId>: ICloneable
     {
+        public TId Id { get; set; }
+
         public object Clone()
         {
             return MemberwiseClone();
         }
 
-        protected T CloneDto<T>()
+        public abstract TClone CloneDto();
+
+        protected TClone CreateClone()
         {
-            return (T)Clone();
+            return (TClone)Clone();
         }
     }
 }
