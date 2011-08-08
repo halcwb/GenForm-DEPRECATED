@@ -11,13 +11,19 @@ namespace Informedica.GenForm.DataAccess.Databases
         {
             Formularium2010,
             Genpres, 
-            GenForm
+            GenForm,
+            GenFormTest
         }
 
         public static string GetConnectionString(DatabaseName database) 
         {
             var instance = new DatabaseConnection();
             return instance.GetConnectionString(Enum.GetName(typeof(DatabaseName), database));
+        }
+
+        public static string GetLocalConnectionString(DatabaseName databaseName)
+        {
+            return @"Data Source=hal-win7\informedica;Initial Catalog=GenFormTest;Integrated Security=True";
         }
 
         public static string GetComputerName()

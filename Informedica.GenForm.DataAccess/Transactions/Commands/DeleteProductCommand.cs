@@ -25,7 +25,8 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
 
         public override void Execute(GenFormDataContext context)
         {
-            GetRepository().Delete(context, Selector);
+            throw new NotImplementedException();
+            //GetRepository().Delete(1);
         }
     }
 

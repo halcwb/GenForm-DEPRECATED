@@ -6,14 +6,12 @@ using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
-using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Transactions;
 using Informedica.GenForm.Library.Transactions.Commands;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 using TypeMock.ArrangeActAssert;
-using Product = Informedica.GenForm.Database.Product;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
 {
@@ -26,7 +24,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         private TestContext testContextInstance;
         private IInsertCommand<IProduct> _command;
         private IProduct _product;
-        private Repository<IProduct, Product> _fakeRepository;
+        private Repository<IProduct> _fakeRepository;
         private GenFormDataContext _fakeContext;
 
         /// <summary>
@@ -127,7 +125,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         {
             _product = CreateNewProduct();
             _command = GetInsertProductCommand(_product);
-            _fakeRepository = Isolate.Fake.Instance<Repository<IProduct, Product>>();
+            _fakeRepository = Isolate.Fake.Instance<Repository<IProduct>>();
             _fakeContext = Isolate.Fake.Instance<GenFormDataContext>();
             ObjectFactory.Inject(_fakeRepository);
         }

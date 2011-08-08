@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using Informedica.GenForm.DataAccess.Databases;
-using Informedica.GenForm.DataAccess.DataMappers;
-using Informedica.GenForm.DataAccess.Repositories.Delegates;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.Repositories;
 using StructureMap;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class Repository<TBo, TDao> : IRepository<TBo>
+    public class Repository<TBo> : IRepository<TBo>
     {
         private GenFormDataContext _context;
         private RollbackObject _rollback;
@@ -35,7 +33,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
         /// <param name="bo">Business Object to insert</param>
         public void Insert(TBo bo)
         {
-            Insert<IDataMapper<TBo, TDao>>(bo);
+            Insert();
         }
 
         /// <summary>
@@ -45,20 +43,18 @@ namespace Informedica.GenForm.DataAccess.Repositories
         /// <param name="bo">Business Object to insert</param>
         public void Insert(GenFormDataContext context, TBo bo)
         {
-            Insert<IDataMapper<TBo, TDao>>(context, bo);
         }
 
         // Locally handled context and transaction
-        private void Insert<TM>(TBo bo) where TM : IDataMapper<TBo, TDao>
+        private void Insert()
         {
             using (var context = GetDataContext())
             {
                 SetUpTransaction(context);
 
-                var dao = InsertMappedDao<TM>(context, bo);
                 try
                 {
-                    SubmitAndRefresh(context, bo, dao);
+                    Submit(context);
                 }
                 catch (Exception)
                 {
@@ -69,47 +65,6 @@ namespace Informedica.GenForm.DataAccess.Repositories
             }
         }
 
-        // Insert with context managed by caller
-        private static TDao InsertMappedDao<TM>(GenFormDataContext context, TBo bo) where TM : IDataMapper<TBo, TDao>
-        {
-            var dao = CreateDao();
-            GetMapper<TM>().MapFromBoToDao(bo, dao);
-
-            InsertOnSubmit(context, dao);
-            return dao;
-        }
-
-        // Refresh bo after insert with for example new id
-        private static void RefreshBo(TBo bo, TDao dao)
-        {
-            GetRefreshMethod()(bo, dao);
-        }
-
-        // Refresh method to be used to refresh bo
-        private static Refresh<TBo, TDao> GetRefreshMethod()
-        {
-            return ObjectFactory.GetInstance<Refresh<TBo, TDao>>();
-        }
-
-        // Perform the actual insert
-        private static void InsertOnSubmit(GenFormDataContext ctx, TDao dao)
-        {
-            GetInsertMethod()(ctx, dao);
-        }
-
-        // Get the method to insert the bo
-        private static Insert<TDao> GetInsertMethod()
-        {
-            return ObjectFactory.GetInstance<Insert<TDao>>();
-        }
-
-        // Insert using the context managed by caller
-        private static void Insert<TM>(GenFormDataContext context, TBo bo) where TM : IDataMapper<TBo, TDao>
-        {
-            var dao = InsertMappedDao<TM>(context, bo);
-
-            SubmitAndRefresh(context, bo, dao);
-        }
 
         #endregion
 
@@ -125,7 +80,6 @@ namespace Informedica.GenForm.DataAccess.Repositories
         /// <param name="id">Id of Business Object to be deleted</param>
         public void Delete(int id)
         {
-                Delete(GetIdSelector(id));
         }
 
         /// <summary>
@@ -134,7 +88,6 @@ namespace Informedica.GenForm.DataAccess.Repositories
         /// <param name="name">Name of business object(s) to be deleted</param>
         public void Delete(String name)
         {
-            Delete(GetNameSelector(name));
         }
 
         /// <summary>
@@ -144,7 +97,6 @@ namespace Informedica.GenForm.DataAccess.Repositories
         /// <param name="id">Id of Business Object to be deleted</param>
         public void Delete(GenFormDataContext context, Int32 id)
         {
-            Delete(context, GetIdSelector(id));
         }
 
         /// <summary>
@@ -154,7 +106,6 @@ namespace Informedica.GenForm.DataAccess.Repositories
         /// <param name="name">Name of Business Object(s) to be deleted</param>
         public void Delete(GenFormDataContext context, String name)
         {
-            Delete(context, GetNameSelector(name));
         }
 
         /// <summary>
@@ -166,60 +117,12 @@ namespace Informedica.GenForm.DataAccess.Repositories
             Delete(((IIdentifiable<Int32>)bo).Identifier.Id);
         }
 
-        // Localy managed delete method
-        private void Delete(Func<TDao, Boolean> selector)
-        {
-            using (var context = GetDataContext())
-            {
-                SetUpTransaction(context);
-                GetDeleteMethod()(context, selector);
-                try
-                {
-                    context.SubmitChanges();
-                }
-                catch (Exception)
-                {
-                    TearDownTransaction(context);
-                    throw;
-                }
-                EndTransaction(context);
-            }
-        }
-
-        /// <summary>
-        /// Delete method with context managed by caller
-        /// </summary>
-        /// <param name="context">Datacontext</param>
-        /// <param name="selector">Selector method to identify object(s) to delete</param>
-        public void Delete(GenFormDataContext context, Func<TDao, Boolean> selector)
-        {
-            GetDeleteMethod()(context, selector);
-            context.SubmitChanges();
-        }
 
         // Delete method that uses a context and a selector to perform delete
-        private static Delete<TDao> GetDeleteMethod()
-        {
-            return ObjectFactory.GetInstance<Delete<TDao>>();
-        }
 
         #endregion
 
         #region Fetch
-
-        /// <summary>
-        /// Fetch Business Objects according to a selector function with datacontext
-        /// managed by caller
-        /// </summary>
-        /// <param name="context">Datacontext</param>
-        /// <param name="selector">Selector function</param>
-        /// <returns>List of fetched Business Objects</returns>
-        public IEnumerable<TBo> Fetch(GenFormDataContext context, Func<TDao, Boolean> selector)
-        {
-            var fetch = ObjectFactory.GetInstance<Fetch<TDao>>();
-            var list = fetch(context, selector);
-            return CreateBoListFromDaoList(list);
-        }
 
         /// <summary>
         /// Fetch a Business Object by Id
@@ -228,7 +131,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
         /// <returns>List with one item or empty list</returns>
         public IEnumerable<TBo> Fetch(int id)
         {
-            return Fetch(GetDataContext(), GetIdSelector(id));
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -238,20 +141,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
         /// <returns>Empty list or with one or more Business Objects</returns>
         public IEnumerable<TBo> Fetch(string name)
         {
-            return Fetch(GetDataContext(), GetNameSelector(name));
-        }
-
-        private static IEnumerable<TBo> CreateBoListFromDaoList(IEnumerable<TDao> list)
-        {
-            IList<TBo> boList = new List<TBo>();
-            var mapper = GetMapper<IDataMapper<TBo, TDao>>();
-            foreach (var dao in list)
-            {
-                var bo = CreateNewBo();
-                mapper.MapFromDaoToBo(dao, bo);
-                boList.Add(bo);
-            }
-            return boList;
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -286,16 +176,6 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         #region Mapping
 
-        private static TM GetMapper<TM>()
-        {
-            return ObjectFactory.GetInstance<TM>();
-        }
-
-        private static TDao CreateDao()
-        {
-            return ObjectFactory.GetInstance<TDao>();
-        }
-
         #endregion
 
         #region Transaction Handling
@@ -319,31 +199,15 @@ namespace Informedica.GenForm.DataAccess.Repositories
             context.Transaction = context.Connection.BeginTransaction();
         }
 
-        private static void SubmitAndRefresh(GenFormDataContext context, TBo bo, TDao dao)
+        private static void Submit(GenFormDataContext context)
         {
             context.SubmitChanges();
-            RefreshBo(bo, dao);
         }
 
 
         #endregion
 
         #region Helper
-
-        private static Func<TDao, Boolean> GetIdSelector(Int32 id)
-        {
-            return ObjectFactory.GetInstance<SelectorOfInt<TDao>>()(id);
-        }
-
-        private static TBo CreateNewBo()
-        {
-            return ObjectFactory.GetInstance<TBo>();
-        }
-
-        private static Func<TDao, Boolean> GetNameSelector(String name)
-        {
-            return ObjectFactory.GetInstance<SelectorOfString<TDao>>()(name);
-        }
 
         #endregion
 
@@ -361,9 +225,9 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         public class RollbackObject : IRollbackObject
         {
-            private Repository<TBo, TDao> _repository;
+            private Repository<TBo> _repository;
 
-            internal RollbackObject(Repository<TBo, TDao> repository)
+            internal RollbackObject(Repository<TBo> repository)
             {
                 _repository = repository;
             }

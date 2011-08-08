@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Informedica.GenForm.Library.DomainModel.Products.Data
 {
-    public class ProductDto: DataTransferObject
+    public class ProductDto: DataTransferObject<ProductDto, Guid>
     {
-        public int Id;
-        public string ProductName;
+        public int ProductId;
+        public string ProductName { get; set; }
         public string DisplayName;
         public string GenericName;
         public string BrandName;
@@ -18,9 +19,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Data
         public string ProductCode;
 
 
-        public ProductDto CloneDto()
+        public override ProductDto CloneDto()
         {
-            return CloneDto<ProductDto>();
+            return CreateClone();
         }
 
     }

@@ -36,6 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\Dependencies\NHibernate\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\Dependencies\NHibernate\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -47,20 +53,27 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappings\BrandMap.cs" />
+    <Compile Include="Mappings\SubstanceGroupMap.cs" />
+    <Compile Include="Mappings\SubstanceMap.cs" />
+    <Compile Include="Mappings\UnitGroupMap.cs" />
+    <Compile Include="Mappings\UnitMap.cs" />
     <Compile Include="Repositories\Delegates\BrandDelegates.cs" />
-    <Compile Include="Repositories\Delegates\SelectorOfString.cs" />
-    <Compile Include="Repositories\Delegates\Delete.cs" />
-    <Compile Include="Repositories\Delegates\Fetch.cs" />
     <Compile Include="Repositories\Delegates\GenericDelegates.cs" />
-    <Compile Include="Repositories\Delegates\SelectorOfInt.cs" />
-    <Compile Include="Repositories\Delegates\Insert.cs" />
     <Compile Include="Repositories\Delegates\PackageDelegates.cs" />
     <Compile Include="Repositories\Delegates\ProductDelegates.cs" />
     <Compile Include="Repositories\Delegates\ShapeDelegates.cs" />
     <Compile Include="Repositories\Delegates\SubstanceDelegates.cs" />
     <Compile Include="Repositories\Delegates\UnitDelegates.cs" />
-    <Compile Include="Repositories\Delegates\Refresh.cs" />
     <Compile Include="Repositories\Delegates\UserDelegates.cs" />
+    <Compile Include="Repositories\Delete.cs" />
+    <Compile Include="Repositories\Fetch.cs" />
+    <Compile Include="Repositories\Insert.cs" />
+    <Compile Include="Repositories\RepositoryDelegates.cs" />
+    <Compile Include="Repositories\SelectorOfInt.cs" />
+    <Compile Include="Repositories\SelectorOfString.cs" />
+    <Compile Include="Repositories\Update.cs" />
+    <Compile Include="SessionFactoryCreator.cs" />
     <Compile Include="Transactions\Commands\CommandBase.cs" />
     <Compile Include="Transactions\Commands\DeleteProductCommand.cs" />
     <Compile Include="Transactions\Commands\DeleteSubstanceCommand.cs" />
@@ -68,16 +81,7 @@
     <Compile Include="Databases\DatabaseConnection.cs" />
     <Compile Include="Databases\DatabaseSetting.cs" />
     <Compile Include="DataContexts\DataContextFactory.cs" />
-    <Compile Include="DataMappers\BrandMapper.cs" />
-    <Compile Include="DataMappers\GenericMapper.cs" />
-    <Compile Include="DataMappers\PackageMapper.cs" />
-    <Compile Include="DataMappers\ProductMapper.cs" />
-    <Compile Include="DataMappers\ShapeMapper.cs" />
-    <Compile Include="DataMappers\SubstanceMapper.cs" />
-    <Compile Include="DataMappers\UnitMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataMappers\IDataMapper.cs" />
-    <Compile Include="DataMappers\UserMapper.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Transactions\Commands\InsertSubstanceCommand.cs" />
     <Compile Include="Transactions\Commands\SelectProductCommand.cs" />

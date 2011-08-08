@@ -27,7 +27,7 @@ namespace Informedica.GenForm.Tests.Fixtures
         {
             return new ProductDto
             {
-                Id = 0,
+                ProductId =  0,
                 ProductName = ProductName,
                 BrandName = Brand,
                 DisplayName = DisplayName,

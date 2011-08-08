@@ -1,6 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.Assembler;
-using Informedica.GenForm.Library.DomainModel.Identification;
+using Informedica.GenForm.Library.DomainModel;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
@@ -57,11 +57,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         [TestMethod]
         public void ThatCanIdentifyAnObject()
         {
-            var substanceDto = new SubstanceDto { SubstanceId = 1, SubstanceName = "paracetamol"};
+            var substanceDto = new SubstanceDto { Id = Guid.NewGuid(), Name = "paracetamol"};
             ISubstance subst = DomainFactory.Create<ISubstance, SubstanceDto>(substanceDto);
             var subst2 = DomainFactory.Create<ISubstance, SubstanceDto>(substanceDto);
-
-            Assert.IsTrue(IdentityComparer.Compare(subst, subst2));
+            
+            Assert.IsTrue(subst2.Equals(subst));
         }
     }
 }

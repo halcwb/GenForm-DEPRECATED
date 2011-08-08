@@ -108,7 +108,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             isPopulated = isPopulated && _product.GenericName == _dto.GenericName;
             isPopulated = isPopulated && _product.PackageName == _dto.PackageName;
             isPopulated = isPopulated && _product.ProductCode == _dto.ProductCode;
-            isPopulated = isPopulated && _product.ProductId == _dto.Id;
+            isPopulated = isPopulated && _product.ProductProductId == _dto.ProductId;
             isPopulated = isPopulated && _product.ProductName == _dto.ProductName;
             isPopulated = isPopulated && _product.Quantity == _dto.Quantity;
             isPopulated = isPopulated && _product.ShapeName == _dto.ShapeName;

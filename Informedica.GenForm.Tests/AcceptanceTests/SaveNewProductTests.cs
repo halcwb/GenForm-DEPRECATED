@@ -2,6 +2,7 @@
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Mvc3.Controllers;
@@ -310,7 +311,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         private IUnit CreateNewUnit(string name)
         {
             var unit = ObjectFactory.GetInstance<IUnit>();
-            unit.UnitName = name;
+            unit.Name = name;
 
             return unit;
         }
@@ -326,8 +327,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private IBrand CreateNewBrand(String name)
         {
-            var brand = ObjectFactory.GetInstance<IBrand>();
-            brand.BrandName = name;
+            var brand = DomainFactory.Create<IBrand, BrandDto>(new BrandDto { Name = "Dynatra"});
 
             return brand;
         }

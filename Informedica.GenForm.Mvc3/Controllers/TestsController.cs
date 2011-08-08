@@ -144,7 +144,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
                            GenericName = "dopamine",
                            PackageName = "ampul",
                            ProductCode = "1",
-                           ProductId = 1,
+                           ProductProductId = 1,
                            ProductName = "dopamine Dynatra 5 mL ampul",
                            Quantity = 5,
                            ShapeName = "infusievloeistof",

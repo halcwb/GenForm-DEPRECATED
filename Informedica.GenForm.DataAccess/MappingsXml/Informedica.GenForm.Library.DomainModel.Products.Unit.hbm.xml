@@ -1,0 +1,23 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Products.Unit, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`Unit`">
+    <id name="Id" type="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" />
+      <generator class="guid.comb" />
+    </id>
+    <property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Name" />
+    </property>
+    <property name="Abbreviation" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Abbreviation" />
+    </property>
+    <property name="Multiplier" type="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Multiplier" />
+    </property>
+    <property name="IsReference" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="IsReference" />
+    </property>
+    <many-to-one cascade="save-update" class="Informedica.GenForm.Library.DomainModel.Products.UnitGroup, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="UnitGroup">
+      <column name="UnitGroup_id" not-null="true" />
+    </many-to-one>
+  </class>
+</hibernate-mapping>

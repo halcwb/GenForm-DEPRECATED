@@ -5,6 +5,160 @@
 	<dms:setSchemaStatement>
 		<ddt:characterStringLiteral value="DBO" />
 	</dms:setSchemaStatement>
+	<ddl:domainDefinition name="Pharmacy_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="Pharmacy_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="Pharmacist_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="Pharmacist_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="PharmacyVersion" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="PharmacyVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="Formularium_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="Formularium_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="User_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="User_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="FormulariumPharmacist_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="FormulariumPharmacist_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="Role_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="Role_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="UserRole_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="UserRole_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="RoleVersion" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="RoleVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="Product_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="Product_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="ProductCombination_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="ProductCombination_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="Package_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="Package_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="Shape_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="Shape_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="Unit_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="Unit_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
 	<ddl:domainDefinition name="Divisor" schema="dbo">
 		<ddt:exactNumeric type="INTEGER" />
 		<ddl:domainConstraintDefinition name="Divisor_Unsigned_Chk">
@@ -16,9 +170,394 @@
 			</ddl:checkConstraintDefinition>
 		</ddl:domainConstraintDefinition>
 	</ddl:domainDefinition>
-	<ddl:domainDefinition name="SubstanceOrdering" schema="dbo">
+	<ddl:domainDefinition name="ProductVersion" schema="dbo">
 		<ddt:exactNumeric type="INTEGER" />
-		<ddl:domainConstraintDefinition name="SubstanceOrdering_Unsigned_Chk">
+		<ddl:domainConstraintDefinition name="ProductVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="Brand_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="Brand_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="Substance_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="Substance_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="ProductSubstance_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="ProductSubstance_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="SortOrder" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="SortOrder_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="FormulariumVersion" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="FormulariumVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="BrandVersion" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="BrandVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="ShapeVersion" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="ShapeVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="SubstanceVersion" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="SubstanceVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="SubstanceGroup_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="SubstanceGroup_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="SubstanceGroupVersion" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="SubstanceGroupVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="UnitGroup_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="UnitGroup_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="UnitGroupVersion" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="UnitGroupVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="UnitVersion" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="UnitVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="ShapePackage_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="ShapePackage_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="ShapeUnit_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="ShapeUnit_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="Chapter_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="Chapter_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="FormulariumChapter_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="FormulariumChapter_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="ChapterVersion" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="ChapterVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="FormulariumChapterVersion" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="FormulariumChapterVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="SubstanceDosingAdvice_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="SubstanceDosingAdvice_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="Route_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="Route_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="DosingAdviceProduct_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="DosingAdviceProduct_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="DosingAdviceRoute_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="DosingAdviceRoute_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="DosingAdviceChapter_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="DosingAdviceChapter_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="RouteVersion" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="RouteVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="ProductRoute_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="ProductRoute_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="TextItem_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="TextItem_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="FormulariumText_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="FormulariumText_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="ProductFormulariumText_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="ProductFormulariumText_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="FormulariumSubstanceText_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="FormulariumSubstanceText_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="TextItemVersion" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="TextItemVersion_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="FormulariumChapterText_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="FormulariumChapterText_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="TextLog_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="TextLog_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="Indication_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="Indication_Id_Unsigned_Chk">
+			<ddl:checkConstraintDefinition>
+				<dep:comparisonPredicate operator="greaterThanOrEquals">
+					<dep:valueKeyword />
+					<ddt:exactNumericLiteral value="0" />
+				</dep:comparisonPredicate>
+			</ddl:checkConstraintDefinition>
+		</ddl:domainConstraintDefinition>
+	</ddl:domainDefinition>
+	<ddl:domainDefinition name="ShapeRoute_Id" schema="dbo">
+		<ddt:exactNumeric type="INTEGER" />
+		<ddl:domainConstraintDefinition name="ShapeRoute_Id_Unsigned_Chk">
 			<ddl:checkConstraintDefinition>
 				<dep:comparisonPredicate operator="greaterThanOrEquals">
 					<dep:valueKeyword />
@@ -28,73 +567,57 @@
 		</ddl:domainConstraintDefinition>
 	</ddl:domainDefinition>
 	<ddl:tableDefinition name="Pharmacy" schema="dbo">
-		<ddl:columnDefinition name="PharmacyId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="Pharmacy_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="PharmacyName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:domain name="PharmacyVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Pharmacy_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="PharmacyId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Pharmacy_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="PharmacyName" />
+				<dep:simpleColumnReference name="Name" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="Pharmacist" schema="dbo">
-		<ddl:columnDefinition name="PharmacistId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="Pharmacist_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="UserId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="User_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="PharmacyId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Pharmacy_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Pharmacist_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="PharmacistId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Pharmacist_UC">
@@ -104,72 +627,56 @@
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="Formularium" schema="dbo">
-		<ddl:columnDefinition name="FormulariumId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="Formularium_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="FormulariumName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:domain name="FormulariumVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="PharmacistId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Pharmacist_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Formularium_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="FormulariumId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Formularium_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="FormulariumName" />
+				<dep:simpleColumnReference name="Name" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="FormulariumPharmacist" schema="dbo">
-		<ddl:columnDefinition name="FormulariumPharmacistId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="FormulariumPharmacist_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="PharmacistId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Pharmacist_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="FormulariumId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Formularium_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -182,26 +689,18 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="FormulariumPharmacist_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="FormulariumPharmacistId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
-	<ddl:tableDefinition name="GenFormUser" schema="dbo">
-		<ddl:columnDefinition name="UserId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+	<ddl:tableDefinition name="&quot;User&quot;" schema="dbo">
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="User_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="UserName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
@@ -213,8 +712,8 @@
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:exactNumeric type="INTEGER" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -234,97 +733,81 @@
 		<ddl:columnDefinition name="PagerNumber">
 			<ddt:characterString type="CHARACTER VARYING" length="30" />
 		</ddl:columnDefinition>
-		<ddl:tableConstraintDefinition name="GenFormUser_PK">
+		<ddl:tableConstraintDefinition name="User_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="UserId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
-		<ddl:tableConstraintDefinition name="GenFormUser_UC1">
+		<ddl:tableConstraintDefinition name="User_UC1">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="UserName" />
+				<dep:simpleColumnReference name="Name" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
-		<ddl:tableConstraintDefinition name="GenFormUser_UC2">
+		<ddl:tableConstraintDefinition name="User_UC2">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
 				<dep:simpleColumnReference name="FirstName" />
 				<dep:simpleColumnReference name="LastName" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
-		<ddl:tableConstraintDefinition name="GenFormUser_UC3">
+		<ddl:tableConstraintDefinition name="User_UC3">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
 				<dep:simpleColumnReference name="PagerNumber" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
-		<ddl:tableConstraintDefinition name="GenFormUser_UC4">
+		<ddl:tableConstraintDefinition name="User_UC4">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
 				<dep:simpleColumnReference name="Email" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="Role" schema="dbo">
-		<ddl:columnDefinition name="RoleId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="Role_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="RoleName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:domain name="RoleVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="RoleDescription">
+		<ddl:columnDefinition name="Description">
 			<ddt:characterString type="CHARACTER VARYING" length="1000" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Role_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="RoleId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Role_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="RoleName" />
+				<dep:simpleColumnReference name="Name" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="UserRole" schema="dbo">
-		<ddl:columnDefinition name="UserRoleId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="UserRole_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="UserId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="User_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="RoleId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Role_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -337,21 +820,13 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="UserRole_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="UserRoleId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="Product" schema="dbo">
-		<ddl:columnDefinition name="ProductId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="Product_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -362,37 +837,37 @@
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:domain name="ProductVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="ShapeId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Shape_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="PackageId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Package_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="GenericId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Substance_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="UnitId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Unit_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="ProductName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="ProductKey">
@@ -411,16 +886,16 @@
 			<ddt:domain name="Divisor" schema="dbo" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="BrandId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Brand_Id" schema="dbo" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Product_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="ProductId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Product_UC1">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="ProductName" />
+				<dep:simpleColumnReference name="Name" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Product_UC2">
@@ -435,33 +910,25 @@
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="ProductCombination" schema="dbo">
-		<ddl:columnDefinition name="ProductCombinationId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="ProductCombination_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="ProductId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Product_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Component">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Product_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="ProductCombinationName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="ProductCombination_UC">
@@ -472,109 +939,85 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="ProductCombination_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="ProductCombinationId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="Package" schema="dbo">
-		<ddl:columnDefinition name="PackageId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="Package_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="PackageName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:exactNumeric type="INTEGER" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Package_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="PackageId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Package_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="PackageName" />
+				<dep:simpleColumnReference name="Name" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="Shape" schema="dbo">
-		<ddl:columnDefinition name="ShapeId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="Shape_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="ShapeName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:domain name="ShapeVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Shape_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="ShapeId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Shape_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="ShapeName" />
+				<dep:simpleColumnReference name="Name" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="Unit" schema="dbo">
-		<ddl:columnDefinition name="UnitId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="Unit_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="UnitName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:domain name="UnitVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -586,12 +1029,12 @@
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="UnitGroupId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="UnitGroup_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="UnitAbbreviation">
+		<ddl:columnDefinition name="Abbreviation">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="Divisor">
@@ -602,69 +1045,53 @@
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Unit_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="UnitId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Unit_UC1">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="UnitName" />
+				<dep:simpleColumnReference name="Name" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Unit_UC2">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="UnitAbbreviation" />
+				<dep:simpleColumnReference name="Abbreviation" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="Brand" schema="dbo">
-		<ddl:columnDefinition name="BrandId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="Brand_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="BrandName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:domain name="BrandVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Brand_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="BrandId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Brand_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="BrandName" />
+				<dep:simpleColumnReference name="Name" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="Substance" schema="dbo">
-		<ddl:columnDefinition name="SubstanceId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="Substance_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -676,7 +1103,7 @@
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+			<ddt:domain name="SubstanceVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -685,11 +1112,11 @@
 			<ddt:boolean type="BOOLEAN" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="SubstanceGroupId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="SubstanceGroup_Id" schema="dbo" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Substance_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="SubstanceId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Substance_UC">
@@ -699,34 +1126,26 @@
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="ProductSubstance" schema="dbo">
-		<ddl:columnDefinition name="ProductSubstanceId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="ProductSubstance_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="ProductId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Product_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="SubstanceId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Substance_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="SubstanceOrdering">
-			<ddt:domain name="SubstanceOrdering" schema="dbo" />
+		<ddl:columnDefinition name="SortOrder">
+			<ddt:domain name="SortOrder" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -734,11 +1153,11 @@
 		<ddl:columnDefinition name="Concentration">
 			<ddt:exactNumeric type="DECIMAL" precision="38" scale="19" />
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="SubstanceQuantity">
+		<ddl:columnDefinition name="Quantity">
 			<ddt:exactNumeric type="DECIMAL" precision="38" scale="16" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="UnitId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Unit_Id" schema="dbo" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="ProductSubstance_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
@@ -748,74 +1167,58 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="ProductSubstance_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="ProductSubstanceId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="SubstanceGroup" schema="dbo">
-		<ddl:columnDefinition name="SubstanceGroupId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="SubstanceGroup_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="SubstanceGroupName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:domain name="SubstanceGroupVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="MainSubstanceGroupId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="SubstanceGroup_Id" schema="dbo" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="SubstanceGroup_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="SubstanceGroupId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="SubstanceGroup_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="SubstanceGroupName" />
+				<dep:simpleColumnReference name="Name" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="UnitGroup" schema="dbo">
-		<ddl:columnDefinition name="UnitGroupId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="UnitGroup_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="UnitGroupName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:domain name="UnitGroupVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -825,38 +1228,30 @@
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="UnitGroup_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="UnitGroupId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="UnitGroup_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="UnitGroupName" />
+				<dep:simpleColumnReference name="Name" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="ShapePackage" schema="dbo">
-		<ddl:columnDefinition name="ShapePackageId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="ShapePackage_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="PackageId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Package_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="ShapeId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Shape_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -869,33 +1264,25 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="ShapePackage_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="ShapePackageId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="ShapeUnit" schema="dbo">
-		<ddl:columnDefinition name="ShapeUnitId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="ShapeUnit_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="ShapeId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Shape_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="UnitId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Unit_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -908,83 +1295,67 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="ShapeUnit_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="ShapeUnitId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="Chapter" schema="dbo">
-		<ddl:columnDefinition name="ChapterId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="Chapter_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="ChapterName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:domain name="ChapterVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Chapter_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="ChapterId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Chapter_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="ChapterName" />
+				<dep:simpleColumnReference name="Name" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="FormulariumChapter" schema="dbo">
-		<ddl:columnDefinition name="FormulariumChapterId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="FormulariumChapter_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="FormulariumId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Formularium_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="ChapterId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Chapter_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:domain name="FormulariumChapterVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="MainChapterId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="FormulariumChapter_Id" schema="dbo" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="FormulariumChapter_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
@@ -994,46 +1365,38 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="FormulariumChapter_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="FormulariumChapterId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="SubstanceDosingAdvice" schema="dbo">
-		<ddl:columnDefinition name="SubstanceDosingAdviceId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="SubstanceDosingAdvice_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="TextItemId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="TextItem_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="SubstanceId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Substance_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="FormulariumId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Formularium_Id" schema="dbo" />
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="IndicationId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Indication_Id" schema="dbo" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="SubstanceDosingAdvice_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="SubstanceDosingAdviceId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="SubstanceDosingAdvice_UC">
@@ -1043,74 +1406,58 @@
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="Route" schema="dbo">
-		<ddl:columnDefinition name="RouteId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="Route_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="RouteName">
+		<ddl:columnDefinition name="Name">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:domain name="RouteVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="RouteAbbreviation">
+		<ddl:columnDefinition name="Abbreviation">
 			<ddt:characterString type="CHARACTER VARYING" length="50" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Route_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="RouteId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Route_UC1">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="RouteName" />
+				<dep:simpleColumnReference name="Name" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Route_UC2">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="RouteAbbreviation" />
+				<dep:simpleColumnReference name="Abbreviation" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="DosingAdviceChapter" schema="dbo">
-		<ddl:columnDefinition name="DosingAdviceChapterId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="DosingAdviceChapter_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="SubstanceDosingAdviceId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="SubstanceDosingAdvice_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="FormulariumChapterId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="FormulariumChapter_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -1123,33 +1470,25 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="DosingAdviceChapter_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="DosingAdviceChapterId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="DosingAdviceRoute" schema="dbo">
-		<ddl:columnDefinition name="DosingAdviceRouteId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="DosingAdviceRoute_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="SubstanceDosingAdviceId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="SubstanceDosingAdvice_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="RouteId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Route_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -1162,33 +1501,25 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="DosingAdviceRoute_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="DosingAdviceRouteId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="DosingAdviceProduct" schema="dbo">
-		<ddl:columnDefinition name="DosingAdviceProductId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="DosingAdviceProduct_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="SubstanceDosingAdviceId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="SubstanceDosingAdvice_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="ProductId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Product_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -1201,33 +1532,25 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="DosingAdviceProduct_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="DosingAdviceProductId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="ProductRoute" schema="dbo">
-		<ddl:columnDefinition name="ProductRouteId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="ProductRoute_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="ProductId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Product_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="RouteId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Route_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -1240,33 +1563,25 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="ProductRoute_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="ProductRouteId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="ShapeRoute" schema="dbo">
-		<ddl:columnDefinition name="ShapeRouteId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="ShapeRoute_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="ShapeId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Shape_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="RouteId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Route_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -1279,39 +1594,31 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="ShapeRoute_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="ShapeRouteId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="TextItem" schema="dbo">
-		<ddl:columnDefinition name="TextItemId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="TextItem_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="TextType">
+		<ddl:columnDefinition name="Type">
 			<ddt:characterString type="CHARACTER VARYING" length="50" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="TextStatus">
+		<ddl:columnDefinition name="Status">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="VersionTimeStamp">
-			<ddt:time type="TIMESTAMP" />
+		<ddl:columnDefinition name="Version">
+			<ddt:domain name="TextItemVersion" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -1319,38 +1626,30 @@
 		<ddl:columnDefinition name="Text">
 			<ddt:characterString type="CHARACTER VARYING" />
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="TextHeading">
+		<ddl:columnDefinition name="Caption">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="TextItem_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="TextItemId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="FormulariumText" schema="dbo">
-		<ddl:columnDefinition name="FormulariumTextId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="FormulariumText_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="FormulariumId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Formularium_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="TextItemId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="TextItem_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -1363,39 +1662,31 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="FormulariumText_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="FormulariumTextId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="ProductFormulariumText" schema="dbo">
-		<ddl:columnDefinition name="ProductFormulariumTextId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="ProductFormulariumText_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="ProductId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Product_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="FormulariumId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Formularium_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="TextItemId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="TextItem_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -1408,39 +1699,31 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="ProductFormulariumText_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="ProductFormulariumTextId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="FormulariumSubstanceText" schema="dbo">
-		<ddl:columnDefinition name="FormulariumSubstanceTextId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="FormulariumSubstanceText_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="SubstanceId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Substance_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="FormulariumId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Formularium_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="TextItemId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="TextItem_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -1453,33 +1736,25 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="FormulariumSubstanceText_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="FormulariumSubstanceTextId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="FormulariumChapterText" schema="dbo">
-		<ddl:columnDefinition name="FormulariumChapterTextId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="FormulariumChapterText_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="FormulariumChapterId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="FormulariumChapter_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="TextItemId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="TextItem_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -1492,21 +1767,13 @@
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="FormulariumChapterText_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="FormulariumChapterTextId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="TextLog" schema="dbo">
-		<ddl:columnDefinition name="TextLogId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="TextLog_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -1518,19 +1785,19 @@
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="FormulariumId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="Formularium_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="TextItemId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="TextItem_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
 		<ddl:columnDefinition name="UserId">
-			<ddt:exactNumeric type="INTEGER" />
+			<ddt:domain name="User_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
@@ -1543,7 +1810,7 @@
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="TextLog_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="TextLogId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="TextLog_UC">
@@ -1556,21 +1823,13 @@
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
 	<ddl:tableDefinition name="Indication" schema="dbo">
-		<ddl:columnDefinition name="IndicationId">
-			<ddt:exactNumeric type="INTEGER" />
-			<ddl:identityColumnSpecification type="ALWAYS">
-				<ddl:sequenceGeneratorStartWithOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorStartWithOption>
-				<ddl:sequenceGeneratorIncrementByOption>
-					<ddt:exactNumericLiteral value="1" />
-				</ddl:sequenceGeneratorIncrementByOption>
-			</ddl:identityColumnSpecification>
+		<ddl:columnDefinition name="Id">
+			<ddt:domain name="Indication_Id" schema="dbo" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
 			</ddl:columnConstraintDefinition>
 		</ddl:columnDefinition>
-		<ddl:columnDefinition name="IndicationText">
+		<ddl:columnDefinition name="Text">
 			<ddt:characterString type="CHARACTER VARYING" length="255" />
 			<ddl:columnConstraintDefinition>
 				<ddl:notNullKeyword />
@@ -1578,12 +1837,12 @@
 		</ddl:columnDefinition>
 		<ddl:tableConstraintDefinition name="Indication_PK">
 			<ddl:uniqueConstraintDefinition type="PRIMARY KEY">
-				<dep:simpleColumnReference name="IndicationId" />
+				<dep:simpleColumnReference name="Id" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 		<ddl:tableConstraintDefinition name="Indication_UC">
 			<ddl:uniqueConstraintDefinition type="UNIQUE">
-				<dep:simpleColumnReference name="IndicationText" />
+				<dep:simpleColumnReference name="Text" />
 			</ddl:uniqueConstraintDefinition>
 		</ddl:tableConstraintDefinition>
 	</ddl:tableDefinition>
@@ -1592,7 +1851,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="PharmacyId" />
 				<ddl:referencesSpecification name="Pharmacy" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="PharmacyId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1601,8 +1860,8 @@
 		<ddl:addTableConstraintDefinition name="Pharmacist_FK2">
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="UserId" />
-				<ddl:referencesSpecification name="GenFormUser" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="UserId" />
+				<ddl:referencesSpecification name="&quot;User&quot;" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1612,7 +1871,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="PharmacistId" />
 				<ddl:referencesSpecification name="Pharmacist" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="PharmacistId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1622,7 +1881,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="PharmacistId" />
 				<ddl:referencesSpecification name="Pharmacist" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="PharmacistId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1632,7 +1891,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="FormulariumId" />
 				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="FormulariumId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1641,8 +1900,8 @@
 		<ddl:addTableConstraintDefinition name="UserRole_FK1">
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="UserId" />
-				<ddl:referencesSpecification name="GenFormUser" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="UserId" />
+				<ddl:referencesSpecification name="&quot;User&quot;" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1652,7 +1911,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="RoleId" />
 				<ddl:referencesSpecification name="Role" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="RoleId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1662,7 +1921,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="ShapeId" />
 				<ddl:referencesSpecification name="Shape" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="ShapeId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1672,7 +1931,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="PackageId" />
 				<ddl:referencesSpecification name="Package" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="PackageId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1682,7 +1941,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="BrandId" />
 				<ddl:referencesSpecification name="Brand" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="BrandId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1692,7 +1951,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="GenericId" />
 				<ddl:referencesSpecification name="Substance" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="SubstanceId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1702,7 +1961,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="UnitId" />
 				<ddl:referencesSpecification name="Unit" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="UnitId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1712,7 +1971,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="ProductId" />
 				<ddl:referencesSpecification name="Product" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="ProductId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1722,7 +1981,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="Component" />
 				<ddl:referencesSpecification name="Product" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="ProductId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1732,7 +1991,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="UnitGroupId" />
 				<ddl:referencesSpecification name="UnitGroup" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="UnitGroupId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1742,7 +2001,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="SubstanceGroupId" />
 				<ddl:referencesSpecification name="SubstanceGroup" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="SubstanceGroupId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1752,7 +2011,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="ProductId" />
 				<ddl:referencesSpecification name="Product" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="ProductId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1762,7 +2021,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="SubstanceId" />
 				<ddl:referencesSpecification name="Substance" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="SubstanceId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1772,7 +2031,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="UnitId" />
 				<ddl:referencesSpecification name="Unit" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="UnitId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1782,7 +2041,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="MainSubstanceGroupId" />
 				<ddl:referencesSpecification name="SubstanceGroup" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="SubstanceGroupId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1792,7 +2051,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="PackageId" />
 				<ddl:referencesSpecification name="Package" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="PackageId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1802,7 +2061,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="ShapeId" />
 				<ddl:referencesSpecification name="Shape" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="ShapeId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1812,7 +2071,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="ShapeId" />
 				<ddl:referencesSpecification name="Shape" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="ShapeId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1822,7 +2081,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="UnitId" />
 				<ddl:referencesSpecification name="Unit" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="UnitId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1832,7 +2091,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="FormulariumId" />
 				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="FormulariumId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1842,7 +2101,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="ChapterId" />
 				<ddl:referencesSpecification name="Chapter" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="ChapterId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1852,7 +2111,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="MainChapterId" />
 				<ddl:referencesSpecification name="FormulariumChapter" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="FormulariumChapterId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1862,7 +2121,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="FormulariumId" />
 				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="FormulariumId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1872,7 +2131,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="SubstanceId" />
 				<ddl:referencesSpecification name="Substance" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="SubstanceId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1882,7 +2141,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="IndicationId" />
 				<ddl:referencesSpecification name="Indication" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="IndicationId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1892,7 +2151,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="TextItemId" />
 				<ddl:referencesSpecification name="TextItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="TextItemId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1902,7 +2161,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="SubstanceDosingAdviceId" />
 				<ddl:referencesSpecification name="SubstanceDosingAdvice" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="SubstanceDosingAdviceId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1912,7 +2171,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="FormulariumChapterId" />
 				<ddl:referencesSpecification name="FormulariumChapter" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="FormulariumChapterId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1922,7 +2181,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="SubstanceDosingAdviceId" />
 				<ddl:referencesSpecification name="SubstanceDosingAdvice" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="SubstanceDosingAdviceId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1932,7 +2191,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="RouteId" />
 				<ddl:referencesSpecification name="Route" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="RouteId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1942,7 +2201,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="SubstanceDosingAdviceId" />
 				<ddl:referencesSpecification name="SubstanceDosingAdvice" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="SubstanceDosingAdviceId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1952,7 +2211,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="ProductId" />
 				<ddl:referencesSpecification name="Product" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="ProductId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1962,7 +2221,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="ProductId" />
 				<ddl:referencesSpecification name="Product" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="ProductId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1972,7 +2231,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="RouteId" />
 				<ddl:referencesSpecification name="Route" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="RouteId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1982,7 +2241,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="ShapeId" />
 				<ddl:referencesSpecification name="Shape" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="ShapeId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -1992,7 +2251,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="RouteId" />
 				<ddl:referencesSpecification name="Route" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="RouteId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -2002,7 +2261,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="FormulariumId" />
 				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="FormulariumId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -2012,7 +2271,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="TextItemId" />
 				<ddl:referencesSpecification name="TextItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="TextItemId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -2022,7 +2281,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="ProductId" />
 				<ddl:referencesSpecification name="Product" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="ProductId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -2032,7 +2291,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="TextItemId" />
 				<ddl:referencesSpecification name="TextItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="TextItemId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -2042,7 +2301,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="FormulariumId" />
 				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="FormulariumId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -2052,7 +2311,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="SubstanceId" />
 				<ddl:referencesSpecification name="Substance" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="SubstanceId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -2062,7 +2321,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="TextItemId" />
 				<ddl:referencesSpecification name="TextItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="TextItemId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -2072,7 +2331,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="FormulariumId" />
 				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="FormulariumId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -2082,7 +2341,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="FormulariumChapterId" />
 				<ddl:referencesSpecification name="FormulariumChapter" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="FormulariumChapterId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -2092,7 +2351,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="TextItemId" />
 				<ddl:referencesSpecification name="TextItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="TextItemId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -2102,7 +2361,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="FormulariumId" />
 				<ddl:referencesSpecification name="Formularium" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="FormulariumId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -2112,7 +2371,7 @@
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="TextItemId" />
 				<ddl:referencesSpecification name="TextItem" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="TextItemId" />
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>
@@ -2121,8 +2380,8 @@
 		<ddl:addTableConstraintDefinition name="TextLog_FK3">
 			<ddl:referentialConstraintDefinition>
 				<dep:simpleColumnReference name="UserId" />
-				<ddl:referencesSpecification name="GenFormUser" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
-					<dep:simpleColumnReference name="UserId" />
+				<ddl:referencesSpecification name="&quot;User&quot;" onDelete="RESTRICT" onUpdate="RESTRICT" schema="dbo">
+					<dep:simpleColumnReference name="Id" />
 				</ddl:referencesSpecification>
 			</ddl:referentialConstraintDefinition>
 		</ddl:addTableConstraintDefinition>

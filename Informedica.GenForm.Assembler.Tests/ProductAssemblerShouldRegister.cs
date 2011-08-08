@@ -1,6 +1,4 @@
-﻿using Informedica.GenForm.DataAccess.DataMappers;
-using Informedica.GenForm.DataAccess.Repositories;
-using Informedica.GenForm.Library.DomainModel.Products;
+﻿using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services.Products;
@@ -101,13 +99,6 @@ namespace Informedica.GenForm.Assembler.Tests
         }
 
         [TestMethod]
-        public void AnImplementationOfProductMapper()
-        {
-            ObjectFactoryAssertUtility.AssertRegistration<IDataMapper<IProduct, Database.Product>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IDataMapper<IProduct, Database.Product>>());
-        }
-
-        [TestMethod]
         public void AnImplementationOfBrand()
         {
             ObjectFactoryAssertUtility.AssertRegistration<IBrand>(
@@ -119,13 +110,6 @@ namespace Informedica.GenForm.Assembler.Tests
         {
             ObjectFactoryAssertUtility.AssertRegistration<IRepository<IBrand>>(
                 ObjectFactoryAssertUtility.GetMessageFor<IRepository<IBrand>>());
-        }
-
-        [TestMethod]
-        public void AnImplementationOfBrandMapper()
-        {
-            ObjectFactoryAssertUtility.AssertRegistration<IDataMapper<IBrand, Database.Brand>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IDataMapper<IBrand, Database.Brand>>());
         }
 
         [TestMethod]
@@ -142,12 +126,6 @@ namespace Informedica.GenForm.Assembler.Tests
                 ObjectFactoryAssertUtility.GetMessageFor<IRepository<IGeneric>>());
         }
 
-        [TestMethod]
-        public void AnImplementationOfGenericMapper()
-        {
-            ObjectFactoryAssertUtility.AssertRegistration<IDataMapper<IGeneric, Database.Substance>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IDataMapper<IGeneric, Database.Substance>>());
-        }
 
         [TestMethod]
         public void AnImplementationOfShape()
@@ -164,13 +142,6 @@ namespace Informedica.GenForm.Assembler.Tests
         }
 
         [TestMethod]
-        public void AnImplementationOfShapeMapper()
-        {
-            ObjectFactoryAssertUtility.AssertRegistration<IDataMapper<IShape, Database.Shape>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IDataMapper<IShape, Database.Shape>>());
-        }
-
-        [TestMethod]
         public void AnImplementationOfUnit()
         {
             ObjectFactoryAssertUtility.AssertRegistration<IUnit>(
@@ -184,12 +155,6 @@ namespace Informedica.GenForm.Assembler.Tests
                 ObjectFactoryAssertUtility.GetMessageFor<IRepository<IUnit>>());
         }
 
-        [TestMethod]
-        public void AnImplementationOfUnitMapper()
-        {
-            ObjectFactoryAssertUtility.AssertRegistration<IDataMapper<IUnit, Database.Unit>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IDataMapper<IUnit,Database.Unit>>());
-        }
 
         [TestMethod]
         public void AnImplementationOfSubstance()
@@ -203,13 +168,6 @@ namespace Informedica.GenForm.Assembler.Tests
         {
             ObjectFactoryAssertUtility.AssertRegistration<IRepository<ISubstance>>(
                 ObjectFactoryAssertUtility.GetMessageFor<IRepository<ISubstance>>());
-        }
-
-        [TestMethod]
-        public void AnImplementationOfSubstanceMapper()
-        {
-            ObjectFactoryAssertUtility.AssertRegistration<IDataMapper<ISubstance, Database.Substance>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IDataMapper<ISubstance, Database.Substance>>());
         }
 
     }

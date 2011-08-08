@@ -1,8 +1,4 @@
-﻿using System;
-using Informedica.GenForm.Database;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TypeMock.ArrangeActAssert;
-using Informedica.GenForm.DataAccess.Repositories;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
 {
@@ -52,28 +48,14 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         //
         #endregion
 
-        [Isolated]
-        [TestMethod]
-        public void CallDeleteWithContextAndSelectorWhenDeleteByName()
+
+        public class Test
         {
-            var fakeContext = Isolate.Fake.Instance<GenFormDataContext>();
-            Func<Test,Boolean> fakeSelector = (x => x.name == "Test");
-            var repos = new Repository<ITest, Test>(fakeContext);
-
-            Isolate.NonPublic.WhenCalled(repos, "Delete").IgnoreCall();
-            Isolate.NonPublic.WhenCalled(typeof(Repository<ITest,Test>), "GetNameSelector").WillReturn(fakeSelector);
-
-            repos.Delete("Test");
-            Isolate.Verify.NonPublic.WasCalled(repos, "Delete");
+            public string name { get; set; }
         }
-    }
 
-    public class Test
-    {
-        public string name { get; set; }
-    }
-
-    public interface ITest
-    {
+        public interface ITest
+        {
+        }
     }
 }
