@@ -80,9 +80,11 @@
     <Compile Include="UnitTests\DomainModel\ADomainModelShouldHaveAnIdentifirer.cs" />
     <Compile Include="UnitTests\DomainModel\DomainFactoryCanCreate.cs" />
     <Compile Include="UnitTests\DomainModel\NewlyCreatedProductShould.cs" />
+    <Compile Include="UnitTests\DomainModel\NewShapeShould.cs" />
     <Compile Include="UnitTests\DomainModel\OjbectFactoryForProductShould.cs" />
     <Compile Include="UnitTests\DomainModel\ProductConstructorShould.cs" />
     <Compile Include="UnitTests\DomainModel\ProductTestBase.cs" />
+    <Compile Include="UnitTests\DomainModel\RouteComparerReturns.cs" />
     <Compile Include="UnitTests\GenFormIdentityTest.cs" />
     <Compile Include="UnitTests\GenFormPrincipalTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -114,7 +114,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
         /// <param name="bo">Business Object to be deleted</param>
         public void Delete(TBo bo)
         {
-            Delete(((IIdentifiable<Int32>)bo).Identifier.Id);
+            throw  new NotImplementedException();
         }
 
 

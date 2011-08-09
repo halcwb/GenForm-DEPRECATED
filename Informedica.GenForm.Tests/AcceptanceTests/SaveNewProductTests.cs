@@ -276,8 +276,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private IPackage CreateNewPackage(String name)
         {
-            var package = ObjectFactory.GetInstance<IPackage>();
-            package.PackageName = name;
+            var package = DomainFactory.Create<IPackage, PackageDto>(new PackageDto {Name = "ampul"});
 
             return package;
         }

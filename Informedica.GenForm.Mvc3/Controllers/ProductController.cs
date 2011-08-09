@@ -1,5 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Library.Services.Products;
 using Newtonsoft.Json.Linq;
 using System.Web.Mvc;
@@ -249,11 +250,11 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         private IPackage GetPackageFromJObject(JObject package)
         {
-            return new Package
+            return DomainFactory.Create<IPackage, PackageDto>( new PackageDto
                        {
-                           PackageName = package.Value<String>("PackageName")
-                       };
-        }
+                           Name = package.Value<String>("PackageName")
+                       });
+        }   
 
         private IGeneric GetGenericFromJObject(JObject generic)
         {

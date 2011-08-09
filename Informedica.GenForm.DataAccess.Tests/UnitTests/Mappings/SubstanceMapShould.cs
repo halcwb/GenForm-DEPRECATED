@@ -1,19 +1,15 @@
-﻿using System.Collections.Generic;
-using FluentNHibernate.Testing;
+﻿using FluentNHibernate.Testing;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.Factories;
-using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests.FluentNH
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 {
     /// <summary>
-    /// Summary description for BrandMapShould
+    /// Summary description for SubstanceMapShould
     /// </summary>
     [TestClass]
-    public class BrandMapShould
+    public class SubstanceMapShould
     {
         private TestContext testContextInstance;
 
@@ -56,27 +52,20 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.FluentNH
         #endregion
 
         [TestMethod]
-        public void CorrectlyMapBrand()
+        public void CorrectlyMapSubstance()
         {
             using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
             {
-                new PersistenceSpecification<Brand>(session)
-                    .CheckProperty(b => b.Name, "Dynatra")
-                    //                    .CheckList(b => b.Products, CreateProductList());
-                    .VerifyTheMappings();
+                new PersistenceSpecification<Substance>(session)
+                        .CheckProperty(s => s.Name, "paracetamol")
+                        .CheckReference(s => s.SubstanceGroup, new SubstanceGroup(GetSubstanceGroupDto()))
+                        .VerifyTheMappings();
             }
-
         }
 
-        private static IEnumerable<Product> CreateProductList()
+        private SubstanceGroupDto GetSubstanceGroupDto()
         {
-            return new List<Product>
-                       {
-                            DomainFactory.Create<Product, ProductDto>(
-                                ProductTestFixtures.GetProductDtoWithNoSubstances()),
-                            DomainFactory.Create<Product, ProductDto>(
-                                ProductTestFixtures.GetProductDtoWithOneSubstance())
-                       };
+            return new SubstanceGroupDto{ Name = "analgetica"};
         }
     }
 }

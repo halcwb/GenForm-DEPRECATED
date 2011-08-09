@@ -1,27 +1,16 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using FluentNHibernate.Testing;
+﻿using FluentNHibernate.Testing;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests.FluentNH
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 {
     /// <summary>
-    /// Summary description for SubstanceMapShould
+    /// Summary description for PackageMappingShould
     /// </summary>
     [TestClass]
-    public class SubstanceMapShould
+    public class PackageMapShould
     {
-        public SubstanceMapShould()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         private TestContext testContextInstance;
 
         /// <summary>
@@ -63,20 +52,18 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.FluentNH
         #endregion
 
         [TestMethod]
-        public void CorrectlyMapSubstance()
+        public void CorrectlyMapPackage()
         {
             using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
             {
-                new PersistenceSpecification<Substance>(session)
-                        .CheckProperty(s => s.Name, "paracetamol")
-                        .CheckReference(s => s.SubstanceGroup, new SubstanceGroup(GetSubstanceGroupDto()))
-                        .VerifyTheMappings();
+                new PersistenceSpecification<Package>(session)
+                    .CheckProperty(b => b.Name, "ampul")
+                    .CheckProperty(p => p.Abbreviation, "amp")
+                    //                    .CheckList(b => b.Products, CreateProductList());
+                    .VerifyTheMappings();
             }
-        }
 
-        private SubstanceGroupDto GetSubstanceGroupDto()
-        {
-            return new SubstanceGroupDto{ Name = "analgetica"};
+
         }
     }
 }

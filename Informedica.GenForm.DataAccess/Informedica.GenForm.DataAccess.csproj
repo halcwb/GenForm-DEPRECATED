@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mappings\BrandMap.cs" />
+    <Compile Include="Mappings\PackageMap.cs" />
+    <Compile Include="Mappings\RouteMap.cs" />
     <Compile Include="Mappings\ShapeMap.cs" />
     <Compile Include="Mappings\SubstanceGroupMap.cs" />
     <Compile Include="Mappings\SubstanceMap.cs" />
