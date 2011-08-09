@@ -1,0 +1,20 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Products.Route, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`Route`">
+    <id name="Id" type="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" />
+      <generator class="guid.comb" />
+    </id>
+    <set cascade="save-update" name="Shapes">
+      <key>
+        <column name="Route_id" />
+      </key>
+      <one-to-many class="Informedica.GenForm.Library.DomainModel.Products.Shape, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    </set>
+    <property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Name" length="255" not-null="true" unique="true" />
+    </property>
+    <property name="Abbreviation" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Abbreviation" length="30" not-null="true" unique="true" />
+    </property>
+  </class>
+</hibernate-mapping>

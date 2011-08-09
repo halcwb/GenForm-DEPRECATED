@@ -216,7 +216,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void NotBeAbleToSaveProductWithInvalidRoute()
         {
             var dto = ProductTestFixtures.GetProductDtoWithTwoSubstancesAndRoute();
-            dto.Routes.First().Route = "";
+            dto.Routes.First().Name = "";
 
             try
             {

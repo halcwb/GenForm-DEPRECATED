@@ -1,11 +1,12 @@
 ﻿using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests.FluentNH
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 {
     /// <summary>
     /// Summary description for UnitWithGroupShould

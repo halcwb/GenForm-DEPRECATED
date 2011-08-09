@@ -1,15 +1,19 @@
-﻿using FluentNHibernate.Testing;
+﻿using System.Collections.Generic;
+using FluentNHibernate.Testing;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Factories;
+using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests.FluentNH
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 {
     /// <summary>
-    /// Summary description for ShapeMapShould
+    /// Summary description for BrandMapShould
     /// </summary>
     [TestClass]
-    public class ShapeMapShould
+    public class BrandMapShould
     {
         private TestContext testContextInstance;
 
@@ -52,15 +56,27 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.FluentNH
         #endregion
 
         [TestMethod]
-        public void CorrectlyMapAShape()
+        public void CorrectlyMapBrand()
         {
             using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
             {
-                new PersistenceSpecification<Shape>(session)
-                    .CheckProperty(s => s.Name, "infusievloeistof")
+                new PersistenceSpecification<Brand>(session)
+                    .CheckProperty(b => b.Name, "Dynatra")
                     //                    .CheckList(b => b.Products, CreateProductList());
                     .VerifyTheMappings();
             }
+
+        }
+
+        private static IEnumerable<Product> CreateProductList()
+        {
+            return new List<Product>
+                       {
+                            DomainFactory.Create<Product, ProductDto>(
+                                ProductTestFixtures.GetProductDtoWithNoSubstances()),
+                            DomainFactory.Create<Product, ProductDto>(
+                                ProductTestFixtures.GetProductDtoWithOneSubstance())
+                       };
         }
     }
 }

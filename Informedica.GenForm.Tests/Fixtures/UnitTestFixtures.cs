@@ -1,4 +1,5 @@
 ﻿using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.Tests.Fixtures
 {

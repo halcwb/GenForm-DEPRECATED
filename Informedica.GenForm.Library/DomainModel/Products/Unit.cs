@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using StructureMap;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
@@ -6,6 +9,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
     public class Unit : Entity<Guid, UnitDto>, IUnit
     {
         private IUnitGroup _group;
+        private HashSet<Shape> _shapes = new HashSet<Shape>(new ShapeComparer());
 
         protected Unit(): base(new UnitDto()) {}
 
@@ -53,28 +57,22 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         }
 
         #endregion
-    }
 
-    public class UnitDto : DataTransferObject<UnitDto, Guid>
-    {
-        public override UnitDto CloneDto()
+        public virtual void AddShape(Shape shape)
         {
-            return CreateClone();
+            if (CanNotAddShape(shape)) return;
+            AssociateShape.WithUnit(shape, this, _shapes);
         }
 
-        public Int32 UnitId;
-        public String Name;
-        public String Abbreviation;
-        public Decimal Multiplier;
-        public Decimal Divisor;
-        public Boolean IsReference;
-        public Guid UnitGroupId;
-        public String UnitGroupName;
-        public Boolean AllowConversion;
+        public virtual bool CanNotAddShape(Shape shape)
+        {
+            return AssociateShape.CanNotAddShape(shape, _shapes);
+        }
 
-        #region Overrides of DataTransferObject<Guid>
-
-
-        #endregion
+        public virtual IEnumerable<Shape> Shapes
+        {
+            get { return _shapes; }
+            protected set { _shapes = new HashSet<Shape>(value); }
+        }
     }
 }

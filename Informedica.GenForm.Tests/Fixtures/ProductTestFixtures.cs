@@ -80,7 +80,7 @@ namespace Informedica.GenForm.Tests.Fixtures
         public static ProductDto GetProductDtoWithTwoSubstancesAndRoute()
         {
             var dto = GetProductDtoWithTwoSubstances();
-            dto.Routes = new List<RouteDto> {new RouteDto {Id = 0, Route = Route}};
+            dto.Routes = new List<RouteDto> {new RouteDto {Id = Guid.Empty, Name = Route}};
             return dto;
         }
 
