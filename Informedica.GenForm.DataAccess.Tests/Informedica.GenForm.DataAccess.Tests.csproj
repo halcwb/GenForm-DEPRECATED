@@ -89,6 +89,7 @@
     <Compile Include="UnitTests\Command\SelectSubstanceCommandShould.cs" />
     <Compile Include="UnitTests\DatabaseConnectionShould.cs" />
     <Compile Include="UnitTests\FluentNH\BrandMapShould.cs" />
+    <Compile Include="UnitTests\FluentNH\ShapeMapShould.cs" />
     <Compile Include="UnitTests\FluentNH\SubstanceMapShould.cs" />
     <Compile Include="UnitTests\FluentNH\SubstanceShould.cs" />
     <Compile Include="UnitTests\FluentNH\UnitWithGroupShould.cs" />

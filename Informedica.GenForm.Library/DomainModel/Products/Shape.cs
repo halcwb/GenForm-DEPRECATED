@@ -1,28 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Shape: IShape
+    public class Shape: Entity<Guid, ShapeDto>, IShape
     {
         #region Implementation of IShape
 
-        private int _shapeId;
+        protected Shape():base(new ShapeDto()) {}
 
-        private string _shapeName;
-
-        public int ShapeId
+        public Shape(ShapeDto dto) : base(dto.CloneDto())
         {
-            get { return _shapeId; }
-            set { _shapeId = value; }
         }
 
-        public string ShapeName
+
+        public virtual String Name
         {
-            get { return _shapeName; }
-            set { _shapeName = value; }
+            get { return Dto.Name; }
+            set { Dto.Name = value; }
+        }
+
+        #endregion
+    }
+
+    public class ShapeDto: DataTransferObject<ShapeDto, Guid>
+    {
+        public string Name;
+
+        #region Overrides of DataTransferObject<ShapeDto,Guid>
+
+        public override ShapeDto CloneDto()
+        {
+            return CreateClone();
         }
 
         #endregion
