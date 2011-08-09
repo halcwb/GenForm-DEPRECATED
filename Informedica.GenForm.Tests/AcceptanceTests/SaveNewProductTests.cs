@@ -245,8 +245,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private IShape CreateNewShape(String name)
         {
-            var shape = ObjectFactory.GetInstance<IShape>();
-            shape.ShapeName = name;
+            var shape = DomainFactory.Create<IShape, ShapeDto>(new ShapeDto{ Name = name});
 
             return shape;
         }

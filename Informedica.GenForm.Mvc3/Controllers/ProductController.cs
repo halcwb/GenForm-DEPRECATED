@@ -241,10 +241,10 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         private IShape GetShapeFromJObject(JObject shape)
         {
-            return new Shape
+            return new Shape(new ShapeDto
                        {
-                           ShapeName = shape.Value<String>("ShapeName")
-                       };
+                           Name = shape.Value<String>("ShapeName")
+                       });
         }
 
         private IPackage GetPackageFromJObject(JObject package)
