@@ -46,6 +46,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             get { return _shapes; }
             protected set { _shapes = new HashSet<Shape>(value); }
         }
-        
+
+        public override bool IdIsDefault(Guid id)
+        {
+            return id == Guid.Empty;
+        }
     }
 }

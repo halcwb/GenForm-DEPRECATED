@@ -20,7 +20,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
     {
         private TestContext testContextInstance;
         private IDeleteCommand<IProduct> _command;
-        private Repository<IProduct> _fakeRepository;
+        private RepositoryLinqToSql<IProduct> _fakeRepositoryLinqToSql;
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -81,9 +81,9 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         private void IsolateDeleteCommand()
         {
             _command = (IDeleteCommand<IProduct>)CommandFactory.CreateDeleteCommand<IProduct>(ProductTestFixtures.GetProductDtoWithTwoSubstancesAndRoute().ProductName);
-            _fakeRepository = Isolate.Fake.Instance<Repository<IProduct>>();
+            _fakeRepositoryLinqToSql = Isolate.Fake.Instance<RepositoryLinqToSql<IProduct>>();
             Isolate.Fake.Instance<GenFormDataContext>();
-            ObjectFactory.Inject(_fakeRepository);
+            ObjectFactory.Inject(_fakeRepositoryLinqToSql);
         }
 
     }

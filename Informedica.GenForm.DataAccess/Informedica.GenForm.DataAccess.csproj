@@ -72,9 +72,12 @@
     <Compile Include="Repositories\Delete.cs" />
     <Compile Include="Repositories\Fetch.cs" />
     <Compile Include="Repositories\Insert.cs" />
+    <Compile Include="Repositories\NHibernateBase.cs" />
+    <Compile Include="Repositories\NHibernateRepository.cs" />
     <Compile Include="Repositories\RepositoryDelegates.cs" />
     <Compile Include="Repositories\SelectorOfInt.cs" />
     <Compile Include="Repositories\SelectorOfString.cs" />
+    <Compile Include="Repositories\UnitGroupRepository.cs" />
     <Compile Include="Repositories\Update.cs" />
     <Compile Include="SessionFactoryCreator.cs" />
     <Compile Include="Transactions\Commands\CommandBase.cs" />
@@ -85,7 +88,7 @@
     <Compile Include="Databases\DatabaseSetting.cs" />
     <Compile Include="DataContexts\DataContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\RepositoryLinqToSql.cs" />
     <Compile Include="Transactions\Commands\InsertSubstanceCommand.cs" />
     <Compile Include="Transactions\Commands\SelectProductCommand.cs" />
     <Compile Include="Transactions\Commands\SelectSubstanceCommand.cs" />

@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Mvc3.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.Factory", "Informedica.Factory\Informedica.Factory.csproj", "{893473D6-D384-4CCD-9877-FBC05BC3E351}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.NHibernate.Tests", "Informedica.NHibernate.Tests\Informedica.NHibernate.Tests.csproj", "{E37173C3-E5BC-4689-B998-1227014865BE}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = GenForm2.vsmdi
@@ -200,6 +202,16 @@ Global
 		{893473D6-D384-4CCD-9877-FBC05BC3E351}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{893473D6-D384-4CCD-9877-FBC05BC3E351}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{893473D6-D384-4CCD-9877-FBC05BC3E351}.Release|x86.ActiveCfg = Release|Any CPU
+		{E37173C3-E5BC-4689-B998-1227014865BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E37173C3-E5BC-4689-B998-1227014865BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E37173C3-E5BC-4689-B998-1227014865BE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E37173C3-E5BC-4689-B998-1227014865BE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E37173C3-E5BC-4689-B998-1227014865BE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E37173C3-E5BC-4689-B998-1227014865BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E37173C3-E5BC-4689-B998-1227014865BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E37173C3-E5BC-4689-B998-1227014865BE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E37173C3-E5BC-4689-B998-1227014865BE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E37173C3-E5BC-4689-B998-1227014865BE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

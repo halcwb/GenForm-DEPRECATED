@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Informedica.GenForm.Library.DomainModel;
 
 namespace Informedica.GenForm.Library.Repositories
 {
-    public interface IRepository<T>
+    public interface IRepository<T, TId, TDto>: IEnumerable<T> 
+        where T: Entity<TId, TDto>
+        where TDto: DataTransferObject<TDto, TId>
     {
-        IEnumerable<T> Fetch(Int32 id);
-        IEnumerable<T> Fetch(String name);
-        void Insert(T bo);
-        void Delete(Int32 id);
-        void Delete(T bo);
-        IRollbackObject Rollback { get; }
+        void Add(T item);
+        bool Contains(T item);
+        int Count { get; }
+        bool Remove(T item);
     }
 
-    public interface IRollbackObject: IDisposable
-    {
-    }
 }

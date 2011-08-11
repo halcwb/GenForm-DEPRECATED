@@ -72,9 +72,9 @@ namespace Informedica.GenForm.DataAccess.Tests.IntegrationTests
             Assert.IsTrue(list.FirstOrDefault().Name == "Admin", "The User should have name Admin");
         }
 
-        private IRepository<IUser> CreateRepository()
+        private IRepositoryLinqToSql<IUser> CreateRepository()
         {
-            return ObjectFactory.GetInstance<IRepository<IUser>>();
+            return ObjectFactory.GetInstance<IRepositoryLinqToSql<IUser>>();
         }
 
         private IEnumerable<GenFormUser> CreateListWithAdminUser()

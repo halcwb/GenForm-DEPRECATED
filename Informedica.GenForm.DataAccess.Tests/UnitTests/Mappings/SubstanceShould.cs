@@ -56,7 +56,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void BeAbleToCreateASessionToPersistSubstance()
         {
-            using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
+            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
             {
                 PersistSubstance(session, CreateTestSubstance());
             }
@@ -75,7 +75,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         public void BePersistedWithSubstanceGroup()
         {
 
-            using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
+            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
             {
                 var subst = DomainFactory.Create<ISubstance, SubstanceDto>(new SubstanceDto
                 {
@@ -96,7 +96,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
                                                                                Name = "paracetamol"
                                                                            });
 
-            using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
+            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
             {
                 PersistSubstance(session, subst);
             }

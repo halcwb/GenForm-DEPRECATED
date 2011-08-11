@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Library.DomainModel.Databases;
 using Informedica.GenForm.Library.Services.Databases;
 using StructureMap.Configuration.DSL;
 
-namespace Informedica.GenForm.Assembler
+namespace Informedica.GenForm.Assembler.Assemblers
 {
     class DatabaseRegistrationAssembler
     {

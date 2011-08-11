@@ -18,7 +18,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
     ///to contain all ProductRepositoryTest Unit Tests
     ///</summary>
     [TestClass]
-    public class ProductRepositoryShould: RepositoryTestBase<IRepository<IProduct>, IProduct>
+    public class ProductRepositoryShould: RepositoryTestBase<IRepositoryLinqToSql<IProduct>, IProduct>
     {
 
         private TestContext testContextInstance;
@@ -134,7 +134,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
             {
                 ctx.Connection.Open();
                 ctx.Transaction = ctx.Connection.BeginTransaction();
-                var repos = new Repository<IProduct>();
+                var repos = new RepositoryLinqToSql<IProduct>();
                 try
                 {
                     repos.Insert(ctx, Bo);

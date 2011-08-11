@@ -54,7 +54,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void CorrectlyMapSubstance()
         {
-            using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
+            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
             {
                 new PersistenceSpecification<Substance>(session)
                         .CheckProperty(s => s.Name, "paracetamol")

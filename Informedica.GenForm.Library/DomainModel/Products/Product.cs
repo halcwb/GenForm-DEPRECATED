@@ -65,5 +65,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #endregion
 
+        public override bool IdIsDefault(Guid id)
+        {
+            return id == Guid.Empty;
+        }
     }
 }

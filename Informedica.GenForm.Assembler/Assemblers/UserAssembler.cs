@@ -1,7 +1,7 @@
-﻿using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.DomainModel.Users;
 using StructureMap.Configuration.DSL;
 
-namespace Informedica.GenForm.Assembler
+namespace Informedica.GenForm.Assembler.Assemblers
 {
     public static class UserAssembler
     {

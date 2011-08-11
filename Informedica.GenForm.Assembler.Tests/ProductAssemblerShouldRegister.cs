@@ -94,8 +94,8 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public void AnImplementationOfProductRepository()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IRepository<IProduct>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IRepository<IProduct>>());
+            ObjectFactoryAssertUtility.AssertRegistration<IRepositoryLinqToSql<IProduct>>(
+                ObjectFactoryAssertUtility.GetMessageFor<IRepositoryLinqToSql<IProduct>>());
         }
 
         [TestMethod]
@@ -108,8 +108,8 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public void AnImplementationOfBrandRepository()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IRepository<IBrand>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IRepository<IBrand>>());
+            ObjectFactoryAssertUtility.AssertRegistration<IRepositoryLinqToSql<IBrand>>(
+                ObjectFactoryAssertUtility.GetMessageFor<IRepositoryLinqToSql<IBrand>>());
         }
 
         [TestMethod]
@@ -122,8 +122,8 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public void AnImplementationOfGenericRepository()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IRepository<IGeneric>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IRepository<IGeneric>>());
+            ObjectFactoryAssertUtility.AssertRegistration<IRepositoryLinqToSql<IGeneric>>(
+                ObjectFactoryAssertUtility.GetMessageFor<IRepositoryLinqToSql<IGeneric>>());
         }
 
 
@@ -137,8 +137,8 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public void AnImplementationOfShapeRepository()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IRepository<IShape>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IRepository<IShape>>());
+            ObjectFactoryAssertUtility.AssertRegistration<IRepositoryLinqToSql<IShape>>(
+                ObjectFactoryAssertUtility.GetMessageFor<IRepositoryLinqToSql<IShape>>());
         }
 
         [TestMethod]
@@ -151,8 +151,8 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public void AnImplementationOfUnitRepository()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IRepository<IUnit>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IRepository<IUnit>>());
+            ObjectFactoryAssertUtility.AssertRegistration<IRepositoryLinqToSql<IUnit>>(
+                ObjectFactoryAssertUtility.GetMessageFor<IRepositoryLinqToSql<IUnit>>());
         }
 
 
@@ -166,8 +166,8 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public void AnImplementationOfSubstanceRepository()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IRepository<ISubstance>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IRepository<ISubstance>>());
+            ObjectFactoryAssertUtility.AssertRegistration<IRepositoryLinqToSql<ISubstance>>(
+                ObjectFactoryAssertUtility.GetMessageFor<IRepositoryLinqToSql<ISubstance>>());
         }
 
     }

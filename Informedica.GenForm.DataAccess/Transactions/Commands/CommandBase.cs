@@ -29,9 +29,9 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
             get { return _items; }
         }
 
-        protected Repository<T> GetRepository()
+        protected RepositoryLinqToSql<T> GetRepository()
         {
-            return ObjectFactory.GetInstance<Repository<T>>();
+            return ObjectFactory.GetInstance<RepositoryLinqToSql<T>>();
         }
 
         public abstract void Execute(GenFormDataContext context);

@@ -24,7 +24,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         private TestContext testContextInstance;
         private IInsertCommand<IProduct> _command;
         private IProduct _product;
-        private Repository<IProduct> _fakeRepository;
+        private RepositoryLinqToSql<IProduct> _fakeRepositoryLinqToSql;
         private GenFormDataContext _fakeContext;
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
             IsolateInsertCommand();
 
             ((IExecutable)_command).Execute(_fakeContext);
-            Isolate.Verify.WasCalledWithAnyArguments(() => _fakeRepository.Insert(_fakeContext, _product));
+            Isolate.Verify.WasCalledWithAnyArguments(() => _fakeRepositoryLinqToSql.Insert(_fakeContext, _product));
         }
 
 
@@ -111,7 +111,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
             using (var transMgr = GetTransactionManager(list))
             {
                 transMgr.ExecuteCommands();
-                Isolate.Verify.WasCalledWithAnyArguments(() => _fakeRepository.Insert(_fakeContext, _product));
+                Isolate.Verify.WasCalledWithAnyArguments(() => _fakeRepositoryLinqToSql.Insert(_fakeContext, _product));
             }
 
         }
@@ -125,9 +125,9 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         {
             _product = CreateNewProduct();
             _command = GetInsertProductCommand(_product);
-            _fakeRepository = Isolate.Fake.Instance<Repository<IProduct>>();
+            _fakeRepositoryLinqToSql = Isolate.Fake.Instance<RepositoryLinqToSql<IProduct>>();
             _fakeContext = Isolate.Fake.Instance<GenFormDataContext>();
-            ObjectFactory.Inject(_fakeRepository);
+            ObjectFactory.Inject(_fakeRepositoryLinqToSql);
         }
 
         private static IProduct CreateNewProduct()

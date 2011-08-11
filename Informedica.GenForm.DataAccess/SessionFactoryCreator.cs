@@ -15,6 +15,7 @@ namespace Informedica.GenForm.DataAccess
                 .Database(MsSqlConfiguration.MsSql2008.ConnectionString(GetConnectionString()))
                 .Mappings(x => x.FluentMappings.AddFromAssemblyOf<Mappings.SubstanceMap>()
                 .ExportTo(@"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.DataAccess\MappingsXml"))
+                .CurrentSessionContext<NHibernate.Context.ThreadStaticSessionContext>()
                 .ExposeConfiguration(BuildSchema)
                 .BuildSessionFactory();
         }

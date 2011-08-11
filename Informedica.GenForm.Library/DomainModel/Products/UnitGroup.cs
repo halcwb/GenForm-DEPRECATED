@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class UnitGroup : Entity<Guid, UnitGroupDto>, IUnitGroup
     {
-        private IList<Unit> _units;
+        private HashSet<Unit> _units = new HashSet<Unit>(new UnitComparer());
 
         protected UnitGroup(): base(new UnitGroupDto()){}
 
@@ -23,27 +26,50 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             set { Dto.AllowConversion = value; }
         }
 
-        public virtual IList<Unit> Units
+        public virtual IEnumerable<Unit> Units
         {
             get { return _units; }
-            set { _units = value; }
+            protected set { _units = new HashSet<Unit>(value); }
         }
-    }
 
-    public class UnitGroupDto: DataTransferObject<UnitGroupDto, Guid>
-    {
-        public Int32 UnitGroupId;
-        public String UnitGroupName;
-        public Boolean AllowConversion;
-
-        public override UnitGroupDto CloneDto()
+        public virtual void AddUnit(Unit unit)
         {
-            return CreateClone();
+            if (CannotAddUnit(unit)) return;
+            _units.Add(unit);
+            unit.ChangeUnitGroup(this);
         }
 
-        #region Overrides of DataTransferObject<Guid>
+        public virtual void RemoveUnit(Unit unit)
+        {
+            if(CanNotRemoveUnit(unit)) return;
+            _units.RemoveWhere(x => new UnitComparer().Equals(x, unit));
+        }
 
+        private bool CanNotRemoveUnit(Unit unit)
+        {
+            if (unit == null) return true;
+            return !ContainsUnit(unit);
+        }
 
-        #endregion
+        private bool CannotAddUnit(Unit unit)
+        {
+            if (unit == null) return true;
+            return ContainsUnit(unit);
+        }
+
+        public virtual bool ContainsUnit(Unit unit)
+        {
+            return _units.Contains(unit, _units.Comparer);
+        }
+
+        public static bool Equals(UnitGroup x, UnitGroup y, UnitGroupComparer comparer)
+        {
+            return comparer.Equals(x, y);
+        }
+
+        public override bool IdIsDefault(Guid id)
+        {
+            return id == Guid.Empty;
+        }
     }
 }

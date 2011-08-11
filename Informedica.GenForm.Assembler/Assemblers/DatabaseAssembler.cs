@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using Informedica.GenForm.Database;
 using StructureMap.Configuration.DSL;
 
-namespace Informedica.GenForm.Assembler
+namespace Informedica.GenForm.Assembler.Assemblers
 {
     public static class DatabaseAssembler
     {

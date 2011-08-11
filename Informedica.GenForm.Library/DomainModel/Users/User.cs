@@ -58,9 +58,9 @@ namespace Informedica.GenForm.Library.DomainModel.Users
             set { _userId = value; }
         }
 
-        private static IRepository<IUser> Repository
+        private static IRepositoryLinqToSql<IUser> RepositoryLinqToSql
         {
-            get { return Factory.ObjectFactory.Instance.GetInstance<IRepository<IUser>>(); }
+            get { return Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IUser>>(); }
         }
 
         #endregion
@@ -74,7 +74,7 @@ namespace Informedica.GenForm.Library.DomainModel.Users
 
         public static IEnumerable<IUser> GetUser(String name)
         {
-            return Repository.Fetch(name);
+            return RepositoryLinqToSql.Fetch(name);
         }
 
         #endregion

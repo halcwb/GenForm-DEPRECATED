@@ -55,5 +55,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             int maxLength = Name.Length > 30 ? 30 : Name.Length;
             return Dto.Name.Substring(0, maxLength);
         }
+
+        public override bool IdIsDefault(Guid id)
+        {
+            return id == Guid.Empty;
+        }
     }
 }

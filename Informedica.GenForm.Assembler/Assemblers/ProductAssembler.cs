@@ -1,8 +1,8 @@
-﻿using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Services.Products;
 using StructureMap.Configuration.DSL;
 
-namespace Informedica.GenForm.Assembler
+namespace Informedica.GenForm.Assembler.Assemblers
 {
     public static class ProductAssembler
     {

@@ -36,9 +36,9 @@ namespace Informedica.GenForm.DataAccess.Transactions.Commands
             _resultList = GetProductRepository().Fetch("");
         }
 
-        private static Repository<IProduct> GetProductRepository()
+        private static RepositoryLinqToSql<IProduct> GetProductRepository()
         {
-            return ObjectFactory.GetInstance<Repository<IProduct>>();
+            return ObjectFactory.GetInstance<RepositoryLinqToSql<IProduct>>();
         }
     }
 

@@ -89,8 +89,8 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         {
             var product = GetValidProduct();
 
-            var repos = ObjectFactory.GetInstance<IRepository<IProduct>>();
-            ObjectFactory.Inject(typeof(IRepository<IProduct>), repos);
+            var repos = ObjectFactory.GetInstance<IRepositoryLinqToSql<IProduct>>();
+            ObjectFactory.Inject(typeof(IRepositoryLinqToSql<IProduct>), repos);
 
             using (repos.Rollback)
             {
@@ -176,8 +176,8 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             var brand = CreateNewBrand(Sintrom);
             try
             {
-                var repos = ObjectFactory.GetInstance<IRepository<IBrand>>();
-                ObjectFactory.Inject(typeof(IRepository<IBrand>), repos);
+                var repos = ObjectFactory.GetInstance<IRepositoryLinqToSql<IBrand>>();
+                ObjectFactory.Inject(typeof(IRepositoryLinqToSql<IBrand>), repos);
 
                 using (repos.Rollback)
                 {
@@ -198,8 +198,8 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             var generic = CreateNewGeneric(Penicilline);
             try
             {
-                var repos = ObjectFactory.GetInstance<IRepository<IGeneric>>();
-                ObjectFactory.Inject(typeof(IRepository<IGeneric>), repos);
+                var repos = ObjectFactory.GetInstance<IRepositoryLinqToSql<IGeneric>>();
+                ObjectFactory.Inject(typeof(IRepositoryLinqToSql<IGeneric>), repos);
 
                 using (repos.Rollback)
                 {
@@ -228,8 +228,8 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             try
             {
                 var shape = CreateNewShape(Tablet);
-                var repos = ObjectFactory.GetInstance<IRepository<IShape>>();
-                ObjectFactory.Inject(typeof(IRepository<IShape>), repos);
+                var repos = ObjectFactory.GetInstance<IRepositoryLinqToSql<IShape>>();
+                ObjectFactory.Inject(typeof(IRepositoryLinqToSql<IShape>), repos);
                 using (repos.Rollback)
                 {
                     var result = GetProductController().AddNewShape(CreateJObjectFrom(shape));
@@ -256,8 +256,8 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             try
             {
                 var package = CreateNewPackage(Ampul);
-                var repos = ObjectFactory.GetInstance<IRepository<IPackage>>();
-                ObjectFactory.Inject(typeof(IRepository<IPackage>), repos);
+                var repos = ObjectFactory.GetInstance<IRepositoryLinqToSql<IPackage>>();
+                ObjectFactory.Inject(typeof(IRepositoryLinqToSql<IPackage>), repos);
 
                 using (repos.Rollback)
                 {
@@ -276,7 +276,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private IPackage CreateNewPackage(String name)
         {
-            var package = DomainFactory.Create<IPackage, PackageDto>(new PackageDto {Name = "ampul"});
+            var package = DomainFactory.Create<IPackage, PackageDto>(new PackageDto {Name = name});
 
             return package;
         }
@@ -288,8 +288,8 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             {
                 var unit = CreateNewUnit(Mmol);
 
-                var repos = ObjectFactory.GetInstance<IRepository<IUnit>>();
-                ObjectFactory.Inject(typeof(IRepository<IUnit>), repos);
+                var repos = ObjectFactory.GetInstance<IRepositoryLinqToSql<IUnit>>();
+                ObjectFactory.Inject(typeof(IRepositoryLinqToSql<IUnit>), repos);
 
                 using (repos.Rollback)
                 {
@@ -308,8 +308,11 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private IUnit CreateNewUnit(string name)
         {
-            var unit = ObjectFactory.GetInstance<IUnit>();
-            unit.Name = name;
+            var unit = new Unit(new UnitDto
+                                    {
+                                        Abbreviation =  "mg",
+                                        Name = name
+                                    });
 
             return unit;
         }
@@ -325,7 +328,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private IBrand CreateNewBrand(String name)
         {
-            var brand = DomainFactory.Create<IBrand, BrandDto>(new BrandDto { Name = "Dynatra"});
+            var brand = DomainFactory.Create<IBrand, BrandDto>(new BrandDto { Name = name});
 
             return brand;
         }

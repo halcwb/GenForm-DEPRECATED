@@ -57,7 +57,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void CorrectlyMapARoute()
         {
-            using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
+            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
             {
                 new PersistenceSpecification<Route>(session)
                     .CheckProperty(r => r.Name, "intraveneus")
@@ -69,7 +69,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void BeAssociatedWithShapes()
         {
-            using(var session = GenFormApplication.Instance.SessionFactory.OpenSession())
+            using(var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
             {
                 new PersistenceSpecification<Route>(session)
                     .CheckProperty(r => r.Name, "intraveneus")

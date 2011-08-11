@@ -19,6 +19,11 @@ namespace Informedica.GenForm.Library.DomainModel.Products
                 return _products ?? (_products = new List<Product>());
             }
         }
+
+        public override bool IdIsDefault(Guid id)
+        {
+            return id == Guid.Empty;
+        }
     }
 
     public class BrandDto: DataTransferObject<BrandDto, Guid>
