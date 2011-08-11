@@ -22,44 +22,44 @@ namespace Informedica.GenForm.Library.Services.Products
 
         public void AddNewBrand(IBrand brand)
         {
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<IBrand>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IBrand>>();
             repository.Insert(brand);
         }
 
         public void AddNewGeneric(IGeneric generic)
         {
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<IGeneric>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IGeneric>>();
             repository.Insert(generic);
         }
 
         public void AddNewShape(IShape shape)
         {
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<IShape>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IShape>>();
             repository.Insert(shape);
         }
 
         public void AddNewPackage(IPackage package)
         {
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<IPackage>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IPackage>>();
             repository.Insert(package);
         }
 
         public void AddNewUnit(IUnit unit)
         {
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<IUnit>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IUnit>>();
             repository.Insert(unit);
         }
 
         public void AddNewSubstance(SubstanceDto substDto)
         {
             var subst = DomainFactory.Create<ISubstance, SubstanceDto>(substDto);
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<ISubstance>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<ISubstance>>();
             repository.Insert(subst);
         }
 
         public ProductDto SaveProduct(ProductDto productDto)
         {
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepository<IProduct>>();
+            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IProduct>>();
             var product = NewProduct(productDto);
             repository.Insert(product);
             productDto.ProductId = product.ProductId;

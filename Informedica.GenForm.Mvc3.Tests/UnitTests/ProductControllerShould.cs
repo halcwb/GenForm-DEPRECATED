@@ -129,8 +129,8 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public void SaveANewSubstanceToDatabase()
         {
-            var repos = ObjectFactory.GetInstance<IRepository<ISubstance>>();
-            ObjectFactory.Inject(typeof(IRepository<ISubstance>), repos);
+            var repos = ObjectFactory.GetInstance<IRepositoryLinqToSql<ISubstance>>();
+            ObjectFactory.Inject(typeof(IRepositoryLinqToSql<ISubstance>), repos);
             using (repos.Rollback)
             {
                 var result = _controller.AddNewSubstance(GetSubstance());

@@ -39,5 +39,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             get { return _group; }
             set { _group = value; }
         }
+
+        public override bool IdIsDefault(Guid id)
+        {
+            return id == Guid.Empty;
+        }
     }
 }

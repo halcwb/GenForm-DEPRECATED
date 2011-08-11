@@ -51,10 +51,12 @@
     <Compile Include="DomainModel\Databases\IDatabaseSetting.cs" />
     <Compile Include="DomainModel\DataTransferObject.cs" />
     <Compile Include="DomainModel\Entity.cs" />
+    <Compile Include="DomainModel\Equality\BrandComparer.cs" />
     <Compile Include="DomainModel\Equality\PackageComparer.cs" />
     <Compile Include="DomainModel\Equality\RouteComparer.cs" />
     <Compile Include="DomainModel\Equality\ShapeComparer.cs" />
     <Compile Include="DomainModel\Equality\UnitComparer.cs" />
+    <Compile Include="DomainModel\Equality\UnitGroupComparer.cs" />
     <Compile Include="DomainModel\Products\AssociateShape.cs" />
     <Compile Include="DomainModel\Products\Brand.cs" />
     <Compile Include="DomainModel\Products\Data\PackageDto.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="DomainModel\Products\Data\ShapeDto.cs" />
     <Compile Include="DomainModel\Products\Data\SubstanceDto.cs" />
     <Compile Include="DomainModel\Products\Data\UnitDto.cs" />
+    <Compile Include="DomainModel\Products\Data\UnitGroupDto.cs" />
     <Compile Include="DomainModel\Products\Generic.cs" />
     <Compile Include="DomainModel\Products\IBrand.cs" />
     <Compile Include="DomainModel\Products\IGeneric.cs" />
@@ -89,6 +92,7 @@
     <Compile Include="Factories\ProductFactory.cs" />
     <Compile Include="Factories\TransactionManagerFactory.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IRepositoryLinqToSql.cs" />
     <Compile Include="DomainModel\Products\IProduct.cs" />
     <Compile Include="DomainModel\Products\Product.cs" />
     <Compile Include="DomainModel\Users\IPharamcists.cs" />

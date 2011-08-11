@@ -54,7 +54,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void CorrectlyMapPackage()
         {
-            using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
+            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
             {
                 new PersistenceSpecification<Package>(session)
                     .CheckProperty(b => b.Name, "ampul")

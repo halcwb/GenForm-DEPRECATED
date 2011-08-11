@@ -27,7 +27,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
         private TestContext testContextInstance;
 
         private ISelectCommand<IProduct> _command;
-        private Repository<IProduct> _fakeRepository;
+        private RepositoryLinqToSql<IProduct> _fakeRepositoryLinqToSql;
         private GenFormDataContext _fakeContext;
         private Func<Product, Boolean> _selector;
 
@@ -168,9 +168,9 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Command
             _selector = new Func<Product, bool>(x => x.ProductId == 1);
             _command = (ISelectCommand<IProduct>)CommandFactory.CreateSelectCommand<IProduct>(1);
             // ToDo: rewrite
-            _fakeRepository = Isolate.Fake.Instance<Repository<IProduct>>();
+            _fakeRepositoryLinqToSql = Isolate.Fake.Instance<RepositoryLinqToSql<IProduct>>();
             _fakeContext = Isolate.Fake.Instance<GenFormDataContext>();
-            ObjectFactory.Inject(_fakeRepository);
+            ObjectFactory.Inject(_fakeRepositoryLinqToSql);
         }
 
     }

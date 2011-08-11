@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using Informedica.GenForm.Assembler.Assemblers;
 using Informedica.GenForm.DataAccess;
 using NHibernate;
 using StructureMap;
@@ -22,16 +24,26 @@ namespace Informedica.GenForm.Assembler
                     {
                         if (_instance == null)
                         {
-                            _instance = new GenFormApplication();
+                            var instance = new GenFormApplication();
+                            Thread.MemoryBarrier();
+                            _instance = instance;
+                            _factory = CreateSessionFactory();
+                            Thread.MemoryBarrier();
                         }
                     }
                 return _instance;
             }
         }
 
-        public ISessionFactory SessionFactory
+        public static ISessionFactory SessionFactory
         {
-            get { return _factory ?? (_factory = CreateSessionFactory()); }
+            get { return Instance.SessionFactoryFromInstance; }
+        }
+
+        [Obsolete]
+        public ISessionFactory SessionFactoryFromInstance
+        {
+            get { return _factory; }
         }
 
         private static ISessionFactory CreateSessionFactory()

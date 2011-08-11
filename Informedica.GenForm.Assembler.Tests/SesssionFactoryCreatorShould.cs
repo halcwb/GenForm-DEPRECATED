@@ -60,7 +60,7 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public void BeRetreivedByGenFormApplication()
         {
-            var factory = GenFormApplication.Instance.SessionFactory;
+            var factory = GenFormApplication.Instance.SessionFactoryFromInstance;
             Assert.IsInstanceOfType(factory, typeof(ISessionFactory));
         }
 

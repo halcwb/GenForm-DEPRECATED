@@ -53,13 +53,14 @@
     <Reference Include="System.Data.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseAssembler.cs" />
-    <Compile Include="DatabaseRegistrationAssembler.cs" />
+    <Compile Include="Assemblers\DatabaseAssembler.cs" />
+    <Compile Include="Assemblers\DatabaseRegistrationAssembler.cs" />
+    <Compile Include="Assemblers\ProductAssembler.cs" />
+    <Compile Include="Assemblers\RepositoryAssembler.cs" />
+    <Compile Include="Assemblers\TransactionAssembler.cs" />
+    <Compile Include="Assemblers\UserAssembler.cs" />
+    <Compile Include="Contexts\SessionContext.cs" />
     <Compile Include="GenFormApplication.cs" />
-    <Compile Include="RepositoryAssembler.cs" />
-    <Compile Include="TransactionAssembler.cs" />
-    <Compile Include="UserAssembler.cs" />
-    <Compile Include="ProductAssembler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

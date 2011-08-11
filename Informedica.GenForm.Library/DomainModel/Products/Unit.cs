@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Repositories;
 using StructureMap;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
@@ -16,12 +17,17 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         [DefaultConstructor]
         public Unit(UnitDto dto): base(dto.CloneDto())
         {
-            _group = new UnitGroup(new UnitGroupDto
-                                       {
-                                           Id = Dto.UnitGroupId,
-                                           UnitGroupName = Dto.UnitGroupName,
-                                           AllowConversion = Dto.AllowConversion
-                                       });
+            _group = GetUnitGroup();
+        }
+
+        private UnitGroup GetUnitGroup()
+        {
+            throw  new NotImplementedException();
+        }
+
+        private static IRepositoryLinqToSql<IUnitGroup> GetRepository()
+        {
+            return ObjectFactory.GetInstance<IRepositoryLinqToSql<IUnitGroup>>();
         }
 
         #region Implementation of IUnit
@@ -53,7 +59,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual IUnitGroup UnitGroup
         {
             get { return _group ?? (_group = new UnitGroup(new UnitGroupDto())); }
-            set { _group = value; }
+            protected set { _group = value; }
         }
 
         #endregion
@@ -73,6 +79,24 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         {
             get { return _shapes; }
             protected set { _shapes = new HashSet<Shape>(value); }
+        }
+
+        public virtual void ChangeUnitGroup(UnitGroup newGroup)
+        {
+            if (CannotChangeGroup(newGroup)) return;
+            var oldGroup = UnitGroup;
+            oldGroup.RemoveUnit(this);
+            UnitGroup = newGroup;
+        }
+
+        public virtual bool CannotChangeGroup(UnitGroup newGroup)
+        {
+            return newGroup == null || Products.UnitGroup.Equals(newGroup, (UnitGroup)UnitGroup, new UnitGroupComparer());
+        }
+
+        public override bool IdIsDefault(Guid id)
+        {
+            return id == Guid.Empty;
         }
     }
 }

@@ -120,9 +120,9 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
             }
         }
 
-        private static IRepository<IUser> CreateUserRepository()
+        private static IRepositoryLinqToSql<IUser> CreateUserRepository()
         {
-            return ObjectFactory.GetInstance<IRepository<IUser>>();
+            return ObjectFactory.GetInstance<IRepositoryLinqToSql<IUser>>();
         }
     }
 }

@@ -8,7 +8,7 @@ using StructureMap;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class Repository<TBo> : IRepository<TBo>
+    public class RepositoryLinqToSql<TBo> : IRepositoryLinqToSql<TBo>
     {
         private GenFormDataContext _context;
         private RollbackObject _rollback;
@@ -17,13 +17,13 @@ namespace Informedica.GenForm.DataAccess.Repositories
         /// Override of constructor to inject context for testing purposes
         /// </summary>
         /// <param name="context">Datacontext for testing purposes</param>
-        public Repository(GenFormDataContext context)
+        public RepositoryLinqToSql(GenFormDataContext context)
         {
             _context = context;
         }
 
         [DefaultConstructor]
-        public Repository() { }
+        public RepositoryLinqToSql() { }
 
         #region Insert
 
@@ -225,17 +225,17 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         public class RollbackObject : IRollbackObject
         {
-            private Repository<TBo> _repository;
+            private RepositoryLinqToSql<TBo> _repositoryLinqToSql;
 
-            internal RollbackObject(Repository<TBo> repository)
+            internal RollbackObject(RepositoryLinqToSql<TBo> repositoryLinqToSql)
             {
-                _repository = repository;
+                _repositoryLinqToSql = repositoryLinqToSql;
             }
 
             public void Dispose()
             {
-                _repository._rollback = null;
-                _repository = null;
+                _repositoryLinqToSql._rollback = null;
+                _repositoryLinqToSql = null;
             }
         }
 

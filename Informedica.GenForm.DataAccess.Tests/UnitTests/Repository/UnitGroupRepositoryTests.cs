@@ -1,19 +1,19 @@
-﻿using System.Collections.Generic;
-using FluentNHibernate.Testing;
+﻿using System;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Assembler.Contexts;
+using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.Factories;
-using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StructureMap;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
+namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
 {
     /// <summary>
-    /// Summary description for BrandMapShould
+    /// Summary description for UnitGroupRepositoryTests
     /// </summary>
     [TestClass]
-    public class BrandMapShould
+    public class UnitGroupRepositoryTests
     {
         private TestContext testContextInstance;
 
@@ -56,27 +56,37 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         #endregion
 
         [TestMethod]
-        public void CorrectlyMapBrand()
+        public void ThatTheSameUnitGroupCannotBeAddedTwice()
         {
-            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
+            var group1 = new UnitGroup(new UnitGroupDto
             {
-                new PersistenceSpecification<Brand>(session)
-                    .CheckProperty(b => b.Name, "Dynatra")
-                    //                    .CheckList(b => b.Products, CreateProductList());
-                    .VerifyTheMappings();
+                AllowConversion = true,
+                UnitGroupName = "massa"
+            });
+            var group2 = new UnitGroup(new UnitGroupDto
+            {
+                AllowConversion = true,
+                UnitGroupName = "massa"
+            });
+            using (GetContext())
+            {
+                try
+                {
+                    new UnitGroupRepository(GenFormApplication.SessionFactory) { group1, group2 };
+                    Assert.Fail("repository should not accept same item twice");
+                }
+                catch (Exception)
+                {
+                    Assert.IsTrue(true);
+                }
             }
-
         }
 
-        private static IEnumerable<Product> CreateProductList()
+
+
+        private IDisposable GetContext()
         {
-            return new List<Product>
-                       {
-                            DomainFactory.Create<Product, ProductDto>(
-                                ProductTestFixtures.GetProductDtoWithNoSubstances()),
-                            DomainFactory.Create<Product, ProductDto>(
-                                ProductTestFixtures.GetProductDtoWithOneSubstance())
-                       };
+            return ObjectFactory.GetInstance<SessionContext>();
         }
     }
 }

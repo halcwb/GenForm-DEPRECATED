@@ -106,7 +106,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
             var productDto = new ProductDto();
             var product = Isolate.Fake.Instance<IProduct>();
 
-            var repos = GetFakeRepository<IRepository<IProduct>, IProduct>(product);
+            var repos = GetFakeRepository<IRepositoryLinqToSql<IProduct>, IProduct>(product);
             ObjectFactory.Inject(repos);
 
             try
@@ -138,8 +138,8 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 
         private void TrySaveProduct(ProductDto dto)
         {
-            var repos = ObjectFactory.GetInstance<IRepository<IProduct>>();
-            ObjectFactory.Inject(typeof(IRepository<IProduct>), repos);
+            var repos = ObjectFactory.GetInstance<IRepositoryLinqToSql<IProduct>>();
+            ObjectFactory.Inject(typeof(IRepositoryLinqToSql<IProduct>), repos);
             try
             {
                 using (repos.Rollback)
@@ -235,7 +235,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             var brand = ObjectFactory.GetInstance<IBrand>();
 
-            var repos = GetFakeRepository<IRepository<IBrand>, IBrand>(brand);
+            var repos = GetFakeRepository<IRepositoryLinqToSql<IBrand>, IBrand>(brand);
             ObjectFactory.Inject(repos);
 
             try
@@ -261,7 +261,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
             var dto = new SubstanceDto {Id = Guid.Empty, Name = "test"};
             var substance = DomainFactory.Create<ISubstance, SubstanceDto>(dto);
 
-            var repos = GetFakeRepository<IRepository<ISubstance>, ISubstance>(substance);
+            var repos = GetFakeRepository<IRepositoryLinqToSql<ISubstance>, ISubstance>(substance);
             ObjectFactory.Inject(repos);
 
             try
@@ -285,8 +285,8 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             var substance = new SubstanceDto { Id = Guid.Empty, Name = "test"};
 
-            var repos = ObjectFactory.GetInstance<IRepository<ISubstance>>();
-            ObjectFactory.Inject(typeof(IRepository<ISubstance>), repos);
+            var repos = ObjectFactory.GetInstance<IRepositoryLinqToSql<ISubstance>>();
+            ObjectFactory.Inject(typeof(IRepositoryLinqToSql<ISubstance>), repos);
 
             try
             {
@@ -302,7 +302,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         }
 
 
-        private static T GetFakeRepository<T, TC>(TC item) where T: IRepository<TC>
+        private static T GetFakeRepository<T, TC>(TC item) where T: IRepositoryLinqToSql<TC>
         {
             var repos = Isolate.Fake.Instance<T>();
             Isolate.WhenCalled(() => repos.Insert(item)).IgnoreCall();

@@ -76,7 +76,7 @@ namespace Informedica.GenForm.Mvc3.Tests.IntegrationTests
             controller.Login("Admin", "Admin");
             try
             {
-                ObjectFactory.GetInstance<IRepository<IUser>>();
+                ObjectFactory.GetInstance<IRepositoryLinqToSql<IUser>>();
 
             }
             catch (Exception e)

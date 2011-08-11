@@ -7,5 +7,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         Guid Id { get; }
         String UnitGroupName { get; set; }
         Boolean AllowsConversion { get; set; }
+        void RemoveUnit(Unit unit);
     }
 }

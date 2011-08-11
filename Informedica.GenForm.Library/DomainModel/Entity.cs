@@ -7,6 +7,7 @@ namespace Informedica.GenForm.Library.DomainModel
         protected readonly TDto Dto;
         public virtual TId Id { get { return Dto.Id; } protected set { Dto.Id = value; } }
         public virtual int Version { get; set; }
+        public abstract bool IdIsDefault(TId id);
 
         protected Entity(TDto dto)
         {

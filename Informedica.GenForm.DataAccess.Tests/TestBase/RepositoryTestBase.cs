@@ -11,7 +11,7 @@ namespace Informedica.GenForm.DataAccess.Tests.TestBase
 {
     [TestClass]
     public abstract class RepositoryTestBase<TRepos, TBo> 
-        where TRepos: IRepository<TBo>
+        where TRepos: IRepositoryLinqToSql<TBo>
         where TBo:class 
 
     {

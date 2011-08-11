@@ -83,7 +83,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void BeAbleToPersistAUnit()
         {
-            using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
+            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
             {
                 PersistUnit(session);
             }

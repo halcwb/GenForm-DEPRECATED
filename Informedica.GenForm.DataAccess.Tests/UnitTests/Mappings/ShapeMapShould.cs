@@ -58,7 +58,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void CorrectlyMapAShape()
         {
-            using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
+            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
             {
                 new PersistenceSpecification<Shape>(session)
                     .CheckProperty(s => s.Name, "infusievloeistof")
@@ -69,7 +69,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void AssociateShapeWithPackages()
         {
-            using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
+            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
             {
                 new PersistenceSpecification<Shape>(session)
                     .CheckProperty(s => s.Name, "infusievloeistof")
@@ -82,7 +82,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void AssociateShapeWithUnit()
         {
-            using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
+            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
             {
                 new PersistenceSpecification<Shape>(session)
                     .CheckProperty(s => s.Name, "infusievloeistof")
@@ -95,7 +95,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void AssociateShapeWithRoute()
         {
-            using (var session = GenFormApplication.Instance.SessionFactory.OpenSession())
+            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
             {
                 new PersistenceSpecification<Shape>(session)
                     .CheckProperty(s => s.Name, "infusievloeistof")
