@@ -57,7 +57,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void CorrectlyMapBrand()
         {
-            new PersistenceSpecification<Brand>(_context.CurrentSession())
+            new PersistenceSpecification<Brand>(Context.CurrentSession())
                 .CheckProperty(b => b.Name, "Dynatra")
                 //                    .CheckList(b => b.Products, CreateProductList());
                 .VerifyTheMappings();

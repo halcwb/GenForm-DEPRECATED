@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
@@ -33,8 +34,14 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddRoute(Route route)
         {
-            if (CanNotAddRoute(route)) return;
-            AssociateShape.WithRoute(this, route, _routes);
+            route.AddShape(this);
+        }
+
+        protected internal virtual void AddRoute(Route route, Action<Shape> addShapeToRoute)
+        {
+            if (_routes.Contains(route, _routes.Comparer)) throw new CannotAddItemException<Route>(route);
+            _routes.Add(route);
+            addShapeToRoute(this);
         }
 
         private bool CanNotAddRoute(Route route)
@@ -61,8 +68,14 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddUnit(Unit unit)
         {
-            if (CanNotAddUnit(unit)) return;
-            AssociateShape.WithUnit(this, unit, _units);
+            unit.AddShape(this);
+        }
+
+        protected internal virtual void AddUnit(Unit unit, Action<Shape> addShapeToUnit)
+        {
+            if (_units.Contains(unit, _units.Comparer)) throw new CannotAddItemException<Unit>(unit);
+            _units.Add(unit);
+            addShapeToUnit(this);
         }
 
         public virtual bool CanNotAddUnit(Unit unit)
@@ -73,8 +86,14 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddPackage(Package package)
         {
-            if (CanNotAddPackage(package)) return;
-            AssociateShape.WithPackage(this, package, _packages);
+            package.AddShape(this);
+        }
+
+        protected internal virtual void AddPackage(Package package, Action<Shape> addShapeToPackage)
+        {
+            if (_packages.Contains(package, new PackageComparer())) throw new CannotAddItemException<Package>(package);
+            _packages.Add(package);
+            addShapeToPackage(this);
         }
 
         public virtual bool CanNotAddPackage(Package package)
@@ -106,6 +125,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public override bool IdIsDefault(Guid id)
         {
             return id == Guid.Empty;
+        }
+
+        public virtual void RemovePackage(Package package)
+        {
+            
+
         }
     }
 }

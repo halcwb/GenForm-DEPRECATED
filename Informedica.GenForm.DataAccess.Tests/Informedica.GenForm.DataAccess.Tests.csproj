@@ -91,6 +91,7 @@
     <Compile Include="UnitTests\Mappings\BrandMapShould.cs" />
     <Compile Include="UnitTests\Mappings\MappingTests.cs" />
     <Compile Include="UnitTests\Mappings\PackageMapShould.cs" />
+    <Compile Include="UnitTests\Mappings\ProductMapShould.cs" />
     <Compile Include="UnitTests\Mappings\RouteMapShould.cs" />
     <Compile Include="UnitTests\Mappings\ShapeMapShould.cs" />
     <Compile Include="UnitTests\Mappings\SubstanceMapShould.cs" />

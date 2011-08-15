@@ -10,6 +10,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
         {
             Map(p => p.Abbreviation).Not.Nullable().Length(30).Unique();
             HasManyToMany(p => p.Shapes)
+                .AsSet()
                 .Inverse()
                 .Cascade.All();
         }

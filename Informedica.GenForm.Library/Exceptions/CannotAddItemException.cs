@@ -1,10 +1,9 @@
 using System;
-using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Library.Exceptions
 {
-    public class CannotAddItemException : Exception
+    public class CannotAddItemException<T> : Exception
     {
-        public CannotAddItemException(Unit unit): base(unit.ToString()) {}
+        public CannotAddItemException(T item): base(item.ToString()) {}
     }
 }

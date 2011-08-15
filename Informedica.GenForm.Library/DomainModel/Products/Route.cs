@@ -27,13 +27,17 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddShape(Shape shape)
         {
-            if (CanNotAddShape(shape)) return;
-            AssociateShape.WithRoute(shape, this, _shapes);
+            shape.AddRoute(this, AddShapeToRoute);
+        }
+
+        private void AddShapeToRoute(Shape shape)
+        {
+            ShapeAssociation.AddShape(_shapes, shape);
         }
 
         public virtual bool CanNotAddShape(Shape shape)
         {
-            return AssociateShape.CanNotAddShape(shape, _shapes);
+            throw new NotImplementedException();
         }
 
         public virtual String Abbreviation 

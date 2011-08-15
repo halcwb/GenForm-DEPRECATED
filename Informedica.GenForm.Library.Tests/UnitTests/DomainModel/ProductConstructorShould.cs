@@ -103,16 +103,15 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
 
         private Boolean ProductIsPopulated()
         {
-            var isPopulated = _product.BrandName == _dto.BrandName;
+            var isPopulated = _product.Brand.Name == _dto.BrandName;
             isPopulated = isPopulated && _product.DisplayName == _dto.DisplayName;
             isPopulated = isPopulated && _product.GenericName == _dto.GenericName;
-            isPopulated = isPopulated && _product.PackageName == _dto.PackageName;
+            isPopulated = isPopulated && _product.Package.Name == _dto.PackageName;
             isPopulated = isPopulated && _product.ProductCode == _dto.ProductCode;
-            isPopulated = isPopulated && _product.ProductProductId == _dto.ProductId;
-            isPopulated = isPopulated && _product.ProductName == _dto.ProductName;
-            isPopulated = isPopulated && _product.Quantity == _dto.Quantity;
-            isPopulated = isPopulated && _product.ShapeName == _dto.ShapeName;
-            isPopulated = isPopulated && _product.UnitName == _dto.UnitName;
+            isPopulated = isPopulated && _product.Name == _dto.ProductName;
+            isPopulated = isPopulated && _product.Quantity.Value == _dto.Quantity;
+            isPopulated = isPopulated && _product.Shape.Name == _dto.ShapeName;
+            isPopulated = isPopulated && _product.Quantity.Unit.Name == _dto.UnitName;
 
             foreach (var substance in _dto.Substances)
             {

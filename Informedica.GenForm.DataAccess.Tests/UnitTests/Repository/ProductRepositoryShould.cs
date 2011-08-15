@@ -138,7 +138,6 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
                 try
                 {
                     repos.Insert(ctx, Bo);
-                    repos.Delete(ctx, Bo.ProductId);
                 }
                 catch (Exception e)
                 {

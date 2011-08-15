@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
@@ -31,8 +33,17 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddShape(Shape shape)
         {
-            if (AssociateShape.CanNotAddShape(shape, _shapes)) return;
-            AssociateShape.WithPackage(shape, this, _shapes);
+            shape.AddPackage(this, AddShapeToPackage);
+        }
+
+        private void AddShapeToPackage(Shape shape)
+        {
+            ShapeAssociation.AddShape(_shapes, shape);
+        }
+
+        public virtual void RemoveShape(Shape shape)
+        {
+            shape.RemovePackage(this);
         }
 
         public virtual IEnumerable<Shape> Shapes
@@ -44,6 +55,15 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public override bool IdIsDefault(Guid id)
         {
             return id == Guid.Empty;
+        }
+    }
+
+    public static class ShapeAssociation
+    {
+        public static void AddShape(HashSet<Shape> shapes, Shape shape)
+        {
+            if (shapes.Contains(shape, new ShapeComparer())) throw new CannotAddItemException<Shape>(shape);
+            shapes.Add(shape);
         }
     }
 }

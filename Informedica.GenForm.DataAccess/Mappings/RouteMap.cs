@@ -9,9 +9,10 @@ namespace Informedica.GenForm.DataAccess.Mappings
         public RouteMap()
         {
             Map(r => r.Abbreviation).Not.Nullable().Length(30).Unique();
-            HasMany(r => r.Shapes)
-                .Cascade.AllDeleteOrphan()
-                .Cascade.SaveUpdate();
+            HasManyToMany(r => r.Shapes)
+                .AsSet()
+                .Cascade.All()
+                .Inverse();
         }
     }
 }

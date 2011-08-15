@@ -74,7 +74,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             var dto = new ProductDto{ProductName = ProductName};
             var product = GetProduct(dto);
 
-            Assert.AreEqual(dto.ProductName, product.ProductName, "new instance should have the same productname");
+            Assert.AreEqual(dto.ProductName, product.Name, "new instance should have the same productname");
         }
 
         [TestMethod]
@@ -92,7 +92,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             var dto = new ProductDto{BrandName = BrandName};
             var product = GetProduct(dto);
 
-            Assert.AreEqual(dto.BrandName, product.BrandName, "new instance should have the same productname");
+            Assert.AreEqual(dto.BrandName, product.Brand.Name, "new instance should have the same productname");
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             var dto = new ProductDto{ProductCode = ProductCode};
             var product = GetProduct(dto);
 
-            Assert.AreEqual(dto.ProductName, product.ProductName, "new instance should have the same productname");
+            Assert.AreEqual(dto.ProductName, product.Name, "new instance should have the same productname");
         }
 
         [TestMethod]
@@ -119,7 +119,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             var dto = new ProductDto{ShapeName = Shape};
             var product = GetProduct(dto);
 
-            Assert.AreEqual(dto.ShapeName, product.ShapeName, "new instance should have the same productname");
+            Assert.AreEqual(dto.ShapeName, product.Shape.Name, "new instance should have the same productname");
         }
 
         [TestMethod]
@@ -128,7 +128,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             var dto = new ProductDto{PackageName = Pacakage};
             var product = GetProduct(dto);
 
-            Assert.AreEqual(dto.PackageName, product.PackageName, "new instance should have the same productname");
+            Assert.AreEqual(dto.PackageName, product.Package.Name, "new instance should have the same productname");
         }
 
         [TestMethod]
@@ -137,7 +137,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             var dto = new ProductDto{UnitName = Unit};
             var product = GetProduct(dto);
 
-            Assert.AreEqual(dto.UnitName, product.UnitName, "new instance should have the same productname");
+            Assert.AreEqual(dto.UnitName, product.Quantity.Unit.Name, "new instance should have the same productname");
         }
 
         [TestMethod]

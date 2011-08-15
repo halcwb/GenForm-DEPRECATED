@@ -57,12 +57,15 @@
     <Compile Include="Mappings\EmptyDatabaseMap.cs" />
     <Compile Include="Mappings\EntityMap.cs" />
     <Compile Include="Mappings\PackageMap.cs" />
+    <Compile Include="Mappings\ProductMap.cs" />
+    <Compile Include="Mappings\ProductSubstanceMap.cs" />
     <Compile Include="Mappings\RouteMap.cs" />
     <Compile Include="Mappings\ShapeMap.cs" />
     <Compile Include="Mappings\SubstanceGroupMap.cs" />
     <Compile Include="Mappings\SubstanceMap.cs" />
     <Compile Include="Mappings\UnitGroupMap.cs" />
     <Compile Include="Mappings\UnitMap.cs" />
+    <Compile Include="Mappings\UnitValueMap.cs" />
     <Compile Include="Repositories\Delegates\BrandDelegates.cs" />
     <Compile Include="Repositories\Delegates\GenericDelegates.cs" />
     <Compile Include="Repositories\Delegates\PackageDelegates.cs" />

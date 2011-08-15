@@ -53,7 +53,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void CorrectlyMapPackageWithTwoShapes()
         {
-            new PersistenceSpecification<Package>(_context.CurrentSession())
+            new PersistenceSpecification<Package>(Context.CurrentSession())
                 .CheckProperty(b => b.Name, "ampul")
                 .CheckProperty(p => p.Abbreviation, "amp")
                 .CheckList(p => p.Shapes, GetShapesList(), (package, shape) => package.AddShape(shape))
@@ -65,7 +65,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             try
             {
-                new PersistenceSpecification<Package>(_context.CurrentSession())
+                new PersistenceSpecification<Package>(Context.CurrentSession())
                     .CheckProperty(b => b.Name, "ampul")
                     .CheckProperty(p => p.Abbreviation, "amp")
                     .CheckList(p => p.Shapes, GetDuplicateShapes(), (package, shape) => package.AddShape(shape))

@@ -49,7 +49,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void CorrectlyMapARoute()
         {
-            new PersistenceSpecification<Route>(_context.CurrentSession())
+            new PersistenceSpecification<Route>(Context.CurrentSession())
                 .CheckProperty(r => r.Name, "intraveneus")
                 .CheckProperty(r => r.Abbreviation, "iv")
                 .VerifyTheMappings();
@@ -58,10 +58,10 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void BeAssociatedWithShapes()
         {
-            new PersistenceSpecification<Route>(_context.CurrentSession())
+            new PersistenceSpecification<Route>(Context.CurrentSession())
                 .CheckProperty(r => r.Name, "intraveneus")
                 .CheckProperty(r => r.Abbreviation, "iv")
-                .CheckList(r => r.Shapes, GetShapesList())
+                .CheckList(r => r.Shapes, GetShapesList(), (route, shape) => route.AddShape(shape))
                 .VerifyTheMappings();
         }
 
@@ -69,7 +69,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             return new List<Shape>
                        {
-                           new Shape(new ShapeDto {Name = "infusievloeistof"})
+                           new Shape(new ShapeDto {Name = "infusievloeistof"}),
+                           new Shape(new ShapeDto {Name = "injectievloeistof"})
                        };
         }
     }

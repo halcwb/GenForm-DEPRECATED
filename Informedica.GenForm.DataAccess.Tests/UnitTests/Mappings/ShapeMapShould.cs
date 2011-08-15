@@ -52,7 +52,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void CorrectlyMapAShape()
         {
-            new PersistenceSpecification<Shape>(_context.CurrentSession())
+            new PersistenceSpecification<Shape>(Context.CurrentSession())
                 .CheckProperty(s => s.Name, "infusievloeistof")
                 .VerifyTheMappings(); 
         }
@@ -60,30 +60,64 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void AssociateShapeWithOnePackage()
         {
-            new PersistenceSpecification<Shape>(_context.CurrentSession())
+            new PersistenceSpecification<Shape>(Context.CurrentSession())
                 .CheckProperty(s => s.Name, "infusievloeistof")
                 .CheckList(s => s.Packages, GetPackageList())
                 .VerifyTheMappings();
         }
 
+        // ToDo: solve problem with VerifyMappings for sets
+        public void AssociateShapeWithTwoPackages()
+        {
+            new PersistenceSpecification<Shape>(Context.CurrentSession())
+                .CheckProperty(s => s.Name, "infusievloeistof")
+                .CheckList(s => s.Packages, GetPackageListTwo())
+                .VerifyTheMappings();
+        }
+
+        private IEnumerable<Package> GetPackageListTwo()
+        {
+            return new List<Package>
+                       {
+                           new Package(new PackageDto {Name = "ampul"}),
+                           new Package(new PackageDto {Name = "zak"})
+                       };
+        }
 
         [TestMethod]
-        public void AssociateShapeWithUnit()
+        public void AssociateShapeWithOneUnit()
         {
-                new PersistenceSpecification<Shape>(_context.CurrentSession())
+                new PersistenceSpecification<Shape>(Context.CurrentSession())
                     .CheckProperty(s => s.Name, "infusievloeistof")
                     .CheckList(s => s.Units, GetUnitList())
                     .VerifyTheMappings();
-            
         }
 
         [TestMethod]
         public void AssociateShapeWithOneRoute()
         {
-            new PersistenceSpecification<Shape>(_context.CurrentSession())
+            new PersistenceSpecification<Shape>(Context.CurrentSession())
                 .CheckProperty(s => s.Name, "infusievloeistof")
                 .CheckList(s => s.Routes, GetRouteList())
                 .VerifyTheMappings();
+        }
+
+        // ToDo: solve problem with VerifyMappings for sets
+        public void AssociateShapeWithTwoRoutes()
+        {
+            new PersistenceSpecification<Shape>(Context.CurrentSession())
+                .CheckProperty(s => s.Name, "infusievloeistof")
+                .CheckList(s => s.Routes, GetRouteListWithTwo())
+                .VerifyTheMappings();
+        }
+
+        private IEnumerable<Route> GetRouteListWithTwo()
+        {
+            return new List<Route>
+                       {
+                           new Route(new RouteDto {Abbreviation = "iv", Name = "intraveneus"}),
+                           new Route(new RouteDto {Abbreviation = "or", Name = "oraal"})
+                       };
         }
 
         private IEnumerable<Route> GetRouteList()
@@ -98,8 +132,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             return new List<Unit>
                        {
-                           UnitFactory.CreateUnit(new UnitDto{Abbreviation = "ml", AllowConversion = true, Divisor = 10, IsReference = false, Multiplier = 1000, Name = "milliliter", UnitGroupName = "algemeen"}),
-                           UnitFactory.CreateUnit(new UnitDto{Abbreviation = "l", AllowConversion = true, Divisor = 1, IsReference = true, Multiplier = 1, Name = "liter", UnitGroupName = "volume"}),
+                           UnitFactory.CreateUnit(new UnitDto{Abbreviation = "ml", AllowConversion = true, Divisor = 10, IsReference = false, Multiplier = 1000, Name = "milliliter", UnitGroupName = "algemeen"})
                        };
         }
 

@@ -59,7 +59,6 @@
     <Compile Include="DomainModel\Equality\ShapeComparer.cs" />
     <Compile Include="DomainModel\Equality\UnitComparer.cs" />
     <Compile Include="DomainModel\Equality\UnitGroupComparer.cs" />
-    <Compile Include="DomainModel\Products\AssociateShape.cs" />
     <Compile Include="DomainModel\Products\Brand.cs" />
     <Compile Include="DomainModel\Products\Data\PackageDto.cs" />
     <Compile Include="DomainModel\Products\Data\ProductDto.cs" />
@@ -89,6 +88,7 @@
     <Compile Include="DomainModel\Products\SubstanceGroup.cs" />
     <Compile Include="DomainModel\Products\Unit.cs" />
     <Compile Include="DomainModel\Products\UnitGroup.cs" />
+    <Compile Include="DomainModel\UnitValue.cs" />
     <Compile Include="Exceptions\CannotAddItemException.cs" />
     <Compile Include="Exceptions\InvalidDtoException.cs" />
     <Compile Include="Factories\DomainFactory.cs" />

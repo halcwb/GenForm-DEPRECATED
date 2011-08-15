@@ -8,14 +8,12 @@ namespace Informedica.GenForm.DataAccess.Mappings
     {
         public ShapeMap()
         {
-            HasManyToMany(s => s.Packages)
+            HasManyToMany(s => s.Packages).AsSet()
                 .Cascade.All();
-            HasManyToMany(s => s.Units)
-                .Cascade.AllDeleteOrphan()
-                .Cascade.SaveUpdate();
-            HasManyToMany(s => s.Routes)
-                .Cascade.AllDeleteOrphan()
-                .Cascade.SaveUpdate();
+            HasManyToMany(s => s.Units).AsSet()
+                .Cascade.All();
+            HasManyToMany(s => s.Routes).AsSet()
+                .Cascade.All();
         }
     }
 }

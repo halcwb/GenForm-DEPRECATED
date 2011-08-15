@@ -80,17 +80,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public IProduct LoadProduct(Int32 productId)
         {
-            var product = new Product
-                              {
-                                  ProductProductId = productId,
-                                  ProductName = "dopamine (Dynatra) infusievloeistof 200 mg/mL 5 mL ampul",
-                                  GenericName = "dopamine",
-                                  BrandName = "Dynatra",
-                                  ShapeName = "infusievloeistof",
-                                  Quantity = 5,
-                                  UnitName = "mL",
-                                  PackageName = "ampul"
-                              };
+            var product = new Product(new ProductDto());
 
             return product;
         }

@@ -1,0 +1,27 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Products.ProductSubstance, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`ProductSubstance`">
+    <id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" />
+      <generator class="hilo">
+        <param name="max_lo">1</param>
+      </generator>
+    </id>
+    <property name="SortOrder" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="SortOrder" not-null="true" />
+    </property>
+    <many-to-one cascade="save-update" class="Informedica.GenForm.Library.DomainModel.Products.Substance, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Substance">
+      <column name="Substance_id" not-null="true" unique-key="ProductSubstanceCombi" />
+    </many-to-one>
+    <many-to-one class="Informedica.GenForm.Library.DomainModel.Products.Product, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Product">
+      <column name="Product_id" not-null="true" unique-key="ProductSubstanceCombi" />
+    </many-to-one>
+    <component name="Quantity" insert="true" update="true" optimistic-lock="true" class="Informedica.GenForm.Library.DomainModel.UnitValue, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <property name="Value" type="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <column name="Value" not-null="true" />
+      </property>
+      <many-to-one cascade="save-update" class="Informedica.GenForm.Library.DomainModel.Products.Unit, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Unit">
+        <column name="Unit_id" not-null="true" />
+      </many-to-one>
+    </component>
+  </class>
+</hibernate-mapping>

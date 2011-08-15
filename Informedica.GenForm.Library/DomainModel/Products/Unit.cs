@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
@@ -59,13 +60,17 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddShape(Shape shape)
         {
-            if (CanNotAddShape(shape)) return;
-            AssociateShape.WithUnit(shape, this, _shapes);
+            shape.AddUnit(this, AddShapeToUnit);
+        }
+
+        private void AddShapeToUnit(Shape shape)
+        {
+            ShapeAssociation.AddShape(_shapes, shape);
         }
 
         public virtual bool CanNotAddShape(Shape shape)
         {
-            return AssociateShape.CanNotAddShape(shape, _shapes);
+            return (shape == null || _shapes.Contains(shape, _shapes.Comparer));
         }
 
         public virtual IEnumerable<Shape> Shapes

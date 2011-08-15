@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using StructureMap;
 
@@ -33,6 +34,8 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             get { return _group; }
             set { _group = value; }
         }
+
+        public virtual IEnumerable<Product> Products { get; protected set; }
 
         public override bool IdIsDefault(Guid id)
         {

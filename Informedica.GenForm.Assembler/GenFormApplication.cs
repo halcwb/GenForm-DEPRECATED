@@ -11,6 +11,7 @@ namespace Informedica.GenForm.Assembler
     {
         private static GenFormApplication _instance;
         private static readonly Object LockThis = new object();
+        
         private static ISessionFactory _factory;
 
         private GenFormApplication() {}
