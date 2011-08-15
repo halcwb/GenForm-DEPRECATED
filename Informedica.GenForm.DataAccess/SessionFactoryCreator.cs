@@ -9,13 +9,21 @@ namespace Informedica.GenForm.DataAccess
 {
     public static class SessionFactoryCreator
     {
+        private const string ExportPath = @"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.DataAccess\MappingsXml";
+        private const string LogPath = @"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.DataAccess\Diagnostics\Log.txt";
+
         public static ISessionFactory CreateSessionFactory()
         {
             return Fluently.Configure()
-                .Database(MsSqlConfiguration.MsSql2008.ConnectionString(GetConnectionString()))
+                .Database(MsSqlConfiguration.MsSql2008.ConnectionString(GetConnectionString()).ShowSql)
                 .Mappings(x => x.FluentMappings.AddFromAssemblyOf<Mappings.SubstanceMap>()
-                .ExportTo(@"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.DataAccess\MappingsXml"))
+                .ExportTo(ExportPath))
                 .CurrentSessionContext<NHibernate.Context.ThreadStaticSessionContext>()
+                .Diagnostics(x => 
+                { 
+                    x.Enable();
+                    x.OutputToFile(LogPath);
+                })
                 .ExposeConfiguration(BuildSchema)
                 .BuildSessionFactory();
         }

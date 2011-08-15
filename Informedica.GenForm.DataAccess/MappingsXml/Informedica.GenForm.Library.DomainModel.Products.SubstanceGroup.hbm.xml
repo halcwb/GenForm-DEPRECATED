@@ -1,9 +1,12 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
   <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Products.SubstanceGroup, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`SubstanceGroup`">
     <id name="Id" type="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-      <column name="Id" not-null="true" />
+      <column name="Id" />
       <generator class="guid.comb" />
     </id>
+    <version name="Version" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Version" />
+    </version>
     <bag access="nosetter.lowercase-underscore" cascade="save-update" name="Substances">
       <key>
         <column name="SubstanceGroup_id" />
@@ -11,7 +14,7 @@
       <one-to-many class="Informedica.GenForm.Library.DomainModel.Products.Substance, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     </bag>
     <property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-      <column name="Name" length="255" not-null="true" />
+      <column name="Name" length="255" not-null="true" unique="true" />
     </property>
   </class>
 </hibernate-mapping>

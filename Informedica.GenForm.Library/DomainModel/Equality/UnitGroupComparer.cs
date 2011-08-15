@@ -7,7 +7,7 @@ namespace Informedica.GenForm.Library.DomainModel.Equality
     {
         public bool Equals(UnitGroup x, UnitGroup y)
         {
-            return x.Equals(y) || EqualName(x.UnitGroupName, y.UnitGroupName);
+            return x.Equals(y) || EqualName(x.Name, y.Name);
         }
 
         public int GetHashCode(UnitGroup obj)

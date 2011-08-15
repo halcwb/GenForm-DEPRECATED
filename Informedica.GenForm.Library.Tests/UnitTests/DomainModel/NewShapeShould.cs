@@ -3,6 +3,7 @@ using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Factories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
@@ -141,12 +142,12 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             return unit;
         }
 
-        private Unit CreateUnit()
+        private static Unit CreateUnit()
         {
-            return new Unit(GetUnitDto());
+            return UnitFactory.CreateUnit((GetUnitDto()));
         }
 
-        private UnitDto GetUnitDto()
+        private static UnitDto GetUnitDto()
         {
             return new UnitDto
                        {

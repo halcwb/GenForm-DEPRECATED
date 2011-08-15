@@ -1,15 +1,17 @@
-﻿using FluentNHibernate.Mapping;
+﻿using System;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.DataAccess.Mappings
 {
-    public class PackageMap : ClassMap<Package>
+    public class PackageMap : EntityMap<Package, Guid, PackageDto>
     {
         public PackageMap()
         {
-            Id(p => p.Id).GeneratedBy.GuidComb();
-            Map(p => p.Name).Not.Nullable().Length(255).Unique();
             Map(p => p.Abbreviation).Not.Nullable().Length(30).Unique();
+            HasManyToMany(p => p.Shapes)
+                .Inverse()
+                .Cascade.All();
         }
     }
 }

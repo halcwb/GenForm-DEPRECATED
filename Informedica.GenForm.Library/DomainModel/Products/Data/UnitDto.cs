@@ -10,7 +10,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Data
         }
 
         public Int32 UnitId;
-        public String Name;
         public String Abbreviation;
         public Decimal Multiplier;
         public Decimal Divisor;

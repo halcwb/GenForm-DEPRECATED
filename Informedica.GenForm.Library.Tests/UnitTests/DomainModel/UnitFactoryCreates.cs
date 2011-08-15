@@ -1,20 +1,16 @@
-﻿using System;
-using Informedica.GenForm.Assembler;
+﻿using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Factories;
-using Informedica.GenForm.Library.Transactions;
-using Informedica.GenForm.Library.Transactions.Commands;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StructureMap;
 
-namespace Informedica.GenForm.Library.Tests.UnitTests.Commands
+namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
 {
     /// <summary>
-    /// Summary description for TransactionManagerWithInsertProductCommandShould
+    /// Summary description for UnitFactoryCreates
     /// </summary>
     [TestClass]
-    public class TransactionWithInsertProductShould
+    public class UnitFactoryCreates
     {
         private TestContext testContextInstance;
 
@@ -39,9 +35,9 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Commands
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize]
-        public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
-        
+        // [ClassInitialize()]
+        // public static void MyClassInitialize(TestContext testContext) { }
+        //
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
@@ -57,44 +53,38 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Commands
         #endregion
 
         [TestMethod]
-        public void GetAValidInsertCommand()
+        public void ANewUnitUsingAUnitDto()
         {
-            var command = (IInsertCommand<IProduct>)GetCommand();
+            var unit = CreateTestUnit();
+            Assert.IsInstanceOfType(unit, typeof(Unit));
+        }
 
-            Assert.IsNotNull(command.Item);
-            Assert.IsFalse(String.IsNullOrEmpty(command.Item.ProductName));
+        private static Unit CreateTestUnit()
+        {
+            var dto = UnitTestFixtures.GetTestUnitMilligram();
+            var unit = UnitFactory.CreateUnit(dto);
+            return unit;
         }
 
         [TestMethod]
-        public void BeAbleToExecuteAnInsertProductCommand()
+        public void AlwaysAUnitWithAUnitGroup()
         {
-            var command = GetCommand();
-            var list = new CommandQueue();
-            list.Enqueue(command);
-
-            using (var transMgr = GetTransactionManager(list))
-            {
-                transMgr.StartTransaction();
-                transMgr.ExecuteCommands();
-                transMgr.RollBackTransaction();
-            }
+            var unit = CreateTestUnit();
+            Assert.IsNotNull(unit.UnitGroup);
         }
 
         [TestMethod]
-        public void BeAbleToRunAnInsertAndSelectCommand()
+        public void AUnitWithUnitGroupWithNameOfUnitDtoUnitGroupName()
         {
-            
+            var unit = CreateTestUnit();
+            Assert.AreEqual(UnitTestFixtures.GetTestUnitMilligram().UnitGroupName, unit.UnitGroup.Name);
         }
 
-        private ICommand GetCommand()
+        [TestMethod]
+        public void UnitWithUnitGroupThatContainsThatUnit()
         {
-            var product = (IProduct)new Product(ProductTestFixtures.GetProductDtoWithTwoSubstancesAndRoute());
-            return CommandFactory.CreateInsertCommand(product);
-        }
-
-        private ITransactionManager GetTransactionManager(CommandQueue list)
-        {
-            return ObjectFactory.With(list).GetInstance<ITransactionManager>();
+            var unit = CreateTestUnit();
+            Assert.AreSame(unit, unit.UnitGroup.Units.First());
         }
     }
 }

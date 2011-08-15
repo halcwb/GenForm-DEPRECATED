@@ -1,16 +1,18 @@
-﻿using FluentNHibernate.Mapping;
+﻿using System;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.DataAccess.Mappings
 {
-    public sealed class ShapeMap: ClassMap<Shape>
+    public sealed class ShapeMap: EntityMap<Shape, Guid, ShapeDto>
     {
         public ShapeMap()
         {
-            Id(s => s.Id).GeneratedBy.GuidComb();
-            Map(s => s.Name).Not.Nullable().Length(255);
-            HasManyToMany(s => s.Packages).Cascade.SaveUpdate();
-            HasManyToMany(s => s.Units).Cascade.SaveUpdate();
+            HasManyToMany(s => s.Packages)
+                .Cascade.All();
+            HasManyToMany(s => s.Units)
+                .Cascade.AllDeleteOrphan()
+                .Cascade.SaveUpdate();
             HasManyToMany(s => s.Routes)
                 .Cascade.AllDeleteOrphan()
                 .Cascade.SaveUpdate();

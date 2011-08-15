@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using FluentNHibernate.Testing;
-using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Factories;
+using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
@@ -13,7 +12,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     /// Summary description for ShapeMapShould
     /// </summary>
     [TestClass]
-    public class ShapeMapShould
+    public class ShapeMapShould : MappingTests
     {
         private TestContext testContextInstance;
 
@@ -38,70 +37,53 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
+        [ClassInitialize]
+        public static void MyClassInitialize(TestContext testContext) { DatabaseCleaner.CleanDataBase(); }
+        
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
         //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
+        
         #endregion
+
+        //ToDo: Add tests with lists with multiple entries
 
         [TestMethod]
         public void CorrectlyMapAShape()
         {
-            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
-            {
-                new PersistenceSpecification<Shape>(session)
-                    .CheckProperty(s => s.Name, "infusievloeistof")
-                    .VerifyTheMappings();
-            }
+            new PersistenceSpecification<Shape>(_context.CurrentSession())
+                .CheckProperty(s => s.Name, "infusievloeistof")
+                .VerifyTheMappings(); 
         }
 
         [TestMethod]
-        public void AssociateShapeWithPackages()
+        public void AssociateShapeWithOnePackage()
         {
-            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
-            {
-                new PersistenceSpecification<Shape>(session)
-                    .CheckProperty(s => s.Name, "infusievloeistof")
-                    .CheckList(s => s.Packages, GetPackageList())
-                    .VerifyTheMappings();
-            }
+            new PersistenceSpecification<Shape>(_context.CurrentSession())
+                .CheckProperty(s => s.Name, "infusievloeistof")
+                .CheckList(s => s.Packages, GetPackageList())
+                .VerifyTheMappings();
         }
 
 
         [TestMethod]
         public void AssociateShapeWithUnit()
         {
-            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
-            {
-                new PersistenceSpecification<Shape>(session)
+                new PersistenceSpecification<Shape>(_context.CurrentSession())
                     .CheckProperty(s => s.Name, "infusievloeistof")
                     .CheckList(s => s.Units, GetUnitList())
                     .VerifyTheMappings();
-            }
             
         }
 
         [TestMethod]
-        public void AssociateShapeWithRoute()
+        public void AssociateShapeWithOneRoute()
         {
-            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
-            {
-                new PersistenceSpecification<Shape>(session)
-                    .CheckProperty(s => s.Name, "infusievloeistof")
-                    .CheckList(s => s.Routes, GetRouteList())
-                    .VerifyTheMappings();
-            }
+            new PersistenceSpecification<Shape>(_context.CurrentSession())
+                .CheckProperty(s => s.Name, "infusievloeistof")
+                .CheckList(s => s.Routes, GetRouteList())
+                .VerifyTheMappings();
         }
 
         private IEnumerable<Route> GetRouteList()
@@ -116,8 +98,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             return new List<Unit>
                        {
-                           new Unit(new UnitDto{Abbreviation = "ml", AllowConversion = true, Divisor = 10, IsReference = false, Multiplier = 1000, Name = "milliliter", UnitGroupName = "volume"}),
-                           new Unit(new UnitDto{Abbreviation = "l", AllowConversion = true, Divisor = 1, IsReference = true, Multiplier = 1, Name = "liter", UnitGroupName = "volume"}),
+                           UnitFactory.CreateUnit(new UnitDto{Abbreviation = "ml", AllowConversion = true, Divisor = 10, IsReference = false, Multiplier = 1000, Name = "milliliter", UnitGroupName = "algemeen"}),
+                           UnitFactory.CreateUnit(new UnitDto{Abbreviation = "l", AllowConversion = true, Divisor = 1, IsReference = true, Multiplier = 1, Name = "liter", UnitGroupName = "volume"}),
                        };
         }
 
@@ -125,8 +107,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             return new List<Package>
                        {
-                           new Package(new PackageDto {Name = "ampul"}),
-                           new Package(new PackageDto {Name = "zak"})
+                           new Package(new PackageDto {Name = "ampul"})
                        };
         }
     }

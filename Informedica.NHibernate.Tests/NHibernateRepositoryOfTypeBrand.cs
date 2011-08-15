@@ -47,7 +47,7 @@ namespace Informedica.NHibernate.Tests
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            _repository = new NHibernateRepository<Brand, Guid, BrandDto>(GenFormApplication.Instance.SessionFactoryFromInstance);
+            _repository = new NHibernateRepository<Brand, Guid, BrandDto>(GenFormApplication.SessionFactory);
         }
         
         // Use ClassCleanup to run code after all tests in a class have run

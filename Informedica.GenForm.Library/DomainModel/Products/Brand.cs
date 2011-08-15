@@ -11,8 +11,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public Brand(BrandDto dto) : base(dto.CloneDto()) {}
 
-        public virtual String Name { get { return Dto.Name; } set { Dto.Name = value; } }
-
         public virtual IEnumerable<Product> Products
         {
             get {
@@ -28,8 +26,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
     public class BrandDto: DataTransferObject<BrandDto, Guid>
     {
-        public string Name;
-
         public override BrandDto CloneDto()
         {
             return CreateClone();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using StructureMap;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
@@ -15,12 +16,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public SubstanceGroup(SubstanceGroupDto dto): base(dto.CloneDto()) {}
 
         #region Implementation of ISubstanceGroup
-
-        public virtual String Name
-        {
-            get { return Dto.Name; }
-            set { Dto.Name = value; }
-        }
 
         public virtual ISubstanceGroup MainSubstanceGroup
         {
@@ -39,23 +34,5 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         {
             return id == Guid.Empty;
         }
-    }
-
-    public class SubstanceGroupDto: DataTransferObject<SubstanceGroupDto, Guid>
-    {
-        public string Name;
-
-        public override SubstanceGroupDto CloneDto()
-        {
-            return CreateClone();
-        }
-
-    }
-
-    public interface ISubstanceGroup
-    {
-        Guid Id { get; }
-        String Name { get; set; }
-        ISubstanceGroup MainSubstanceGroup { get; set; }
     }
 }

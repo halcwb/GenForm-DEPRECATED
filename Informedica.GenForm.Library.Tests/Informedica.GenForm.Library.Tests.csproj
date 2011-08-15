@@ -51,14 +51,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+    <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\NHibernate\Castle.Core.dll</HintPath>
+      <HintPath>..\Dependencies\NHibernate\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\NHibernate\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
-    <Reference Include="NHibernate.ByteCode.Castle">
-      <HintPath>..\Dependencies\NHibernate\NHibernate.ByteCode.Castle.dll</HintPath>
+    <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\NHibernate\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -81,21 +85,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTests\Commands\ACommandFactoryShould.cs" />
     <Compile Include="UnitTests\Commands\CommandListShould.cs" />
-    <Compile Include="UnitTests\Commands\TransactionOfInsertSelectDeleteShould.cs" />
-    <Compile Include="UnitTests\Commands\TransactionWithInsertProductShould.cs" />
-    <Compile Include="UnitTests\Commands\TransactionWithInsertAndSelectShould.cs" />
     <Compile Include="UnitTests\DomainModel\ADomainModelShouldHaveAnIdentifirer.cs" />
     <Compile Include="UnitTests\DomainModel\DomainFactoryCanCreate.cs" />
     <Compile Include="UnitTests\DomainModel\NewlyCreatedProductShould.cs" />
+    <Compile Include="UnitTests\DomainModel\NewPackageShould.cs" />
     <Compile Include="UnitTests\DomainModel\NewShapeShould.cs" />
     <Compile Include="UnitTests\DomainModel\OjbectFactoryForProductShould.cs" />
     <Compile Include="UnitTests\DomainModel\ProductConstructorShould.cs" />
     <Compile Include="UnitTests\DomainModel\ProductTestBase.cs" />
     <Compile Include="UnitTests\DomainModel\RouteComparerReturns.cs" />
+    <Compile Include="UnitTests\DomainModel\UnitFactoryCreates.cs" />
     <Compile Include="UnitTests\DomainModel\UnitGroupWithUnitsShould.cs" />
     <Compile Include="UnitTests\DomainModel\UnitConstructorShould.cs" />
+    <Compile Include="UnitTests\Factories\FluentFactoryTests.cs" />
     <Compile Include="UnitTests\GenFormIdentityTest.cs" />
     <Compile Include="UnitTests\GenFormPrincipalTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="UnitTests\Services\DatabaseServicesShould.cs" />
     <Compile Include="UnitTests\Services\LoginServicesShould.cs" />
     <Compile Include="UnitTests\Services\ProductServicesShould.cs" />
+    <Compile Include="UnitTests\Services\UnitServicesTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />

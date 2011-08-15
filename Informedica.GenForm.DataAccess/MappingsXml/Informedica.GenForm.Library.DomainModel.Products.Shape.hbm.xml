@@ -4,7 +4,10 @@
       <column name="Id" />
       <generator class="guid.comb" />
     </id>
-    <set cascade="save-update" name="Packages" table="PackageToShape">
+    <version name="Version" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Version" />
+    </version>
+    <set cascade="all" name="Packages" table="PackagesToShapes">
       <key>
         <column name="Shape_id" />
       </key>
@@ -29,7 +32,7 @@
       </many-to-many>
     </set>
     <property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-      <column name="Name" length="255" not-null="true" />
+      <column name="Name" length="255" not-null="true" unique="true" />
     </property>
   </class>
 </hibernate-mapping>

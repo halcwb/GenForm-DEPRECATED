@@ -1,7 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Assembler.Contexts;
-using Informedica.GenForm.DataAccess.DataContexts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.NHibernate.Tests
@@ -14,7 +13,7 @@ namespace Informedica.NHibernate.Tests
         {
             using (SessionContext.UseContext())
             {
-                Assert.IsNotNull(GenFormApplication.Instance.SessionFactoryFromInstance.GetCurrentSession());
+                Assert.IsNotNull(GenFormApplication.SessionFactory.GetCurrentSession());
             }
         }
 
@@ -23,12 +22,12 @@ namespace Informedica.NHibernate.Tests
         {
             using (SessionContext.UseContext())
             {
-                Assert.IsNotNull(GenFormApplication.Instance.SessionFactoryFromInstance.GetCurrentSession());
+                Assert.IsNotNull(GenFormApplication.SessionFactory.GetCurrentSession());
             }
 
             try
             {
-                GenFormApplication.Instance.SessionFactoryFromInstance.GetCurrentSession();
+                GenFormApplication.SessionFactory.GetCurrentSession();
                 Assert.Fail("No session should be open after disposal of SessionBuilder");
             }
             catch (Exception)

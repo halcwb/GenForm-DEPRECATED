@@ -36,8 +36,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return AssociateShape.CanNotAddShape(shape, _shapes);
         }
 
-        public virtual String Name { get { return Dto.Name ?? (Dto.Name = String.Empty); } set { Dto.Name = value; } }
-
         public virtual String Abbreviation 
         { 
             get { return Dto.Abbreviation ?? (Dto.Abbreviation = CreateAbbreviationFromName()); } 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
@@ -12,12 +13,15 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         protected UnitGroup(): base(new UnitGroupDto()){}
 
-        public UnitGroup(UnitGroupDto dto): base(dto.CloneDto()) {}
-
-        public virtual string UnitGroupName
+        [Obsolete]
+        public UnitGroup(UnitGroupDto dto): base(dto.CloneDto())
         {
-            get { return Dto.UnitGroupName; }
-            set { Dto.UnitGroupName = value; }
+            ValidateDto();
+        }
+
+        private void ValidateDto()
+        {
+            if (String.IsNullOrWhiteSpace(Dto.Name)) throw new InvalidDtoException<UnitGroupDto, Guid>(Dto);
         }
 
         public virtual bool AllowsConversion
@@ -34,21 +38,14 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddUnit(Unit unit)
         {
-            if (CannotAddUnit(unit)) return;
+            if (CannotAddUnit(unit)) throw new CannotAddItemException(unit);
             _units.Add(unit);
             unit.ChangeUnitGroup(this);
         }
 
         public virtual void RemoveUnit(Unit unit)
         {
-            if(CanNotRemoveUnit(unit)) return;
             _units.RemoveWhere(x => new UnitComparer().Equals(x, unit));
-        }
-
-        private bool CanNotRemoveUnit(Unit unit)
-        {
-            if (unit == null) return true;
-            return !ContainsUnit(unit);
         }
 
         private bool CannotAddUnit(Unit unit)

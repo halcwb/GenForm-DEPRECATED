@@ -15,12 +15,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public Package(PackageDto dto) : base(dto.CloneDto()) {}
 
-        public virtual string Name
-        {
-            get { return Dto.Name; }
-            set { Dto.Name = value; }
-        }
-
         public virtual String Abbreviation
         {
             get { return Dto.Abbreviation ?? GetAbbreviatedName(); }
@@ -37,7 +31,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddShape(Shape shape)
         {
-            if (!AssociateShape.CanNotAddShape(shape, _shapes)) return;
+            if (AssociateShape.CanNotAddShape(shape, _shapes)) return;
             AssociateShape.WithPackage(shape, this, _shapes);
         }
 
