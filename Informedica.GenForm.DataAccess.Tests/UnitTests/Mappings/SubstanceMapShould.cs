@@ -55,7 +55,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void CorrectlyMapSubstance()
         {
-            new PersistenceSpecification<Substance>(_context.CurrentSession())
+            new PersistenceSpecification<Substance>(Context.CurrentSession())
                     .CheckProperty(s => s.Name, "paracetamol")
                     .CheckReference(s => s.SubstanceGroup, new SubstanceGroup(GetSubstanceGroupDto()))
                     .VerifyTheMappings();

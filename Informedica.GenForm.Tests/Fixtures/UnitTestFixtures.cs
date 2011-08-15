@@ -11,8 +11,8 @@ namespace Informedica.GenForm.Tests.Fixtures
                        {
                            Name = "milligram",
                            Abbreviation = "mg",
-                           Multiplier = (decimal) 0.0001,
-                           Divisor = 0,
+                           Multiplier = 0.0001M,
+                           Divisor = 1000,
                            UnitGroupName = "massa",
                            AllowConversion = true
                        };

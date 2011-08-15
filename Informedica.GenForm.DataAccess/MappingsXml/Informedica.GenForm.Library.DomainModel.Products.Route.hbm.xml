@@ -7,11 +7,13 @@
     <version name="Version" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Version" />
     </version>
-    <set cascade="save-update" name="Shapes">
+    <set cascade="all" inverse="true" name="Shapes" table="RoutesToShapes">
       <key>
         <column name="Route_id" />
       </key>
-      <one-to-many class="Informedica.GenForm.Library.DomainModel.Products.Shape, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+      <many-to-many class="Informedica.GenForm.Library.DomainModel.Products.Shape, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <column name="Shape_id" />
+      </many-to-many>
     </set>
     <property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Name" length="255" not-null="true" unique="true" />

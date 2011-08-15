@@ -15,7 +15,7 @@
         <column name="Package_id" />
       </many-to-many>
     </set>
-    <set cascade="save-update" name="Units" table="UnitToShape">
+    <set cascade="all" name="Units" table="ShapesToUnits">
       <key>
         <column name="Shape_id" />
       </key>
@@ -23,7 +23,7 @@
         <column name="Unit_id" />
       </many-to-many>
     </set>
-    <set cascade="save-update" name="Routes" table="RouteToShape">
+    <set cascade="all" name="Routes" table="RoutesToShapes">
       <key>
         <column name="Shape_id" />
       </key>

@@ -6,9 +6,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class Product : Entity<Guid, ProductDto>, IProduct
     {
-        private IList<IProductSubstance> _substances;
+        private IList<ProductSubstance> _substances;
 
-        public Product(): base( new ProductDto()) {}
+        protected Product(): base( new ProductDto()) {}
 
         public Product(ProductDto dto): base(dto.CloneDto())
         {
@@ -18,50 +18,46 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             }
         }
 
-        private static IProductSubstance NewSubstance(ProductSubstanceDto productSubstanceDto)
+        private static ProductSubstance NewSubstance(ProductSubstanceDto productSubstanceDto)
         {
             return new ProductSubstance(productSubstanceDto);
         }
 
         #region Implementation of IProduct
 
-        public int ProductProductId { get { return Dto.ProductId; } set { Dto.ProductId = value; } }
+        public virtual string ProductCode { get { return Dto.ProductCode; } protected set { Dto.ProductCode = value; } }
 
-        public int ProductId
+        public virtual string GenericName { get { return Dto.GenericName; } protected set { Dto.GenericName = value; } }
+
+        public virtual UnitValue Quantity { get; protected set; }
+
+        public virtual string DisplayName { get { return Dto.DisplayName ?? Dto.ProductName; } protected set { Dto.DisplayName = value; } }
+
+        public virtual ProductSubstance AddSubstance(ProductSubstanceDto productSubstanceDto)
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
-
-        public string ProductName { get { return Dto.ProductName; } set { Dto.ProductName = value; } }
-        public string ProductCode { get { return Dto.ProductCode; } set { Dto.ProductCode = value; } }
-        public string GenericName { get { return Dto.GenericName; } set { Dto.GenericName = value; } }
-        public string BrandName { get { return Dto.BrandName; } set { Dto.BrandName = value; } }
-        public string ShapeName { get { return Dto.ShapeName; } set { Dto.ShapeName = value; } }
-        public decimal Quantity { get { return Dto.Quantity; } set { Dto.Quantity = value; } }
-        public string UnitName { get { return Dto.UnitName; } set { Dto.UnitName = value; } }
-        public string PackageName { get { return Dto.PackageName; } set { Dto.PackageName = value; } }
-        public string DisplayName { get { return Dto.DisplayName ?? Dto.ProductName; } set { Dto.DisplayName = value; } }
-
-        public IProductSubstance AddSubstance(ProductSubstanceDto productSubstanceDto)
-        {
-            IProductSubstance substance = new ProductSubstance(productSubstanceDto);
+            ProductSubstance substance = new ProductSubstance(productSubstanceDto);
             GetSubstances().Add(substance);
             return substance;
         }
 
-        private IList<IProductSubstance> GetSubstances()
+        private IList<ProductSubstance> GetSubstances()
         {
-            return _substances ?? (_substances = new List<IProductSubstance>());
+            return _substances ?? (_substances = new List<ProductSubstance>());
         }
 
-        public IEnumerable<IProductSubstance> Substances
+        public virtual IEnumerable<ProductSubstance> Substances
         {
             get 
             {
                 return GetSubstances();
             }
         }
+
+        public virtual Brand Brand { get; protected set; }
+
+        public virtual Package Package { get; protected set; }
+
+        public virtual Shape Shape { get; protected set; }
 
         #endregion
 

@@ -138,18 +138,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         private static IProduct GetProduct()
         {
-            return new Product
-                       {
-                           BrandName = "Dynatra",
-                           GenericName = "dopamine",
-                           PackageName = "ampul",
-                           ProductCode = "1",
-                           ProductProductId = 1,
-                           ProductName = "dopamine Dynatra 5 mL ampul",
-                           Quantity = 5,
-                           ShapeName = "infusievloeistof",
-                           UnitName = "mL"
-                       };
+            return new Product(new ProductDto());
         }
     }
 }

@@ -67,7 +67,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             var dto = new ProductDto {ProductName = ProductName};
             var product = GetProduct(dto);
             dto.ProductName = "Cannot be changed";
-            Assert.IsTrue(product.ProductName == ProductName, "product name was changed");
+            Assert.IsTrue(product.Name == ProductName, "product name was changed");
         }
 
         [TestMethod]

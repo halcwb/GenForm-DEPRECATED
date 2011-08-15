@@ -5,16 +5,15 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public interface IProduct
     {
-        Int32 ProductId { get; set; }
-        String ProductName { get; set; }
-        String ProductCode { get; set; }
-        String GenericName { get; set; }
-        String BrandName { get; set; }
-        String ShapeName { get; set; }
-        Decimal Quantity { get; set; }
-        String UnitName { get; set; }
-        String PackageName { get; set; }
-        String DisplayName { get; set; }
-        IEnumerable<IProductSubstance> Substances { get; }
+        Guid Id { get; }
+        String Name { get; }
+        String ProductCode { get; }
+        String GenericName { get; }
+        Brand Brand { get; }
+        Shape Shape { get; }
+        UnitValue Quantity { get; }
+        Package Package { get; }
+        String DisplayName { get; }
+        IEnumerable<ProductSubstance> Substances { get; }
     }
 }

@@ -84,7 +84,7 @@ namespace Informedica.GenForm.Assembler.Tests
             var product = ObjectFactory.With(dto).GetInstance<IProduct>();
             
             Assert.IsInstanceOfType(product, typeof(IProduct));
-            Assert.IsTrue(product.ProductName == productName);
+            Assert.IsTrue(product.Name == productName);
         }
 
         [TestMethod]

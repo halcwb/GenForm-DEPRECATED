@@ -7,15 +7,17 @@ Sources scanned:
 
 Mappings discovered:
 
-  BrandMap          | Informedica.GenForm.DataAccess.Mappings.BrandMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null         
-  EmptyDatabaseMap  | Informedica.GenForm.DataAccess.Mappings.EmptyDatabaseMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null 
-  PackageMap        | Informedica.GenForm.DataAccess.Mappings.PackageMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null       
-  RouteMap          | Informedica.GenForm.DataAccess.Mappings.RouteMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null         
-  ShapeMap          | Informedica.GenForm.DataAccess.Mappings.ShapeMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null         
-  SubstanceGroupMap | Informedica.GenForm.DataAccess.Mappings.SubstanceGroupMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  SubstanceMap      | Informedica.GenForm.DataAccess.Mappings.SubstanceMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null     
-  UnitGroupMap      | Informedica.GenForm.DataAccess.Mappings.UnitGroupMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null     
-  UnitMap           | Informedica.GenForm.DataAccess.Mappings.UnitMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null          
+  BrandMap            | Informedica.GenForm.DataAccess.Mappings.BrandMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null           
+  EmptyDatabaseMap    | Informedica.GenForm.DataAccess.Mappings.EmptyDatabaseMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null   
+  PackageMap          | Informedica.GenForm.DataAccess.Mappings.PackageMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null         
+  ProductMap          | Informedica.GenForm.DataAccess.Mappings.ProductMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null         
+  ProductSubstanceMap | Informedica.GenForm.DataAccess.Mappings.ProductSubstanceMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  RouteMap            | Informedica.GenForm.DataAccess.Mappings.RouteMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null           
+  ShapeMap            | Informedica.GenForm.DataAccess.Mappings.ShapeMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null           
+  SubstanceGroupMap   | Informedica.GenForm.DataAccess.Mappings.SubstanceGroupMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null  
+  SubstanceMap        | Informedica.GenForm.DataAccess.Mappings.SubstanceMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null       
+  UnitGroupMap        | Informedica.GenForm.DataAccess.Mappings.UnitGroupMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null       
+  UnitMap             | Informedica.GenForm.DataAccess.Mappings.UnitMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null            
 
 Conventions
 -----------

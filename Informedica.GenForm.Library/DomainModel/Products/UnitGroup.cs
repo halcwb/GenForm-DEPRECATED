@@ -38,7 +38,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddUnit(Unit unit)
         {
-            if (CannotAddUnit(unit)) throw new CannotAddItemException(unit);
+            if (CannotAddUnit(unit)) throw new CannotAddItemException<Unit>(unit);
             _units.Add(unit);
             unit.ChangeUnitGroup(this);
         }
