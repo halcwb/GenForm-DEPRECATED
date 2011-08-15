@@ -1,7 +1,7 @@
 ﻿using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
+using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
@@ -49,15 +49,18 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         // public void MyTestInitialize() { }
         //
         // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
+        [TestCleanup]
+        public void MyTestCleanup()
+        {
+            DatabaseCleaner.CleanDataBase();
+        }
+
         #endregion
 
         [TestMethod]
         public void HavePropertiesSetByTestFixture()
         {
-            var unit = DomainFactory.Create<IUnit, UnitDto>(UnitTestFixtures.GetTestUnitMilligram());
+            var unit = UnitFactory.CreateUnit(UnitTestFixtures.GetTestUnitMilligram());
 
             AssertUnitNameIsSet(unit);
         }
@@ -65,14 +68,14 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void HaveAUnitGroup()
         {
-            var unit = DomainFactory.Create<IUnit, UnitDto>(UnitTestFixtures.GetTestUnitMilligram());
+            var unit = UnitFactory.CreateUnit(UnitTestFixtures.GetTestUnitMilligram());
 
             AssertUnitGroupName(unit);
         }
 
         private static void AssertUnitGroupName(IUnit unit)
         {
-            Assert.AreEqual(UnitTestFixtures.GetTestUnitMilligram().UnitGroupName, unit.UnitGroup.UnitGroupName);
+            Assert.AreEqual(UnitTestFixtures.GetTestUnitMilligram().UnitGroupName, unit.UnitGroup.Name);
         }
 
         private static void AssertUnitNameIsSet(IUnit unit)
@@ -83,7 +86,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void BeAbleToPersistAUnit()
         {
-            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
+            using (var session = GenFormApplication.SessionFactory.OpenSession())
             {
                 PersistUnit(session);
             }
@@ -91,8 +94,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 
         private static void PersistUnit(ISession session)
         {
-            var unit =
-                DomainFactory.Create<IUnit, UnitDto>(UnitTestFixtures.GetTestUnitMilligram());
+            var unit = UnitFactory.CreateUnit(UnitTestFixtures.GetTestUnitMilligram());
 
             using (var trans = session.BeginTransaction())
             {
@@ -101,7 +103,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 
                 session.Save(unit);
 
-                trans.Commit();
+                trans.Rollback();
             }
 
         }

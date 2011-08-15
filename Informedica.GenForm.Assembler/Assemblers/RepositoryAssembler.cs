@@ -1,7 +1,9 @@
+using System;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.DataAccess.Repositories.Delegates;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.DomainModel.Users;
 using Informedica.GenForm.Library.Repositories;
 using StructureMap.Configuration.DSL;
@@ -10,7 +12,7 @@ using Package = Informedica.GenForm.Database.Package;
 using Product = Informedica.GenForm.Database.Product;
 using Shape = Informedica.GenForm.Database.Shape;
 using Substance = Informedica.GenForm.Database.Substance;
-using Unit = Informedica.GenForm.Database.Unit;
+using Unit = Informedica.GenForm.Library.DomainModel.Products.Unit;
 
 namespace Informedica.GenForm.Assembler.Assemblers
 {
@@ -44,7 +46,7 @@ namespace Informedica.GenForm.Assembler.Assemblers
             _registry.For<Insert<Package>>().Use(PackageDelegates.Insert);
 
             _registry.For<IRepositoryLinqToSql<IUnit>>().Use<RepositoryLinqToSql<IUnit>>();
-            _registry.For<Insert<Unit>>().Use(UnitDelegates.Insert);
+            _registry.For<IRepository<Unit, Guid, UnitDto>>().Use<UnitRepository>();
 
             _registry.For<IRepositoryLinqToSql<IUser>>().Use<RepositoryLinqToSql<IUser>>();
             _registry.For<Fetch<GenFormUser>>().Use(UserDelegates.Fetch);

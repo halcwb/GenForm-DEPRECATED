@@ -61,12 +61,12 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
             var group1 = new UnitGroup(new UnitGroupDto
             {
                 AllowConversion = true,
-                UnitGroupName = "massa"
+                Name = "massa"
             });
             var group2 = new UnitGroup(new UnitGroupDto
             {
                 AllowConversion = true,
-                UnitGroupName = "massa"
+                Name = "massa"
             });
             using (GetContext())
             {

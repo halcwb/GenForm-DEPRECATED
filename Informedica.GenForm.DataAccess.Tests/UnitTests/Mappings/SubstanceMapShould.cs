@@ -1,6 +1,7 @@
 ﻿using FluentNHibernate.Testing;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
@@ -9,7 +10,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     /// Summary description for SubstanceMapShould
     /// </summary>
     [TestClass]
-    public class SubstanceMapShould
+    public class SubstanceMapShould : MappingTests
     {
         private TestContext testContextInstance;
 
@@ -54,13 +55,10 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void CorrectlyMapSubstance()
         {
-            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
-            {
-                new PersistenceSpecification<Substance>(session)
-                        .CheckProperty(s => s.Name, "paracetamol")
-                        .CheckReference(s => s.SubstanceGroup, new SubstanceGroup(GetSubstanceGroupDto()))
-                        .VerifyTheMappings();
-            }
+            new PersistenceSpecification<Substance>(_context.CurrentSession())
+                    .CheckProperty(s => s.Name, "paracetamol")
+                    .CheckReference(s => s.SubstanceGroup, new SubstanceGroup(GetSubstanceGroupDto()))
+                    .VerifyTheMappings();
         }
 
         private SubstanceGroupDto GetSubstanceGroupDto()

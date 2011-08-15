@@ -51,18 +51,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+    <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\NHibernate\Castle.Core.dll</HintPath>
+      <HintPath>..\Dependencies\NHibernate\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL" />
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\NHibernate\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\NHibernate\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.ByteCode.Castle">
-      <HintPath>..\Dependencies\NHibernate\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -84,14 +84,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseCleanerShould.cs" />
     <Compile Include="TestBase\RepositoryTestBase.cs" />
     <Compile Include="IntegrationTests\UserRepositoryTest.cs" />
-    <Compile Include="UnitTests\Command\DeleteProductCommandShould.cs" />
-    <Compile Include="UnitTests\Command\InsertProductCommandShould.cs" />
-    <Compile Include="UnitTests\Command\SelectProductCommandShould.cs" />
-    <Compile Include="UnitTests\Command\SelectSubstanceCommandShould.cs" />
     <Compile Include="UnitTests\DatabaseConnectionShould.cs" />
     <Compile Include="UnitTests\Mappings\BrandMapShould.cs" />
+    <Compile Include="UnitTests\Mappings\MappingTests.cs" />
     <Compile Include="UnitTests\Mappings\PackageMapShould.cs" />
     <Compile Include="UnitTests\Mappings\RouteMapShould.cs" />
     <Compile Include="UnitTests\Mappings\ShapeMapShould.cs" />
@@ -157,7 +155,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UnitTests\Command\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

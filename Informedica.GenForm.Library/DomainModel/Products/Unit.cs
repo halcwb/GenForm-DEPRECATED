@@ -2,46 +2,41 @@
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.Repositories;
+using Informedica.GenForm.Library.Factories;
 using StructureMap;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class Unit : Entity<Guid, UnitDto>, IUnit
     {
-        private IUnitGroup _group;
+        #region Private
+        
+        private UnitGroup _group;
         private HashSet<Shape> _shapes = new HashSet<Shape>(new ShapeComparer());
 
-        protected Unit(): base(new UnitDto()) {}
+        #endregion
 
-        [DefaultConstructor]
-        public Unit(UnitDto dto): base(dto.CloneDto())
+        #region Constructor
+
+        protected Unit() : base(new UnitDto()) { }
+
+        [DefaultConstructor, Obsolete]
+        public Unit(UnitDto dto) : base(dto.CloneDto()) { }
+
+        public Unit(UnitDto dto, UnitGroup group)
+            : base(dto.CloneDto())
         {
-            _group = GetUnitGroup();
+            SetUnitGroup(group);
         }
 
-        private UnitGroup GetUnitGroup()
-        {
-            throw  new NotImplementedException();
-        }
+        #endregion
 
-        private static IRepositoryLinqToSql<IUnitGroup> GetRepository()
-        {
-            return ObjectFactory.GetInstance<IRepositoryLinqToSql<IUnitGroup>>();
-        }
-
-        #region Implementation of IUnit
-
-        public virtual string Name
-        {
-            get { return Dto.Name; }
-            set { Dto.Name = value; }
-        }
+        #region Business
 
         public virtual String Abbreviation
         {
             get { return Dto.Abbreviation; }
-            set { Dto.Name = value; }
+            set { Dto.Abbreviation = value; }
         }
 
         public virtual Decimal Multiplier
@@ -56,13 +51,11 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             set { Dto.IsReference = value; }
         }
 
-        public virtual IUnitGroup UnitGroup
+        public virtual UnitGroup UnitGroup
         {
-            get { return _group ?? (_group = new UnitGroup(new UnitGroupDto())); }
+            get { return _group; }
             protected set { _group = value; }
         }
-
-        #endregion
 
         public virtual void AddShape(Shape shape)
         {
@@ -83,20 +76,48 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void ChangeUnitGroup(UnitGroup newGroup)
         {
+            SetUnitGroup(newGroup);
+        }
+
+        private void SetUnitGroup(UnitGroup newGroup)
+        {
             if (CannotChangeGroup(newGroup)) return;
             var oldGroup = UnitGroup;
-            oldGroup.RemoveUnit(this);
+            if (oldGroup != null) oldGroup.RemoveUnit(this);
             UnitGroup = newGroup;
+            if (!UnitGroup.ContainsUnit(this)) UnitGroup.AddUnit(this);
         }
 
         public virtual bool CannotChangeGroup(UnitGroup newGroup)
         {
-            return newGroup == null || Products.UnitGroup.Equals(newGroup, (UnitGroup)UnitGroup, new UnitGroupComparer());
+            if (_group == null) return false;
+            return UnitGroup.Equals(newGroup, UnitGroup, new UnitGroupComparer());
         }
 
         public override bool IdIsDefault(Guid id)
         {
             return id == Guid.Empty;
         }
+
+        #endregion
+
+        #region Factory
+
+        public static Unit CreateUnit(UnitDto dto)
+        {
+            return UnitFactory.CreateUnit(dto);
+        }
+
+        public static Unit CreateUnit(UnitDto dto, UnitGroup group)
+        {
+            return UnitFactory.CreateUnit(dto, group);
+        }
+
+        public static Unit CreateUnit(UnitDto dto, UnitGroupDto groupDto)
+        {
+            return UnitFactory.CreateUnit(dto, groupDto);
+        }
+
+        #endregion
     }
 }

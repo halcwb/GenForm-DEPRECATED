@@ -12,8 +12,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Data
             Routes = new List<RouteDto>();
         }
 
-        public string Name;
-
         public IEnumerable<PackageDto> Packages { get; set; }
 
         public IEnumerable<UnitDto> Units { get; set; }

@@ -29,6 +29,13 @@ namespace Informedica.GenForm.DataAccess.Repositories
             Transact(() => Session.Save(item));
         }
 
+        public virtual void Add(T item, IEqualityComparer<T> comparer)
+        {
+            if (this.Contains(item, comparer)) throw new NonUniqueObjectException(item.Id, item.ToString());
+            // ToDo: temp hack to avoid loop through Add of derived class
+            Transact(() => Session.Save(item));
+        }
+
         public virtual bool Contains(T item)
         {
             if (item.IdIsDefault(item.Id)) return false;

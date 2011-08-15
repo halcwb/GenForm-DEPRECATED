@@ -6,7 +6,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Data
     {
         public Guid SubstanceGroupId;
         public String SubstanceGroupName;
-        public String Name { get; set; }
 
         public int SubstanceId { get; set; }
 

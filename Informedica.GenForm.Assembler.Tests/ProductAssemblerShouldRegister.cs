@@ -1,8 +1,11 @@
-﻿using Informedica.GenForm.Library.DomainModel.Products;
+﻿using System;
+using Informedica.GenForm.DataAccess.Repositories;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services.Products;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NHibernate;
 using StructureMap;
 
 namespace Informedica.GenForm.Assembler.Tests
@@ -151,8 +154,8 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public void AnImplementationOfUnitRepository()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IRepositoryLinqToSql<IUnit>>(
-                ObjectFactoryAssertUtility.GetMessageFor<IRepositoryLinqToSql<IUnit>>());
+            ObjectFactoryAssertUtility.AssertRegistrationWith<ISessionFactory, IRepository<Unit, Guid, UnitDto>>(
+                GenFormApplication.SessionFactory);
         }
 
 

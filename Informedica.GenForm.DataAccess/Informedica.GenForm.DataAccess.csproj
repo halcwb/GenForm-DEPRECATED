@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mappings\BrandMap.cs" />
+    <Compile Include="Mappings\EmptyDatabaseMap.cs" />
+    <Compile Include="Mappings\EntityMap.cs" />
     <Compile Include="Mappings\PackageMap.cs" />
     <Compile Include="Mappings\RouteMap.cs" />
     <Compile Include="Mappings\ShapeMap.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Repositories\SelectorOfInt.cs" />
     <Compile Include="Repositories\SelectorOfString.cs" />
     <Compile Include="Repositories\UnitGroupRepository.cs" />
+    <Compile Include="Repositories\UnitRepository.cs" />
     <Compile Include="Repositories\Update.cs" />
     <Compile Include="SessionFactoryCreator.cs" />
     <Compile Include="Transactions\Commands\CommandBase.cs" />

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FluentNHibernate.Testing;
-using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
@@ -12,7 +11,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     /// Summary description for RouteMapShould
     /// </summary>
     [TestClass]
-    public class RouteMapShould
+    public class RouteMapShould : MappingTests
     {
         private TestContext testContextInstance;
 
@@ -37,46 +36,33 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
+        [ClassInitialize]
+        public static void MyClassInitialize(TestContext testContext) { DatabaseCleaner.CleanDataBase(); }
+        
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
         //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
+
         #endregion
 
         [TestMethod]
         public void CorrectlyMapARoute()
         {
-            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
-            {
-                new PersistenceSpecification<Route>(session)
-                    .CheckProperty(r => r.Name, "intraveneus")
-                    .CheckProperty(r => r.Abbreviation, "iv")
-                    .VerifyTheMappings();
-            }
+            new PersistenceSpecification<Route>(_context.CurrentSession())
+                .CheckProperty(r => r.Name, "intraveneus")
+                .CheckProperty(r => r.Abbreviation, "iv")
+                .VerifyTheMappings();
         }
 
         [TestMethod]
         public void BeAssociatedWithShapes()
         {
-            using(var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
-            {
-                new PersistenceSpecification<Route>(session)
-                    .CheckProperty(r => r.Name, "intraveneus")
-                    .CheckProperty(r => r.Abbreviation, "iv")
-                    .CheckList(r => r.Shapes, GetShapesList())
-                    .VerifyTheMappings();
-            }
+            new PersistenceSpecification<Route>(_context.CurrentSession())
+                .CheckProperty(r => r.Name, "intraveneus")
+                .CheckProperty(r => r.Abbreviation, "iv")
+                .CheckList(r => r.Shapes, GetShapesList())
+                .VerifyTheMappings();
         }
 
         private IEnumerable<Shape> GetShapesList()

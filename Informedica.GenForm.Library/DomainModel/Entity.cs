@@ -1,4 +1,5 @@
 ﻿using System;
+using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.DomainModel
 {
@@ -6,6 +7,7 @@ namespace Informedica.GenForm.Library.DomainModel
     {
         protected readonly TDto Dto;
         public virtual TId Id { get { return Dto.Id; } protected set { Dto.Id = value; } }
+        public virtual string Name { get { return Dto.Name; } protected set { Dto.Name = value; } }
         public virtual int Version { get; set; }
         public abstract bool IdIsDefault(TId id);
 

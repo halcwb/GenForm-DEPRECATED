@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Exceptions;
+using Informedica.GenForm.Library.Factories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
@@ -51,11 +54,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
 
         private UnitGroup CreateNewUnitGroup()
         {
-            return new UnitGroup(new UnitGroupDto
-                                     {
-                                         AllowConversion = true,
-                                         UnitGroupName = "massa"
-                                     });
+            return UnitGroupFactory.CreateUnitGroup(new UnitGroupDto
+                    {
+                        AllowConversion = true,
+                        Name = "massa"
+                    });
         }
 
         // Use TestCleanup to run code after each test has run
@@ -67,7 +70,16 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         [TestMethod]
         public void BeAbleToHaveAUnitAdded()
         {
-            var unit = CreateUnit();
+            var unit = UnitFactory.CreateUnit(new UnitDto
+                                                  {
+                                                      Abbreviation = "mg",
+                                                      AllowConversion = false,
+                                                      Divisor = 1,
+                                                      IsReference = false,
+                                                      Multiplier = 1,
+                                                      Name = "milligram",
+                                                      UnitGroupName = "algemeen"
+                                                  });
             _unitGroup.AddUnit(unit);
             Assert.AreSame(unit, _unitGroup.Units.First());
         }
@@ -75,20 +87,37 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         [TestMethod]
         public void NotAcceptTheSameUnitTwice()
         {
-            _unitGroup.AddUnit(CreateUnit());
-            _unitGroup.AddUnit(CreateUnit());
-            Assert.IsTrue(_unitGroup.Units.Count() == 1);
+            try
+            {
+                _unitGroup.AddUnit(CreateUnit());
+                _unitGroup.AddUnit(CreateUnit());
+                Assert.Fail(new StackFrame().GetMethod().Name);
+
+            }
+            catch (System.Exception e)
+            {
+                Assert.IsInstanceOfType(e, typeof(CannotAddItemException), e.ToString());
+            } 
         }
 
         [TestMethod]
         public void SetUnitWithReferenceToItself()
         {
-            var unit = CreateUnit();
+            var unit = UnitFactory.CreateUnit(new UnitDto
+                                                  {
+                                                      AllowConversion = false,
+                                                      Abbreviation = "mg",
+                                                      Divisor = 1,
+                                                      IsReference = false,
+                                                      Multiplier = 1,
+                                                      Name = "milligram",
+                                                      UnitGroupName = "algemeen"
+                                                  });
             Assert.AreNotEqual(_unitGroup, unit.UnitGroup);
 
             _unitGroup.AddUnit(unit);
 
-            Assert.AreEqual(_unitGroup.UnitGroupName, unit.UnitGroup.UnitGroupName);
+            Assert.AreEqual(_unitGroup.Name, unit.UnitGroup.Name);
             Assert.AreEqual(_unitGroup, unit.UnitGroup);
         }
 
@@ -96,26 +125,35 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         public void AcceptTwoDifferentUnits()
         {
             var unit1 = CreateUnit();
-            var unit2 = new Unit(new UnitDto
-                                     {
-                                         Abbreviation = "mcg",
-                                         Name = "microgram",
-                                         Divisor = 1000000,
-                                         IsReference = true                                     
-                                     });
-            _unitGroup.AddUnit(unit1);
-            _unitGroup.AddUnit(unit2);
+            var unit2 = UnitFactory.CreateUnit(new UnitDto
+                        {
+                            Abbreviation = "mcg",
+                            Name = "microgram",
+                            Divisor = 1000000,
+                            IsReference = true,
+                            AllowConversion = false,
+                            Multiplier = 0.0000001M,
+                            UnitGroupName = "algemeen"
+                        });
+
+            if (!_unitGroup.ContainsUnit(unit1)) _unitGroup.AddUnit(unit1);
+            if (!_unitGroup.ContainsUnit(unit2)) _unitGroup.AddUnit(unit2);
+
             Assert.IsTrue(_unitGroup.Units.Count() == 2);
         }
 
         private Unit CreateUnit()
         {
-            return new Unit(new UnitDto
-                                {
-                                    Abbreviation = "mg",
-                                    Name = "milligram",
-                                    Divisor = 1000
-                                });
+            return UnitFactory.CreateUnit(new UnitDto
+                    {
+                        Abbreviation = "mg",
+                        Name = "milligram",
+                        Divisor = 1000,
+                        AllowConversion = true,
+                        IsReference = false,
+                        Multiplier = 0.001M,
+                        UnitGroupName = "massa"
+                    });
         }
     }
 }

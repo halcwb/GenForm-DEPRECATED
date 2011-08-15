@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using FluentNHibernate.Testing;
-using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
@@ -13,7 +12,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     /// Summary description for BrandMapShould
     /// </summary>
     [TestClass]
-    public class BrandMapShould
+    public class BrandMapShould : MappingTests
     {
         private TestContext testContextInstance;
 
@@ -58,13 +57,10 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void CorrectlyMapBrand()
         {
-            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
-            {
-                new PersistenceSpecification<Brand>(session)
-                    .CheckProperty(b => b.Name, "Dynatra")
-                    //                    .CheckList(b => b.Products, CreateProductList());
-                    .VerifyTheMappings();
-            }
+            new PersistenceSpecification<Brand>(_context.CurrentSession())
+                .CheckProperty(b => b.Name, "Dynatra")
+                //                    .CheckList(b => b.Products, CreateProductList());
+                .VerifyTheMappings();
 
         }
 

@@ -83,12 +83,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return _packages.Contains(package, _packages.Comparer);
         }
 
-        public virtual String Name
-        {
-            get { return Dto.Name; }
-            set { Dto.Name = value; }
-        }
-
         public virtual IEnumerable<Package> Packages
         {
             get { return _packages; }

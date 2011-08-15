@@ -1,14 +1,13 @@
-﻿using FluentNHibernate.Mapping;
+﻿using System;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.DataAccess.Mappings
 {
-    public sealed class SubstanceGroupMap: ClassMap<SubstanceGroup>
+    public sealed class SubstanceGroupMap: EntityMap<SubstanceGroup, Guid, SubstanceGroupDto>
     {
         public SubstanceGroupMap()
         {
-            Id(x => x.Id).Not.Nullable().GeneratedBy.GuidComb();
-            Map(x => x.Name).Not.Nullable().Length(255);
             HasMany(x => x.Substances).Cascade.SaveUpdate();
         }
     }

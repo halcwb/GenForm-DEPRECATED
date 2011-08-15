@@ -8,18 +8,19 @@ namespace Informedica.GenForm.Assembler.Contexts
     {
         public SessionContext()
         {
-            CurrentSessionContext.Bind(GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession());   
+            CurrentSessionContext.Bind(GenFormApplication.SessionFactory.OpenSession());   
         }
 
         public void Dispose()
         {
-            var session = CurrentSessionContext.Unbind(GenFormApplication.Instance.SessionFactoryFromInstance);
+            var session = CurrentSessionContext.Unbind(GenFormApplication.SessionFactory);
             session.Close();
+            session.Dispose();
         }
 
         public ISession CurrentSession()
         {
-            return GenFormApplication.Instance.SessionFactoryFromInstance.GetCurrentSession();
+            return GenFormApplication.SessionFactory.GetCurrentSession();
         }
 
         public static SessionContext UseContext()

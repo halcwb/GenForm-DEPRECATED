@@ -10,7 +10,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Data
             Shapes = new List<ShapeDto>();
         }
 
-        public string Name;
         public string Abbreviation;
 
         public IEnumerable<ShapeDto> Shapes { get; set; }

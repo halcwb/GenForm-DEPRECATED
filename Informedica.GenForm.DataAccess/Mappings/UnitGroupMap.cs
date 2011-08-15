@@ -1,16 +1,16 @@
-﻿using FluentNHibernate.Mapping;
+﻿using System;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.DataAccess.Mappings
 {
-    public class UnitGroupMap: ClassMap<UnitGroup>
+    public sealed class UnitGroupMap: EntityMap<UnitGroup, Guid, UnitGroupDto>
     {
         public UnitGroupMap()
         {
-            Id(x => x.Id);
-            Map(x => x.UnitGroupName);
             Map(x => x.AllowsConversion);
-            HasMany(x => x.Units);
+            HasMany(x => x.Units)
+                .Cascade.All().Inverse();
         }
     }
 }

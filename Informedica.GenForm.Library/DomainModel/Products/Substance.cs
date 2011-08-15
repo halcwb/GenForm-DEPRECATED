@@ -28,12 +28,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             set { Dto.SubstanceId = value; }
         }
 
-        public virtual String Name
-        {
-            get { return Dto.Name; }
-            set { Dto.Name = value; }
-        }
-
         public virtual SubstanceGroup SubstanceGroup
         {
             get { return _group; }

@@ -4,14 +4,17 @@
       <column name="Id" />
       <generator class="guid.comb" />
     </id>
-    <set name="Units">
+    <version name="Version" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Version" />
+    </version>
+    <set cascade="all" inverse="true" name="Units">
       <key>
         <column name="UnitGroup_id" />
       </key>
       <one-to-many class="Informedica.GenForm.Library.DomainModel.Products.Unit, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     </set>
-    <property name="UnitGroupName" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-      <column name="UnitGroupName" />
+    <property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Name" length="255" not-null="true" unique="true" />
     </property>
     <property name="AllowsConversion" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="AllowsConversion" />

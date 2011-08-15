@@ -60,7 +60,6 @@
     <Compile Include="ProductAssemblerShouldRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SesssionFactoryCreatorShould.cs" />
-    <Compile Include="TransactionAssemblerShouldRegister.cs" />
     <Compile Include="UserAssemblerShouldRegister.cs" />
   </ItemGroup>
   <ItemGroup>

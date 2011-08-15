@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
@@ -13,13 +12,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         public override void Add(UnitGroup item)
         {
-            if (this.Contains(item, new UnitGroupComparer())) throw new AddDuplicateEntityException(item);
-            base.Add(item);
+            base.Add(item, new UnitGroupComparer());
         }
-    }
-
-    public class AddDuplicateEntityException : Exception
-    {
-        public AddDuplicateEntityException(object entity): base(entity.GetType().ToString()) {}
     }
 }

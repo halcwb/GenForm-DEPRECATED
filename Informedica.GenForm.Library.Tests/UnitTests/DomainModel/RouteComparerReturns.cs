@@ -86,9 +86,8 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         [TestMethod]
         public void FalseWhenRouteIsNotSameObjectAndIsEmpty()
         {
-            var dto = new RouteDto();
-            var route = CreateRoute(dto);
-            var route2 = CreateRoute(dto);
+            var route = CreateRoute(new RouteDto{ Abbreviation = "iv", Name = "intraveneus"});
+            var route2 = CreateRoute(new RouteDto{ Abbreviation = "or", Name =  "oraal"});
 
             Assert.IsFalse(_comparer.Equals(route, route2));            
         }

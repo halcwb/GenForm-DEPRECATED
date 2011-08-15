@@ -80,9 +80,9 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
 
         private UnitGroup GetUnitgroup()
         {
-            var group = GetRepository().SingleOrDefault(x => x.UnitGroupName == "massa") ??
+            var group = GetRepository().SingleOrDefault(x => x.Name == "massa") ??
                         DomainFactory.CreateOrGetById<UnitGroup, UnitGroupDto>(
-                new UnitGroupDto {AllowConversion = true, UnitGroupName = "massa"});
+                new UnitGroupDto {AllowConversion = true, Name = "massa"});
             return group;
         }
 
@@ -113,7 +113,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         {
             var group2 =
                 GetRepository().Single(
-                    x => x.UnitGroupName == group1.UnitGroupName);
+                    x => x.Name == group1.Name);
             Assert.AreEqual(group1.Id, group2.Id);
         }
 
