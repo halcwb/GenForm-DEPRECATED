@@ -1,16 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Exceptions;
+using StructureMap;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class Product : Entity<Guid, ProductDto>, IProduct
     {
+        #region Private Fields
+        
         private IList<ProductSubstance> _substances;
+        private IList<Route> _routes;
 
-        protected Product(): base( new ProductDto()) {}
+        #endregion
 
-        public Product(ProductDto dto): base(dto.CloneDto())
+        #region Constructor
+        
+        protected Product() : base(new ProductDto()) { }
+
+        [DefaultConstructor]
+        public Product(ProductDto dto)
+            : base(dto.CloneDto())
         {
             foreach (var substanceDto in Dto.Substances)
             {
@@ -23,6 +36,8 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return new ProductSubstance(productSubstanceDto);
         }
 
+        #endregion
+        
         #region Implementation of IProduct
 
         public virtual string ProductCode { get { return Dto.ProductCode; } protected set { Dto.ProductCode = value; } }
@@ -31,11 +46,17 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual UnitValue Quantity { get; protected set; }
 
-        public virtual string DisplayName { get { return Dto.DisplayName ?? Dto.ProductName; } protected set { Dto.DisplayName = value; } }
+        public virtual string DisplayName { get { return Dto.DisplayName ?? Dto.Name; } protected set { Dto.DisplayName = value; } }
+
+        public virtual Brand Brand { get; protected set; }
+
+        public virtual Package Package { get; protected set; }
+
+        public virtual Shape Shape { get; protected set; }
 
         public virtual ProductSubstance AddSubstance(ProductSubstanceDto productSubstanceDto)
         {
-            ProductSubstance substance = new ProductSubstance(productSubstanceDto);
+            var substance = new ProductSubstance(productSubstanceDto);
             GetSubstances().Add(substance);
             return substance;
         }
@@ -47,17 +68,26 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual IEnumerable<ProductSubstance> Substances
         {
-            get 
+            get
             {
                 return GetSubstances();
             }
+
+            protected set { _substances = value.ToList(); }
         }
 
-        public virtual Brand Brand { get; protected set; }
+        public virtual void AddRoute(Route route)
+        {
+            if (_routes.Contains(route, new RouteComparer())) throw new CannotAddItemException<Route>(route);
+            _routes.Add(route);
+            route.AddProduct(this);
+        }
 
-        public virtual Package Package { get; protected set; }
-
-        public virtual Shape Shape { get; protected set; }
+        public virtual IEnumerable<Route> Routes
+        {
+            get { return _routes ?? (_routes = new List<Route>()); }  
+            protected set { _routes = value.ToList(); }
+        }
 
         #endregion
 

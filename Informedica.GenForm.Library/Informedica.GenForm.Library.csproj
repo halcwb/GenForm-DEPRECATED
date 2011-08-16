@@ -55,6 +55,7 @@
     <Compile Include="DomainModel\Entity.cs" />
     <Compile Include="DomainModel\Equality\BrandComparer.cs" />
     <Compile Include="DomainModel\Equality\PackageComparer.cs" />
+    <Compile Include="DomainModel\Equality\ProductComparer.cs" />
     <Compile Include="DomainModel\Equality\RouteComparer.cs" />
     <Compile Include="DomainModel\Equality\ShapeComparer.cs" />
     <Compile Include="DomainModel\Equality\UnitComparer.cs" />
@@ -117,6 +118,8 @@
     <Compile Include="Security\LoginUser.cs" />
     <Compile Include="Services\Databases\DatabaseServices.cs" />
     <Compile Include="Services\Databases\IDatabaseServices.cs" />
+    <Compile Include="Services\Products\UnitCreator.cs" />
+    <Compile Include="Services\Products\UnitServices.cs" />
     <Compile Include="Services\Users\ILoginServices.cs" />
     <Compile Include="Security\ILoginCriteria.cs" />
     <Compile Include="Services\Products\IProductServices.cs" />

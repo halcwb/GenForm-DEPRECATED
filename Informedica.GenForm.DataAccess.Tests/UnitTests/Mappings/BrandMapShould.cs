@@ -3,6 +3,7 @@ using FluentNHibernate.Testing;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
+using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,7 +13,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     /// Summary description for BrandMapShould
     /// </summary>
     [TestClass]
-    public class BrandMapShould : MappingTests
+    public class BrandMapShould : TestSessionContext
     {
         private TestContext testContextInstance;
 

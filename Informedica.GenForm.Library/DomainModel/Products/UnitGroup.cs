@@ -68,5 +68,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         {
             return id == Guid.Empty;
         }
+
+        public static UnitGroup Create(UnitGroupDto groupDto)
+        {
+            return new UnitGroup(groupDto);
+        }
     }
 }

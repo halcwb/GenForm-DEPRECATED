@@ -1,11 +1,10 @@
-﻿using System;
 using Informedica.GenForm.Assembler.Contexts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
+namespace Informedica.GenForm.Tests
 {
     [TestClass]
-    public abstract class MappingTests
+    public abstract class TestSessionContext
     {
         protected SessionContext Context;
 

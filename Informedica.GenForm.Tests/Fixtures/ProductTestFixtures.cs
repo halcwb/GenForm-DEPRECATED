@@ -27,8 +27,8 @@ namespace Informedica.GenForm.Tests.Fixtures
         {
             return new ProductDto
             {
-                ProductId =  0,
-                ProductName = ProductName,
+                Id = Guid.Empty,
+                Name = ProductName,
                 BrandName = Brand,
                 DisplayName = DisplayName,
                 GenericName = Generic,
@@ -90,7 +90,7 @@ namespace Informedica.GenForm.Tests.Fixtures
             var list = new List<ProductDto>();
             list.Add(dto);
             dto = dto.CloneDto();
-            dto.ProductName = "paracetamol Paracetamol zetpil 1 stuk";
+            dto.Name = "paracetamol Paracetamol zetpil 1 stuk";
             dto.BrandName = "Paracetamol";
             dto.GenericName = "paracetamol";
             dto.PackageName = "zetpil";
@@ -99,7 +99,7 @@ namespace Informedica.GenForm.Tests.Fixtures
             dto.UnitName = "stuk";
             list.Add(dto);
             dto = dto.CloneDto();
-            dto.ProductName = "lactulose Duphalac stroop 200 milliliter";
+            dto.Name = "lactulose Duphalac stroop 200 milliliter";
             dto.BrandName = "Duphalac";
             dto.GenericName = "lactulose";
             dto.ShapeName = "stroop";

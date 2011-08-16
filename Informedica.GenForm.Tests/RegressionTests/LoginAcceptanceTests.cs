@@ -21,13 +21,13 @@ namespace Informedica.GenForm.Tests.RegressionTests
             //
         }
 
-        private TestContext testContextInstance;
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
+        public Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
         {
             get
             {
@@ -45,7 +45,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         //
         // Use ClassInitialize to run code before running the first test in the class
         [ClassInitialize()]
-        public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
+        public static void MyClassInitialize(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext) { GenFormApplication.Initialize(); }
         
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]

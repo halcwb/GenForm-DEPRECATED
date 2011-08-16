@@ -1,14 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using FluentNHibernate.Testing;
+﻿using FluentNHibernate.Testing;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel;
+using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
+using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NHibernate;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 {
@@ -16,7 +15,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     /// Summary description for ProductMapping
     /// </summary>
     [TestClass]
-    public class ProductMapShould : MappingTests
+    public class ProductMapShould : TestSessionContext
     {
         private TestContext testContextInstance;
 
@@ -36,7 +35,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
         
         // Use ClassCleanup to run code after all tests in a class have run
@@ -69,29 +68,5 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
                 .VerifyTheMappings();
         }
 
-    }
-
-    public class ProductComparer : NameComparer, IEqualityComparer<Product>, IEqualityComparer
-    {
-        public bool Equals(Product x, Product y)
-        {
-            return x.Equals(y) || EqualName(x.Name, y.Name);
-        }
-
-        public int GetHashCode(Product obj)
-        {
-            return obj.GetHashCode();
-        }
-
-        public bool Equals(object x, object y)
-        {
-            if (x.GetType() == typeof(Product)) return Equals((Product) x, (Product) y);
-            return true;
-        }
-
-        public int GetHashCode(object obj)
-        {
-            return GetHashCode((Product)obj);
-        }
     }
 }

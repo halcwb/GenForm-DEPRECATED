@@ -23,7 +23,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
     {
         private const String Penicilline = "penicilline";
         private const String Sintrom = "Sintrom";
-        private TestContext testContextInstance;
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContextInstance;
         private const String Mmol = "Mmol";
         private const String Ampul = "Ampul";
         private const String Tablet = "tablet";
@@ -32,7 +32,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
+        public Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
         {
             get
             {
@@ -50,7 +50,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         //
         // Use ClassInitialize to run code before running the first test in the class
         [ClassInitialize]
-        public static void MyClassInitialize(TestContext testContext)
+        public static void MyClassInitialize(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             GenFormApplication.Initialize();
         }
@@ -146,7 +146,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         {
             return new ProductDto
             {
-                ProductName = "dopamine Dynatra infusievloeistof 200 mg 5 mL ampul",
+                Name = "dopamine Dynatra infusievloeistof 200 mg 5 mL ampul",
                 DisplayName = "dopamine Dynatra infusievloeistof 200 mg 5 mL ampul",
                 GenericName = "dopamine",
                 BrandName = "Dynatra",
@@ -163,7 +163,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         public void ThatUserCannotSaveProductWithMandatoryFieldsNotFilledIn()
         {
             var product = new ProductDto();
-            product.ProductName = "Test";
+            product.Name = "Test";
 
             var result = GetProductController().SaveProduct(product);
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "a non valid product should not be saved");

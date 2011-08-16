@@ -1,5 +1,4 @@
 ﻿using System;
-using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.DomainModel
 {

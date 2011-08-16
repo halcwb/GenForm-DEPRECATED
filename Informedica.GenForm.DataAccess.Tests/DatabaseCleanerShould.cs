@@ -4,6 +4,7 @@ using Informedica.GenForm.Library.DomainModel.Databases;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate.Linq;
+using TestContext = Microsoft.VisualStudio.TestTools.UnitTesting.TestContext;
 
 namespace Informedica.GenForm.DataAccess.Tests
 {

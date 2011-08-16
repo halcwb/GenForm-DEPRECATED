@@ -9,6 +9,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
     public class Route: Entity<Guid, RouteDto>
     {
         private HashSet<Shape> _shapes = new HashSet<Shape>(new ShapeComparer());
+        private readonly ISet<Product> _products = new HashSet<Product>(new ProductComparer());
 
         protected Route() : base(new RouteDto()){}
 
@@ -61,6 +62,16 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public override bool IdIsDefault(Guid id)
         {
             return id == Guid.Empty;
+        }
+
+        public virtual IEnumerable<Product> Products
+        {
+            get { return _products; }
+        }
+
+        internal protected virtual void AddProduct(Product product)
+        {
+            _products.Add(product);
         }
     }
 }

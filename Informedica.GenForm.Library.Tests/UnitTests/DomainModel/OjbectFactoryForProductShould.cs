@@ -71,10 +71,10 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         [TestMethod]
         public void CreateAnInstanceWithProductNameSetToDto()
         {
-            var dto = new ProductDto{ProductName = ProductName};
+            var dto = new ProductDto{Name = ProductName};
             var product = GetProduct(dto);
 
-            Assert.AreEqual(dto.ProductName, product.Name, "new instance should have the same productname");
+            Assert.AreEqual(dto.Name, product.Name, "new instance should have the same productname");
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             var dto = new ProductDto{ProductCode = ProductCode};
             var product = GetProduct(dto);
 
-            Assert.AreEqual(dto.ProductName, product.Name, "new instance should have the same productname");
+            Assert.AreEqual(dto.Name, product.Name, "new instance should have the same productname");
         }
 
         [TestMethod]
