@@ -1,33 +1,38 @@
-﻿using Informedica.GenForm.Library.DomainModel.Products;
+using System;
+using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.Library.Factories
 {
-    public class UnitFactory
+    public class UnitFactory : EntityFactory<Unit, Guid, UnitDto>
     {
-        public static Unit CreateUnit(UnitDto dto, UnitGroup group)
+        private UnitGroup _group;
+
+        public UnitFactory(UnitDto dto) : base(dto) {}
+
+        protected override Unit Create()
         {
-            return new Unit(dto, group);
+            if (_group == null) _group = GetGroup(new UnitGroupDto
+                {
+                    Name =  Dto.UnitGroupName,
+                    AllowConversion = Dto.AllowConversion
+                });
+
+            var unit = Unit.Create(Dto, _group);
+            Add(unit);
+            return Find();
         }
 
-        public static Unit CreateUnit(UnitDto dto)
+        public UnitFactory AddToGroup(UnitGroupDto groupDto)
         {
-            return new Unit(dto, UnitGroupFactory.CreateUnitGroup(
-                new UnitGroupDto
-                {
-                    AllowConversion = dto.AllowConversion,
-                    Name = dto.UnitGroupName
-                }));
+            _group = GetGroup(groupDto);
+            return this;
         }
 
-        public static Unit CreateUnit(UnitDto dto, UnitGroupDto groupDto)
+        private UnitGroup GetGroup(UnitGroupDto groupDto)
         {
-            return new Unit(dto, UnitGroupFactory.CreateUnitGroup(
-                new UnitGroupDto
-                {
-                    AllowConversion = groupDto.AllowConversion,
-                    Name = groupDto.Name
-                }));
+            return new UnitGroupFactory(groupDto).Get();
         }
     }
 }

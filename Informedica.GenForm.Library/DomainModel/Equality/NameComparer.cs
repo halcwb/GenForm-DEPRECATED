@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Informedica.GenForm.Library.DomainModel.Products
+namespace Informedica.GenForm.Library.DomainModel.Equality
 {
     public abstract class NameComparer
     {

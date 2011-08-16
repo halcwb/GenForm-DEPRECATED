@@ -4,6 +4,7 @@ using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.DataAccess.Tests.TestBase;
 using Informedica.GenForm.Database;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Repositories;

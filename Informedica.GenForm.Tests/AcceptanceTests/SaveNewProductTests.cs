@@ -1,5 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
@@ -245,7 +246,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private IShape CreateNewShape(String name)
         {
-            var shape = DomainFactory.Create<IShape, ShapeDto>(new ShapeDto{ Name = name});
+            var shape = Shape.Create(new ShapeDto{ Name = name});
 
             return shape;
         }
@@ -276,7 +277,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private IPackage CreateNewPackage(String name)
         {
-            var package = DomainFactory.Create<IPackage, PackageDto>(new PackageDto {Name = name});
+            var package = Package.Create(new PackageDto {Name = name});
 
             return package;
         }
@@ -308,7 +309,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private IUnit CreateNewUnit(string name)
         {
-            var unit = new Unit(new UnitDto
+            var unit = Unit.Create(new UnitDto
                                     {
                                         Abbreviation =  "mg",
                                         Name = name
@@ -328,7 +329,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private IBrand CreateNewBrand(String name)
         {
-            var brand = DomainFactory.Create<IBrand, BrandDto>(new BrandDto { Name = name});
+            var brand = Brand.Create(new BrandDto { Name = name});
 
             return brand;
         }

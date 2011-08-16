@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Informedica.GenForm.Library.DomainModel.Products.Data
+namespace Informedica.GenForm.Library.DomainModel.Data
 {
     public class SubstanceDto: DataTransferObject<SubstanceDto, Guid>
     {

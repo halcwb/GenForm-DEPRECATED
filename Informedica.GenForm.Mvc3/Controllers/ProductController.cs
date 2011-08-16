@@ -1,4 +1,5 @@
 ﻿using System;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Library.Services.Products;
@@ -80,7 +81,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public IProduct LoadProduct(Int32 productId)
         {
-            var product = new Product(new ProductDto());
+            var product = Product.Create(new ProductDto());
 
             return product;
         }
@@ -223,7 +224,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         private IBrand GetBrandFromJObject(JObject brand)
         {
-            return new Brand
+            return Brand.Create
                        (new BrandDto
                        {
                            Name = brand.Value<String>("BrandName")
@@ -232,7 +233,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         private IShape GetShapeFromJObject(JObject shape)
         {
-            return new Shape(new ShapeDto
+            return Shape.Create(new ShapeDto
                        {
                            Name = shape.Value<String>("ShapeName")
                        });
@@ -240,7 +241,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         private IPackage GetPackageFromJObject(JObject package)
         {
-            return DomainFactory.Create<IPackage, PackageDto>( new PackageDto
+            return Package.Create( new PackageDto
                        {
                            Name = package.Value<String>("PackageName")
                        });
@@ -256,7 +257,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         private IUnit GetUnitFromJObject(JObject unit)
         {
-            return new Unit(new UnitDto
+            return Unit.Create(new UnitDto
                        {
                            Name = unit.Value<String>("UnitName")
                        });

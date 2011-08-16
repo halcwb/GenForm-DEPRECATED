@@ -72,8 +72,12 @@
   <ItemGroup>
     <Compile Include="AcceptanceTests\SaveNewProductTests.cs" />
     <Compile Include="DatabaseCleaner.cs" />
+    <Compile Include="Fixtures\BrandTestFixtures.cs" />
     <Compile Include="Fixtures\ProductTestFixtures.cs" />
+    <Compile Include="Fixtures\RouteTestFixtures.cs" />
+    <Compile Include="Fixtures\ShapeTestFixtures.cs" />
     <Compile Include="Fixtures\SubstanceTestFixtures.cs" />
+    <Compile Include="Fixtures\UnitGroupTestFixtures.cs" />
     <Compile Include="Fixtures\UnitTestFixtures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegressionTests\LoginAcceptanceTests.cs" />

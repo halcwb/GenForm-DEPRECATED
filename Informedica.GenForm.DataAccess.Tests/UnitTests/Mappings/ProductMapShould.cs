@@ -1,9 +1,8 @@
 ﻿using FluentNHibernate.Testing;
 using Informedica.GenForm.Assembler;
-using Informedica.GenForm.Library.DomainModel;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
@@ -59,14 +58,13 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
             new PersistenceSpecification<Product>(Context.CurrentSession(), new ProductComparer())
                 .CheckProperty(x => x.Name, "dopamine Dynatra infusievloeistof 200 mg in 5 mL ampul")
                 .CheckProperty(x => x.GenericName, "dopamine")
-                .CheckReference(x => x.Brand, new Brand(new BrandDto {Name = "Dynatra"}))
+                .CheckReference(x => x.Brand, Brand.Create(new BrandDto {Name = "Dynatra"}))
                 .CheckProperty(x => x.DisplayName, "dopamine Dynatra infusievloeistof 200 mg in 5 mL ampul")
-                .CheckReference(x => x.Package, new Package(new PackageDto {Name = "ampul", Abbreviation = "amp"}))
-                .CheckReference(x => x.Shape, new Shape(new ShapeDto {Name = "infusievloeistof"}))
-                .CheckProperty(x => x.Quantity, new UnitValue(10, UnitFactory.CreateUnit(UnitTestFixtures.GetTestUnitMilligram())))
+                .CheckReference(x => x.Package, Package.Create(new PackageDto {Name = "ampul", Abbreviation = "amp"}))
+                .CheckReference(x => x.Shape, Shape.Create(new ShapeDto {Name = "infusievloeistof"}))
+                .CheckProperty(x => x.Quantity, UnitValue.Create(10, Unit.Create(UnitTestFixtures.GetTestUnitMilligram())))
 
                 .VerifyTheMappings();
         }
-
     }
 }

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 
-namespace Informedica.GenForm.Library.DomainModel.Products.Data
+namespace Informedica.GenForm.Library.DomainModel.Data
 {
     public class ProductDto: DataTransferObject<ProductDto, Guid>
     {
@@ -15,6 +16,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Data
         public IEnumerable<ProductSubstanceDto> Substances = new List<ProductSubstanceDto>();
         public IEnumerable<RouteDto> Routes = new List<RouteDto>();
         public string ProductCode;
+        public string UnitAbbreviation;
+        public bool UnitGroupAllowConversion;
+        public decimal UnitDivisor;
+        public bool UnitIsReference;
+        public decimal UnitMultiplier;
+        public string UnitGroupName;
 
         public override ProductDto CloneDto()
         {

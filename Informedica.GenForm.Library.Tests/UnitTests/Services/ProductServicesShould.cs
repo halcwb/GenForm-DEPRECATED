@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
@@ -259,7 +260,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void CallSubstanceRepositoryToAddNewSubstance()
         {
             var dto = new SubstanceDto {Id = Guid.Empty, Name = "test"};
-            var substance = DomainFactory.Create<ISubstance, SubstanceDto>(dto);
+            var substance = Substance.Create(dto);
 
             var repos = GetFakeRepository<IRepositoryLinqToSql<ISubstance>, ISubstance>(substance);
             ObjectFactory.Inject(repos);

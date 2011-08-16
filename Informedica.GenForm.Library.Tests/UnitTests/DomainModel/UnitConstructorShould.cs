@@ -62,7 +62,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         private Unit CreateUnit()
         {
             
-            return UnitFactory.CreateUnit(new UnitDto
+            return Unit.Create(new UnitDto
                     {
                         Abbreviation = "mg",
                         AllowConversion = true,
@@ -78,7 +78,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         public void UseExistingUnitGroupToAddUnitTo()
         {
             var unit1 = CreateUnit();
-            var unit2 = UnitFactory.CreateUnit(new UnitDto
+            var unit2 = Unit.Create(new UnitDto
                         {
                             Abbreviation = "mcg",
                             Divisor = 1000000,

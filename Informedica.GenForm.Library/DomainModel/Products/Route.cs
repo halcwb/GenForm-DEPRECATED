@@ -1,19 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class Route: Entity<Guid, RouteDto>
     {
         private HashSet<Shape> _shapes = new HashSet<Shape>(new ShapeComparer());
-        private readonly ISet<Product> _products = new HashSet<Product>(new ProductComparer());
+        private HashSet<Product> _products = new HashSet<Product>(new ProductComparer());
 
         protected Route() : base(new RouteDto()){}
 
-        public Route(RouteDto dto) : base(dto.CloneDto())
+        private Route(RouteDto dto) : base(dto.CloneDto())
         {
             AddShapes();
         }
@@ -22,7 +23,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         {
             foreach (var shape in Dto.Shapes)
             {
-                AddShape(new Shape(shape));
+                AddShape(Shape.Create(shape));
             }
         }
 
@@ -50,7 +51,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual IEnumerable<Shape> Shapes
         {
             get { return _shapes  ?? (_shapes = new HashSet<Shape>()); }
-            protected set { _shapes = new HashSet<Shape>(value); }
+            protected set { _shapes = new HashSet<Shape>(value, new ShapeComparer()); }
         }
 
         private string CreateAbbreviationFromName()
@@ -67,11 +68,24 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual IEnumerable<Product> Products
         {
             get { return _products; }
+            protected set { _products = new HashSet<Product>(value, new ProductComparer());}
         }
 
         internal protected virtual void AddProduct(Product product)
         {
+            if (_products.Contains(product, _products.Comparer)) throw new CannotAddItemException<Product>(product);
             _products.Add(product);
+        }
+
+        internal protected virtual void RemoveProduct(Product product)
+        {
+            if (!_products.Contains(product)) throw new CannotRemoveItemException<Product>(product);
+            _products.Remove(product);
+        }
+
+        public static Route Create(RouteDto dto)
+        {
+            return new Route(dto);
         }
     }
 }

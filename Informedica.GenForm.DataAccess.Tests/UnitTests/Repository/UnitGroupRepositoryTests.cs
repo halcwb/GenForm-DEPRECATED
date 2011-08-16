@@ -2,6 +2,7 @@
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Assembler.Contexts;
 using Informedica.GenForm.DataAccess.Repositories;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -58,12 +59,12 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         [TestMethod]
         public void ThatTheSameUnitGroupCannotBeAddedTwice()
         {
-            var group1 = new UnitGroup(new UnitGroupDto
+            var group1 = UnitGroup.Create(new UnitGroupDto
             {
                 AllowConversion = true,
                 Name = "massa"
             });
-            var group2 = new UnitGroup(new UnitGroupDto
+            var group2 = UnitGroup.Create(new UnitGroupDto
             {
                 AllowConversion = true,
                 Name = "massa"

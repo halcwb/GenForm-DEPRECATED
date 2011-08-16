@@ -1,16 +1,15 @@
-﻿using System.Linq;
+﻿using System;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
+namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
 {
     /// <summary>
-    /// Summary description for UnitFactoryCreates
+    /// Summary description for UnitGroupWithUnitsShould
     /// </summary>
     [TestClass]
-    public class UnitFactoryCreates
+    public class UnitGroupConstructionTests
     {
         private TestContext testContextInstance;
 
@@ -43,9 +42,21 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         // public static void MyClassCleanup() { }
         //
         // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
+        //[TestInitialize]
+        //public void MyTestInitialize()
+        //{
+        //    _unitGroup = CreateNewUnitGroup();
+        //}
+
+        //private UnitGroup CreateNewUnitGroup()
+        //{
+        //    return UnitGroupFactory.CreateUnitGroup(new UnitGroupDto
+        //            {
+        //                AllowConversion = true,
+        //                Name = "massa"
+        //            });
+        //}
+
         // Use TestCleanup to run code after each test has run
         // [TestCleanup()]
         // public void MyTestCleanup() { }
@@ -53,38 +64,15 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         #endregion
 
         [TestMethod]
-        public void ANewUnitUsingAUnitDto()
+        public void ThatAValidUnitGroupCanBeCreated()
         {
-            var unit = CreateTestUnit();
-            Assert.IsInstanceOfType(unit, typeof(Unit));
+            var group = UnitGroup.Create(UnitGroupTestFixtures.ValidDto());
+            Assert.IsTrue(UnitGroupIsValid(group));
         }
 
-        private static Unit CreateTestUnit()
+        private bool UnitGroupIsValid(UnitGroup group)
         {
-            var dto = UnitTestFixtures.GetTestUnitMilligram();
-            var unit = UnitFactory.CreateUnit(dto);
-            return unit;
-        }
-
-        [TestMethod]
-        public void AlwaysAUnitWithAUnitGroup()
-        {
-            var unit = CreateTestUnit();
-            Assert.IsNotNull(unit.UnitGroup);
-        }
-
-        [TestMethod]
-        public void AUnitWithUnitGroupWithNameOfUnitDtoUnitGroupName()
-        {
-            var unit = CreateTestUnit();
-            Assert.AreEqual(UnitTestFixtures.GetTestUnitMilligram().UnitGroupName, unit.UnitGroup.Name);
-        }
-
-        [TestMethod]
-        public void UnitWithUnitGroupThatContainsThatUnit()
-        {
-            var unit = CreateTestUnit();
-            Assert.AreSame(unit, unit.UnitGroup.Units.First());
+            return !String.IsNullOrWhiteSpace(group.Name);
         }
     }
 }

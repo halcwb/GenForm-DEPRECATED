@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.Tests.Fixtures
@@ -36,7 +37,13 @@ namespace Informedica.GenForm.Tests.Fixtures
                 ProductCode = ProductCode,
                 Quantity = ProductQuantity,
                 ShapeName = Shape,
-                UnitName = ProductUnit
+                UnitName = ProductUnit,
+                UnitAbbreviation = "mg",
+                UnitDivisor = 1000M,
+                UnitGroupAllowConversion = true,
+                UnitGroupName = "massa",
+                UnitIsReference = false,
+                UnitMultiplier = 0.001M
             };
 
 
@@ -49,11 +56,16 @@ namespace Informedica.GenForm.Tests.Fixtures
                                  {
                                      new ProductSubstanceDto
                                          {
-                                             Id = 0, 
                                              Quantity = SubstanceQuantity, 
                                              SortOrder = SortOrder, 
                                              Substance = Substance, 
-                                             Unit = SubstanceUnit
+                                             UnitName = SubstanceUnit,
+                                             UnitAbbreviation = "mg",
+                                             UnitGroupAllowConversion = true,
+                                             UnitGroupName = "massa",
+                                             UnitMultiplier = 0.001M,
+                                             UnitDivisor = 1000M,
+                                             UnitIsReference = false
                                          }
                                  };
             return dto;
@@ -71,7 +83,7 @@ namespace Informedica.GenForm.Tests.Fixtures
                                              Quantity = 5,
                                              SortOrder = 2,
                                              Substance = "water",
-                                             Unit = "mL"
+                                             UnitName = "mL"
                                          }
                                  };
             return dto;
@@ -108,6 +120,17 @@ namespace Informedica.GenForm.Tests.Fixtures
             list.Add(dto);
 
             return list;
+        }
+
+        public static ProductDto GetProductDtoWithOneSubstanceAndRoutes()
+        {
+            var dto = GetProductDtoWithOneSubstance();
+            dto.Routes = new List<RouteDto> 
+                             {
+                                 new RouteDto {Abbreviation = "iv", Name = "intraveneus"},
+                                 new RouteDto {Abbreviation = "or", Name = "oraal"}
+                             };
+            return dto;
         }
     }
 }

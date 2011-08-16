@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
@@ -21,8 +22,15 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         protected Unit() : base(new UnitDto()) { }
 
-        [DefaultConstructor, Obsolete]
-        public Unit(UnitDto dto) : base(dto.CloneDto()) { }
+        private Unit(UnitDto dto) : base(dto.CloneDto())
+        {
+            var group = UnitGroup.Create(new UnitGroupDto
+                {
+                    AllowConversion = dto.AllowConversion,
+                    Name = dto.UnitGroupName
+                });
+            group.AddUnit(this);
+        }
 
         public Unit(UnitDto dto, UnitGroup group)
             : base(dto.CloneDto())
@@ -120,7 +128,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public static Unit Create(UnitDto dto, UnitGroupDto groupDto)
         {
-            return new Unit(dto, UnitGroupFactory.CreateUnitGroup(groupDto));
+            return new Unit(dto, UnitGroup.Create(groupDto));
         }
 
         #endregion

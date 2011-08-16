@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Linq;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Exceptions;
-using Informedica.GenForm.Library.Services.Products;
-using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
@@ -15,7 +14,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
     /// Summary description for NewShapeShould
     /// </summary>
     [TestClass]
-    public class NewShapeShould : TestSessionContext
+    public class NewShapeShould
     {   
         private TestContext testContextInstance;
         private Shape _newShape;
@@ -68,14 +67,14 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
 
         private Route AssociateShapeWithRoute(Route route)
         {
-            _newShape = new Shape(new ShapeDto { Name = "infusievloeistof" });
+            _newShape = Shape.Create(new ShapeDto { Name = "infusievloeistof" });
             _newShape.AddRoute(route);
             return route;
         }
 
         private static Route CreateRoute()
         {
-            return new Route(new RouteDto{ Abbreviation = "iv", Name = "intraveneus"});
+            return Route.Create(new RouteDto{ Abbreviation = "iv", Name = "intraveneus"});
         }
 
         [TestMethod]
@@ -85,7 +84,6 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             try
             {
                 AssociateShapeWithRoute(route);
-
             }
             catch ( Exception e)
             {
@@ -119,14 +117,14 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
 
         private Package AssociateShapeWithPackage(Package package)
         {
-            _newShape = new Shape(new ShapeDto { Name = "infusievloeistof" });
+            _newShape = Shape.Create(new ShapeDto { Name = "infusievloeistof" });
             _newShape.AddPackage(package);
             return package;
         }
 
         private Package CreatePackage()
         {
-            return new Package(new PackageDto
+            return Package.Create(new PackageDto
                                    {
                                        Abbreviation = "ampul",
                                        Name = "ampul"
@@ -161,14 +159,14 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
 
         private Unit AssociateShapeWithUnit(Unit unit)
         {
-            _newShape = new Shape(new ShapeDto { Name = "infusievloeistof" });
+            _newShape = Shape.Create(new ShapeDto { Name = "infusievloeistof" });
             _newShape.AddUnit(unit);
             return unit;
         }
 
         private static Unit CreateUnit()
         {
-            return new UnitCreator(GetUnitDto()).GetUnit();
+            return Unit.Create(GetUnitDto());
         }
 
         private static UnitDto GetUnitDto()

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
@@ -13,8 +13,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         protected UnitGroup(): base(new UnitGroupDto()){}
 
-        [Obsolete]
-        public UnitGroup(UnitGroupDto dto): base(dto.CloneDto())
+        private UnitGroup(UnitGroupDto dto): base(dto.CloneDto())
         {
             ValidateDto();
         }

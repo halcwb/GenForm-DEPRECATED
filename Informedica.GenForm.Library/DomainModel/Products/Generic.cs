@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Informedica.GenForm.Library.DomainModel.Products
+﻿namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class Generic : IGeneric
     {

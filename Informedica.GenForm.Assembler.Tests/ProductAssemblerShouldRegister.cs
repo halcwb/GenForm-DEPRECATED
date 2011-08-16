@@ -1,5 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.DataAccess.Repositories;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Repositories;

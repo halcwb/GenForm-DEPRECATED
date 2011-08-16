@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Tests.Fixtures;
@@ -60,7 +61,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         {
             try
             {
-                var product = new Product(new ProductDto());
+                var product = Product.Create(new ProductDto());
                 Assert.IsNotNull(product);
                 
             }
@@ -81,7 +82,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         private void SetupDtoWithoutSubstances()
         {
             _dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
-            _product = new Product(_dto);
+            _product = Product.Create(_dto);
         }
 
         [TestMethod]
@@ -96,7 +97,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         public void PopulateProductWithOneSubstance()
         {
             _dto = ProductTestFixtures.GetProductDtoWithOneSubstance();
-            _product = new Product(_dto);
+            _product = Product.Create(_dto);
 
             Assert.IsTrue(ProductIsPopulated(), "product substance was not added");
         }
@@ -121,7 +122,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
                                   substance1.Substance == s.Substance.Name &&
                                   substance1.SortOrder == s.SortOrder &&
                                   substance1.Quantity == s.Quantity.Value &&
-                                  substance1.Unit == s.Quantity.Unit.Name) != null;
+                                  substance1.UnitName == s.Quantity.Unit.Name) != null;
             }
 
             return isPopulated;

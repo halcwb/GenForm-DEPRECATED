@@ -9,9 +9,9 @@ namespace Informedica.GenForm.Library.Services.Products
 {
     public static class UnitServices
     {
-        public static UnitCreator WithDto(UnitDto dto)
+        public static UnitFactory WithDto(UnitDto dto)
         {
-            return new UnitCreator(dto);
+            return new UnitFactory(dto);
         }
 
         public static Unit GetUnit(Guid id)

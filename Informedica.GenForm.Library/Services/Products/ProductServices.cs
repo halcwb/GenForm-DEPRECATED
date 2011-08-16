@@ -1,4 +1,5 @@
 ﻿using System;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
@@ -52,7 +53,7 @@ namespace Informedica.GenForm.Library.Services.Products
 
         public void AddNewSubstance(SubstanceDto substDto)
         {
-            var subst = DomainFactory.Create<ISubstance, SubstanceDto>(substDto);
+            var subst = Substance.Create(substDto);
             var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<ISubstance>>();
             repository.Insert(subst);
         }

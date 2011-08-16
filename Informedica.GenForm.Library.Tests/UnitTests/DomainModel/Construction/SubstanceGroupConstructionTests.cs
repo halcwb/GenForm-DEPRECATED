@@ -1,18 +1,14 @@
-﻿using System;
-using Informedica.GenForm.Assembler;
-using Informedica.GenForm.Library.DomainModel;
-using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.Factories;
+﻿using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
+namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
 {
     /// <summary>
-    /// Summary description for ADomainModelShouldHaveAnIdentifirer
+    /// Summary description for SubstanceGroup
     /// </summary>
     [TestClass]
-    public class ADomainModelShouldHaveAnIdentifirer
+    public class SubstanceGroupConstructionTests
     {
         private TestContext testContextInstance;
 
@@ -37,9 +33,9 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
-        public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
-        
+        // [ClassInitialize()]
+        // public static void MyClassInitialize(TestContext testContext) { }
+        //
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
@@ -55,13 +51,15 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         #endregion
 
         [TestMethod]
-        public void ThatCanIdentifyAnObject()
+        public void ThatAValidUnitGroupIsConstructed()
         {
-            var substanceDto = new SubstanceDto { Id = Guid.NewGuid(), Name = "paracetamol"};
-            ISubstance subst = DomainFactory.Create<ISubstance, SubstanceDto>(substanceDto);
-            var subst2 = DomainFactory.Create<ISubstance, SubstanceDto>(substanceDto);
-            
-            Assert.IsTrue(subst2.Equals(subst));
+            var unitgroup = UnitGroup.Create(UnitGroupTestFixtures.GetDto());
+            Assert.IsTrue(UnitGroupIsValid(unitgroup));
+        }
+
+        private bool UnitGroupIsValid(UnitGroup unitgroup)
+        {
+            return !string.IsNullOrWhiteSpace(unitgroup.Name);
         }
     }
 }

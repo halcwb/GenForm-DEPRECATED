@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class Package: Entity<Guid, PackageDto>, IPackage
     {
         private HashSet<Shape> _shapes = new HashSet<Shape>(new ShapeComparer());
+        private readonly HashSet<Product> _products = new HashSet<Product>(new ProductComparer());
 
         #region Implementation of IPackage
 
         protected Package() : base(new PackageDto()) {}
 
-        public Package(PackageDto dto) : base(dto.CloneDto()) {}
+        private Package(PackageDto dto) : base(dto.CloneDto()) {}
 
         public virtual String Abbreviation
         {
@@ -52,18 +51,34 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             protected set { _shapes = new HashSet<Shape>(value); }
         }
 
+        public virtual IEnumerable<Product> Products
+        {
+            get { return _products; }
+        }
+
         public override bool IdIsDefault(Guid id)
         {
             return id == Guid.Empty;
         }
-    }
 
-    public static class ShapeAssociation
-    {
-        public static void AddShape(HashSet<Shape> shapes, Shape shape)
+        public static Package Create(PackageDto dto)
         {
-            if (shapes.Contains(shape, new ShapeComparer())) throw new CannotAddItemException<Shape>(shape);
-            shapes.Add(shape);
+            return new Package(dto);
+        }
+
+        internal protected virtual void AddProduct(Product product)
+        {
+            product.SetPackage(this, AddProductToPackage);
+        }
+
+        private void AddProductToPackage(Product product)
+        {
+            _products.Add(product);
+        }
+
+        internal protected virtual void Remove(Product product)
+        {
+            _products.Remove(product);
         }
     }
 }
