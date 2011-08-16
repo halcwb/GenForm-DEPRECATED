@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FluentNHibernate.Testing;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
@@ -69,9 +70,9 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             return new List<Product>
                        {
-                            DomainFactory.Create<Product, ProductDto>(
+                            Product.Create(
                                 ProductTestFixtures.GetProductDtoWithNoSubstances()),
-                            DomainFactory.Create<Product, ProductDto>(
+                            Product.Create(
                                 ProductTestFixtures.GetProductDtoWithOneSubstance())
                        };
         }

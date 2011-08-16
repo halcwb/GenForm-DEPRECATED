@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
@@ -12,12 +12,13 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         private HashSet<Package> _packages = new HashSet<Package>(new PackageComparer());
         private HashSet<Unit> _units = new HashSet<Unit>(new UnitComparer());
         private HashSet<Route> _routes = new HashSet<Route>(new RouteComparer());
+        private readonly HashSet<Product> _products = new HashSet<Product>(new ProductComparer());
 
         #region Implementation of IShape
 
         protected Shape():base(new ShapeDto()) {}
 
-        public Shape(ShapeDto dto) : base(dto.CloneDto())
+        private Shape(ShapeDto dto) : base(dto.CloneDto())
         {
             AddPackages();
             AddUnits();
@@ -28,7 +29,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         {
             foreach (var route in Dto.Routes)
             {
-                AddRoute(new Route(route));   
+                AddRoute(Route.Create(route));   
             }
         }
 
@@ -44,7 +45,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             addShapeToRoute(this);
         }
 
-        private bool CanNotAddRoute(Route route)
+        public virtual bool CanNotAddRoute(Route route)
         {
             if (route == null) return true;
             return _routes.Contains(route, _routes.Comparer);
@@ -54,7 +55,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         {            
             foreach (var package in Dto.Packages)
             {
-                AddPackage(new Package(package));
+                AddPackage(Package.Create(package));
             }
         }
 
@@ -62,7 +63,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         {
             foreach (var unit in Dto.Units)
             {
-                AddUnit(new Unit(unit));
+                AddUnit(Unit.Create(unit));
             }
         }
 
@@ -120,6 +121,11 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             protected set { _routes = new HashSet<Route>(value); }
         }
 
+        public virtual IEnumerable<Product> Products
+        {
+            get { return _products; }
+        }
+
         #endregion
 
         public override bool IdIsDefault(Guid id)
@@ -129,8 +135,27 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void RemovePackage(Package package)
         {
-            
+            _packages.Remove(package);
+        }
 
+        public static Shape Create(ShapeDto dto)
+        {
+            return new Shape(dto);
+        }
+
+        internal protected virtual void AddProduct(Product product)
+        {
+            product.SetShape(this, AddProductToShape);
+        }
+
+        private void AddProductToShape(Product product)
+        {
+            _products.Add(product);
+        }
+
+        internal protected virtual void Remove(Product product)
+        {
+            _products.Remove(product);
         }
     }
 }

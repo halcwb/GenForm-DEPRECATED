@@ -7,12 +7,12 @@
     <version name="Version" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Version" />
     </version>
-    <bag access="nosetter.lowercase-underscore" cascade="save-update" name="Substances">
+    <set cascade="save-update" name="Substances">
       <key>
         <column name="SubstanceGroup_id" />
       </key>
       <one-to-many class="Informedica.GenForm.Library.DomainModel.Products.Substance, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-    </bag>
+    </set>
     <property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Name" length="255" not-null="true" unique="true" />
     </property>

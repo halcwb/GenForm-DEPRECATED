@@ -13,6 +13,14 @@
       </key>
       <one-to-many class="Informedica.GenForm.Library.DomainModel.Products.ProductSubstance, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     </set>
+    <set cascade="save-update" name="Routes" table="ProductsToRoutes">
+      <key>
+        <column name="Product_id" />
+      </key>
+      <many-to-many class="Informedica.GenForm.Library.DomainModel.Products.Route, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <column name="Route_id" />
+      </many-to-many>
+    </set>
     <property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Name" length="255" not-null="true" unique="true" />
     </property>
@@ -34,7 +42,7 @@
     <many-to-one cascade="save-update" class="Informedica.GenForm.Library.DomainModel.Products.Shape, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Shape">
       <column name="Shape_id" not-null="true" />
     </many-to-one>
-    <component name="Quantity" insert="true" update="true" optimistic-lock="true" class="Informedica.GenForm.Library.DomainModel.UnitValue, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <component name="Quantity" insert="true" update="true" optimistic-lock="true" class="Informedica.GenForm.Library.DomainModel.Products.UnitValue, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <property name="Value" type="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <column name="Value" not-null="true" />
       </property>

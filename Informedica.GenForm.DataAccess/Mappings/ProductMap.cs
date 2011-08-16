@@ -1,4 +1,5 @@
 ﻿using System;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 
@@ -21,6 +22,10 @@ namespace Informedica.GenForm.DataAccess.Mappings
                 .Not.Nullable()
                 .Cascade.SaveUpdate();
             HasMany(x => x.Substances).Not.KeyNullable()
+                .AsSet()
+                .Cascade.All()
+                .Cascade.SaveUpdate();
+            HasManyToMany(x => x.Routes)
                 .AsSet()
                 .Cascade.All()
                 .Cascade.SaveUpdate();

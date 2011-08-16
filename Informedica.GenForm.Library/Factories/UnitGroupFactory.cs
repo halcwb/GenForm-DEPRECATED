@@ -1,15 +1,18 @@
+﻿using System;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.Library.Factories
 {
-    public static class UnitGroupFactory
+    public class UnitGroupFactory : EntityFactory<UnitGroup, Guid, UnitGroupDto>
     {
-        public static UnitGroup CreateUnitGroup(UnitGroupDto dto)
+        public UnitGroupFactory(UnitGroupDto dto) : base(dto) {}
+
+        protected override UnitGroup Create()
         {
-// ReSharper disable CSharpWarnings::CS0612
-            return new UnitGroup(dto);
-// ReSharper restore CSharpWarnings::CS0612
+            var group = UnitGroup.Create(Dto);
+            Add(group);
+            return Find();
         }
     }
 }

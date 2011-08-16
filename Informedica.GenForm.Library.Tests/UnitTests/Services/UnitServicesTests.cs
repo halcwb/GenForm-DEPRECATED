@@ -1,10 +1,10 @@
 ﻿using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Assembler.Contexts;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestContext = Microsoft.VisualStudio.TestTools.UnitTesting.TestContext;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 {
@@ -12,7 +12,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
     /// Summary description for UnitServicesTests
     /// </summary>
     [TestClass]
-    public class UnitServicesTests
+    public class UnitServicesTests : TestSessionContext
     {
         private TestContext testContextInstance;
         private SessionContext _context;
@@ -50,50 +50,35 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         // public static void MyClassCleanup() { }
         //
         // Use TestInitialize to run code before running each test 
-        [TestInitialize()]
-        public void MyTestInitialize()
-        {
-            _context = new SessionContext();
-            _context.CurrentSession().Transaction.Begin();            
-        }
-        
-        // Use TestCleanup to run code after each test has run
-        [TestCleanup()]
-        public void MyTestCleanup()
-        {
-            _context.CurrentSession().Transaction.Rollback();
-            _context.Dispose();
-            _context = null;
-        }
         
         #endregion
 
         [TestMethod]
         public void ThatServicesCanCreateNewUnitWithNewUnitGroup()
         {
-            var unit = UnitServices.WithDto(GetUnitDto()).GetUnit();
+            var unit = UnitServices.WithDto(GetUnitDto()).Get();
             Assert.IsNotNull(unit);
         }
 
         [TestMethod]
         public void ThatServicesCanCreateNewUnitAndAddUnitToGroup()
         {
-            var unit = UnitServices.WithDto(GetUnitDto()).AddToGroup(GetGroupDto()).GetUnit();
+            var unit = UnitServices.WithDto(GetUnitDto()).AddToGroup(GetGroupDto()).Get();
             Assert.IsNotNull(unit);
         }
 
         [TestMethod]
         public void ThatServicesGetsTheUnitFromTheRepositoryOnceItsAdded()
         {
-            var unit = UnitServices.WithDto(GetUnitDto()).AddToGroup(GetGroupDto()).GetUnit();
+            var unit = UnitServices.WithDto(GetUnitDto()).AddToGroup(GetGroupDto()).Get();
             Assert.AreEqual(unit, UnitServices.GetUnit(unit.Id));
         }
 
         [TestMethod]
         public void ThatServicesReturnsSameUnitWhenAskedTwiceForSameUnit()
         {
-            var unit1 = UnitServices.WithDto(GetUnitDto()).GetUnit();
-            var unit2 = UnitServices.WithDto(GetUnitDto()).GetUnit();
+            var unit1 = UnitServices.WithDto(GetUnitDto()).Get();
+            var unit2 = UnitServices.WithDto(GetUnitDto()).Get();
 
             Assert.AreEqual(unit1, unit2);
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FluentNHibernate.Testing;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
@@ -79,8 +80,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             return new List<Package>
                        {
-                           new Package(new PackageDto {Name = "ampul"}),
-                           new Package(new PackageDto {Name = "zak"})
+                           Package.Create(new PackageDto {Name = "ampul"}),
+                           Package.Create(new PackageDto {Name = "zak"})
                        };
         }
 
@@ -115,8 +116,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             return new List<Route>
                        {
-                           new Route(new RouteDto {Abbreviation = "iv", Name = "intraveneus"}),
-                           new Route(new RouteDto {Abbreviation = "or", Name = "oraal"})
+                           Route.Create(new RouteDto {Abbreviation = "iv", Name = "intraveneus"}),
+                           Route.Create(new RouteDto {Abbreviation = "or", Name = "oraal"})
                        };
         }
 
@@ -124,7 +125,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             return new List<Route>
                        {
-                           new Route(new RouteDto {Abbreviation = "iv", Name = "intraveneus"})
+                           Route.Create(new RouteDto {Abbreviation = "iv", Name = "intraveneus"})
                        };
         }
 
@@ -132,7 +133,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             return new List<Unit>
                        {
-                           UnitFactory.CreateUnit(new UnitDto{Abbreviation = "ml", AllowConversion = true, Divisor = 10, IsReference = false, Multiplier = 1000, Name = "milliliter", UnitGroupName = "algemeen"})
+                           Unit.Create(new UnitDto{Abbreviation = "ml", AllowConversion = true, Divisor = 10, IsReference = false, Multiplier = 1000, Name = "milliliter", UnitGroupName = "algemeen"})
                        };
         }
 
@@ -140,7 +141,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             return new List<Package>
                        {
-                           new Package(new PackageDto {Name = "ampul"})
+                           Package.Create(new PackageDto {Name = "ampul"})
                        };
         }
     }

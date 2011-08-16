@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Equality;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class Brand : Entity<Guid, BrandDto>, IBrand
     {
-        private IEnumerable<Product> _products;
+        private readonly ISet<Product> _products = new HashSet<Product>(new ProductComparer());
 
         protected Brand(): base(new BrandDto()){}
 
-        public Brand(BrandDto dto) : base(dto.CloneDto()) {}
+        private Brand(BrandDto dto) : base(dto.CloneDto()) {}
 
         public virtual IEnumerable<Product> Products
         {
             get {
-                return _products ?? (_products = new List<Product>());
+                return _products;
             }
         }
 
@@ -22,13 +24,25 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         {
             return id == Guid.Empty;
         }
-    }
 
-    public class BrandDto: DataTransferObject<BrandDto, Guid>
-    {
-        public override BrandDto CloneDto()
+        public static Brand Create(BrandDto brandDto)
         {
-            return CreateClone();
+            return new Brand(brandDto);
+        }
+
+        internal protected virtual void AddProduct(Product product)
+        {
+            product.SetBrand(this, AddProductToBrand);
+        }
+
+        private void AddProductToBrand(Product product)
+        {
+            _products.Add(product);
+        }
+
+        internal protected virtual void RemoveProduct(Product product)
+        {
+            _products.Remove(product);
         }
     }
 }

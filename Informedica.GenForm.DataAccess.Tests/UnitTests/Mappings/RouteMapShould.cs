@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FluentNHibernate.Testing;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Tests;
@@ -69,8 +70,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             return new List<Shape>
                        {
-                           new Shape(new ShapeDto {Name = "infusievloeistof"}),
-                           new Shape(new ShapeDto {Name = "injectievloeistof"})
+                           Shape.Create(new ShapeDto {Name = "infusievloeistof"}),
+                           Shape.Create(new ShapeDto {Name = "injectievloeistof"})
                        };
         }
     }

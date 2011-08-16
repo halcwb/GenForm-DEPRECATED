@@ -5,8 +5,10 @@ using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Assembler.Contexts;
 using Informedica.GenForm.DataAccess.DataContexts;
 using Informedica.GenForm.DataAccess.Repositories;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate.Linq;
 using StructureMap;
@@ -96,13 +98,13 @@ namespace Informedica.NHibernate.Tests
 
         private void ReturnsTrueForNewBrandWithTheSameName()
         {
-            Assert.IsTrue(_repository.Contains(new Brand(new BrandDto{ Name = _brand.Name}), new BrandComparer()), new StackFrame().GetMethod().Name);
+            Assert.IsTrue(_repository.Contains(Brand.Create(new BrandDto{ Name = _brand.Name}), new BrandComparer()), new StackFrame().GetMethod().Name);
         }
 
 
         private void ReturnFalseForAnotherBrand()
         {
-            Assert.IsFalse(_repository.Contains(new Brand(new BrandDto())), new StackFrame().GetMethod().Name);
+            Assert.IsFalse(_repository.Contains(Brand.Create(new BrandDto())), new StackFrame().GetMethod().Name);
         }
 
         private void ReturnTrueForContainsBrand()
@@ -167,7 +169,7 @@ namespace Informedica.NHibernate.Tests
 
         private Brand GetBrand()
         {
-            return _brand ?? (_brand = new Brand(new BrandDto { Name = "Dynatra" }));
+            return _brand ?? (_brand = Brand.Create(new BrandDto { Name = "Dynatra" }));
         }
     }
 }

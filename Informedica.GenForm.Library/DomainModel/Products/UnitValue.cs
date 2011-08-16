@@ -1,7 +1,6 @@
 using System;
-using Informedica.GenForm.Library.DomainModel.Products;
 
-namespace Informedica.GenForm.Library.DomainModel
+namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class UnitValue
     {
@@ -21,5 +20,10 @@ namespace Informedica.GenForm.Library.DomainModel
         public virtual Unit Unit { get; protected set; }
 
         public virtual decimal Value { get; protected set; }
+
+        public static UnitValue Create(decimal quantity, Unit unit)
+        {
+            return new UnitValue(quantity, unit);
+        }
     }
 }

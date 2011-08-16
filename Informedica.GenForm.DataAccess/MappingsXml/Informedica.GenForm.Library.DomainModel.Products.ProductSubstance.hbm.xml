@@ -15,7 +15,7 @@
     <many-to-one class="Informedica.GenForm.Library.DomainModel.Products.Product, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Product">
       <column name="Product_id" not-null="true" unique-key="ProductSubstanceCombi" />
     </many-to-one>
-    <component name="Quantity" insert="true" update="true" optimistic-lock="true" class="Informedica.GenForm.Library.DomainModel.UnitValue, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <component name="Quantity" insert="true" update="true" optimistic-lock="true" class="Informedica.GenForm.Library.DomainModel.Products.UnitValue, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <property name="Value" type="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
         <column name="Value" not-null="true" />
       </property>

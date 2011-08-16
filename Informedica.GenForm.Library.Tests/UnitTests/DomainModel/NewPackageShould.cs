@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Exceptions;
@@ -73,11 +74,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
 
         private static Package AssociateWithShape()
         {
-            var package = new Package(new PackageDto
+            var package = Package.Create(new PackageDto
                                           {
                                               Name = "ampul"
                                           });
-            package.AddShape(new Shape(new ShapeDto
+            package.AddShape(Shape.Create(new ShapeDto
                                            {
                                                Name = "infusievloeistof"
                                            }));
@@ -87,11 +88,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         [TestMethod]
         public void BeAbleToAssociatePackageWithShape()
         {
-            var package = new Package(new PackageDto
+            var package = Package.Create(new PackageDto
                                             {
                                                 Name = "ampul"
                                             });
-            var shape = new Shape(new ShapeDto
+            var shape = Shape.Create(new ShapeDto
                                            {
                                                Name = "infusievloeistof"
                                            });
@@ -107,7 +108,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             var package = AssociateWithShape();
             try
             {
-                package.AddShape(new Shape(new ShapeDto
+                package.AddShape(Shape.Create(new ShapeDto
                                        {
                                            Name = "infusievloeistof"
                                        }));

@@ -1,4 +1,5 @@
 ﻿using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
@@ -70,7 +71,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         public void BePersistedWithSubstanceGroup()
         {
 
-                var subst = DomainFactory.Create<ISubstance, SubstanceDto>(new SubstanceDto
+                var subst = Substance.Create(new SubstanceDto
                 {
                     SubstanceGroupName = "analgetica",
                     Name = "paracetamol"
@@ -82,7 +83,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void ThrowAnErrorWhenSubsanceGroupNameIsEmptyString()
         {
-            var subst = DomainFactory.Create<ISubstance, SubstanceDto>(new SubstanceDto
+            var subst = Substance.Create(new SubstanceDto
                                                                            {
                                                                                SubstanceGroupName = "",
                                                                                Name = "paracetamol"
@@ -98,7 +99,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 
         private static ISubstance CreateTestSubstance()
         {
-            return DomainFactory.Create<ISubstance, SubstanceDto>(new SubstanceDto { Name = "paracetamol" });
+            return Substance.Create(new SubstanceDto { Name = "paracetamol" });
         }
 
     }

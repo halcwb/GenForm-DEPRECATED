@@ -1,6 +1,5 @@
 ﻿using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -55,7 +54,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void HavePropertiesSetByTestFixture()
         {
-            var unit = UnitFactory.CreateUnit(UnitTestFixtures.GetTestUnitMilligram());
+            var unit = Unit.Create(UnitTestFixtures.GetTestUnitMilligram());
 
             AssertUnitNameIsSet(unit);
         }
@@ -63,7 +62,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void HaveAUnitGroup()
         {
-            var unit = UnitFactory.CreateUnit(UnitTestFixtures.GetTestUnitMilligram());
+            var unit = Unit.Create(UnitTestFixtures.GetTestUnitMilligram());
 
             AssertUnitGroupName(unit);
         }
@@ -86,7 +85,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 
         private static void PersistUnit(ISession session)
         {
-            var unit = UnitFactory.CreateUnit(UnitTestFixtures.GetTestUnitMilligram());
+            var unit = Unit.Create(UnitTestFixtures.GetTestUnitMilligram());
 
             AssertUnitNameIsSet(unit);
             AssertUnitGroupName(unit);
