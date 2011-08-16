@@ -12,7 +12,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     /// Summary description for ShapeMapShould
     /// </summary>
     [TestClass]
-    public class ShapeMapShould : MappingTests
+    public class ShapeMapShould : TestSessionContext
     {
         private TestContext testContextInstance;
 

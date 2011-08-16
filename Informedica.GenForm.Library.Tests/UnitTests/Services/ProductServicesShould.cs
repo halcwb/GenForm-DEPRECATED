@@ -94,7 +94,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
             var product = ObjectFactory.With(dto).GetInstance<IProduct>();
             Assert.IsTrue(ObjectExaminer.ObjectHasEmptyProperties(product), "helper method should return true");
 
-            dto.ProductName = "Not Empty";
+            dto.Name = "Not Empty";
             product = ObjectFactory.With(dto).GetInstance<IProduct>();
             Assert.IsFalse(ObjectExaminer.ObjectHasEmptyProperties(product), "helper method should return false");
         }

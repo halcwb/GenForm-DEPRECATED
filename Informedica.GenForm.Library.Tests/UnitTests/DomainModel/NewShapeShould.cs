@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Linq;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.Factories;
+using Informedica.GenForm.Library.Exceptions;
+using Informedica.GenForm.Library.Services.Products;
+using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
@@ -12,8 +15,8 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
     /// Summary description for NewShapeShould
     /// </summary>
     [TestClass]
-    public class NewShapeShould
-    {
+    public class NewShapeShould : TestSessionContext
+    {   
         private TestContext testContextInstance;
         private Shape _newShape;
 
@@ -38,20 +41,18 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            GenFormApplication.Initialize();
+
+        }
+        
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
         //
         // Use TestInitialize to run code before running each test 
-        [TestInitialize]
-        public void MyTestInitialize()
-        {
-            _newShape = new Shape(new ShapeDto{ Name = "infusievloeistof"});
-        }
-        
         // Use TestCleanup to run code after each test has run
         // [TestCleanup()]
         // public void MyTestCleanup() { }
@@ -67,6 +68,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
 
         private Route AssociateShapeWithRoute(Route route)
         {
+            _newShape = new Shape(new ShapeDto { Name = "infusievloeistof" });
             _newShape.AddRoute(route);
             return route;
         }
@@ -80,8 +82,15 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         public void NotAcceptTheSameRouteTwice()
         {
             var route = AssociateShapeWithRoute(CreateRoute());
-            AssociateShapeWithRoute(route);
+            try
+            {
+                AssociateShapeWithRoute(route);
 
+            }
+            catch ( Exception e)
+            {
+                Assert.IsInstanceOfType(e, typeof(CannotAddItemException<Shape>));
+            }
             Assert.IsFalse(_newShape.Routes.Count() == 2);
         }
 
@@ -89,8 +98,15 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         public void NotAcceptDifferentRouteObjectsWithSameDataTwice()
         {
             AssociateShapeWithRoute(CreateRoute());
-            AssociateShapeWithRoute(CreateRoute());
+            try
+            {
+                AssociateShapeWithRoute(CreateRoute());
 
+            }
+            catch (Exception e)
+            {
+                Assert.IsInstanceOfType(e, typeof(CannotAddItemException<Route>));
+            }
             Assert.IsFalse(_newShape.Routes.Count() == 2);
         }
 
@@ -103,6 +119,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
 
         private Package AssociateShapeWithPackage(Package package)
         {
+            _newShape = new Shape(new ShapeDto { Name = "infusievloeistof" });
             _newShape.AddPackage(package);
             return package;
         }
@@ -129,22 +146,29 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         public void WillNotAddSameUnitTwice()
         {
             var unit1 = AssociateShapeWithUnit(CreateUnit());
-            var unit2 = AssociateShapeWithUnit(CreateUnit());
+            try
+            {
+                AssociateShapeWithUnit(CreateUnit());
 
+            }
+            catch (Exception e)
+            {
+                Assert.IsInstanceOfType(e, typeof(CannotAddItemException<Unit>));
+            }
             Assert.IsTrue(_newShape.Units.Count() == 1);
             Assert.IsTrue(_newShape.Units.Contains(unit1, new UnitComparer()));
-            Assert.IsTrue(_newShape.Units.Contains(unit2, new UnitComparer()));
         }
 
         private Unit AssociateShapeWithUnit(Unit unit)
         {
+            _newShape = new Shape(new ShapeDto { Name = "infusievloeistof" });
             _newShape.AddUnit(unit);
             return unit;
         }
 
         private static Unit CreateUnit()
         {
-            return UnitFactory.CreateUnit((GetUnitDto()));
+            return new UnitCreator(GetUnitDto()).GetUnit();
         }
 
         private static UnitDto GetUnitDto()

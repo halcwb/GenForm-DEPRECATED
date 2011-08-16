@@ -5,8 +5,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Data
 {
     public class ProductDto: DataTransferObject<ProductDto, Guid>
     {
-        public int ProductId;
-        public string ProductName { get; set; }
         public string DisplayName;
         public string GenericName;
         public string BrandName;
@@ -17,7 +15,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Data
         public IEnumerable<ProductSubstanceDto> Substances = new List<ProductSubstanceDto>();
         public IEnumerable<RouteDto> Routes = new List<RouteDto>();
         public string ProductCode;
-
 
         public override ProductDto CloneDto()
         {

@@ -4,6 +4,7 @@ using FluentNHibernate.MappingModel;
 using FluentNHibernate.Testing;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
@@ -12,7 +13,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     /// Summary description for PackageMappingShould
     /// </summary>
     [TestClass]
-    public class PackageMapShould: MappingTests
+    public class PackageMapShould: TestSessionContext
     {
         private TestContext testContextInstance;
 
@@ -51,7 +52,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         #endregion
 
         [TestMethod]
-        public void CorrectlyMapPackageWithTwoShapes()
+        public void CorrectlyMapPackageWithOneShape()
         {
             new PersistenceSpecification<Package>(Context.CurrentSession())
                 .CheckProperty(b => b.Name, "ampul")
@@ -83,9 +84,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             return new DefaultableList<Shape>
                        {
-                           new Shape(new ShapeDto{ Name = "infusievloeistof"}),
-                           new Shape(new ShapeDto{ Name = "injectiewater"})
-                       };
+                           new Shape(new ShapeDto{ Name = "infusievloeistof"})                       };
         }
 
         private IEnumerable<Shape> GetDuplicateShapes()

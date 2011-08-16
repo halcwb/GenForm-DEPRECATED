@@ -64,10 +64,10 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         [TestMethod]
         public void NotChangeWhenDtoIsChanged()
         {
-            var dto = new ProductDto {ProductName = ProductName};
+            var dto = new ProductDto {Name = ProductName};
             var product = GetProduct(dto);
-            dto.ProductName = "Cannot be changed";
-            Assert.IsTrue(product.Name == ProductName, "product name was changed");
+            dto.Name = "Cannot be changed";
+            Assert.AreEqual(ProductName, product.Name, "product name was changed");
         }
 
         [TestMethod]
@@ -82,7 +82,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         {
             return new ProductDto
                        {
-                           ProductName = ProductName,
+                           Name = ProductName,
                            Substances = new List<ProductSubstanceDto>{new ProductSubstanceDto{Id = 1, Quantity = 500, SortOrder = 1, Substance = "dopamine", Unit = "mg"}}
                        };
 

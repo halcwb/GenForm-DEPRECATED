@@ -2,6 +2,7 @@
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
+using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 
@@ -11,7 +12,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     /// Summary description for SubstanceShould
     /// </summary>
     [TestClass]
-    public class SubstanceShould
+    public class SubstanceShould : TestSessionContext
     {
         private TestContext testContextInstance;
 
@@ -56,35 +57,26 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void BeAbleToCreateASessionToPersistSubstance()
         {
-            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
-            {
-                PersistSubstance(session, CreateTestSubstance());
-            }
+            PersistSubstance(Context.CurrentSession(), CreateTestSubstance());
         }
 
         [TestMethod]
         public void BeAbleToCreateASubstanceDirectlyFromSessionFactory()
         {
-            using (var session = SessionFactoryCreator.CreateSessionFactory().OpenSession())
-            {
-                PersistSubstance(session, CreateTestSubstance());
-            }
+            PersistSubstance(Context.CurrentSession(), CreateTestSubstance());
         }
 
         [TestMethod]
         public void BePersistedWithSubstanceGroup()
         {
 
-            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
-            {
                 var subst = DomainFactory.Create<ISubstance, SubstanceDto>(new SubstanceDto
                 {
                     SubstanceGroupName = "analgetica",
                     Name = "paracetamol"
                 });
 
-                PersistSubstance(session, subst);
-            }
+                PersistSubstance(Context.CurrentSession(), subst);
         }
 
         [TestMethod]
@@ -96,20 +88,12 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
                                                                                Name = "paracetamol"
                                                                            });
 
-            using (var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession())
-            {
-                PersistSubstance(session, subst);
-            }
+            PersistSubstance(Context.CurrentSession(), subst);
         }
 
         private static void PersistSubstance(ISession session, ISubstance subst)
         {
-            using (var trans = session.BeginTransaction())
-            {
-                session.SaveOrUpdate(subst);
-
-                trans.Rollback();
-            }
+            session.SaveOrUpdate(subst);
         }
 
         private static ISubstance CreateTestSubstance()

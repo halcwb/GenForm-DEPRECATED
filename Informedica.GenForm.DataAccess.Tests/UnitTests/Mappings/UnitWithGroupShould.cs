@@ -12,7 +12,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     /// Summary description for UnitWithGroupShould
     /// </summary>
     [TestClass]
-    public class UnitWithGroupShould
+    public class UnitWithGroupShould : TestSessionContext
     {
         private TestContext testContextInstance;
 
@@ -49,11 +49,6 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         // public void MyTestInitialize() { }
         //
         // Use TestCleanup to run code after each test has run
-        [TestCleanup]
-        public void MyTestCleanup()
-        {
-            DatabaseCleaner.CleanDataBase();
-        }
 
         #endregion
 
@@ -86,26 +81,17 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void BeAbleToPersistAUnit()
         {
-            using (var session = GenFormApplication.SessionFactory.OpenSession())
-            {
-                PersistUnit(session);
-            }
+            PersistUnit(Context.CurrentSession());
         }
 
         private static void PersistUnit(ISession session)
         {
             var unit = UnitFactory.CreateUnit(UnitTestFixtures.GetTestUnitMilligram());
 
-            using (var trans = session.BeginTransaction())
-            {
-                AssertUnitNameIsSet(unit);
-                AssertUnitGroupName(unit);
+            AssertUnitNameIsSet(unit);
+            AssertUnitGroupName(unit);
 
-                session.Save(unit);
-
-                trans.Rollback();
-            }
-
+            session.Save(unit);
         }
 
     }

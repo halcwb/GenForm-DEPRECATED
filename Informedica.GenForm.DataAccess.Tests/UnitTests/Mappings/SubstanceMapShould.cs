@@ -1,7 +1,7 @@
 ﻿using FluentNHibernate.Testing;
-using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
@@ -10,7 +10,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     /// Summary description for SubstanceMapShould
     /// </summary>
     [TestClass]
-    public class SubstanceMapShould : MappingTests
+    public class SubstanceMapShould : TestSessionContext
     {
         private TestContext testContextInstance;
 

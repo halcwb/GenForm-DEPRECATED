@@ -108,7 +108,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             isPopulated = isPopulated && _product.GenericName == _dto.GenericName;
             isPopulated = isPopulated && _product.Package.Name == _dto.PackageName;
             isPopulated = isPopulated && _product.ProductCode == _dto.ProductCode;
-            isPopulated = isPopulated && _product.Name == _dto.ProductName;
+            isPopulated = isPopulated && _product.Name == _dto.Name;
             isPopulated = isPopulated && _product.Quantity.Value == _dto.Quantity;
             isPopulated = isPopulated && _product.Shape.Name == _dto.ShapeName;
             isPopulated = isPopulated && _product.Quantity.Unit.Name == _dto.UnitName;
@@ -118,10 +118,10 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
                 var substance1 = substance;
                 isPopulated = isPopulated &&
                               _product.Substances.SingleOrDefault(s => 
-                                  substance1.Substance == s.Substance &&
+                                  substance1.Substance == s.Substance.Name &&
                                   substance1.SortOrder == s.SortOrder &&
-                                  substance1.Quantity == s.Quantity &&
-                                  substance1.Unit == s.Unit) != null;
+                                  substance1.Quantity == s.Quantity.Value &&
+                                  substance1.Unit == s.Quantity.Unit.Name) != null;
             }
 
             return isPopulated;

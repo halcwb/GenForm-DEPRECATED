@@ -80,7 +80,7 @@ namespace Informedica.GenForm.Assembler.Tests
         public void AspecificConstructorMethodForProduct()
         {
             const string productName = "dopamine Dynatra infusievloeistof 5 mL ampul";
-            var dto = new ProductDto{ ProductName = productName};
+            var dto = new ProductDto{ Name = productName};
             var product = ObjectFactory.With(dto).GetInstance<IProduct>();
             
             Assert.IsInstanceOfType(product, typeof(IProduct));

@@ -108,19 +108,19 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #region Factory
 
-        public static Unit CreateUnit(UnitDto dto)
+        public static Unit Create(UnitDto dto)
         {
-            return UnitFactory.CreateUnit(dto);
+            return new Unit(dto);
         }
 
-        public static Unit CreateUnit(UnitDto dto, UnitGroup group)
+        public static Unit Create(UnitDto dto, UnitGroup group)
         {
-            return UnitFactory.CreateUnit(dto, group);
+            return new Unit(dto, group);
         }
 
-        public static Unit CreateUnit(UnitDto dto, UnitGroupDto groupDto)
+        public static Unit Create(UnitDto dto, UnitGroupDto groupDto)
         {
-            return UnitFactory.CreateUnit(dto, groupDto);
+            return new Unit(dto, UnitGroupFactory.CreateUnitGroup(groupDto));
         }
 
         #endregion

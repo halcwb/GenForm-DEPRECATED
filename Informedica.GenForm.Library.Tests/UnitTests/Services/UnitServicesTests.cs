@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Informedica.GenForm.Assembler;
+﻿using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Assembler.Contexts;
-using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.Factories;
-using Informedica.GenForm.Library.Repositories;
+using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestContext = Microsoft.VisualStudio.TestTools.UnitTesting.TestContext;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 {
@@ -122,72 +118,6 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
                            Name = "milligram",
                            UnitGroupName = "massa"
                        };
-        }
-    }
-
-    public static class UnitServices
-    {
-        public static UnitCreator WithDto(UnitDto dto)
-        {
-            return new UnitCreator(dto);
-        }
-
-        public static Unit GetUnit(Guid id)
-        {
-            return Repository.SingleOrDefault(x => x.Id == id);
-        }
-
-        private static IEnumerable<Unit> Repository
-        {
-            get { return RepositoryFactory.Create<Unit, Guid, UnitDto>(); }
-        }
-
-
-    }
-
-    public class UnitCreator
-    {
-        private readonly UnitDto _dto;
-        private UnitGroupDto _groupDto;
-        private IRepository<Unit, Guid, UnitDto> _repository;
-
-        public UnitCreator(UnitDto dto)
-        {
-            _dto = dto;
-        }
-
-        public Unit GetUnit()
-        {
-            return FindUnit() ?? CreateUnit();
-        }
-
-        private Unit FindUnit()
-        {
-            return Repository.SingleOrDefault(x => x.Name == _dto.Name);
-        }
-
-        private IRepository<Unit, Guid, UnitDto> Repository
-        {
-            get { return _repository ?? (_repository = RepositoryFactory.Create<Unit, Guid, UnitDto>()); }
-        }
-
-        private Unit CreateUnit()
-        {
-            AddNewUnitToRepository();
-            return FindUnit();
-        }
-
-        private void AddNewUnitToRepository()
-        {
-            Repository.Add(_groupDto != null
-                               ? Unit.CreateUnit(_dto, _groupDto)
-                               : Unit.CreateUnit(_dto));
-        }
-
-        public UnitCreator AddToGroup(UnitGroupDto groupDto)
-        {
-            _groupDto = groupDto;
-            return this;
         }
     }
 }

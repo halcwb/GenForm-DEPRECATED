@@ -11,7 +11,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     /// Summary description for RouteMapShould
     /// </summary>
     [TestClass]
-    public class RouteMapShould : MappingTests
+    public class RouteMapShould : TestSessionContext
     {
         private TestContext testContextInstance;
 
