@@ -12,6 +12,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
             Id(x => x.Id).GeneratedBy.GuidComb();
             Map(x => x.Name).Not.Nullable().Unique().Length(255);
             Version(x => x.Version);
+            SelectBeforeUpdate();
         } 
     }
 }

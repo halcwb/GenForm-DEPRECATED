@@ -1,22 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.Factories;
-using StructureMap;
+using Informedica.GenForm.Library.DomainModel.Relations;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Unit : Entity<Guid, UnitDto>, IUnit
+    public class Unit : Entity<Guid, UnitDto>, IUnit, IRelationPart
     {
-        #region Private
-        
-        private UnitGroup _group;
-        private HashSet<Shape> _shapes = new HashSet<Shape>(new ShapeComparer());
-
-        #endregion
 
         #region Constructor
 
@@ -29,7 +20,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
                     AllowConversion = dto.AllowConversion,
                     Name = dto.UnitGroupName
                 });
-            group.AddUnit(this);
+            RelationManager.OneToMany<UnitGroup, Unit>().Add(group, this);
         }
 
         public Unit(UnitDto dto, UnitGroup group)
@@ -62,29 +53,8 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual UnitGroup UnitGroup
         {
-            get { return _group; }
-            protected set { _group = value; }
-        }
-
-        public virtual void AddShape(Shape shape)
-        {
-            shape.AddUnit(this, AddShapeToUnit);
-        }
-
-        private void AddShapeToUnit(Shape shape)
-        {
-            ShapeAssociation.AddShape(_shapes, shape);
-        }
-
-        public virtual bool CanNotAddShape(Shape shape)
-        {
-            return (shape == null || _shapes.Contains(shape, _shapes.Comparer));
-        }
-
-        public virtual IEnumerable<Shape> Shapes
-        {
-            get { return _shapes; }
-            protected set { _shapes = new HashSet<Shape>(value); }
+            get { return RelationProvider.UnitGroupUnit.GetOnePart(this); }
+            protected set { RelationProvider.UnitGroupUnit.Add(value, this); }
         }
 
         public virtual void ChangeUnitGroup(UnitGroup newGroup)
@@ -94,16 +64,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private void SetUnitGroup(UnitGroup newGroup)
         {
-            if (CannotChangeGroup(newGroup)) return;
-            var oldGroup = UnitGroup;
-            if (oldGroup != null) oldGroup.RemoveUnit(this);
-            UnitGroup = newGroup;
-            if (!UnitGroup.ContainsUnit(this)) UnitGroup.AddUnit(this);
-        }
+            RelationProvider.UnitGroupUnit.Add(newGroup, this);        }
 
         public virtual bool CannotChangeGroup(UnitGroup newGroup)
         {
-            if (_group == null) return false;
             return UnitGroup.Equals(newGroup, UnitGroup, new UnitGroupComparer());
         }
 
@@ -132,5 +96,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         }
 
         #endregion
+
+        internal protected virtual void RemoveFromGroup()
+        {
+            UnitGroup.RemoveUnit(this);
+        }
     }
 }

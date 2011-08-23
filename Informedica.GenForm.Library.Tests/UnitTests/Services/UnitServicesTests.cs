@@ -1,5 +1,5 @@
-﻿using Informedica.GenForm.Assembler;
-using Informedica.GenForm.Assembler.Contexts;
+﻿using System.Linq;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Services.Products;
@@ -15,7 +15,8 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
     public class UnitServicesTests : TestSessionContext
     {
         private TestContext testContextInstance;
-        private SessionContext _context;
+
+        public UnitServicesTests() : base(true) {}
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -70,6 +71,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatServicesGetsTheUnitFromTheRepositoryOnceItsAdded()
         {
+            Context.CurrentSession().SetBatchSize(2);
             var unit = UnitServices.WithDto(GetUnitDto()).AddToGroup(GetGroupDto()).Get();
             Assert.AreEqual(unit, UnitServices.GetUnit(unit.Id));
         }
@@ -81,6 +83,37 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
             var unit2 = UnitServices.WithDto(GetUnitDto()).Get();
 
             Assert.AreEqual(unit1, unit2);
+        }
+
+        [TestMethod]
+        public void ThatServicesCanBeQueriedUsingLinq()
+        {
+            var result = UnitServices.Units.Where(x => x.UnitGroup.Name == "massa");
+            Assert.IsTrue(result != null);
+        }
+
+        [TestMethod]
+        public void ThatServicesCanDeleteUnit()
+        {
+            var unit = UnitServices.WithDto(GetUnitDto()).Get();
+            UnitServices.Delete(unit);
+            Assert.IsNull(UnitServices.Units.SingleOrDefault(x => x.Name == GetUnitDto().Name));
+        }
+
+        [TestMethod]
+        public void ThatUnitGroupIsStillThereAfterUnitDelete()
+        {
+            var unit = UnitServices.WithDto(GetUnitDto()).Get();
+            UnitServices.Delete(unit);
+            Assert.IsNotNull(UnitGroupServices.UnitGroups.SingleOrDefault(x => x.Name == GetUnitDto().UnitGroupName));
+        }
+        
+        [TestMethod]
+        public void ThatAUnitGroupCanBeChanged()
+        {
+            var unit = UnitServices.WithDto(GetUnitDto()).Get();
+            unit.Name = "changed";
+            Assert.IsNotNull(UnitServices.Units.SingleOrDefault(x => x.Name == "changed"));
         }
 
         private UnitGroupDto GetGroupDto()

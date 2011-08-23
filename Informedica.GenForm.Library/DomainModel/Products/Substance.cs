@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
-using StructureMap;
+using Informedica.GenForm.Library.DomainModel.Relations;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Substance : Entity<Guid, SubstanceDto>, ISubstance
+    public class Substance : Entity<Guid, SubstanceDto>, ISubstance, IRelationPart
     {
-        private SubstanceGroup _group;
         private readonly HashSet<Product> _products = new HashSet<Product>(new ProductComparer());
 
         protected Substance(): base(new SubstanceDto()) {}
@@ -33,19 +32,17 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddToSubstanceGroup(SubstanceGroup group)
         {
-            group.AddSubstance(this, SetSubstanceGroup);           
-        }
-
-        private void SetSubstanceGroup(SubstanceGroup group)
-        {
-            if (_group != null) _group.Remove(this);
-            _group = group;
+            RelationProvider.SubstanceGroupSubstance.Add(group, this);
         }
 
         public virtual SubstanceGroup SubstanceGroup
         {
-            get { return _group; }
-            protected set { _group = value; }
+            get { return RelationProvider.SubstanceGroupSubstance.GetOnePart(this); }
+            protected set
+            {
+                RelationProvider.SubstanceGroupSubstance.Clear(this);
+                RelationProvider.SubstanceGroupSubstance.Add(value, this);
+            }
         }
 
         public virtual IEnumerable<Product> Products { get { return _products; } }
@@ -63,6 +60,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public static Substance Create(SubstanceDto dto, SubstanceGroup substanceGroup)
         {
             var substance = new Substance(dto);
+            if (substanceGroup == null) return substance;
             substance.AddToSubstanceGroup(substanceGroup);
             return substance;
         }
@@ -70,6 +68,11 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         internal protected virtual void AddProduct(Product product)
         {
             _products.Add(product);
+        }
+
+        public virtual void RemoveFromSubstanceGroup()
+        {
+            RelationProvider.SubstanceGroupSubstance.Remove(SubstanceGroup, this);
         }
     }
 }

@@ -4,9 +4,9 @@ using FluentNHibernate.MappingModel;
 using FluentNHibernate.Testing;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NHibernate;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 {
@@ -17,6 +17,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     public class PackageMapShould: TestSessionContext
     {
         private TestContext testContextInstance;
+
+        public PackageMapShould() : base(true) {}
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -51,6 +53,16 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         // Use TestCleanup to run code after each test has run
 
         #endregion
+
+        [TestMethod]
+        public void CorrectlyMapPackage()
+        {
+            new PersistenceSpecification<Package>(Context.CurrentSession())
+                .CheckProperty(b => b.Name, "ampul")
+                .CheckProperty(p => p.Abbreviation, "amp")
+                .VerifyTheMappings();
+            
+        }
 
         [TestMethod]
         public void CorrectlyMapPackageWithOneShape()

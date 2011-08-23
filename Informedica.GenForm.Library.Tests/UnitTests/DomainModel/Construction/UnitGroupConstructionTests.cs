@@ -66,7 +66,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         [TestMethod]
         public void ThatAValidUnitGroupCanBeCreated()
         {
-            var group = UnitGroup.Create(UnitGroupTestFixtures.ValidDto());
+            var group = UnitGroup.Create(UnitGroupTestFixtures.GetDtoVolume());
             Assert.IsTrue(UnitGroupIsValid(group));
         }
 

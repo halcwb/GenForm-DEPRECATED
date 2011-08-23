@@ -9,13 +9,13 @@ namespace Informedica.GenForm.Library.DomainModel.Data
         public ShapeDto()
         {
             Packages = new List<PackageDto>();
-            Units = new List<UnitDto>();
+            UnitGroups = new List<UnitGroupDto>();
             Routes = new List<RouteDto>();
         }
 
         public IEnumerable<PackageDto> Packages { get; set; }
 
-        public IEnumerable<UnitDto> Units { get; set; }
+        public IEnumerable<UnitGroupDto> UnitGroups { get; set; }
 
         public IEnumerable<RouteDto> Routes { get; set; }
 

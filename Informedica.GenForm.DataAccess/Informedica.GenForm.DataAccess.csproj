@@ -66,6 +66,7 @@
     <Compile Include="Mappings\UnitGroupMap.cs" />
     <Compile Include="Mappings\UnitMap.cs" />
     <Compile Include="Mappings\UnitValueMap.cs" />
+    <Compile Include="Repositories\BrandRepository.cs" />
     <Compile Include="Repositories\Delegates\BrandDelegates.cs" />
     <Compile Include="Repositories\Delegates\GenericDelegates.cs" />
     <Compile Include="Repositories\Delegates\PackageDelegates.cs" />
@@ -79,9 +80,15 @@
     <Compile Include="Repositories\Insert.cs" />
     <Compile Include="Repositories\NHibernateBase.cs" />
     <Compile Include="Repositories\NHibernateRepository.cs" />
+    <Compile Include="Repositories\PackageRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\RepositoryDelegates.cs" />
+    <Compile Include="Repositories\RouteRepository.cs" />
     <Compile Include="Repositories\SelectorOfInt.cs" />
     <Compile Include="Repositories\SelectorOfString.cs" />
+    <Compile Include="Repositories\ShapeRepository.cs" />
+    <Compile Include="Repositories\SubstanceGroupRepository.cs" />
+    <Compile Include="Repositories\SubstanceRepository.cs" />
     <Compile Include="Repositories\UnitGroupRepository.cs" />
     <Compile Include="Repositories\UnitRepository.cs" />
     <Compile Include="Repositories\Update.cs" />

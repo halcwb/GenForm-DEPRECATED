@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
-using Informedica.GenForm.Library.DomainModel.Products;
+﻿using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests.Fixtures;
+using Informedica.GenForm.Tests.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
@@ -56,163 +55,96 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         public void ThatAValidProductCanBeConstructed()
         {
             var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductIsValid(product));
-        }
-
-        private bool ProductIsValid(Product product)
-        {
-            return !String.IsNullOrWhiteSpace(product.Name) &&
-                   !String.IsNullOrWhiteSpace(product.GenericName) &&
-                   !String.IsNullOrWhiteSpace(product.DisplayName) &&
-                   !String.IsNullOrWhiteSpace(product.ProductCode);
+            Assert.IsTrue(ProductChecker.ProductIsValid(product));
         }
 
         [TestMethod]
         public void ThatAValidProductWithBrandCanBeConstructed()
         {
             var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductIsValid(product) && ProductHasBrand(product));
+            Assert.IsTrue(ProductChecker.ProductIsValid(product) && 
+                          ProductChecker.ProductHasBrand(product));
         }
-
-        private bool ProductHasBrand(Product product)
-        {
-            return product.Brand != null &&
-                   !String.IsNullOrWhiteSpace(product.Brand.Name) &&
-                   product.Brand.Products.Contains(product);
-        }
-
 
         [TestMethod]
         public void ThatAValidProductWithShapeCanBeConstructed()
         {
             var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductIsValid(product) && ProductHasBrand(product) && ProductHasShape(product));
-        }
-
-        private bool ProductHasShape(Product product)
-        {
-            return product.Shape != null &&
-                   !String.IsNullOrWhiteSpace(product.Shape.Name) &&
-                   product.Shape.Products.Contains(product);
+            Assert.IsTrue(ProductChecker.ProductIsValid(product) && ProductChecker.ProductHasBrand(product) && ProductChecker.ProductHasShape(product));
         }
 
         [TestMethod]
         public void ThatAValidProductWithPackageCanBeConstructed()
         {
             var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductIsValid(product) && 
-                          ProductHasBrand(product) && 
-                          ProductHasShape(product) && 
-                          ProductHasPackage(product));
-        }
-
-        private bool ProductHasPackage(Product product)
-        {
-            return product.Package != null &&
-                   !String.IsNullOrWhiteSpace(product.Package.Name) &&
-                   product.Package.Products.Contains(product);
+            Assert.IsTrue(ProductChecker.ProductIsValid(product) && 
+                          ProductChecker.ProductHasBrand(product) && 
+                          ProductChecker.ProductHasShape(product) && 
+                          ProductChecker.ProductHasPackage(product));
         }
 
         [TestMethod]
         public void ThatAValidProductAssociatesShapeWithPackage()
         {
             var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductIsValid(product) &&
-                          ProductHasBrand(product) &&
-                          ProductHasShape(product) &&
-                          ProductHasPackage(product) &&
-                          ProductAssociatesShapeWithPackage(product));
-        }
-
-        private bool ProductAssociatesShapeWithPackage(Product product)
-        {
-            return product.Shape.Packages.Contains(product.Package);
+            Assert.IsTrue(ProductChecker.ProductIsValid(product) &&
+                          ProductChecker.ProductHasBrand(product) &&
+                          ProductChecker.ProductHasShape(product) &&
+                          ProductChecker.ProductHasPackage(product) &&
+                          ProductChecker.ProductAssociatesShapeWithPackage(product));
         }
 
         [TestMethod]
         public void ThatAValidProductWithUnitValueCanBeConstructed()
         {
             var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductIsValid(product) &&
-                          ProductHasBrand(product) &&
-                          ProductHasShape(product) &&
-                          ProductHasPackage(product) &&
-                          ProductHasUnitValue(product));
-        }
-
-        private bool ProductHasUnitValue(Product product)
-        {
-            return product.Quantity != null &&
-                   product.Quantity.Value > 0 && 
-                   product.Quantity.Unit != null &&
-                   !String.IsNullOrWhiteSpace(product.Quantity.Unit.Name);
+            Assert.IsTrue(ProductChecker.ProductIsValid(product) &&
+                          ProductChecker.ProductHasBrand(product) &&
+                          ProductChecker.ProductHasShape(product) &&
+                          ProductChecker.ProductHasPackage(product) &&
+                          ProductChecker.ProductHasUnitValue(product));
         }
 
         [TestMethod]
         public void ThatAValidProductAssociatesShapeWithUnit()
         {
             var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductIsValid(product) &&
-                          ProductHasBrand(product) &&
-                          ProductHasShape(product) &&
-                          ProductHasPackage(product) &&
-                          ProductAssociatesShapeWithPackage(product) &&
-                          ProductHasUnitValue(product) && 
-                          ProductAssociatesShapeWithUnit(product));
-        }
-
-        private bool ProductAssociatesShapeWithUnit(Product product)
-        {
-            return product.Shape.Units.Contains(product.Quantity.Unit);
+            Assert.IsTrue(ProductChecker.ProductIsValid(product) &&
+                          ProductChecker.ProductHasBrand(product) &&
+                          ProductChecker.ProductHasShape(product) &&
+                          ProductChecker.ProductHasPackage(product) &&
+                          ProductChecker.ProductAssociatesShapeWithPackage(product) &&
+                          ProductChecker.ProductHasUnitValue(product) && 
+                          ProductChecker.ProductAssociatesShapeWithUnitGroup(product));
         }
 
         [TestMethod]
         public void ThatAValidProductWithProductSubstanceCanBeConstructed()
         {
             var product = Product.Create(ProductTestFixtures.GetProductDtoWithOneSubstance());
-            Assert.IsTrue(ProductIsValid(product) &&
-                          ProductHasBrand(product) &&
-                          ProductHasShape(product) &&
-                          ProductHasPackage(product) &&
-                          ProductAssociatesShapeWithPackage(product) &&
-                          ProductHasUnitValue(product) &&
-                          ProductAssociatesShapeWithUnit(product) &&
-                          ProductHasProductSubstance(product));
-        }
-
-        private bool ProductHasProductSubstance(Product product)
-        {
-            return product.Substances.Count() > 0 &&
-                   product.Substances.First().SortOrder > 0 &&
-                   product.Substances.First().Substance != null &&
-                   product.Substances.First().Substance.Products.Contains(product) &&
-                   product.Substances.First().Quantity != null &&
-                   product.Substances.First().Quantity.Value > 0 &&
-                   !String.IsNullOrWhiteSpace(product.Substances.First().Quantity.Unit.Name);
+            Assert.IsTrue(ProductChecker.ProductIsValid(product) &&
+                          ProductChecker.ProductHasBrand(product) &&
+                          ProductChecker.ProductHasShape(product) &&
+                          ProductChecker.ProductHasPackage(product) &&
+                          ProductChecker.ProductAssociatesShapeWithPackage(product) &&
+                          ProductChecker.ProductHasUnitValue(product) &&
+                          ProductChecker.ProductAssociatesShapeWithUnitGroup(product) &&
+                          ProductChecker.ProductHasProductSubstance(product));
         }
 
         [TestMethod]
         public void ThatAValidProductWithRoutesCanBeConstructed()
         {
             var product = Product.Create(ProductTestFixtures.GetProductDtoWithOneSubstanceAndRoutes());
-            Assert.IsTrue(ProductIsValid(product) &&
-                          ProductHasBrand(product) &&
-                          ProductHasShape(product) &&
-                          ProductHasPackage(product) &&
-                          ProductAssociatesShapeWithPackage(product) &&
-                          ProductHasUnitValue(product) &&
-                          ProductAssociatesShapeWithUnit(product) &&
-                          ProductHasProductSubstance(product) && 
-                          ProductHasRoutes(product));
-        }
-
-        private bool ProductHasRoutes(Product product)
-        {
-            return product.Routes.Count() > 0 && 
-                   !String.IsNullOrWhiteSpace(product.Routes.First().Name) &&
-                   !String.IsNullOrWhiteSpace(product.Routes.First().Abbreviation) &&
-                   product.Routes.First().Products.Contains(product) &&
-                   product.Routes.Last().Products.Contains(product);
+            Assert.IsTrue(ProductChecker.ProductIsValid(product) &&
+                          ProductChecker.ProductHasBrand(product) &&
+                          ProductChecker.ProductHasShape(product) &&
+                          ProductChecker.ProductHasPackage(product) &&
+                          ProductChecker.ProductAssociatesShapeWithPackage(product) &&
+                          ProductChecker.ProductHasUnitValue(product) &&
+                          ProductChecker.ProductAssociatesShapeWithUnitGroup(product) &&
+                          ProductChecker.ProductHasProductSubstance(product) && 
+                          ProductChecker.ProductHasRoutes(product));
         }
     }
 }

@@ -2,7 +2,6 @@
 using FluentNHibernate.Testing;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,6 +14,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     public class RouteMapShould : TestSessionContext
     {
         private TestContext testContextInstance;
+
+        public RouteMapShould() : base(false) {}
 
         /// <summary>
         ///Gets or sets the test context which provides

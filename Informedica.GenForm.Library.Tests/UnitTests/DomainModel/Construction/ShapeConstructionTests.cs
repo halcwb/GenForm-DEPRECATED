@@ -88,17 +88,17 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         }
 
         [TestMethod]
-        public void AValidShapeWithUnitsCanBeConstructed()
+        public void AValidShapeWithTwoUnitGroupsCanBeConstructed()
         {
-            var shape = Shape.Create(ShapeTestFixtures.GetValidDtoWithUnits());
-            Assert.IsTrue(ShapeIsValid(shape) && ShapeContainsPackages(shape) && ShapeContainsRoutes(shape) && ShapeContainsUnits(shape));
+            var shape = Shape.Create(ShapeTestFixtures.GetValidDtoWithUnitGroups());
+            Assert.IsTrue(ShapeIsValid(shape) && ShapeContainsPackages(shape) && ShapeContainsRoutes(shape) && ShapeContainsUnitGroups(shape));
         }
 
-        private bool ShapeContainsUnits(Shape shape)
+        private bool ShapeContainsUnitGroups(Shape shape)
         {
-            return shape.Units.Count() == 2 &&
-                   shape.Units.First().Shapes.Contains(shape) &&
-                   shape.Units.Last().Shapes.Contains(shape);
+            return shape.UnitGroups.Count() == 2 &&
+                   shape.UnitGroups.First().Shapes.Contains(shape) &&
+                   shape.UnitGroups.Last().Shapes.Contains(shape);
         }
 
         private bool ShapeIsValid(Shape shape)

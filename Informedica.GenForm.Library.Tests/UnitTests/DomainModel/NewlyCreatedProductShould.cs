@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
@@ -15,13 +13,6 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
     [TestClass]
     public class NewlyCreatedProductShould: ProductTestBase
     {
-        public NewlyCreatedProductShould()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         private TestContext testContextInstance;
 
         /// <summary>
@@ -45,7 +36,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
         
         // Use ClassCleanup to run code after all tests in a class have run
@@ -84,7 +75,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             return new ProductDto
                        {
                            Name = ProductName,
-                           Substances = new List<ProductSubstanceDto>{new ProductSubstanceDto{Id = 1, Quantity = 500, SortOrder = 1, Substance = "dopamine", UnitName = "mg"}}
+                           Substances = new List<ProductSubstanceDto>{new ProductSubstanceDto{Id = Guid.Empty, Quantity = 500, SortOrder = 1, Substance = "dopamine", UnitName = "mg"}}
                        };
 
         }

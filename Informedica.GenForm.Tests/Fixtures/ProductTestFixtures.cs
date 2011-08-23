@@ -28,7 +28,6 @@ namespace Informedica.GenForm.Tests.Fixtures
         {
             return new ProductDto
             {
-                Id = Guid.Empty,
                 Name = ProductName,
                 BrandName = Brand,
                 DisplayName = DisplayName,
@@ -38,10 +37,10 @@ namespace Informedica.GenForm.Tests.Fixtures
                 Quantity = ProductQuantity,
                 ShapeName = Shape,
                 UnitName = ProductUnit,
-                UnitAbbreviation = "mg",
+                UnitAbbreviation = "mL",
                 UnitDivisor = 1000M,
                 UnitGroupAllowConversion = true,
-                UnitGroupName = "massa",
+                UnitGroupName = "volume",
                 UnitIsReference = false,
                 UnitMultiplier = 0.001M
             };
@@ -79,7 +78,7 @@ namespace Informedica.GenForm.Tests.Fixtures
                                      dto.Substances.First(),
                                      new ProductSubstanceDto
                                          {
-                                             Id = 0,
+                                             Id = Guid.Empty,
                                              Quantity = 5,
                                              SortOrder = 2,
                                              Substance = "water",
@@ -125,11 +124,22 @@ namespace Informedica.GenForm.Tests.Fixtures
         public static ProductDto GetProductDtoWithOneSubstanceAndRoutes()
         {
             var dto = GetProductDtoWithOneSubstance();
-            dto.Routes = new List<RouteDto> 
+            AddOneRoute(dto);
+            return dto;
+        }
+
+        private static void AddOneRoute(ProductDto dto)
+        {
+            dto.Routes = new List<RouteDto>
                              {
-                                 new RouteDto {Abbreviation = "iv", Name = "intraveneus"},
-                                 new RouteDto {Abbreviation = "or", Name = "oraal"}
+                                 new RouteDto {Abbreviation = "iv", Name = "intraveneus"}
                              };
+        }
+
+        public static ProductDto GetProductWithOneRoute()
+        {
+            var dto = GetProductDtoWithNoSubstances();
+            AddOneRoute(dto);
             return dto;
         }
     }

@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Equality;
-using Informedica.GenForm.Library.Exceptions;
+using Informedica.GenForm.Library.DomainModel.Relations;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Route: Entity<Guid, RouteDto>
+    public class Route: Entity<Guid, RouteDto>, IRelationPart
     {
-        private HashSet<Shape> _shapes = new HashSet<Shape>(new ShapeComparer());
-        private HashSet<Product> _products = new HashSet<Product>(new ProductComparer());
-
         protected Route() : base(new RouteDto()){}
 
         private Route(RouteDto dto) : base(dto.CloneDto())
@@ -29,12 +24,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddShape(Shape shape)
         {
-            shape.AddRoute(this, AddShapeToRoute);
-        }
-
-        private void AddShapeToRoute(Shape shape)
-        {
-            ShapeAssociation.AddShape(_shapes, shape);
+            RelationProvider.ShapeRoute.Add(shape, this);
         }
 
         public virtual bool CanNotAddShape(Shape shape)
@@ -50,8 +40,8 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual IEnumerable<Shape> Shapes
         {
-            get { return _shapes  ?? (_shapes = new HashSet<Shape>()); }
-            protected set { _shapes = new HashSet<Shape>(value, new ShapeComparer()); }
+            get { return RelationProvider.ShapeRoute.GetManyPartLeft(this); }
+            protected set { RelationProvider.ShapeRoute.Add(value, this); }
         }
 
         private string CreateAbbreviationFromName()
@@ -67,25 +57,23 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual IEnumerable<Product> Products
         {
-            get { return _products; }
-            protected set { _products = new HashSet<Product>(value, new ProductComparer());}
-        }
-
-        internal protected virtual void AddProduct(Product product)
-        {
-            if (_products.Contains(product, _products.Comparer)) throw new CannotAddItemException<Product>(product);
-            _products.Add(product);
-        }
-
-        internal protected virtual void RemoveProduct(Product product)
-        {
-            if (!_products.Contains(product)) throw new CannotRemoveItemException<Product>(product);
-            _products.Remove(product);
+            get { return RelationProvider.RouteProduct.GetManyPartRight(this); }
+            protected set { RelationProvider.RouteProduct.Add(this, value);}
         }
 
         public static Route Create(RouteDto dto)
         {
             return new Route(dto);
+        }
+
+        internal protected  virtual void RemoveAllShapes()
+        {
+            RelationProvider.ShapeRoute.Clear(this);
+        }
+
+        public virtual void RemoveShape(Shape shape)
+        {
+            RelationProvider.ShapeRoute.Remove(shape, this);
         }
     }
 }

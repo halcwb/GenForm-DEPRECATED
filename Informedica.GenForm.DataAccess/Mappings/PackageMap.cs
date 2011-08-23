@@ -1,7 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.DataAccess.Mappings
 {
@@ -11,6 +10,8 @@ namespace Informedica.GenForm.DataAccess.Mappings
         {
             Map(p => p.Abbreviation).Not.Nullable().Length(30).Unique();
             HasManyToMany(p => p.Shapes)
+                // Fetch.Join will raise laizy collection load error
+                .Fetch.Select()
                 .AsSet()
                 .Inverse()
                 .Cascade.All();

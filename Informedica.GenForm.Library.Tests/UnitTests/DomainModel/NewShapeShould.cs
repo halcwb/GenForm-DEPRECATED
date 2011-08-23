@@ -4,7 +4,6 @@ using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -134,59 +133,54 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         [TestMethod]
         public void BeAbleToAssociateWithUnit()
         {
-            var unit = AssociateShapeWithUnit(CreateUnit());
+            var unitGroup = AssociateShapeWithUnit(CreateUnitGroup());
 
-            Assert.IsTrue(_newShape.Units.Contains(unit));
-            Assert.IsTrue(_newShape.Units.Count() == 1);
+            Assert.IsTrue(_newShape.UnitGroups.Contains(unitGroup));
+            Assert.IsTrue(_newShape.UnitGroups.Count() == 1);
         }
 
         [TestMethod]
-        public void WillNotAddSameUnitTwice()
+        public void WillNotAddSameUnitGroupTwice()
         {
-            var unit1 = AssociateShapeWithUnit(CreateUnit());
+            var group1 = AssociateShapeWithUnit(CreateUnitGroup());
             try
             {
-                AssociateShapeWithUnit(CreateUnit());
+                AssociateShapeWithUnit(CreateUnitGroup());
 
             }
             catch (Exception e)
             {
                 Assert.IsInstanceOfType(e, typeof(CannotAddItemException<Unit>));
             }
-            Assert.IsTrue(_newShape.Units.Count() == 1);
-            Assert.IsTrue(_newShape.Units.Contains(unit1, new UnitComparer()));
+            Assert.IsTrue(_newShape.UnitGroups.Count() == 1);
+            Assert.IsTrue(_newShape.UnitGroups.Contains(group1, new UnitGroupComparer()));
         }
 
-        private Unit AssociateShapeWithUnit(Unit unit)
+        private UnitGroup AssociateShapeWithUnit(UnitGroup unitGroup)
         {
             _newShape = Shape.Create(new ShapeDto { Name = "infusievloeistof" });
-            _newShape.AddUnit(unit);
-            return unit;
+            _newShape.AddUnitGroup(unitGroup);
+            return unitGroup;
         }
 
-        private static Unit CreateUnit()
+        private static UnitGroup CreateUnitGroup()
         {
-            return Unit.Create(GetUnitDto());
+            return UnitGroup.Create(GetUnitGroupDto());
         }
 
-        private static UnitDto GetUnitDto()
+        private static UnitGroupDto GetUnitGroupDto()
         {
-            return new UnitDto
+            return new UnitGroupDto
                        {
-                           Abbreviation = "ml",
                            AllowConversion = true,
-                           Divisor = 1000,
-                           IsReference = false,
-                           Multiplier = (Decimal)0.001,
-                           Name = "milliliter",
-                           UnitGroupName = "volume"
+                           Name = "massa"
                        };
         }
 
         [TestMethod]
         public void HaveUnitWithShapeAssociatedWithThatUnit()
         {
-            var unit = AssociateShapeWithUnit(CreateUnit());
+            var unit = AssociateShapeWithUnit(CreateUnitGroup());
             Assert.IsTrue(unit.Shapes.Contains(_newShape, new ShapeComparer()));
         }
     }

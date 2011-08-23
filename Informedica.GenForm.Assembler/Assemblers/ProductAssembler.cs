@@ -1,5 +1,4 @@
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Services.Products;
 using StructureMap.Configuration.DSL;
 
 namespace Informedica.GenForm.Assembler.Assemblers
@@ -13,7 +12,6 @@ namespace Informedica.GenForm.Assembler.Assemblers
             _registry = new Registry();
 
             _registry.For<IProduct>().Use<Product>();
-            _registry.For<IProductServices>().Use<ProductServices>();
             _registry.For<IBrand>().Use<Brand>();
             _registry.For<IGeneric>().Use<Generic>();
             _registry.For<ISubstance>().Use<Substance>();

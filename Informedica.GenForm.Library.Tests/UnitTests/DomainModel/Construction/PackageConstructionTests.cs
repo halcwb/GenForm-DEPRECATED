@@ -1,6 +1,6 @@
 ﻿using System;
-using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
@@ -62,18 +62,6 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         {
             return !String.IsNullOrWhiteSpace(package.Name) &&
                    !String.IsNullOrWhiteSpace(package.Abbreviation);
-        }
-    }
-
-    public static class PackageTestFixtures
-    {
-        public static PackageDto GetValidDto()
-        {
-            return new PackageDto
-                       {
-                           Abbreviation = "ampul",
-                           Name = "ampul"
-                       };
         }
     }
 }

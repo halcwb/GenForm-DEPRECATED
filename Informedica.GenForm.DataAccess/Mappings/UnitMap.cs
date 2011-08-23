@@ -15,10 +15,6 @@ namespace Informedica.GenForm.DataAccess.Mappings
                 .Cascade
                 .SaveUpdate()
                 .Not.Nullable();
-            HasManyToMany(x => x.Shapes)
-                .AsSet()    
-                .Inverse()
-                .Cascade.All();
         }
     }
 }

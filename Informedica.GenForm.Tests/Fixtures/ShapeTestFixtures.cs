@@ -38,13 +38,13 @@ namespace Informedica.GenForm.Tests.Fixtures
             return dto;
         }
 
-        public static ShapeDto GetValidDtoWithUnits()
+        public static ShapeDto GetValidDtoWithUnitGroups()
         {
             var dto = GetValidDtoWithRoutes();
-            dto.Units = new List<UnitDto>
+            dto.UnitGroups = new List<UnitGroupDto>
                             {
-                                UnitTestFixtures.GetTestUnitMilligram(),
-                                new UnitDto{ Abbreviation = "mL", AllowConversion = true, Divisor = 1000, IsReference = false, Name = "milliliter", Multiplier = 0.001M, UnitGroupName = "volume"}
+                                UnitGroupTestFixtures.GetDtoVolume(),
+                                UnitGroupTestFixtures.GetDtoMass()
                             };
             return dto;
         }

@@ -19,11 +19,12 @@ namespace Informedica.GenForm.Assembler.Contexts
             {}
             finally
             {
-                CurrentSessionContext.Bind(GenFormApplication.SessionFactory.OpenSession());
-            }
+                var session = GenFormApplication.SessionFactory.OpenSession();
+                CurrentSessionContext.Bind(session);
+            } 
         }
 
-        public void Dispose()
+        public void Dispose() 
         {
             DisposeSession();
         }

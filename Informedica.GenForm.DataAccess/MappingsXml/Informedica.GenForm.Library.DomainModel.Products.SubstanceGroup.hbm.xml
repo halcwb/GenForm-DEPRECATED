@@ -1,5 +1,5 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Products.SubstanceGroup, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`SubstanceGroup`">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Products.SubstanceGroup, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`SubstanceGroup`" select-before-update="true">
     <id name="Id" type="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Id" />
       <generator class="guid.comb" />
@@ -7,7 +7,7 @@
     <version name="Version" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Version" />
     </version>
-    <set cascade="save-update" name="Substances">
+    <set inverse="true" name="Substances">
       <key>
         <column name="SubstanceGroup_id" />
       </key>

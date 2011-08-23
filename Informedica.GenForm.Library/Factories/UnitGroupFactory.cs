@@ -12,7 +12,7 @@ namespace Informedica.GenForm.Library.Factories
         {
             var group = UnitGroup.Create(Dto);
             Add(group);
-            return Find();
+            return group;
         }
     }
 }

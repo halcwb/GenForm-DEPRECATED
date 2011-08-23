@@ -1,5 +1,5 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Products.UnitGroup, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`UnitGroup`">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Products.UnitGroup, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`UnitGroup`" select-before-update="true">
     <id name="Id" type="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Id" />
       <generator class="guid.comb" />
@@ -12,6 +12,14 @@
         <column name="UnitGroup_id" />
       </key>
       <one-to-many class="Informedica.GenForm.Library.DomainModel.Products.Unit, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    </set>
+    <set cascade="all" fetch="join" inverse="true" name="Shapes" table="ShapesToUnitGroups">
+      <key>
+        <column name="UnitGroup_id" />
+      </key>
+      <many-to-many class="Informedica.GenForm.Library.DomainModel.Products.Shape, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <column name="Shape_id" />
+      </many-to-many>
     </set>
     <property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Name" length="255" not-null="true" unique="true" />

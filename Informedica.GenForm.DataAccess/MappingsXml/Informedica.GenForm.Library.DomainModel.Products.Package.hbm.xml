@@ -1,5 +1,5 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Products.Package, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`Package`">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Products.Package, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`Package`" select-before-update="true">
     <id name="Id" type="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Id" />
       <generator class="guid.comb" />
@@ -7,7 +7,7 @@
     <version name="Version" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Version" />
     </version>
-    <set cascade="all" inverse="true" name="Shapes" table="PackagesToShapes">
+    <set cascade="all" fetch="select" inverse="true" name="Shapes" table="PackagesToShapes">
       <key>
         <column name="Package_id" />
       </key>

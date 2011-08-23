@@ -1,8 +1,10 @@
-﻿namespace Informedica.GenForm.Library.DomainModel.Data
+﻿using System;
+
+namespace Informedica.GenForm.Library.DomainModel.Data
 {
-    public class ProductSubstanceDto
+    public class ProductSubstanceDto : DataTransferObject<ProductSubstanceDto, Guid>
     {
-        public int Id;
+        public Guid Id;
         public int SortOrder;
         public string Substance;
         public decimal Quantity;
@@ -13,5 +15,10 @@
         public decimal UnitMultiplier;
         public decimal UnitDivisor;
         public bool UnitIsReference;
+
+        public override ProductSubstanceDto CloneDto()
+        {
+            return CreateClone();
+        }
     }
 }
