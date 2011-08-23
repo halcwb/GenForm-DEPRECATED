@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Relations;
 using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Shape: Entity<Guid, ShapeDto>, IShape
+    public class Shape: Entity<Guid, ShapeDto>, IShape, IRelationPart
     {
         private HashSet<Package> _packages = new HashSet<Package>(new PackageComparer());
-        private HashSet<Unit> _units = new HashSet<Unit>(new UnitComparer());
+        private HashSet<UnitGroup> _unitGroups = new HashSet<UnitGroup>(new UnitGroupComparer());
         private HashSet<Route> _routes = new HashSet<Route>(new RouteComparer());
-        private readonly HashSet<Product> _products = new HashSet<Product>(new ProductComparer());
 
         #region Implementation of IShape
 
@@ -21,7 +21,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         private Shape(ShapeDto dto) : base(dto.CloneDto())
         {
             AddPackages();
-            AddUnits();
+            AddUnitGroups();
             AddRoutes();
         }
 
@@ -35,7 +35,8 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddRoute(Route route)
         {
-            route.AddShape(this);
+            RelationProvider.ShapeRoute.Add(this, route);
+            //route.AddShape(this);
         }
 
         protected internal virtual void AddRoute(Route route, Action<Shape> addShapeToRoute)
@@ -59,42 +60,28 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             }
         }
 
-        private void AddUnits()
+        private void AddUnitGroups()
         {
-            foreach (var unit in Dto.Units)
+            foreach (var dto in Dto.UnitGroups)
             {
-                AddUnit(Unit.Create(unit));
+                AddUnitGroup(UnitGroup.Create(dto));
             }
         }
 
-        public virtual void AddUnit(Unit unit)
+        public virtual void AddUnitGroup(UnitGroup group)
         {
-            unit.AddShape(this);
+            RelationProvider.ShapeUnitGroup.Add(this, group);
         }
 
-        protected internal virtual void AddUnit(Unit unit, Action<Shape> addShapeToUnit)
+        public virtual bool CanNotAddUnitGroup(UnitGroup unitGroup)
         {
-            if (_units.Contains(unit, _units.Comparer)) throw new CannotAddItemException<Unit>(unit);
-            _units.Add(unit);
-            addShapeToUnit(this);
-        }
-
-        public virtual bool CanNotAddUnit(Unit unit)
-        {
-            if (unit == null) return true;
-            return _units.Contains(unit, _units.Comparer);
+            if (unitGroup == null) return true;
+            return _unitGroups.Contains(unitGroup, _unitGroups.Comparer);
         }
 
         public virtual void AddPackage(Package package)
         {
-            package.AddShape(this);
-        }
-
-        protected internal virtual void AddPackage(Package package, Action<Shape> addShapeToPackage)
-        {
-            if (_packages.Contains(package, new PackageComparer())) throw new CannotAddItemException<Package>(package);
-            _packages.Add(package);
-            addShapeToPackage(this);
+            RelationProvider.ShapePackage.Add(this, package);
         }
 
         public virtual bool CanNotAddPackage(Package package)
@@ -105,25 +92,25 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual IEnumerable<Package> Packages
         {
-            get { return _packages; }
-            protected set { _packages = new HashSet<Package>(value); }
+            get { return RelationProvider.ShapePackage.GetManyPartRight(this); }
+            protected set { RelationProvider.ShapePackage.Add(this, value); }
         }
 
-        public virtual IEnumerable<Unit> Units
+        public virtual IEnumerable<UnitGroup> UnitGroups
         {
-            get { return _units; }
-            protected set { _units = new HashSet<Unit>(value); }
+            get { return RelationProvider.ShapeUnitGroup.GetManyPartRight(this); }
+            protected set { RelationProvider.ShapeUnitGroup.Add(this, value); }
         }
 
         public virtual IEnumerable<Route> Routes
         {
-            get { return _routes; }
-            protected set { _routes = new HashSet<Route>(value); }
+            get { return RelationProvider.ShapeRoute.GetManyPartRight(this); }
+            protected set { RelationProvider.ShapeRoute.Add(this, value); }
         }
 
         public virtual IEnumerable<Product> Products
         {
-            get { return _products; }
+            get { return RelationProvider.ShapeProduct.GetManyPart(this); }
         }
 
         #endregion
@@ -135,7 +122,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void RemovePackage(Package package)
         {
-            _packages.Remove(package);
+            RelationProvider.ShapePackage.Remove(this, package);
         }
 
         public static Shape Create(ShapeDto dto)
@@ -143,19 +130,31 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return new Shape(dto);
         }
 
-        internal protected virtual void AddProduct(Product product)
+        internal protected virtual void RemoveAllAssociations()
         {
-            product.SetShape(this, AddProductToShape);
+            RemoveAllPackages();
+            RemoveAllUnitGroups();
+            RemoveAllRoutes();
         }
 
-        private void AddProductToShape(Product product)
+        private void RemoveAllRoutes()
         {
-            _products.Add(product);
+            RelationProvider.ShapeRoute.Clear(this);
         }
 
-        internal protected virtual void Remove(Product product)
+        private void RemoveAllUnitGroups()
         {
-            _products.Remove(product);
+            RelationProvider.ShapeUnitGroup.Clear(this);
+        }
+
+        internal protected virtual void RemoveAllPackages()
+        {
+            RelationProvider.ShapePackage.Clear(this);
+        }
+
+        public virtual void RemoveUnitGroup(UnitGroup unitGroup)
+        {
+            RelationProvider.ShapeUnitGroup.Remove(this, unitGroup);
         }
     }
 }

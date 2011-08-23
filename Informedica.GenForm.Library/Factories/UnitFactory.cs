@@ -21,7 +21,7 @@ namespace Informedica.GenForm.Library.Factories
 
             var unit = Unit.Create(Dto, _group);
             Add(unit);
-            return Find();
+            return unit;
         }
 
         public UnitFactory AddToGroup(UnitGroupDto groupDto)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 
 namespace Informedica.GenForm.Tests.Fixtures
@@ -11,6 +12,16 @@ namespace Informedica.GenForm.Tests.Fixtures
                            Abbreviation = "iv",
                            Name = "intraveneus"
                        };
+        }
+
+        public static RouteDto GetRouteWithShape()
+        {
+            var dto = GetValidDto();
+            dto.Shapes = new List<ShapeDto>
+                             {
+                                 ShapeTestFixtures.GetValidDto()
+                             };
+            return dto;
         }
     }
 }

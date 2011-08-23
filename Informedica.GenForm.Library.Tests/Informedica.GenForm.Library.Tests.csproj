@@ -100,17 +100,26 @@
     <Compile Include="UnitTests\DomainModel\OjbectFactoryForProductShould.cs" />
     <Compile Include="UnitTests\DomainModel\ProductConstructorShould.cs" />
     <Compile Include="UnitTests\DomainModel\ProductTestBase.cs" />
+    <Compile Include="UnitTests\DomainModel\RelationManagerTests.cs" />
     <Compile Include="UnitTests\DomainModel\RouteComparerReturns.cs" />
     <Compile Include="UnitTests\DomainModel\Construction\UnitGroupConstructionTests.cs" />
     <Compile Include="UnitTests\DomainModel\UnitConstructorShould.cs" />
+    <Compile Include="UnitTests\DomainModel\VersioningTests.cs" />
+    <Compile Include="UnitTests\Factories\EntityFactoryShould.cs" />
+    <Compile Include="UnitTests\Factories\FactoryManagerTests.cs" />
     <Compile Include="UnitTests\Factories\FluentFactoryTests.cs" />
     <Compile Include="UnitTests\GenFormIdentityTest.cs" />
     <Compile Include="UnitTests\GenFormPrincipalTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IntegrationTests\UserTest.cs" />
+    <Compile Include="UnitTests\Services\BrandServicesTests.cs" />
     <Compile Include="UnitTests\Services\DatabaseServicesShould.cs" />
     <Compile Include="UnitTests\Services\LoginServicesShould.cs" />
-    <Compile Include="UnitTests\Services\ProductServicesShould.cs" />
+    <Compile Include="UnitTests\Services\PackageServicesTests.cs" />
+    <Compile Include="UnitTests\Services\ProductServicesTests.cs" />
+    <Compile Include="UnitTests\Services\RouteServicesTests.cs" />
+    <Compile Include="UnitTests\Services\ShapeServicesTests.cs" />
+    <Compile Include="UnitTests\Services\SubstanceServicesTests.cs" />
     <Compile Include="UnitTests\Services\UnitServicesTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -124,10 +133,6 @@
     <ProjectReference Include="..\Informedica.GenForm.DataAccess\Informedica.GenForm.DataAccess.csproj">
       <Project>{9EC2E9E4-CEEF-4A78-A8DE-EB12F8C6DAE1}</Project>
       <Name>Informedica.GenForm.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Database\Informedica.GenForm.Database.csproj">
-      <Project>{46C54F92-FF84-4F84-A6E0-CD141EAFBE60}</Project>
-      <Name>Informedica.GenForm.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
       <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>

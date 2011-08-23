@@ -59,6 +59,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="TypeMock, Version=6.0.9.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -73,6 +74,7 @@
     <Compile Include="AcceptanceTests\SaveNewProductTests.cs" />
     <Compile Include="DatabaseCleaner.cs" />
     <Compile Include="Fixtures\BrandTestFixtures.cs" />
+    <Compile Include="Fixtures\PackageTestFixtures.cs" />
     <Compile Include="Fixtures\ProductTestFixtures.cs" />
     <Compile Include="Fixtures\RouteTestFixtures.cs" />
     <Compile Include="Fixtures\ShapeTestFixtures.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegressionTests\LoginAcceptanceTests.cs" />
     <Compile Include="TestSessionContext.cs" />
+    <Compile Include="Utilities\ProductChecker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />

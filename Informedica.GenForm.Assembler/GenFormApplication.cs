@@ -41,14 +41,17 @@ namespace Informedica.GenForm.Assembler
             get { return Instance.SessionFactoryFromInstance; }
         }
 
-        [Obsolete]
-        public ISessionFactory SessionFactoryFromInstance
+        private ISessionFactory SessionFactoryFromInstance
         {
-            get { return _factory; }
+            get
+            {
+                return _factory;
+            }
         }
 
         private static ISessionFactory CreateSessionFactory()
         {
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
             return SessionFactoryCreator.CreateSessionFactory();            
         }
 

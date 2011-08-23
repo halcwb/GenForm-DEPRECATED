@@ -3,12 +3,10 @@ using System.Diagnostics;
 using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Assembler.Contexts;
-using Informedica.GenForm.DataAccess.DataContexts;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate.Linq;
 using StructureMap;
@@ -49,7 +47,7 @@ namespace Informedica.NHibernate.Tests
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            _repository = new NHibernateRepository<Brand, Guid, BrandDto>(GenFormApplication.SessionFactory);
+            _repository = new BrandRepository(GenFormApplication.SessionFactory);
         }
         
         // Use ClassCleanup to run code after all tests in a class have run
@@ -71,9 +69,9 @@ namespace Informedica.NHibernate.Tests
         {
             using (GetContext())
             {
-                BeInstantiated();
-                BeAbleToUseTypedSessionQuery();
-                BeAbleGiveACountOfZeroWhenNothingSaved();
+                //BeInstantiated();
+                //BeAbleToUseTypedSessionQuery();
+                //BeAbleGiveACountOfZeroWhenNothingSaved();
                 NotThrowAnErrorWhenAddingANewBrand();
                 AfterSaveReturnACountOfOne();
                 BeAbleToFindTheNewBrand();
@@ -139,8 +137,8 @@ namespace Informedica.NHibernate.Tests
         {
             try
             {
-                var session = GenFormApplication.Instance.SessionFactoryFromInstance.OpenSession();
-                session.Query<Brand>().Count();
+                var session = GenFormApplication.SessionFactory.OpenSession();
+                Assert.IsTrue(session.Query<Brand>().Count() == 0);
 
             }
             catch (Exception e)

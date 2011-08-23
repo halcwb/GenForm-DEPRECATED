@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Services.Products;
 using Newtonsoft.Json.Linq;
 using StructureMap;
@@ -108,7 +107,8 @@ namespace Informedica.GenForm.Mvc3.Controllers
             var message = String.Empty;
             try
             {
-                product = GetProductServices().SaveProduct(product);
+                // ToDo: rewrite to new service
+                //product = GetProductServices().SaveProduct(product);
 
             }
             catch (Exception e)

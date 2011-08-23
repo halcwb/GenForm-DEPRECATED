@@ -4,7 +4,7 @@ namespace Informedica.GenForm.Tests.Fixtures
 {
     public static class UnitGroupTestFixtures
     {
-        public static UnitGroupDto GetDto()
+        public static UnitGroupDto GetDtoMass()
         {
             return new UnitGroupDto
                        {
@@ -13,9 +13,13 @@ namespace Informedica.GenForm.Tests.Fixtures
                        };
         }
 
-        public static UnitGroupDto ValidDto()
+        public static UnitGroupDto GetDtoVolume()
         {
-            return GetDto();
+            return new UnitGroupDto
+            {
+                AllowConversion = true,
+                Name = "volume"
+            };
         }
     }
 }

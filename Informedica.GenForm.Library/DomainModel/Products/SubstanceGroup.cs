@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Equality;
-using Informedica.GenForm.Library.Exceptions;
-using StructureMap;
+using Informedica.GenForm.Library.DomainModel.Relations;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class SubstanceGroup: Entity<Guid, SubstanceGroupDto>, ISubstanceGroup
+    public class SubstanceGroup: Entity<Guid, SubstanceGroupDto>, ISubstanceGroup, IRelationPart
     {
         private ISubstanceGroup _mainSubstanceGroup;
-        private ISet<Substance> _substances = new HashSet<Substance>(new SubstanceComparer());
 
         protected SubstanceGroup(): base(new SubstanceGroupDto()) {}
 
@@ -27,8 +23,8 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         
         public virtual IEnumerable<Substance> Substances
         {
-            get { return _substances; }
-            protected set { _substances = new HashSet<Substance>(value, new SubstanceComparer()); }
+            get { return RelationProvider.SubstanceGroupSubstance.GetManyPart(this); }
+            protected set { RelationProvider.SubstanceGroupSubstance.Add(this, new HashSet<Substance>(value)); }
         }
 
         #endregion
@@ -43,22 +39,19 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             substance.AddToSubstanceGroup(this);
         }
 
-        internal protected virtual void AddSubstance(Substance substance, Action<SubstanceGroup> setSubstanceGroup)
-        {
-            if (_substances.Contains(substance, new SubstanceComparer()))
-                throw new CannotAddItemException<Substance>(substance);
-            _substances.Add(substance);
-            setSubstanceGroup(this);
-        }
-
         public virtual void Remove(Substance substance)
         {
-            _substances.Remove(substance);
+            RelationProvider.SubstanceGroupSubstance.Remove(this, substance);
         }
 
         public static SubstanceGroup Create(SubstanceGroupDto dto)
         {
             return new SubstanceGroup(dto);
+        }
+
+        public virtual void ClearSubstances()
+        {
+            RelationProvider.SubstanceGroupSubstance.Clear(this);
         }
     }
 }

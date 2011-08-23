@@ -92,8 +92,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
             var message = String.Empty;
             try
             {
-                _services.SaveProduct(product);
-
             }
             catch (Exception e)
             {
@@ -111,8 +109,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
             try
             {
-                _services.AddNewBrand(brand);
-
             }
             catch (Exception e)
             {
@@ -131,8 +127,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
             try
             {
-                _services.AddNewGeneric(generic);
-
             }
             catch (Exception e)
             {
@@ -151,8 +145,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
             try
             {
-                _services.AddNewShape(shape);
-
             }
             catch (Exception e)
             {
@@ -171,8 +163,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
             try
             {
-                _services.AddNewPackage(package);
-
             }
             catch (Exception e)
             {
@@ -191,8 +181,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
             try
             {
-                _services.AddNewUnit(unit);
-
             }
             catch (Exception e)
             {
@@ -210,8 +198,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
             try
             {
-                _services.AddNewSubstance(substanceDto);
-
             }
             catch (Exception e)
             {
@@ -269,7 +255,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
             var message = String.Empty;
             try
             {
-                _services.DeleteProduct(id);
                 success = true;
             }
             catch (Exception e)

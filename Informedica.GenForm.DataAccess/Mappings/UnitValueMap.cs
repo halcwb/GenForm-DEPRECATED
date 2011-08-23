@@ -1,6 +1,5 @@
 using System;
 using FluentNHibernate.Mapping;
-using Informedica.GenForm.Library.DomainModel;
 using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.DataAccess.Mappings

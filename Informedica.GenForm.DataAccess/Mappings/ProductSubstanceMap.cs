@@ -9,15 +9,15 @@ namespace Informedica.GenForm.DataAccess.Mappings
 
         public ProductSubstanceMap()
         {
-            Id(x => x.Id).GeneratedBy.HiLo("1");
+            Id(x => x.Id).GeneratedBy.GuidComb();
             Map(x => x.SortOrder).Not.Nullable();
             References(x => x.Substance).Not.Nullable()
-                .UniqueKey(ProductSubstanceCombi)
-                .Cascade.SaveUpdate();
+                .Cascade.SaveUpdate()
+                .UniqueKey(ProductSubstanceCombi);
             References(x => x.Product).Not.Nullable()
+                .Cascade.SaveUpdate()
                 .UniqueKey(ProductSubstanceCombi);
             Component(x => x.Quantity, UnitValueMap.GetMap());
-
         }
     }
 }

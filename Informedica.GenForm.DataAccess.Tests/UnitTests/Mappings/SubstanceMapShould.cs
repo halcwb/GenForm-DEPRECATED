@@ -15,6 +15,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     {
         private TestContext testContextInstance;
 
+        public SubstanceMapShould() : base(true) {}
+
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.

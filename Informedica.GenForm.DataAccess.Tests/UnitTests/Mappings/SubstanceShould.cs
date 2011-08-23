@@ -1,8 +1,6 @@
 ﻿using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
@@ -16,6 +14,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     public class SubstanceShould : TestSessionContext
     {
         private TestContext testContextInstance;
+
+        public SubstanceShould() : base(false) {}
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -70,7 +70,6 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void BePersistedWithSubstanceGroup()
         {
-
                 var subst = Substance.Create(new SubstanceDto
                 {
                     SubstanceGroupName = "analgetica",
@@ -84,10 +83,10 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         public void ThrowAnErrorWhenSubsanceGroupNameIsEmptyString()
         {
             var subst = Substance.Create(new SubstanceDto
-                                                                           {
-                                                                               SubstanceGroupName = "",
-                                                                               Name = "paracetamol"
-                                                                           });
+                {
+                    SubstanceGroupName = "",
+                    Name = "paracetamol"
+                });
 
             PersistSubstance(Context.CurrentSession(), subst);
         }

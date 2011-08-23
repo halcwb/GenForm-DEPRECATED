@@ -1,86 +1,53 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
-using Informedica.GenForm.Library.Repositories;
 
 namespace Informedica.GenForm.Library.Services.Products
 {
-    public class ProductServices : IProductServices
+    public class ProductServices : ServicesBase<Product, Guid, ProductDto>
     {
-        #region Implementation of IProductServices
+        private static ProductServices _instance;
+        private static readonly object LockThis = new object();
 
-        public IProduct GetProduct(int productId)
+        private static ProductServices Instance
         {
-            throw new NotImplementedException();
+            get
+            {
+                if (_instance == null)
+                    lock (LockThis)
+                    {
+                        if (_instance == null)
+                        {
+                            var instance = new ProductServices();
+                            Thread.MemoryBarrier();
+                            _instance = instance;
+                        }
+                    }
+                return _instance;
+            }
         }
 
-        public IProduct GetProduct(String productName)
+        public static ProductFactory WithDto(ProductDto productDto)
         {
-            throw new NotImplementedException();
+            return (ProductFactory)Instance.GetFactory(productDto);
         }
 
-        public void AddNewBrand(IBrand brand)
+        public static IEnumerable<Product> Products
         {
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IBrand>>();
-            repository.Insert(brand);
+            get { return Instance.Repository; }
         }
 
-        public void AddNewGeneric(IGeneric generic)
+        public static void Delete(Product product)
         {
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IGeneric>>();
-            repository.Insert(generic);
+            Instance.DeleteProduct(product);
         }
 
-        public void AddNewShape(IShape shape)
+        private void DeleteProduct(Product product)
         {
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IShape>>();
-            repository.Insert(shape);
+            Repository.Remove(product);
         }
-
-        public void AddNewPackage(IPackage package)
-        {
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IPackage>>();
-            repository.Insert(package);
-        }
-
-        public void AddNewUnit(IUnit unit)
-        {
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IUnit>>();
-            repository.Insert(unit);
-        }
-
-        public void AddNewSubstance(SubstanceDto substDto)
-        {
-            var subst = Substance.Create(substDto);
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<ISubstance>>();
-            repository.Insert(subst);
-        }
-
-        public ProductDto SaveProduct(ProductDto productDto)
-        {
-            var repository = Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IProduct>>();
-            var product = NewProduct(productDto);
-            repository.Insert(product);
-            return productDto;
-        }
-
-        private static IProduct NewProduct(ProductDto productDto)
-        {
-            return Factory.ObjectFactory.Instance.With(productDto).GetInstance<IProduct>();
-        }
-
-        public void DeleteProduct(int productId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IProduct GetEmptyProduct()
-        {
-            return Factory.ObjectFactory.Instance.GetInstance<IProduct>();
-        }
-
-        #endregion
     }
 }

@@ -35,6 +35,9 @@ namespace Informedica.GenForm.Library.Factories
 
         protected void Add(TEnt entity)
         {
+            // Performance improvement return if entity already 
+            // added by an associated entity
+            if (!entity.IdIsDefault(entity.Id)) return;
             Repository.Add(entity);
         }
     }

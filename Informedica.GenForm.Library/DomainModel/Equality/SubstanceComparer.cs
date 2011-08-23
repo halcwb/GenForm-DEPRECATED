@@ -3,7 +3,7 @@ using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Library.DomainModel.Equality
 {
-    internal class SubstanceComparer : NameComparer, IEqualityComparer<Substance>
+    public class SubstanceComparer : NameComparer, IEqualityComparer<Substance>
     {
         public bool Equals(Substance x, Substance y)
         {

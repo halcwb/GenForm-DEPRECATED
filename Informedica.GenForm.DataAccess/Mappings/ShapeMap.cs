@@ -1,7 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.DataAccess.Mappings
 {
@@ -9,11 +8,20 @@ namespace Informedica.GenForm.DataAccess.Mappings
     {
         public ShapeMap()
         {
-            HasManyToMany(s => s.Packages).AsSet()
+            HasManyToMany(s => s.Packages)
+                // Fetch.Join will raise laizy collection load error
+                .Fetch.Select()
+                .AsSet()
                 .Cascade.All();
-            HasManyToMany(s => s.Units).AsSet()
+            HasManyToMany(s => s.UnitGroups)
+                // Fetch.Join will raise laizy collection load error
+                .Fetch.Select()
+                .AsSet()
                 .Cascade.All();
-            HasManyToMany(s => s.Routes).AsSet()
+            HasManyToMany(s => s.Routes)
+                // Fetch.Join will raise laizy collection load error
+                .Fetch.Select()
+                .AsSet()
                 .Cascade.All();
         }
     }

@@ -1,9 +1,10 @@
-﻿using FluentNHibernate.Testing;
+﻿using System.Collections.Generic;
+using FluentNHibernate.MappingModel;
+using FluentNHibernate.Testing;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,6 +18,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     public class ProductMapShould : TestSessionContext
     {
         private TestContext testContextInstance;
+
+        public ProductMapShould() : base(false) {}
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -65,6 +68,43 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
                 .CheckProperty(x => x.Quantity, UnitValue.Create(10, Unit.Create(UnitTestFixtures.GetTestUnitMilligram())))
 
                 .VerifyTheMappings();
+        }
+
+        [TestMethod]
+        public void CorrectlyMapAProductWithSubstance()
+        {
+            new PersistenceSpecification<Product>(Context.CurrentSession(), new ProductComparer())
+                .CheckProperty(x => x.Name, "dopamine Dynatra infusievloeistof 200 mg in 5 mL ampul")
+                .CheckProperty(x => x.GenericName, "dopamine")
+                .CheckReference(x => x.Brand, Brand.Create(new BrandDto {Name = "Dynatra"}))
+                .CheckProperty(x => x.DisplayName, "dopamine Dynatra infusievloeistof 200 mg in 5 mL ampul")
+                .CheckReference(x => x.Package, Package.Create(new PackageDto {Name = "ampul", Abbreviation = "amp"}))
+                .CheckReference(x => x.Shape, Shape.Create(new ShapeDto {Name = "infusievloeistof"}))
+                .CheckProperty(x => x.Quantity, UnitValue.Create(10, Unit.Create(UnitTestFixtures.GetTestUnitMilligram())))
+                .CheckList(x => x.Substances, GetSubstanceList())
+
+                .VerifyTheMappings();
+        }
+
+        private IEnumerable<ProductSubstance> GetSubstanceList()
+        {
+            return new DefaultableList<ProductSubstance>
+                       {
+                           ProductSubstance.Create(null, new ProductSubstanceDto
+                                                             {
+                                                                 Name = "dopamine",
+                                                                 Quantity = 200M,
+                                                                 SortOrder = 1,
+                                                                 Substance = "dopamine",
+                                                                 UnitAbbreviation = "mg",
+                                                                 UnitDivisor = 1000,
+                                                                 UnitGroupAllowConversion = true,
+                                                                 UnitGroupName = "massa",
+                                                                 UnitIsReference = false,
+                                                                 UnitMultiplier = 0.001M,
+                                                                 UnitName = "milligram"
+                                                             })
+                       };
         }
     }
 }

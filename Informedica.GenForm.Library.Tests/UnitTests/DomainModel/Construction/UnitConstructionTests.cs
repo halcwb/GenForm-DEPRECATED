@@ -61,7 +61,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         [TestMethod]
         public void ThatAValidUnitIsConstructedWithExistingUnitGroup()
         {
-            var group = UnitGroup.Create(UnitGroupTestFixtures.ValidDto());
+            var group = UnitGroup.Create(UnitGroupTestFixtures.GetDtoVolume());
             var unit = Unit.Create(UnitTestFixtures.GetTestUnitMilligram(), group);
             Assert.IsTrue(UnitIsValid(unit));
         }

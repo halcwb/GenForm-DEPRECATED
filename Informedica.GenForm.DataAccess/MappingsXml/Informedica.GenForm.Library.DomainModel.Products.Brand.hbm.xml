@@ -1,5 +1,5 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Products.Brand, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`Brand`">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Products.Brand, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`Brand`" select-before-update="true">
     <id name="Id" type="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Id" />
       <generator class="guid.comb" />
@@ -7,6 +7,12 @@
     <version name="Version" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Version" />
     </version>
+    <set inverse="true" name="Products">
+      <key>
+        <column name="Brand_id" />
+      </key>
+      <one-to-many class="Informedica.GenForm.Library.DomainModel.Products.Product, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    </set>
     <property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Name" length="255" not-null="true" unique="true" />
     </property>

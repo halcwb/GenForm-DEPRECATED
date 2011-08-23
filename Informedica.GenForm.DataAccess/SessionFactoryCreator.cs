@@ -15,15 +15,17 @@ namespace Informedica.GenForm.DataAccess
         public static ISessionFactory CreateSessionFactory()
         {
             return Fluently.Configure()
-                .Database(MsSqlConfiguration.MsSql2008.ConnectionString(GetConnectionString()).ShowSql)
+                .Database(MsSqlConfiguration.MsSql2008.ConnectionString(GetConnectionString()).ShowSql().AdoNetBatchSize(5).MaxFetchDepth(2))
                 .Mappings(x => x.FluentMappings.AddFromAssemblyOf<Mappings.SubstanceMap>()
                 .ExportTo(ExportPath))
                 .CurrentSessionContext<NHibernate.Context.ThreadStaticSessionContext>()
-                .Diagnostics(x => 
-                { 
-                    x.Enable();
+                .Diagnostics(x =>
+                {
+                    x.Enable(true);
                     x.OutputToFile(LogPath);
                 })
+                // ToDo: Find out how to correctly configure second level cache
+                //.Cache(x => x.UseSecondLevelCache()).Cache(x => x.UseMinimalPuts()).Cache(x => x.UseQueryCache())
                 .ExposeConfiguration(BuildSchema)
                 .BuildSessionFactory();
         }

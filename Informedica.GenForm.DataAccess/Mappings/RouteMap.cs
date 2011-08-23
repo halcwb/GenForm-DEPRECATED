@@ -10,10 +10,14 @@ namespace Informedica.GenForm.DataAccess.Mappings
         {
             Map(r => r.Abbreviation).Not.Nullable().Length(30).Unique();
             HasManyToMany(r => r.Shapes)
+                // Fetch.Join will raise laizy collection load error
+                .Fetch.Select()
                 .AsSet()
                 .Cascade.All()
                 .Inverse();
             HasManyToMany(r => r.Products)
+                // Fetch.Join will raise laizy collection load error
+                .Fetch.Select()
                 .AsSet()
                 .Cascade.All()
                 .Inverse();

@@ -22,6 +22,7 @@ namespace Informedica.GenForm.Library.DomainModel.Data
         public bool UnitIsReference;
         public decimal UnitMultiplier;
         public string UnitGroupName;
+        public string PackageAbbreviation;
 
         public override ProductDto CloneDto()
         {

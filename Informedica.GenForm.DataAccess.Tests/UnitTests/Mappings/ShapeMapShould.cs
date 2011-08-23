@@ -2,8 +2,6 @@
 using FluentNHibernate.Testing;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -16,6 +14,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     public class ShapeMapShould : TestSessionContext
     {
         private TestContext testContextInstance;
+
+        public ShapeMapShould() : base(true) {}
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -86,11 +86,11 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         }
 
         [TestMethod]
-        public void AssociateShapeWithOneUnit()
+        public void AssociateShapeWithOneUnitGroup()
         {
                 new PersistenceSpecification<Shape>(Context.CurrentSession())
                     .CheckProperty(s => s.Name, "infusievloeistof")
-                    .CheckList(s => s.Units, GetUnitList())
+                    .CheckList(s => s.UnitGroups, GetUnitGroupList())
                     .VerifyTheMappings();
         }
 
@@ -129,11 +129,11 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
                        };
         }
 
-        private IEnumerable<Unit> GetUnitList()
+        private IEnumerable<UnitGroup> GetUnitGroupList()
         {
-            return new List<Unit>
+            return new List<UnitGroup>
                        {
-                           Unit.Create(new UnitDto{Abbreviation = "ml", AllowConversion = true, Divisor = 10, IsReference = false, Multiplier = 1000, Name = "milliliter", UnitGroupName = "algemeen"})
+                           UnitGroup.Create(new UnitGroupDto{ AllowConversion = true, Name = "volume"})
                        };
         }
 

@@ -70,8 +70,10 @@ Deallocate curAllForeignKeys
         {
             using (var session = GenFormApplication.SessionFactory.OpenSession())
             {
+                session.Transaction.Begin();
                 var query = session.CreateSQLQuery(GetEmptyAllTablesSql());
                 query.ExecuteUpdate();
+                session.Transaction.Commit();
             }
         }
 
