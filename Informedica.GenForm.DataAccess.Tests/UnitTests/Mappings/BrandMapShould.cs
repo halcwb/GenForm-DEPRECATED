@@ -64,7 +64,6 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
                 .CheckProperty(b => b.Name, "Dynatra")
                 .CheckList(b => b.Products, CreateProductList())
                 .VerifyTheMappings();
-
         }
 
         private static IEnumerable<Product> CreateProductList()

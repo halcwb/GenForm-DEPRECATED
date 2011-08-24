@@ -9,6 +9,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
     public class Substance : Entity<Guid, SubstanceDto>, ISubstance, IRelationPart
     {
         private readonly HashSet<Product> _products = new HashSet<Product>(new ProductComparer());
+        private SubstanceGroup _substanceGroup;
 
         protected Substance(): base(new SubstanceDto()) {}
 
@@ -24,25 +25,15 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             group.AddSubstance(this);
         }
 
-        public virtual int SubstanceId
-        {
-            get { return Dto.SubstanceId; }
-            set { Dto.SubstanceId = value; }
-        }
-
         public virtual void AddToSubstanceGroup(SubstanceGroup group)
         {
-            RelationProvider.SubstanceGroupSubstance.Add(group, this);
+            group.AddSubstance(this);
         }
 
         public virtual SubstanceGroup SubstanceGroup
         {
-            get { return RelationProvider.SubstanceGroupSubstance.GetOnePart(this); }
-            protected set
-            {
-                RelationProvider.SubstanceGroupSubstance.Clear(this);
-                RelationProvider.SubstanceGroupSubstance.Add(value, this);
-            }
+            get { return _substanceGroup; }
+            internal protected set { _substanceGroup = value; }
         }
 
         public virtual IEnumerable<Product> Products { get { return _products; } }
@@ -72,7 +63,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void RemoveFromSubstanceGroup()
         {
-            RelationProvider.SubstanceGroupSubstance.Remove(SubstanceGroup, this);
+            SubstanceGroup.Remove(this);
         }
     }
 }

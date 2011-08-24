@@ -19,15 +19,6 @@ namespace Informedica.GenForm.Library.DomainModel.Relations
 
         private void Initialize()
         {
-            _registry.Add(typeof(IRelation<UnitGroup, Unit>), new OneToManyRelation<UnitGroup, Unit>());
-            _registry.Add(typeof(IRelation<Shape, Product>), new OneToManyRelation<Shape, Product>());
-            _registry.Add(typeof(IRelation<Package, Product>), new OneToManyRelation<Package, Product>());
-            _registry.Add(typeof(IRelation<Brand, Product>), new OneToManyRelation<Brand, Product>());
-            _registry.Add(typeof(IRelation<SubstanceGroup, Substance>), new OneToManyRelation<SubstanceGroup, Substance>());
-            _registry.Add(typeof(IRelation<Shape, UnitGroup>), new ManyToManyRelation<Shape, UnitGroup>());
-            _registry.Add(typeof(IRelation<Shape, Package>), new ManyToManyRelation<Shape, Package>());
-            _registry.Add(typeof(IRelation<Shape, Route>), new ManyToManyRelation<Shape, Route>());
-            _registry.Add(typeof(IRelation<Route, Product>), new ManyToManyRelation<Route, Product>());
         }
 
         public static void Add<TLeft,TRight>(Type type, IRelation<TLeft, TRight> relation)

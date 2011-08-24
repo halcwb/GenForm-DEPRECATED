@@ -8,6 +8,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class Unit : Entity<Guid, UnitDto>, IUnit, IRelationPart
     {
+        private UnitGroup _unitGroup;
 
         #region Constructor
 
@@ -20,13 +21,18 @@ namespace Informedica.GenForm.Library.DomainModel.Products
                     AllowConversion = dto.AllowConversion,
                     Name = dto.UnitGroupName
                 });
-            RelationManager.OneToMany<UnitGroup, Unit>().Add(group, this);
+            SetUnitGroup(group);
         }
 
         public Unit(UnitDto dto, UnitGroup group)
             : base(dto.CloneDto())
         {
             SetUnitGroup(group);
+        }
+
+        private void SetUnitGroup(UnitGroup group)
+        {
+            ChangeUnitGroup(group);
         }
 
         #endregion
@@ -53,18 +59,14 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual UnitGroup UnitGroup
         {
-            get { return RelationProvider.UnitGroupUnit.GetOnePart(this); }
-            protected set { RelationProvider.UnitGroupUnit.Add(value, this); }
+            get { return _unitGroup; }
+            protected internal set { _unitGroup = value; }
         }
 
         public virtual void ChangeUnitGroup(UnitGroup newGroup)
         {
-            SetUnitGroup(newGroup);
+            newGroup.AddUnit(this);
         }
-
-        private void SetUnitGroup(UnitGroup newGroup)
-        {
-            RelationProvider.UnitGroupUnit.Add(newGroup, this);        }
 
         public virtual bool CannotChangeGroup(UnitGroup newGroup)
         {
@@ -74,6 +76,11 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public override bool IdIsDefault(Guid id)
         {
             return id == Guid.Empty;
+        }
+
+        internal protected virtual void RemoveFromGroup()
+        {
+            UnitGroup.RemoveUnit(this);
         }
 
         #endregion
@@ -96,10 +103,5 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         }
 
         #endregion
-
-        internal protected virtual void RemoveFromGroup()
-        {
-            UnitGroup.RemoveUnit(this);
-        }
     }
 }

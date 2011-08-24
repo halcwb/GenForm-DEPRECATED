@@ -15,7 +15,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     {
         private TestContext testContextInstance;
 
-        public SubstanceShould() : base(false) {}
+        public SubstanceShould() : base(true) {}
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -76,6 +76,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
                     Name = "paracetamol"
                 });
 
+                Assert.AreEqual("analgetica", subst.SubstanceGroup.Name);
                 PersistSubstance(Context.CurrentSession(), subst);
         }
 

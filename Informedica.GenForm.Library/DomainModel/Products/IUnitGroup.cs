@@ -8,7 +8,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         Guid Id { get; }
         String Name { get; }
         Boolean AllowsConversion { get; }
-        IEnumerable<Unit> Units { get; }
+        Iesi.Collections.Generic.ISet<Unit> Units { get; }
         void RemoveUnit(Unit unit);
         void AddUnit(Unit unit);
     }
