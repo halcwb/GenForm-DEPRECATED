@@ -1,7 +1,6 @@
 ﻿using FluentNHibernate.Testing;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -56,17 +55,27 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         #endregion
 
         [TestMethod]
-        public void CorrectlyMapSubstance()
+        public void CorrectlyMapSubstanceWithoutGroup()
         {
             new PersistenceSpecification<Substance>(Context.CurrentSession())
                     .CheckProperty(s => s.Name, "paracetamol")
-                    .CheckReference(s => s.SubstanceGroup, SubstanceGroup.Create(GetSubstanceGroupDto()))
+                    .VerifyTheMappings();
+        }
+
+        [TestMethod]
+        public void CorrectlyMapSubstanceWithGroup()
+        {
+            var group = SubstanceGroup.Create(GetSubstanceGroupDto());
+
+            new PersistenceSpecification<Substance>(Context.CurrentSession())
+                    .CheckProperty(s => s.Name, "paracetamol")
+                    .CheckReference(s => s.SubstanceGroup, group, ((s, y) => s.AddToSubstanceGroup(y)))
                     .VerifyTheMappings();
         }
 
         private SubstanceGroupDto GetSubstanceGroupDto()
         {
-            return new SubstanceGroupDto{ Name = "analgetica"};
+            return new SubstanceGroupDto{ Name = "analgetica" };
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Informedica.GenForm.Library.Factories
                                          GetPackage(),
                                          GetUnitValue());
 
-            if (!String.IsNullOrWhiteSpace(Dto.BrandName)) product.AddBrand(GetBrand());
+            if (!String.IsNullOrWhiteSpace(Dto.BrandName)) product.SetBrand(GetBrand());
 
             product = AddProductSubstances(product);
             product = AddProductRoutes(product);

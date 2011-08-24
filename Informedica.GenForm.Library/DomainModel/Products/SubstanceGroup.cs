@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Relations;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class SubstanceGroup: Entity<Guid, SubstanceGroupDto>, ISubstanceGroup, IRelationPart
+    public class SubstanceGroup: Entity<Guid, SubstanceGroupDto>
     {
-        private ISubstanceGroup _mainSubstanceGroup;
+        private SubstanceGroup _mainSubstanceGroup;
+        private ISet<Substance> _substances = new HashedSet<Substance>();
 
         protected SubstanceGroup(): base(new SubstanceGroupDto()) {}
 
@@ -15,16 +15,16 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #region Implementation of ISubstanceGroup
 
-        public virtual ISubstanceGroup MainSubstanceGroup
+        public virtual SubstanceGroup MainSubstanceGroup
         {
             get { return _mainSubstanceGroup; }
             set { _mainSubstanceGroup = value; }
         }
         
-        public virtual IEnumerable<Substance> Substances
+        public virtual ISet<Substance> Substances
         {
-            get { return RelationProvider.SubstanceGroupSubstance.GetManyPart(this); }
-            protected set { RelationProvider.SubstanceGroupSubstance.Add(this, new HashSet<Substance>(value)); }
+            get { return _substances; }
+            protected set { _substances = value; }
         }
 
         #endregion
@@ -36,12 +36,19 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddSubstance(Substance substance)
         {
-            substance.AddToSubstanceGroup(this);
+            if (_substances.Contains(substance)) return;
+
+            _substances.Add(substance);
+            substance.SubstanceGroup = this;
         }
 
         public virtual void Remove(Substance substance)
         {
-            RelationProvider.SubstanceGroupSubstance.Remove(this, substance);
+            if (_substances.Contains(substance))
+            {
+                _substances.Remove(substance);
+                substance.SubstanceGroup = null;
+            }
         }
 
         public static SubstanceGroup Create(SubstanceGroupDto dto)
@@ -51,7 +58,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void ClearSubstances()
         {
-            RelationProvider.SubstanceGroupSubstance.Clear(this);
+            foreach (var substance in Substances)
+            {
+                substance.RemoveFromSubstanceGroup();
+            }
         }
     }
 }

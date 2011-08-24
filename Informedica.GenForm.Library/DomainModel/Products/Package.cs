@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Relations;
 
@@ -7,6 +7,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class Package: Entity<Guid, PackageDto>, IPackage, IRelationPart
     {
+        private ISet<Product> _products = new HashedSet<Product>();
+        private ISet<Shape> _shapes = new HashedSet<Shape>();
+
         #region Implementation of IPackage
 
         protected Package() : base(new PackageDto()) {}
@@ -29,23 +32,30 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddShape(Shape shape)
         {
-            RelationProvider.ShapePackage.Add(shape, this);
+            if (_shapes.Contains(shape)) return;
+
+            _shapes.Add(shape);
+            shape.AddPackage(this);
         }
 
         public virtual void RemoveShape(Shape shape)
         {
-            RelationProvider.ShapePackage.Remove(shape, this);
+            if (!_shapes.Contains(shape)) return;
+
+            _shapes.Remove(shape);
+            shape.RemovePackage(this);
         }
 
-        public virtual IEnumerable<Shape> Shapes
+        public virtual ISet<Shape> Shapes
         {
-            get { return RelationProvider.ShapePackage.GetManyPartLeft(this); }
-            protected set { RelationProvider.ShapePackage.Add(value, this); }
+            get { return _shapes; }
+            protected set { _shapes = value; }
         }
 
-        public virtual IEnumerable<Product> Products
+        public virtual ISet<Product> Products
         {
-            get { return RelationProvider.PackageProduct.GetManyPart(this); }
+            get { return _products; }
+            protected set { _products = value; }
         }
 
         public override bool IdIsDefault(Guid id)
@@ -60,7 +70,28 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         internal protected virtual void RemoveAllShapes()
         {
-            RelationProvider.ShapePackage.Clear(this);
+            var list = new HashedSet<Shape>(Shapes);
+            foreach (var shape in list)
+            {
+                _shapes.Remove(shape);
+                shape.RemovePackage(this);
+            }
+        }
+
+        internal protected virtual void RemoveProduct(Product product)
+        {
+            if(_products.Contains(product))
+            {
+                _products.Remove(product);
+            }
+        }
+
+        public virtual void AddProduct(Product product)
+        {
+            if (_products.Contains(product)) return;
+
+            _products.Add(product);
+            product.SetPackage(this);
         }
     }
 }

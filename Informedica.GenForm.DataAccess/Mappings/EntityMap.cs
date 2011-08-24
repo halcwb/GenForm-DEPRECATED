@@ -11,6 +11,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
         {
             Id(x => x.Id).GeneratedBy.GuidComb();
             Map(x => x.Name).Not.Nullable().Unique().Length(255);
+            // ToDo: Versionning like this is not going to work
             Version(x => x.Version);
             SelectBeforeUpdate();
         } 

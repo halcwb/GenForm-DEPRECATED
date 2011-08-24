@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Relations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -74,16 +73,15 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         }
 
         [TestMethod]
-        public void ThatAOneToManyRelationCanBeAddedWithManySet()
+        public void ThatManyOfOneToManyRelationCanBeSet()
         {
             RelationManager.Add(typeof(IRelation<Group, Item>), new OneToManyRelation<Group, Item>());
             var relation = RelationManager.OneToMany<Group, Item>();
             var group = new Group();
             var item = new Item();
-            var items = new HashSet<Item> { item };
-            relation.Add(group, items);
+            var items = new HashedSet<Item> { item };
+            relation.Set(group, items);
             Assert.IsTrue(group.Items.Contains(item));
-            Assert.IsTrue(item.Group == group);
         }
 
         [TestMethod]
@@ -129,7 +127,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
 
     public class Item2 : IRelationPart
     {
-        public IEnumerable<Item> Items
+        public Iesi.Collections.Generic.ISet<Item> Items
         {
             get { return RelationManager.ManyToMany<Item, Item2>().GetManyPartLeft(this); }
         }
@@ -137,7 +135,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
 
     public class Group : IRelationPart
     {
-        public IEnumerable<Item> Items
+        public Iesi.Collections.Generic.ISet<Item> Items
         {
             get { return RelationManager.OneToMany<Group, Item>().GetManyPart(this); }
         }
@@ -147,7 +145,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
     {
         public Group Group { get { return RelationManager.OneToMany<Group, Item>().GetOnePart(this); } }
 
-        public IEnumerable<Item2> Items
+        public Iesi.Collections.Generic.ISet<Item2> Items
         {
             get { return RelationManager.ManyToMany<Item, Item2>().GetManyPartRight(this); }
         }

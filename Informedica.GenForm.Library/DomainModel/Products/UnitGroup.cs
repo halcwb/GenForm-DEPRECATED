@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Relations;
@@ -10,12 +9,18 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class UnitGroup : Entity<Guid, UnitGroupDto>, IUnitGroup, IRelationPart
     {
-        private HashSet<Unit> _units;
-        private HashSet<Shape> _shapes;
+        #region Private
 
-        protected UnitGroup(): base(new UnitGroupDto()){}
+        private ISet<Unit> _units;
+        private ISet<Shape> _shapes;
 
-        private UnitGroup(UnitGroupDto dto): base(dto.CloneDto())
+        #endregion
+
+        #region Construction
+
+        protected UnitGroup() : base(new UnitGroupDto()) { }
+
+        private UnitGroup(UnitGroupDto dto) : base(dto.CloneDto())
         {
             ValidateDto();
         }
@@ -25,55 +30,42 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             if (String.IsNullOrWhiteSpace(Dto.Name)) throw new InvalidDtoException<UnitGroupDto, Guid>(Dto);
         }
 
+        #endregion
+
+        #region Business
+
         public virtual bool AllowsConversion
         {
             get { return Dto.AllowConversion; }
             set { Dto.AllowConversion = value; }
         }
 
-        public virtual IEnumerable<Unit> Units
+        public virtual ISet<Unit> Units
         {
-            get { return GetUnits(); }
-            protected set { SetUnits(value); }
+            get { return _units; }
+            protected set { _units = value; }
         }
 
-        private void SetUnits(IEnumerable<Unit> value)
+        public virtual ISet<Shape> Shapes
         {
-            RelationManager.OneToMany<UnitGroup, Unit>().Add(this, new HashSet<Unit>(value));
-        }
-
-        private IEnumerable<Unit> GetUnits()
-        {
-            return new HashSet<Unit>(RelationManager.OneToMany<UnitGroup, Unit>().GetManyPart(this));
-                //_units ?? (_units = new HashSet<Unit>(new UnitComparer()));
-        }
-
-        public virtual IEnumerable<Shape> Shapes
-        {
-            get { return GetShapes();  }
-            protected set { _shapes = new HashSet<Shape>(value); }
+            get { return _shapes; }
+            protected set { _shapes = value; }
         }
 
         public virtual void AddUnit(Unit unit)
         {
-            RelationProvider.UnitGroupUnit.Add(this, unit);
+            if (_units.Contains(unit)) return;
+
+            _units.Add(unit);
+            unit.UnitGroup = this;
         }
 
         public virtual void RemoveUnit(Unit unit)
         {
-            RelationManager.OneToMany<UnitGroup, Unit>().Remove(this, unit);
-            //GetUnits().RemoveWhere(x => new UnitComparer().Equals(x, unit));
-        }
-
-        private bool CannotAddUnit(Unit unit)
-        {
-            if (unit == null) return true;
-            return ContainsUnit(unit);
-        }
-
-        public virtual bool ContainsUnit(Unit unit)
-        {
-            return GetUnits().Contains(unit, _units.Comparer);
+            if (_units.Contains(unit))
+            {
+                _units.Remove(unit);
+            }
         }
 
         public static bool Equals(UnitGroup x, UnitGroup y, UnitGroupComparer comparer)
@@ -86,32 +78,34 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return id == Guid.Empty;
         }
 
+        public virtual void AddShape(Shape shape)
+        {
+            if (_shapes.Contains(shape)) return;
+
+            _shapes.Remove(shape);
+            shape.AddUnitGroup(this);
+        }
+
+        public virtual void RemoveShape(Shape shape)
+        {
+            if (_shapes.Contains(shape))
+            {
+                _shapes.Remove(shape);
+                shape.RemoveUnitGroup(this);
+            }
+        }
+
+        #endregion
+
+        #region Factory
+
         public static UnitGroup Create(UnitGroupDto groupDto)
         {
             return new UnitGroup(groupDto);
         }
 
-        public virtual void AddShape(Shape shape)
-        {
-            RelationManager.ManyToMany<Shape, UnitGroup>().Add(shape, this);
-            //shape.AddUnitGroup(this, AddShapeToUnit);
-        }
 
-        private void AddShapeToUnit(Shape shape)
-        {
-            ShapeAssociation.AddShape(GetShapes(), shape);
-        }
+        #endregion
 
-        private HashSet<Shape> GetShapes()
-        {
-            return new HashSet<Shape>(RelationManager.ManyToMany<Shape, UnitGroup>().GetManyPartLeft(this));
-        }
-
-        public virtual void RemoveShape(Shape shape)
-        {
-            RelationManager.ManyToMany<Shape, UnitGroup>().Remove(shape, this);
-            //_shapes.Remove(shape);
-            //shape.RemoveUnitGroup(this);
-        }
     }
 }

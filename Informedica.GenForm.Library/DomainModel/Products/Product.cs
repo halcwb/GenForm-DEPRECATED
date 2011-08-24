@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.DomainModel.Relations;
@@ -11,8 +11,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
     {
         #region Private Fields
         
-        private IList<ProductSubstance> _substances;
+        private IList<ProductSubstance> _substances = new List<ProductSubstance>();
         private UnitValue _unitValue;
+        private Brand _brand;
+        private Package _package;
+        private Shape _shape;
+        private Iesi.Collections.Generic.ISet<Route> _routes = new HashedSet<Route>();
 
         #endregion
 
@@ -42,7 +46,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
             foreach (var dto in Dto.Routes)
             {
-                RelationProvider.RouteProduct.Add(Route.Create(dto), this);
+                AddRoute(Route.Create(dto));
             }
         }
 
@@ -50,23 +54,40 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         {
             if (String.IsNullOrWhiteSpace(Dto.ShapeName)) return;
             var package = Package.Create(new PackageDto {Abbreviation = Dto.PackageName, Name = Dto.PackageName});
-            RelationProvider.PackageProduct.Add(package, this);
+            SetPackage(package);
+        }
+
+        public virtual void SetPackage(Package package)
+        {
+            if (_package == package) return;
+
+            if (_package != null) _package.RemoveProduct(this);
+            _package = package;
+            package.AddProduct(this);
         }
 
         private void AddProductToShape()
         {
             if (String.IsNullOrWhiteSpace(Dto.ShapeName)) return;
             var shape = Shape.Create(new ShapeDto {Name = Dto.ShapeName});
-            RelationProvider.ShapeProduct.Add(shape, this);
+            SetShape(shape);
+        }
+
+        public virtual void SetShape(Shape shape)
+        {
+            if (_shape == shape) return;
+
+            if (_shape != null) _shape.RemoveProduct(this);
+            _shape = shape;
+            shape.AddProduct(this);
         }
 
         private void AddProductToBrand()
         {
-            if (!String.IsNullOrWhiteSpace(Dto.BrandName))
-            {
-                var brand = Brand.Create(new BrandDto {Name = Dto.BrandName});
-                RelationProvider.BrandProduct.Add(brand, this);
-            }
+            if (String.IsNullOrWhiteSpace(Dto.BrandName)) return;
+            
+            var brand = Brand.Create(new BrandDto {Name = Dto.BrandName});
+            SetBrand(brand);
         }
 
         private void SetQuantity()
@@ -104,20 +125,20 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual Brand Brand
         {
-            get { return RelationProvider.BrandProduct.GetOnePart(this); } 
-            set { RelationProvider.BrandProduct.Add(value, this); }
+            get { return _brand; }
+            protected set { _brand = value; }
         }
 
         public virtual Package Package
         {
-            get { return RelationProvider.PackageProduct.GetOnePart(this); } 
-            protected set { RelationProvider.PackageProduct.Add(value, this); }
+            get { return _package; } 
+            protected set { _package = value; }
         }
 
         public virtual Shape Shape
         {
-            get { return RelationProvider.ShapeProduct.GetOnePart(this); } 
-            protected set { RelationProvider.ShapeProduct.Add(value, this); }
+            get { return _shape; } 
+            protected set { _shape = value; }
         }
 
         private IList<ProductSubstance> GetSubstances()
@@ -125,25 +146,28 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return _substances ?? (_substances = new List<ProductSubstance>());
         }
 
-        public virtual IEnumerable<ProductSubstance> Substances
+        public virtual IList<ProductSubstance> Substances
         {
             get
             {
                 return GetSubstances();
             }
 
-            protected set { _substances = value.ToList(); }
+            protected set { _substances = value; }
         }
 
         public virtual void AddRoute(Route route)
         {
-            RelationProvider.RouteProduct.Add(route, this);
+            if (_routes.Contains(route)) return;
+
+            _routes.Add(route);
+            route.AddProduct(this);
         }
 
-        public virtual IEnumerable<Route> Routes
+        public virtual Iesi.Collections.Generic.ISet<Route> Routes
         {
-            get { return RelationProvider.RouteProduct.GetManyPartLeft(this); }  
-            protected set { RelationProvider.RouteProduct.Add(value, this); }
+            get { return _routes; }  
+            protected set { _routes = value; }
         }
 
         #endregion
@@ -158,21 +182,25 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return new Product(dto);
         }
 
-        public virtual void AddBrand(Brand brand)
+        public virtual void SetBrand(Brand brand)
         {
-            RelationProvider.BrandProduct.Add(brand, this);
+            if (_brand == brand) return;
+            
+            if (_brand != null) _brand.RemoveProduct(this);
+            _brand = brand;
+            if (brand != null) brand.AddProduct(this);
         }
 
         public static Product Create(ProductDto dto, Shape shape, Package package, UnitValue unitValue)
         {
             var product = new Product(dto);
-            RelationProvider.ShapeProduct.Add(shape, product);
-            RelationProvider.PackageProduct.Add(package, product);
-            product.AddUnitValue(unitValue);
+            product.SetShape(shape);
+            product.SetPackage(package);
+            product.SetUnitValue(unitValue);
             return product;
         }
 
-        private void AddUnitValue(UnitValue unitValue)
+        private void SetUnitValue(UnitValue unitValue)
         {
             _unitValue = unitValue;
         }
@@ -184,7 +212,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void RemoveRoute(Route route)
         {
-            RelationProvider.RouteProduct.Remove(route, this);
+            if (!_routes.Contains(route)) return;
+
+            _routes.Remove(route);
+            route.RemoveProduct(this);
         }
     }
 }

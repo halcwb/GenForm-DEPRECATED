@@ -1,7 +1,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
-using Informedica.GenForm.Library.DomainModel;
+using Iesi.Collections.Generic;
 
 namespace Informedica.GenForm.Library.DomainModel.Relations
 {
@@ -9,33 +8,35 @@ namespace Informedica.GenForm.Library.DomainModel.Relations
         where TLeftPart : class, IRelationPart
         where TRightPart : class, IRelationPart
     {
-        private readonly IDictionary<TLeftPart, ISet<TRightPart>> _oneToManyRight;
-        private readonly IDictionary<TRightPart, ISet<TLeftPart>> _oneToManyLeft;
+        private readonly IDictionary<TLeftPart, Iesi.Collections.Generic.ISet<TRightPart>> _oneToManyRight;
+        private readonly IDictionary<TRightPart, Iesi.Collections.Generic.ISet<TLeftPart>> _oneToManyLeft;
 
         public ManyToManyRelation()
         {
-            _oneToManyLeft = new ConcurrentDictionary<TRightPart, ISet<TLeftPart>>();
-            _oneToManyRight = new ConcurrentDictionary<TLeftPart, ISet<TRightPart>>();
+            _oneToManyLeft = new ConcurrentDictionary<TRightPart, Iesi.Collections.Generic.ISet<TLeftPart>>();
+            _oneToManyRight = new ConcurrentDictionary<TLeftPart, Iesi.Collections.Generic.ISet<TRightPart>>();
         } 
 
-        public IEnumerable<TLeftPart> GetManyPartLeft(TRightPart rightPart)
+        public Iesi.Collections.Generic.ISet<TLeftPart> GetManyPartLeft(TRightPart rightPart)
         {
-            return _oneToManyLeft.ContainsKey(rightPart) ? _oneToManyLeft[rightPart] : new HashSet<TLeftPart>();
+            if (!_oneToManyLeft.ContainsKey(rightPart))  _oneToManyLeft[rightPart] = new HashedSet<TLeftPart>();
+            return _oneToManyLeft[rightPart];
         }
 
         public void Add(TLeftPart leftPart, TRightPart rightPart)
         {
             if (leftPart == null || rightPart == null) return;
 
-            if(!_oneToManyLeft.ContainsKey(rightPart)) _oneToManyLeft.Add(rightPart, new HashSet<TLeftPart>());
+            if(!_oneToManyLeft.ContainsKey(rightPart)) _oneToManyLeft.Add(rightPart, new HashedSet<TLeftPart>());
             _oneToManyLeft[rightPart].Add(leftPart);
-            if(!_oneToManyRight.ContainsKey(leftPart)) _oneToManyRight.Add(leftPart, new HashSet<TRightPart>());
+            if(!_oneToManyRight.ContainsKey(leftPart)) _oneToManyRight.Add(leftPart, new HashedSet<TRightPart>());
             _oneToManyRight[leftPart].Add(rightPart);
         }
 
-        public IEnumerable<TRightPart> GetManyPartRight(TLeftPart leftPart)
+        public Iesi.Collections.Generic.ISet<TRightPart> GetManyPartRight(TLeftPart leftPart)
         {
-            return _oneToManyRight.ContainsKey(leftPart) ? _oneToManyRight[leftPart] : new HashSet<TRightPart>();
+            if (!_oneToManyRight.ContainsKey(leftPart)) _oneToManyRight[leftPart] = new HashedSet<TRightPart>();
+            return _oneToManyRight[leftPart];
         }
 
         public void Remove(TLeftPart leftPart, TRightPart rightPart)
@@ -52,30 +53,20 @@ namespace Informedica.GenForm.Library.DomainModel.Relations
             }
         }
 
-        public void Add(TLeftPart leftPart, IEnumerable<TRightPart> rightParts)
+        public void Set(TLeftPart leftPart, Iesi.Collections.Generic.ISet<TRightPart> rightParts)
         {
-            if (leftPart == null || rightParts == null || rightParts.Count() == 0) return;
+            if (leftPart == null) return;
 
-            if (!_oneToManyRight.ContainsKey(leftPart)) _oneToManyRight.Add(leftPart, new HashSet<TRightPart>());
-            foreach (var rightPart in rightParts)
-            {
-                _oneToManyRight[leftPart].Add(rightPart);
-                if (!_oneToManyLeft.ContainsKey(rightPart)) _oneToManyLeft.Add(rightPart, new HashSet<TLeftPart>());
-                _oneToManyLeft[rightPart].Add(leftPart);
-            }
+            if (!_oneToManyRight.ContainsKey(leftPart)) _oneToManyRight.Add(leftPart, null);
+            _oneToManyRight[leftPart] = rightParts;
         }
 
-        public void Add(IEnumerable<TLeftPart> leftParts, TRightPart rightPart)
+        public void Set(Iesi.Collections.Generic.ISet<TLeftPart> leftParts, TRightPart rightPart)
         {
-            if (leftParts == null || leftParts.Count() == 0 || rightPart == null) return;
+            if (rightPart == null) return;
 
-            if (!_oneToManyLeft.ContainsKey(rightPart)) _oneToManyLeft.Add(rightPart, new HashSet<TLeftPart>());
-            foreach (var leftPart in leftParts)
-            {
-                _oneToManyLeft[rightPart].Add(leftPart);
-                if (!_oneToManyRight.ContainsKey(leftPart)) _oneToManyRight.Add(leftPart, new HashSet<TRightPart>());
-                _oneToManyRight[leftPart].Add(rightPart);
-            }
+            if (!_oneToManyLeft.ContainsKey(rightPart)) _oneToManyLeft.Add(rightPart, null);
+            _oneToManyLeft[rightPart] = leftParts;
         }
 
         public void Clear(TLeftPart leftPart)
@@ -90,7 +81,7 @@ namespace Informedica.GenForm.Library.DomainModel.Relations
 
         public void Clear(TRightPart rightPart)
         {
-            var leftList = new HashSet<TLeftPart>(_oneToManyLeft[rightPart]);
+            var leftList = new HashedSet<TLeftPart>(_oneToManyLeft[rightPart]);
             foreach (var leftPart in leftList)
             {
                 _oneToManyRight[leftPart].Remove(rightPart);

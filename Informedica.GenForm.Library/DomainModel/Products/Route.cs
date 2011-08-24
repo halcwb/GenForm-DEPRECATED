@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Relations;
 
@@ -7,6 +7,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class Route: Entity<Guid, RouteDto>, IRelationPart
     {
+        private ISet<Shape> _shapes = new HashedSet<Shape>();
+        private ISet<Product> _products = new HashedSet<Product>();
+
         protected Route() : base(new RouteDto()){}
 
         private Route(RouteDto dto) : base(dto.CloneDto())
@@ -24,12 +27,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddShape(Shape shape)
         {
-            RelationProvider.ShapeRoute.Add(shape, this);
-        }
-
-        public virtual bool CanNotAddShape(Shape shape)
-        {
-            throw new NotImplementedException();
+            if (_shapes.Contains(shape)) return;
         }
 
         public virtual String Abbreviation 
@@ -38,10 +36,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             set { Dto.Abbreviation = value; } 
         }
 
-        public virtual IEnumerable<Shape> Shapes
+        public virtual ISet<Shape> Shapes
         {
-            get { return RelationProvider.ShapeRoute.GetManyPartLeft(this); }
-            protected set { RelationProvider.ShapeRoute.Add(value, this); }
+            get { return _shapes; }
+            protected set { _shapes = value; }
         }
 
         private string CreateAbbreviationFromName()
@@ -55,10 +53,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return id == Guid.Empty;
         }
 
-        public virtual IEnumerable<Product> Products
+        public virtual ISet<Product> Products
         {
-            get { return RelationProvider.RouteProduct.GetManyPartRight(this); }
-            protected set { RelationProvider.RouteProduct.Add(this, value);}
+            get { return _products; }
+            protected set { _products = value;}
         }
 
         public static Route Create(RouteDto dto)
@@ -68,12 +66,37 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         internal protected  virtual void RemoveAllShapes()
         {
-            RelationProvider.ShapeRoute.Clear(this);
+            var list = new HashedSet<Shape>(Shapes);
+            foreach (var shape in list)
+            {
+                RemoveShape(shape);
+            }
         }
 
         public virtual void RemoveShape(Shape shape)
         {
-            RelationProvider.ShapeRoute.Remove(shape, this);
+            if (_shapes.Contains(shape))
+            {
+                _shapes.Remove(shape);
+                shape.RemoveRoute(this);
+            }
+        }
+
+        public void AddProduct(Product product)
+        {
+            if (_products.Contains(product)) return;
+
+            _products.Add(product);
+            product.AddRoute(this);
+        }
+
+        public void RemoveProduct(Product product)
+        {
+            if (_products.Contains(product))
+            {
+                _products.Remove(product);
+                product.RemoveRoute(this);
+            }
         }
     }
 }

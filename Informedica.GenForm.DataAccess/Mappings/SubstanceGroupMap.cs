@@ -10,6 +10,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
         {
             HasMany(x => x.Substances)
                 .AsSet()
+                .Cascade.All()
                 .Inverse();
         }
     }
