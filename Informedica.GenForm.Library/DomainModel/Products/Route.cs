@@ -1,11 +1,10 @@
 ﻿using System;
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Relations;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Route: Entity<Guid, RouteDto>, IRelationPart
+    public class Route: Entity<Guid, RouteDto>
     {
         private ISet<Shape> _shapes = new HashedSet<Shape>();
         private ISet<Product> _products = new HashedSet<Product>();
@@ -28,6 +27,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual void AddShape(Shape shape)
         {
             if (_shapes.Contains(shape)) return;
+
+            _shapes.Add(shape);
+            shape.AddRoute(this);
         }
 
         public virtual String Abbreviation 
@@ -64,12 +66,21 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return new Route(dto);
         }
 
-        internal protected  virtual void RemoveAllShapes()
+        internal protected virtual void RemoveAllShapes()
         {
             var list = new HashedSet<Shape>(Shapes);
             foreach (var shape in list)
             {
                 RemoveShape(shape);
+            }
+        }
+
+        internal protected  virtual void RemoveAllProducts()
+        {
+            var list = new HashedSet<Product>(Products);
+            foreach (var product in list)
+            {
+                RemoveProduct(product);
             }
         }
 
@@ -82,7 +93,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             }
         }
 
-        public void AddProduct(Product product)
+        public virtual void AddProduct(Product product)
         {
             if (_products.Contains(product)) return;
 
@@ -90,7 +101,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             product.AddRoute(this);
         }
 
-        public void RemoveProduct(Product product)
+        public virtual void RemoveProduct(Product product)
         {
             if (_products.Contains(product))
             {

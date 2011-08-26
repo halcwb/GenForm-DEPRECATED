@@ -21,7 +21,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
                 .Not.Nullable()
                 .Cascade.SaveUpdate();
             HasMany(x => x.Substances)
-                .AsSet()
+                .AsList(s => s.Column("SortOrder"))
                 .Cascade.All().Inverse();
             HasManyToMany(x => x.Routes)
                 .AsSet()

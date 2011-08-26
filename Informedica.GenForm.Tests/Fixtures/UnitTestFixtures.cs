@@ -1,5 +1,4 @@
-﻿using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
+﻿using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.Tests.Fixtures
 {
@@ -16,6 +15,20 @@ namespace Informedica.GenForm.Tests.Fixtures
                            UnitGroupName = "massa",
                            AllowConversion = true
                        };
+        }
+
+        public static UnitDto GetTestUnitMililiter()
+        {
+            return  new UnitDto
+                        {
+                            Abbreviation = "mL",
+                            AllowConversion = true,
+                            Divisor = 1000,
+                            IsReference = false,
+                            Multiplier = 0.001M,
+                            Name = "milliliter",
+                            UnitGroupName = "volume"
+                        };
         }
     }
 }

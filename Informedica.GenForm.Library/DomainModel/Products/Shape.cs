@@ -9,7 +9,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         private ISet<Route> _routes = new HashedSet<Route>();
         private ISet<UnitGroup> _unitGroups = new HashedSet<UnitGroup>();
         private ISet<Package> _packages = new HashedSet<Package>();
-        private ISet<Product> _products = new HashedSet<Product>();
+        private readonly ISet<Product> _products = new HashedSet<Product>();
 
         protected Shape():base(new ShapeDto()) {}
 
@@ -63,6 +63,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual void AddPackage(Package package)
         {
             if (_packages.Contains(package)) return;
+
+            _packages.Add(package);
+            package.AddShape(this);
         }
 
         public virtual ISet<Package> Packages
@@ -148,7 +151,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             unitGroup.RemoveShape(this);
         }
 
-        public void RemoveRoute(Route route)
+        public virtual void RemoveRoute(Route route)
         {
             if (!_routes.Contains(route)) return;
             
@@ -161,7 +164,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             if (_products.Contains(product)) _products.Remove(product);
         }
 
-        public void AddProduct(Product product)
+        public virtual void AddProduct(Product product)
         {
             if (_products.Contains(product)) return;
 

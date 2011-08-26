@@ -64,7 +64,6 @@
     <Compile Include="Assemblers\DatabaseRegistrationAssembler.cs" />
     <Compile Include="Assemblers\ProductAssembler.cs" />
     <Compile Include="Assemblers\RepositoryAssembler.cs" />
-    <Compile Include="Assemblers\TransactionAssembler.cs" />
     <Compile Include="Assemblers\UserAssembler.cs" />
     <Compile Include="Contexts\SessionContext.cs" />
     <Compile Include="GenFormApplication.cs" />

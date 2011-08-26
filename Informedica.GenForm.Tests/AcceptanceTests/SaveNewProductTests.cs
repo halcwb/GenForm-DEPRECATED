@@ -193,61 +193,9 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
         }
 
         [TestMethod]
-        public void UserCanAddANewGenericName()
-        {
-            var generic = CreateNewGeneric(Penicilline);
-            try
-            {
-                var repos = ObjectFactory.GetInstance<IRepositoryLinqToSql<IGeneric>>();
-                ObjectFactory.Inject(typeof(IRepositoryLinqToSql<IGeneric>), repos);
-
-                using (repos.Rollback)
-                {
-                    var result = GetProductController().AddNewGeneric(CreateJObjectFrom(generic));
-
-                    Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New generic " + Penicilline + " could not be added");
-                }
-            }
-            catch (Exception e)
-            {
-                Assert.Fail("an error was thrown: " + e);
-            }
-        }
-
-        private IGeneric CreateNewGeneric(string name)
-        {
-            var generic = ObjectFactory.GetInstance<IGeneric>();
-            generic.GenericName = name;
-
-            return generic;
-        }
-
-        [TestMethod]
         public void UserCanAddNewShapeName()
         {
-            try
-            {
-                var shape = CreateNewShape(Tablet);
-                var repos = ObjectFactory.GetInstance<IRepositoryLinqToSql<IShape>>();
-                ObjectFactory.Inject(typeof(IRepositoryLinqToSql<IShape>), repos);
-                using (repos.Rollback)
-                {
-                    var result = GetProductController().AddNewShape(CreateJObjectFrom(shape));
-
-                    Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "New shape" + Tablet + " could not be added");
-                }
-            }
-            catch (Exception e)
-            {
-                Assert.Fail("an error was thrown: " + e);
-            }
-        }
-
-        private IShape CreateNewShape(String name)
-        {
-            var shape = Shape.Create(new ShapeDto{ Name = name});
-
-            return shape;
+            throw new NotImplementedException();
         }
 
         [TestMethod]

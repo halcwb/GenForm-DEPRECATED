@@ -71,46 +71,21 @@
     <Compile Include="Mappings\UnitMap.cs" />
     <Compile Include="Mappings\UnitValueMap.cs" />
     <Compile Include="Repositories\BrandRepository.cs" />
-    <Compile Include="Repositories\Delegates\BrandDelegates.cs" />
-    <Compile Include="Repositories\Delegates\GenericDelegates.cs" />
-    <Compile Include="Repositories\Delegates\PackageDelegates.cs" />
-    <Compile Include="Repositories\Delegates\ProductDelegates.cs" />
-    <Compile Include="Repositories\Delegates\ShapeDelegates.cs" />
-    <Compile Include="Repositories\Delegates\SubstanceDelegates.cs" />
-    <Compile Include="Repositories\Delegates\UnitDelegates.cs" />
-    <Compile Include="Repositories\Delegates\UserDelegates.cs" />
-    <Compile Include="Repositories\Delete.cs" />
-    <Compile Include="Repositories\Fetch.cs" />
-    <Compile Include="Repositories\Insert.cs" />
     <Compile Include="Repositories\NHibernateBase.cs" />
     <Compile Include="Repositories\NHibernateRepository.cs" />
     <Compile Include="Repositories\PackageRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
-    <Compile Include="Repositories\RepositoryDelegates.cs" />
     <Compile Include="Repositories\RouteRepository.cs" />
-    <Compile Include="Repositories\SelectorOfInt.cs" />
-    <Compile Include="Repositories\SelectorOfString.cs" />
     <Compile Include="Repositories\ShapeRepository.cs" />
     <Compile Include="Repositories\SubstanceGroupRepository.cs" />
     <Compile Include="Repositories\SubstanceRepository.cs" />
     <Compile Include="Repositories\UnitGroupRepository.cs" />
     <Compile Include="Repositories\UnitRepository.cs" />
-    <Compile Include="Repositories\Update.cs" />
     <Compile Include="SessionFactoryCreator.cs" />
-    <Compile Include="Transactions\Commands\CommandBase.cs" />
-    <Compile Include="Transactions\Commands\DeleteProductCommand.cs" />
-    <Compile Include="Transactions\Commands\DeleteSubstanceCommand.cs" />
-    <Compile Include="Transactions\Commands\InsertProductCommand.cs" />
     <Compile Include="Databases\DatabaseConnection.cs" />
     <Compile Include="Databases\DatabaseSetting.cs" />
     <Compile Include="DataContexts\DataContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\RepositoryLinqToSql.cs" />
-    <Compile Include="Transactions\Commands\InsertSubstanceCommand.cs" />
-    <Compile Include="Transactions\Commands\SelectProductCommand.cs" />
-    <Compile Include="Transactions\Commands\SelectSubstanceCommand.cs" />
-    <Compile Include="Transactions\IExecutable.cs" />
-    <Compile Include="Transactions\TransactionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Informedica.GenForm.Database\Informedica.GenForm.Database.csproj">
@@ -126,7 +101,9 @@
       <Name>Informedica.Settings</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Repositories\Delegates\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

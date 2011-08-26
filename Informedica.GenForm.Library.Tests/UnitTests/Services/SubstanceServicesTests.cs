@@ -61,14 +61,14 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatSubstanceCanBeGet()
         {
-            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetValidSubstanceDto()).Get();
+            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
             Assert.IsInstanceOfType(substance, typeof(Substance));
         }
 
         [TestMethod]
         public void ThatSubstanceWithSubstanceGroupCanBeGet()
         {
-            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetValidSubstanceDto()).Get();
+            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
             Assert.AreEqual(substance.SubstanceGroup.Name,
                             SubstanceServices.Substances.Single(x => x.Name == substance.Name)
                             .SubstanceGroup.Name);           
@@ -77,7 +77,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatSubstanceWithSubstanceGroupIsBidirectional()
         {
-            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetValidSubstanceDto()).Get();
+            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
             Assert.AreEqual(substance,
                             SubstanceServices.Substances.Single(x => x.Name == substance.Name)
                             .SubstanceGroup.Substances.Single(s => s.Name == substance.Name));                       
@@ -86,7 +86,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatSubstanceCanBeFound()
         {
-            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetValidSubstanceDto()).Get();
+            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
             Assert.AreEqual(substance, 
                             SubstanceServices.Substances.Single(x => x.Name == substance.Name));
         }
@@ -94,7 +94,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod] 
         public void ThatSubstanceCanChangeName()
         {
-            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetValidSubstanceDto()).Get();
+            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
             substance.Name = "dopamine changed";
             Context.CurrentSession().Transaction.Commit();
             
@@ -107,36 +107,36 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatSubstanceCanBeDeleted()
         {
-            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetValidSubstanceDto()).Get();
+            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
             SubstanceServices.Delete(substance);
             Context.CurrentSession().Transaction.Commit();
 
             Context.CurrentSession().Transaction.Begin();
             substance =
                 SubstanceServices.Substances.SingleOrDefault(
-                    s => s.Name == SubstanceTestFixtures.GetValidSubstanceDto().Name);
+                    s => s.Name == SubstanceTestFixtures.GetSubstanceWithGroup().Name);
             Assert.IsNull(substance);
         }
 
         [TestMethod]
         public void ThatSubstanceCanBeDeletedWithinTransaction()
         {
-            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetValidSubstanceDto()).Get();
+            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
             SubstanceServices.Delete(substance);
 
             substance =
                 SubstanceServices.Substances.SingleOrDefault(
-                    s => s.Name == SubstanceTestFixtures.GetValidSubstanceDto().Name);
+                    s => s.Name == SubstanceTestFixtures.GetSubstanceWithGroup().Name);
             Assert.IsNull(substance);
         }
 
         [TestMethod]
         public void ThatSubstanceGroupCanBeDeletedWithoutDeletingSubstance()
         {
-            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetValidSubstanceDto()).Get();
+            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
             var group = substance.SubstanceGroup;
             var id = group.Id;
-            group.ClearSubstances();
+            group.ClearAllSubstances();
 
             Assert.IsNull(substance.SubstanceGroup);
             Context.CurrentSession().Delete(group);
@@ -145,9 +145,18 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         }
 
         [TestMethod]
+        public void ThatIfSubstanceDeleteIsCalledSubstanceGroupHasNoAssociationWithSubstance()
+        {
+            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
+            
+            SubstanceServices.Delete(substance);
+
+        }
+
+        [TestMethod]
         public void ThatSubstanceCanBeDeletedWithoutDeletingSubstanceGroup()
         {
-            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetValidSubstanceDto()).Get();
+            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
             var id = substance.SubstanceGroup.Id;
             SubstanceServices.Delete(substance);
             var group = Context.CurrentSession().Get<SubstanceGroup>(id);

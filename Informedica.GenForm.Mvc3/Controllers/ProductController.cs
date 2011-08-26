@@ -1,7 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Library.Services.Products;
 using Newtonsoft.Json.Linq;
 using System.Web.Mvc;
@@ -90,6 +89,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
         {
             var success = true;
             var message = String.Empty;
+
             try
             {
             }
@@ -117,24 +117,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
             }
 
             return this.Direct(new { success, data = brand, message });
-        }
-
-        public ActionResult AddNewGeneric(JObject genericDto)
-        {
-            var success = true;
-            var message = String.Empty;
-            var generic = GetGenericFromJObject(genericDto);
-
-            try
-            {
-            }
-            catch (Exception e)
-            {
-                success = false;
-                message = e.ToString();
-            }
-
-            return this.Direct(new { success, data = generic, message });
         }
 
         public ActionResult AddNewShape(JObject shapeDto)
@@ -231,14 +213,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
                        {
                            Name = package.Value<String>("PackageName")
                        });
-        }   
-
-        private IGeneric GetGenericFromJObject(JObject generic)
-        {
-            return new Generic
-                       {
-                           GenericName = generic.Value<String>("GenericName")
-                       };
         }
 
         private IUnit GetUnitFromJObject(JObject unit)

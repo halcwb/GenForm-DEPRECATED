@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
-using Informedica.GenForm.Library.DomainModel.Relations;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Substance : Entity<Guid, SubstanceDto>, ISubstance, IRelationPart
+    public class Substance : Entity<Guid, SubstanceDto>, ISubstance
     {
         private readonly HashSet<Product> _products = new HashSet<Product>(new ProductComparer());
         private SubstanceGroup _substanceGroup;

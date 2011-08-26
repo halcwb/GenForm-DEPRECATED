@@ -1,13 +1,14 @@
-﻿using Informedica.GenForm.Library.DomainModel.Users;
+﻿using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Informedica.GenForm.Assembler.Tests
+namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Updating
 {
     /// <summary>
-    /// Summary description for UserAssemblerShould
+    /// Summary description for SubstanceWithSubstanceGroup
     /// </summary>
     [TestClass]
-    public class UserAssemblerShouldRegister
+    public class SubstanceWithSubstanceGroupTests
     {
         private TestContext testContextInstance;
 
@@ -32,9 +33,9 @@ namespace Informedica.GenForm.Assembler.Tests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize]
-        public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
-        
+        // [ClassInitialize()]
+        // public static void MyClassInitialize(TestContext testContext) { }
+        //
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
@@ -49,12 +50,29 @@ namespace Informedica.GenForm.Assembler.Tests
         //
         #endregion
 
+        [TestMethod]
+        public void ThatIfSubstanceGroupIsSetToNullSubstanceGroupDoesNotContainSubstance()
+        {
+            var subst = GetSubstanceWithGroup();
+            var group = subst.SubstanceGroup;
+
+            subst.RemoveFromSubstanceGroup();
+            Assert.IsFalse(group.Substances.Contains(subst));
+            Assert.IsNull(subst.SubstanceGroup);
+        }
 
         [TestMethod]
-        public void AnImplementationOfUser()
+        public void ThatWhenSubstanceIsRemovedFromSubstanceGroupSubstanceGroupOfSubstanceIsNull()
         {
-            ObjectFactoryAssertUtility.AssertRegistration<IUser>(
-                ObjectFactoryAssertUtility.GetMessageFor<IUser>());
+            var subst = GetSubstanceWithGroup();
+            subst.SubstanceGroup.Remove(subst);
+
+            Assert.IsNull(subst.SubstanceGroup);            
+        }
+
+        private Substance GetSubstanceWithGroup()
+        {
+            return Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
         }
     }
 }

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.DomainModel.Relations;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Product : Entity<Guid, ProductDto>, IProduct, IRelationPart
+    public class Product : Entity<Guid, ProductDto>, IProduct
     {
         #region Private Fields
         
@@ -210,12 +209,22 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             GetSubstances().Add(new ProductSubstance(this, sortOrder, substance, quantity, unit));
         }
 
+        public virtual void AddSubstance(ProductSubstance substance)
+        {
+            GetSubstances().Add(substance);
+        }
+
         public virtual void RemoveRoute(Route route)
         {
             if (!_routes.Contains(route)) return;
 
             _routes.Remove(route);
             route.RemoveProduct(this);
+        }
+
+        public virtual void RemoveFromBrand()
+        {
+            SetBrand(null);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -55,14 +54,14 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         [TestMethod]
         public void ThatAValidSubstanceIsCreated()
         {
-            var substance = Substance.Create(SubstanceTestFixtures.GetValidSubstanceDto());
+            var substance = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
             Assert.IsTrue(SubstanceIsValid(substance));
         }
 
         [TestMethod]
         public void ThatAValidSubstanceIsCreatedInANewGroup()
         {
-            var substance = Substance.Create(SubstanceTestFixtures.GetValidSubstanceDto());
+            var substance = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
             Assert.IsTrue(SubstanceGroupIsValid(substance));
         }
 
@@ -70,7 +69,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         public void ThatAValidSubstanceCanBeCreatedWithAnExistingGroup()
         {
             var substance = Substance.Create(SubstanceTestFixtures.GetSubstanceDtoWithoutGroup(), 
-                            SubstanceGroup.Create(SubstanceGroupTestFixtures.GetDto()));
+                            SubstanceGroup.Create(SubstanceGroupTestFixtures.GetSubstanceGroupDtoWithoutItems()));
             Assert.IsTrue(SubstanceIsValid(substance));
             Assert.IsTrue(SubstanceGroupIsValid(substance));
         }
@@ -84,14 +83,6 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         private bool SubstanceIsValid(Substance substance)
         {
             return !string.IsNullOrWhiteSpace(substance.Name);
-        }
-    }
-
-    public static class SubstanceGroupTestFixtures
-    {
-        public static SubstanceGroupDto GetDto()
-        {
-            return new SubstanceGroupDto {Name = "inotropica"};
         }
     }
 }

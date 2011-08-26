@@ -5,7 +5,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
 {
     public sealed class ProductSubstanceMap : ClassMap<ProductSubstance>
     {
-        private volatile string ProductSubstanceCombi = "ProductSubstanceCombi";
+        private const string ProductSubstanceCombi = "ProductSubstanceCombi";
 
         public ProductSubstanceMap()
         {

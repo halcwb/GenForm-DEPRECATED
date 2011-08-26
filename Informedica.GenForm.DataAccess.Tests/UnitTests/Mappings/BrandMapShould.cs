@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using FluentNHibernate.Testing;
+﻿using FluentNHibernate.Testing;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests;
-using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
@@ -15,7 +13,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     {
         private TestContext testContextInstance;
 
-        public BrandMapShould() : base(true)
+        public BrandMapShould() : base(false)
         {
         }
 
@@ -62,19 +60,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             new PersistenceSpecification<Brand>(Context.CurrentSession())
                 .CheckProperty(b => b.Name, "Dynatra")
-                .CheckList(b => b.Products, CreateProductList())
                 .VerifyTheMappings();
-        }
-
-        private static IEnumerable<Product> CreateProductList()
-        {
-            return new List<Product>
-                       {
-                            Product.Create(
-                                ProductTestFixtures.GetProductDtoWithNoSubstances()),
-                            Product.Create(
-                                ProductTestFixtures.GetProductDtoWithOneSubstance())
-                       };
         }
     }
 }
