@@ -78,9 +78,7 @@
     <Compile Include="DomainModel\Data\SubstanceGroupDto.cs" />
     <Compile Include="DomainModel\Data\UnitDto.cs" />
     <Compile Include="DomainModel\Data\UnitGroupDto.cs" />
-    <Compile Include="DomainModel\Products\Generic.cs" />
     <Compile Include="DomainModel\Products\IBrand.cs" />
-    <Compile Include="DomainModel\Products\IGeneric.cs" />
     <Compile Include="DomainModel\Products\IPackage.cs" />
     <Compile Include="DomainModel\Products\IProductSubstance.cs" />
     <Compile Include="DomainModel\Products\IShape.cs" />
@@ -92,26 +90,17 @@
     <Compile Include="DomainModel\Products\ProductSubstance.cs" />
     <Compile Include="DomainModel\Products\Route.cs" />
     <Compile Include="DomainModel\Products\Shape.cs" />
-    <Compile Include="DomainModel\Products\ShapeAssociation.cs" />
     <Compile Include="DomainModel\Products\Substance.cs" />
     <Compile Include="DomainModel\Products\SubstanceGroup.cs" />
     <Compile Include="DomainModel\Products\Unit.cs" />
     <Compile Include="DomainModel\Products\UnitGroup.cs" />
     <Compile Include="DomainModel\Products\UnitValue.cs" />
-    <Compile Include="DomainModel\Relations\IRelation.cs" />
-    <Compile Include="DomainModel\Relations\IRelationPart.cs" />
-    <Compile Include="DomainModel\Relations\ManyToManyRelation.cs" />
-    <Compile Include="DomainModel\Relations\OneToManyRelation.cs" />
-    <Compile Include="DomainModel\Relations\OneToOneRelation.cs" />
-    <Compile Include="DomainModel\Relations\RelationManager.cs" />
-    <Compile Include="DomainModel\Relations\RelationProvider.cs" />
     <Compile Include="Exceptions\CannotAddItemException.cs" />
     <Compile Include="Exceptions\CannotRemoveItemException.cs" />
     <Compile Include="Exceptions\InvalidDtoException.cs" />
     <Compile Include="Factories\BrandFactory.cs" />
     <Compile Include="Factories\EntityFactory.cs" />
     <Compile Include="Factories\FactoryManager.cs" />
-    <Compile Include="Factories\ICommandFactory.cs" />
     <Compile Include="Factories\PackageFactory.cs" />
     <Compile Include="Factories\ProductFactory.cs" />
     <Compile Include="Factories\RepositoryFactory.cs" />
@@ -119,7 +108,6 @@
     <Compile Include="Factories\ShapeFactory.cs" />
     <Compile Include="Factories\SubstanceFactory.cs" />
     <Compile Include="Factories\SubstanceGroupFactory.cs" />
-    <Compile Include="Factories\TransactionManagerFactory.cs" />
     <Compile Include="Factories\UnitFactory.cs" />
     <Compile Include="Factories\UnitGroupFactory.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -153,12 +141,6 @@
     <Compile Include="Services\Products\IProductServices.cs" />
     <Compile Include="Services\Users\LoginServices.cs" />
     <Compile Include="Services\Products\ProductServices.cs" />
-    <Compile Include="Transactions\CommandQueue.cs" />
-    <Compile Include="Transactions\Commands\IDeleteCommand.cs" />
-    <Compile Include="Transactions\Commands\IInsertCommand.cs" />
-    <Compile Include="Transactions\Commands\ISelectCommand.cs" />
-    <Compile Include="Transactions\ICommand.cs" />
-    <Compile Include="Transactions\ITransactionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Informedica.Factory\Informedica.Factory.csproj">

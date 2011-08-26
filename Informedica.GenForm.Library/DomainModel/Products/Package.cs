@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Linq;
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Relations;
+using Informedica.GenForm.Library.DomainModel.Equality;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Package: Entity<Guid, PackageDto>, IPackage, IRelationPart
+    public class Package: Entity<Guid, PackageDto>, IPackage
     {
         private ISet<Product> _products = new HashedSet<Product>();
         private ISet<Shape> _shapes = new HashedSet<Shape>();
+        private readonly ShapeComparer _shapeComparer = new ShapeComparer();
 
         #region Implementation of IPackage
 
@@ -32,15 +34,20 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void AddShape(Shape shape)
         {
-            if (_shapes.Contains(shape)) return;
+            if (ContainsShape(shape)) return;
 
             _shapes.Add(shape);
             shape.AddPackage(this);
         }
 
+        public virtual bool ContainsShape(Shape shape)
+        {
+            return _shapes.Contains(shape, _shapeComparer);
+        }
+
         public virtual void RemoveShape(Shape shape)
         {
-            if (!_shapes.Contains(shape)) return;
+            if (!ContainsShape(shape)) return;
 
             _shapes.Remove(shape);
             shape.RemovePackage(this);
@@ -73,8 +80,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             var list = new HashedSet<Shape>(Shapes);
             foreach (var shape in list)
             {
-                _shapes.Remove(shape);
-                shape.RemovePackage(this);
+                RemoveShape(shape);
             }
         }
 

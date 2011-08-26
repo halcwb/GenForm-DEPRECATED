@@ -2,11 +2,10 @@
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.DomainModel.Relations;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Unit : Entity<Guid, UnitDto>, IUnit, IRelationPart
+    public class Unit : Entity<Guid, UnitDto>, IUnit
     {
         private UnitGroup _unitGroup;
 

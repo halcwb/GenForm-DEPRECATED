@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Informedica.Factory
 {
@@ -17,7 +18,9 @@ namespace Informedica.Factory
                 {
                     lock (LockThis)
                     {
-                        if (_instance == null) _instance = new ObjectFactory();
+                        var instance = new ObjectFactory();
+                        Thread.MemoryBarrier();
+                        if (_instance == null) _instance = instance;
                     }
                 }
                 return _instance;

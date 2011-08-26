@@ -1,5 +1,4 @@
-﻿using Informedica.GenForm.DataAccess.Databases;
-using Informedica.GenForm.Database;
+﻿using Informedica.GenForm.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Assembler.Tests
@@ -59,16 +58,6 @@ namespace Informedica.GenForm.Assembler.Tests
         //}
         //
         #endregion
-
-        /// <summary>
-        ///A test for RegisterDependencies
-        ///</summary>
-        [TestMethod]
-        public void AnInstanceOfGenFormDataContext()
-        {
-            var connection = DatabaseConnection.GetConnectionString(DatabaseConnection.DatabaseName.GenForm);
-            ObjectFactoryAssertUtility.AssertRegistrationWith<string, GenFormDataContext>(connection);
-        }
 
         [TestMethod]
         public void NotADefaultInstanceOfGenFormDataContext()

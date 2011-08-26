@@ -1,21 +1,23 @@
 ﻿using Informedica.GenForm.Assembler;
-using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests;
+using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NHibernate;
 
-namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
+namespace Informedica.NHibernate.Tests
 {
     /// <summary>
-    /// Summary description for SubstanceShould
+    /// Summary description for NHibernateRepositoryTests
     /// </summary>
     [TestClass]
-    public class SubstanceShould : TestSessionContext
+    public class NHibernateRepositoryTests : TestSessionContext
     {
         private TestContext testContextInstance;
 
-        public SubstanceShould() : base(false) {}
+        public NHibernateRepositoryTests() : base(true)
+        {
+        }
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -40,7 +42,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         // Use ClassInitialize to run code before running the first test in the class
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
-
+        
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
@@ -56,51 +58,43 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         #endregion
 
         [TestMethod]
-        public void BeAbleToCreateASessionToPersistSubstance()
+        public void ThatSubstanceCanBeAdded()
         {
-            PersistSubstance(Context.CurrentSession(), CreateTestSubstance());
+            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            var repos = new SubstanceRepository(GenFormApplication.SessionFactory);
+            repos.Add(subst);
+
+            Assert.IsTrue(repos.Contains(subst));
         }
 
         [TestMethod]
-        public void BeAbleToCreateASubstanceDirectlyFromSessionFactory()
+        public void ThatSubstanceHasSubstanceGroup()
         {
-            PersistSubstance(Context.CurrentSession(), CreateTestSubstance());
+            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            var repos = new SubstanceRepository(GenFormApplication.SessionFactory);
+            repos.Add(subst);
+            
+            Assert.IsNotNull(subst.SubstanceGroup);
         }
 
         [TestMethod]
-        public void BePersistedWithSubstanceGroup()
+        public void ThatSubstanceGroupContainsSubstance()
         {
-                var subst = Substance.Create(new SubstanceDto
-                {
-                    SubstanceGroupName = "analgetica",
-                    Name = "paracetamol"
-                });
+            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            new SubstanceRepository(GenFormApplication.SessionFactory) {subst};
 
-                Assert.AreEqual("analgetica", subst.SubstanceGroup.Name);
-                PersistSubstance(Context.CurrentSession(), subst);
+            Assert.IsTrue(subst.SubstanceGroup.Substances.Contains(subst));
         }
 
         [TestMethod]
-        public void ThrowAnErrorWhenSubsanceGroupNameIsEmptyString()
+        public void ThatSubstancCanBeRemovedFromSubstanceGroup()
         {
-            var subst = Substance.Create(new SubstanceDto
-                {
-                    SubstanceGroupName = "",
-                    Name = "paracetamol"
-                });
+            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            new SubstanceRepository(GenFormApplication.SessionFactory) {subst};
+            var group = subst.SubstanceGroup;
+            subst.RemoveFromSubstanceGroup();
 
-            PersistSubstance(Context.CurrentSession(), subst);
+            Assert.IsFalse(group.Substances.Contains(subst));   
         }
-
-        private static void PersistSubstance(ISession session, ISubstance subst)
-        {
-            session.SaveOrUpdate(subst);
-        }
-
-        private static ISubstance CreateTestSubstance()
-        {
-            return Substance.Create(new SubstanceDto { Name = "paracetamol" });
-        }
-
     }
 }

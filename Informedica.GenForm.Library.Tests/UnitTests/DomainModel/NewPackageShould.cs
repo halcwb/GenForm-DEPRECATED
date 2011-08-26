@@ -106,19 +106,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         public void NotAcceptTwoDuplicateShapes()
         {
             var package = AssociateWithShape();
-            try
-            {
-                package.AddShape(Shape.Create(new ShapeDto
-                                       {
-                                           Name = "infusievloeistof"
-                                       }));
-                Assert.Fail(new StackFrame().GetMethod().Name);
-            }
-            catch (Exception e)
-            {
-                Assert.IsInstanceOfType(e, typeof(CannotAddItemException<Shape>));
-            }
-
+            package.AddShape(Shape.Create(new ShapeDto
+                                    {
+                                        Name = "infusievloeistof"
+                                    }));
+            Assert.AreEqual(1, package.Shapes.Count);
         }
     }
 }

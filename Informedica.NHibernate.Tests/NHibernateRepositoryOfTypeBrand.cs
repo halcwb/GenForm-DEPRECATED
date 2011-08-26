@@ -69,9 +69,9 @@ namespace Informedica.NHibernate.Tests
         {
             using (GetContext())
             {
-                //BeInstantiated();
-                //BeAbleToUseTypedSessionQuery();
-                //BeAbleGiveACountOfZeroWhenNothingSaved();
+                BeInstantiated();
+                BeAbleToUseTypedSessionQuery();
+                BeAbleGiveACountOfZeroWhenNothingSaved();
                 NotThrowAnErrorWhenAddingANewBrand();
                 AfterSaveReturnACountOfOne();
                 BeAbleToFindTheNewBrand();

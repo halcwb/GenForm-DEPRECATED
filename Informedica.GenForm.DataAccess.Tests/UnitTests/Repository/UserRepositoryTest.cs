@@ -79,7 +79,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         //[TestMethod] ToDo: rewrite this test to use with Repository
         public void GetUserBySystemUsernameReturnsInstanceOfIUserWithThatName()
         {
-            var name = "Test";
+            const string name = "Test";
             IsolateRepositoryFromDataContext(CreateUserListWithName(name));
 
             var result = CreateUserRepository().Fetch(name).FirstOrDefault();

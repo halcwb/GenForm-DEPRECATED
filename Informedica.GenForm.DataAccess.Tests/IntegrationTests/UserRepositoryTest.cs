@@ -2,7 +2,6 @@
 using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess.DataContexts;
-using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Database;
 using Informedica.GenForm.Library.DomainModel.Users;
 using Informedica.GenForm.Library.Repositories;
@@ -41,7 +40,7 @@ namespace Informedica.GenForm.DataAccess.Tests.IntegrationTests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
         
         // Use ClassCleanup to run code after all tests in a class have run
@@ -67,6 +66,7 @@ namespace Informedica.GenForm.DataAccess.Tests.IntegrationTests
             IsolateRepositoryFromDataContext(users);
 
             var list = repository.Fetch("Admin");
+            if (list == null) Assert.Fail();
 
             Assert.IsTrue(list.Count() > 0, "A user with name Admin should exist in the database");
             Assert.IsTrue(list.FirstOrDefault().Name == "Admin", "The User should have name Admin");

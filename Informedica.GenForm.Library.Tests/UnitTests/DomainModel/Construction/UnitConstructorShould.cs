@@ -1,9 +1,8 @@
-﻿using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.Factories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
+namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
 {
     /// <summary>
     /// Summary description for UnitTestConstructorShould

@@ -6,7 +6,6 @@ using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NHibernate;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 {
@@ -18,7 +17,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     {
         private TestContext testContextInstance;
 
-        public PackageMapShould() : base(true) {}
+        public PackageMapShould() : base(false) {}
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -75,7 +74,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         }
 
         [TestMethod]
-        public void WillNotAllowDuplicateShapes()
+        public void WillThrowAnnErrorWhenDuplicateShapes()
         {
             try
             {

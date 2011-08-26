@@ -15,7 +15,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     {
         private TestContext testContextInstance;
 
-        public UnitWithGroupShould() : base(true) {}
+        public UnitWithGroupShould() : base(false) {}
 
         /// <summary>
         ///Gets or sets the test context which provides

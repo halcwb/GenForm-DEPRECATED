@@ -2,17 +2,16 @@
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
-using Informedica.GenForm.Library.DomainModel.Relations;
 using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class UnitGroup : Entity<Guid, UnitGroupDto>, IUnitGroup, IRelationPart
+    public class UnitGroup : Entity<Guid, UnitGroupDto>, IUnitGroup
     {
         #region Private
 
-        private ISet<Unit> _units;
-        private ISet<Shape> _shapes;
+        private ISet<Unit> _units = new HashedSet<Unit>();
+        private ISet<Shape> _shapes = new HashedSet<Shape>();
 
         #endregion
 
@@ -82,7 +81,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         {
             if (_shapes.Contains(shape)) return;
 
-            _shapes.Remove(shape);
+            _shapes.Add(shape);
             shape.AddUnitGroup(this);
         }
 

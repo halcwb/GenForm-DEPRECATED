@@ -17,7 +17,7 @@ namespace Informedica.GenForm.Tests.Fixtures
             return list;
         }
 
-        public static SubstanceDto GetValidSubstanceDto()
+        public static SubstanceDto GetSubstanceWithGroup()
         {
             return new SubstanceDto
                        {
@@ -28,7 +28,7 @@ namespace Informedica.GenForm.Tests.Fixtures
 
         public static SubstanceDto GetSubstanceDtoWithoutGroup()
         {
-            var dto = GetValidSubstanceDto();
+            var dto = GetSubstanceWithGroup();
             dto.SubstanceGroupName = "";
             return dto;
         }

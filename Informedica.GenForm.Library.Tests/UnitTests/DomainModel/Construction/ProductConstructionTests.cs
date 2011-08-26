@@ -106,7 +106,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         }
 
         [TestMethod]
-        public void ThatAValidProductAssociatesShapeWithUnit()
+        public void ThatAValidProductAssociatesShapeWithUnitGroup()
         {
             var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
             Assert.IsTrue(ProductChecker.ProductIsValid(product) &&
