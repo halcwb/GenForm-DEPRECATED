@@ -74,6 +74,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatProductHasShape()
         {
             var product = GetProduct();
+            
             Assert.IsTrue(ProductChecker.ProductHasShape(product));
         }
 

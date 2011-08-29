@@ -12,7 +12,7 @@ namespace Informedica.GenForm.Library.DomainModel.Equality
 
         public int GetHashCode(Brand obj)
         {
-            return obj.GetHashCode();
+            return obj.Name.GetHashCode();
         }
     }
 }
