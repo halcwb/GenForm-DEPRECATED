@@ -4,13 +4,16 @@ namespace Informedica.GenForm.Library.DomainModel
 {
     public abstract class Entity<TId, TDto> where TDto: DataTransferObject<TDto, TId>
     {
-        private readonly int _cachedHash;
+        private int? _cachedHashCode;
 
         protected readonly TDto Dto;
 
         public virtual TId Id { get { return Dto.Id; } protected set { Dto.Id = value; } }
-        public virtual string Name { get { return Dto.Name; }
-            set { Dto.Name = value; } }
+        public virtual string Name 
+        { 
+            get { return Dto.Name; }
+            set { Dto.Name = value; } 
+        }
 
         public virtual int Version
         {
@@ -22,7 +25,12 @@ namespace Informedica.GenForm.Library.DomainModel
         protected Entity(TDto dto)
         {
             Dto = dto;
-            _cachedHash = Equals(Dto.Id, default(TId)) ? base.GetHashCode() : Dto.Id.GetHashCode();
+        }
+
+        private int CreateHashCode()
+        {
+            if (IdIsDefault(Dto.Id)) return base.GetHashCode(); 
+            return Dto.Id.GetHashCode();
         }
 
         public override bool Equals(object obj)
@@ -63,7 +71,7 @@ namespace Informedica.GenForm.Library.DomainModel
 
         public override int GetHashCode()
         {
-            return _cachedHash;
+            return (int)(_cachedHashCode ?? (_cachedHashCode = CreateHashCode()));
         }
     }
 
