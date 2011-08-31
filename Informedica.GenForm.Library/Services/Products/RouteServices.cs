@@ -1,13 +1,14 @@
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Factories;
+using Informedica.GenForm.Library.Repositories;
 
 namespace Informedica.GenForm.Library.Services.Products
 {
-    public class RouteServices : ServicesBase<Route, Guid, RouteDto>
+    public class RouteServices : ServicesBase<Route, RouteDto>
     {
         private static RouteServices _instance;
         private static readonly object LockThis = new object();
@@ -45,6 +46,11 @@ namespace Informedica.GenForm.Library.Services.Products
         {
             route.RemoveAllShapes();
             Instance.Repository.Remove(route);
+        }
+
+        public static void ChangeRouteName(Route route, string newName)
+        {
+            IdentityChanger.ChangeIdentity(route.ChangeName, newName, Instance.Repository);
         }
     }
 }

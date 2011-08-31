@@ -6,7 +6,7 @@ using NHibernate;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class RouteRepository : NHibernateRepository<Route, Guid, RouteDto>
+    public class RouteRepository : NHibernateRepository<Route>
     {
         public RouteRepository(ISessionFactory factory) : base(factory) {}
 

@@ -1,27 +1,40 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class ProductSubstance : Entity<Guid, ProductSubstanceDto>, IProductSubstance
+    public class ProductSubstance : Entity<ProductSubstance>, IProductSubstance
     {
         private Substance _substance;
         private Product _product;
         private UnitValue _unitValue;
+        private ProductSubstanceDto _dto;
 
-        protected ProductSubstance(): base (new ProductSubstanceDto()) {}
-
-        private ProductSubstance(Product product, ProductSubstanceDto dto) : base(dto)
+        static ProductSubstance()
         {
+            RegisterValidationRules();
+        }
+
+        protected ProductSubstance(): base (new ProductSubstanceComparer())
+        {
+            _dto = new ProductSubstanceDto();
+        }
+
+        private ProductSubstance(Product product, ProductSubstanceDto dto) : base(new ProductSubstanceComparer())
+        {
+            ValidateDto(dto);
+
             if (product != null) _product = product;
 
-            SetSubstance(Substance.Create(new SubstanceDto {Name = Dto.Substance}));
+            SetSubstance(Substance.Create(new SubstanceDto {Name = _dto.Substance}));
             SetQuantity();
         }
 
-        public ProductSubstance(Product product, int sortOrder, Substance substance, decimal quantity, Unit unit) : base(new ProductSubstanceDto())
+        public ProductSubstance(Product product, int sortOrder, Substance substance, decimal quantity, Unit unit) : base(new ProductSubstanceComparer())
         {
+            _dto = new ProductSubstanceDto();
             Initialize(product, sortOrder, substance, quantity, unit);
         }
 
@@ -35,15 +48,15 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private void SetQuantity()
         {
-            _unitValue = UnitValue.Create(Dto.Quantity, Unit.Create(new UnitDto
+            _unitValue = UnitValue.Create(_dto.Quantity, Unit.Create(new UnitDto
             {
-                Abbreviation = Dto.UnitAbbreviation,
-                Name = Dto.UnitName,
-                AllowConversion = Dto.UnitGroupAllowConversion,
-                Divisor = Dto.UnitDivisor,
-                IsReference = Dto.UnitIsReference,
-                Multiplier = Dto.UnitMultiplier,
-                UnitGroupName = Dto.UnitGroupName
+                Abbreviation = _dto.UnitAbbreviation,
+                Name = _dto.UnitName,
+                AllowConversion = _dto.UnitGroupAllowConversion,
+                Divisor = _dto.UnitDivisor,
+                IsReference = _dto.UnitIsReference,
+                Multiplier = _dto.UnitMultiplier,
+                UnitGroupName = _dto.UnitGroupName
             }));
         }
 
@@ -54,20 +67,32 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             _substance.AddProduct(_product);
         }
 
-        #region Implementation of IProductSubstance
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
 
-        public override bool IdIsDefault(Guid id)
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+
+        private static void RegisterValidationRules()
         {
-            return id.Equals(Guid.Empty);
+            ValidationRulesManager.RegisterRule<ProductSubstanceDto>(x => !String.IsNullOrWhiteSpace(x.Name));
+            ValidationRulesManager.RegisterRule<ProductSubstanceDto>(x => x.SortOrder > 0);
+            ValidationRulesManager.RegisterRule<ProductSubstanceDto>(x => x.Quantity > 0);
+            ValidationRulesManager.RegisterRule<ProductSubstanceDto>(x => !String.IsNullOrWhiteSpace(x.Substance));
         }
 
-        public virtual int SortOrder { get { return Dto.SortOrder; } set { Dto.SortOrder = value; } }
+        protected override void SetDto<TDto>(TDto dto)
+        {
+            var dataTransferObject = dto as DataTransferObject<ProductSubstanceDto>;
+            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();            
+        }
+
+        public virtual int SortOrder { get { return _dto.SortOrder; } set { _dto.SortOrder = value; } }
+
         public virtual Substance Substance { get { return _substance; } protected set { _substance = value; } }
+
         public virtual UnitValue Quantity { get { return _unitValue; } protected set { _unitValue = value; } }
 
         public virtual Product Product { get { return _product; } protected set { _product = value; } }
 
-        #endregion
 
         public static ProductSubstance Create(Product product, ProductSubstanceDto dto)
         {

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
@@ -82,7 +85,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatBrandCanBeUpdated()
         {
             var brand = BrandServices.WithDto(BrandTestFixtures.GetDto()).Get();
-            brand.Name = "Dynatra change";
+            BrandServices.ChangeBrandName(brand, "changedName");
             Context.CurrentSession().Transaction.Commit();
 
             Context.CurrentSession().Transaction.Begin();

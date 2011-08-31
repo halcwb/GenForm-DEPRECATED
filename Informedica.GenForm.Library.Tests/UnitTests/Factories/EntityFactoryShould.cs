@@ -109,7 +109,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
         {
             var factory = new PackageFactory(PackageTestFixtures.GetDtoWithTwoShapes());
             var package = Isolate.Fake.Instance<Package>();
-            var repos = Isolate.Fake.Instance<IRepository<Package, Guid, PackageDto>>();
+            var repos = Isolate.Fake.Instance<IRepository<Package>>();
 
             Isolate.NonPublic.WhenCalled(factory, "Find").WillReturn(package);
             Isolate.WhenCalled(() => repos.Add(package)).IgnoreCall();

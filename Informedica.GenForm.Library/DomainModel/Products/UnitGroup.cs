@@ -2,31 +2,35 @@
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
-using Informedica.GenForm.Library.Exceptions;
+using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class UnitGroup : Entity<Guid, UnitGroupDto>, IUnitGroup
+    public class UnitGroup : Entity<UnitGroup>, IUnitGroup
     {
         #region Private
 
         private ISet<Unit> _units = new HashedSet<Unit>();
         private ISet<Shape> _shapes = new HashedSet<Shape>();
+        private UnitGroupDto _dto;
 
         #endregion
 
         #region Construction
 
-        protected UnitGroup() : base(new UnitGroupDto()) { }
-
-        private UnitGroup(UnitGroupDto dto) : base(dto.CloneDto())
+        static UnitGroup()
         {
-            ValidateDto();
+            RegisterValidationRules();
         }
 
-        private void ValidateDto()
+        protected UnitGroup() : base(new UnitGroupComparer())
         {
-            if (String.IsNullOrWhiteSpace(Dto.Name)) throw new InvalidDtoException<UnitGroupDto, Guid>(Dto);
+            _dto = new UnitGroupDto();
+        }
+
+        private UnitGroup(UnitGroupDto dto) : base(new UnitGroupComparer())
+        {
+            ValidateDto(dto);
         }
 
         #endregion
@@ -35,8 +39,8 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual bool AllowsConversion
         {
-            get { return Dto.AllowConversion; }
-            set { Dto.AllowConversion = value; }
+            get { return _dto.AllowConversion; }
+            set { _dto.AllowConversion = value; }
         }
 
         public virtual ISet<Unit> Units
@@ -72,11 +76,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return comparer.Equals(x, y);
         }
 
-        public override bool IdIsDefault(Guid id)
-        {
-            return id == Guid.Empty;
-        }
-
         public virtual void AddShape(Shape shape)
         {
             if (_shapes.Contains(shape)) return;
@@ -103,8 +102,21 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return new UnitGroup(groupDto);
         }
 
-
         #endregion
 
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+
+        private static void RegisterValidationRules()
+        {
+            ValidationRulesManager.RegisterRule<UnitGroupDto>(x => !String.IsNullOrWhiteSpace(x.Name));
+        }
+
+        protected override void SetDto<TDto>(TDto dto)
+        {
+            var dataTransferObject = dto as DataTransferObject<UnitGroupDto>;
+            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
+        }
     }
 }

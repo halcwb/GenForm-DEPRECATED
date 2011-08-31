@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.Library.Factories
 {
-    public class ProductFactory : EntityFactory<Product, Guid, ProductDto>
+    public class ProductFactory : EntityFactory<Product, ProductDto>
     {
         public ProductFactory(ProductDto dto) : base(dto) {}
 

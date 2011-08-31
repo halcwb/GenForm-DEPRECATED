@@ -1,20 +1,31 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Unit : Entity<Guid, UnitDto>, IUnit
+    public class Unit : Entity<Unit>, IUnit
     {
         private UnitGroup _unitGroup;
+        private UnitDto _dto;
 
         #region Constructor
 
-        protected Unit() : base(new UnitDto()) { }
-
-        private Unit(UnitDto dto) : base(dto.CloneDto())
+        static Unit()
         {
+            RegisterValidationRules();
+        }
+
+        protected Unit() : base(new UnitComparer())
+        {
+            _dto =  new UnitDto();
+        }
+
+        private Unit(UnitDto dto) : base(new UnitComparer())
+        {
+            ValidateDto(dto);
+
             var group = UnitGroup.Create(new UnitGroupDto
                 {
                     AllowConversion = dto.AllowConversion,
@@ -23,9 +34,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             SetUnitGroup(group);
         }
 
-        public Unit(UnitDto dto, UnitGroup group)
-            : base(dto.CloneDto())
+        public Unit(UnitDto dto, UnitGroup group) : base(new UnitComparer())
         {
+            _dto = dto.CloneDto();
             SetUnitGroup(group);
         }
 
@@ -40,20 +51,20 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual String Abbreviation
         {
-            get { return Dto.Abbreviation; }
-            set { Dto.Abbreviation = value; }
+            get { return _dto.Abbreviation; }
+            set { _dto.Abbreviation = value; }
         }
 
         public virtual Decimal Multiplier
         {
-            get { return Dto.Multiplier; }
-            set { Dto.Multiplier = value; }
+            get { return _dto.Multiplier; }
+            set { _dto.Multiplier = value; }
         }
 
         public virtual Boolean IsReference
         {
-            get { return Dto.IsReference; }
-            set { Dto.IsReference = value; }
+            get { return _dto.IsReference; }
+            set { _dto.IsReference = value; }
         }
 
         public virtual UnitGroup UnitGroup
@@ -72,14 +83,26 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return UnitGroup.Equals(newGroup, UnitGroup, new UnitGroupComparer());
         }
 
-        public override bool IdIsDefault(Guid id)
-        {
-            return id == Guid.Empty;
-        }
-
         internal protected virtual void RemoveFromGroup()
         {
             UnitGroup.RemoveUnit(this);
+        }
+
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+
+        private static void RegisterValidationRules()
+        {
+            ValidationRulesManager.RegisterRule<UnitDto>(x => !String.IsNullOrWhiteSpace(x.Name));
+            ValidationRulesManager.RegisterRule<UnitDto>(x => !String.IsNullOrWhiteSpace(x.Abbreviation));
+            ValidationRulesManager.RegisterRule<UnitDto>(x => x.Multiplier > 0);
+        }
+
+        protected override void SetDto<TDto>(TDto dto)
+        {
+            var dataTransferObject = dto as DataTransferObject<UnitDto>;
+            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
         }
 
         #endregion
@@ -93,7 +116,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public static Unit Create(UnitDto dto, UnitGroup group)
         {
-            return new Unit(dto, group);
+            return new Unit(dto, @group);
         }
 
         public static Unit Create(UnitDto dto, UnitGroupDto groupDto)
@@ -102,5 +125,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         }
 
         #endregion
+
+        internal protected virtual void ChangeName(string newName)
+        {
+            Name = newName;
+        }
     }
 }

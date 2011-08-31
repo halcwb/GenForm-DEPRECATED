@@ -2,24 +2,36 @@
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Substance : Entity<Guid, SubstanceDto>, ISubstance
+    public class Substance : Entity<Substance>, ISubstance
     {
         private readonly HashSet<Product> _products = new HashSet<Product>(new ProductComparer());
         private SubstanceGroup _substanceGroup;
+        private SubstanceDto _dto;
 
-        protected Substance(): base(new SubstanceDto()) {}
-
-        private Substance(SubstanceDto substanceDto): base(substanceDto.CloneDto())
+        static Substance()
         {
-            if (Dto.SubstanceGroupName == null) return;
+            RegisterValidationRules();
+        }
+
+        protected Substance(): base(new SubstanceComparer())
+        {
+            _dto = new SubstanceDto();
+        }
+
+        private Substance(SubstanceDto dto): base(new SubstanceComparer())
+        {
+            ValidateDto(dto);
+
+            if (_dto.SubstanceGroupName == null) return;
             
             var group = SubstanceGroup.Create(new SubstanceGroupDto
                                             {
-                                                Id =  Dto.SubstanceGroupId,
-                                                Name = Dto.SubstanceGroupName
+                                                Id =  _dto.SubstanceGroupId,
+                                                Name = _dto.SubstanceGroupName
                                             });
             group.AddSubstance(this);
         }
@@ -36,11 +48,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         }
 
         public virtual IEnumerable<Product> Products { get { return _products; } }
-
-        public override bool IdIsDefault(Guid id)
-        {
-            return id == Guid.Empty;
-        }
 
         public static Substance Create(SubstanceDto dto)
         {
@@ -63,6 +70,26 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual void RemoveFromSubstanceGroup()
         {
             SubstanceGroup.Remove(this);
+        }
+
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+
+        private static void RegisterValidationRules()
+        {
+            ValidationRulesManager.RegisterRule<SubstanceDto>(x => !String.IsNullOrWhiteSpace(x.Name));            
+        }
+
+        protected override void SetDto<TDto>(TDto dto)
+        {
+            var dataTransferObject = dto as DataTransferObject<SubstanceDto>;
+            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();  
+        }
+
+        internal protected virtual void ChangeName(string newName)
+        {
+            Name = newName;
         }
     }
 }

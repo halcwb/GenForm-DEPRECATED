@@ -7,12 +7,12 @@ namespace Informedica.GenForm.Library.DomainModel.Equality
     {
         public bool Equals(Substance x, Substance y)
         {
-            return x.Equals(y) || EqualName(x.Name, y.Name);
+            return EqualName(x.Name, y.Name);
         }
 
         public int GetHashCode(Substance obj)
         {
-            return obj.GetHashCode();
+            return obj.Name.GetHashCode();
         }
     }
 }

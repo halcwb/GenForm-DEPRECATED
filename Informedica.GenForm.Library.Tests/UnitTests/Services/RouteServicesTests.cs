@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
@@ -83,8 +85,8 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatRouteCanChangeName()
         {
             var route = RouteServices.WithDto(RouteTestFixtures.GetValidDto()).Get();
-            route.Name = "iv_changed";
-            Context.CurrentSession().Transaction.Commit();
+            RouteServices.ChangeRouteName(route, "iv_changed");
+
             Context.CurrentSession().Transaction.Begin();
             route = RouteServices.Routes.SingleOrDefault(x => x.Name == "iv_changed");
             Assert.IsNotNull(route);

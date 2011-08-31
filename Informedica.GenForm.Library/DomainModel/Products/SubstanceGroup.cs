@@ -4,18 +4,31 @@ using System.Linq;
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class SubstanceGroup: Entity<Guid, SubstanceGroupDto>
+    public class SubstanceGroup: Entity<SubstanceGroup>
     {
         private SubstanceGroup _mainSubstanceGroup;
         private Iesi.Collections.Generic.ISet<Substance> _substances = new HashedSet<Substance>();
         private readonly IEqualityComparer<Substance> _substanceComparer = new SubstanceComparer();
+        private SubstanceGroupDto _dto;
 
-        protected SubstanceGroup(): base(new SubstanceGroupDto()) {}
+        static SubstanceGroup()
+        {
+            RegisterValidationRules();
+        }
 
-        private SubstanceGroup(SubstanceGroupDto dto): base(dto.CloneDto()) {}
+        protected SubstanceGroup(): base(new SubstanceGroupComparer())
+        {
+            _dto = new SubstanceGroupDto();
+        }
+
+        private SubstanceGroup(SubstanceGroupDto dto): base(new SubstanceGroupComparer())
+        {
+            ValidateDto(dto);
+        }
 
         #region Implementation of ISubstanceGroup
 
@@ -32,11 +45,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         }
 
         #endregion
-
-        public override bool IdIsDefault(Guid id)
-        {
-            return id == Guid.Empty;
-        }
 
         public virtual void AddSubstance(Substance substance)
         {
@@ -71,6 +79,22 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual bool ContainsSubstance(Substance subst)
         {
             return _substances.Contains(subst, _substanceComparer);
+        }
+
+
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+
+        private static void RegisterValidationRules()
+        {
+            ValidationRulesManager.RegisterRule<SubstanceGroupDto>(x => !String.IsNullOrWhiteSpace(x.Name));
+        }
+
+        protected override void SetDto<TDto>(TDto dto)
+        {
+            var dataTransferObject = dto as DataTransferObject<SubstanceGroupDto>;
+            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
         }
     }
 }

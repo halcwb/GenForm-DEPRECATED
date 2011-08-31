@@ -1,24 +1,39 @@
 ﻿using System;
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Route: Entity<Guid, RouteDto>
+    public class Route: Entity<Route>
     {
+        public const int AbbreviationLength = 30;
+        public new const int NameLength = 50;
+
         private ISet<Shape> _shapes = new HashedSet<Shape>();
         private ISet<Product> _products = new HashedSet<Product>();
+        private RouteDto _dto;
 
-        protected Route() : base(new RouteDto()){}
-
-        private Route(RouteDto dto) : base(dto.CloneDto())
+        static Route()
         {
+            RegisterValidationRules();
+        }
+
+        protected Route() : base(new RouteComparer())
+        {
+            _dto = new RouteDto();
+        }
+
+        private Route(RouteDto dto) : base(new RouteComparer())
+        {
+            ValidateDto(dto);
             AddShapes();
         }
 
         private void AddShapes()
         {
-            foreach (var shape in Dto.Shapes)
+            foreach (var shape in _dto.Shapes)
             {
                 AddShape(Shape.Create(shape));
             }
@@ -34,25 +49,14 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual String Abbreviation 
         { 
-            get { return Dto.Abbreviation ?? (Dto.Abbreviation = CreateAbbreviationFromName()); } 
-            set { Dto.Abbreviation = value; } 
+            get { return _dto.Abbreviation; } 
+            set { _dto.Abbreviation = value; } 
         }
 
         public virtual ISet<Shape> Shapes
         {
             get { return _shapes; }
             protected set { _shapes = value; }
-        }
-
-        private string CreateAbbreviationFromName()
-        {
-            int maxLength = Name.Length > 30 ? 30 : Name.Length;
-            return Dto.Name.Substring(0, maxLength);
-        }
-
-        public override bool IdIsDefault(Guid id)
-        {
-            return id == Guid.Empty;
         }
 
         public virtual ISet<Product> Products
@@ -109,5 +113,42 @@ namespace Informedica.GenForm.Library.DomainModel.Products
                 product.RemoveRoute(this);
             }
         }
+
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name
+        {
+            get { return _dto.Name ?? String.Empty; } 
+            protected set { SetRouteName(value); }
+        }
+
+        private static void RegisterValidationRules()
+        {
+            ValidationRulesManager.RegisterRule<RouteDto>(x => !String.IsNullOrWhiteSpace(x.Name), "Route has to have a name");
+            ValidationRulesManager.RegisterRule<RouteDto>(x => !String.IsNullOrWhiteSpace(x.Abbreviation));
+        }
+
+        protected override void SetDto<TDto>(TDto dto)
+        {
+            var dataTransferObject = dto as DataTransferObject<RouteDto>;
+            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
+        }
+
+        private void SetRouteName(string value)
+        {
+            if (String.IsNullOrWhiteSpace(value) || Name.Equals(value)) return;
+
+            var length = value.Length > NameLength ? NameLength : value.Length;
+            _dto.Name = value.Substring(0, length).Trim().ToLower();
+
+            length = length > AbbreviationLength ? AbbreviationLength : length;
+            if (String.IsNullOrEmpty(_dto.Abbreviation)) _dto.Abbreviation = _dto.Name.Substring(0, length);
+        }
+
+        internal protected virtual void ChangeName(string name)
+        {
+            Name = name;
+        }
+
     }
 }

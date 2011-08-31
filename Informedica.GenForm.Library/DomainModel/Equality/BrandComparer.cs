@@ -3,11 +3,11 @@ using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Library.DomainModel.Equality
 {
-    public class BrandComparer : IEqualityComparer<Brand>
+    public class BrandComparer : NameComparer,  IEqualityComparer<Brand>
     {
         public bool Equals(Brand x, Brand y)
         {
-            return x.Equals(y) || x.Id == y.Id || x.Name == y.Name;
+            return EqualName(x.Name, y.Name);
         }
 
         public int GetHashCode(Brand obj)

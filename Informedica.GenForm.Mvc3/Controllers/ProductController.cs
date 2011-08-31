@@ -1,6 +1,5 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Services.Products;
 using Newtonsoft.Json.Linq;
 using System.Web.Mvc;
@@ -190,7 +189,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new { success, data = substanceDto, message });
         }
 
-        private IBrand GetBrandFromJObject(JObject brand)
+        private Brand GetBrandFromJObject(JObject brand)
         {
             return Brand.Create
                        (new BrandDto

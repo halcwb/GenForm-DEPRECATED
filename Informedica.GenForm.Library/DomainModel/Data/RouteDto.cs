@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
+﻿using System.Collections.Generic;
 
 namespace Informedica.GenForm.Library.DomainModel.Data
 {
-    public class RouteDto: DataTransferObject<RouteDto, Guid>
+    public class RouteDto: DataTransferObject<RouteDto>
     {
         public RouteDto()
         {

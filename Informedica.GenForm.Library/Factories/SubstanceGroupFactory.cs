@@ -4,7 +4,7 @@ using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Library.Factories
 {
-    public class SubstanceGroupFactory : EntityFactory<SubstanceGroup, Guid, SubstanceGroupDto>
+    public class SubstanceGroupFactory : EntityFactory<SubstanceGroup, SubstanceGroupDto>
     {
         public SubstanceGroupFactory(SubstanceGroupDto dto) : base(dto) {}
 

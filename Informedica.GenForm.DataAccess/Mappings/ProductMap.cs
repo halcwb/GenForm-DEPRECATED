@@ -1,10 +1,8 @@
-﻿using System;
-using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Products;
+﻿using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.DataAccess.Mappings
 {
-    public sealed class ProductMap : EntityMap<Product, Guid, ProductDto>
+    public sealed class ProductMap : EntityMap<Product>
     {
         public ProductMap()
         {

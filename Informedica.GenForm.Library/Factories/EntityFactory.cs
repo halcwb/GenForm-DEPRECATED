@@ -4,21 +4,21 @@ using Informedica.GenForm.Library.Repositories;
 
 namespace Informedica.GenForm.Library.Factories
 {
-    public abstract class EntityFactory<TEnt, TId, TDto>
-        where TEnt : Entity<TId,TDto>
-        where TDto : DataTransferObject<TDto, TId>
+    public abstract class EntityFactory<TEnt, TDto>
+        where TEnt : Entity<TEnt>
+        where TDto : DataTransferObject<TDto>
     {
         protected TDto Dto;
-        private IRepository<TEnt, TId, TDto> _repository;
+        private IRepository<TEnt> _repository;
 
         protected EntityFactory(TDto dto)
         {
             Dto = dto;
         } 
 
-        private IRepository<TEnt, TId, TDto> Repository
+        private IRepository<TEnt> Repository
         {
-            get { return _repository ?? (_repository = RepositoryFactory.Create<TEnt, TId, TDto>()); }
+            get { return _repository ?? (_repository = RepositoryFactory.Create<TEnt>()); }
         }
 
         public TEnt Get()
@@ -37,7 +37,7 @@ namespace Informedica.GenForm.Library.Factories
         {
             // Performance improvement return if entity already 
             // added by an associated entity
-            if (!entity.IdIsDefault(entity.Id)) return;
+            if (!entity.IsTransient()) return;
             Repository.Add(entity);
         }
     }

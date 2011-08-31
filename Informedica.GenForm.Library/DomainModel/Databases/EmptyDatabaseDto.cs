@@ -2,7 +2,7 @@ using System;
 
 namespace Informedica.GenForm.Library.DomainModel.Databases
 {
-    public class EmptyDatabaseDto: DataTransferObject<EmptyDatabaseDto, int>
+    public class EmptyDatabaseDto: DataTransferObject<EmptyDatabaseDto>
     {
         public Boolean IsEmpty;
 

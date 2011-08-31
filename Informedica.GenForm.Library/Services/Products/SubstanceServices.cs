@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Factories;
 
 namespace Informedica.GenForm.Library.Services.Products
 {
-    public class SubstanceServices : ServicesBase<Substance, Guid, SubstanceDto>
+    public class SubstanceServices : ServicesBase<Substance, SubstanceDto>
     {
         private static SubstanceServices _instance;
         private static readonly object LockThis = new object();
@@ -44,6 +45,11 @@ namespace Informedica.GenForm.Library.Services.Products
         {
             substance.RemoveFromSubstanceGroup();
             Instance.Repository.Remove(substance);
+        }
+
+        public static void ChangeSubstanceName(Substance substance, string newName)
+        {
+            IdentityChanger.ChangeIdentity(substance.ChangeName, newName, Instance.Repository);
         }
     }
 }

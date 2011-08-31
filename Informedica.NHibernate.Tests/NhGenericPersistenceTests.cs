@@ -106,16 +106,5 @@ namespace Informedica.NHibernate.Tests
             var loadedSubst = Context.CurrentSession().Load<Substance>(subst.Id);
             Assert.AreEqual(subst.GetHashCode(), loadedSubst.GetHashCode());
         }
-
-        [TestMethod]
-        public void HashCodeFromLoadedItemIsHashOfGuid()
-        {
-            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
-
-            Context.CurrentSession().SaveOrUpdate(subst);
-
-            var loadedSubst = Context.CurrentSession().Load<Substance>(subst.Id);
-            Assert.AreEqual(loadedSubst.Id.GetHashCode(), loadedSubst.GetHashCode());
-        }
     }
 }

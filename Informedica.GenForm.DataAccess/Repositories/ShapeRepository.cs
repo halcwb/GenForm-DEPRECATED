@@ -1,12 +1,10 @@
-using System;
-using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
 using NHibernate;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class ShapeRepository : NHibernateRepository<Shape, Guid, ShapeDto>
+    public class ShapeRepository : NHibernateRepository<Shape>
     {
         public ShapeRepository(ISessionFactory factory) : base(factory) {}
 

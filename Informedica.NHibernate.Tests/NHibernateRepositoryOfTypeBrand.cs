@@ -20,7 +20,7 @@ namespace Informedica.NHibernate.Tests
     public class NHibernateRepositoryOfTypeBrand
     {
         private TestContext testContextInstance;
-        private static NHibernateRepository<Brand, Guid, BrandDto> _repository;
+        private static NHibernateRepository<Brand> _repository;
         private Brand _brand;
 
         /// <summary>

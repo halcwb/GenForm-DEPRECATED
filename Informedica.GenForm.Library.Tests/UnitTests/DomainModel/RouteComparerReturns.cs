@@ -1,8 +1,6 @@
-﻿using System;
-using Informedica.GenForm.Library.DomainModel.Data;
+﻿using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
@@ -37,7 +35,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
             _comparer = new RouteComparer();
@@ -60,7 +58,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         [TestMethod]
         public void TrueWhenRouteIsSameObject()
         {
-            var route = CreateRoute(new RouteDto());
+            var route = CreateRoute(new RouteDto { Abbreviation = "iv", Name = "intraveneus"});
             Assert.IsTrue(_comparer.Equals(route, route));
         }
 

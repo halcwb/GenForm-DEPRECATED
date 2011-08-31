@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
+using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Product : Entity<Guid, ProductDto>, IProduct
+    public class Product : Entity<Product>, IProduct
     {
         #region Private Fields
         
@@ -16,15 +17,25 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         private Package _package;
         private Shape _shape;
         private Iesi.Collections.Generic.ISet<Route> _routes = new HashedSet<Route>();
+        private ProductDto _dto;
 
         #endregion
 
         #region Constructor
-        
-        protected Product() : base(new ProductDto()) { }
 
-        private Product(ProductDto dto) : base(dto.CloneDto())
+        static Product()
         {
+            RegisterValidationRules();
+        }
+        
+        protected Product() : base(new ProductComparer())
+        {
+            _dto = new ProductDto();
+        }
+
+        private Product(ProductDto dto) : base(new ProductComparer())
+        {
+            ValidateDto(dto);
             Initialize();
         }
 
@@ -38,12 +49,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             SetQuantity();
             if (Shape != null) Shape.AddUnitGroup(Quantity.Unit.UnitGroup);
 
-            foreach (var substanceDto in Dto.Substances)
+            foreach (var substanceDto in _dto.Substances)
             {
                 GetSubstances().Add(CreateSubstance(substanceDto));
             }
 
-            foreach (var dto in Dto.Routes)
+            foreach (var dto in _dto.Routes)
             {
                 AddRoute(Route.Create(dto));
             }
@@ -51,8 +62,8 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private void AddProductToPackage()
         {
-            if (String.IsNullOrWhiteSpace(Dto.ShapeName)) return;
-            var package = Package.Create(new PackageDto {Abbreviation = Dto.PackageName, Name = Dto.PackageName});
+            if (String.IsNullOrWhiteSpace(_dto.ShapeName)) return;
+            var package = Package.Create(new PackageDto {Abbreviation = _dto.PackageName, Name = _dto.PackageName});
             SetPackage(package);
         }
 
@@ -67,8 +78,8 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private void AddProductToShape()
         {
-            if (String.IsNullOrWhiteSpace(Dto.ShapeName)) return;
-            var shape = Shape.Create(new ShapeDto {Name = Dto.ShapeName});
+            if (String.IsNullOrWhiteSpace(_dto.ShapeName)) return;
+            var shape = Shape.Create(new ShapeDto {Name = _dto.ShapeName});
             SetShape(shape);
         }
 
@@ -83,25 +94,25 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private void AddProductToBrand()
         {
-            if (String.IsNullOrWhiteSpace(Dto.BrandName)) return;
+            if (String.IsNullOrWhiteSpace(_dto.BrandName)) return;
             
-            var brand = Brand.Create(new BrandDto {Name = Dto.BrandName});
+            var brand = Brand.Create(new BrandDto {Name = _dto.BrandName});
             SetBrand(brand);
         }
 
         private void SetQuantity()
         {
-            if (String.IsNullOrWhiteSpace(Dto.UnitName)) return;
+            if (String.IsNullOrWhiteSpace(_dto.UnitName)) return;
 
-            _unitValue = UnitValue.Create(Dto.Quantity, Unit.Create(new UnitDto
+            _unitValue = UnitValue.Create(_dto.Quantity, Unit.Create(new UnitDto
             {
-                Abbreviation = Dto.UnitAbbreviation,
-                Name = Dto.UnitName,
-                AllowConversion = Dto.UnitGroupAllowConversion,
-                Divisor = Dto.UnitDivisor,
-                IsReference = Dto.UnitIsReference,
-                Multiplier = Dto.UnitMultiplier,
-                UnitGroupName = Dto.UnitGroupName
+                Abbreviation = _dto.UnitAbbreviation,
+                Name = _dto.UnitName,
+                AllowConversion = _dto.UnitGroupAllowConversion,
+                Divisor = _dto.UnitDivisor,
+                IsReference = _dto.UnitIsReference,
+                Multiplier = _dto.UnitMultiplier,
+                UnitGroupName = _dto.UnitGroupName
             }));
         }
 
@@ -114,13 +125,13 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         
         #region Implementation of IProduct
 
-        public virtual string ProductCode { get { return Dto.ProductCode; } protected set { Dto.ProductCode = value; } }
+        public virtual string ProductCode { get { return _dto.ProductCode; } protected set { _dto.ProductCode = value; } }
 
-        public virtual string GenericName { get { return Dto.GenericName; } protected set { Dto.GenericName = value; } }
+        public virtual string GenericName { get { return _dto.GenericName; } protected set { _dto.GenericName = value; } }
 
         public virtual UnitValue Quantity { get { return _unitValue; } protected set { _unitValue = value; } }
 
-        public virtual string DisplayName { get { return Dto.DisplayName ?? Dto.Name; } protected set { Dto.DisplayName = value; } }
+        public virtual string DisplayName { get { return _dto.DisplayName ?? _dto.Name; } protected set { _dto.DisplayName = value; } }
 
         public virtual Brand Brand
         {
@@ -171,11 +182,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #endregion
 
-        public override bool IdIsDefault(Guid id)
-        {
-            return id == Guid.Empty;
-        }
-
         public static Product Create(ProductDto dto)
         {
             return new Product(dto);
@@ -225,6 +231,22 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual void RemoveFromBrand()
         {
             SetBrand(null);
+        }
+
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+
+        private static void RegisterValidationRules()
+        {
+            ValidationRulesManager.RegisterRule<ProductDto>(x => !String.IsNullOrWhiteSpace(x.Name));
+        }
+
+        protected override void SetDto<TDto>(TDto dto)
+        {
+            var dataTransferObject = dto as DataTransferObject<ProductDto>;
+            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
+            
         }
     }
 }
