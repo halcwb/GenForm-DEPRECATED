@@ -3,14 +3,15 @@ using Informedica.GenForm.Library.DomainModel;
 
 namespace Informedica.GenForm.Library.Repositories
 {
-    public interface IRepository<T, TId, TDto>: IEnumerable<T> 
-        where T: Entity<TId, TDto>
-        where TDto: DataTransferObject<TDto, TId>
+    public interface IRepository<TEnt>: IEnumerable<TEnt> 
+        where TEnt : Entity<TEnt>
     {
-        void Add(T item);
-        bool Contains(T item);
+        void Add(TEnt item);
+        bool Contains(TEnt item);
         int Count { get; }
-        bool Remove(T item);
+        bool Remove(TEnt item);
+        void Flush();
+        void Clear();
     }
 
 }

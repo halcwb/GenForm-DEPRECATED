@@ -7,7 +7,7 @@ using Informedica.GenForm.Library.Factories;
 
 namespace Informedica.GenForm.Library.Services.Products
 {
-    public class UnitGroupServices : ServicesBase<UnitGroup, Guid, UnitGroupDto>
+    public class UnitGroupServices : ServicesBase<UnitGroup, UnitGroupDto>
     {
         private static UnitGroupServices _instance;
         private static readonly object LockThis = new object();

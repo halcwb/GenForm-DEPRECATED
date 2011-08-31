@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using Informedica.GenForm.Library.DomainModel;
 using Informedica.GenForm.Library.Factories;
@@ -6,25 +6,25 @@ using Informedica.GenForm.Library.Repositories;
 
 namespace Informedica.GenForm.Library.Services
 {
-    public abstract class ServicesBase<TEnt, TId, TDto>
-        where TEnt : Entity<TId, TDto>
-        where TDto : DataTransferObject<TDto, TId>
+    public abstract class ServicesBase<TEnt, TDto>
+        where TEnt : Entity<TEnt>
+        where TDto : DataTransferObject<TDto>
     {
-        private IRepository<TEnt, TId, TDto> _repository;
+        private IRepository<TEnt> _repository;
  
-        protected EntityFactory<TEnt, TId, TDto> GetFactory(TDto dto)
+        protected EntityFactory<TEnt, TDto> GetFactory(TDto dto) 
         {
-            return FactoryManager.Get<TEnt, TId, TDto>(dto);
+            return FactoryManager.Get<TEnt, TDto>(dto);
         }
 
-        protected TEnt GetById(TId id)
+        protected TEnt GetById(Guid id)
         {
-            return Repository.SingleOrDefault(x => x.Id.Equals(id));
+            return Repository.SingleOrDefault(x => x.Id == id);
         }
 
-        public IRepository<TEnt, TId, TDto> Repository
+        public IRepository<TEnt> Repository
         {
-            get { return _repository ?? (_repository = RepositoryFactory.Create<TEnt, TId, TDto>()); }
+            get { return _repository ?? (_repository = RepositoryFactory.Create<TEnt>()); }
         }
 
         

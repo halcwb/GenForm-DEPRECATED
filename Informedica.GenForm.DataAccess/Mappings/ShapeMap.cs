@@ -1,10 +1,8 @@
-﻿using System;
-using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Products;
+﻿using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.DataAccess.Mappings
 {
-    public sealed class ShapeMap: EntityMap<Shape, Guid, ShapeDto>
+    public sealed class ShapeMap: EntityMap<Shape>
     {
         public ShapeMap()
         {

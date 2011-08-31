@@ -12,7 +12,7 @@ namespace Informedica.GenForm.Assembler.Assemblers
             _registry = new Registry();
 
             _registry.For<IProduct>().Use<Product>();
-            _registry.For<IBrand>().Use<Brand>();
+            _registry.For<Brand>().Use<Brand>();
             _registry.For<ISubstance>().Use<Substance>();
             _registry.For<IShape>().Use<Shape>();
             _registry.For<IPackage>().Use<Package>();

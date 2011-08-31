@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Factories;
 
 namespace Informedica.GenForm.Library.Services.Products
 {
-    public class UnitServices : ServicesBase<Unit, Guid, UnitDto>
+    public class UnitServices : ServicesBase<Unit, UnitDto>
     {
         private static UnitServices _instance;
         private static readonly object LockThis = new object();
@@ -49,6 +50,11 @@ namespace Informedica.GenForm.Library.Services.Products
         {
             unit.RemoveFromGroup();
             Instance.Repository.Remove(unit);
+        }
+
+        public static void ChangeUnitName(Unit unit, string newName)
+        {
+            IdentityChanger.ChangeIdentity(unit.ChangeName, newName, Instance.Repository);
         }
     }
 }

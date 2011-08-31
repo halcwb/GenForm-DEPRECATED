@@ -74,7 +74,7 @@ namespace Informedica.GenForm.DataAccess.Tests
             {
                 var session = context.CurrentSession();
                 session.Transaction.Begin();
-                var emptyDb = new EmptyDatabase(new EmptyDatabaseDto{ IsEmpty =  false});
+                var emptyDb = new EmptyDatabase { IsEmpty = false };
                 session.Save(emptyDb);
                 session.Transaction.Commit();
 

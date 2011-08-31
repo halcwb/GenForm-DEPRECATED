@@ -7,7 +7,7 @@ using Informedica.GenForm.Library.Factories;
 
 namespace Informedica.GenForm.Library.Services.Products
 {
-    public class ShapeServices : ServicesBase<Shape, Guid, ShapeDto>
+    public class ShapeServices : ServicesBase<Shape, ShapeDto>
     {
         private static ShapeServices _instance;
         private static readonly object LockThis = new object();

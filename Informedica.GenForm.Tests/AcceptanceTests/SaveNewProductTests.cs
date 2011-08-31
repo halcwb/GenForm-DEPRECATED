@@ -2,7 +2,6 @@
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Mvc3.Controllers;
@@ -274,7 +273,7 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "brand with empty name can not be added");
         }
 
-        private IBrand CreateNewBrand(String name)
+        private Brand CreateNewBrand(String name)
         {
             var brand = Brand.Create(new BrandDto { Name = name});
 

@@ -1,11 +1,10 @@
 using System;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.Library.Factories
 {
-    public class UnitFactory : EntityFactory<Unit, Guid, UnitDto>
+    public class UnitFactory : EntityFactory<Unit, UnitDto>
     {
         private UnitGroup _group;
 

@@ -4,8 +4,6 @@ using System.Threading;
 using Informedica.GenForm.Library.DomainModel;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
-using Informedica.GenForm.Library.Services.Products;
 
 namespace Informedica.GenForm.Library.Factories
 {
@@ -25,14 +23,14 @@ namespace Informedica.GenForm.Library.Factories
 
         private void Initialize()
         {
-            _factories.Add(typeof(EntityFactory<Unit, Guid, UnitDto>), typeof(UnitFactory));
-            _factories.Add(typeof(EntityFactory<UnitGroup, Guid, UnitGroupDto>), typeof(UnitGroupFactory));
-            _factories.Add(typeof(EntityFactory<Brand, Guid, BrandDto>), typeof(BrandFactory));
-            _factories.Add(typeof(EntityFactory<Shape, Guid, ShapeDto>), typeof(ShapeFactory));
-            _factories.Add(typeof(EntityFactory<Package, Guid, PackageDto>), typeof(PackageFactory));
-            _factories.Add(typeof(EntityFactory<Route, Guid, RouteDto>), typeof(RouteFactory));
-            _factories.Add(typeof(EntityFactory<Substance, Guid, SubstanceDto>), typeof(SubstanceFactory));
-            _factories.Add(typeof(EntityFactory<Product, Guid, ProductDto>), typeof(ProductFactory));
+            _factories.Add(typeof(EntityFactory<Unit, UnitDto>), typeof(UnitFactory));
+            _factories.Add(typeof(EntityFactory<UnitGroup, UnitGroupDto>), typeof(UnitGroupFactory));
+            _factories.Add(typeof(EntityFactory<Brand, BrandDto>), typeof(BrandFactory));
+            _factories.Add(typeof(EntityFactory<Shape, ShapeDto>), typeof(ShapeFactory));
+            _factories.Add(typeof(EntityFactory<Package, PackageDto>), typeof(PackageFactory));
+            _factories.Add(typeof(EntityFactory<Route, RouteDto>), typeof(RouteFactory));
+            _factories.Add(typeof(EntityFactory<Substance, SubstanceDto>), typeof(SubstanceFactory));
+            _factories.Add(typeof(EntityFactory<Product, ProductDto>), typeof(ProductFactory));
         }
 
         private static FactoryManager Instance
@@ -54,20 +52,20 @@ namespace Informedica.GenForm.Library.Factories
             }
         }
 
-        private EntityFactory<TEnt, TId, TDto> GetFromInstance<TEnt, TId, TDto>(TDto dto)
-            where TEnt : Entity<TId,TDto>
-            where TDto : DataTransferObject<TDto, TId>
+        private EntityFactory<TEnt, TDto> GetFromInstance<TEnt, TDto>(TDto dto)
+            where TEnt : Entity<TEnt>
+            where TDto : DataTransferObject<TDto>
         {
-            Type type = _factories[typeof(EntityFactory<TEnt, TId, TDto>)];
-            return (EntityFactory<TEnt, TId, TDto>)Activator.CreateInstance(type, new object[] { dto });            
+            Type type = _factories[typeof(EntityFactory<TEnt, TDto>)];
+            return (EntityFactory<TEnt, TDto>)Activator.CreateInstance(type, new object[] { dto });            
         }
 
-        public static EntityFactory<TEnt, TId, TDto> Get<TEnt, TId, TDto>(TDto dto)
-            where TEnt : Entity<TId,TDto>
-            where TDto : DataTransferObject<TDto, TId>
+        public static EntityFactory<TEnt, TDto> Get<TEnt, TDto>(TDto dto)
+            where TEnt : Entity<TEnt>
+            where TDto : DataTransferObject<TDto>
 
         {
-            return Instance.GetFromInstance<TEnt,TId,TDto>(dto);
+            return Instance.GetFromInstance<TEnt, TDto>(dto);
         }
     }
 }

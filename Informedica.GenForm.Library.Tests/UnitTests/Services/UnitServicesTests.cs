@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -112,7 +111,8 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatAUnitGroupCanBeChanged()
         {
             var unit = UnitServices.WithDto(GetUnitDto()).Get();
-            unit.Name = "changed";
+            // ToDo: rewrite
+            UnitServices.ChangeUnitName(unit, "changed");
             Assert.IsNotNull(UnitServices.Units.SingleOrDefault(x => x.Name == "changed"));
         }
 

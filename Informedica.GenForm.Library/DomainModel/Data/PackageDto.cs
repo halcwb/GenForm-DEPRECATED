@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Informedica.GenForm.Library.DomainModel.Data
 {
-    public class PackageDto: DataTransferObject<PackageDto, Guid>
+    public class PackageDto: DataTransferObject<PackageDto>
     {
         public string Abbreviation;
         private IList<ShapeDto> _shapes;

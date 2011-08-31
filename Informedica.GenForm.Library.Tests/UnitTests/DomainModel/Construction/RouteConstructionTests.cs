@@ -1,4 +1,5 @@
 ﻿using System;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -58,9 +59,23 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
             Assert.IsTrue(RouteIsValid(route));
         }
 
+        [TestMethod]
+        public void ThatRouteWithoutNameThrowsException()
+        {
+            try
+            {
+                Route.Create(new RouteDto());
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
+
         private bool RouteIsValid(Route route)
         {
-            return !String.IsNullOrWhiteSpace(route.Name);
+            return !String.IsNullOrWhiteSpace(route.Name) && !String.IsNullOrWhiteSpace(route.Abbreviation);
         }
     }
 }

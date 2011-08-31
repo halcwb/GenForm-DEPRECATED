@@ -1,4 +1,5 @@
-﻿using Informedica.GenForm.Assembler;
+﻿using System.Linq;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests;
@@ -95,6 +96,16 @@ namespace Informedica.NHibernate.Tests
             subst.RemoveFromSubstanceGroup();
 
             Assert.IsFalse(group.Substances.Contains(subst));   
+        }
+
+        [TestMethod]
+        public void ThatRepositoryCanUseLinq()
+        {
+            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            var repos = new SubstanceRepository(GenFormApplication.SessionFactory) { subst };
+
+            var result = repos.Select(x => x.Name == SubstanceGroupTestFixtures.GetSubstanceGroupDtoWithoutItems().Name);
+            Assert.IsNotNull(result);
         }
     }
 }

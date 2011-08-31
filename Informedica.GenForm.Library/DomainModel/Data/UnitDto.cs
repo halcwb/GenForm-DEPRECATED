@@ -1,15 +1,14 @@
 ﻿using System;
 
-namespace Informedica.GenForm.Library.DomainModel.Products.Data
+namespace Informedica.GenForm.Library.DomainModel.Data
 {
-    public class UnitDto : DataTransferObject<UnitDto, Guid>
+    public class UnitDto : DataTransferObject<UnitDto>
     {
         public override UnitDto CloneDto()
         {
             return CreateClone();
         }
 
-        public Int32 UnitId;
         public String Abbreviation;
         public Decimal Multiplier;
         public Decimal Divisor;
@@ -18,9 +17,5 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Data
         public String UnitGroupName;
         public Boolean AllowConversion;
 
-        #region Overrides of DataTransferObject<Guid>
-
-
-        #endregion
     }
 }

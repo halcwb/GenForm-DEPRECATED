@@ -7,7 +7,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
     {
         public EmptyDatabaseMap()
         {
-            Id(x => x.Id).GeneratedBy.Identity();
+            Id(x => x.Id).GeneratedBy.GuidComb();
             Map(x => x.IsEmpty).Not.Nullable();
         }
     }

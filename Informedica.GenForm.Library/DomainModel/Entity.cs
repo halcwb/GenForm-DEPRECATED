@@ -1,77 +1,60 @@
 ﻿using System;
+using System.Collections.Generic;
+using Informedica.GenForm.Library.DomainModel.Validation;
+using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.DomainModel
 {
-    public abstract class Entity<TId, TDto> where TDto: DataTransferObject<TDto, TId>
+    public abstract class Entity<TEnt> 
+        where TEnt : Entity<TEnt>
     {
-        private int? _cachedHashCode;
+        public const int NameLength = 255;
 
-        protected readonly TDto Dto;
+        private readonly IEqualityComparer<TEnt> _comparer;
 
-        public virtual TId Id { get { return Dto.Id; } protected set { Dto.Id = value; } }
-        public virtual string Name 
-        { 
-            get { return Dto.Name; }
-            set { Dto.Name = value; } 
+        protected Entity(IEqualityComparer<TEnt> comparer)
+        {
+            _comparer = comparer;
         }
 
-        public virtual int Version
-        {
-            get; protected set;
-        }
-        
-        public abstract bool IdIsDefault(TId id);
+        public abstract Guid Id { get; protected set; }
 
-        protected Entity(TDto dto)
-        {
-            Dto = dto;
-        }
+        public abstract string Name { get; protected set; }
 
-        private int CreateHashCode()
+        public virtual int Version  { get; protected set; }
+
+        public virtual bool IsTransient()
         {
-            if (IdIsDefault(Dto.Id)) return base.GetHashCode(); 
-            return Dto.Id.GetHashCode();
+            return Id == Guid.Empty;
         }
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as Entity<TId, TDto>);
-        }
+            if (obj == null) return false;
+            if (this == obj) return true;
 
-        private static bool IsTransient(Entity<TId, TDto> obj)
-        {
-            return obj != null &&
-                   Equals(obj.Id, default(TId));
-        }
-
-        private Type GetUnproxiedType()
-        {
-            return GetType();
-        }
-
-        public virtual bool Equals(Entity<TId, TDto> other)
-        {
-            if (other == null)
-                return false;
-
-            if (ReferenceEquals(this, other))
-                return true;
-
-            if (!IsTransient(this) && 
-                !IsTransient(other) &&
-                Equals(Id, other.Id))
-            {
-                var otherType = other.GetUnproxiedType();
-                var thisType = GetUnproxiedType();
-                return thisType.IsAssignableFrom(otherType) || otherType.IsAssignableFrom(thisType);
-            }
-
-            return false;
+            return _comparer.Equals((TEnt)this, (TEnt)obj);
         }
 
         public override int GetHashCode()
         {
-            return (int)(_cachedHashCode ?? (_cachedHashCode = CreateHashCode()));
+            return  _comparer.GetHashCode((TEnt)this);
+        }
+
+        protected abstract void SetDto<TDto>(TDto dto) where TDto : DataTransferObject<TDto>;
+
+        protected void ValidateDto<TDto>(TDto dto) 
+            where TDto : DataTransferObject<TDto>
+        {
+            var brokenRule = ValidationRulesManager.CheckRules(dto);
+            if (!String.IsNullOrEmpty(brokenRule)) throw new BrokenValidationRuleException(brokenRule);
+
+            SetDto(dto);
+        }
+
+        public static IEnumerable<String> GetBrokenRules<TDto>(TDto dto) where TDto : DataTransferObject<TDto>
+        {
+            return ValidationRulesManager.GetBrokenRules(dto);
         }
     }
 

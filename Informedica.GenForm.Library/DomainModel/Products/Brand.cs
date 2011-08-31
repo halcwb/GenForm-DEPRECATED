@@ -4,27 +4,35 @@ using System.Linq;
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Brand : Entity<Guid, BrandDto>, IBrand
+    public class Brand : Entity<Brand>
     {
         private Iesi.Collections.Generic.ISet<Product> _products = new HashedSet<Product>();
         private readonly ProductComparer  _productComparer = new ProductComparer();
+        private BrandDto _dto;
 
-        protected Brand(): base(new BrandDto()){}
+        static Brand()
+        {
+            RegisterValidationRules();
+        }
 
-        private Brand(BrandDto dto) : base(dto.CloneDto()) {}
+        protected Brand(): base(new BrandComparer())
+        {
+            _dto = new BrandDto();
+        }
+
+        private Brand(BrandDto dto) : base(new BrandComparer())
+        {
+            ValidateDto(dto);
+        }
 
         public virtual Iesi.Collections.Generic.ISet<Product> Products
         {
             get  { return _products; }
             protected set { _products = value;}
-        }
-
-        public override bool IdIsDefault(Guid id)
-        {
-            return id == Guid.Empty;
         }
 
         public static Brand Create(BrandDto brandDto)
@@ -59,6 +67,26 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             {
                 product.RemoveFromBrand();
             }
+        }
+
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+
+        private static void RegisterValidationRules()
+        {
+            ValidationRulesManager.RegisterRule<ProductSubstanceDto>(x => !String.IsNullOrWhiteSpace(x.Name));
+        }
+
+        protected override void SetDto<TDto>(TDto dto)
+        {
+            var dataTransferObject = dto as DataTransferObject<BrandDto>;
+            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
+        }
+
+        internal protected virtual void ChangeName(string obj)
+        {
+            Name = obj;
         }
     }
 }

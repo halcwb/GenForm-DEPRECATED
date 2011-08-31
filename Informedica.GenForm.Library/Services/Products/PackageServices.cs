@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using Informedica.GenForm.Library.DomainModel.Data;
@@ -7,7 +6,7 @@ using Informedica.GenForm.Library.Factories;
 
 namespace Informedica.GenForm.Library.Services.Products
 {
-    public class PackageServices : ServicesBase<Package, Guid, PackageDto>
+    public class PackageServices : ServicesBase<Package, PackageDto>
     {
         private static PackageServices _instance;
         private static readonly object LockThis = new object();

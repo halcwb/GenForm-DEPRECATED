@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Library.Factories
 {
-    public class ShapeFactory : EntityFactory<Shape, Guid, ShapeDto>
+    public class ShapeFactory : EntityFactory<Shape, ShapeDto>
     {
         public ShapeFactory(ShapeDto dto) : base(dto) {}
 

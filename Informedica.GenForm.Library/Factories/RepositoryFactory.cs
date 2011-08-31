@@ -6,11 +6,9 @@ namespace Informedica.GenForm.Library.Factories
 {
     public static class RepositoryFactory
     {
-        public static IRepository<TEntity, TId, TDto> Create<TEntity, TId, TDto>() 
-            where TEntity: Entity<TId, TDto>
-            where TDto: DataTransferObject<TDto, TId>
+        public static IRepository<TEnt> Create<TEnt>() where TEnt : Entity<TEnt>
         {
-            return ObjectFactory.GetInstance<IRepository<TEntity, TId, TDto>>();
+            return ObjectFactory.GetInstance<IRepository<TEnt>>();
         }
 
     }

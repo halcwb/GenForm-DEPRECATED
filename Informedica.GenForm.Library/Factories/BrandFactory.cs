@@ -1,10 +1,9 @@
-using System;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Library.Factories
 {
-    public class BrandFactory : EntityFactory<Brand, Guid, BrandDto>
+    public class BrandFactory : EntityFactory<Brand, BrandDto>
     {
         public BrandFactory(BrandDto dto) : base(dto) {}
 

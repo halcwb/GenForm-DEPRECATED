@@ -1,10 +1,8 @@
-﻿using System;
-using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Products;
+﻿using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.DataAccess.Mappings
 {
-    public class PackageMap : EntityMap<Package, Guid, PackageDto>
+    public class PackageMap : EntityMap<Package>
     {
         public PackageMap()
         {

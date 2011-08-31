@@ -6,7 +6,7 @@ using NHibernate;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class UnitGroupRepository: NHibernateRepository<UnitGroup, Guid, UnitGroupDto>
+    public class UnitGroupRepository: NHibernateRepository<UnitGroup>
     {
         public UnitGroupRepository(ISessionFactory sessionFactory): base(sessionFactory) {}
 

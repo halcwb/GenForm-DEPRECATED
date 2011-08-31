@@ -7,12 +7,15 @@ namespace Informedica.GenForm.Library.DomainModel.Equality
     {
         public bool Equals(UnitValue x, UnitValue y)
         {
-            return x.Unit.Name == y.Unit.Name && x.Value == y.Value;
+            return EqualName(x.Unit.Name, y.Unit.Name) && x.Value == y.Value;
         }
 
         public int GetHashCode(UnitValue obj)
         {
-            return obj.GetHashCode();
+            var hash = 17;
+            hash = hash + 7 * obj.Unit.Name.GetHashCode();
+            hash = hash + 7 * obj.Value.GetHashCode();
+            return hash;
         }
     }
 }

@@ -2,9 +2,8 @@
 
 namespace Informedica.GenForm.Library.DomainModel.Data
 {
-    public class ProductSubstanceDto : DataTransferObject<ProductSubstanceDto, Guid>
+    public class ProductSubstanceDto : DataTransferObject<ProductSubstanceDto>
     {
-        public Guid Id;
         public int SortOrder;
         public string Substance;
         public decimal Quantity;

@@ -1,12 +1,10 @@
-using System;
-using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
 using NHibernate;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class SubstanceRepository : NHibernateRepository<Substance, Guid, SubstanceDto>
+    public class SubstanceRepository : NHibernateRepository<Substance>
     {
         public SubstanceRepository(ISessionFactory factory) : base(factory) {}
 

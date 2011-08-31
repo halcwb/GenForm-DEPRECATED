@@ -1,10 +1,8 @@
-﻿using System;
-using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Products;
+﻿using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.DataAccess.Mappings
 {
-    public sealed class UnitGroupMap: EntityMap<UnitGroup, Guid, UnitGroupDto>
+    public sealed class UnitGroupMap: EntityMap<UnitGroup>
     {
         public UnitGroupMap()
         {

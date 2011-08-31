@@ -1,6 +1,5 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Library.Tests.UnitTests.Services;
@@ -57,14 +56,14 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
         [TestMethod]
         public void ThatAUnitFactoryCanBeReturned()
         {
-            var factory = (UnitFactory)FactoryManager.Get<Unit, Guid, UnitDto>(new UnitDto());
+            var factory = (UnitFactory)FactoryManager.Get<Unit, UnitDto>(new UnitDto());
             Assert.IsInstanceOfType(factory, typeof(UnitFactory));
         }
 
         [TestMethod]
         public void ThatABrandFactoryCanBeReturned()
         {
-            var factory = (BrandFactory)FactoryManager.Get<Brand, Guid, BrandDto>(new BrandDto());
+            var factory = (BrandFactory)FactoryManager.Get<Brand, BrandDto>(new BrandDto());
             Assert.IsInstanceOfType(factory, typeof(BrandFactory));
         }
     }

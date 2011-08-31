@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using NHibernate.Collection.Generic;
 
 namespace Informedica.GenForm.Tests.Fixtures

@@ -95,7 +95,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatSubstanceCanChangeName()
         {
             var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
-            substance.Name = "dopamine changed";
+            SubstanceServices.ChangeSubstanceName(substance, "dopamine changed");
             Context.CurrentSession().Transaction.Commit();
             
             Context.CurrentSession().Transaction.Begin();

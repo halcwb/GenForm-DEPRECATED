@@ -1,14 +1,12 @@
-﻿using System;
-using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Products;
+﻿using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.DataAccess.Mappings
 {
-    public sealed class RouteMap : EntityMap<Route, Guid, RouteDto>
+    public sealed class RouteMap : EntityMap<Route>
     {
-        public RouteMap()
+        public RouteMap() : base(Route.NameLength)
         {
-            Map(r => r.Abbreviation).Not.Nullable().Length(30).Unique();
+            Map(r => r.Abbreviation).Not.Nullable().Length(Route.AbbreviationLength).Unique();
             HasManyToMany(r => r.Shapes)
                 // Fetch.Join will raise laizy collection load error
                 .Fetch.Select()

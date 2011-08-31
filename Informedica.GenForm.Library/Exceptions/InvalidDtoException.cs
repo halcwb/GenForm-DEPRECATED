@@ -3,9 +3,9 @@ using Informedica.GenForm.Library.DomainModel;
 
 namespace Informedica.GenForm.Library.Exceptions
 {
-    public class InvalidDtoException<TDto, TId> : Exception
+    public class InvalidDtoException<TDto> : Exception
     {
-        public InvalidDtoException(DataTransferObject<TDto, TId> dto) : base(dto.ToString())
+        public InvalidDtoException(DataTransferObject<TDto> dto) : base(dto.ToString())
         {
 
         }

@@ -1,13 +1,13 @@
 using System;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 using NHibernate;
 using StructureMap;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class UnitRepository: NHibernateRepository<Unit, Guid, UnitDto>
+    public class UnitRepository: NHibernateRepository<Unit>
     {
         [DefaultConstructor]
         protected UnitRepository(): base(ObjectFactory.GetInstance<ISessionFactory>()) {}

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Informedica.GenForm.Library.DomainModel.Products.Data;
 
 namespace Informedica.GenForm.Library.DomainModel.Data
 {
-    public class ShapeDto: DataTransferObject<ShapeDto, Guid>
+    public class ShapeDto: DataTransferObject<ShapeDto>
     {
         public ShapeDto()
         {

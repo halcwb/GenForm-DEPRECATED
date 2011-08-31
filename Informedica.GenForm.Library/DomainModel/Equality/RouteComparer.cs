@@ -7,12 +7,12 @@ namespace Informedica.GenForm.Library.DomainModel.Equality
     {
         public bool Equals(Route x, Route y)
         {
-            return x.Equals(y) || EqualName(x.Name, y.Name) || EqualName(x.Abbreviation, y.Abbreviation);
+            return EqualName(x.Name, y.Name) || EqualName(x.Abbreviation, y.Abbreviation);
         }
 
         public int GetHashCode(Route obj)
         {
-            return obj.GetHashCode();
+            return obj.Name.GetHashCode();
         }
     }
 }

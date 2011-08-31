@@ -6,7 +6,7 @@ using NHibernate;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class PackageRepository : NHibernateRepository<Package, Guid, PackageDto>
+    public class PackageRepository : NHibernateRepository<Package>
     {
         public PackageRepository(ISessionFactory factory) : base(factory) {}
 

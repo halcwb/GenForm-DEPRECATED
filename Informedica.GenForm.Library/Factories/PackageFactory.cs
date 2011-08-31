@@ -4,7 +4,7 @@ using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Library.Factories
 {
-    public class PackageFactory : EntityFactory<Package, Guid, PackageDto>
+    public class PackageFactory : EntityFactory<Package, PackageDto>
     {
         public PackageFactory(PackageDto dto) : base(dto) {}
 
