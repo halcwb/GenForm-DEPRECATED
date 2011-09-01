@@ -64,11 +64,11 @@ namespace Informedica.NHibernate.Tests
         {
             var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
             var group = subst.SubstanceGroup;
-            Assert.IsTrue(group.Substances.Contains(subst));
+            Assert.IsTrue(group.SubstanceSet.Contains(subst));
 
             Context.CurrentSession().SaveOrUpdate(subst);
 
-            Assert.IsTrue(group.Substances.Contains(subst));
+            Assert.IsTrue(group.SubstanceSet.Contains(subst));
         }
 
         [TestMethod]
@@ -76,12 +76,12 @@ namespace Informedica.NHibernate.Tests
         {
             var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
             var group = subst.SubstanceGroup;
-            Assert.IsTrue(group.Substances.Contains(subst));
+            Assert.IsTrue(group.SubstanceSet.Contains(subst));
 
             Context.CurrentSession().SaveOrUpdate(subst);
 
             subst.RemoveFromSubstanceGroup();
-            Assert.IsFalse(group.Substances.Contains(subst));            
+            Assert.IsFalse(group.SubstanceSet.Contains(subst));            
         }
 
         [TestMethod]

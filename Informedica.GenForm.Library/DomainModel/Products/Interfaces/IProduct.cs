@@ -14,6 +14,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Interfaces
         UnitValue Quantity { get; }
         Package Package { get; }
         String DisplayName { get; }
-        IList<ProductSubstance> Substances { get; }
+        IList<ProductSubstance> SubstanceList { get; }
     }
 }

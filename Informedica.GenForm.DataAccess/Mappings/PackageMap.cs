@@ -7,7 +7,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
         public PackageMap()
         {
             Map(p => p.Abbreviation).Not.Nullable().Length(30).Unique();
-            HasManyToMany(p => p.Shapes)
+            HasManyToMany(p => p.ShapeSet)
                 // Fetch.Join will raise laizy collection load error
                 .Fetch.Select()
                 .AsSet()

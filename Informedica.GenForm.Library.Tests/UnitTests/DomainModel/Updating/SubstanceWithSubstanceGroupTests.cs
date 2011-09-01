@@ -57,7 +57,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Updating
             var group = subst.SubstanceGroup;
 
             subst.RemoveFromSubstanceGroup();
-            Assert.IsFalse(group.Substances.Contains(subst));
+            Assert.IsFalse(group.SubstanceSet.Contains(subst));
             Assert.IsNull(subst.SubstanceGroup);
         }
 

@@ -62,7 +62,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         public void ThatUnitGroupHasACollectionOfIUnit()
         {
             var unitgroup = UnitGroup.Create(UnitGroupTestFixtures.GetDtoMass());
-            Assert.IsInstanceOfType(unitgroup.Units, typeof(UnitCollection));
+            Assert.IsInstanceOfType(unitgroup.Units, typeof(UnitSet));
         }
 
         private bool UnitGroupIsValid(UnitGroup unitgroup)

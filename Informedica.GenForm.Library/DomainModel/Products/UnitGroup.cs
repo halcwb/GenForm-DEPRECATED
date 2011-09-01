@@ -13,8 +13,8 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         #region Private
 
         private UnitGroupDto _dto;
-        private UnitCollection _units;
-        private ShapeCollection<UnitGroup> _shapes;
+        private UnitSet _units;
+        private ShapeSet<UnitGroup> _shapes;
 
         #endregion
 
@@ -39,8 +39,8 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private void InitCollections()
         {
-            _units = new UnitCollection(this);
-            _shapes = new ShapeCollection<UnitGroup>(this);
+            _units = new UnitSet(this);
+            _shapes = new ShapeSet<UnitGroup>(this);
         }
 
         #endregion
@@ -64,13 +64,13 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual Iesi.Collections.Generic.ISet<Unit> UnitSet
         {
-            get { return _units.GetUnitSet(); }
-            protected set { _units = new UnitCollection(value, this); }
+            get { return _units.GetEntitySet(); }
+            protected set { _units = new UnitSet(value, this); }
         }
 
         public virtual void AddUnit(IUnit unit)
         {
-            _units.Add((Unit)unit);
+            _units.Add(unit);
         }
 
         internal protected virtual void RemoveUnit(Unit unit)
@@ -86,7 +86,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual Iesi.Collections.Generic.ISet<Shape> ShapeSet
         {
             get { return _shapes.GetEntitySet(); }
-            protected set { _shapes = new ShapeCollection<UnitGroup>(value, this); }
+            protected set { _shapes = new ShapeSet<UnitGroup>(value, this); }
         }
 
         public virtual void AddShape(IShape shape)

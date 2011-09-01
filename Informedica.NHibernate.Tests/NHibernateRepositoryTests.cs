@@ -84,7 +84,7 @@ namespace Informedica.NHibernate.Tests
             var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
             new SubstanceRepository(GenFormApplication.SessionFactory) {subst};
 
-            Assert.IsTrue(subst.SubstanceGroup.Substances.Contains(subst));
+            Assert.IsTrue(subst.SubstanceGroup.SubstanceSet.Contains(subst));
         }
 
         [TestMethod]
@@ -95,7 +95,7 @@ namespace Informedica.NHibernate.Tests
             var group = subst.SubstanceGroup;
             subst.RemoveFromSubstanceGroup();
 
-            Assert.IsFalse(group.Substances.Contains(subst));   
+            Assert.IsFalse(group.SubstanceSet.Contains(subst));   
         }
 
         [TestMethod]

@@ -6,7 +6,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
     {
         public SubstanceGroupMap()
         {
-            HasMany(x => x.Substances)
+            HasMany(x => x.SubstanceSet)
                 .AsSet()
                 .Cascade.All()
                 .Inverse();

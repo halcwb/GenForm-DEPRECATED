@@ -1,90 +1,103 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products.Collections;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class SubstanceGroup: Entity<SubstanceGroup>
     {
-        private SubstanceGroup _mainSubstanceGroup;
-        private Iesi.Collections.Generic.ISet<Substance> _substances = new HashedSet<Substance>();
-        private readonly IEqualityComparer<Substance> _substanceComparer = new SubstanceComparer();
+        #region Private
+
         private SubstanceGroupDto _dto;
+        private SubstanceSet _substances;
+
+        #endregion
+
+        #region Construction
 
         static SubstanceGroup()
         {
             RegisterValidationRules();
         }
 
-        protected SubstanceGroup(): base()
+        protected SubstanceGroup()
         {
             _dto = new SubstanceGroupDto();
+            InitializeCollections();
         }
 
-        private SubstanceGroup(SubstanceGroupDto dto): base()
+        private SubstanceGroup(SubstanceGroupDto dto)
         {
             ValidateDto(dto);
+            InitializeCollections();
         }
 
-        #region Implementation of ISubstanceGroup
-
-        public virtual SubstanceGroup MainSubstanceGroup
+        private void InitializeCollections()
         {
-            get { return _mainSubstanceGroup; }
-            set { _mainSubstanceGroup = value; }
-        }
-        
-        public virtual Iesi.Collections.Generic.ISet<Substance> Substances
-        {
-            get { return _substances; }
-            protected set { _substances = value; }
+            _substances = new SubstanceSet(this);
         }
 
         #endregion
 
-        public virtual void AddSubstance(Substance substance)
-        {
-            if (_substances.Contains(substance)) return;
+        #region Business
 
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+
+        public virtual SubstanceGroup MainSubstanceGroup { get; set; }
+
+        public virtual IEnumerable<ISubstance> Substances
+        {
+            get { return _substances;  }
+        }
+        
+        public virtual Iesi.Collections.Generic.ISet<Substance> SubstanceSet
+        {
+            get { return _substances.GetEntitySet(); }
+            protected set { _substances = new SubstanceSet(value, this); }
+        }
+
+        public virtual bool ContainsSubstance(ISubstance subst)
+        {
+            return _substances.Contains(subst);
+        }
+
+        public virtual void AddSubstance(ISubstance substance)
+        {
             _substances.Add(substance);
-            substance.SubstanceGroup = this;
         }
 
-        public virtual void Remove(Substance substance)
+        public virtual void Remove(ISubstance substance)
         {
-            if (!_substances.Contains(substance)) return;
-            
             _substances.Remove(substance);
-            substance.SubstanceGroup = null;
-        }
-
-        public static SubstanceGroup Create(SubstanceGroupDto dto)
-        {
-            return new SubstanceGroup(dto);
         }
 
         public virtual void ClearAllSubstances()
         {
-            var list = new List<Substance>(Substances);
+            var list = new List<Substance>(SubstanceSet);
             foreach (var substance in list)
             {
                 substance.RemoveFromSubstanceGroup();
             }
         }
 
-        public virtual bool ContainsSubstance(Substance subst)
+        #endregion
+
+        #region Factory
+
+        public static SubstanceGroup Create(SubstanceGroupDto dto)
         {
-            return _substances.Contains(subst, _substanceComparer);
+            return new SubstanceGroup(dto);
         }
 
+        #endregion
 
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
-
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+        #region Validation
 
         private static void RegisterValidationRules()
         {
@@ -96,5 +109,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             var dataTransferObject = dto as DataTransferObject<SubstanceGroupDto>;
             if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
         }
+
+        #endregion
     }
 }

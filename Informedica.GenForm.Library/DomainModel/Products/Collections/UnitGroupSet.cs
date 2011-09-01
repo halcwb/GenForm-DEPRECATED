@@ -4,13 +4,13 @@ using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 
 namespace Informedica.GenForm.Library.DomainModel.Products.Collections
 {
-    internal class UnitGroupCollection : EntityCollection<UnitGroup, IShape>
+    internal class UnitGroupSet : EntitySet<UnitGroup, IShape>
     {
-        internal UnitGroupCollection(ISet<UnitGroup> unitGroups, IShape parent) : 
+        internal UnitGroupSet(ISet<UnitGroup> unitGroups, IShape parent) : 
             base(unitGroups, parent, new UnitGroupComparer()) 
         {}
 
-        internal UnitGroupCollection(IShape parent) : 
+        internal UnitGroupSet(IShape parent) : 
             base(new HashedSet<UnitGroup>(), parent, new UnitGroupComparer())
         {}
 

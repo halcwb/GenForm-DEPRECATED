@@ -18,10 +18,10 @@ namespace Informedica.GenForm.DataAccess.Mappings
             References(x => x.Shape)
                 .Not.Nullable()
                 .Cascade.SaveUpdate();
-            HasMany(x => x.Substances)
+            HasMany(x => x.SubstanceList)
                 .AsList(s => s.Column("SortOrder"))
                 .Cascade.All().Inverse();
-            HasManyToMany(x => x.Routes)
+            HasManyToMany(x => x.RouteSet)
                 .AsSet()
                 .Cascade.All();
         }

@@ -117,7 +117,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             {
                 var substance1 = substance;
                 isPopulated = isPopulated &&
-                              _product.Substances.SingleOrDefault(s => 
+                              _product.SubstanceList.SingleOrDefault(s => 
                                   substance1.Substance == s.Substance.Name &&
                                   substance1.SortOrder == s.SortOrder &&
                                   substance1.Quantity == s.Quantity.Value &&

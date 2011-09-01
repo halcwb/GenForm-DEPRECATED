@@ -68,7 +68,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         {
             var package = AssociateWithShape();
 
-            Assert.IsTrue(package.Shapes.Count() == 1);
+            Assert.IsTrue(package.ShapeSet.Count() == 1);
         }
 
         private static Package AssociateWithShape()
@@ -105,11 +105,19 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         public void NotAcceptTwoDuplicateShapes()
         {
             var package = AssociateWithShape();
-            package.AddShape(Shape.Create(new ShapeDto
-                                    {
-                                        Name = "infusievloeistof"
-                                    }));
-            Assert.AreEqual(1, package.Shapes.Count);
+            try
+            {
+                package.AddShape(Shape.Create(new ShapeDto
+                                {
+                                    Name = "infusievloeistof"
+                                }));
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                Assert.IsInstanceOfType(e, typeof(CannotAddItemException<Shape>));
+                Assert.AreEqual(1, package.ShapeSet.Count);
+            } 
         }
     }
 }

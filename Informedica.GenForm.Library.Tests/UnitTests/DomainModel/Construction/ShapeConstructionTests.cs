@@ -69,8 +69,8 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         private bool ShapeContainsPackages(Shape shape)
         {
             return shape.PackageSet.Count() == 2 &&
-                   shape.PackageSet.First().Shapes.Contains(shape) &&
-                   shape.PackageSet.Last().Shapes.Contains(shape);
+                   shape.PackageSet.First().ShapeSet.Contains(shape) &&
+                   shape.PackageSet.Last().ShapeSet.Contains(shape);
         }
 
         [TestMethod]
@@ -83,8 +83,8 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         private bool ShapeContainsRoutes(Shape shape)
         {
             return shape.RouteSet.Count() == 2 &&
-                   shape.RouteSet.First().Shapes.Contains(shape) &&
-                   shape.RouteSet.Last().Shapes.Contains(shape);
+                   shape.RouteSet.First().ShapeSet.Contains(shape) &&
+                   shape.RouteSet.Last().ShapeSet.Contains(shape);
         }
 
         [TestMethod]

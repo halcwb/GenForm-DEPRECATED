@@ -96,7 +96,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatRouteCanBeAssociatedWithShape()
         {
             var route = RouteServices.WithDto(RouteTestFixtures.GetRouteWithShape()).Get();
-            Assert.IsTrue(route.Shapes.Count() == 1);
+            Assert.IsTrue(route.ShapeSet.Count() == 1);
         }
 
         [TestMethod]
