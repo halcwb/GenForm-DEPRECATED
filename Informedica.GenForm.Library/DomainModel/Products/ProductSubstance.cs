@@ -1,6 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
@@ -17,12 +17,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             RegisterValidationRules();
         }
 
-        protected ProductSubstance(): base (new ProductSubstanceComparer())
+        protected ProductSubstance(): base ()
         {
             _dto = new ProductSubstanceDto();
         }
 
-        private ProductSubstance(Product product, ProductSubstanceDto dto) : base(new ProductSubstanceComparer())
+        private ProductSubstance(Product product, ProductSubstanceDto dto) : base()
         {
             ValidateDto(dto);
 
@@ -32,7 +32,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             SetQuantity();
         }
 
-        public ProductSubstance(Product product, int sortOrder, Substance substance, decimal quantity, Unit unit) : base(new ProductSubstanceComparer())
+        public ProductSubstance(Product product, int sortOrder, Substance substance, decimal quantity, Unit unit) : base()
         {
             _dto = new ProductSubstanceDto();
             Initialize(product, sortOrder, substance, quantity, unit);

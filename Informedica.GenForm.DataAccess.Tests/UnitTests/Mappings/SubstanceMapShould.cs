@@ -1,5 +1,7 @@
-﻿using FluentNHibernate.Testing;
+﻿using System.Collections;
+using FluentNHibernate.Testing;
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -66,8 +68,9 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         public void CorrectlyMapSubstanceWithGroup()
         {
             var group = SubstanceGroup.Create(GetSubstanceGroupDto());
+            var comparer = (IEqualityComparer) new SubstanceComparer();
 
-            new PersistenceSpecification<Substance>(Context.CurrentSession())
+            new PersistenceSpecification<Substance>(Context.CurrentSession(), comparer)
                     .CheckProperty(s => s.Name, "paracetamol")
                     .CheckReference(s => s.SubstanceGroup, group, ((s, y) => s.AddToSubstanceGroup(y)))
                     .VerifyTheMappings();

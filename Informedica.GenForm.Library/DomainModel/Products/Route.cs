@@ -1,12 +1,12 @@
 ﻿using System;
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Route: Entity<Route>
+    public class Route: Entity<Route>, IRoute
     {
         public const int AbbreviationLength = 30;
         public new const int NameLength = 50;
@@ -20,12 +20,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             RegisterValidationRules();
         }
 
-        protected Route() : base(new RouteComparer())
+        protected Route()
         {
             _dto = new RouteDto();
         }
 
-        private Route(RouteDto dto) : base(new RouteComparer())
+        private Route(RouteDto dto)
         {
             ValidateDto(dto);
             AddShapes();
@@ -49,7 +49,11 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual String Abbreviation 
         { 
-            get { return _dto.Abbreviation; } 
+            get
+            {
+                if (String.IsNullOrWhiteSpace(_dto.Abbreviation)) SetAbbreviation();
+                return _dto.Abbreviation;
+            } 
             set { _dto.Abbreviation = value; } 
         }
 
@@ -141,7 +145,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             var length = value.Length > NameLength ? NameLength : value.Length;
             _dto.Name = value.Substring(0, length).Trim().ToLower();
 
-            length = length > AbbreviationLength ? AbbreviationLength : length;
+            SetAbbreviation();
+        }
+
+        private void SetAbbreviation()
+        {
+            var length = _dto.Name.Length > AbbreviationLength ? AbbreviationLength : _dto.Name.Length;
             if (String.IsNullOrEmpty(_dto.Abbreviation)) _dto.Abbreviation = _dto.Name.Substring(0, length);
         }
 

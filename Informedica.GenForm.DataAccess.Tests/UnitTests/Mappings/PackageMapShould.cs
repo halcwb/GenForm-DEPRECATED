@@ -3,6 +3,7 @@ using System.Diagnostics;
 using FluentNHibernate.MappingModel;
 using FluentNHibernate.Testing;
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -66,7 +67,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void CorrectlyMapPackageWithOneShape()
         {
-            new PersistenceSpecification<Package>(Context.CurrentSession())
+            var comparer = new PackageComparer();
+            new PersistenceSpecification<Package>(Context.CurrentSession(), comparer)
                 .CheckProperty(b => b.Name, "ampul")
                 .CheckProperty(p => p.Abbreviation, "amp")
                 .CheckList(p => p.Shapes, GetShapesList(), (package, shape) => package.AddShape(shape))
@@ -74,11 +76,12 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         }
 
         [TestMethod]
-        public void WillThrowAnnErrorWhenDuplicateShapes()
+        public void WillThrowAnErrorWhenDuplicateShapes()
         {
             try
             {
-                new PersistenceSpecification<Package>(Context.CurrentSession())
+                var comparer = new PackageComparer();
+                new PersistenceSpecification<Package>(Context.CurrentSession(), comparer)
                     .CheckProperty(b => b.Name, "ampul")
                     .CheckProperty(p => p.Abbreviation, "amp")
                     .CheckList(p => p.Shapes, GetDuplicateShapes(), (package, shape) => package.AddShape(shape))
@@ -87,7 +90,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
             }
             catch (System.Exception e)
             {
-                Assert.IsNotNull(e);
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
             }
         }
 

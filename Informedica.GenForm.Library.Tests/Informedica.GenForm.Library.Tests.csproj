@@ -99,6 +99,7 @@
     <Compile Include="UnitTests\DomainModel\ProductConstructorShould.cs" />
     <Compile Include="UnitTests\DomainModel\RouteComparerReturns.cs" />
     <Compile Include="UnitTests\DomainModel\Construction\UnitGroupConstructionTests.cs" />
+    <Compile Include="UnitTests\DomainModel\UnitCollectionTests.cs" />
     <Compile Include="UnitTests\DomainModel\Updating\SubstanceWithSubstanceGroupTests.cs" />
     <Compile Include="UnitTests\DomainModel\Validation\ValidationOfEmptyUnitDtoTests.cs" />
     <Compile Include="UnitTests\DomainModel\VersioningTests.cs" />

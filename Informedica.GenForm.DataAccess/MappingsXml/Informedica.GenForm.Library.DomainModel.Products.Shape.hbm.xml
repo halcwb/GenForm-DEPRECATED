@@ -7,7 +7,7 @@
     <version name="Version" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Version" />
     </version>
-    <set cascade="all" fetch="select" name="Packages" table="PackagesToShapes">
+    <set cascade="all" fetch="select" name="PackageSet" table="PackageSetToShapes">
       <key>
         <column name="Shape_id" />
       </key>
@@ -15,7 +15,7 @@
         <column name="Package_id" />
       </many-to-many>
     </set>
-    <set cascade="all" fetch="select" name="UnitGroups" table="ShapesToUnitGroups">
+    <set cascade="all" fetch="select" name="UnitGroupSet" table="ShapeSetToUnitGroupSet">
       <key>
         <column name="Shape_id" />
       </key>
@@ -23,7 +23,7 @@
         <column name="UnitGroup_id" />
       </many-to-many>
     </set>
-    <set cascade="all" fetch="select" name="Routes" table="RoutesToShapes">
+    <set cascade="all" fetch="select" name="RouteSet" table="RouteSetToShapes">
       <key>
         <column name="Shape_id" />
       </key>

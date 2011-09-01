@@ -44,7 +44,7 @@ namespace Informedica.GenForm.Tests.Utilities
         {
             return product.Shape != null &&
                    !String.IsNullOrWhiteSpace(product.Shape.Name) &&
-                   product == product.Shape.Products.First();
+                   product == product.Shape.ProductSet.First();
         }
 
         public static bool ProductHasPackage(Product product)
@@ -56,7 +56,7 @@ namespace Informedica.GenForm.Tests.Utilities
 
         public static bool ProductAssociatesShapeWithPackage(Product product)
         {
-            return product.Shape.Packages.Contains(product.Package);
+            return product.Shape.PackageSet.Contains(product.Package);
         }
 
         public static bool ProductHasUnitValue(Product product)
@@ -69,7 +69,7 @@ namespace Informedica.GenForm.Tests.Utilities
 
         public static bool ProductAssociatesShapeWithUnitGroup(Product product)
         {
-            return product.Shape.UnitGroups.Contains(product.Quantity.Unit.UnitGroup);
+            return product.Shape.UnitGroupSet.Contains(product.Quantity.Unit.UnitGroup);
         }
 
         public static bool ProductHasProductSubstance(Product product)

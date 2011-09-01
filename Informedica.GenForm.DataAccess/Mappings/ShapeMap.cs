@@ -6,17 +6,17 @@ namespace Informedica.GenForm.DataAccess.Mappings
     {
         public ShapeMap()
         {
-            HasManyToMany(s => s.Packages)
+            HasManyToMany(s => s.PackageSet)
                 // Fetch.Join will raise laizy collection load error
                 .Fetch.Select()
                 .AsSet()
                 .Cascade.All();
-            HasManyToMany(s => s.UnitGroups)
+            HasManyToMany(s => s.UnitGroupSet)
                 // Fetch.Join will raise laizy collection load error
                 .Fetch.Select()
                 .AsSet()
                 .Cascade.All();
-            HasManyToMany(s => s.Routes)
+            HasManyToMany(s => s.RouteSet)
                 // Fetch.Join will raise laizy collection load error
                 .Fetch.Select()
                 .AsSet()

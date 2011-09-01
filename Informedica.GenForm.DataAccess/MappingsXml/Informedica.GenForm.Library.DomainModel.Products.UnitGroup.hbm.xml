@@ -7,13 +7,13 @@
     <version name="Version" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Version" />
     </version>
-    <set cascade="all" inverse="true" name="Units">
+    <set cascade="all" inverse="true" name="UnitSet">
       <key>
         <column name="UnitGroup_id" />
       </key>
       <one-to-many class="Informedica.GenForm.Library.DomainModel.Products.Unit, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     </set>
-    <set cascade="all" fetch="join" inverse="true" name="Shapes" table="ShapesToUnitGroups">
+    <set cascade="all" fetch="join" inverse="true" name="ShapeSet" table="ShapeSetToUnitGroupSet">
       <key>
         <column name="UnitGroup_id" />
       </key>

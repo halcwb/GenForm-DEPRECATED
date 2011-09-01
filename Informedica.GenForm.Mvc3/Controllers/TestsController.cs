@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.Services.Products;
 using Newtonsoft.Json.Linq;
 using StructureMap;

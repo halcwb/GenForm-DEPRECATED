@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FluentNHibernate.Testing;
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -61,9 +62,10 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void AssociateShapeWithOnePackage()
         {
-            new PersistenceSpecification<Shape>(Context.CurrentSession())
+            var comparer = new ShapeComparer();
+            new PersistenceSpecification<Shape>(Context.CurrentSession(), comparer)
                 .CheckProperty(s => s.Name, "infusievloeistof")
-                .CheckList(s => s.Packages, GetPackageList())
+                .CheckList(s => s.PackageSet, GetPackageList())
                 .VerifyTheMappings();
         }
 
@@ -72,7 +74,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         {
             new PersistenceSpecification<Shape>(Context.CurrentSession())
                 .CheckProperty(s => s.Name, "infusievloeistof")
-                .CheckList(s => s.Packages, GetPackageListTwo())
+                .CheckList(s => s.PackageSet, GetPackageListTwo())
                 .VerifyTheMappings();
         }
 
@@ -88,27 +90,30 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void AssociateShapeWithOneUnitGroup()
         {
-                new PersistenceSpecification<Shape>(Context.CurrentSession())
-                    .CheckProperty(s => s.Name, "infusievloeistof")
-                    .CheckList(s => s.UnitGroups, GetUnitGroupList())
-                    .VerifyTheMappings();
+            var comparer = new UnitGroupComparer();
+            new PersistenceSpecification<Shape>(Context.CurrentSession(), comparer)
+                .CheckProperty(s => s.Name, "infusievloeistof")
+                .CheckList(s => s.UnitGroupSet, GetUnitGroupList())
+                .VerifyTheMappings();
         }
 
         [TestMethod]
         public void AssociateShapeWithOneRoute()
         {
-            new PersistenceSpecification<Shape>(Context.CurrentSession())
+            var comparer = new ShapeComparer();
+            new PersistenceSpecification<Shape>(Context.CurrentSession(), comparer)
                 .CheckProperty(s => s.Name, "infusievloeistof")
-                .CheckList(s => s.Routes, GetRouteList())
+                .CheckList(s => s.RouteSet, GetRouteList())
                 .VerifyTheMappings();
         }
 
         // ToDo: solve problem with VerifyMappings for sets
         public void AssociateShapeWithTwoRoutes()
         {
-            new PersistenceSpecification<Shape>(Context.CurrentSession())
+            var comparer = new ShapeComparer();
+            new PersistenceSpecification<Shape>(Context.CurrentSession(), comparer)
                 .CheckProperty(s => s.Name, "infusievloeistof")
-                .CheckList(s => s.Routes, GetRouteListWithTwo())
+                .CheckList(s => s.RouteSet, GetRouteListWithTwo())
                 .VerifyTheMappings();
         }
 

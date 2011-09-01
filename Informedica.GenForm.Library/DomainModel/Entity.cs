@@ -10,13 +10,6 @@ namespace Informedica.GenForm.Library.DomainModel
     {
         public const int NameLength = 255;
 
-        private readonly IEqualityComparer<TEnt> _comparer;
-
-        protected Entity(IEqualityComparer<TEnt> comparer)
-        {
-            _comparer = comparer;
-        }
-
         public abstract Guid Id { get; protected set; }
 
         public abstract string Name { get; protected set; }
@@ -26,19 +19,6 @@ namespace Informedica.GenForm.Library.DomainModel
         public virtual bool IsTransient()
         {
             return Id == Guid.Empty;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null) return false;
-            if (this == obj) return true;
-
-            return _comparer.Equals((TEnt)this, (TEnt)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return  _comparer.GetHashCode((TEnt)this);
         }
 
         protected abstract void SetDto<TDto>(TDto dto) where TDto : DataTransferObject<TDto>;

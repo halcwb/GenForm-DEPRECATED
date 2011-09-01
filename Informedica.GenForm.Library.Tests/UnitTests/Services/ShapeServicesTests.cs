@@ -93,7 +93,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             var package = PackageServices.WithDto(GetPackageDto()).Get();
             var shape = ShapeServices.WithDto(ShapeTestFixtures.GetValidDtoWithPackages()).Get();
-            Assert.AreEqual(shape.Packages.Single(p => p.Name == package.Name), package);
+            Assert.AreEqual(shape.PackageSet.Single(p => p.Name == package.Name), package);
 
         }
 
@@ -126,7 +126,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             var route = RouteServices.WithDto(GetRouteDto()).Get();
             var shape = ShapeServices.WithDto(ShapeTestFixtures.GetValidDtoWithRoutes()).Get();
-            Assert.AreEqual(shape.Routes.Single(p => p.Name == route.Name), route);
+            Assert.AreEqual(shape.RouteSet.Single(p => p.Name == route.Name), route);
         }
 
         private RouteDto GetRouteDto()
@@ -155,7 +155,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             var unitGroup = UnitGroupServices.WithDto(GetUnitGroupDto()).Get();
             var shape = ShapeServices.WithDto(ShapeTestFixtures.GetValidDtoWithUnitGroups()).Get();
-            Assert.AreEqual(shape.UnitGroups.Single(p => p.Name == unitGroup.Name), unitGroup);
+            Assert.AreEqual(shape.UnitGroupSet.Single(p => p.Name == unitGroup.Name), unitGroup);
         }
 
         [TestMethod]

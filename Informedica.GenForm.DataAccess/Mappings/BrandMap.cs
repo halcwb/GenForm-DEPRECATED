@@ -6,7 +6,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
     {
         public BrandMap()
         {
-            HasMany(x => x.Products)
+            HasMany(x => x.ProductSet)
                 .AsSet()
                 .Inverse();
         }

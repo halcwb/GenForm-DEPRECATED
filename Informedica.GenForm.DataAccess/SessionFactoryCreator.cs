@@ -33,7 +33,7 @@ namespace Informedica.GenForm.DataAccess
         private static void BuildSchema(Configuration config)
         {
             // first drop the database to recreate a new one
-            new SchemaExport(config).Drop(false, true);
+            // new SchemaExport(config).Drop(false, true);
             // this NHibernate tool takes a configuration (with mapping info in)
             // and exports a database schema from it
             new SchemaExport(config).Create(false, true);

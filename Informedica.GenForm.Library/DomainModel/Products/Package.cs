@@ -3,6 +3,7 @@ using System.Linq;
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
@@ -21,12 +22,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             RegisterValidationRules();
         }
 
-        protected Package() : base(new PackageComparer())
+        protected Package() : base()
         {
             _dto = new PackageDto();
         }
 
-        private Package(PackageDto dto) : base(new PackageComparer())
+        private Package(PackageDto dto) : base()
         {
             ValidateDto(dto);
         }
