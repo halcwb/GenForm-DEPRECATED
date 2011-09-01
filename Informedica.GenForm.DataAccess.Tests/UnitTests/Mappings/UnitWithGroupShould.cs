@@ -1,9 +1,13 @@
-﻿using Informedica.GenForm.Assembler;
+﻿using System.Linq;
+using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
+using NHibernate.Linq;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 {
@@ -69,20 +73,65 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
             AssertUnitGroupName(unit);
         }
 
-        private static void AssertUnitGroupName(IUnit unit)
-        {
-            Assert.AreEqual(UnitTestFixtures.GetTestUnitMilligram().UnitGroupName, unit.UnitGroup.Name);
-        }
-
-        private static void AssertUnitNameIsSet(IUnit unit)
-        {
-            Assert.AreEqual(UnitTestFixtures.GetTestUnitMilligram().Name, unit.Name);
-        }
-
         [TestMethod]
         public void BeAbleToPersistAUnit()
         {
             PersistUnit(Context.CurrentSession());
+        }
+
+        [TestMethod]
+        public void BeAbleToFindUnitInUnitGroup()
+        {
+            PersistUnit(Context.CurrentSession());
+            var unit =
+                Context.CurrentSession().Query<Unit>().Single(
+                    x => x.Name == UnitTestFixtures.GetTestUnitMilligram().Name);
+
+            Assert.IsTrue(unit.UnitGroup.Units.Contains(unit));
+        }
+
+        [TestMethod]
+        public void NotAcceptTheSameUnitTwice()
+        {
+            PersistUnit(Context.CurrentSession());
+            var unit =
+                Context.CurrentSession().Query<Unit>().Single(
+                    x => x.Name == UnitTestFixtures.GetTestUnitMilligram().Name);
+            var group = unit.UnitGroup;
+            try
+            {
+                group.AddUnit(unit);
+            }
+            catch (System.Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
+
+
+        [TestMethod]
+        public void NotAcceptTheDifferentUnitWithSameUnitNameTwice()
+        {
+            PersistUnit(Context.CurrentSession());
+            var unit =
+                Context.CurrentSession().Query<Unit>().Single(
+                    x => x.Name == UnitTestFixtures.GetTestUnitMilligram().Name);
+            var group = unit.UnitGroup;
+            
+            try
+            {
+                group.AddUnit(
+                    new Unit(
+                        new UnitDto
+                            {
+                                Name = UnitTestFixtures.GetTestUnitMilligram().Name,
+                                Abbreviation = UnitTestFixtures.GetTestUnitMilligram().Abbreviation
+                            }, group));
+            }
+            catch (System.Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
         }
 
         private static void PersistUnit(ISession session)
@@ -95,5 +144,14 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
             session.Save(unit);
         }
 
+        private static void AssertUnitGroupName(IUnit unit)
+        {
+            Assert.AreEqual(UnitTestFixtures.GetTestUnitMilligram().UnitGroupName, unit.UnitGroup.Name);
+        }
+
+        private static void AssertUnitNameIsSet(IUnit unit)
+        {
+            Assert.AreEqual(UnitTestFixtures.GetTestUnitMilligram().Name, unit.Name);
+        }
     }
 }

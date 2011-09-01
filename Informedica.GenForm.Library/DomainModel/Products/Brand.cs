@@ -1,77 +1,100 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products.Collections;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Brand : Entity<Brand>
+    public class Brand : Entity<Brand>, IBrand
     {
-        private Iesi.Collections.Generic.ISet<Product> _products = new HashedSet<Product>();
-        private readonly ProductComparer  _productComparer = new ProductComparer();
+        #region Private
+
         private BrandDto _dto;
+        private ProductCollection<Brand> _products;
+
+        #endregion
+
+        #region Construction
 
         static Brand()
         {
             RegisterValidationRules();
         }
 
-        protected Brand(): base(new BrandComparer())
+        protected Brand()
         {
             _dto = new BrandDto();
+            InitializeCollections();
         }
 
-        private Brand(BrandDto dto) : base(new BrandComparer())
+        private Brand(BrandDto dto)
         {
             ValidateDto(dto);
+            InitializeCollections();
         }
 
-        public virtual Iesi.Collections.Generic.ISet<Product> Products
+        private void InitializeCollections()
         {
-            get  { return _products; }
-            protected set { _products = value;}
+            _products = new ProductCollection<Brand>(this);
         }
 
-        public static Brand Create(BrandDto brandDto)
+        #endregion
+
+        #region Business
+
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+
+        public virtual IEnumerable<IProduct> Products
         {
-            return new Brand(brandDto);
+            get { return _products; }
+        }
+        
+        public virtual Iesi.Collections.Generic.ISet<Product> ProductSet
+        {
+            get { return _products.GetEntitySet(); }
+            protected set { _products = new ProductCollection<Brand>(value, this); }
         }
 
-        internal protected virtual void RemoveProduct(Product product)
+        public virtual void AddProduct(IProduct product)
         {
-            if (!ContainsProduct(product)) return;
-
-            _products.Remove(product);
+            _products.Add((Product)product, ((Product)product).SetBrand);
         }
 
-        public virtual bool ContainsProduct(Product product)
+        public virtual void RemoveProduct(IProduct product)
         {
-            return _products.Contains(product, _productComparer);
-        }
-
-        public virtual void AddProduct(Product product)
-        {
-            if (ContainsProduct(product)) return;
-
-            _products.Add(product);
-            product.SetBrand(this);
+            _products.Remove((Product)product, ((Product)product).RemoveFromBrand);
         }
 
         public virtual void RemoveAllProducts()
         {
-            var list = new List<Product>(Products);
+            var list = new List<Product>(ProductSet);
             foreach (var product in list)
             {
                 product.RemoveFromBrand();
             }
         }
 
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+        internal protected virtual void ChangeName(string obj)
+        {
+            Name = obj;
+        }
 
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+        #endregion
+
+        #region Factory
+
+        public static Brand Create(BrandDto brandDto)
+        {
+            return new Brand(brandDto);
+        }
+
+        #endregion
+
+        #region Validation
 
         private static void RegisterValidationRules()
         {
@@ -84,9 +107,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
         }
 
-        internal protected virtual void ChangeName(string obj)
-        {
-            Name = obj;
-        }
+        #endregion
+
     }
 }

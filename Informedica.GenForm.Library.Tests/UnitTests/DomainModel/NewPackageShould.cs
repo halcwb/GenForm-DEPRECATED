@@ -97,7 +97,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
                                            });
             package.AddShape(shape);
 
-            Assert.IsTrue(shape.Packages.Count() == 1);
+            Assert.IsTrue(shape.PackageSet.Count() == 1);
             
         }
 

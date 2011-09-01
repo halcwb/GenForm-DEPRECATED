@@ -20,12 +20,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             RegisterValidationRules();
         }
 
-        protected SubstanceGroup(): base(new SubstanceGroupComparer())
+        protected SubstanceGroup(): base()
         {
             _dto = new SubstanceGroupDto();
         }
 
-        private SubstanceGroup(SubstanceGroupDto dto): base(new SubstanceGroupComparer())
+        private SubstanceGroup(SubstanceGroupDto dto): base()
         {
             ValidateDto(dto);
         }

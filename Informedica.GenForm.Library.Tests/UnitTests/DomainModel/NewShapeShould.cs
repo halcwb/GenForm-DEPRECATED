@@ -61,7 +61,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         public void BeAbleToAssociateWithRoute()
         {
             var route = AssociateShapeWithRoute(CreateRoute());
-            Assert.AreEqual(route, _newShape.Routes.First());
+            Assert.AreEqual(route, _newShape.RouteSet.First());
         }
 
         private Route AssociateShapeWithRoute(Route route)
@@ -88,7 +88,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             {
                 Assert.IsInstanceOfType(e, typeof(CannotAddItemException<Shape>));
             }
-            Assert.IsFalse(_newShape.Routes.Count() == 2);
+            Assert.IsFalse(_newShape.RouteSet.Count() == 2);
         }
 
         [TestMethod]
@@ -104,14 +104,14 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             {
                 Assert.IsInstanceOfType(e, typeof(CannotAddItemException<Route>));
             }
-            Assert.IsFalse(_newShape.Routes.Count() == 2);
+            Assert.IsFalse(_newShape.RouteSet.Count() == 2);
         }
 
         [TestMethod]
         public void BeAbleToAssociateWithPackage()
         {
             var package = AssociateShapeWithPackage(CreatePackage());
-            Assert.IsTrue(_newShape.Packages.First().Name == package.Name);
+            Assert.IsTrue(_newShape.PackageSet.First().Name == package.Name);
         }
 
         private Package AssociateShapeWithPackage(Package package)
@@ -135,8 +135,8 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         {
             var unitGroup = AssociateShapeWithUnit(CreateUnitGroup());
 
-            Assert.IsTrue(_newShape.UnitGroups.Contains(unitGroup));
-            Assert.IsTrue(_newShape.UnitGroups.Count() == 1);
+            Assert.IsTrue(_newShape.UnitGroupSet.Contains(unitGroup));
+            Assert.IsTrue(_newShape.UnitGroupSet.Count() == 1);
         }
 
         [TestMethod]
@@ -152,8 +152,8 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             {
                 Assert.IsInstanceOfType(e, typeof(CannotAddItemException<Unit>));
             }
-            Assert.IsTrue(_newShape.UnitGroups.Count() == 1);
-            Assert.IsTrue(_newShape.UnitGroups.Contains(group1, new UnitGroupComparer()));
+            Assert.IsTrue(_newShape.UnitGroupSet.Count() == 1);
+            Assert.IsTrue(_newShape.UnitGroupSet.Contains(group1, new UnitGroupComparer()));
         }
 
         private UnitGroup AssociateShapeWithUnit(UnitGroup unitGroup)
@@ -181,7 +181,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         public void HaveUnitWithShapeAssociatedWithThatUnit()
         {
             var unit = AssociateShapeWithUnit(CreateUnitGroup());
-            Assert.IsTrue(unit.Shapes.Contains(_newShape, new ShapeComparer()));
+            Assert.IsTrue(unit.ShapeSet.Contains(_newShape, new ShapeComparer()));
         }
     }
 }

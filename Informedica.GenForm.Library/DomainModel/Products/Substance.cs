@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
@@ -17,12 +18,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             RegisterValidationRules();
         }
 
-        protected Substance(): base(new SubstanceComparer())
+        protected Substance(): base()
         {
             _dto = new SubstanceDto();
         }
 
-        private Substance(SubstanceDto dto): base(new SubstanceComparer())
+        private Substance(SubstanceDto dto): base()
         {
             ValidateDto(dto);
 

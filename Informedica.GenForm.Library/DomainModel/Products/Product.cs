@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
@@ -28,12 +28,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             RegisterValidationRules();
         }
         
-        protected Product() : base(new ProductComparer())
+        protected Product() : base()
         {
             _dto = new ProductDto();
         }
 
-        private Product(ProductDto dto) : base(new ProductComparer())
+        private Product(ProductDto dto) : base()
         {
             ValidateDto(dto);
             Initialize();
@@ -247,6 +247,11 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             var dataTransferObject = dto as DataTransferObject<ProductDto>;
             if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
             
+        }
+
+        public void RemoveFromBrand(Brand obj)
+        {
+            RemoveFromBrand();
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Informedica.GenForm.Assembler;
-using Informedica.GenForm.Library.DomainModel.Equality;
-using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.Repositories;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;

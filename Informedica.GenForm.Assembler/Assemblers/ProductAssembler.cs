@@ -1,4 +1,5 @@
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using StructureMap.Configuration.DSL;
 
 namespace Informedica.GenForm.Assembler.Assemblers

@@ -1,4 +1,5 @@
 ﻿using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Collections;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -55,6 +56,13 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         {
             var unitgroup = UnitGroup.Create(UnitGroupTestFixtures.GetDtoMass());
             Assert.IsTrue(UnitGroupIsValid(unitgroup));
+        }
+
+        [TestMethod]
+        public void ThatUnitGroupHasACollectionOfIUnit()
+        {
+            var unitgroup = UnitGroup.Create(UnitGroupTestFixtures.GetDtoMass());
+            Assert.IsInstanceOfType(unitgroup.Units, typeof(UnitCollection));
         }
 
         private bool UnitGroupIsValid(UnitGroup unitgroup)

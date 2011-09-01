@@ -7,9 +7,9 @@ namespace Informedica.GenForm.DataAccess.Mappings
         public UnitGroupMap()
         {
             Map(x => x.AllowsConversion);
-            HasMany(x => x.Units)
+            HasMany(x => x.UnitSet)
                 .Cascade.All().Inverse();
-            HasManyToMany(x => x.Shapes)
+            HasManyToMany(x => x.ShapeSet)
                 .Fetch.Join()
                 .AsSet()
                 .Inverse()

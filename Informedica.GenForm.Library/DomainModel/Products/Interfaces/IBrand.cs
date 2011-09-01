@@ -1,6 +1,6 @@
 using System;
 
-namespace Informedica.GenForm.Library.DomainModel.Products
+namespace Informedica.GenForm.Library.DomainModel.Products.Interfaces
 {
     public interface IBrand
     {

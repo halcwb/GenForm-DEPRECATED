@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FluentNHibernate.Testing;
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -60,7 +61,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void BeAssociatedWithShapes()
         {
-            new PersistenceSpecification<Route>(Context.CurrentSession())
+            var comparer = new RouteComparer();
+            new PersistenceSpecification<Route>(Context.CurrentSession(), comparer)
                 .CheckProperty(r => r.Name, "intraveneus")
                 .CheckProperty(r => r.Abbreviation, "iv")
                 .CheckList(r => r.Shapes, GetShapesList(), (route, shape) => route.AddShape(shape))

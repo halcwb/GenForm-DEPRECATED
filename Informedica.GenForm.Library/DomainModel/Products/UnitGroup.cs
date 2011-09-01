@@ -1,7 +1,9 @@
 ﻿using System;
-using Iesi.Collections.Generic;
+using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products.Collections;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
@@ -10,9 +12,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
     {
         #region Private
 
-        private ISet<Unit> _units = new HashedSet<Unit>();
-        private ISet<Shape> _shapes = new HashedSet<Shape>();
         private UnitGroupDto _dto;
+        private UnitCollection _units;
+        private ShapeCollection<UnitGroup> _shapes;
 
         #endregion
 
@@ -23,19 +25,31 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             RegisterValidationRules();
         }
 
-        protected UnitGroup() : base(new UnitGroupComparer())
+        protected UnitGroup()
         {
             _dto = new UnitGroupDto();
+            InitCollections();
         }
 
-        private UnitGroup(UnitGroupDto dto) : base(new UnitGroupComparer())
+        private UnitGroup(UnitGroupDto dto)
         {
             ValidateDto(dto);
+            InitCollections();
+        }
+
+        private void InitCollections()
+        {
+            _units = new UnitCollection(this);
+            _shapes = new ShapeCollection<UnitGroup>(this);
         }
 
         #endregion
 
         #region Business
+
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
 
         public virtual bool AllowsConversion
         {
@@ -43,54 +57,51 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             set { _dto.AllowConversion = value; }
         }
 
-        public virtual ISet<Unit> Units
+        public virtual IEnumerable<IUnit> Units
         {
             get { return _units; }
-            protected set { _units = value; }
         }
 
-        public virtual ISet<Shape> Shapes
+        public virtual Iesi.Collections.Generic.ISet<Unit> UnitSet
+        {
+            get { return _units.GetUnitSet(); }
+            protected set { _units = new UnitCollection(value, this); }
+        }
+
+        public virtual void AddUnit(IUnit unit)
+        {
+            _units.Add((Unit)unit);
+        }
+
+        internal protected virtual void RemoveUnit(Unit unit)
+        {
+            _units.Remove(unit);
+        }
+
+        public virtual IEnumerable<IShape> Shapes
         {
             get { return _shapes; }
-            protected set { _shapes = value; }
         }
 
-        public virtual void AddUnit(Unit unit)
+        public virtual Iesi.Collections.Generic.ISet<Shape> ShapeSet
         {
-            if (_units.Contains(unit)) return;
-
-            _units.Add(unit);
-            unit.UnitGroup = this;
+            get { return _shapes.GetEntitySet(); }
+            protected set { _shapes = new ShapeCollection<UnitGroup>(value, this); }
         }
 
-        public virtual void RemoveUnit(Unit unit)
+        public virtual void AddShape(IShape shape)
         {
-            if (_units.Contains(unit))
-            {
-                _units.Remove(unit);
-            }
+            _shapes.Add((Shape)shape, ((Shape)shape).AddUnitGroup);
+        }
+
+        public virtual void RemoveShape(IShape shape)
+        {
+            _shapes.Remove((Shape)shape, ((Shape)shape).RemoveUnitGroup);
         }
 
         public static bool Equals(UnitGroup x, UnitGroup y, UnitGroupComparer comparer)
         {
             return comparer.Equals(x, y);
-        }
-
-        public virtual void AddShape(Shape shape)
-        {
-            if (_shapes.Contains(shape)) return;
-
-            _shapes.Add(shape);
-            shape.AddUnitGroup(this);
-        }
-
-        public virtual void RemoveShape(Shape shape)
-        {
-            if (_shapes.Contains(shape))
-            {
-                _shapes.Remove(shape);
-                shape.RemoveUnitGroup(this);
-            }
         }
 
         #endregion
@@ -104,9 +115,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #endregion
 
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
-
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+        #region Validation
 
         private static void RegisterValidationRules()
         {
@@ -118,5 +127,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             var dataTransferObject = dto as DataTransferObject<UnitGroupDto>;
             if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
         }
+
+        #endregion
     }
 }

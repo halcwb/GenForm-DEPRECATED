@@ -1,6 +1,7 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
@@ -17,12 +18,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             RegisterValidationRules();
         }
 
-        protected Unit() : base(new UnitComparer())
+        protected Unit()
         {
             _dto =  new UnitDto();
         }
 
-        private Unit(UnitDto dto) : base(new UnitComparer())
+        private Unit(UnitDto dto) : base()
         {
             ValidateDto(dto);
 
@@ -34,7 +35,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             SetUnitGroup(group);
         }
 
-        public Unit(UnitDto dto, UnitGroup group) : base(new UnitComparer())
+        public Unit(UnitDto dto, UnitGroup group) : base()
         {
             _dto = dto.CloneDto();
             SetUnitGroup(group);

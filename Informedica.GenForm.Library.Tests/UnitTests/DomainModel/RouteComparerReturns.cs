@@ -75,7 +75,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         [TestMethod]
         public void TrueWhenRouteHasSameAbbreviation()
         {
-            var dto = new RouteDto {Abbreviation = "iv"};
+            var dto = new RouteDto { Name = "intraveneus", Abbreviation = "iv"};
             var route = CreateRoute(dto);
             var route2 = CreateRoute(dto);
 

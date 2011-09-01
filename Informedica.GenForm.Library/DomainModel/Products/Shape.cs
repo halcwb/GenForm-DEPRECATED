@@ -1,57 +1,66 @@
 ﻿using System;
+using System.Collections.Generic;
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products.Collections;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class Shape: Entity<Shape>, IShape
+    public class Shape : Entity<Shape>, IShape
     {
-        private ISet<Route> _routes = new HashedSet<Route>();
-        private ISet<UnitGroup> _unitGroups = new HashedSet<UnitGroup>();
-        private ISet<Package> _packages = new HashedSet<Package>();
-        private readonly ISet<Product> _products = new HashedSet<Product>();
+        #region Private
 
         private ShapeDto _dto;
+        private UnitGroupCollection _unitGroups;
+        private PackageCollection _packages;
+        private RouteCollection<Shape> _routes;
+        private ProductCollection<Shape> _products;
+
+        #endregion
+
+        #region Construction
 
         static Shape()
         {
             RegisterValidationRules();
         }
 
-        protected Shape():base(new ShapeComparer())
+        protected Shape()
         {
             _dto = new ShapeDto();
+            InitCollections();
         }
 
-        private Shape(ShapeDto dto) : base(new ShapeComparer())
+        private Shape(ShapeDto dto)
         {
             ValidateDto(dto);
+            InitCollections();
 
             AddPackages();
             AddUnitGroups();
             AddRoutes();
         }
 
+        private void InitCollections()
+        {
+            _unitGroups = new UnitGroupCollection(this);
+            _packages = new PackageCollection(this);
+            _routes = new RouteCollection<Shape>(this);
+            _products = new ProductCollection<Shape>(this);
+        }
+
         private void AddRoutes()
         {
             foreach (var route in _dto.Routes)
             {
-                AddRoute(Route.Create(route));   
+                AddRoute(Route.Create(route));
             }
         }
 
-        public virtual void AddRoute(Route route)
-        {
-            if (_routes.Contains(route)) return;
-
-            _routes.Add(route);
-            route.AddShape(this);
-        }
-
         private void AddPackages()
-        {            
+        {
             foreach (var package in _dto.Packages)
             {
                 AddPackage(Package.Create(package));
@@ -66,56 +75,96 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             }
         }
 
-        public virtual void AddUnitGroup(UnitGroup group)
-        {
-            if (_unitGroups.Contains(group)) return;
+        #endregion
 
-            _unitGroups.Add(group);
-            group.AddShape(this);
-        }
+        #region Business
 
-        public virtual void AddPackage(Package package)
-        {
-            if (_packages.Contains(package)) return;
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
 
-            _packages.Add(package);
-            package.AddShape(this);
-        }
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
 
-        public virtual ISet<Package> Packages
-        {
-            get { return _packages; }
-            protected set { _packages = value; }
-        }
-
-        public virtual ISet<UnitGroup> UnitGroups
+        public virtual IEnumerable<IUnitGroup> UnitGroups
         {
             get { return _unitGroups; }
-            protected set { _unitGroups = value; }
         }
 
-        public virtual ISet<Route> Routes
+        public virtual Iesi.Collections.Generic.ISet<UnitGroup> UnitGroupSet
         {
-            get { return _routes; }
-            protected set { _routes = value; }
+            get { return _unitGroups.GetEntitySet(); }
+            protected set { _unitGroups = new UnitGroupCollection(value, this); }
         }
 
-        public virtual ISet<Product> Products
+        public virtual void AddUnitGroup(IUnitGroup group)
+        {
+            _unitGroups.Add((UnitGroup)group);
+        }
+
+        public virtual void RemoveUnitGroup(IUnitGroup unitGroup)
+        {
+            _unitGroups.Remove((UnitGroup)unitGroup);
+        }
+
+        public virtual IEnumerable<IPackage> Packages
+        {
+            get { return _packages; }
+        }
+
+        public virtual Iesi.Collections.Generic.ISet<Package> PackageSet
+        {
+            get { return _packages.GetEntitySet(); }
+            protected set { _packages = new PackageCollection(value, this); }
+        }
+
+        public virtual void AddPackage(IPackage package)
+        {
+            _packages.Add((Package)package);
+        }
+
+        public virtual void RemovePackage(IPackage package)
+        {
+            _packages.Remove((Package)package);
+        }
+
+        public virtual IEnumerable<IRoute> Routes
+        {
+           get { return _routes; }
+        }
+        
+        public virtual Iesi.Collections.Generic.ISet<Route> RouteSet
+        {
+            get { return _routes.GetEntitySet(); }
+            protected set { _routes = new RouteCollection<Shape>(value, this); }
+        }        
+        
+        public virtual void AddRoute(IRoute route)
+        {
+            _routes.Add((Route)route, ((Route)route).AddShape);
+        }
+
+        public virtual void RemoveRoute(IRoute route)
+        {
+            _routes.Remove((Route)route, ((Route)route).RemoveShape);
+        }
+        
+        public virtual IEnumerable<IProduct> Products
         {
             get { return _products; }
         }
 
-        public virtual void RemovePackage(Package package)
+        public virtual Iesi.Collections.Generic.ISet<Product> ProductSet
         {
-            if (!_packages.Contains(package)) return;
-            
-            _packages.Remove(package);
-            package.RemoveShape(this);
+            get { return _products.GetEntitySet(); }
+            protected set { _products = new ProductCollection<Shape>(value, this);}
         }
 
-        public static Shape Create(ShapeDto dto)
+        internal protected virtual void RemoveProduct(IProduct product)
         {
-            return new Shape(dto);
+            if (ProductSet.Contains((Product)product)) ProductSet.Remove((Product)product);
+        }
+
+        public virtual void AddProduct(IProduct product)
+        {
+            _products.Add((Product) product, ((Product) product).SetShape);
         }
 
         internal protected virtual void RemoveAllAssociations()
@@ -127,7 +176,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private void RemoveAllRoutes()
         {
-            var list = new HashedSet<Route>(Routes);
+            var list = new HashedSet<Route>(RouteSet);
             foreach (var route in list)
             {
                 RemoveRoute(route);
@@ -136,7 +185,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private void RemoveAllUnitGroups()
         {
-            var list = new HashedSet<UnitGroup>(UnitGroups);
+            var list = new HashedSet<UnitGroup>(UnitGroupSet);
             foreach (var unitGroup in list)
             {
                 RemoveUnitGroup(unitGroup);
@@ -145,45 +194,25 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         internal protected virtual void RemoveAllPackages()
         {
-            var list = new HashedSet<Package>(Packages);
+            var list = new HashedSet<Package>(PackageSet);
             foreach (var package in list)
             {
                 RemovePackage(package);
             }
         }
 
-        public virtual void RemoveUnitGroup(UnitGroup unitGroup)
+        #endregion
+
+        #region Factory
+
+        public static Shape Create(ShapeDto dto)
         {
-            if (!_unitGroups.Contains(unitGroup)) return;
-            
-            _unitGroups.Remove(unitGroup);
-            unitGroup.RemoveShape(this);
+            return new Shape(dto);
         }
 
-        public virtual void RemoveRoute(Route route)
-        {
-            if (!_routes.Contains(route)) return;
-            
-            _routes.Remove(route);
-            route.RemoveShape(this);
-        }
+        #endregion
 
-        internal protected virtual void RemoveProduct(Product product)
-        {
-            if (_products.Contains(product)) _products.Remove(product);
-        }
-
-        public virtual void AddProduct(Product product)
-        {
-            if (_products.Contains(product)) return;
-
-            _products.Add(product);
-            product.SetShape(this);
-        }
-
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
-
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+        #region Validation
 
         private static void RegisterValidationRules()
         {
@@ -193,7 +222,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         protected override void SetDto<TDto>(TDto dto)
         {
             var dataTransferObject = dto as DataTransferObject<ShapeDto>;
-            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();            
+            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
         }
+
+        #endregion
     }
 }
