@@ -76,8 +76,10 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
 
         private bool SubstanceGroupIsValid(Substance substance)
         {
+            if (substance.SubstanceGroup == null) return true;
+
             return !string.IsNullOrWhiteSpace(substance.SubstanceGroup.Name) &&
-                   substance.SubstanceGroup.Substances.Contains(substance);
+                   substance.SubstanceGroup.SubstanceSet.Contains(substance);
         }
 
         private bool SubstanceIsValid(Substance substance)

@@ -12,7 +12,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         #region Private
 
         private BrandDto _dto;
-        private ProductCollection<Brand> _products;
+        private ProductSet<Brand> _products;
 
         #endregion
 
@@ -37,7 +37,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private void InitializeCollections()
         {
-            _products = new ProductCollection<Brand>(this);
+            _products = new ProductSet<Brand>(this);
         }
 
         #endregion
@@ -56,7 +56,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual Iesi.Collections.Generic.ISet<Product> ProductSet
         {
             get { return _products.GetEntitySet(); }
-            protected set { _products = new ProductCollection<Brand>(value, this); }
+            protected set { _products = new ProductSet<Brand>(value, this); }
         }
 
         public virtual void AddProduct(IProduct product)

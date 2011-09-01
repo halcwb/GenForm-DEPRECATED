@@ -71,7 +71,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
             new PersistenceSpecification<Package>(Context.CurrentSession(), comparer)
                 .CheckProperty(b => b.Name, "ampul")
                 .CheckProperty(p => p.Abbreviation, "amp")
-                .CheckList(p => p.Shapes, GetShapesList(), (package, shape) => package.AddShape(shape))
+                .CheckList(p => p.ShapeSet, GetShapesList(), (package, shape) => package.AddShape(shape))
                 .VerifyTheMappings();
         }
 
@@ -84,7 +84,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
                 new PersistenceSpecification<Package>(Context.CurrentSession(), comparer)
                     .CheckProperty(b => b.Name, "ampul")
                     .CheckProperty(p => p.Abbreviation, "amp")
-                    .CheckList(p => p.Shapes, GetDuplicateShapes(), (package, shape) => package.AddShape(shape))
+                    .CheckList(p => p.ShapeSet, GetDuplicateShapes(), (package, shape) => package.AddShape(shape))
                     .VerifyTheMappings();
                 Assert.Fail(new StackFrame().GetMethod().Name);
             }

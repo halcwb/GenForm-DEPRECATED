@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Products.Collections;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
@@ -11,9 +13,15 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public const int AbbreviationLength = 30;
         public new const int NameLength = 50;
 
-        private ISet<Shape> _shapes = new HashedSet<Shape>();
-        private ISet<Product> _products = new HashedSet<Product>();
+        #region Private
+
         private RouteDto _dto;
+        private ShapeSet<Route> _shapes;
+        private ProductSet<Route> _products;
+
+        #endregion
+
+        #region Construction
 
         static Route()
         {
@@ -23,12 +31,20 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         protected Route()
         {
             _dto = new RouteDto();
+            InitializeCollections();
         }
 
         private Route(RouteDto dto)
         {
             ValidateDto(dto);
+            InitializeCollections();
             AddShapes();
+        }
+
+        private void InitializeCollections()
+        {
+            _shapes = new ShapeSet<Route>(this);
+            _products = new ProductSet<Route>(this);
         }
 
         private void AddShapes()
@@ -39,92 +55,121 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             }
         }
 
-        public virtual void AddShape(Shape shape)
-        {
-            if (_shapes.Contains(shape)) return;
+        #endregion
 
-            _shapes.Add(shape);
-            shape.AddRoute(this);
+        #region Business
+
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name
+        {
+            get { return _dto.Name ?? String.Empty; }
+            protected set { SetRouteName(value); }
         }
 
-        public virtual String Abbreviation 
-        { 
+        private void SetRouteName(string value)
+        {
+            if (String.IsNullOrWhiteSpace(value) || Name.Equals(value)) return;
+
+            var length = value.Length > NameLength ? NameLength : value.Length;
+            _dto.Name = value.Substring(0, length).Trim().ToLower();
+
+            SetAbbreviation();
+        }
+
+        public virtual String Abbreviation
+        {
             get
             {
                 if (String.IsNullOrWhiteSpace(_dto.Abbreviation)) SetAbbreviation();
                 return _dto.Abbreviation;
-            } 
-            set { _dto.Abbreviation = value; } 
+            }
+            set { _dto.Abbreviation = value; }
         }
 
-        public virtual ISet<Shape> Shapes
+        private void SetAbbreviation()
+        {
+            var length = _dto.Name.Length > AbbreviationLength ? AbbreviationLength : _dto.Name.Length;
+            if (String.IsNullOrEmpty(_dto.Abbreviation)) _dto.Abbreviation = _dto.Name.Substring(0, length);
+        }
+
+        internal protected virtual void ChangeName(string name)
+        {
+            Name = name;
+        }
+
+        public virtual IEnumerable<IShape> Shapes
         {
             get { return _shapes; }
-            protected set { _shapes = value; }
         }
 
-        public virtual ISet<Product> Products
+        public virtual Iesi.Collections.Generic.ISet<Shape> ShapeSet
+        {
+            get { return _shapes.GetEntitySet(); }
+            protected set { _shapes = new ShapeSet<Route>(value, this); }
+        }
+
+        public virtual void AddShape(IShape shape)
+        {
+            _shapes.Add((Shape)shape, ((Shape)shape).AddRoute);
+        }
+
+        public virtual void RemoveShape(IShape shape)
+        {
+            _shapes.Remove((Shape)shape, ((Shape)shape).RemoveRoute);
+        }
+
+        public virtual IEnumerable<IProduct> Products
         {
             get { return _products; }
-            protected set { _products = value;}
         }
 
-        public static Route Create(RouteDto dto)
+        public virtual Iesi.Collections.Generic.ISet<Product> ProductSet
         {
-            return new Route(dto);
+            get { return _products.GetEntitySet(); }
+            protected set { _products = new ProductSet<Route>(value, this); }
+        }
+
+        public virtual void AddProduct(IProduct product)
+        {
+            _products.Add((Product)product, ((Product)product).AddRoute);
+        }
+
+        public virtual void RemoveProduct(IProduct product)
+        {
+            _products.Remove((Product)product, ((Product)product).RemoveRoute);
         }
 
         internal protected virtual void RemoveAllShapes()
         {
-            var list = new HashedSet<Shape>(Shapes);
+            var list = new HashedSet<Shape>(ShapeSet);
             foreach (var shape in list)
             {
                 RemoveShape(shape);
             }
         }
 
-        internal protected  virtual void RemoveAllProducts()
+        internal protected virtual void RemoveAllProducts()
         {
-            var list = new HashedSet<Product>(Products);
+            var list = new HashedSet<Product>(ProductSet);
             foreach (var product in list)
             {
                 RemoveProduct(product);
             }
         }
 
-        public virtual void RemoveShape(Shape shape)
+        #endregion
+
+        #region Factory
+        
+        public static Route Create(RouteDto dto)
         {
-            if (_shapes.Contains(shape))
-            {
-                _shapes.Remove(shape);
-                shape.RemoveRoute(this);
-            }
+            return new Route(dto);
         }
 
-        public virtual void AddProduct(Product product)
-        {
-            if (_products.Contains(product)) return;
+        #endregion
 
-            _products.Add(product);
-            product.AddRoute(this);
-        }
-
-        public virtual void RemoveProduct(Product product)
-        {
-            if (_products.Contains(product))
-            {
-                _products.Remove(product);
-                product.RemoveRoute(this);
-            }
-        }
-
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
-
-        public override string Name
-        {
-            get { return _dto.Name ?? String.Empty; } 
-            protected set { SetRouteName(value); }
-        }
+        #region Validation
 
         private static void RegisterValidationRules()
         {
@@ -138,26 +183,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
         }
 
-        private void SetRouteName(string value)
-        {
-            if (String.IsNullOrWhiteSpace(value) || Name.Equals(value)) return;
-
-            var length = value.Length > NameLength ? NameLength : value.Length;
-            _dto.Name = value.Substring(0, length).Trim().ToLower();
-
-            SetAbbreviation();
-        }
-
-        private void SetAbbreviation()
-        {
-            var length = _dto.Name.Length > AbbreviationLength ? AbbreviationLength : _dto.Name.Length;
-            if (String.IsNullOrEmpty(_dto.Abbreviation)) _dto.Abbreviation = _dto.Name.Substring(0, length);
-        }
-
-        internal protected virtual void ChangeName(string name)
-        {
-            Name = name;
-        }
+        #endregion
 
     }
 }

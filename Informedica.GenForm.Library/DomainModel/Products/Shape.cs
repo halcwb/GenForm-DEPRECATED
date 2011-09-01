@@ -13,10 +13,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         #region Private
 
         private ShapeDto _dto;
-        private UnitGroupCollection _unitGroups;
-        private PackageCollection _packages;
-        private RouteCollection<Shape> _routes;
-        private ProductCollection<Shape> _products;
+        private UnitGroupSet _unitGroups;
+        private PackageSet _packages;
+        private RouteSet<Shape> _routes;
+        private ProductSet<Shape> _products;
 
         #endregion
 
@@ -45,10 +45,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private void InitCollections()
         {
-            _unitGroups = new UnitGroupCollection(this);
-            _packages = new PackageCollection(this);
-            _routes = new RouteCollection<Shape>(this);
-            _products = new ProductCollection<Shape>(this);
+            _unitGroups = new UnitGroupSet(this);
+            _packages = new PackageSet(this);
+            _routes = new RouteSet<Shape>(this);
+            _products = new ProductSet<Shape>(this);
         }
 
         private void AddRoutes()
@@ -91,16 +91,20 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual Iesi.Collections.Generic.ISet<UnitGroup> UnitGroupSet
         {
             get { return _unitGroups.GetEntitySet(); }
-            protected set { _unitGroups = new UnitGroupCollection(value, this); }
+            protected set { _unitGroups = new UnitGroupSet(value, this); }
         }
 
-        public virtual void AddUnitGroup(IUnitGroup group)
+        public virtual void AddUnitGroup(IUnitGroup unitGroup)
         {
-            _unitGroups.Add((UnitGroup)group);
+            if (unitGroup == null) return;
+            
+            _unitGroups.Add((UnitGroup)unitGroup);
         }
 
         public virtual void RemoveUnitGroup(IUnitGroup unitGroup)
         {
+            if (unitGroup == null) return;
+
             _unitGroups.Remove((UnitGroup)unitGroup);
         }
 
@@ -112,7 +116,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual Iesi.Collections.Generic.ISet<Package> PackageSet
         {
             get { return _packages.GetEntitySet(); }
-            protected set { _packages = new PackageCollection(value, this); }
+            protected set { _packages = new PackageSet(value, this); }
         }
 
         public virtual void AddPackage(IPackage package)
@@ -133,7 +137,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual Iesi.Collections.Generic.ISet<Route> RouteSet
         {
             get { return _routes.GetEntitySet(); }
-            protected set { _routes = new RouteCollection<Shape>(value, this); }
+            protected set { _routes = new RouteSet<Shape>(value, this); }
         }        
         
         public virtual void AddRoute(IRoute route)
@@ -154,7 +158,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual Iesi.Collections.Generic.ISet<Product> ProductSet
         {
             get { return _products.GetEntitySet(); }
-            protected set { _products = new ProductCollection<Shape>(value, this);}
+            protected set { _products = new ProductSet<Shape>(value, this);}
         }
 
         internal protected virtual void RemoveProduct(IProduct product)

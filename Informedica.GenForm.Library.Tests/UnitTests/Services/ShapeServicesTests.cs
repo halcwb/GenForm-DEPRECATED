@@ -102,7 +102,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             var package = PackageServices.WithDto(GetPackageDto()).Get();
             var shape = ShapeServices.WithDto(ShapeTestFixtures.GetValidDtoWithPackages()).Get();
-            Assert.AreEqual(shape, package.Shapes.First());
+            Assert.AreEqual(shape, package.ShapeSet.First());
         }
 
         [TestMethod]
@@ -139,7 +139,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             var route = RouteServices.WithDto(GetRouteDto()).Get();
             var shape = ShapeServices.WithDto(ShapeTestFixtures.GetValidDtoWithRoutes()).Get();
-            Assert.AreEqual(shape, route.Shapes.First());
+            Assert.AreEqual(shape, route.ShapeSet.First());
         }
 
         [TestMethod]

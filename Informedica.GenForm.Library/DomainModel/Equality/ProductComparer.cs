@@ -17,9 +17,9 @@ namespace Informedica.GenForm.Library.DomainModel.Equality
             if (!x.Package.Equals(y.Package)) return false;
             if (!x.Quantity.Equals(y.Quantity)) return false;
 
-            foreach (var substance in x.Substances)
+            foreach (var substance in x.SubstanceList)
             {
-                if (y.Substances.Contains(substance)) return false;
+                if (y.SubstanceList.Contains(substance)) return false;
             }
 
             return true;

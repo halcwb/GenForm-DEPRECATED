@@ -51,7 +51,7 @@ namespace Informedica.GenForm.Tests.Utilities
         {
             return product.Package != null &&
                    !String.IsNullOrWhiteSpace(product.Package.Name) &&
-                   product == product.Package.Products.First();
+                   product == product.Package.ProductSet.First();
         }
 
         public static bool ProductAssociatesShapeWithPackage(Product product)
@@ -69,28 +69,29 @@ namespace Informedica.GenForm.Tests.Utilities
 
         public static bool ProductAssociatesShapeWithUnitGroup(Product product)
         {
+            if (product.Quantity.Unit.UnitGroup == null) return false;
             return product.Shape.UnitGroupSet.Contains(product.Quantity.Unit.UnitGroup);
         }
 
         public static bool ProductHasProductSubstance(Product product)
         {
-            return product.Substances.Count() > 0 &&
-                   product.Substances.First().SortOrder > 0 &&
-                   product.Substances.First().Substance != null &&
+            return product.SubstanceList.Count() > 0 &&
+                   product.SubstanceList.First().SortOrder > 0 &&
+                   product.SubstanceList.First().Substance != null &&
                    // Weird problem with contains, returns false when in fact same object
-                   product == product.Substances.First().Substance.Products.First() &&
-                   product.Substances.First().Quantity != null &&
-                   product.Substances.First().Quantity.Value > 0 &&
-                   !String.IsNullOrWhiteSpace(product.Substances.First().Quantity.Unit.Name);
+                   product == product.SubstanceList.First().Substance.Products.First() &&
+                   product.SubstanceList.First().Quantity != null &&
+                   product.SubstanceList.First().Quantity.Value > 0 &&
+                   !String.IsNullOrWhiteSpace(product.SubstanceList.First().Quantity.Unit.Name);
         }
 
         public static bool ProductHasRoutes(Product product)
         {
-            return product.Routes.Count() > 0 && 
-                   !String.IsNullOrWhiteSpace(product.Routes.First().Name) &&
-                   !String.IsNullOrWhiteSpace(product.Routes.First().Abbreviation) &&
-                   product.Routes.First().Products.Contains(product) &&
-                   product.Routes.Last().Products.Contains(product);
+            return product.RouteSet.Count() > 0 && 
+                   !String.IsNullOrWhiteSpace(product.RouteSet.First().Name) &&
+                   !String.IsNullOrWhiteSpace(product.RouteSet.First().Abbreviation) &&
+                   product.RouteSet.First().ProductSet.Contains(product) &&
+                   product.RouteSet.Last().ProductSet.Contains(product);
         }
     }
 }

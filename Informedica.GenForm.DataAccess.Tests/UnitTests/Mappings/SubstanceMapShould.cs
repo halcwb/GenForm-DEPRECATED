@@ -72,7 +72,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 
             new PersistenceSpecification<Substance>(Context.CurrentSession(), comparer)
                     .CheckProperty(s => s.Name, "paracetamol")
-                    .CheckReference(s => s.SubstanceGroup, group, ((s, y) => s.AddToSubstanceGroup(y)))
+                    .CheckReference(s => s.SubstanceGroup, group, ((s, y) => s.SetSubstanceGroup(y)))
                     .VerifyTheMappings();
         }
 

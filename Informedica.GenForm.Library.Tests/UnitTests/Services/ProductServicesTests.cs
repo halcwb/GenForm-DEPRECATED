@@ -152,7 +152,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatAProductWithOnlyRoutesCanBeDeleted()
         {
             var product = GetProductWithOneRoute();
-            product.RemoveRoute(product.Routes.First());
+            product.RemoveRoute(product.RouteSet.First());
             ProductServices.Delete(product);
             product = ProductServices.Products.SingleOrDefault(x => x.Name == ProductTestFixtures.ProductName);
             Assert.IsNull(product);
@@ -162,7 +162,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatAProductWithOneSubstanceCanBeDeleted()
         {
             var product = ProductServices.WithDto(ProductTestFixtures.GetProductDtoWithOneSubstance()).Get();
-            Assert.IsTrue(product.Substances.Count() == 1);
+            Assert.IsTrue(product.SubstanceList.Count() == 1);
             ProductServices.Delete(product);
             product = ProductServices.Products.SingleOrDefault(x => x.Name == ProductTestFixtures.ProductName);
             Assert.IsNull(product);
@@ -177,7 +177,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatProductWithSubstancesAndRoutesCanBeDeleted()
         {
             var product = GetProductWithSubstancesAndRoute();
-            Assert.IsTrue(product.Substances.Count() > 0);
+            Assert.IsTrue(product.SubstanceList.Count() > 0);
 
             ProductServices.Delete(product);
             product = ProductServices.Products.SingleOrDefault(x => x.Name == ProductTestFixtures.ProductName);

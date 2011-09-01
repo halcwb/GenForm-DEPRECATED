@@ -65,7 +65,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
             new PersistenceSpecification<Route>(Context.CurrentSession(), comparer)
                 .CheckProperty(r => r.Name, "intraveneus")
                 .CheckProperty(r => r.Abbreviation, "iv")
-                .CheckList(r => r.Shapes, GetShapesList(), (route, shape) => route.AddShape(shape))
+                .CheckList(r => r.ShapeSet, GetShapesList(), (route, shape) => route.AddShape(shape))
                 .VerifyTheMappings();
         }
 

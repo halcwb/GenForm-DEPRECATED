@@ -7,32 +7,39 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class ProductSubstance : Entity<ProductSubstance>, IProductSubstance
     {
+        #region Private
+
         private Substance _substance;
         private Product _product;
         private UnitValue _unitValue;
         private ProductSubstanceDto _dto;
+
+        #endregion
+
+        #region Contstruction
 
         static ProductSubstance()
         {
             RegisterValidationRules();
         }
 
-        protected ProductSubstance(): base ()
+        protected ProductSubstance()
         {
             _dto = new ProductSubstanceDto();
         }
 
-        private ProductSubstance(Product product, ProductSubstanceDto dto) : base()
+        private ProductSubstance(Product product, ProductSubstanceDto dto)
         {
             ValidateDto(dto);
 
             if (product != null) _product = product;
 
-            SetSubstance(Substance.Create(new SubstanceDto {Name = _dto.Substance}));
+            SetSubstance(Substance.Create(new SubstanceDto { Name = _dto.Substance }));
             SetQuantity();
         }
 
-        public ProductSubstance(Product product, int sortOrder, Substance substance, decimal quantity, Unit unit) : base()
+        public ProductSubstance(Product product, int sortOrder, Substance substance, decimal quantity, Unit unit)
+            : base()
         {
             _dto = new ProductSubstanceDto();
             Initialize(product, sortOrder, substance, quantity, unit);
@@ -45,6 +52,18 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             SetSubstance(substance);
             _unitValue = UnitValue.Create(quantity, unit);
         }
+
+        #endregion
+
+        #region Business
+
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+
+        public virtual int SortOrder { get { return _dto.SortOrder; } set { _dto.SortOrder = value; } }
+
+        public virtual UnitValue Quantity { get { return _unitValue; } protected set { _unitValue = value; } }
 
         private void SetQuantity()
         {
@@ -60,6 +79,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             }));
         }
 
+        public virtual Substance Substance { get { return _substance; } protected set { _substance = value; } }
 
         private void SetSubstance(Substance substance)
         {
@@ -67,9 +87,20 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             _substance.AddProduct(_product);
         }
 
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+        public virtual Product Product { get { return _product; } protected set { _product = value; } }
 
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+        #endregion
+
+        #region Factory
+
+        public static ProductSubstance Create(Product product, ProductSubstanceDto dto)
+        {
+            return new ProductSubstance(product, dto);
+        }
+
+        #endregion
+
+        #region Validation
 
         private static void RegisterValidationRules()
         {
@@ -82,21 +113,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         protected override void SetDto<TDto>(TDto dto)
         {
             var dataTransferObject = dto as DataTransferObject<ProductSubstanceDto>;
-            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();            
+            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
         }
 
-        public virtual int SortOrder { get { return _dto.SortOrder; } set { _dto.SortOrder = value; } }
-
-        public virtual Substance Substance { get { return _substance; } protected set { _substance = value; } }
-
-        public virtual UnitValue Quantity { get { return _unitValue; } protected set { _unitValue = value; } }
-
-        public virtual Product Product { get { return _product; } protected set { _product = value; } }
-
-
-        public static ProductSubstance Create(Product product, ProductSubstanceDto dto)
-        {
-            return new ProductSubstance(product, dto);
-        }
+        #endregion
+    
     }
 }

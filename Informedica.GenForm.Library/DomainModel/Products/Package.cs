@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using Iesi.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Equality;
+using Informedica.GenForm.Library.DomainModel.Products.Collections;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
@@ -10,27 +10,46 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class Package: Entity<Package>, IPackage
     {
-        private ISet<Product> _products = new HashedSet<Product>();
-        private ISet<Shape> _shapes = new HashedSet<Shape>();
-        private readonly ShapeComparer _shapeComparer = new ShapeComparer();
-        private PackageDto _dto;
+        #region Private
 
-        #region Implementation of IPackage
+        private PackageDto _dto;
+        private ShapeSet<Package> _shapes;
+        private ProductSet<Package> _products;
+
+        #endregion
+
+        #region Construction
 
         static Package()
         {
             RegisterValidationRules();
         }
 
-        protected Package() : base()
+        protected Package()
         {
             _dto = new PackageDto();
+            InitializeCollections();
         }
 
-        private Package(PackageDto dto) : base()
+        private Package(PackageDto dto)
         {
             ValidateDto(dto);
+            InitializeCollections();
         }
+
+        private void InitializeCollections()
+        {
+            _shapes = new ShapeSet<Package>(this);
+            _products = new ProductSet<Package>(this);
+        }
+
+        #endregion
+
+        #region Business
+
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
 
         public virtual String Abbreviation
         {
@@ -44,75 +63,74 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return _dto.Name.Substring(0, maxlength);
         }
 
-        #endregion
-
-        public virtual void AddShape(Shape shape)
-        {
-            if (ContainsShape(shape)) return;
-
-            _shapes.Add(shape);
-            shape.AddPackage(this);
-        }
-
-        public virtual bool ContainsShape(Shape shape)
-        {
-            return _shapes.Contains(shape, _shapeComparer);
-        }
-
-        public virtual void RemoveShape(Shape shape)
-        {
-            if (!ContainsShape(shape)) return;
-
-            _shapes.Remove(shape);
-            shape.RemovePackage(this);
-        }
-
-        public virtual ISet<Shape> Shapes
+        public virtual IEnumerable<IShape> Shapes
         {
             get { return _shapes; }
-            protected set { _shapes = value; }
         }
 
-        public virtual ISet<Product> Products
+        public virtual Iesi.Collections.Generic.ISet<Shape> ShapeSet
+        {
+            get { return _shapes.GetEntitySet(); }
+            protected set { _shapes = new ShapeSet<Package>(value, this); }
+        }
+
+        public virtual bool ContainsShape(IShape shape)
+        {
+            return _shapes.Contains((Shape)shape);
+        }
+
+        public virtual void AddShape(IShape shape)
+        {
+            _shapes.Add((Shape)shape, ((Shape)shape).AddPackage);
+        }
+
+        public virtual void RemoveShape(IShape shape)
+        {
+            _shapes.Remove((Shape)shape, ((Shape)shape).RemovePackage);
+        }
+
+        public virtual IEnumerable<IProduct> Products
         {
             get { return _products; }
-            protected set { _products = value; }
         }
 
-        public static Package Create(PackageDto dto)
+        public virtual Iesi.Collections.Generic.ISet<Product> ProductSet
         {
-            return new Package(dto);
+            get { return _products.GetEntitySet(); }
+            protected set { _products = new ProductSet<Package>(value, this); }
+        }
+
+        public virtual void AddProduct(IProduct product)
+        {
+            _products.Add((Product)product, ((Product)product).SetPackage);
+        }
+
+        internal protected virtual void RemoveProduct(Product product)
+        {
+            _products.Remove(product);
         }
 
         internal protected virtual void RemoveAllShapes()
         {
-            var list = new HashedSet<Shape>(Shapes);
+            var list = new HashedSet<Shape>(ShapeSet);
             foreach (var shape in list)
             {
                 RemoveShape(shape);
             }
         }
 
-        internal protected virtual void RemoveProduct(Product product)
+        #endregion
+
+        #region Factory
+
+        public static Package Create(PackageDto dto)
         {
-            if(_products.Contains(product))
-            {
-                _products.Remove(product);
-            }
+            return new Package(dto);
         }
 
-        public virtual void AddProduct(Product product)
-        {
-            if (_products.Contains(product)) return;
+        #endregion
 
-            _products.Add(product);
-            product.SetPackage(this);
-        }
-
-
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
-
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+        #region Validation
 
         private static void RegisterValidationRules()
         {
@@ -124,5 +142,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             var dataTransferObject = dto as DataTransferObject<PackageDto>;
             if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
         }
+
+        #endregion
     }
 }

@@ -7,7 +7,7 @@
     <version name="Version" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Version" />
     </version>
-    <set inverse="true" name="Products">
+    <set inverse="true" name="ProductSet">
       <key>
         <column name="Brand_id" />
       </key>

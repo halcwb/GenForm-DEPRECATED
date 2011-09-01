@@ -80,7 +80,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
             var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
             Assert.AreEqual(substance,
                             SubstanceServices.Substances.Single(x => x.Name == substance.Name)
-                            .SubstanceGroup.Substances.Single(s => s.Name == substance.Name));                       
+                            .SubstanceGroup.SubstanceSet.Single(s => s.Name == substance.Name));                       
         }
 
         [TestMethod]

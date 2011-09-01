@@ -81,7 +81,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
             var fact = new SubstanceFactory(dto);
             var subst = fact.Get();
 
-            Assert.IsNotNull(subst.SubstanceGroup.Substances.First() == subst);
+            Assert.IsNotNull(subst.SubstanceGroup.SubstanceSet.First() == subst);
         }
 
         [TestMethod]
@@ -90,11 +90,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
             var dto = SubstanceTestFixtures.GetSubstanceWithGroup();
             var fact = new SubstanceFactory(dto);
             var subst = fact.Get();
-            Assert.IsTrue(subst.SubstanceGroup.Substances.Contains(subst));
+            Assert.IsTrue(subst.SubstanceGroup.SubstanceSet.Contains(subst));
             Context.CurrentSession().Transaction.Commit();
             Context.CurrentSession().Transaction.Begin();
 
-            Assert.IsTrue(subst.SubstanceGroup.Substances.Contains(subst));
+            Assert.IsTrue(subst.SubstanceGroup.SubstanceSet.Contains(subst));
         }
 
         [TestMethod]
@@ -104,7 +104,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
             var fact = new SubstanceFactory(dto);
             var subst = fact.Get();
             
-            Assert.AreEqual(subst, subst.SubstanceGroup.Substances.First());
+            Assert.AreEqual(subst, subst.SubstanceGroup.SubstanceSet.First());
             subst.RemoveFromSubstanceGroup();
             Assert.IsNull(subst.SubstanceGroup);
         }

@@ -89,7 +89,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatAPackagaWithAshapeCanBeGet()
         {
             var package = GetPackageWithShape();
-            Assert.IsTrue(package.Shapes.Count() > 0);
+            Assert.IsTrue(package.ShapeSet.Count() > 0);
             PackageServices.Delete(package);
         }
 
@@ -118,7 +118,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatPackageWithShapeAfterDeletePackageLeavesShape()
         {
             var package = GetPackageWithShape();
-            var shapeName = package.Shapes.First().Name;
+            var shapeName = package.ShapeSet.First().Name;
             PackageServices.Delete(package);
             var shape = ShapeServices.Shapes.SingleOrDefault(x => x.Name == shapeName);
             Assert.IsNotNull(shape);
@@ -128,7 +128,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatPackageWithTwoShapesCanBeGet()
         {
             var package = GetPackageWithTwoShapes();
-            Assert.AreEqual(2, package.Shapes.Count());
+            Assert.AreEqual(2, package.ShapeSet.Count());
         }
 
         [TestMethod]

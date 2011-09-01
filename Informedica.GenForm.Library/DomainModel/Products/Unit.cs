@@ -8,10 +8,14 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 {
     public class Unit : Entity<Unit>, IUnit
     {
+        #region Private
+
         private UnitGroup _unitGroup;
         private UnitDto _dto;
 
-        #region Constructor
+        #endregion
+
+        #region Construction
 
         static Unit()
         {
@@ -23,7 +27,13 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             _dto =  new UnitDto();
         }
 
-        private Unit(UnitDto dto) : base()
+        public Unit(UnitDto dto, UnitGroup group)
+        {
+            _dto = dto.CloneDto();
+            SetUnitGroup(group);
+        }
+
+        private Unit(UnitDto dto)
         {
             ValidateDto(dto);
 
@@ -32,12 +42,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
                     AllowConversion = dto.AllowConversion,
                     Name = dto.UnitGroupName
                 });
-            SetUnitGroup(group);
-        }
 
-        public Unit(UnitDto dto, UnitGroup group) : base()
-        {
-            _dto = dto.CloneDto();
             SetUnitGroup(group);
         }
 
@@ -49,6 +54,15 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         #endregion
 
         #region Business
+
+        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
+
+        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
+
+        internal protected virtual void ChangeName(string newName)
+        {
+            Name = newName;
+        }
 
         public virtual String Abbreviation
         {
@@ -76,6 +90,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void ChangeUnitGroup(UnitGroup newGroup)
         {
+            if (newGroup == null || newGroup == UnitGroup) return;
+
+            _unitGroup = newGroup;
             newGroup.AddUnit(this);
         }
 
@@ -87,23 +104,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         internal protected virtual void RemoveFromGroup()
         {
             UnitGroup.RemoveUnit(this);
-        }
-
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
-
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
-
-        private static void RegisterValidationRules()
-        {
-            ValidationRulesManager.RegisterRule<UnitDto>(x => !String.IsNullOrWhiteSpace(x.Name));
-            ValidationRulesManager.RegisterRule<UnitDto>(x => !String.IsNullOrWhiteSpace(x.Abbreviation));
-            ValidationRulesManager.RegisterRule<UnitDto>(x => x.Multiplier > 0);
-        }
-
-        protected override void SetDto<TDto>(TDto dto)
-        {
-            var dataTransferObject = dto as DataTransferObject<UnitDto>;
-            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
         }
 
         #endregion
@@ -127,9 +127,22 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #endregion
 
-        internal protected virtual void ChangeName(string newName)
+        #region Validation
+
+        private static void RegisterValidationRules()
         {
-            Name = newName;
+            ValidationRulesManager.RegisterRule<UnitDto>(x => !String.IsNullOrWhiteSpace(x.Name));
+            ValidationRulesManager.RegisterRule<UnitDto>(x => !String.IsNullOrWhiteSpace(x.Abbreviation));
+            ValidationRulesManager.RegisterRule<UnitDto>(x => x.Multiplier > 0);
         }
+
+        protected override void SetDto<TDto>(TDto dto)
+        {
+            var dataTransferObject = dto as DataTransferObject<UnitDto>;
+            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
+        }
+
+        #endregion
+
     }
 }
