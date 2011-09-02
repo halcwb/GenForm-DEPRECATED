@@ -18,6 +18,7 @@ Mappings discovered:
   SubstanceMap        | Informedica.GenForm.DataAccess.Mappings.SubstanceMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null       
   UnitGroupMap        | Informedica.GenForm.DataAccess.Mappings.UnitGroupMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null       
   UnitMap             | Informedica.GenForm.DataAccess.Mappings.UnitMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null            
+  UserMap             | Informedica.GenForm.DataAccess.Mappings.UserMap, Informedica.GenForm.DataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null            
 
 Conventions
 -----------

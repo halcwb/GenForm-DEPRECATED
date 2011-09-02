@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Informedica.GenForm.Library.DomainModel.Products.Interfaces
 {
@@ -7,6 +8,8 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Interfaces
         Guid Id { get; }
         string Name { get; }
         String Abbreviation { get; set; }
+        IEnumerable<IShape> Shapes { get; }
+        IEnumerable<IProduct> Products { get; }
         void AddShape(IShape shape);
         void RemoveShape(IShape shape);
         void AddProduct(IProduct product);

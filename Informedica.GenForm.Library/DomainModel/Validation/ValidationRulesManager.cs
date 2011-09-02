@@ -30,66 +30,66 @@ namespace Informedica.GenForm.Library.DomainModel.Validation
             }
         }
 
-        public static IEnumerable<ValidationRule<TDto>> GetRules<TDto>() 
-            where TDto : DataTransferObject<TDto>
+        public static IEnumerable<ValidationRule<TEnt>> GetRules<TEnt>() 
+            where TEnt : Entity<TEnt>
         {
-            return Instance.GetRulesFor<TDto>();
+            return Instance.GetRulesFor<TEnt>();
         }
 
-        private IEnumerable<ValidationRule<TDto>> GetRulesFor<TDto>()
-            where TDto : DataTransferObject<TDto>
+        private IEnumerable<ValidationRule<TEnt>> GetRulesFor<TEnt>()
+            where TEnt : Entity<TEnt>
         {
-            if (!_registry.ContainsKey(typeof(TDto))) RegisterRules<TDto>();
-            var rules = (ValidationRules<TDto>)_registry[typeof(TDto)];
+            if (!_registry.ContainsKey(typeof(TEnt))) RegisterRules<TEnt>();
+            var rules = (ValidationRules<TEnt>)_registry[typeof(TEnt)];
             return rules;
         }
 
-        private void RegisterRules<TDto>() where TDto : DataTransferObject<TDto>
+        private void RegisterRules<TEnt>() where TEnt : Entity<TEnt>
         {
-            _registry.Add(typeof(TDto), new ValidationRules<TDto>());
+            _registry.Add(typeof(TEnt), new ValidationRules<TEnt>());
         }
 
-        public static void RegisterRule<T>(ValidationRule<T> func)
-            where T : DataTransferObject<T>
+        public static void RegisterRule<TEnt>(ValidationRule<TEnt> func)
+            where TEnt : Entity<TEnt>
         {
             RegisterRule(func, String.Empty);
         }
 
         public static void RegisterRule<T>(ValidationRule<T> func, String description)
-            where T : DataTransferObject<T>
+            where T : Entity<T>
         {
             ((ValidationRules<T>)Instance.GetRulesFor<T>()).RegisterRule(func, description);
         }
 
-        internal static string GetBrokenRule<TDto>(ValidationRule<TDto> rule)
-            where TDto : DataTransferObject<TDto>
+        internal static string GetBrokenRule<TEnt>(ValidationRule<TEnt> rule)
+            where TEnt : Entity<TEnt>
         {
-            return  ((IEnumerable<KeyValuePair<ValidationRule<TDto>, string>>)
-                     GetRules<TDto>()).Single(x => x.Key == rule).Value;
+            return  ((IEnumerable<KeyValuePair<ValidationRule<TEnt>, string>>)
+                     GetRules<TEnt>()).Single(x => x.Key == rule).Value;
         }
 
-        internal static string CheckRules<TDto>(TDto dto) 
-            where TDto : DataTransferObject<TDto>
+        internal static string CheckRules<TEnt>(TEnt dto) 
+            where TEnt : Entity<TEnt>
         {
-            foreach (var rule in GetValidationRules<TDto>())
+            foreach (var rule in GetValidationRules<TEnt>())
             {
                 if (!rule.Invoke(dto)) return GetBrokenRule(rule);
             }
             return String.Empty;
         }
 
-        internal static IEnumerable<ValidationRule<TDto>> GetValidationRules<TDto>() 
-            where TDto : DataTransferObject<TDto>
+        internal static IEnumerable<ValidationRule<TEnt>> GetValidationRules<TEnt>() 
+            where TEnt : Entity<TEnt>
         {
-            return GetRules<TDto>();
+            return GetRules<TEnt>();
         }
 
-        internal static IEnumerable<String> GetBrokenRules<TDto>(TDto dto)
-            where TDto : DataTransferObject<TDto>
+        internal static IEnumerable<String> GetBrokenRules<TEnt>(TEnt dto)
+            where TEnt : Entity<TEnt>
         {
-            return (from rule in ValidationRulesManager.GetValidationRules<TDto>()
+            return (from rule in GetValidationRules<TEnt>()
                     where !rule.Invoke(dto)
-                    select ValidationRulesManager.GetBrokenRule(rule)).ToList();
+                    select GetBrokenRule(rule)).ToList();
         }
 
     }

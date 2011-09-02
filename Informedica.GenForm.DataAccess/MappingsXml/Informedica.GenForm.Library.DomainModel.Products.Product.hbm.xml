@@ -16,7 +16,7 @@
       </index>
       <one-to-many class="Informedica.GenForm.Library.DomainModel.Products.ProductSubstance, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     </list>
-    <set cascade="all" name="RouteSet" table="ProductSetToRouteSet">
+    <set cascade="all" name="RouteSet" table="RouteToProduct">
       <key>
         <column name="Product_id" />
       </key>

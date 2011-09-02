@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using Informedica.GenForm.Library.DomainModel;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Library.Repositories;
 
@@ -19,7 +19,12 @@ namespace Informedica.GenForm.Library.Services
 
         protected TEnt GetById(Guid id)
         {
-            return Repository.SingleOrDefault(x => x.Id == id);
+            return Repository.GetById(id);
+        }
+
+        protected TEnt GetByName(String name)
+        {
+            return Repository.GetByName(name);
         }
 
         public IRepository<TEnt> Repository

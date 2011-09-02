@@ -102,7 +102,7 @@ namespace Informedica.NHibernate.Tests
 
         private void ReturnFalseForAnotherBrand()
         {
-            Assert.IsFalse(_repository.Contains(Brand.Create(new BrandDto())), new StackFrame().GetMethod().Name);
+            Assert.IsFalse(_repository.Contains(Brand.Create(new BrandDto { Name = "Other"})), new StackFrame().GetMethod().Name);
         }
 
         private void ReturnTrueForContainsBrand()

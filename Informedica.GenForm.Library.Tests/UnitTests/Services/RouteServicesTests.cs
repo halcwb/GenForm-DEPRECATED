@@ -64,27 +64,27 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatArouteCanBeGet()
         {
-            var route = RouteServices.WithDto(RouteTestFixtures.GetValidDto()).Get();
+            var route = RouteServices.WithDto(RouteTestFixtures.GetRouteIvDto()).Get();
             Assert.IsInstanceOfType(route, typeof(Route));
         }
 
         public void ThatRouteHasAnId()
         {
-            var route = RouteServices.WithDto(RouteTestFixtures.GetValidDto()).Get();
+            var route = RouteServices.WithDto(RouteTestFixtures.GetRouteIvDto()).Get();
             Assert.IsTrue(route.Id != Guid.Empty);
         }
 
         [TestMethod]
         public void ThatRouteCanBeFound()
         {
-            var route = RouteServices.WithDto(RouteTestFixtures.GetValidDto()).Get();
+            var route = RouteServices.WithDto(RouteTestFixtures.GetRouteIvDto()).Get();
             Assert.AreEqual(route, RouteServices.Routes.Single(x => x.Name == route.Name));          
         }
 
         [TestMethod]
         public void ThatRouteCanChangeName()
         {
-            var route = RouteServices.WithDto(RouteTestFixtures.GetValidDto()).Get();
+            var route = RouteServices.WithDto(RouteTestFixtures.GetRouteIvDto()).Get();
             RouteServices.ChangeRouteName(route, "iv_changed");
 
             Context.CurrentSession().Transaction.Begin();
@@ -96,13 +96,13 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatRouteCanBeAssociatedWithShape()
         {
             var route = RouteServices.WithDto(RouteTestFixtures.GetRouteWithShape()).Get();
-            Assert.IsTrue(route.ShapeSet.Count() == 1);
+            Assert.IsTrue(route.Shapes.Count() == 1);
         }
 
         [TestMethod]
         public void ThatRouteWithoutAShapeCanBeDeleted()
         {
-            var route = RouteServices.WithDto(RouteTestFixtures.GetValidDto()).Get();
+            var route = RouteServices.WithDto(RouteTestFixtures.GetRouteIvDto()).Get();
             RouteServices.Delete(route);
             route = RouteServices.Routes.SingleOrDefault(x => x.Name == route.Name);
             Assert.IsNull(route);

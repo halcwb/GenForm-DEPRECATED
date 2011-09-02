@@ -11,7 +11,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
     {
         #region Private
 
-        private BrandDto _dto;
         private ProductSet<Brand> _products;
 
         #endregion
@@ -25,13 +24,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         protected Brand()
         {
-            _dto = new BrandDto();
-            InitializeCollections();
-        }
-
-        private Brand(BrandDto dto)
-        {
-            ValidateDto(dto);
             InitializeCollections();
         }
 
@@ -43,10 +35,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         #endregion
 
         #region Business
-
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
-
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
 
         public virtual IEnumerable<IProduct> Products
         {
@@ -89,7 +77,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public static Brand Create(BrandDto brandDto)
         {
-            return new Brand(brandDto);
+            var brand = new Brand
+                       {
+                           Name = brandDto.Name
+                       };
+            Validate(brand);
+            return brand;
         }
 
         #endregion
@@ -98,13 +91,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private static void RegisterValidationRules()
         {
-            ValidationRulesManager.RegisterRule<ProductSubstanceDto>(x => !String.IsNullOrWhiteSpace(x.Name));
-        }
-
-        protected override void SetDto<TDto>(TDto dto)
-        {
-            var dataTransferObject = dto as DataTransferObject<BrandDto>;
-            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
+            ValidationRulesManager.RegisterRule<Brand>(x => !String.IsNullOrWhiteSpace(x.Name), "Merk moet een naam hebben");
         }
 
         #endregion

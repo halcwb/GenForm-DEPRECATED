@@ -55,12 +55,16 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         {
             Unit unit = CreateUnit();
             Assert.IsNotNull(unit.UnitGroup);
-            Assert.AreEqual("massa", unit.UnitGroup.Name);
+            Assert.AreEqual("mass", unit.UnitGroup.Name);
         }
 
         private Unit CreateUnit()
         {
-            
+            var group = UnitGroup.Create(new UnitGroupDto
+                                             {
+                                                 AllowConversion = true,
+                                                 Name = "mass"
+                                             });
             return Unit.Create(new UnitDto
                     {
                         Abbreviation = "mg",
@@ -70,7 +74,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
                         Multiplier = (decimal)0.001,
                         Name = "milligram",
                         UnitGroupName = "massa"
-                    });
+                    }, group);
         }
 
         [TestMethod]

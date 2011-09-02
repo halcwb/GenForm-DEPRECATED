@@ -24,10 +24,11 @@ namespace Informedica.GenForm.Library.Security
         private static IGenFormIdentity CreateIdentity(String name, String password)
         {
             if (name == null) throw new ArgumentNullException("name");
-
-            var users = User.GetUser(name);
-            if (users.Count() != 1 || users.First().Password != password) return new AnonymousIdentity();
-            return new GenFormIdentity(name);
+            // ToDo: fix this
+            //var users = User.GetUser(name);
+            //if (users.Count() != 1 || users.First().Password != password) return new AnonymousIdentity();
+            //return new GenFormIdentity(name);
+            throw new NotImplementedException();
         }
 
         internal static IGenFormIdentity GetIdentity(ILoginCriteria criteria)

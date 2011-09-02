@@ -4,6 +4,7 @@ using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.Repositories;
+using Informedica.GenForm.Library.Services.Interfaces;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Mvc3.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -256,11 +257,11 @@ namespace Informedica.GenForm.Tests.AcceptanceTests
 
         private IUnit CreateNewUnit(string name)
         {
-            var unit = Unit.Create(new UnitDto
+            var unit = UnitServices.WithDto(new UnitDto
                                     {
                                         Abbreviation =  "mg",
                                         Name = name
-                                    });
+                                    }).Get();
 
             return unit;
         }

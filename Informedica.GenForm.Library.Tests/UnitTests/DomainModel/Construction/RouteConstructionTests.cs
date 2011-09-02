@@ -55,25 +55,43 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         [TestMethod]
         public void ThatAValidRouteCanBeConstructed()
         {
-            var route = Route.Create(RouteTestFixtures.GetValidDto());
+            var route = RouteTestFixtures.CreateRouteIv();
             Assert.IsTrue(RouteIsValid(route));
         }
 
         [TestMethod]
         public void ThatRouteWithoutNameThrowsException()
         {
+            var dto = RouteTestFixtures.GetRouteIvDto();
+            dto.Name = String.Empty;
+
+            AssertCreateFails(dto);
+        }
+
+
+        [TestMethod]
+        public void ThatRouteWithoutAbbreviationThrowsException()
+        {
+            var dto = RouteTestFixtures.GetRouteIvDto();
+            dto.Abbreviation = String.Empty;
+
+            AssertCreateFails(dto);
+        }
+
+        private static void AssertCreateFails(RouteDto dto)
+        {
             try
             {
-                Route.Create(new RouteDto());
+                Route.Create(dto);
                 Assert.Fail();
             }
             catch (Exception e)
             {
-                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+                Assert.IsNotInstanceOfType(e, typeof (AssertFailedException));
             }
         }
 
-        private bool RouteIsValid(Route route)
+        private static bool RouteIsValid(Route route)
         {
             return !String.IsNullOrWhiteSpace(route.Name) && !String.IsNullOrWhiteSpace(route.Abbreviation);
         }

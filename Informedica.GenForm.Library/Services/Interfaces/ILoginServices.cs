@@ -1,7 +1,7 @@
 ﻿using System;
 using Informedica.GenForm.Library.Security;
 
-namespace Informedica.GenForm.Library.Services.Users
+namespace Informedica.GenForm.Library.Services.Interfaces
 {
     public interface ILoginServices
     {

@@ -1,4 +1,5 @@
 ﻿using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Tests.Fixtures
 {
@@ -29,6 +30,18 @@ namespace Informedica.GenForm.Tests.Fixtures
                             Name = "milliliter",
                             UnitGroupName = "volume"
                         };
+        }
+
+        public static Unit CreateUnitMilligram()
+        {
+            var group = UnitGroupTestFixtures.CreateUnitGroupMass();
+            return Unit.Create(GetTestUnitMilligram(), group);
+        }
+
+        public static Unit CreateUnitMililiter()
+        {
+            var group = UnitGroupTestFixtures.CreateUnitGroupVolume();
+            return Unit.Create(GetTestUnitMililiter(), group);
         }
     }
 }

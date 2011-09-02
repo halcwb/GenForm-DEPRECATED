@@ -5,6 +5,7 @@ using Informedica.GenForm.Library.Services;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.Services.Databases;
+using Informedica.GenForm.Library.Services.Interfaces;
 using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers

@@ -1,5 +1,6 @@
-﻿using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Collections;
+﻿using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -19,17 +20,12 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         ///</summary>
         public TestContext TestContext
         {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
+            get { return testContextInstance; }
+            set { testContextInstance = value; }
         }
 
         #region Additional test attributes
+
         //
         // You can use the following additional attributes as you write your tests:
         //
@@ -49,25 +45,35 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         // [TestCleanup()]
         // public void MyTestCleanup() { }
         //
+
         #endregion
 
         [TestMethod]
-        public void ThatAValidUnitGroupIsConstructed()
+        public void ThatSubstanceGroupIsConstructedWithNameInotropica()
         {
-            var unitgroup = UnitGroup.Create(UnitGroupTestFixtures.GetDtoMass());
-            Assert.IsTrue(UnitGroupIsValid(unitgroup));
+            var group = SubstanceGroupTestFixtures.CreateSubstanceGroup();
+            Assert.AreEqual(group.Name, "inotropica");
         }
 
         [TestMethod]
-        public void ThatUnitGroupHasACollectionOfIUnit()
+        public void ThatSubstancesCountIsZero()
         {
-            var unitgroup = UnitGroup.Create(UnitGroupTestFixtures.GetDtoMass());
-            Assert.IsInstanceOfType(unitgroup.Units, typeof(UnitSet));
+            var group = SubstanceGroupTestFixtures.CreateSubstanceGroup();
+            Assert.AreEqual(0, group.Substances.Count());
         }
 
-        private bool UnitGroupIsValid(UnitGroup unitgroup)
+        [TestMethod]
+        public void ThatSubstanceGroupWithoutNameCannotBeCreated()
         {
-            return !string.IsNullOrWhiteSpace(unitgroup.Name);
+            try
+            {
+                SubstanceGroup.Create(new SubstanceGroupDto());
+                Assert.Fail();
+            }
+            catch (System.Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
         }
     }
 }

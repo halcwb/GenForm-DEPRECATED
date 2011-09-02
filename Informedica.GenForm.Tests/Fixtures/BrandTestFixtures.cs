@@ -1,4 +1,5 @@
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Tests.Fixtures
 {
@@ -10,6 +11,12 @@ namespace Informedica.GenForm.Tests.Fixtures
                        {
                            Name = "Dynatra"
                        };
+        }
+
+        public static Brand GetBrandWithNoProducts()
+        {
+            var brand = Brand.Create(GetDto());
+            return brand;
         }
     }
 }

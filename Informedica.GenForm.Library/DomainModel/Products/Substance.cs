@@ -12,7 +12,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         #region Private
 
         private readonly HashSet<Product> _products = new HashSet<Product>(new ProductComparer());
-        private SubstanceDto _dto;
 
         #endregion
 
@@ -23,46 +22,25 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             RegisterValidationRules();
         }
 
-        protected Substance()
-        {
-            _dto = new SubstanceDto();
-        }
-
-        private Substance(SubstanceDto dto)
-        {
-            ValidateDto(dto);
-
-            if (_dto.SubstanceGroupName == null) return;
-
-            var group = SubstanceGroup.Create(new SubstanceGroupDto
-                                            {
-                                                Id = _dto.SubstanceGroupId,
-                                                Name = _dto.SubstanceGroupName
-                                            });
-            group.AddSubstance(this);
-        }
+        protected Substance() {}
 
         #endregion
 
         #region Business
-
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
-
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
 
         internal protected virtual void ChangeName(string newName)
         {
             Name = newName;
         }
 
-        public virtual void SetSubstanceGroup(SubstanceGroup group)
+        public virtual void SetSubstanceGroup(ISubstanceGroup group)
         {
             if (SubstanceGroup == group) return;
             SubstanceGroup = group;
             group.AddSubstance(this);
         }
 
-        public virtual SubstanceGroup SubstanceGroup { get; protected internal set; }
+        public virtual ISubstanceGroup SubstanceGroup { get; protected internal set; }
 
         public virtual void RemoveFromSubstanceGroup()
         {
@@ -70,10 +48,17 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
             var group = SubstanceGroup;
             SubstanceGroup = null;
-            group.Remove(this);
+            ((SubstanceGroup)group).Remove(this);
         }
 
-        public virtual IEnumerable<Product> Products { get { return _products; } }
+        public virtual void AddProduct(IProduct product)
+        {
+            if (_products.Contains((Product)product)) return;
+
+            _products.Add((Product)product);
+        }
+
+        public virtual IEnumerable<IProduct> Products { get { return _products; } }
 
         internal protected virtual void AddProduct(Product product)
         {
@@ -86,13 +71,19 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public static Substance Create(SubstanceDto dto)
         {
-            return new Substance(dto);
+            var subst = new Substance
+                       {
+                           Name = dto.Name
+                       };
+            Validate(subst);
+            return subst;
         }
 
         public static Substance Create(SubstanceDto dto, SubstanceGroup substanceGroup)
         {
-            var substance = new Substance(dto);
+            var substance = Create(dto);
             if (substanceGroup == null) return substance;
+
             substance.SetSubstanceGroup(substanceGroup);
             return substance;
         }
@@ -103,13 +94,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private static void RegisterValidationRules()
         {
-            ValidationRulesManager.RegisterRule<SubstanceDto>(x => !String.IsNullOrWhiteSpace(x.Name));
-        }
-
-        protected override void SetDto<TDto>(TDto dto)
-        {
-            var dataTransferObject = dto as DataTransferObject<SubstanceDto>;
-            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
+            ValidationRulesManager.RegisterRule<Substance>(x => !String.IsNullOrWhiteSpace(x.Name));
         }
 
         #endregion

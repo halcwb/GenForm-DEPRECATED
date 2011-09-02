@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Validation;
 using Informedica.GenForm.Library.Exceptions;
 
@@ -8,11 +9,16 @@ namespace Informedica.GenForm.Library.DomainModel
     public abstract class Entity<TEnt> 
         where TEnt : Entity<TEnt>
     {
+        protected Entity()
+        {
+        } 
+
+
         public const int NameLength = 255;
 
-        public abstract Guid Id { get; protected set; }
+        public virtual Guid Id { get; protected set; }
 
-        public abstract string Name { get; protected set; }
+        public virtual string Name { get; set; }
 
         public virtual int Version  { get; protected set; }
 
@@ -21,20 +27,16 @@ namespace Informedica.GenForm.Library.DomainModel
             return Id == Guid.Empty;
         }
 
-        protected abstract void SetDto<TDto>(TDto dto) where TDto : DataTransferObject<TDto>;
-
-        protected void ValidateDto<TDto>(TDto dto) 
-            where TDto : DataTransferObject<TDto>
+        public virtual IEnumerable<String> GetBrokenRules(TEnt entity)
         {
-            var brokenRule = ValidationRulesManager.CheckRules(dto);
-            if (!String.IsNullOrEmpty(brokenRule)) throw new BrokenValidationRuleException(brokenRule);
-
-            SetDto(dto);
+            return ValidationRulesManager.GetBrokenRules(entity);
         }
 
-        public static IEnumerable<String> GetBrokenRules<TDto>(TDto dto) where TDto : DataTransferObject<TDto>
+        public static void Validate(TEnt entity)
         {
-            return ValidationRulesManager.GetBrokenRules(dto);
+            var broken = entity.GetBrokenRules(entity).ToList();
+            var count = broken.Count();
+            if (broken != null && count > 0) throw new InvalidEntityException<TEnt>(entity, broken);
         }
     }
 

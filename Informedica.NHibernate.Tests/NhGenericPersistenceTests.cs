@@ -1,4 +1,6 @@
-﻿using Informedica.GenForm.Assembler;
+﻿using System.Linq;
+using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
@@ -62,32 +64,32 @@ namespace Informedica.NHibernate.Tests
         [TestMethod]
         public void CollectionCanFindAnItemItContains()
         {
-            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            var subst = CreateSubstanceWithGroup();
             var group = subst.SubstanceGroup;
-            Assert.IsTrue(group.SubstanceSet.Contains(subst));
+            Assert.IsTrue(group.Substances.Contains(subst));
 
             Context.CurrentSession().SaveOrUpdate(subst);
 
-            Assert.IsTrue(group.SubstanceSet.Contains(subst));
+            Assert.IsTrue(group.Substances.Contains(subst));
         }
 
         [TestMethod]
         public void CollectionCanHaveAnItemRemoved()
         {
-            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            var subst = CreateSubstanceWithGroup();
             var group = subst.SubstanceGroup;
-            Assert.IsTrue(group.SubstanceSet.Contains(subst));
+            Assert.IsTrue(group.Substances.Contains(subst));
 
             Context.CurrentSession().SaveOrUpdate(subst);
 
             subst.RemoveFromSubstanceGroup();
-            Assert.IsFalse(group.SubstanceSet.Contains(subst));            
+            Assert.IsFalse(group.Substances.Contains(subst));            
         }
 
         [TestMethod]
         public void LoadedItemByIdIsSameAsSameItemInSet()
         {
-            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            var subst = CreateSubstanceWithGroup();
             var group = subst.SubstanceGroup;
 
             Context.CurrentSession().SaveOrUpdate(subst);
@@ -99,12 +101,21 @@ namespace Informedica.NHibernate.Tests
         [TestMethod]
         public void LoadedItemHasSameHashCodeAsInitialItem()
         {
-            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            var subst = CreateSubstanceWithGroup();
 
             Context.CurrentSession().SaveOrUpdate(subst);
 
             var loadedSubst = Context.CurrentSession().Load<Substance>(subst.Id);
             Assert.AreEqual(subst.GetHashCode(), loadedSubst.GetHashCode());
         }
+
+        private static Substance CreateSubstanceWithGroup()
+        {
+            var group = SubstanceGroup.Create(new SubstanceGroupDto { Name = "analgetica" });
+            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            group.AddSubstance(subst);
+            return subst;
+        }
+
     }
 }

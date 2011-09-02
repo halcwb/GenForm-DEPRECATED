@@ -7,7 +7,7 @@ namespace Informedica.GenForm.Tests.Fixtures
 {
     public static class ShapeTestFixtures
     {
-        public static ShapeDto GetValidDto()
+        public static ShapeDto GetIvFluidDto()
         {
             return new ShapeDto
                        {
@@ -17,7 +17,7 @@ namespace Informedica.GenForm.Tests.Fixtures
 
         public static ShapeDto GetValidDtoWithPackages()
         {
-            var dto = GetValidDto();
+            var dto = GetIvFluidDto();
             dto.Packages = new List<PackageDto>
                 {
                     new PackageDto{ Abbreviation = "ampul", Name = "ampul"},
@@ -31,7 +31,7 @@ namespace Informedica.GenForm.Tests.Fixtures
             var dto = GetValidDtoWithPackages();
             dto.Routes = new List<RouteDto>
                              {
-                                 RouteTestFixtures.GetValidDto(),
+                                 RouteTestFixtures.GetRouteIvDto(),
                                  new RouteDto{ Abbreviation = "or", Name = "oraal"}
                              };
             return dto;
@@ -46,6 +46,11 @@ namespace Informedica.GenForm.Tests.Fixtures
                                 UnitGroupTestFixtures.GetDtoMass()
                             };
             return dto;
+        }
+
+        public static Shape CreateIvFluidShape()
+        {
+            return Shape.Create(GetIvFluidDto());
         }
     }
 }

@@ -8,11 +8,10 @@ using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
 {
-    public class SubstanceGroup: Entity<SubstanceGroup>
+    public class SubstanceGroup: Entity<SubstanceGroup>, ISubstanceGroup
     {
         #region Private
 
-        private SubstanceGroupDto _dto;
         private SubstanceSet _substances;
 
         #endregion
@@ -26,13 +25,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         protected SubstanceGroup()
         {
-            _dto = new SubstanceGroupDto();
-            InitializeCollections();
-        }
-
-        private SubstanceGroup(SubstanceGroupDto dto)
-        {
-            ValidateDto(dto);
             InitializeCollections();
         }
 
@@ -45,11 +37,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #region Business
 
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
-
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
-
-        public virtual SubstanceGroup MainSubstanceGroup { get; set; }
+        public virtual ISubstanceGroup MainSubstanceGroup { get; set; }
 
         public virtual IEnumerable<ISubstance> Substances
         {
@@ -92,7 +80,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public static SubstanceGroup Create(SubstanceGroupDto dto)
         {
-            return new SubstanceGroup(dto);
+            var group = new SubstanceGroup
+                       {
+                           Name = dto.Name,
+                       };
+            Validate(group);
+            return group;
         }
 
         #endregion
@@ -101,13 +94,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private static void RegisterValidationRules()
         {
-            ValidationRulesManager.RegisterRule<SubstanceGroupDto>(x => !String.IsNullOrWhiteSpace(x.Name));
-        }
-
-        protected override void SetDto<TDto>(TDto dto)
-        {
-            var dataTransferObject = dto as DataTransferObject<SubstanceGroupDto>;
-            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
+            ValidationRulesManager.RegisterRule<SubstanceGroup>(x => !String.IsNullOrWhiteSpace(x.Name));
         }
 
         #endregion

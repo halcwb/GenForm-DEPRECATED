@@ -12,7 +12,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
     {
         #region Private
 
-        private ShapeDto _dto;
         private UnitGroupSet _unitGroups;
         private PackageSet _packages;
         private RouteSet<Shape> _routes;
@@ -29,19 +28,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         protected Shape()
         {
-            _dto = new ShapeDto();
             InitCollections();
         }
 
-        private Shape(ShapeDto dto)
-        {
-            ValidateDto(dto);
-            InitCollections();
-
-            AddPackages();
-            AddUnitGroups();
-            AddRoutes();
-        }
 
         private void InitCollections()
         {
@@ -51,37 +40,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             _products = new ProductSet<Shape>(this);
         }
 
-        private void AddRoutes()
-        {
-            foreach (var route in _dto.Routes)
-            {
-                AddRoute(Route.Create(route));
-            }
-        }
-
-        private void AddPackages()
-        {
-            foreach (var package in _dto.Packages)
-            {
-                AddPackage(Package.Create(package));
-            }
-        }
-
-        private void AddUnitGroups()
-        {
-            foreach (var dto in _dto.UnitGroups)
-            {
-                AddUnitGroup(UnitGroup.Create(dto));
-            }
-        }
-
         #endregion
 
         #region Business
-
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
-
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
 
         public virtual IEnumerable<IUnitGroup> UnitGroups
         {
@@ -211,22 +172,26 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public static Shape Create(ShapeDto dto)
         {
-            return new Shape(dto);
+            var shape = new Shape
+                       {
+                           Name = dto.Name
+                       };
+            Validate(shape);
+            return shape;
         }
 
         #endregion
 
         #region Validation
 
-        private static void RegisterValidationRules()
+        public static IEnumerable<String> GetBrokenRules(Shape shape)
         {
-            ValidationRulesManager.RegisterRule<ShapeDto>(x => !String.IsNullOrWhiteSpace(x.Name));
+            return ValidationRulesManager.GetBrokenRules(shape);
         }
 
-        protected override void SetDto<TDto>(TDto dto)
+        private static void RegisterValidationRules()
         {
-            var dataTransferObject = dto as DataTransferObject<ShapeDto>;
-            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
+            ValidationRulesManager.RegisterRule<Shape>(x => !String.IsNullOrWhiteSpace(x.Name));
         }
 
         #endregion

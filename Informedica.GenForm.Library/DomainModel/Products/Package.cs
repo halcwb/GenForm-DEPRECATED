@@ -12,9 +12,9 @@ namespace Informedica.GenForm.Library.DomainModel.Products
     {
         #region Private
 
-        private PackageDto _dto;
         private ShapeSet<Package> _shapes;
         private ProductSet<Package> _products;
+        private string _abbreviation;
 
         #endregion
 
@@ -27,13 +27,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         protected Package()
         {
-            _dto = new PackageDto();
-            InitializeCollections();
-        }
-
-        private Package(PackageDto dto)
-        {
-            ValidateDto(dto);
             InitializeCollections();
         }
 
@@ -47,20 +40,16 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #region Business
 
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
-
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
-
         public virtual String Abbreviation
         {
-            get { return _dto.Abbreviation ?? GetAbbreviatedName(); }
-            set { _dto.Abbreviation = value; }
+            get { return _abbreviation ?? GetAbbreviatedName(); }
+            set { _abbreviation = value; }
         }
 
         private string GetAbbreviatedName()
         {
             int maxlength = Name.Length > 30 ? 30 : Name.Length;
-            return _dto.Name.Substring(0, maxlength);
+            return Name.Substring(0, maxlength);
         }
 
         public virtual IEnumerable<IShape> Shapes
@@ -125,7 +114,13 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public static Package Create(PackageDto dto)
         {
-            return new Package(dto);
+            var package = new Package
+                       {
+                           Name = dto.Name,
+                           Abbreviation = dto.Abbreviation
+                       };
+            Validate(package);
+            return package;
         }
 
         #endregion
@@ -134,13 +129,8 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private static void RegisterValidationRules()
         {
-            ValidationRulesManager.RegisterRule<PackageDto>(x => !String.IsNullOrWhiteSpace(x.Name));
-        }
-
-        protected override void SetDto<TDto>(TDto dto)
-        {
-            var dataTransferObject = dto as DataTransferObject<PackageDto>;
-            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
+            ValidationRulesManager.RegisterRule<Package>(x => !String.IsNullOrWhiteSpace(x.Name), "Verpakking moet een naam hebben");
+            ValidationRulesManager.RegisterRule<Package>(x => !String.IsNullOrWhiteSpace(x.Abbreviation), "Verpakking moet een afkorting hebben");
         }
 
         #endregion

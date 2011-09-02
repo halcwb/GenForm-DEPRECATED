@@ -1,7 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Tests.Utilities
 {
@@ -18,7 +21,7 @@ namespace Informedica.GenForm.Tests.Utilities
                                                                     ProductHasUnitValue,
                                                                     ProductAssociatesShapeWithPackage,
                                                                     ProductAssociatesShapeWithUnitGroup
-                                                                };  
+                                                                };
 
         public static bool CheckAll(Product product)
         {
@@ -27,71 +30,88 @@ namespace Informedica.GenForm.Tests.Utilities
 
         public static bool ProductIsValid(Product product)
         {
-            return !String.IsNullOrWhiteSpace(product.Name) &&
-                   !String.IsNullOrWhiteSpace(product.GenericName) &&
-                   !String.IsNullOrWhiteSpace(product.DisplayName) &&
-                   !String.IsNullOrWhiteSpace(product.ProductCode);
+            var valid = !String.IsNullOrWhiteSpace(product.Name) &&
+                        !String.IsNullOrWhiteSpace(product.GenericName) &&
+                        !String.IsNullOrWhiteSpace(product.DisplayName) &&
+                        !String.IsNullOrWhiteSpace(product.ProductCode);
+            if (!valid) throw new AssertFailedException(new StackFrame().GetMethod().Name);
+            return true;
         }
 
         public static bool ProductHasBrand(Product product)
         {
-            return product.Brand != null &&
+            var valid = product.Brand != null &&
                    !String.IsNullOrWhiteSpace(product.Brand.Name) &&
                    product == product.Brand.Products.First();
+            if (!valid) throw new AssertFailedException(new StackFrame().GetMethod().Name);
+            return true;
         }
 
         public static bool ProductHasShape(Product product)
         {
-            return product.Shape != null &&
+            var valid = product.Shape != null &&
                    !String.IsNullOrWhiteSpace(product.Shape.Name) &&
                    product == product.Shape.ProductSet.First();
+            if (!valid) throw new AssertFailedException(new StackFrame().GetMethod().Name);
+            return true;
         }
 
         public static bool ProductHasPackage(Product product)
         {
-            return product.Package != null &&
-                   !String.IsNullOrWhiteSpace(product.Package.Name) &&
-                   product == product.Package.ProductSet.First();
+            var valid = product.Package != null &&
+                        !String.IsNullOrWhiteSpace(product.Package.Name) &&
+                        product == product.Package.ProductSet.First();
+            if (!valid) throw new AssertFailedException(new StackFrame().GetMethod().Name);
+            return true;
         }
 
         public static bool ProductAssociatesShapeWithPackage(Product product)
         {
-            return product.Shape.PackageSet.Contains(product.Package);
+            var valid = product.Shape.PackageSet.Contains(product.Package);
+            if (!valid) throw new AssertFailedException(new StackFrame().GetMethod().Name);
+            return true;
         }
 
         public static bool ProductHasUnitValue(Product product)
         {
-            return product.Quantity != null &&
-                   product.Quantity.Value > 0 && 
+            var valid = product.Quantity != null &&
+                   product.Quantity.Value > 0 &&
                    product.Quantity.Unit != null &&
                    !String.IsNullOrWhiteSpace(product.Quantity.Unit.Name);
+            if (!valid) throw new AssertFailedException(new StackFrame().GetMethod().Name);
+            return true;
         }
 
         public static bool ProductAssociatesShapeWithUnitGroup(Product product)
         {
             if (product.Quantity.Unit.UnitGroup == null) return false;
-            return product.Shape.UnitGroupSet.Contains(product.Quantity.Unit.UnitGroup);
+            var valid = product.Shape.UnitGroups.Contains(product.Quantity.Unit.UnitGroup);
+            if (!valid) throw new AssertFailedException(new StackFrame().GetMethod().Name);
+            return true;
         }
 
         public static bool ProductHasProductSubstance(Product product)
         {
-            return product.SubstanceList.Count() > 0 &&
-                   product.SubstanceList.First().SortOrder > 0 &&
-                   product.SubstanceList.First().Substance != null &&
-                   // Weird problem with contains, returns false when in fact same object
-                   product == product.SubstanceList.First().Substance.Products.First() &&
+            var valid = product.Substances.Count() > 0 &&
+                   product.Substances.First().SortOrder > 0 &&
+                   product.Substances.First().Substance != null &&
+                   product.Substances.First().Substance.Products.Contains(product) &&
                    product.SubstanceList.First().Quantity != null &&
                    product.SubstanceList.First().Quantity.Value > 0 &&
                    !String.IsNullOrWhiteSpace(product.SubstanceList.First().Quantity.Unit.Name);
+            if (!valid) throw new AssertFailedException(new StackFrame().GetMethod().Name);
+            return true;
         }
 
         public static bool ProductHasRoutes(Product product)
         {
-            return product.RouteSet.Count() > 0 && 
-                   !String.IsNullOrWhiteSpace(product.RouteSet.First().Name) &&
-                   !String.IsNullOrWhiteSpace(product.RouteSet.First().Abbreviation) &&
-                   product.RouteSet.First().ProductSet.Contains(product) &&
-                   product.RouteSet.Last().ProductSet.Contains(product);
+            var valid = product.RouteSet.Count() > 0 &&
+                   !String.IsNullOrWhiteSpace(product.Routes.First().Name) &&
+                   !String.IsNullOrWhiteSpace(product.Routes.First().Abbreviation) &&
+                   product.Routes.First().Products.Contains(product) &&
+                   product.Routes.Last().Products.Contains(product);
+            if (!valid) throw new AssertFailedException(new StackFrame().GetMethod().Name);
+            return true;
         }
     }
 }

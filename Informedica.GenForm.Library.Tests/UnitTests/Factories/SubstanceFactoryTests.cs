@@ -1,10 +1,10 @@
-﻿using Informedica.GenForm.Assembler;
+﻿using System.Linq;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Factories;
 using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NHibernate.Util;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
 {
@@ -39,7 +39,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
         
         // Use ClassCleanup to run code after all tests in a class have run
@@ -81,7 +81,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
             var fact = new SubstanceFactory(dto);
             var subst = fact.Get();
 
-            Assert.IsNotNull(subst.SubstanceGroup.SubstanceSet.First() == subst);
+            Assert.IsNotNull(subst.SubstanceGroup.Substances.First() == subst);
         }
 
         [TestMethod]
@@ -90,11 +90,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
             var dto = SubstanceTestFixtures.GetSubstanceWithGroup();
             var fact = new SubstanceFactory(dto);
             var subst = fact.Get();
-            Assert.IsTrue(subst.SubstanceGroup.SubstanceSet.Contains(subst));
+            Assert.IsTrue(subst.SubstanceGroup.Substances.Contains(subst));
             Context.CurrentSession().Transaction.Commit();
             Context.CurrentSession().Transaction.Begin();
 
-            Assert.IsTrue(subst.SubstanceGroup.SubstanceSet.Contains(subst));
+            Assert.IsTrue(subst.SubstanceGroup.Substances.Contains(subst));
         }
 
         [TestMethod]
@@ -104,7 +104,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
             var fact = new SubstanceFactory(dto);
             var subst = fact.Get();
             
-            Assert.AreEqual(subst, subst.SubstanceGroup.SubstanceSet.First());
+            Assert.AreEqual(subst, subst.SubstanceGroup.Substances.First());
             subst.RemoveFromSubstanceGroup();
             Assert.IsNull(subst.SubstanceGroup);
         }

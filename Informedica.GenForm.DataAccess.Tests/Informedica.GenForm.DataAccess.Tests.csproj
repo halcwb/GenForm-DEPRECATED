@@ -97,6 +97,7 @@
     <Compile Include="UnitTests\Mappings\SubstanceShould.cs" />
     <Compile Include="UnitTests\Mappings\UnitWithGroupShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTests\Mappings\UserMapShould.cs" />
     <Compile Include="UnitTests\Repository\ProductRepostitoryConstructorShould.cs" />
     <Compile Include="UnitTests\Repository\RepositoryShould.cs" />
     <Compile Include="UnitTests\Repository\UnitGroupRepositoryTests.cs" />

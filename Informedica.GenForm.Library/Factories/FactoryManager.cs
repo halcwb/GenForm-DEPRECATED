@@ -4,6 +4,8 @@ using System.Threading;
 using Informedica.GenForm.Library.DomainModel;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.Factories
 {
@@ -31,6 +33,7 @@ namespace Informedica.GenForm.Library.Factories
             _factories.Add(typeof(EntityFactory<Route, RouteDto>), typeof(RouteFactory));
             _factories.Add(typeof(EntityFactory<Substance, SubstanceDto>), typeof(SubstanceFactory));
             _factories.Add(typeof(EntityFactory<Product, ProductDto>), typeof(ProductFactory));
+            _factories.Add(typeof(EntityFactory<User, UserDto>), typeof(UserFactory));
         }
 
         private static FactoryManager Instance
@@ -56,7 +59,10 @@ namespace Informedica.GenForm.Library.Factories
             where TEnt : Entity<TEnt>
             where TDto : DataTransferObject<TDto>
         {
-            Type type = _factories[typeof(EntityFactory<TEnt, TDto>)];
+            var key = typeof (EntityFactory<TEnt, TDto>);
+            if (!_factories.ContainsKey(key)) throw new FactoryNotFoundException(key.ToString());
+
+            Type type = _factories[key];
             return (EntityFactory<TEnt, TDto>)Activator.CreateInstance(type, new object[] { dto });            
         }
 

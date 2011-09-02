@@ -1,5 +1,6 @@
 ﻿using System;
 using Informedica.GenForm.Library.Security;
+using Informedica.GenForm.Library.Services.Interfaces;
 
 namespace Informedica.GenForm.Library.Services.Users
 {

@@ -11,7 +11,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
         {
             Id(x => x.Id).GeneratedBy.GuidComb();
             Map(x => x.SortOrder).Not.Nullable();
-            References(x => x.Substance).Not.Nullable()
+            References<Substance>(x => x.Substance).Not.Nullable()
                 .Cascade.SaveUpdate()
                 .UniqueKey(ProductSubstanceCombi);
             References(x => x.Product).Not.Nullable()

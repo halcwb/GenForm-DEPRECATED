@@ -31,5 +31,16 @@ namespace Informedica.GenForm.Tests.Fixtures
             dto.SubstanceGroupName = "";
             return dto;
         }
+
+        public static Substance CreateSubstanceWithoutGroup()
+        {
+            return Substance.Create(GetSubstanceDtoWithoutGroup());
+        }
+
+        public static Substance CreateSubstanceWitGroup()
+        {
+            var group = SubstanceGroupTestFixtures.CreateSubstanceGroup();
+            return Substance.Create(GetSubstanceDtoWithoutGroup(), group);
+        }
     }
 }

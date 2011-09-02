@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Informedica.GenForm.Library.DomainModel
+namespace Informedica.GenForm.Library.DomainModel.Data
 {
     public abstract class DataTransferObject<TClone>: ICloneable
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -54,8 +55,40 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         [TestMethod]
         public void ThatAValidPackageCanBeConstructed()
         {
-            var package = Package.Create(PackageTestFixtures.GetValidDto());
+            var package = PackageTestFixtures.CreatePackageAmpul();
             Assert.IsTrue(PackageIsValid(package));
+        }
+
+        [TestMethod]
+        public void ThatPackageWithoutNameThrowsException()
+        {
+            var dto = PackageTestFixtures.GetAmpulDto();
+            dto.Name = String.Empty;
+
+            AssertCreateFails(dto);
+        }
+
+
+        [TestMethod]
+        public void ThatPackageWithoutAbbreviationThrowsException()
+        {
+            var dto = PackageTestFixtures.GetAmpulDto();
+            dto.Abbreviation = String.Empty;
+
+            AssertCreateFails(dto);
+        }
+
+        private static void AssertCreateFails(PackageDto dto)
+        {
+            try
+            {
+                Package.Create(dto);
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof (AssertFailedException));
+            }
         }
 
         private bool PackageIsValid(Package package)

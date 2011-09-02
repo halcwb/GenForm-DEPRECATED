@@ -4,6 +4,7 @@ using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
+using Informedica.GenForm.Library.Services.Interfaces;
 using Informedica.GenForm.Library.Services.Products;
 using Newtonsoft.Json.Linq;
 using StructureMap;
@@ -140,7 +141,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         private static IProduct GetProduct()
         {
-            return Product.Create(new ProductDto());
+            return ProductServices.WithDto(new ProductDto()).Get();
         }
     }
 }

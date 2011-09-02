@@ -24,8 +24,6 @@ namespace Informedica.GenForm.DataAccess
                     x.Enable(true);
                     x.OutputToFile(LogPath);
                 })
-                // ToDo: Find out how to correctly configure second level cache
-                //.Cache(x => x.UseSecondLevelCache()).Cache(x => x.UseMinimalPuts()).Cache(x => x.UseQueryCache())
                 .ExposeConfiguration(BuildSchema)
                 .BuildSessionFactory();
         }

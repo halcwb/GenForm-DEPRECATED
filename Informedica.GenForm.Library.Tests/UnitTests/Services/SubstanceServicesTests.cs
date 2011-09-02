@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
@@ -80,7 +81,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
             var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
             Assert.AreEqual(substance,
                             SubstanceServices.Substances.Single(x => x.Name == substance.Name)
-                            .SubstanceGroup.SubstanceSet.Single(s => s.Name == substance.Name));                       
+                            .SubstanceGroup.Substances.Single(s => s.Name == substance.Name));                       
         }
 
         [TestMethod]
@@ -133,14 +134,14 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatSubstanceGroupCanBeDeletedWithoutDeletingSubstance()
         {
-            var substance = SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
+            var substance = (ISubstance)SubstanceServices.WithDto(SubstanceTestFixtures.GetSubstanceWithGroup()).Get();
             var group = substance.SubstanceGroup;
             var id = group.Id;
-            group.ClearAllSubstances();
+            ((SubstanceGroup)group).ClearAllSubstances();
 
             Assert.IsNull(substance.SubstanceGroup);
             Context.CurrentSession().Delete(group);
-            group = Context.CurrentSession().Get<SubstanceGroup>(id);
+            group = (ISubstanceGroup)Context.CurrentSession().Get<SubstanceGroup>(id);
             Assert.IsNull(group);
         }
 

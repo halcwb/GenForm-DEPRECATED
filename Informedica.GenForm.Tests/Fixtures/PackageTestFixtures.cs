@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Tests.Fixtures
 {
     public static class PackageTestFixtures
     {
-        public static PackageDto GetValidDto()
+        public static PackageDto GetAmpulDto()
         {
             return new PackageDto
                        {
@@ -16,8 +17,8 @@ namespace Informedica.GenForm.Tests.Fixtures
 
         public static PackageDto GetDtoWithOneShape()
         {
-            var dto = GetValidDto();
-            dto.Shapes = new List<ShapeDto> {ShapeTestFixtures.GetValidDto()};
+            var dto = GetAmpulDto();
+            dto.Shapes = new List<ShapeDto> {ShapeTestFixtures.GetIvFluidDto()};
             return dto;
         }
 
@@ -26,6 +27,11 @@ namespace Informedica.GenForm.Tests.Fixtures
             var dto = GetDtoWithOneShape();
             dto.Shapes.Add(new ShapeDto {Name = "injectievloeistof"});
             return dto;
+        }
+
+        public static Package CreatePackageAmpul()
+        {
+            return Package.Create(GetAmpulDto());
         }
     }
 }

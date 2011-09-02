@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Databases;
 
-namespace Informedica.GenForm.Library.Services.Databases
+namespace Informedica.GenForm.Library.Services.Interfaces
 {
     public interface IDatabaseServices
 
