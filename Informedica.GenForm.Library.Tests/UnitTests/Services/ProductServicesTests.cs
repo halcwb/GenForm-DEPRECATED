@@ -66,7 +66,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 
         private static Product GetProduct()
         {
-            var product = ProductServices.WithDto(ProductTestFixtures.GetProductDtoWithNoSubstances()).Get();
+            var product = ProductServices.WithDto(ProductTestFixtures.GetProductDtoWithTwoSubstancesAndRoute()).Get();
             return product;
         }
 
@@ -116,28 +116,22 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatProductWithSubstancesCanBeGet()
         {
-            var product = ProductServices.WithDto(ProductTestFixtures.GetProductDtoWithOneSubstance()).Get();
+            var product = GetProduct();
             Assert.IsTrue(ProductChecker.ProductIsValid(product) && ProductChecker.ProductHasProductSubstance(product));
         }
 
         [TestMethod]
         public void ThatProductWithRoutesCanBeGet()
         {
-            var product = ProductServices.WithDto(ProductTestFixtures.GetProductWithOneRoute()).Get();
+            var product = GetProduct();
             Assert.IsTrue(ProductChecker.ProductIsValid(product) && ProductChecker.ProductHasRoutes(product));
         }
 
         [TestMethod]
         public void ThatProductWithSubstancesAndRoutesCanBeGet()
         {
-            var product = GetProductWithSubstancesAndRoute();
+            var product = GetProduct();
             Assert.IsTrue(ProductChecker.ProductIsValid(product) && ProductChecker.CheckAll(product));
-        }
-
-        private static Product GetProductWithSubstancesAndRoute()
-        {
-            var product = ProductServices.WithDto(ProductTestFixtures.GetProductDtoWithTwoSubstancesAndRoute()).Get();
-            return product;
         }
 
         [TestMethod]
@@ -151,7 +145,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatAProductWithOnlyRoutesCanBeDeleted()
         {
-            var product = GetProductWithOneRoute();
+            var product = GetProduct();
             product.RemoveRoute(product.RouteSet.First());
             ProductServices.Delete(product);
             product = ProductServices.Products.SingleOrDefault(x => x.Name == ProductTestFixtures.ProductName);
@@ -161,27 +155,23 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatAProductWithOneSubstanceCanBeDeleted()
         {
-            var product = ProductServices.WithDto(ProductTestFixtures.GetProductDtoWithOneSubstance()).Get();
-            Assert.IsTrue(product.SubstanceList.Count() == 1);
+            var product = GetProduct();
+            Assert.IsTrue(product.Substances.Count() > 0, "substances were not added");
             ProductServices.Delete(product);
-            product = ProductServices.Products.SingleOrDefault(x => x.Name == ProductTestFixtures.ProductName);
-            Assert.IsNull(product);
-        }
 
-        private Product GetProductWithOneRoute()
-        {
-            return ProductServices.WithDto(ProductTestFixtures.GetProductWithOneRoute()).Get();
+            product = ProductServices.Products.SingleOrDefault(x => x.Name == ProductTestFixtures.ProductName);
+            Assert.IsNull(product, "product was not deleted");
         }
 
         [TestMethod]
         public void ThatProductWithSubstancesAndRoutesCanBeDeleted()
         {
-            var product = GetProductWithSubstancesAndRoute();
-            Assert.IsTrue(product.SubstanceList.Count() > 0);
+            var product = GetProduct();
+            Assert.IsTrue(product.Substances.Count() > 0, "substances were not added");
 
             ProductServices.Delete(product);
             product = ProductServices.Products.SingleOrDefault(x => x.Name == ProductTestFixtures.ProductName);
-            Assert.IsTrue(product == null);
+            Assert.IsTrue(product == null, "product was not deleted");
         }
     }
 }

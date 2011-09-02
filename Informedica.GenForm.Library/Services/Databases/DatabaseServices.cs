@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Databases;
+using Informedica.GenForm.Library.Services.Interfaces;
 
 namespace Informedica.GenForm.Library.Services.Databases
 {

@@ -131,6 +131,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
                        {
                            Abbreviation = "mg",
                            AllowConversion = true,
+                           Multiplier = 0.001M,
                            Divisor = 1,
                            IsReference = false,
                            Name = "milligram",

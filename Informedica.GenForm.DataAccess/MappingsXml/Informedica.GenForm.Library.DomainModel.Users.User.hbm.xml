@@ -1,0 +1,29 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Informedica.GenForm.Library.DomainModel.Users.User, Informedica.GenForm.Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`User`" select-before-update="true">
+    <id name="Id" type="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" />
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Version" />
+    </version>
+    <property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Name" length="255" not-null="true" unique="true" />
+    </property>
+    <property name="Email" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Email" not-null="true" unique="true" />
+    </property>
+    <property name="FirstName" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="FirstName" not-null="true" />
+    </property>
+    <property name="LastName" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="LastName" not-null="true" />
+    </property>
+    <property name="Pager" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Pager" />
+    </property>
+    <property name="Password" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Password" not-null="true" />
+    </property>
+  </class>
+</hibernate-mapping>

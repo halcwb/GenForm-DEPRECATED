@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -64,15 +65,46 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         #endregion
 
         [TestMethod]
-        public void ThatAValidUnitGroupCanBeCreated()
+        public void ThatUnitGroupHasNameVolume()
         {
-            var group = UnitGroup.Create(UnitGroupTestFixtures.GetDtoVolume());
-            Assert.IsTrue(UnitGroupIsValid(group));
+            var group = UnitGroupTestFixtures.CreateUnitGroupVolume();
+            Assert.AreEqual("volume", group.Name);
         }
 
-        private bool UnitGroupIsValid(UnitGroup group)
+        [TestMethod]
+        public void ThatUnitGroupVolumeAllowsConversion()
         {
-            return !String.IsNullOrWhiteSpace(group.Name);
+            var group = UnitGroupTestFixtures.CreateUnitGroupVolume();
+            Assert.IsTrue(group.AllowsConversion);
         }
+
+        [TestMethod]
+        public void ThatNewUnitGroupHasZeroUnits()
+        {
+            var group = UnitGroupTestFixtures.CreateUnitGroupVolume();
+            Assert.AreEqual(0, group.Units.Count());
+        }
+
+        [TestMethod]
+        public void ThatNewUnitGroupIsAssociatedWithZeroShapes()
+        {
+            var group = UnitGroupTestFixtures.CreateUnitGroupVolume();
+            Assert.AreEqual(0, group.Shapes.Count());
+        }
+
+        [TestMethod]
+        public void ThatConstrucionWithEmptyNameThrowsException()
+        {
+            try
+            {
+                UnitGroup.Create(new UnitGroupDto());
+                Assert.Fail();
+            }
+            catch (System.Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
+        
     }
 }

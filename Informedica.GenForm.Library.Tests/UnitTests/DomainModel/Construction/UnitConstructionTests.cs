@@ -1,4 +1,6 @@
-﻿using Informedica.GenForm.Library.DomainModel.Products;
+﻿using System;
+using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -53,19 +55,66 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         [TestMethod]
         public void ThatAValidUnitIsConstructedWithNewUnitGroup()
         {
-            var unit = Unit.Create(UnitTestFixtures.GetTestUnitMilligram());
+            var unit = UnitTestFixtures.CreateUnitMilligram();
             Assert.IsTrue(UnitIsValid(unit));
         }
 
         [TestMethod]
-        public void ThatAValidUnitIsConstructedWithExistingUnitGroup()
+        public void ThatUnitWithNoNameCannotBeConstructed()
         {
-            var group = UnitGroup.Create(UnitGroupTestFixtures.GetDtoVolume());
-            var unit = Unit.Create(UnitTestFixtures.GetTestUnitMilligram(), group);
-            Assert.IsTrue(UnitIsValid(unit));
+            var group = UnitGroupTestFixtures.CreateUnitGroupMass();
+            var dto = UnitTestFixtures.GetTestUnitMilligram();
+            dto.Name = string.Empty;
+
+            AssertCreateFails(group, dto);
         }
 
-        private bool UnitIsValid(Unit unit)
+
+        [TestMethod]
+        public void ThatUnitWithNoAbbreviationCannotBeConstructed()
+        {
+            var group = UnitGroupTestFixtures.CreateUnitGroupMass();
+            var dto = UnitTestFixtures.GetTestUnitMilligram();
+            dto.Abbreviation = string.Empty;
+
+            AssertCreateFails(group, dto);
+        }
+
+
+        [TestMethod]
+        public void ThatUnitWithNoMultiplierCannotBeConstructed()
+        {
+            var group = UnitGroupTestFixtures.CreateUnitGroupMass();
+            var dto = UnitTestFixtures.GetTestUnitMilligram();
+            dto.Multiplier = 0;
+
+            AssertCreateFails(group, dto);
+        }
+
+
+        [TestMethod]
+        public void ThatUnitWithEmptyGroupCannotBeConstructed()
+        {
+            var dto = UnitTestFixtures.GetTestUnitMilligram();
+
+            AssertCreateFails(null, dto);
+        }
+
+        private static void AssertCreateFails(UnitGroup group, UnitDto dto)
+        {
+            try
+            {
+                Unit.Create(dto, group);
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof (AssertFailedException));
+            }
+        }
+
+
+        private static bool UnitIsValid(Unit unit)
         {
             return !string.IsNullOrWhiteSpace(unit.Name) &&
                    !string.IsNullOrWhiteSpace(unit.Abbreviation) &&

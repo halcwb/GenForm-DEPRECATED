@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Informedica.GenForm.Library.DomainModel;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.Repositories;
 
 namespace Informedica.GenForm.Library.Factories

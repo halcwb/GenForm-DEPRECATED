@@ -3,6 +3,7 @@ using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Tests;
+using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 
@@ -71,14 +72,10 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void BePersistedWithSubstanceGroup()
         {
-                var subst = Substance.Create(new SubstanceDto
-                {
-                    SubstanceGroupName = "analgetica",
-                    Name = "paracetamol"
-                });
+            var subst = CreateSubstanceWithGroup();
 
-                Assert.AreEqual("analgetica", subst.SubstanceGroup.Name);
-                PersistSubstance(Context.CurrentSession(), subst);
+            Assert.AreEqual("analgetica", subst.SubstanceGroup.Name);
+            PersistSubstance(Context.CurrentSession(), subst);
         }
 
         [TestMethod]
@@ -103,5 +100,13 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
             return Substance.Create(new SubstanceDto { Name = "paracetamol" });
         }
 
+
+        private static Substance CreateSubstanceWithGroup()
+        {
+            var group = SubstanceGroup.Create(new SubstanceGroupDto { Name = "analgetica" });
+            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            group.AddSubstance(subst);
+            return subst;
+        }
     }
 }

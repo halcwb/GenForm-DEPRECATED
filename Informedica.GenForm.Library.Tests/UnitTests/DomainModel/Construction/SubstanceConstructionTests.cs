@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -54,35 +55,40 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         [TestMethod]
         public void ThatAValidSubstanceIsCreated()
         {
-            var substance = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            var substance = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
             Assert.IsTrue(SubstanceIsValid(substance));
+        }
+
+        [TestMethod]
+        public void ThatSubstanceCannotBeCreatedWithoutName()
+        {
+            try
+            {
+                Substance.Create(new SubstanceDto());
+                Assert.Fail();
+            }
+            catch (System.Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
         }
 
         [TestMethod]
         public void ThatAValidSubstanceIsCreatedInANewGroup()
         {
-            var substance = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
-            Assert.IsTrue(SubstanceGroupIsValid(substance));
+            var substance = SubstanceTestFixtures.CreateSubstanceWitGroup();
+            Assert.IsNotNull(substance.SubstanceGroup);
         }
+
 
         [TestMethod]
-        public void ThatAValidSubstanceCanBeCreatedWithAnExistingGroup()
+        public void ThatSubstanceGroupContainsThatSubstance()
         {
-            var substance = Substance.Create(SubstanceTestFixtures.GetSubstanceDtoWithoutGroup(), 
-                            SubstanceGroup.Create(SubstanceGroupTestFixtures.GetSubstanceGroupDtoWithoutItems()));
-            Assert.IsTrue(SubstanceIsValid(substance));
-            Assert.IsTrue(SubstanceGroupIsValid(substance));
+            var substance = SubstanceTestFixtures.CreateSubstanceWitGroup();
+            Assert.IsTrue(substance.SubstanceGroup.Substances.Contains(substance));
         }
 
-        private bool SubstanceGroupIsValid(Substance substance)
-        {
-            if (substance.SubstanceGroup == null) return true;
-
-            return !string.IsNullOrWhiteSpace(substance.SubstanceGroup.Name) &&
-                   substance.SubstanceGroup.SubstanceSet.Contains(substance);
-        }
-
-        private bool SubstanceIsValid(Substance substance)
+        private static bool SubstanceIsValid(Substance substance)
         {
             return !string.IsNullOrWhiteSpace(substance.Name);
         }

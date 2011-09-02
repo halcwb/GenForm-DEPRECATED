@@ -6,11 +6,13 @@ namespace Informedica.GenForm.DataAccess.Repositories
 {
     public class BrandRepository : NHibernateRepository<Brand>
     {
+        private static readonly BrandComparer Comparer = new BrandComparer();
+
         public BrandRepository(ISessionFactory sessionFactory) : base(sessionFactory) {}
 
         public override void Add(Brand item)
         {
-            base.Add(item, new BrandComparer());
+            base.Add(item, Comparer);
         }
     }
 }

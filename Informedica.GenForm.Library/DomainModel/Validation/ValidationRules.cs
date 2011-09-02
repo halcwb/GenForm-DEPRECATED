@@ -5,15 +5,15 @@ using System.Collections.Generic;
 
 namespace Informedica.GenForm.Library.DomainModel.Validation
 {
-    public class ValidationRules<TDto> : 
-        IEnumerable<ValidationRule<TDto>>, 
+    public class ValidationRules<TEnt> : 
+        IEnumerable<ValidationRule<TEnt>>, 
         IEnumerable<String> , 
-        IEnumerable<KeyValuePair<ValidationRule<TDto>, String>> 
-        where TDto : DataTransferObject<TDto>
+        IEnumerable<KeyValuePair<ValidationRule<TEnt>, String>> 
+        where TEnt : Entity<TEnt>
     {
-        private readonly IDictionary<ValidationRule<TDto>, String> _rules = new ConcurrentDictionary<ValidationRule<TDto>, string>();
+        private readonly IDictionary<ValidationRule<TEnt>, String> _rules = new ConcurrentDictionary<ValidationRule<TEnt>, string>();
 
-        IEnumerator<KeyValuePair<ValidationRule<TDto>, string>> IEnumerable<KeyValuePair<ValidationRule<TDto>, string>>.GetEnumerator()
+        IEnumerator<KeyValuePair<ValidationRule<TEnt>, string>> IEnumerable<KeyValuePair<ValidationRule<TEnt>, string>>.GetEnumerator()
         {
             return _rules.GetEnumerator();
         }
@@ -23,7 +23,7 @@ namespace Informedica.GenForm.Library.DomainModel.Validation
             return _rules.Values.GetEnumerator();
         }
 
-        public IEnumerator<ValidationRule<TDto>> GetEnumerator()
+        public IEnumerator<ValidationRule<TEnt>> GetEnumerator()
         {
             return _rules.Keys.GetEnumerator();
         }
@@ -33,12 +33,12 @@ namespace Informedica.GenForm.Library.DomainModel.Validation
             return GetEnumerator();
         }
 
-        internal void RegisterRule(ValidationRule<TDto> rule)
+        internal void RegisterRule(ValidationRule<TEnt> rule)
         {
             RegisterRule(rule, String.Empty);
         }
 
-        internal void RegisterRule(ValidationRule<TDto> rule, String description)
+        internal void RegisterRule(ValidationRule<TEnt> rule, String description)
         {
             if (_rules.ContainsKey(rule)) return;
             _rules.Add(rule,description);            

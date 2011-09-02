@@ -1,4 +1,5 @@
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Tests.Fixtures
 {
@@ -20,6 +21,16 @@ namespace Informedica.GenForm.Tests.Fixtures
                 AllowConversion = true,
                 Name = "volume"
             };
+        }
+
+        public static UnitGroup CreateUnitGroupVolume()
+        {
+            return UnitGroup.Create(GetDtoVolume());
+        }
+
+        public static UnitGroup CreateUnitGroupMass()
+        {
+            return UnitGroup.Create(GetDtoMass());
         }
     }
 }

@@ -73,14 +73,14 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 
         private static Package GetPackageWithoutShape()
         {
-            var package = PackageServices.WithDto(PackageTestFixtures.GetValidDto()).Get();
+            var package = PackageServices.WithDto(PackageTestFixtures.GetAmpulDto()).Get();
             return package;
         }
 
         [TestMethod]
         public void ThatAPackageCanBeFound()
         {
-            var package = PackageServices.WithDto(PackageTestFixtures.GetValidDto()).Get();
+            var package = PackageServices.WithDto(PackageTestFixtures.GetAmpulDto()).Get();
             Assert.AreEqual(package,
                             PackageServices.Packages.Single(x => x.Name == package.Name));
         }

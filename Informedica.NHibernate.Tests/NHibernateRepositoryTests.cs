@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess.Repositories;
+using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
@@ -71,7 +72,7 @@ namespace Informedica.NHibernate.Tests
         [TestMethod]
         public void ThatSubstanceHasSubstanceGroup()
         {
-            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            var subst = SubstanceTestFixtures.CreateSubstanceWitGroup();
             var repos = new SubstanceRepository(GenFormApplication.SessionFactory);
             repos.Add(subst);
             
@@ -81,27 +82,36 @@ namespace Informedica.NHibernate.Tests
         [TestMethod]
         public void ThatSubstanceGroupContainsSubstance()
         {
-            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            var subst = CreateSubstanceWithGroup();
+
             new SubstanceRepository(GenFormApplication.SessionFactory) {subst};
 
-            Assert.IsTrue(subst.SubstanceGroup.SubstanceSet.Contains(subst));
+            Assert.IsTrue(subst.SubstanceGroup.Substances.Contains(subst));
+        }
+
+        private static Substance CreateSubstanceWithGroup()
+        {
+            var group = SubstanceGroup.Create(new SubstanceGroupDto {Name = "analgetica"});
+            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            group.AddSubstance(subst);
+            return subst;
         }
 
         [TestMethod]
         public void ThatSubstancCanBeRemovedFromSubstanceGroup()
         {
-            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
-            new SubstanceRepository(GenFormApplication.SessionFactory) {subst};
+            var subst = CreateSubstanceWithGroup();
+
             var group = subst.SubstanceGroup;
             subst.RemoveFromSubstanceGroup();
 
-            Assert.IsFalse(group.SubstanceSet.Contains(subst));   
+            Assert.IsFalse(group.Substances.Contains(subst));   
         }
 
         [TestMethod]
         public void ThatRepositoryCanUseLinq()
         {
-            var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            var subst = CreateSubstanceWithGroup();
             var repos = new SubstanceRepository(GenFormApplication.SessionFactory) { subst };
 
             var result = repos.Select(x => x.Name == SubstanceGroupTestFixtures.GetSubstanceGroupDtoWithoutItems().Name);

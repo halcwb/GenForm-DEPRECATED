@@ -1,5 +1,6 @@
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Users;
 using Informedica.GenForm.Library.Repositories;
 using StructureMap.Configuration.DSL;
 
@@ -22,6 +23,7 @@ namespace Informedica.GenForm.Assembler.Assemblers
             _registry.For<IRepository<Substance>>().Use<SubstanceRepository>();
             _registry.For<IRepository<SubstanceGroup>>().Use<SubstanceGroupRepository>();
             _registry.For<IRepository<Product>>().Use<ProductRepository>();
+            _registry.For<IRepository<User>>().Use<UserRepository>();
 
             return _registry;
         }

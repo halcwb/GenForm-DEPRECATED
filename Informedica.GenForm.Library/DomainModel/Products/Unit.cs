@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
@@ -11,7 +12,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         #region Private
 
         private UnitGroup _unitGroup;
-        private UnitDto _dto;
 
         #endregion
 
@@ -24,26 +24,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         protected Unit()
         {
-            _dto =  new UnitDto();
-        }
-
-        public Unit(UnitDto dto, UnitGroup group)
-        {
-            _dto = dto.CloneDto();
-            SetUnitGroup(group);
-        }
-
-        private Unit(UnitDto dto)
-        {
-            ValidateDto(dto);
-
-            var group = UnitGroup.Create(new UnitGroupDto
-                {
-                    AllowConversion = dto.AllowConversion,
-                    Name = dto.UnitGroupName
-                });
-
-            SetUnitGroup(group);
         }
 
         private void SetUnitGroup(UnitGroup group)
@@ -55,32 +35,16 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #region Business
 
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
-
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
-
         internal protected virtual void ChangeName(string newName)
         {
             Name = newName;
         }
 
-        public virtual String Abbreviation
-        {
-            get { return _dto.Abbreviation; }
-            set { _dto.Abbreviation = value; }
-        }
+        public virtual String Abbreviation { get; set; }
 
-        public virtual Decimal Multiplier
-        {
-            get { return _dto.Multiplier; }
-            set { _dto.Multiplier = value; }
-        }
+        public virtual Decimal Multiplier { get; set; }
 
-        public virtual Boolean IsReference
-        {
-            get { return _dto.IsReference; }
-            set { _dto.IsReference = value; }
-        }
+        public virtual Boolean IsReference { get; set; }
 
         public virtual UnitGroup UnitGroup
         {
@@ -110,19 +74,19 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #region Factory
 
-        public static Unit Create(UnitDto dto)
-        {
-            return new Unit(dto);
-        }
-
         public static Unit Create(UnitDto dto, UnitGroup group)
         {
-            return new Unit(dto, @group);
-        }
+            var unit = new Unit
+            {
+                Abbreviation = dto.Abbreviation,
+                IsReference = dto.IsReference,
+                Name = dto.Name,
+                Multiplier = dto.Multiplier
+            };
 
-        public static Unit Create(UnitDto dto, UnitGroupDto groupDto)
-        {
-            return new Unit(dto, UnitGroup.Create(groupDto));
+            unit.SetUnitGroup(group);
+            Validate(unit);
+            return unit;
         }
 
         #endregion
@@ -131,15 +95,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         private static void RegisterValidationRules()
         {
-            ValidationRulesManager.RegisterRule<UnitDto>(x => !String.IsNullOrWhiteSpace(x.Name));
-            ValidationRulesManager.RegisterRule<UnitDto>(x => !String.IsNullOrWhiteSpace(x.Abbreviation));
-            ValidationRulesManager.RegisterRule<UnitDto>(x => x.Multiplier > 0);
-        }
-
-        protected override void SetDto<TDto>(TDto dto)
-        {
-            var dataTransferObject = dto as DataTransferObject<UnitDto>;
-            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
+            ValidationRulesManager.RegisterRule<Unit>(x => !String.IsNullOrWhiteSpace(x.Name), "Unit moet een naam hebben");
+            ValidationRulesManager.RegisterRule<Unit>(x => !String.IsNullOrWhiteSpace(x.Abbreviation), "Unit moet een afkorting hebben");
+            ValidationRulesManager.RegisterRule<Unit>(x => x.Multiplier > 0, "De factor moet groter dan 0 zijn");
+            ValidationRulesManager.RegisterRule<Unit>(x => x.UnitGroup != null, "Unit moet in een unitgroep zitten");
         }
 
         #endregion

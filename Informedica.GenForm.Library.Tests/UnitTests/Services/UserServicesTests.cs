@@ -1,22 +1,18 @@
-﻿using System;
-using Informedica.GenForm.Library.DomainModel.Users;
-using Informedica.GenForm.Library.Repositories;
-using Informedica.GenForm.Library.Security;
+﻿using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.Services.Users;
-using Informedica.GenForm.Mvc3.Controllers;
+using Informedica.GenForm.Tests;
+using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StructureMap;
-using TypeMock.ArrangeActAssert;
 
-namespace Informedica.GenForm.Mvc3.Tests.IntegrationTests
+namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 {
     /// <summary>
-    /// Summary description for LoginControllerTest
+    /// Summary description for UserServicesTests
     /// </summary>
     [TestClass]
-    public class LoginControllerTest
+    public class UserServicesTests : TestSessionContext
     {
-        public LoginControllerTest()
+        public UserServicesTests() : base (true)
         {
             //
             // TODO: Add constructor logic here
@@ -46,9 +42,9 @@ namespace Informedica.GenForm.Mvc3.Tests.IntegrationTests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
+        [ClassInitialize]
+        public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
+        
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
@@ -63,26 +59,21 @@ namespace Informedica.GenForm.Mvc3.Tests.IntegrationTests
         //
         #endregion
 
-        [Isolated]
         [TestMethod]
-        public void Login_user_results_in_UserRepository_registration()
+        public void ThatAuserCanBeGet()
         {
-            var controller = new LoginController();
-            var services = Isolate.Fake.Instance<LoginServices>();
-            var user = Isolate.Fake.Instance<ILoginCriteria>();
-            Isolate.NonPublic.WhenCalled(typeof(LoginController), "GetLoginServices").WillReturn(services);
-            Isolate.WhenCalled(() => services.Login(user)).IgnoreCall();
+            var user = UserServices.WithDto(UserTestFixtures.GetValidUserDto()).Get();
+            Assert.AreEqual(user.Name, UserTestFixtures.GetValidUserDto().Name);
+        }
 
-            controller.Login("Admin", "Admin");
-            try
-            {
-                ObjectFactory.GetInstance<IRepositoryLinqToSql<IUser>>();
+        [TestMethod]
+        public void ThatUserCanBeRetrievedById()
+        {
+            var user = UserServices.WithDto(UserTestFixtures.GetValidUserDto()).Get();
+            Assert.AreEqual(user.Name, UserTestFixtures.GetValidUserDto().Name);
 
-            }
-            catch (Exception e)
-            {
-                Assert.Fail("UserRepository could not be resolved: " + e);
-            }
+            var user2 = UserServices.GetUserById(user.Id);
+            Assert.AreSame(user, user2);
         }
     }
 }

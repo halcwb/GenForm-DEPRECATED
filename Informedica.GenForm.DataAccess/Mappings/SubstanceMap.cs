@@ -6,7 +6,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
     {
         public SubstanceMap()
         {
-            References(x => x.SubstanceGroup)
+            References<SubstanceGroup>(x => x.SubstanceGroup)
                 .Cascade.SaveUpdate();
         }
     }

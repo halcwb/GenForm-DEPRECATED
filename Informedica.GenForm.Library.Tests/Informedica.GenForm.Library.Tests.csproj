@@ -94,9 +94,9 @@
     <Compile Include="UnitTests\DomainModel\Construction\SubstanceGroupConstructionTests.cs" />
     <Compile Include="UnitTests\DomainModel\Construction\UnitConstructionTests.cs" />
     <Compile Include="UnitTests\DomainModel\Construction\UnitConstructorShould.cs" />
+    <Compile Include="UnitTests\DomainModel\Construction\UserConstructionTests.cs" />
     <Compile Include="UnitTests\DomainModel\NewPackageShould.cs" />
     <Compile Include="UnitTests\DomainModel\NewShapeShould.cs" />
-    <Compile Include="UnitTests\DomainModel\ProductConstructorShould.cs" />
     <Compile Include="UnitTests\DomainModel\RouteComparerReturns.cs" />
     <Compile Include="UnitTests\DomainModel\Construction\UnitGroupConstructionTests.cs" />
     <Compile Include="UnitTests\DomainModel\UnitCollectionTests.cs" />
@@ -120,6 +120,7 @@
     <Compile Include="UnitTests\Services\ShapeServicesTests.cs" />
     <Compile Include="UnitTests\Services\SubstanceServicesTests.cs" />
     <Compile Include="UnitTests\Services\UnitServicesTests.cs" />
+    <Compile Include="UnitTests\Services\UserServicesTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />

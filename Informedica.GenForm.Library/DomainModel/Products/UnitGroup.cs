@@ -12,7 +12,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
     {
         #region Private
 
-        private UnitGroupDto _dto;
         private UnitSet _units;
         private ShapeSet<UnitGroup> _shapes;
 
@@ -27,13 +26,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         protected UnitGroup()
         {
-            _dto = new UnitGroupDto();
-            InitCollections();
-        }
-
-        private UnitGroup(UnitGroupDto dto)
-        {
-            ValidateDto(dto);
             InitCollections();
         }
 
@@ -47,15 +39,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #region Business
 
-        public override Guid Id { get { return _dto.Id; } protected set { _dto.Id = value; } }
-
-        public override string Name { get { return _dto.Name; } protected set { _dto.Name = value; } }
-
-        public virtual bool AllowsConversion
-        {
-            get { return _dto.AllowConversion; }
-            set { _dto.AllowConversion = value; }
-        }
+        public virtual bool AllowsConversion { get; set; }
 
         public virtual IEnumerable<IUnit> Units
         {
@@ -108,24 +92,29 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #region Factory
 
-        public static UnitGroup Create(UnitGroupDto groupDto)
+        public static UnitGroup Create(UnitGroupDto dto)
         {
-            return new UnitGroup(groupDto);
+            var group = new UnitGroup
+                       {
+                           AllowsConversion = dto.AllowConversion,
+                           Name = dto.Name,
+                       };
+            Validate(group);
+            return group;
         }
 
         #endregion
 
         #region Validation
 
-        private static void RegisterValidationRules()
+        public static IEnumerable<String> GetBrokenRules(UnitGroup dto)
         {
-            ValidationRulesManager.RegisterRule<UnitGroupDto>(x => !String.IsNullOrWhiteSpace(x.Name));
+            return ValidationRulesManager.GetBrokenRules(dto);
         }
 
-        protected override void SetDto<TDto>(TDto dto)
+        private static void RegisterValidationRules()
         {
-            var dataTransferObject = dto as DataTransferObject<UnitGroupDto>;
-            if (dataTransferObject != null) _dto = dataTransferObject.CloneDto();
+            ValidationRulesManager.RegisterRule<UnitGroup>(x => !String.IsNullOrWhiteSpace(x.Name));
         }
 
         #endregion

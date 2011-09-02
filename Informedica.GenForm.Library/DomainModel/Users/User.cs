@@ -1,99 +1,84 @@
 ﻿using System;
-using System.Collections.Generic;
-using Informedica.GenForm.Library.Repositories;
+using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Users
 {
-    public class User: IUser
+    public class User: Entity<User>, IUser
     {
-        #region IUser
+        #region Private
 
-        private string _userName;
-        private string _password;
-        private string _lastName;
-        private string _firstName;
-        private string _email;
-        private string _pager;
-        private Int32 _userId;
+        #endregion
 
-        public string UserName
+        #region Construction
+
+        static User()
         {
-            get { return _userName; }
-            set { _userName = value; }
+            RegisterValidationRules();
         }
 
-        public string Password
+        protected User()
         {
-            get { return _password; }
-            set { _password = value; }
         }
 
-        public string LastName
+        #endregion
+
+        #region Business
+
+        public virtual string UserName { get; set; }
+
+        public virtual string Password { get; set; }
+
+        public virtual string LastName { get; set; }
+
+        public virtual string FirstName { get; set; }
+
+        public virtual string Email { get; set; }
+
+        public virtual string Pager { get; set; }
+
+        public virtual string AuthenticationType
         {
-            get { return _lastName; }
-            set { _lastName = value; }
+            get { throw new NotImplementedException(); }
         }
 
-        public string FirstName
+        public virtual bool IsAuthenticated
         {
-            get { return _firstName; }
-            set { _firstName = value; }
-        }
+            get { throw new NotImplementedException(); }
 
-        public string Email
-        {
-            get { return _email; }
-            set { _email = value; }
-        }
-
-        public string Pager
-        {
-            get { return _pager; }
-            set { _pager = value; }
-        }
-
-        public int UserId
-        {
-            get { return _userId; }
-            set { _userId = value; }
-        }
-
-        private static IRepositoryLinqToSql<IUser> RepositoryLinqToSql
-        {
-            get { return Factory.ObjectFactory.Instance.GetInstance<IRepositoryLinqToSql<IUser>>(); }
         }
 
         #endregion
 
         #region Factory Methods
 
-        public static IUser NewUser()
+        public static User Create(UserDto userDto)
         {
-            return new User();
-        }
-
-        public static IEnumerable<IUser> GetUser(String name)
-        {
-            return RepositoryLinqToSql.Fetch(name);
+            var user = new User
+                       {
+                           Email = userDto.Email,
+                           FirstName = userDto.FirstName,
+                           LastName = userDto.LastName,
+                           Pager = userDto.Pager,
+                           UserName = userDto.Name,
+                           Name = userDto.Name,
+                           Password = userDto.Password,
+                       };
+            Validate(user);
+            return user;
         }
 
         #endregion
 
-        #region Implementation of IIdentity
+        #region Validation
 
-        public string Name
+        private static void RegisterValidationRules()
         {
-            get { return UserName; }
-        }
-
-        public string AuthenticationType
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public bool IsAuthenticated
-        {
-            get { throw new NotImplementedException(); }
+            ValidationRulesManager.RegisterRule<User>(x => !String.IsNullOrWhiteSpace(x.Email), "Email is verplicht");
+            ValidationRulesManager.RegisterRule<User>(x => !String.IsNullOrWhiteSpace(x.Name), "Naam is verplicht");
+            ValidationRulesManager.RegisterRule<User>(x => !String.IsNullOrWhiteSpace(x.LastName), "Achternaam is verplicht");
+            ValidationRulesManager.RegisterRule<User>(x => !String.IsNullOrWhiteSpace(x.FirstName), "Voornaam is verplicht");
+            ValidationRulesManager.RegisterRule<User>(x => !String.IsNullOrWhiteSpace(x.Password), "Paswoord is verplicht");
         }
 
         #endregion

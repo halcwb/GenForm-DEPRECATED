@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Tests.Fixtures
 {
@@ -90,7 +91,7 @@ namespace Informedica.GenForm.Tests.Fixtures
         public static ProductDto GetProductDtoWithTwoSubstancesAndRoute()
         {
             var dto = GetProductDtoWithTwoSubstances();
-            dto.Routes = new List<RouteDto> {new RouteDto {Id = Guid.Empty, Name = Route}};
+            dto.Routes = new List<RouteDto> {new RouteDto {Id = Guid.Empty, Name = Route, Abbreviation = Route}};
             return dto;
         }
 
@@ -140,6 +141,23 @@ namespace Informedica.GenForm.Tests.Fixtures
             var dto = GetProductDtoWithNoSubstances();
             AddOneRoute(dto);
             return dto;
+        }
+
+        public static Product CreateProductWithOneSubstAndOneRoute()
+        {
+            var dto = GetProductDtoWithNoSubstances();
+            var shape = ShapeTestFixtures.CreateIvFluidShape();
+            var package = PackageTestFixtures.CreatePackageAmpul();
+            var unit = UnitTestFixtures.CreateUnitMililiter();
+            var product = Product.Create(dto)
+                .Shape(shape)
+                .Package(package)
+                .Quantity(unit, 5M)
+                .Substance(1, SubstanceTestFixtures.CreateSubstanceWithoutGroup(), 200M,
+                           UnitTestFixtures.CreateUnitMilligram())
+                .Route(RouteTestFixtures.CreateRouteIv());
+
+            return product;
         }
     }
 }

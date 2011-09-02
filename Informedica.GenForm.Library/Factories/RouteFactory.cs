@@ -1,5 +1,7 @@
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
+using Informedica.GenForm.Library.Services.Products;
 
 namespace Informedica.GenForm.Library.Factories
 {
@@ -10,8 +12,19 @@ namespace Informedica.GenForm.Library.Factories
         protected override Route Create()
         {
             var route = Route.Create(Dto);
+
+            foreach (var shape in Dto.Shapes)
+            {
+                route.AddShape(GetShape(shape));
+            }
+
             Add(route);
             return route;
+        }
+
+        private IShape GetShape(ShapeDto shape)
+        {
+            return ShapeServices.WithDto(shape).Get();
         }
     }
 }

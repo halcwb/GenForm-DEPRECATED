@@ -60,15 +60,27 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void HavePropertiesSetByTestFixture()
         {
-            var unit = Unit.Create(UnitTestFixtures.GetTestUnitMilligram());
+            var unit = CreateUnit();
 
             AssertUnitNameIsSet(unit);
+        }
+
+        private static Unit CreateUnit()
+        {
+            var group =
+                UnitGroup.Create(new UnitGroupDto
+                                     {
+                                         Name = UnitTestFixtures.GetTestUnitMilligram().UnitGroupName,
+                                         AllowConversion = UnitTestFixtures.GetTestUnitMilligram().AllowConversion
+                                     });
+            var unit = Unit.Create(UnitTestFixtures.GetTestUnitMilligram(), group);
+            return unit;
         }
 
         [TestMethod]
         public void HaveAUnitGroup()
         {
-            var unit = Unit.Create(UnitTestFixtures.GetTestUnitMilligram());
+            var unit = CreateUnit();
 
             AssertUnitGroupName(unit);
         }
@@ -120,13 +132,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
             
             try
             {
-                group.AddUnit(
-                    new Unit(
-                        new UnitDto
-                            {
-                                Name = UnitTestFixtures.GetTestUnitMilligram().Name,
-                                Abbreviation = UnitTestFixtures.GetTestUnitMilligram().Abbreviation
-                            }, group));
+                group.AddUnit(CreateUnit());
             }
             catch (System.Exception e)
             {
@@ -136,7 +142,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
 
         private static void PersistUnit(ISession session)
         {
-            var unit = Unit.Create(UnitTestFixtures.GetTestUnitMilligram());
+            var unit = CreateUnit();
 
             AssertUnitNameIsSet(unit);
             AssertUnitGroupName(unit);

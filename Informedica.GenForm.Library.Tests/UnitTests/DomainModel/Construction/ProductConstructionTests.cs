@@ -1,6 +1,6 @@
-﻿using Informedica.GenForm.Library.DomainModel.Products;
+﻿using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests.Fixtures;
-using Informedica.GenForm.Tests.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
@@ -52,99 +52,237 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         #endregion
 
         [TestMethod]
-        public void ThatAValidProductCanBeConstructed()
+        public void ThatProductCanBeCreatedUsingFluentConstructor()
         {
-            var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductChecker.ProductIsValid(product));
+            var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances())
+                .Shape(ShapeTestFixtures.CreateIvFluidShape())
+                .Package(PackageTestFixtures.CreatePackageAmpul())
+                .Quantity(UnitTestFixtures.CreateUnitMililiter(), 5M)
+                .Substance(1, SubstanceTestFixtures.CreateSubstanceWithoutGroup(), 200,
+                           UnitTestFixtures.CreateUnitMilligram())
+                .Route(RouteTestFixtures.CreateRouteIv());
+            
+            Assert.IsInstanceOfType(product, typeof(Product));
         }
 
         [TestMethod]
-        public void ThatAValidProductWithBrandCanBeConstructed()
+        public void ThatProductCreateFailsWhenNoDisplayName()
         {
-            var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductChecker.ProductIsValid(product) && 
-                          ProductChecker.ProductHasBrand(product));
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            dto.DisplayName = string.Empty;
+            var shape = ShapeTestFixtures.CreateIvFluidShape();
+            var package = PackageTestFixtures.CreatePackageAmpul();
+            decimal prodQuantity = 5M;
+            var unit = UnitTestFixtures.CreateUnitMililiter();
+            var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
+            int order = 1;
+            decimal quantity = 200;
+            var substUnit = UnitTestFixtures.CreateUnitMilligram();
+            var route = RouteTestFixtures.CreateRouteIv();
+
+            AssertCreateFails(quantity, subst, substUnit, route, order, shape, dto, package, prodQuantity, unit);            
         }
 
         [TestMethod]
-        public void ThatAValidProductWithShapeCanBeConstructed()
+        public void ThatProductCreateFailsWhenNoGenericName()
         {
-            var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductChecker.ProductIsValid(product) && ProductChecker.ProductHasBrand(product) && ProductChecker.ProductHasShape(product));
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            dto.GenericName = string.Empty;
+            var shape = ShapeTestFixtures.CreateIvFluidShape();
+            var package = PackageTestFixtures.CreatePackageAmpul();
+            decimal prodQuantity = 5M;
+            var unit = UnitTestFixtures.CreateUnitMililiter();
+            var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
+            int order = 1;
+            decimal quantity = 200;
+            var substUnit = UnitTestFixtures.CreateUnitMilligram();
+            var route = RouteTestFixtures.CreateRouteIv();
+
+            AssertCreateFails(quantity, subst, substUnit, route, order, shape, dto, package, prodQuantity, unit);
         }
 
         [TestMethod]
-        public void ThatAValidProductWithPackageCanBeConstructed()
+        public void ThatProductCreateFailsWhenNoShape()
         {
-            var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductChecker.ProductIsValid(product) && 
-                          ProductChecker.ProductHasBrand(product) && 
-                          ProductChecker.ProductHasShape(product) && 
-                          ProductChecker.ProductHasPackage(product));
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            var package = PackageTestFixtures.CreatePackageAmpul();
+            decimal prodQuantity = 5M;
+            var unit = UnitTestFixtures.CreateUnitMililiter();
+            var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
+            int order = 1;
+            decimal quantity = 200;
+            var substUnit = UnitTestFixtures.CreateUnitMilligram();
+            var route = RouteTestFixtures.CreateRouteIv();
+
+            AssertCreateFails(quantity, subst, substUnit, route, order, null, dto, package, prodQuantity, unit);
         }
 
         [TestMethod]
-        public void ThatAValidProductAssociatesShapeWithPackage()
+        public void ThatProductCreateFailsWhenNoPackage()
         {
-            var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductChecker.ProductIsValid(product) &&
-                          ProductChecker.ProductHasBrand(product) &&
-                          ProductChecker.ProductHasShape(product) &&
-                          ProductChecker.ProductHasPackage(product) &&
-                          ProductChecker.ProductAssociatesShapeWithPackage(product));
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            var shape = ShapeTestFixtures.CreateIvFluidShape();
+            decimal prodQuantity = 5M;
+            var unit = UnitTestFixtures.CreateUnitMililiter();
+            var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
+            int order = 1;
+            decimal quantity = 200;
+            var substUnit = UnitTestFixtures.CreateUnitMilligram();
+            var route = RouteTestFixtures.CreateRouteIv();
+
+            AssertCreateFails(quantity, subst, substUnit, route, order, shape, dto, null, prodQuantity, unit);
         }
 
         [TestMethod]
-        public void ThatAValidProductWithUnitValueCanBeConstructed()
+        public void ThatProductCreateFailsWhenNoProductQuantity()
         {
-            var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductChecker.ProductIsValid(product) &&
-                          ProductChecker.ProductHasBrand(product) &&
-                          ProductChecker.ProductHasShape(product) &&
-                          ProductChecker.ProductHasPackage(product) &&
-                          ProductChecker.ProductHasUnitValue(product));
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            var shape = ShapeTestFixtures.CreateIvFluidShape();
+            var package = PackageTestFixtures.CreatePackageAmpul();
+            decimal prodQuantity = 0;
+            var unit = UnitTestFixtures.CreateUnitMililiter();
+            var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
+            int order = 1;
+            decimal quantity = 200;
+            var substUnit = UnitTestFixtures.CreateUnitMilligram();
+            var route = RouteTestFixtures.CreateRouteIv();
+
+            AssertCreateFails(quantity, subst, substUnit, route, order, shape, dto, package, prodQuantity, unit);
         }
 
         [TestMethod]
-        public void ThatAValidProductAssociatesShapeWithUnitGroup()
+        public void ThatProductCreateFailsWhenNoProductUnit()
         {
-            var product = Product.Create(ProductTestFixtures.GetProductDtoWithNoSubstances());
-            Assert.IsTrue(ProductChecker.ProductIsValid(product) &&
-                          ProductChecker.ProductHasBrand(product) &&
-                          ProductChecker.ProductHasShape(product) &&
-                          ProductChecker.ProductHasPackage(product) &&
-                          ProductChecker.ProductAssociatesShapeWithPackage(product) &&
-                          ProductChecker.ProductHasUnitValue(product) && 
-                          ProductChecker.ProductAssociatesShapeWithUnitGroup(product));
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            var shape = ShapeTestFixtures.CreateIvFluidShape();
+            var package = PackageTestFixtures.CreatePackageAmpul();
+            decimal prodQuantity = 5M;
+            var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
+            int order = 1;
+            decimal quantity = 200;
+            var substUnit = UnitTestFixtures.CreateUnitMilligram();
+            var route = RouteTestFixtures.CreateRouteIv();
+
+            AssertCreateFails(quantity, subst, substUnit, route, order, shape, dto, package, prodQuantity, null);
         }
 
         [TestMethod]
-        public void ThatAValidProductWithProductSubstanceCanBeConstructed()
+        public void ThatProductCreateFailsWhenNoSubstance()
         {
-            var product = Product.Create(ProductTestFixtures.GetProductDtoWithOneSubstance());
-            Assert.IsTrue(ProductChecker.ProductIsValid(product) &&
-                          ProductChecker.ProductHasBrand(product) &&
-                          ProductChecker.ProductHasShape(product) &&
-                          ProductChecker.ProductHasPackage(product) &&
-                          ProductChecker.ProductAssociatesShapeWithPackage(product) &&
-                          ProductChecker.ProductHasUnitValue(product) &&
-                          ProductChecker.ProductAssociatesShapeWithUnitGroup(product) &&
-                          ProductChecker.ProductHasProductSubstance(product));
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            var shape = ShapeTestFixtures.CreateIvFluidShape();
+            var package = PackageTestFixtures.CreatePackageAmpul();
+            decimal prodQuantity = 5M;
+            var unit = UnitTestFixtures.CreateUnitMililiter();
+            int order = 1;
+            decimal quantity = 200;
+            var substUnit = UnitTestFixtures.CreateUnitMilligram();
+            var route = RouteTestFixtures.CreateRouteIv();
+
+            AssertCreateFails(quantity, null, substUnit, route, order, shape, dto, package, prodQuantity, unit);
         }
 
         [TestMethod]
-        public void ThatAValidProductWithRoutesCanBeConstructed()
+        public void ThatProductCreateFailsWhenNoSortOrder()
         {
-            var product = Product.Create(ProductTestFixtures.GetProductDtoWithOneSubstanceAndRoutes());
-            Assert.IsTrue(ProductChecker.ProductIsValid(product) &&
-                          ProductChecker.ProductHasBrand(product) &&
-                          ProductChecker.ProductHasShape(product) &&
-                          ProductChecker.ProductHasPackage(product) &&
-                          ProductChecker.ProductAssociatesShapeWithPackage(product) &&
-                          ProductChecker.ProductHasUnitValue(product) &&
-                          ProductChecker.ProductAssociatesShapeWithUnitGroup(product) &&
-                          ProductChecker.ProductHasProductSubstance(product) && 
-                          ProductChecker.ProductHasRoutes(product));
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            var shape = ShapeTestFixtures.CreateIvFluidShape();
+            var package = PackageTestFixtures.CreatePackageAmpul();
+            decimal prodQuantity = 5M;
+            var unit = UnitTestFixtures.CreateUnitMililiter();
+            var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
+            int order = 0;
+            decimal quantity = 200;
+            var substUnit = UnitTestFixtures.CreateUnitMilligram();
+            var route = RouteTestFixtures.CreateRouteIv();
+
+            AssertCreateFails(quantity, subst, substUnit, route, order, shape, dto, package, prodQuantity, unit);
+        }
+
+        [TestMethod]
+        public void ThatProductCreateFailsWhenSubstanceHasNoQuantity()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            var shape = ShapeTestFixtures.CreateIvFluidShape();
+            var package = PackageTestFixtures.CreatePackageAmpul();
+            decimal prodQuantity = 5M;
+            var unit = UnitTestFixtures.CreateUnitMililiter();
+            var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
+            int order = 1;
+            decimal quantity = 0;
+            var substUnit = UnitTestFixtures.CreateUnitMilligram();
+            var route = RouteTestFixtures.CreateRouteIv();
+
+            AssertCreateFails(quantity, subst, substUnit, route, order, shape, dto, package, prodQuantity, unit);
+        }
+
+        [TestMethod]
+        public void ThatProductCreateFailsWhenSubstanceHasNoSubstanceUnit()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            var shape = ShapeTestFixtures.CreateIvFluidShape();
+            var package = PackageTestFixtures.CreatePackageAmpul();
+            decimal prodQuantity = 5M;
+            var unit = UnitTestFixtures.CreateUnitMililiter();
+            var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
+            int order = 1;
+            decimal quantity = 0;
+            var substUnit = UnitTestFixtures.CreateUnitMilligram();
+            var route = RouteTestFixtures.CreateRouteIv();
+
+            AssertCreateFails(quantity, subst, substUnit, route, order, shape, dto, package, prodQuantity, unit);
+        }
+
+        [TestMethod]
+        public void ThatProductCreateFailsWhenSubstanceHasNoUnit()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            var shape = ShapeTestFixtures.CreateIvFluidShape();
+            var package = PackageTestFixtures.CreatePackageAmpul();
+            decimal prodQuantity = 5M;
+            var unit = UnitTestFixtures.CreateUnitMililiter();
+            var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
+            int order = 1;
+            decimal quantity = 200;
+            var route = RouteTestFixtures.CreateRouteIv();
+
+            AssertCreateFails(quantity, subst, null, route, order, shape, dto, package, prodQuantity, unit);
+        }
+
+        [TestMethod]
+        public void ThatProductCreateFailsWhenProductHasNoRoute()
+        {
+            var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
+            var shape = ShapeTestFixtures.CreateIvFluidShape();
+            var package = PackageTestFixtures.CreatePackageAmpul();
+            decimal prodQuantity = 5M;
+            var unit = UnitTestFixtures.CreateUnitMililiter();
+            var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
+            int order = 1;
+            decimal quantity = 200;
+            var substUnit = UnitTestFixtures.CreateUnitMilligram();
+
+            AssertCreateFails(quantity, subst, substUnit, null, order, shape, dto, package, prodQuantity, unit);
+        }
+
+        private static void AssertCreateFails(decimal quantity, Substance subst, Unit substUnit, Route route, int order,
+                                              Shape shape, ProductDto dto, Package package, decimal prodQuantity, Unit unit)
+        {
+            try
+            {
+                Product.Create(dto)
+                    .Shape(shape)
+                    .Package(package)
+                    .Quantity(unit, prodQuantity)
+                    .Substance(order, subst, quantity, substUnit)
+                    .Route(route);
+
+                Assert.Fail();
+            }
+            catch (System.Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof (AssertFailedException));
+            }
         }
     }
 }

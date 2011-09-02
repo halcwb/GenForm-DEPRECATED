@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 
@@ -11,11 +12,18 @@ namespace Informedica.GenForm.Library.Factories
 
         protected override Product Create()
         {
-            
-            var product = Product.Create(GetProductDto(),
-                                         GetShape(),
-                                         GetPackage(),
-                                         GetUnitValue());
+            var substDto = Dto.Substances.First();
+            Dto.Substances = Dto.Substances.Skip(1).ToList();
+
+            var routeDto = Dto.Routes.First();
+            Dto.Routes = Dto.Routes.Skip(1).ToList();
+
+            var product = Product.Create(GetProductDto())
+                .Shape(GetShape())
+                .Package(GetPackage())
+                .Quantity(GetUnitValue().Unit, GetUnitValue().Value)
+                .Substance(substDto.SortOrder, GetSubstance(substDto.Substance), substDto.Quantity, GetUnit(substDto))
+                .Route(GetRoute(routeDto));
 
             if (!String.IsNullOrWhiteSpace(Dto.BrandName)) product.SetBrand(GetBrand());
 

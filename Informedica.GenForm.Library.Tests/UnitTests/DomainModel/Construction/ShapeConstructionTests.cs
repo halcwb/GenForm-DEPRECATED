@@ -55,53 +55,46 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         [TestMethod]
         public void AValidShapeCanBeConstucted()
         {
-            var shape = Shape.Create(ShapeTestFixtures.GetValidDto());
+            var shape = ShapeTestFixtures.CreateIvFluidShape();
             Assert.IsTrue(ShapeIsValid(shape));
+        }
+
+        [TestMethod]
+        public void ThatShapeWithoutNameThrowsException()
+        {
+            try
+            {
+                var dto = ShapeTestFixtures.GetIvFluidDto();
+                dto.Name = String.Empty;
+                Shape.Create(dto);
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
         }
 
         [TestMethod]
         public void AValidShapeWithPackagesCanBeConstructed()
         {
             var shape = Shape.Create(ShapeTestFixtures.GetValidDtoWithPackages());
+            var package1 = Package.Create(ShapeTestFixtures.GetValidDtoWithPackages().Packages.First());
+            var package2 = Package.Create(ShapeTestFixtures.GetValidDtoWithPackages().Packages.Last());
+
+            shape.AddPackage(package1);
+            shape.AddPackage(package2);
             Assert.IsTrue(ShapeIsValid(shape) && ShapeContainsPackages(shape));
         }
 
-        private bool ShapeContainsPackages(Shape shape)
+        private static bool ShapeContainsPackages(Shape shape)
         {
             return shape.PackageSet.Count() == 2 &&
                    shape.PackageSet.First().ShapeSet.Contains(shape) &&
                    shape.PackageSet.Last().ShapeSet.Contains(shape);
         }
 
-        [TestMethod]
-        public void AValidShapeWithRoutesCanBeConstructed()
-        {
-            var shape = Shape.Create(ShapeTestFixtures.GetValidDtoWithRoutes());
-            Assert.IsTrue(ShapeIsValid(shape) && ShapeContainsPackages(shape) && ShapeContainsRoutes(shape));
-        }
-
-        private bool ShapeContainsRoutes(Shape shape)
-        {
-            return shape.RouteSet.Count() == 2 &&
-                   shape.RouteSet.First().ShapeSet.Contains(shape) &&
-                   shape.RouteSet.Last().ShapeSet.Contains(shape);
-        }
-
-        [TestMethod]
-        public void AValidShapeWithTwoUnitGroupsCanBeConstructed()
-        {
-            var shape = Shape.Create(ShapeTestFixtures.GetValidDtoWithUnitGroups());
-            Assert.IsTrue(ShapeIsValid(shape) && ShapeContainsPackages(shape) && ShapeContainsRoutes(shape) && ShapeContainsUnitGroups(shape));
-        }
-
-        private bool ShapeContainsUnitGroups(Shape shape)
-        {
-            return shape.UnitGroupSet.Count() == 2 &&
-                   shape.UnitGroupSet.First().Shapes.Contains(shape) &&
-                   shape.UnitGroupSet.Last().Shapes.Contains(shape);
-        }
-
-        private bool ShapeIsValid(Shape shape)
+        private static bool ShapeIsValid(Shape shape)
         {
             return !String.IsNullOrWhiteSpace(shape.Name);
         }

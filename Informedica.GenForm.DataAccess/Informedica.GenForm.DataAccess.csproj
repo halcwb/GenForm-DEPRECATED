@@ -70,6 +70,7 @@
     <Compile Include="Mappings\UnitGroupMap.cs" />
     <Compile Include="Mappings\UnitMap.cs" />
     <Compile Include="Mappings\UnitValueMap.cs" />
+    <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Repositories\BrandRepository.cs" />
     <Compile Include="Repositories\NHibernateBase.cs" />
     <Compile Include="Repositories\NHibernateRepository.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Repositories\SubstanceRepository.cs" />
     <Compile Include="Repositories\UnitGroupRepository.cs" />
     <Compile Include="Repositories\UnitRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="SessionFactoryCreator.cs" />
     <Compile Include="Databases\DatabaseConnection.cs" />
     <Compile Include="Databases\DatabaseSetting.cs" />

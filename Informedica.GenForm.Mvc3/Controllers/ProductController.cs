@@ -1,6 +1,7 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
+using Informedica.GenForm.Library.Services.Interfaces;
 using Informedica.GenForm.Library.Services.Products;
 using Newtonsoft.Json.Linq;
 using System.Web.Mvc;
@@ -80,7 +81,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public IProduct LoadProduct(Int32 productId)
         {
-            var product = Product.Create(new ProductDto());
+            var product = ProductServices.WithDto(new ProductDto()).Get();
 
             return product;
         }
@@ -217,10 +218,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         private IUnit GetUnitFromJObject(JObject unit)
         {
-            return Unit.Create(new UnitDto
-                       {
-                           Name = unit.Value<String>("UnitName")
-                       });
+            return UnitServices.WithDto(new UnitDto{ Name = unit.Value<String>("Name")}).Get();
         }
 
         public ActionResult DeleteProduct(Int32 id)

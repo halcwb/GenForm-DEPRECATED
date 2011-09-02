@@ -1,4 +1,6 @@
-﻿using Informedica.GenForm.Library.DomainModel.Products;
+﻿using System.Linq;
+using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -57,7 +59,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Updating
             var group = subst.SubstanceGroup;
 
             subst.RemoveFromSubstanceGroup();
-            Assert.IsFalse(group.SubstanceSet.Contains(subst));
+            Assert.IsFalse(group.Substances.Contains(subst));
             Assert.IsNull(subst.SubstanceGroup);
         }
 
@@ -72,7 +74,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Updating
 
         private Substance GetSubstanceWithGroup()
         {
-            return Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
+            var dto = SubstanceTestFixtures.GetSubstanceWithGroup();
+            var subst =  Substance.Create(dto);
+            var group = SubstanceGroup.Create(new SubstanceGroupDto {Name = dto.SubstanceGroupName});
+            group.AddSubstance(subst);
+            return subst;
         }
     }
 }

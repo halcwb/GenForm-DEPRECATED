@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests.Fixtures;
@@ -53,20 +54,36 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         #endregion
 
         [TestMethod]
-        public void ThatAValidUnitIsCreated()
+        public void ThatBrandWithNameIsCreated()
         {
-            var brand = Brand.Create(GetBrandDto());
+            var brand = BrandTestFixtures.GetBrandWithNoProducts();
             Assert.IsTrue(BrandIsValid(brand));
         }
 
-        private bool BrandIsValid(Brand brand)
+        [TestMethod]
+        public void ThatBrandHasZeroProducts()
         {
-            return (!String.IsNullOrWhiteSpace(brand.Name));
+            var brand = BrandTestFixtures.GetBrandWithNoProducts();
+            Assert.AreEqual(0, brand.Products.Count());
         }
 
-        private BrandDto GetBrandDto()
+        [TestMethod]
+        public void ThatBrandWithoutNameThrowsException()
         {
-            return BrandTestFixtures.GetDto();
+            try
+            {
+                Brand.Create(new BrandDto());
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }   
+        }
+
+        private static bool BrandIsValid(Brand brand)
+        {
+            return (!String.IsNullOrWhiteSpace(brand.Name));
         }
     }
 }

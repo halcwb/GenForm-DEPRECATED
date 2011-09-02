@@ -1,4 +1,5 @@
 ﻿using Informedica.GenForm.Library.Security;
+using Informedica.GenForm.Library.Services.Interfaces;
 using Informedica.GenForm.Library.Services.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock.ArrangeActAssert;

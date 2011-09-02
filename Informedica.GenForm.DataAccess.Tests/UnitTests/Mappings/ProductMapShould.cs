@@ -56,6 +56,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         [TestMethod]
         public void CorrectlyMapAProduct()
         {
+            var group = UnitGroup.Create(new UnitGroupDto { AllowConversion = true, Name = "massa"});
             new PersistenceSpecification<Product>(Context.CurrentSession(), new ProductComparer())
                 .CheckProperty(x => x.Name, "dopamine Dynatra infusievloeistof 200 mg in 5 mL ampul")
                 .CheckProperty(x => x.GenericName, "dopamine")
@@ -63,7 +64,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
                 .CheckProperty(x => x.DisplayName, "dopamine Dynatra infusievloeistof 200 mg in 5 mL ampul")
                 .CheckReference(x => x.Package, Package.Create(new PackageDto {Name = "ampul", Abbreviation = "amp"}))
                 .CheckReference(x => x.Shape, Shape.Create(new ShapeDto {Name = "infusievloeistof"}))
-                .CheckProperty(x => x.Quantity, UnitValue.Create(10, Unit.Create(UnitTestFixtures.GetTestUnitMilligram())))
+                .CheckProperty(x => x.Quantity, UnitValue.Create(10, Unit.Create(UnitTestFixtures.GetTestUnitMilligram(), group)))
 
                 .VerifyTheMappings();
         }

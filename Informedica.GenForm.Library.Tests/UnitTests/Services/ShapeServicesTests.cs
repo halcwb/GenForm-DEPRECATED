@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Tests;
 using Informedica.GenForm.Tests.Fixtures;
@@ -59,14 +61,14 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatShapeCanBeGet()
         {
-            var shape = ShapeServices.WithDto(ShapeTestFixtures.GetValidDto()).Get();
+            var shape = ShapeServices.WithDto(ShapeTestFixtures.GetIvFluidDto()).Get();
             Assert.IsNotNull(shape);
         }
 
         [TestMethod]
         public void ThatAddedShapeCanBeFound()
         {
-            var shape = ShapeServices.WithDto(ShapeTestFixtures.GetValidDto()).Get();
+            var shape = ShapeServices.WithDto(ShapeTestFixtures.GetIvFluidDto()).Get();
             Assert.AreEqual(shape, ShapeServices.Shapes.Single(
                 x => x.Name == shape.Name));
         }
@@ -74,15 +76,15 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatShapeCanBeDeleted()
         {
-            var shape = ShapeServices.WithDto(ShapeTestFixtures.GetValidDto()).Get();
+            var shape = ShapeServices.WithDto(ShapeTestFixtures.GetIvFluidDto()).Get();
             ShapeServices.Delete(shape);
-            Assert.IsNull(ShapeServices.Shapes.SingleOrDefault(x => x.Name == ShapeTestFixtures.GetValidDto().Name));
+            Assert.IsNull(ShapeServices.Shapes.SingleOrDefault(x => x.Name == ShapeTestFixtures.GetIvFluidDto().Name));
         }
 
         [TestMethod]
         public void ThatShapeCanBeUpdated()
         {
-            var shape = ShapeServices.WithDto(ShapeTestFixtures.GetValidDto()).Get();
+            var shape = ShapeServices.WithDto(ShapeTestFixtures.GetIvFluidDto()).Get();
             // ToDo: rewrite
             // shape.Name = shape.Name + "_changed";
             Assert.IsNotNull(ShapeServices.Shapes.SingleOrDefault(x => x.Name == shape.Name));
@@ -126,7 +128,9 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             var route = RouteServices.WithDto(GetRouteDto()).Get();
             var shape = ShapeServices.WithDto(ShapeTestFixtures.GetValidDtoWithRoutes()).Get();
-            Assert.AreEqual(shape.RouteSet.Single(p => p.Name == route.Name), route);
+
+            var list = new List<IRoute>(shape.Routes);
+            Assert.AreEqual(list.Single(p => p.Name == route.Name), route);
         }
 
         private RouteDto GetRouteDto()
