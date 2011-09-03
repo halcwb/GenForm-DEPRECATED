@@ -60,10 +60,10 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         public void MapUser()
         {
             new PersistenceSpecification<User>(Context.CurrentSession())
-                .CheckProperty(b => b.Name, "Admin")
-                .CheckProperty(u => u.Email, "admin@gmail.com")
-                .CheckProperty(u => u.FirstName, "Admin")
-                .CheckProperty(u => u.LastName, "Admin")
+                .CheckProperty(b => b.Name, "Foo")
+                .CheckProperty(u => u.Email, "Foo@gmail.com")
+                .CheckProperty(u => u.FirstName, "Foo")
+                .CheckProperty(u => u.LastName, "Bar")
                 .CheckProperty(u => u.Password, "secret")
                 .VerifyTheMappings();
         }

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Databases;
-using Informedica.GenForm.Library.Services;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.Services.Databases;
-using Informedica.GenForm.Library.Services.Interfaces;
 using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
@@ -17,7 +15,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult GetDatabases()
         {
-            IEnumerable<String> names = GetDatabaseServices().GetDatabases();
+            IEnumerable<String> names = DatabaseServices.GetDatabases();
             IList<object> list = new List<object>();
             foreach (var name in names)
             {
@@ -36,15 +34,10 @@ namespace Informedica.GenForm.Mvc3.Controllers
         public Boolean SetSetting(String computerName, String name, String value)
         {
             var setting = CreateSettings(computerName, name, value);
-            GetDatabaseServices().MapSettingsPath(HttpContext.ApplicationInstance.Server.MapPath("~/"));
-            GetDatabaseServices().RegisterDatabaseSetting(setting);
+            DatabaseServices.MapSettingsPath(HttpContext.ApplicationInstance.Server.MapPath("~/"));
+            DatabaseServices.RegisterDatabaseSetting(setting);
 
             return true;
-        }
-
-        private static IDatabaseServices GetDatabaseServices()
-        {
-            return ObjectFactory.GetInstance<IDatabaseServices>();
         }
 
         private static IDatabaseSetting CreateSettings(String computerName, String name, String value)

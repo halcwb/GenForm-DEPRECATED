@@ -37,12 +37,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
 
         public TEnt GetByName(String name)
         {
-            return Transact(() => Session.QueryOver<TEnt>().Where(x => NameEquals(x.Name, name)).SingleOrDefault());
-        }
-
-        private bool NameEquals(String ent, String name)
-        {
-            return String.Equals(ent.Trim().ToLower(), name.Trim().ToLower());
+            return Transact(() => Session.QueryOver<TEnt>().Where(x => x.Name == name).SingleOrDefault());
         }
 
         public virtual int Count

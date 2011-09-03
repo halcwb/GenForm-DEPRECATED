@@ -35,24 +35,24 @@ namespace Informedica.GenForm.Library.Services.Users
             return (UserFactory)Instance.GetFactory(dto);
         }
 
-        public static User GetUserById(Guid id)
+        public static IUser GetUserById(Guid id)
         {
             return Instance.GetById(id);
         }
 
-        public static User GetUserByName(String name)
+        public static IUser GetUserByName(String name)
         {
             return Instance.GetByName(name);
         }
 
-        public static IEnumerable<User> Users
+        public static IEnumerable<IUser> Users
         {
             get { return Instance.Repository; }
         }
 
-        public static void Delete(User user)
+        public static void Delete(IUser user)
         {
-            Instance.Repository.Remove(user);
+            Instance.Repository.Remove((User)user);
         }
     }
 }

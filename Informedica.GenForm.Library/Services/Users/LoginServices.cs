@@ -1,38 +1,41 @@
 ﻿using System;
 using Informedica.GenForm.Library.Security;
-using Informedica.GenForm.Library.Services.Interfaces;
 
 namespace Informedica.GenForm.Library.Services.Users
 {
-    public class LoginServices : ILoginServices
+    public static class LoginServices
     {
-        #region Implementation of ILoginServices
 
-        public void Login(ILoginCriteria user)
+        public static void Login(ILoginCriteria criteria)
         {
-            GenFormPrincipal.Login(user);
+            GenFormPrincipal.Login(criteria);
         }
 
-        public Boolean IsLoggedIn(ILoginCriteria user)
+        public static bool IsLoggedIn(ILoginCriteria criteria)
         {
             return GenFormPrincipal.GetPrincipal().IsLoggedIn();
         }
 
-        public void Logout(ILoginCriteria user)
+        public static void Logout(ILoginCriteria criteria)
         {
-            if (GenFormIdentity.GetIdentity(user.UserName) == null) throw new Exception();
+            if (GenFormIdentity.GetIdentity(criteria.UserName) == null) throw new Exception();
 
             GenFormPrincipal.Logout();
         }
 
-        public void ChangePassword(ILoginCriteria loginUser, string newPassword)
+        public static void ChangePassword(ILoginCriteria criteria, string newPassword)
         {
-            Principal.ChangePassword(loginUser.Password, newPassword);
+            Principal.ChangePassword(criteria.Password, newPassword);
         }
 
-        public bool CheckPassword(String password)
+        public static bool CheckPassword(string password)
         {
             return Principal.CheckPassword(password);
+        }
+
+        public static ILoginCriteria CreateLoginUse(String userName, String password)
+        {
+            return LoginUser.NewLoginUser(userName, password);
         }
 
         private static IGenFormPrincipal Principal
@@ -40,23 +43,7 @@ namespace Informedica.GenForm.Library.Services.Users
             get { return GenFormPrincipal.GetPrincipal(); }
         }
 
-        public ILoginCriteria CreateLoginUser(String userName, String password)
-        {
-            return LoginUser.NewLoginUser(userName, password);
-        }
 
-        #endregion
-
-        #region LoginServices Factory Methods
-
-        private LoginServices() {}
-
-        public static ILoginServices NewLoginServices()
-        {
-            return new LoginServices();
-        }
-
-        #endregion
     }
 }
 

@@ -9,11 +9,18 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Interfaces
         String Name { get; }
         String ProductCode { get; }
         String GenericName { get; }
-        Brand Brand { get; }
-        Shape Shape { get; }
+        IBrand Brand { get; }
+        IShape Shape { get; }
         UnitValue Quantity { get; }
-        Package Package { get; }
+        IPackage Package { get; }
         String DisplayName { get; }
-        IList<ProductSubstance> SubstanceList { get; }
+        IEnumerable<IProductSubstance> Substances { get; }
+        bool ContainsSubstance(ISubstance substance);
+        void AddSubstance(ISubstance substance, int sortOrder, UnitValue quanity);
+        void RemoveSubstance(ISubstance substance);
+        IEnumerable<IRoute> Routes { get; }
+        bool ContainsRoute(IRoute route);
+        void AddRoute(IRoute route);
+        void RemoveRoute(IRoute route);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Library.DomainModel.Databases;
 using Informedica.GenForm.Library.Services.Databases;
-using Informedica.GenForm.Library.Services.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 
@@ -14,7 +13,6 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
     public class DatabaseServicesShould
     {
         private TestContext testContextInstance;
-        private static IDatabaseServices _databaseServices;
         private static IDatabaseSetting _databaseSetting;
 
 
@@ -39,14 +37,12 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            ObjectFactory.Inject<IDatabaseServices>(new DatabaseServices());
             ObjectFactory.Inject<IDatabaseSetting>(new DatabaseSetting());
             ObjectFactory.Inject<IDatabaseConnection>(new DatabaseConnection());
 
-            _databaseServices = ObjectFactory.GetInstance<IDatabaseServices>();
             _databaseSetting = ObjectFactory.GetInstance<IDatabaseSetting>();
         }
 
@@ -69,7 +65,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             SetUpInvalidDatabaseSetting();
 
-            Assert.IsFalse(_databaseServices.TestDatabaseConnection(_databaseSetting), "Bogus database should not exist");
+            Assert.IsFalse(DatabaseServices.TestDatabaseConnection(_databaseSetting), "Bogus database should not exist");
         }
 
         private static void SetUpInvalidDatabaseSetting()
@@ -84,7 +80,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             SetUpValidDatabaseSetting();
 
-            Assert.IsTrue(_databaseServices.TestDatabaseConnection(_databaseSetting), "Production database should exists");
+            Assert.IsTrue(DatabaseServices.TestDatabaseConnection(_databaseSetting), "Production database should exists");
         }
 
         private static void SetUpValidDatabaseSetting()
@@ -99,9 +95,9 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void RegisterValidDatabaseSetting()
         {
             SetUpValidDatabaseSetting();
-            _databaseServices.RegisterDatabaseSetting(_databaseSetting);
+            DatabaseServices.RegisterDatabaseSetting(_databaseSetting);
 
-            Assert.IsTrue(_databaseServices.TestDatabaseConnection(_databaseSetting), "A valid database setting should be registered");
+            Assert.IsTrue(DatabaseServices.TestDatabaseConnection(_databaseSetting), "A valid database setting should be registered");
         }
     }
 }

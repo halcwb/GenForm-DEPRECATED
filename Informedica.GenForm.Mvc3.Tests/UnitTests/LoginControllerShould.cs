@@ -1,6 +1,6 @@
 ﻿using System;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.Security;
-using Informedica.GenForm.Library.Services.Interfaces;
 using Informedica.GenForm.Library.Services.Users;
 using Informedica.GenForm.Mvc3.Controllers;
 using Informedica.GenForm.PresentationLayer.Security;
@@ -24,7 +24,6 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         private const String TempPassword = "temp";
         private const String InvalidUser = "foo";
         private const String InvalidPassword = "bar";
-        private const String SuccessProperty = "success";
 
         private TestContext testContextInstance;
 
@@ -49,10 +48,11 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
+        [ClassInitialize]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            GenFormApplication.Initialize();
+        }
         //
         //Use ClassCleanup to run code after all tests in a class have run
         //[ClassCleanup()]
@@ -84,17 +84,19 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         public void ReturnFalseForInvalidUserLogin()
         {
             var controller = new LoginController();
-            IsolateLoginController(GetUser(), GetLoginServices());
-
+            var user = GetUser();
+            IsolateLoginController(user);
+            Isolate.Fake.StaticMethods(typeof(LoginServices));
+            Isolate.WhenCalled(() => LoginServices.Login(user)).IgnoreCall();
             var response = controller.Login(InvalidUser, InvalidPassword);
 
             Assert.IsFalse(GetSuccessValueFromActionResult(response));
         }
 
-        private static void IsolateLoginController(ILoginCriteria user, ILoginServices services)
+        private static void IsolateLoginController(ILoginCriteria user)
         {
+            Isolate.Fake.StaticMethods<LoginUser>();
             Isolate.WhenCalled(() => LoginUser.NewLoginUser(InvalidUser, InvalidPassword)).WillReturn(user);
-            Isolate.WhenCalled(() => LoginServices.NewLoginServices()).WillReturn(services);
         }
 
         [Isolated]
@@ -103,11 +105,10 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             // Setup
             var user = GetUser();
-            var loginServices = GetLoginServices();
-            IsolateLoginController(user, loginServices);
+            IsolateLoginController(user);
 
-            Isolate.WhenCalled(() => loginServices.Login(user)).IgnoreCall();
-            Isolate.WhenCalled(() => loginServices.IsLoggedIn(user)).WillReturn(true);
+            Isolate.WhenCalled(() => LoginServices.Login(user)).IgnoreCall();
+            Isolate.WhenCalled(() => LoginServices.IsLoggedIn(user)).WillReturn(true);
             var controller = new LoginController();
 
             var response = controller.Login(ValidUser, ValidPassword);
@@ -120,28 +121,22 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             return Isolate.Fake.Instance<ILoginCriteria>();
         }
 
-        private static ILoginServices GetLoginServices()
-        {
-            return Isolate.Fake.Instance<ILoginServices>();
-        }
-
         [Isolated]
         [TestMethod]
         public  void ReturnSuccessValueTrueForPasswordChangeForValidUser()
         {
             var controller = GetController();
-            var loginServices = GetLoginServices();
             var user = GetUser();
-            IsolateLoginController(user, loginServices);
+            IsolateLoginController(user);
 
-            Isolate.WhenCalled(() => loginServices.IsLoggedIn(user)).WillReturn(true);
-            Assert.IsTrue(loginServices.IsLoggedIn(GetUser()), "Cannot log in");
+            Isolate.WhenCalled(() => LoginServices.IsLoggedIn(user)).WillReturn(true);
+            Assert.IsTrue(LoginServices.IsLoggedIn(GetUser()), "Cannot log in");
 
-            Isolate.WhenCalled(() => loginServices.ChangePassword(user, TempPassword)).IgnoreCall();
-            Isolate.WhenCalled(() => loginServices.CheckPassword(TempPassword)).WillReturn(true);
+            Isolate.WhenCalled(() => LoginServices.ChangePassword(user, TempPassword)).IgnoreCall();
+            Isolate.WhenCalled(() => LoginServices.CheckPassword(TempPassword)).WillReturn(true);
 
             var response = controller.ChangePassword(ValidUser, ValidPassword, TempPassword);
-            Isolate.Verify.WasCalledWithExactArguments(() => loginServices.ChangePassword(user, TempPassword));            
+            Isolate.Verify.WasCalledWithExactArguments(() => LoginServices.ChangePassword(user, TempPassword));            
 
             Assert.IsTrue(GetSuccessValueFromActionResult(response), "Password was not changed");
         }
@@ -156,14 +151,14 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         public void NotChangePasswordWhenNotLoggedIn()
         {
             var controller = GetController();
-            var loginServices = GetLoginServices();
             var user = GetUser();
-            IsolateLoginController(user, loginServices);
+            IsolateLoginController(user);
 
-            Isolate.WhenCalled(() => loginServices.ChangePassword(user, "newpassword")).IgnoreCall();
+            Isolate.Fake.StaticMethods(typeof(LoginServices));
+            Isolate.WhenCalled(() => LoginServices.ChangePassword(user, "newpassword")).IgnoreCall();
 
             var response = controller.ChangePassword("foo", "oldpassword", "newpassword");
-            Isolate.Verify.WasCalledWithExactArguments(() => loginServices.ChangePassword(user, "newpassword"));
+            Isolate.Verify.WasCalledWithExactArguments(() => LoginServices.ChangePassword(user, "newpassword"));
 
             Assert.IsFalse(GetSuccessValueFromActionResult(response), "Password was not changed");
         }

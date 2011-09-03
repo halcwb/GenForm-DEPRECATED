@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using Informedica.GenForm.Assembler;
+using NHibernate;
 
 namespace Informedica.GenForm.Mvc3
 {
@@ -34,6 +35,11 @@ namespace Informedica.GenForm.Mvc3
             RegisterRoutes(RouteTable.Routes);
 
             GenFormApplication.Initialize();
+        }
+
+        public static ISessionFactory SessionFactory
+        {
+            get { return GenFormApplication.SessionFactory; }
         }
     }
 }

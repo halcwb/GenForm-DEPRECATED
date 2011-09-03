@@ -2,12 +2,9 @@
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
-using Informedica.GenForm.Library.Services.Interfaces;
 using Informedica.GenForm.Library.Services.Products;
 using Newtonsoft.Json.Linq;
-using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
@@ -109,8 +106,8 @@ namespace Informedica.GenForm.Mvc3.Controllers
             var message = String.Empty;
             try
             {
-                // ToDo: rewrite to new service
-                //product = GetProductServices().SaveProduct(product);
+                // ToDo: mapper for IProduct to ProductDto
+                //product = ProductServices.WithDto(product).Get();
 
             }
             catch (Exception e)
@@ -127,11 +124,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
             if (id > 0) success = true;
 
             return this.Direct(new {success});
-        }
-
-        private IProductServices GetProductServices()
-        {
-            return ObjectFactory.GetInstance<IProductServices>();
         }
 
         public ActionResult GetProduct(JObject idObject)

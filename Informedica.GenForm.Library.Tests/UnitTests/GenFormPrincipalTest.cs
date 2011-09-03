@@ -1,6 +1,6 @@
-﻿using System.Threading;
-using Informedica.GenForm.Assembler;
+﻿using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.Security;
+using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
@@ -14,11 +14,13 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
     ///to contain all GenFormPrincipalTest Unit Tests
     ///</summary>
     [TestClass]
-    public class GenFormPrincipalTest
+    public class GenFormPrincipalTest : TestSessionContext
     {
-
-
         private TestContext testContextInstance;
+
+        public GenFormPrincipalTest() : base(true)
+        {
+        }
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -41,10 +43,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
+        [ClassInitialize]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            GenFormApplication.Initialize();
+        }
         //
         //Use ClassCleanup to run code after all tests in a class have run
         //[ClassCleanup()]
@@ -53,11 +56,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
         //}
         //
         //Use TestInitialize to run code before running each test
-        [TestInitialize]
-        public void MyTestInitialize()
-        {
-            GenFormApplication.Initialize();
-        }
+        //[TestInitialize]
+        //public void MyTestInitialize()
+        //{
+        //    GenFormApplication.Initialize();
+        //}
         //
         //Use TestCleanup to run code after each test has run
         //[TestCleanup()]
@@ -69,7 +72,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void Login_system_user_results_in_PrincipalIdentity()
+        public void LoginSystemUserResultsInPricipalIdentityBeingSet()
         {
             ILoginCriteria user = CreateSystemUser();
             IsolateGetIdentity();
@@ -78,20 +81,9 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
             Assert.IsNotNull(GenFormPrincipal.GetPrincipal().Identity, "Principal identity should be set");
         }
 
-        private void IsolateGetIdentity()
-        {
-            var identity = Isolate.Fake.Instance<GenFormIdentity>();
-            Isolate.NonPublic.WhenCalled(typeof(GenFormPrincipal), "GetIdentity").WillReturn(identity);
-        }
-
-        private static ILoginCriteria CreateSystemUser()
-        {
-            return LoginUser.NewLoginUser("Admin", "Admin");
-        }
-
         [Isolated]
         [TestMethod]
-        public void Login_with_system_user_and_password_bar_should_return_false()
+        public void LoginWithAsSystemUserWithWrongPasswordShouldReturnFalse()
         {
             var user = CreateSystemUser();
             user.Password = "bar";
@@ -103,7 +95,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void Login_calls_SetPrincipal_with_identity()
+        public void LoginCallsSetPrincipalWithIdentity()
         {
             var user = CreateSystemUser();
             var identity = CreateFakeGenFormIdentity();
@@ -121,27 +113,30 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
             }
         }
 
-        private static IGenFormIdentity CreateFakeGenFormIdentity()
-        {
-            return Isolate.Fake.Instance<IGenFormIdentity>();
-        }
-
         [Isolated]
         [TestMethod]
-        public void IsLoggedIn_returns_false_for_anonymousidentity()
+        public void IsLoggedInReturnsFalseForAnonymousUser()
         {
             var principal = GenFormPrincipal.GetPrincipal();
 
             Assert.IsFalse(principal.IsLoggedIn(), "Principal that is not logged in should return false");
         }
 
-        [Isolated]
-        [TestMethod]
-        public void GetGenFormPrincipal_should_not_return_null_when_threadprincipal_is_set_to_null()
+        private void IsolateGetIdentity()
         {
-            Thread.CurrentPrincipal = null;
-
-            Assert.IsNotNull(GenFormPrincipal.GetPrincipal(), "GetPrincipal should never return null");
+            var identity = Isolate.Fake.Instance<GenFormIdentity>();
+            Isolate.NonPublic.WhenCalled(typeof(GenFormPrincipal), "GetIdentity").WillReturn(identity);
         }
+
+        private static ILoginCriteria CreateSystemUser()
+        {
+            return LoginUser.NewLoginUser("Admin", "Admin");
+        }
+
+        private static IGenFormIdentity CreateFakeGenFormIdentity()
+        {
+            return Isolate.Fake.Instance<IGenFormIdentity>();
+        }
+
     }
 }
