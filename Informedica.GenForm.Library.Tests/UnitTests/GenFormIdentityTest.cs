@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Users;
 using Informedica.GenForm.Library.Security;
+using Informedica.GenForm.Library.Services.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
@@ -70,18 +70,16 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void GetIdentity_calls_GetUser_of_User()
+        public void GetIdentityCallsUserServiceToGetUser()
         {
             const String name = "Admin";
             var user = CreateFakeIuser();
-            var users = CreateUserListWithUser(user);
-            IsolateGetUserByName(users, name);
+            IsolateGetUserByName(user, name);
 
             try
             {
                 GenFormIdentity.GetIdentity(name);
-                // ToDo: fixt test
-                //Isolate.Verify.WasCalledWithExactArguments(() => User.GetUser(name));
+                Isolate.Verify.WasCalledWithExactArguments(() => UserServices.GetUserByName(name));
 
             }
             catch (VerifyException e)
@@ -98,8 +96,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
             var user = CreateFakeIuser();
             Isolate.WhenCalled(() => user.Name).WillReturn("Admin");
             Isolate.WhenCalled(() => user.Password).WillReturn("lkjlj");
-            var users = CreateUserListWithUser(user);
-            IsolateGetUserByName(users, name);
+            IsolateGetUserByName(user, name);
 
             var result = GenFormIdentity.GetIdentity(name);
 
@@ -109,11 +106,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void GetIdentity_of_nonexistent_user_creates_AnonymousIdentity()
+        public void GetIdentityOfNonExistentUserReturnsAnonymousIdentity()
         {
             const String name = "foo";
-            var users = CreateEmptyUserList();
-            IsolateGetUserByName(users, name);
+            var user = CreateFakeIuser();
+            IsolateGetUserByName(user, name);
 
             var result = GenFormIdentity.GetIdentity(name);
 
@@ -126,20 +123,9 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
             return Isolate.Fake.Instance<IUser>();
         }
 
-        private static IEnumerable<IUser> CreateEmptyUserList()
+        private static void IsolateGetUserByName(IUser user, String name)
         {
-            return new List<IUser>();
-        }
-
-        private static IEnumerable<IUser> CreateUserListWithUser(IUser user)
-        {
-            return new List<IUser> {user};
-        }
-
-        private static void IsolateGetUserByName(IEnumerable<IUser> users, String name)
-        {
-            // ToDo: fix this
-            // Isolate.WhenCalled(() => User.GetUser(name)).WillReturn(users);
+            Isolate.WhenCalled(() => UserServices.GetUserByName(name)).WillReturn(user);
         }
     }
 }

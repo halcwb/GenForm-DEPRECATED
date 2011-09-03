@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Security;
 using System.Security.Principal;
 using System.Threading;
+using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.Services.Users;
 
 namespace Informedica.GenForm.Library.Security
 {
@@ -62,12 +65,21 @@ namespace Informedica.GenForm.Library.Security
 
         public void ChangePassword(string oldPassword, string newPassword)
         {
-            throw new NotImplementedException();
+            if (!CheckPassword(oldPassword)) throw new SecurityException("paswoord klopt niet");
+
+            var user = GetCurrentUser();
+            user.Password = newPassword;
         }
 
         public bool CheckPassword(string password)
         {
-            throw new NotImplementedException();
+            var user = GetCurrentUser();
+            return user.Password == password;
+        }
+
+        private static IUser GetCurrentUser()
+        {
+            return UserServices.GetUserByName(Thread.CurrentPrincipal.Identity.Name);
         }
 
         #endregion

@@ -147,7 +147,6 @@
     <Compile Include="Security\IGenFormPrincipal.cs" />
     <Compile Include="Security\LoginUser.cs" />
     <Compile Include="Services\Databases\DatabaseServices.cs" />
-    <Compile Include="Services\Interfaces\IDatabaseServices.cs" />
     <Compile Include="Services\Products\BrandServices.cs" />
     <Compile Include="Services\Products\PackageServices.cs" />
     <Compile Include="Services\Products\RouteServices.cs" />
@@ -156,9 +155,7 @@
     <Compile Include="Services\Products\UnitGroupServices.cs" />
     <Compile Include="Services\Products\UnitServices.cs" />
     <Compile Include="Services\ServicesBase.cs" />
-    <Compile Include="Services\Interfaces\ILoginServices.cs" />
     <Compile Include="Security\ILoginCriteria.cs" />
-    <Compile Include="Services\Interfaces\IProductServices.cs" />
     <Compile Include="Services\Users\LoginServices.cs" />
     <Compile Include="Services\Products\ProductServices.cs" />
     <Compile Include="Services\Users\UserServices.cs" />

@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Databases;
-using Informedica.GenForm.Library.Services.Interfaces;
 
 namespace Informedica.GenForm.Library.Services.Databases
 {
-    public class DatabaseServices : IDatabaseServices
+    public static class DatabaseServices
     {
         #region Implementation of IDatabaseServices
 
-        public bool TestDatabaseConnection(IDatabaseSetting databaseSetting)
+        public static bool TestDatabaseConnection(IDatabaseSetting databaseSetting)
         {
             return GetDatabaseConnection().TestConnection(databaseSetting.ConnectionString);
         }
 
-        public bool RegisterDatabaseSetting(IDatabaseSetting databaseSetting)
+        public static bool RegisterDatabaseSetting(IDatabaseSetting databaseSetting)
         {
             if(!TestDatabaseConnection(databaseSetting)) return  false;
 
@@ -22,17 +21,17 @@ namespace Informedica.GenForm.Library.Services.Databases
             return true;
         }
 
-        public void MapSettingsPath(String path)
+        public static void MapSettingsPath(String path)
         {
             GetDatabaseConnection().SetSettingsPath(path);
         }
 
-        public IEnumerable<string> GetDatabases()
+        public static IEnumerable<string> GetDatabases()
         {
             return GetDatabaseConnection().GetDatabases();
         }
 
-        private IDatabaseConnection GetDatabaseConnection()
+        private static IDatabaseConnection GetDatabaseConnection()
         {
             return Factory.ObjectFactory.Instance.GetInstance<IDatabaseConnection>();
         }

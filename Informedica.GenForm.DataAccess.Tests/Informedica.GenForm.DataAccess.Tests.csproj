@@ -101,7 +101,7 @@
     <Compile Include="UnitTests\Repository\ProductRepostitoryConstructorShould.cs" />
     <Compile Include="UnitTests\Repository\RepositoryShould.cs" />
     <Compile Include="UnitTests\Repository\UnitGroupRepositoryTests.cs" />
-    <Compile Include="UnitTests\Repository\UserRepositoryTest.cs" />
+    <Compile Include="UnitTests\Repository\UserRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />

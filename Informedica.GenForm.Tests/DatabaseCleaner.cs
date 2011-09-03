@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Informedica.GenForm.Assembler;
 
@@ -73,6 +74,8 @@ Deallocate curAllForeignKeys
                 session.Transaction.Begin();
                 var query = session.CreateSQLQuery(GetEmptyAllTablesSql());
                 query.ExecuteUpdate();
+                query = session.CreateSQLQuery(RestoreSystemAdminSql());
+                query.ExecuteUpdate();
                 session.Transaction.Commit();
             }
         }
@@ -80,6 +83,32 @@ Deallocate curAllForeignKeys
         private static string GetEmptyAllTablesSql()
         {
             return new StringBuilder().AppendFormat(EmptyAllTables, "GenFormTest", "1").ToString();
+        }
+
+        private static string RestoreSystemAdminSql()
+        {
+            var sql = new StringBuilder();
+            sql.AppendFormat(
+                @"INSERT INTO [GenFormTest].[dbo].[User]
+           ([Id]
+           ,[Version]
+           ,[Name]
+           ,[Email]
+           ,[FirstName]
+           ,[LastName]
+           ,[Pager]
+           ,[Password])
+     VALUES
+           ('{0}'
+           ,1
+           ,'Admin'
+           ,'admin@gmail.com'
+           ,'Admin'
+           ,'Admin'
+           ,'1'
+           ,'Admin')", Guid.NewGuid());
+
+            return sql.ToString();
         }
     }
 }

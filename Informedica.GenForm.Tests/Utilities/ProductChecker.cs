@@ -1,16 +1,15 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Tests.Utilities
 {
     public static class ProductChecker
     {
-        private static readonly IList<Func<Product, bool>> Checks = new List<Func<Product, bool>>
+        private static readonly IList<Func<IProduct, bool>> Checks = new List<Func<IProduct, bool>>
                                                                 {
                                                                     ProductIsValid,
                                                                     ProductHasBrand,
@@ -23,12 +22,12 @@ namespace Informedica.GenForm.Tests.Utilities
                                                                     ProductAssociatesShapeWithUnitGroup
                                                                 };
 
-        public static bool CheckAll(Product product)
+        public static bool CheckAll(IProduct product)
         {
             return Checks.All(check => check(product));
         }
 
-        public static bool ProductIsValid(Product product)
+        public static bool ProductIsValid(IProduct product)
         {
             var valid = !String.IsNullOrWhiteSpace(product.Name) &&
                         !String.IsNullOrWhiteSpace(product.GenericName) &&
@@ -38,7 +37,7 @@ namespace Informedica.GenForm.Tests.Utilities
             return true;
         }
 
-        public static bool ProductHasBrand(Product product)
+        public static bool ProductHasBrand(IProduct product)
         {
             var valid = product.Brand != null &&
                    !String.IsNullOrWhiteSpace(product.Brand.Name) &&
@@ -47,32 +46,32 @@ namespace Informedica.GenForm.Tests.Utilities
             return true;
         }
 
-        public static bool ProductHasShape(Product product)
+        public static bool ProductHasShape(IProduct product)
         {
             var valid = product.Shape != null &&
                    !String.IsNullOrWhiteSpace(product.Shape.Name) &&
-                   product == product.Shape.ProductSet.First();
+                   product == product.Shape.Products.First();
             if (!valid) throw new AssertFailedException(new StackFrame().GetMethod().Name);
             return true;
         }
 
-        public static bool ProductHasPackage(Product product)
+        public static bool ProductHasPackage(IProduct product)
         {
             var valid = product.Package != null &&
                         !String.IsNullOrWhiteSpace(product.Package.Name) &&
-                        product == product.Package.ProductSet.First();
+                        product == product.Package.Products.First();
             if (!valid) throw new AssertFailedException(new StackFrame().GetMethod().Name);
             return true;
         }
 
-        public static bool ProductAssociatesShapeWithPackage(Product product)
+        public static bool ProductAssociatesShapeWithPackage(IProduct product)
         {
-            var valid = product.Shape.PackageSet.Contains(product.Package);
+            var valid = product.Shape.Packages.Contains(product.Package);
             if (!valid) throw new AssertFailedException(new StackFrame().GetMethod().Name);
             return true;
         }
 
-        public static bool ProductHasUnitValue(Product product)
+        public static bool ProductHasUnitValue(IProduct product)
         {
             var valid = product.Quantity != null &&
                    product.Quantity.Value > 0 &&
@@ -82,7 +81,7 @@ namespace Informedica.GenForm.Tests.Utilities
             return true;
         }
 
-        public static bool ProductAssociatesShapeWithUnitGroup(Product product)
+        public static bool ProductAssociatesShapeWithUnitGroup(IProduct product)
         {
             if (product.Quantity.Unit.UnitGroup == null) return false;
             var valid = product.Shape.UnitGroups.Contains(product.Quantity.Unit.UnitGroup);
@@ -90,22 +89,22 @@ namespace Informedica.GenForm.Tests.Utilities
             return true;
         }
 
-        public static bool ProductHasProductSubstance(Product product)
+        public static bool ProductHasProductSubstance(IProduct product)
         {
             var valid = product.Substances.Count() > 0 &&
                    product.Substances.First().SortOrder > 0 &&
                    product.Substances.First().Substance != null &&
                    product.Substances.First().Substance.Products.Contains(product) &&
-                   product.SubstanceList.First().Quantity != null &&
-                   product.SubstanceList.First().Quantity.Value > 0 &&
-                   !String.IsNullOrWhiteSpace(product.SubstanceList.First().Quantity.Unit.Name);
+                   product.Substances.First().Quantity != null &&
+                   product.Substances.First().Quantity.Value > 0 &&
+                   !String.IsNullOrWhiteSpace(product.Substances.First().Quantity.Unit.Name);
             if (!valid) throw new AssertFailedException(new StackFrame().GetMethod().Name);
             return true;
         }
 
-        public static bool ProductHasRoutes(Product product)
+        public static bool ProductHasRoutes(IProduct product)
         {
-            var valid = product.RouteSet.Count() > 0 &&
+            var valid = product.Routes.Count() > 0 &&
                    !String.IsNullOrWhiteSpace(product.Routes.First().Name) &&
                    !String.IsNullOrWhiteSpace(product.Routes.First().Abbreviation) &&
                    product.Routes.First().Products.Contains(product) &&

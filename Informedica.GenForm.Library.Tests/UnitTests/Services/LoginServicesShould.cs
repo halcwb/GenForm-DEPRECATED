@@ -1,5 +1,4 @@
 ﻿using Informedica.GenForm.Library.Security;
-using Informedica.GenForm.Library.Services.Interfaces;
 using Informedica.GenForm.Library.Services.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock.ArrangeActAssert;
@@ -71,14 +70,13 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void BeAbleToLogoutSystemUserAfterLogin()
         {
-            var target = CreateILoginServices(); 
             var user = CreateSystemLoginCriteria();
 
             IsolateSystemUserLogoutReturnsLoggedInFalse(user);
 
-            target.Logout(user);
+            LoginServices.Logout(user);
 
-            Assert.IsFalse(target.IsLoggedIn(user), "User should be logged out, after logout");
+            Assert.IsFalse(LoginServices.IsLoggedIn(user), "User should be logged out, after logout");
         }
 
         private static void IsolateSystemUserLogoutReturnsLoggedInFalse(ILoginCriteria criteria)
@@ -94,13 +92,42 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ReturnTrueAfterSuccessfullLogin()
         {
-            var target = CreateILoginServices();
             var user = CreateSystemLoginCriteria();
             IsolateSystemUserLoginReturnsTrue(user);
 
-            target.Login(user);
+            LoginServices.Login(user);
 
-            Assert.IsTrue(target.IsLoggedIn(user));
+            Assert.IsTrue(LoginServices.IsLoggedIn(user));
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void ReturnTrueAfterSystemUserLogin()
+        {
+            var criteria = CreateSystemLoginCriteria();
+            IsolateSystemUserLoginReturnsTrue(criteria);
+
+            Assert.IsTrue(LoginServices.IsLoggedIn(criteria), "System User should be logged in");
+        }
+
+
+        [Isolated]
+        [TestMethod]
+        public void System_user_can_change_password()
+        {
+            var user = CreateSystemLoginCriteria();
+            IsolateSystemUserLoginReturnsTrue(user);
+            
+            const string newPassword = "NewPassword";
+            var oldPassword = user.Password;
+
+            var principal = Isolate.Fake.Instance<IGenFormPrincipal>();
+            Isolate.NonPublic.Property.WhenGetCalled(typeof(LoginServices), "Principal").WillReturn(principal);
+            Isolate.WhenCalled(() => principal.ChangePassword(oldPassword, newPassword)).IgnoreCall();
+            Isolate.WhenCalled(() => principal.CheckPassword(newPassword)).WillReturn(true);
+
+            LoginServices.ChangePassword(user, newPassword);
+            
         }
 
         private static void IsolateSystemUserLoginReturnsTrue(ILoginCriteria criteria)
@@ -114,41 +141,5 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
             return LoginUser.NewLoginUser("Admin", "Admin");
         }
 
-        [Isolated]
-        [TestMethod]
-        public void ReturnTrueAfterSystemUserLogin()
-        {
-            var target = CreateILoginServices();
-            var criteria = CreateSystemLoginCriteria();
-            IsolateSystemUserLoginReturnsTrue(criteria);
-
-            Assert.IsTrue(target.IsLoggedIn(criteria), "System User should be logged in");
-        }
-
-
-        private static ILoginServices CreateILoginServices()
-        {
-            return LoginServices.NewLoginServices();
-        }
-
-        [Isolated]
-        [TestMethod]
-        public void System_user_can_change_password()
-        {
-            var target = CreateILoginServices();
-            var user = CreateSystemLoginCriteria();
-            IsolateSystemUserLoginReturnsTrue(user);
-            
-            const string newPassword = "NewPassword";
-            var oldPassword = user.Password;
-
-            var principal = Isolate.Fake.Instance<IGenFormPrincipal>();
-            Isolate.NonPublic.Property.WhenGetCalled(typeof(LoginServices), "Principal").WillReturn(principal);
-            Isolate.WhenCalled(() => principal.ChangePassword(oldPassword, newPassword)).IgnoreCall();
-            Isolate.WhenCalled(() => principal.CheckPassword(newPassword)).WillReturn(true);
-
-            target.ChangePassword(user, newPassword);
-            
-        }
     }
 }

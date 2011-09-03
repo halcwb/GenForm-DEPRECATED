@@ -1,30 +1,16 @@
 ﻿using System;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
-using Informedica.GenForm.Library.Services.Interfaces;
 using Informedica.GenForm.Library.Services.Products;
 using Newtonsoft.Json.Linq;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.DomainModel.Products;
-using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
     public class ProductController : Controller
     {
-        private IProductServices _services;
-
-        public ProductController(IProductServices services)
-        {
-            _services = services;
-        }
-
-        public ProductController() : this(ObjectFactory.GetInstance<IProductServices>()) { }
-
-        //
-        // GET: /Product/
-
         public ActionResult GetGenericNames()
         {
             return this.Direct(
@@ -221,12 +207,14 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return UnitServices.WithDto(new UnitDto{ Name = unit.Value<String>("Name")}).Get();
         }
 
-        public ActionResult DeleteProduct(Int32 id)
+        public ActionResult DeleteProduct(String id)
         {
             Boolean success;
             var message = String.Empty;
             try
             {
+                var product = ProductServices.Get(Guid.Parse(id));
+                ProductServices.Delete(product);
                 success = true;
             }
             catch (Exception e)

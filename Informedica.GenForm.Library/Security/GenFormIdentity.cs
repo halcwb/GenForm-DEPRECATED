@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Linq;
 using System.Security.Principal;
-using System.Threading;
-using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.Services.Users;
 
 namespace Informedica.GenForm.Library.Security
 {
     internal class GenFormIdentity: GenericIdentity, IGenFormIdentity
     {
         private GenFormIdentity(String name) : base(name)
-        {
-        }
-
-        private GenFormIdentity(String name, String type) : base(name, type)
         {
         }
 
@@ -24,11 +18,10 @@ namespace Informedica.GenForm.Library.Security
         private static IGenFormIdentity CreateIdentity(String name, String password)
         {
             if (name == null) throw new ArgumentNullException("name");
-            // ToDo: fix this
-            //var users = User.GetUser(name);
-            //if (users.Count() != 1 || users.First().Password != password) return new AnonymousIdentity();
-            //return new GenFormIdentity(name);
-            throw new NotImplementedException();
+
+            var user = UserServices.GetUserByName(name);
+            if (user == null || String.IsNullOrWhiteSpace(password) || user.Password != password) return new AnonymousIdentity();
+            return new GenFormIdentity(name);
         }
 
         internal static IGenFormIdentity GetIdentity(ILoginCriteria criteria)

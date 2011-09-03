@@ -104,7 +104,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return prodSubst;
         }
 
-        public static ProductSubstance Create(int sortorder, Product product, Substance substance, UnitValue quantity)
+        internal static ProductSubstance Create(int sortorder, Product product, Substance substance, UnitValue quantity)
         {
             var prodSubst = new ProductSubstance
                             {

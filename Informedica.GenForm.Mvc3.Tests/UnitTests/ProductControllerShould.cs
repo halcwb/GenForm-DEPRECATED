@@ -1,16 +1,10 @@
 ﻿using System;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Data;
-using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
-using Informedica.GenForm.Library.Repositories;
-using Informedica.GenForm.Library.Services.Interfaces;
 using Informedica.GenForm.Library.Services.Products;
 using Informedica.GenForm.Mvc3.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json.Linq;
-using StructureMap;
-using TypeMock;
 using TypeMock.ArrangeActAssert;
 
 namespace Informedica.GenForm.Mvc3.Tests.UnitTests
@@ -23,7 +17,6 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
     {
         private TestContext testContextInstance;
         private static ProductController _controller;
-        private IProductServices _services;
         private ProductDto _dto;
 
         /// <summary>
@@ -116,7 +109,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             _controller = new ProductController();
 
-            var result = _controller.DeleteProduct(0);
+            var result = _controller.DeleteProduct(Guid.NewGuid().ToString());
             Assert.IsFalse(String.IsNullOrEmpty(ActionResultParser.GetPropertyValue<String>(result, "message")));
         }
 
@@ -124,39 +117,18 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         public void ReturnSuccessIsTrueValueWhenCanDeleteProduct()
         {
             IsolateController();
-            // ToDo rewrite test
-            //Isolate.WhenCalled(() => _services.DeleteProduct(1)).WithExactArguments().IgnoreCall();
+            var product = Isolate.Fake.Instance<IProduct>();
+            Isolate.Fake.StaticMethods(typeof(ProductServices));
+            Isolate.WhenCalled(() => ProductServices.Delete(product)).IgnoreCall();
 
-            var result = _controller.DeleteProduct(1);
+            var result = _controller.DeleteProduct(Guid.NewGuid().ToString());
             Assert.IsTrue(ActionResultParser.GetSuccessValue(result));
-        }
-
-        [TestMethod]
-        public void SaveANewSubstanceToDatabase()
-        {
-            var repos = ObjectFactory.GetInstance<IRepositoryLinqToSql<ISubstance>>();
-            ObjectFactory.Inject(typeof(IRepositoryLinqToSql<ISubstance>), repos);
-            using (repos.Rollback)
-            {
-                var result = _controller.AddNewSubstance(GetSubstance());
-
-
-                Assert.IsTrue(ActionResultParser.GetSuccessValue(result),
-                              "new substance could not be submitted to the database: " +
-                              ActionResultParser.GetPropertyValue<String>(result, "message"));
-            }
-        }
-
-        private static SubstanceDto GetSubstance()
-        {
-            return new SubstanceDto {SubstanceId = 0, Name = "test"};
         }
 
         private void IsolateController()
         {
-            _services = Isolate.Fake.Instance<IProductServices>();
             _dto = Isolate.Fake.Instance<ProductDto>();
-            _controller = new ProductController(_services);
+            _controller = new ProductController();
         }
 
 

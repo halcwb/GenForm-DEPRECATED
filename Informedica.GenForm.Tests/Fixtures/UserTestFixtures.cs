@@ -1,4 +1,5 @@
 using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.DomainModel.Users;
 
 namespace Informedica.GenForm.Tests.Fixtures
 {
@@ -8,13 +9,18 @@ namespace Informedica.GenForm.Tests.Fixtures
         {
             return new UserDto
                        {
-                           Email = "admin@gmail.com",
-                           FirstName = "Admin",
-                           LastName = "Admin",
-                           Name = "Admin",
+                           Email = "foo@gmail.com",
+                           FirstName = "Foo",
+                           LastName = "Bar",
+                           Name = "foobar",
                            Pager = "12345",
                            Password = "secret"
                        };
+        }
+
+        public static User CreateFooBarUser()
+        {
+            return User.Create(GetValidUserDto());
         }
     }
 }

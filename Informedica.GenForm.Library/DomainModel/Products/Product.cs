@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Collections;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
@@ -48,15 +49,15 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual string DisplayName { get; set; }
 
         public virtual string ProductCode { get; set; }
-
+        
         public virtual string GenericName { get; set; }
 
         public virtual UnitValue Quantity { get; set; }
 
-        public virtual Brand Brand
+        public virtual IBrand Brand
         {
             get { return _brand; }
-            protected set { _brand = value; }
+            protected set { _brand = (Brand)value; }
         }
 
         public virtual void SetBrand(Brand brand)
@@ -73,10 +74,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             SetBrand(null);
         }
 
-        public virtual Package Package
+        public virtual IPackage Package
         {
             get { return _package; }
-            protected set { _package = value; }
+            protected set { _package = (Package)value; }
         }
 
         public virtual void SetPackage(Package package)
@@ -88,10 +89,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             package.AddProduct(this);
         }
 
-        public virtual Shape Shape
+        public virtual IShape Shape
         {
             get { return _shape; }
-            protected set { _shape = value; }
+            protected set { _shape = (Shape)value; }
         }
 
         public virtual void SetShape(Shape shape)
@@ -101,6 +102,14 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             if (_shape != null) _shape.RemoveProduct(this);
             _shape = shape;
             shape.AddProduct(this);
+        }
+
+        public virtual void RemoveSubstance(ISubstance substance)
+        {
+            var _prodSubst = _substances.SingleOrDefault(x => x.Substance == substance);
+            if (_prodSubst == null) return;
+
+            _substances.Remove(_prodSubst);
         }
 
         public virtual IEnumerable<IRoute> Routes
@@ -132,6 +141,18 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         public virtual IEnumerable<IProductSubstance> Substances
         {
             get { return GetSubstances(); }
+        }
+
+        public virtual bool ContainsSubstance(ISubstance substance)
+        {
+            return _substances.Count(x => x.Substance == substance) > 0;
+        }
+
+        public virtual void AddSubstance(ISubstance substance, int sortOrder, UnitValue quanity)
+        {
+            if (ContainsSubstance(substance)) return;
+            
+            _substances.Add(ProductSubstance.Create(sortOrder, this, (Substance)substance, quanity));
         }
 
         public virtual IList<ProductSubstance> SubstanceList

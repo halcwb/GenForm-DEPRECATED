@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.Factories;
 
 namespace Informedica.GenForm.Library.Services.Products
@@ -35,19 +36,24 @@ namespace Informedica.GenForm.Library.Services.Products
             return (ProductFactory)Instance.GetFactory(productDto);
         }
 
-        public static IEnumerable<Product> Products
+        public static IEnumerable<IProduct> Products
         {
             get { return Instance.Repository; }
         }
 
-        public static void Delete(Product product)
+        public static void Delete(IProduct product)
         {
             Instance.DeleteProduct(product);
         }
 
-        private void DeleteProduct(Product product)
+        private void DeleteProduct(IProduct product)
         {
-            Repository.Remove(product);
+            Repository.Remove((Product)product);
+        }
+
+        public static IProduct Get(Guid id)
+        {
+            return Instance.GetById(id);
         }
     }
 }

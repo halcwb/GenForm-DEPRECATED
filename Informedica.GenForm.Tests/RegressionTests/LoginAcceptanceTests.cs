@@ -9,25 +9,22 @@ namespace Informedica.GenForm.Tests.RegressionTests
     /// Summary description for UnitTest1
     /// </summary>
     [TestClass]
-    public class LoginAcceptanceTests
+    public class LoginAcceptanceTests : TestSessionContext
     {
         private const String SystemUserName = "Admin";
         private const String SystemUserPassword = "Admin";
 
-        public LoginAcceptanceTests()
+        public LoginAcceptanceTests() : base(true)
         {
-            //
-            // TODO: Add constructor logic here
-            //
         }
 
-        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContextInstance;
+        private TestContext testContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
+        public TestContext TestContext
         {
             get
             {
@@ -44,8 +41,8 @@ namespace Informedica.GenForm.Tests.RegressionTests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
-        public static void MyClassInitialize(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext) { GenFormApplication.Initialize(); }
+        [ClassInitialize]
+        public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
         
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
@@ -62,7 +59,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         #endregion
 
         [TestMethod]
-        public void System_user_can_login()
+        public void SystemUserCanLogin()
         {
             // Setup
             var loginController = CreateLoginController();
@@ -77,7 +74,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         }
 
         [TestMethod]
-        public void System_user_cannot_login_with_password_bar()
+        public void SystemUserCannotLoginWithInvalidPassword()
         {
             var loginController = CreateLoginController();
 
@@ -87,7 +84,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         }
 
         [TestMethod]
-        public void User_foo_cannot_login_with_password_bar()
+        public void InvalidUserCannotLoginWithInvalidPassword()
         {
             var loginController = CreateLoginController();
 
@@ -96,13 +93,8 @@ namespace Informedica.GenForm.Tests.RegressionTests
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "User foo cannot login with password bar (if not added as users)");
         }
 
-        private static LoginController CreateLoginController()
-        {
-            return new LoginController();
-        }
-
         [TestMethod]
-        public void User_without_username_cannot_login()
+        public void UserWithoutUserNameCannotLogin()
         {
             var loginController = CreateLoginController();
 
@@ -120,5 +112,11 @@ namespace Informedica.GenForm.Tests.RegressionTests
 
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "User without a password cannot login");
         }
+
+        private static LoginController CreateLoginController()
+        {
+            return new LoginController();
+        }
+
     }
 }
