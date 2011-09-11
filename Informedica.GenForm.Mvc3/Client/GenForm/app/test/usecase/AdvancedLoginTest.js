@@ -8,7 +8,7 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
             databaseName = 'TestDatabase',
             machine = 'HAL-WIN7',
             windowName = 'window[title=Registreer Database]',
-            connection = 'Data Source=HAL-WIN7\\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True',
+            connection = 'Data Source=HAL-WIN7\\INFORMEDICA;Initial Catalog=GenFormTest;Integrated Security=True',
             message = '',
             waitingTime = 500;
 
@@ -69,21 +69,6 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
 
         it('Advance login has a combobox to select a database', function () {
             expect(me.getSelectDatabaseCombo()).toBeDefined();
-        });
-
-        it('A default database is selected', function () {
-            var database = 'Default Database',
-                comboBox = me.getSelectDatabaseCombo();
-
-            expect(comboBox.getValue()).toBe(database);
-        });
-
-        it('The user can select a database to login', function () {
-            var database = 'TestDatabase Indurain',
-                comboBox = me.getSelectDatabaseCombo();
-            
-            queryHelper.setFormField(comboBox, database);
-            expect(comboBox.getValue()).toBe(database);
         });
 
         it('The user can open up a window to register a new database', function () {

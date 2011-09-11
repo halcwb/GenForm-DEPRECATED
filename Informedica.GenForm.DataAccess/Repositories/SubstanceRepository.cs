@@ -6,8 +6,7 @@ namespace Informedica.GenForm.DataAccess.Repositories
 {
     public class SubstanceRepository : NHibernateRepository<Substance>
     {
-        public SubstanceRepository(ISessionFactory factory) : base(factory) {}
-
+        public SubstanceRepository(ISessionFactory factory) : base(factory) { }
 
         public override void Add(Substance item)
         {

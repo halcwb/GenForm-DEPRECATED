@@ -2,50 +2,30 @@
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.Services.Users;
-using Newtonsoft.Json.Linq;
 using Informedica.GenForm.Library.Security;
+using Informedica.GenForm.Mvc3.Environments;
 using Informedica.GenForm.PresentationLayer.Security;
+using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
     public class LoginController : Controller
     {
 
-        [ActionName("Login2")]
-        public ActionResult Login(JObject jObject)
+        [Transaction, ActionName("Login")]
+        public ActionResult Login(String userName, String password, String environment)
         {
-            if (jObject.Count == 0) return this.Direct(
-                new
-                    {
-                        username = "gebruiker",
-                        password = "paswoord",
-                        validationRules = new []
-                                              {
-                         new {type = "presence", field = "username"},
-                         new {type = "presence", field = "password"}
-                    }
-                }
-            );
-            var user = GetUser(jObject["username"].ToString(), jObject["password"].ToString());
-            LoginServices.Login(user);
+            if (HttpContext != null && HttpContext.Application != null) 
+                HttpContext.Application.Add("environment", environment);
 
-            return this.Direct(new { success = LoginServices.IsLoggedIn(user) });
-        }
-
-        [ActionName("Login")]
-        public ActionResult Login(String userName, String password)
-        {
             var user = GetUser(userName, password);
             LoginServices.Login(user);
 
-            return this.Direct(new {success = LoginServices.IsLoggedIn(user)});
+            var success = LoginServices.IsLoggedIn(user);
+            return this.Direct(new {success});
         }
 
-        private static ILoginCriteria GetUser(String userName, String password)
-        {
-            return LoginUser.NewLoginUser(userName, password);
-        }
-
+        [Transaction]
         public ActionResult Logout(String userName)
         {
             throw new NotImplementedException();
@@ -60,10 +40,16 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new {success = LoginServices.CheckPassword(newPassword)});
         }
 
+        [Transaction]
         public ActionResult GetLoginPresentation(String userName, String password)
         {
             ILoginForm form = LoginForm.NewLoginForm(userName, password);
             return this.Direct(new {success = true, data = form});
+        }
+
+        private static ILoginCriteria GetUser(String userName, String password)
+        {
+            return LoginUser.NewLoginUser(userName, password);
         }
 
     }

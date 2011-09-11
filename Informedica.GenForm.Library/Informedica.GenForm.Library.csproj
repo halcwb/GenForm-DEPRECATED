@@ -131,7 +131,6 @@
     <Compile Include="Factories\UnitGroupFactory.cs" />
     <Compile Include="Factories\UserFactory.cs" />
     <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\IRepositoryLinqToSql.cs" />
     <Compile Include="DomainModel\Products\Interfaces\IProduct.cs" />
     <Compile Include="DomainModel\Products\Product.cs" />
     <Compile Include="DomainModel\Users\Interfaces\IPharamcists.cs" />

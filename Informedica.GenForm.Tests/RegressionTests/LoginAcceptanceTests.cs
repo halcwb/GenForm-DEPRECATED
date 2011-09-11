@@ -65,7 +65,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
             var loginController = CreateLoginController();
             
             // Execute
-            var result = loginController.Login(SystemUserName, SystemUserPassword);
+            var result = loginController.Login(SystemUserName, SystemUserPassword, "GenFormTest");
             
             // Verify
             Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "System user could not successfully log in");
@@ -78,7 +78,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         {
             var loginController = CreateLoginController();
 
-            var result = loginController.Login(SystemUserName, "bar");
+            var result = loginController.Login(SystemUserName, "bar", "GenFormTest");
 
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "System should not be able with password bar");
         }
@@ -88,7 +88,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         {
             var loginController = CreateLoginController();
 
-            var result = loginController.Login("foo", "bar");
+            var result = loginController.Login("foo", "bar", "GenFormTest");
 
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "User foo cannot login with password bar (if not added as users)");
         }
@@ -98,7 +98,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         {
             var loginController = CreateLoginController();
 
-            var result = loginController.Login("", "bar");
+            var result = loginController.Login("", "bar", "GenFormTest");
 
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "User without username cannot log in");
         }
@@ -108,7 +108,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         {
             var loginController = CreateLoginController();
 
-            var result = loginController.Login("foo", "");
+            var result = loginController.Login("foo", "", "GenFormTest");
 
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "User without a password cannot login");
         }

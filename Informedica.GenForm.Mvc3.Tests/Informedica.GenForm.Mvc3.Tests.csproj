@@ -55,16 +55,19 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ext-direct-mvc\version-3.0.0\Mvc3Demo\bin\Ext.Direct.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ext-direct-mvc\version-3.0.0\Mvc3Demo\bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate, Version=3.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
     <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\StructureMap2.6.1\deploy\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -73,8 +76,10 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="TypeMock, Version=6.0.9.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\TypeMock\TypeMock.dll</HintPath>
@@ -85,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoginControllerTest.cs" />
     <Compile Include="UnitTests\ActionResultParserTest.cs" />
     <Compile Include="UnitTests\LoginControllerShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,6 +112,10 @@
     <ProjectReference Include="..\Informedica.GenForm.Presentation\Informedica.GenForm.Presentation.csproj">
       <Project>{63800128-7BE0-4B57-A789-27CB9E5EED3B}</Project>
       <Name>Informedica.GenForm.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.Settings\Informedica.Settings.csproj">
+      <Project>{B30C5371-DDDD-46BE-827A-72798E743B60}</Project>
+      <Name>Informedica.Settings</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.Utilities\Informedica.Utilities.csproj">
       <Project>{A1C3A418-F89E-41A3-9D32-E05C7E38577F}</Project>

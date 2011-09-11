@@ -91,6 +91,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
             _databaseSetting.Machine = "HAL-WIN7";
         }
 
+
         [TestMethod]
         public void RegisterValidDatabaseSetting()
         {

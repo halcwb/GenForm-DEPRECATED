@@ -23,5 +23,13 @@ namespace Informedica.GenForm.Library.Security
         } 
 
         #endregion
+
+        public static ILoginCriteria NewLoginUser(string admin, string password, string environment)
+        {
+            var user = new LoginUser {UserName = admin, Password = password, Environment = environment};
+            return user;
+        }
+
+        public string Environment { get; set; }
     }
 }

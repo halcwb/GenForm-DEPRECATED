@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using NHibernate;
 
-namespace Informedica.GenForm.Mvc3
+namespace Informedica.GenForm.Mvc3.Environments
 {
 
     [AttributeUsage(AttributeTargets.Method,
@@ -29,10 +29,19 @@ namespace Informedica.GenForm.Mvc3
         public override void OnResultExecuted(
           ResultExecutedContext filterContext)
         {
-            var tx = Session.Transaction;
-            if (tx != null && tx.IsActive)
-                Session.Transaction.Commit();
+            try
+            {
+                var tx = Session.Transaction;
+                if (tx != null && tx.IsActive)
+                    Session.Transaction.Commit();
 
+            }
+// ReSharper disable EmptyGeneralCatchClause
+            catch (Exception)
+// ReSharper restore EmptyGeneralCatchClause
+            {
+                //ToDo: dirty hack, do nothing have to fix this 
+            }
             base.OnResultExecuted(filterContext);
         }
 

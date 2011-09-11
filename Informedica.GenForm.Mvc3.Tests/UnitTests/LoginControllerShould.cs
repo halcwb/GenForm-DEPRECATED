@@ -74,29 +74,20 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         //
         #endregion
 
-        private static bool GetSuccessValueFromActionResult(ActionResult response)
-        {
-            return ActionResultParser.GetSuccessValue(response);
-        }
-
         [Isolated]
         [TestMethod]
         public void ReturnFalseForInvalidUserLogin()
         {
+            
             var controller = new LoginController();
             var user = GetUser();
             IsolateLoginController(user);
             Isolate.Fake.StaticMethods(typeof(LoginServices));
             Isolate.WhenCalled(() => LoginServices.Login(user)).IgnoreCall();
-            var response = controller.Login(InvalidUser, InvalidPassword);
+
+            var response = controller.Login(InvalidUser, InvalidPassword, "GenFormTest");
 
             Assert.IsFalse(GetSuccessValueFromActionResult(response));
-        }
-
-        private static void IsolateLoginController(ILoginCriteria user)
-        {
-            Isolate.Fake.StaticMethods<LoginUser>();
-            Isolate.WhenCalled(() => LoginUser.NewLoginUser(InvalidUser, InvalidPassword)).WillReturn(user);
         }
 
         [Isolated]
@@ -111,14 +102,9 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(user)).WillReturn(true);
             var controller = new LoginController();
 
-            var response = controller.Login(ValidUser, ValidPassword);
+            var response = controller.Login(ValidUser, ValidPassword, "GenFormTest");
 
             Assert.IsTrue(GetSuccessValueFromActionResult(response));
-        }
-
-        private static ILoginCriteria GetUser()
-        {
-            return Isolate.Fake.Instance<ILoginCriteria>();
         }
 
         [Isolated]
@@ -139,11 +125,6 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Isolate.Verify.WasCalledWithExactArguments(() => LoginServices.ChangePassword(user, TempPassword));            
 
             Assert.IsTrue(GetSuccessValueFromActionResult(response), "Password was not changed");
-        }
-
-        private static LoginController GetController()
-        {
-            return new LoginController();
         }
 
         [Isolated]
@@ -193,10 +174,31 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Assert.IsFalse(GetLoginInButtonEnabledValue(result));
         }
 
+        private static LoginController GetController()
+        {
+            return new LoginController();
+        }
+
+        private static ILoginCriteria GetUser()
+        {
+            return Isolate.Fake.Instance<ILoginCriteria>();
+        }
+
+        private static bool GetSuccessValueFromActionResult(ActionResult response)
+        {
+            return ActionResultParser.GetSuccessValue(response);
+        }
+
         private static bool GetLoginInButtonEnabledValue(ActionResult result)
         {
             var form = (ILoginForm)((JsonResult)(result)).Data.GetType().GetProperty("data").GetValue(((JsonResult)(result)).Data, null);
             return form.Login.Enabled;
+        }
+
+        private static void IsolateLoginController(ILoginCriteria user)
+        {
+            Isolate.Fake.StaticMethods<LoginUser>();
+            Isolate.WhenCalled(() => LoginUser.NewLoginUser(InvalidUser, InvalidPassword)).WillReturn(user);
         }
 
     }

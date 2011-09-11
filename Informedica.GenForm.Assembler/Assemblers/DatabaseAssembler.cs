@@ -10,7 +10,7 @@ namespace Informedica.GenForm.Assembler.Assemblers
         public static Registry RegisterDependencies()
         {
             _registry = new Registry();
-            _registry.For<ISessionFactory>().Use(GenFormApplication.SessionFactory);
+            //_registry.For<ISessionFactory>().HybridHttpOrThreadLocalScoped().Use(GenFormApplication.SessionFactory);
 
             return _registry;
         }

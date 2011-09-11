@@ -4,6 +4,7 @@ using Informedica.GenForm.Library.DomainModel.Databases;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.Services.Databases;
+using Informedica.GenForm.Mvc3.Environments;
 using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
@@ -13,6 +14,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
         //
         // GET: /Database/
 
+        [Transaction]
         public ActionResult GetDatabases()
         {
             IEnumerable<String> names = DatabaseServices.GetDatabases();
@@ -24,14 +26,15 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(list);
         }
 
+        [Transaction]
         public ActionResult SaveDatabaseRegistration(String databaseName, String machine, String connectionString)
         {
-            SetSetting(machine, databaseName, connectionString);
-            return this.Direct(new {success = true, databaseName});
+            var success = SetSetting(machine, databaseName, connectionString);
+            return this.Direct(new {success, databaseName});
         }
 
 
-        public Boolean SetSetting(String computerName, String name, String value)
+        private Boolean SetSetting(String computerName, String name, String value)
         {
             var setting = CreateSettings(computerName, name, value);
             DatabaseServices.MapSettingsPath(HttpContext.ApplicationInstance.Server.MapPath("~/"));

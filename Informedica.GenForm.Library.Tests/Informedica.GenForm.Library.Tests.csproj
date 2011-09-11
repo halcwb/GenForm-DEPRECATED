@@ -106,6 +106,7 @@
     <Compile Include="UnitTests\Factories\EntityFactoryShould.cs" />
     <Compile Include="UnitTests\Factories\FactoryManagerTests.cs" />
     <Compile Include="UnitTests\Factories\FluentFactoryTests.cs" />
+    <Compile Include="UnitTests\Factories\RepositoryFactoryShould.cs" />
     <Compile Include="UnitTests\Factories\SubstanceFactoryTests.cs" />
     <Compile Include="UnitTests\GenFormIdentityTest.cs" />
     <Compile Include="UnitTests\GenFormPrincipalTest.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="UnitTests\Services\BrandServicesTests.cs" />
     <Compile Include="UnitTests\Services\DatabaseServicesShould.cs" />
     <Compile Include="UnitTests\Services\LoginServicesShould.cs" />
+    <Compile Include="UnitTests\Services\LoginServicesTests.cs" />
     <Compile Include="UnitTests\Services\PackageServicesTests.cs" />
     <Compile Include="UnitTests\Services\ProductServicesTests.cs" />
     <Compile Include="UnitTests\Services\RouteServicesTests.cs" />
@@ -154,7 +156,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Test References\" />
-    <Folder Include="UnitTests\Commands\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
