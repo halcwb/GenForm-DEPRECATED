@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading;
 using Informedica.GenForm.Assembler.Assemblers;
 using Informedica.GenForm.DataAccess;
@@ -12,7 +14,8 @@ namespace Informedica.GenForm.Assembler
         private static GenFormApplication _instance;
         private static readonly Object LockThis = new object();
         
-        private static ISessionFactory _factory;
+        private static ISessionFactory _defaultFactory;
+        private static readonly IDictionary<string, ISessionFactory> Factories = new ConcurrentDictionary<string, ISessionFactory>();
 
         private GenFormApplication() {}
 
@@ -28,7 +31,7 @@ namespace Informedica.GenForm.Assembler
                             var instance = new GenFormApplication();
                             Thread.MemoryBarrier();
                             _instance = instance;
-                            _factory = CreateSessionFactory();
+                            _defaultFactory = CreateSessionFactory();
                             Thread.MemoryBarrier();
                         }
                     }
@@ -45,13 +48,12 @@ namespace Informedica.GenForm.Assembler
         {
             get
             {
-                return _factory;
+                return _defaultFactory;
             }
         }
 
         private static ISessionFactory CreateSessionFactory()
         {
-            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
             return SessionFactoryCreator.CreateSessionFactory();            
         }
 
@@ -60,11 +62,21 @@ namespace Informedica.GenForm.Assembler
             ObjectFactory.Initialize(x =>
             {
                 x.AddRegistry(DatabaseAssembler.RegisterDependencies());
-                x.AddRegistry(ProductAssembler.RegisterDependencies());
                 x.AddRegistry(DatabaseRegistrationAssembler.RegisterDependencies());
-                x.AddRegistry(UserAssembler.RegisterDependencies());
                 x.AddRegistry(RepositoryAssembler.RegisterDependencies());
             });
+        }
+
+        public static ISessionFactory GetSessionFactory(string environment)
+        {
+            // Todo: Temp hack to enable default test environment
+            if (environment == "GenFormTest") environment = String.Empty;
+            if (!Factories.ContainsKey(environment))
+            {
+                Factories.Add(environment, SessionFactoryCreator.CreateSessionFactory(environment));
+            }
+
+            return Factories[environment];
         }
     }
 }

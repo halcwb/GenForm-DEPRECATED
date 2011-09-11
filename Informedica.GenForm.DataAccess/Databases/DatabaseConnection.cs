@@ -21,6 +21,12 @@ namespace Informedica.GenForm.DataAccess.Databases
             return instance.GetConnectionString(Enum.GetName(typeof(DatabaseName), database));
         }
 
+        public static string GetEnvironment(string environment)
+        {
+            var instance = new DatabaseConnection();
+            return instance.GetConnectionString(environment);
+        }
+
         public static string GetLocalConnectionString(DatabaseName databaseName)
         {
             return @"Data Source=hal-win7\informedica;Initial Catalog=GenFormTest;Integrated Security=True";
@@ -52,8 +58,7 @@ namespace Informedica.GenForm.DataAccess.Databases
 
         public void RegisterSetting(IDatabaseSetting databaseSetting)
         {
-            SettingsManager.Instance.CreateSecureSetting(databaseSetting.Machine, 
-                                                         databaseSetting.Name,
+            SettingsManager.Instance.WriteSecureSetting(databaseSetting.Name,
                                                          databaseSetting.ConnectionString);
         }
 

@@ -1,6 +1,9 @@
 using System;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Assembler.Contexts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NHibernate;
+using StructureMap;
 
 namespace Informedica.GenForm.Tests
 {
@@ -13,6 +16,12 @@ namespace Informedica.GenForm.Tests
         protected TestSessionContext(Boolean commit)
         {
             _commit = commit;
+            Initialize();
+        }
+
+        private static void Initialize()
+        {
+            ObjectFactory.Configure(x => x.For<ISessionFactory>().HybridHttpOrThreadLocalScoped().Use(GenFormApplication.SessionFactory));
         }
 
         [TestInitialize]

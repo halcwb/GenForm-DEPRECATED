@@ -37,6 +37,11 @@ namespace Informedica.GenForm.Mvc3
             GenFormApplication.Initialize();
         }
 
+        public static ISessionFactory GetSessionFactory(string environment)
+        {
+            return GenFormApplication.GetSessionFactory(environment);
+        }
+
         public static ISessionFactory SessionFactory
         {
             get { return GenFormApplication.SessionFactory; }

@@ -1,4 +1,5 @@
-﻿using FluentNHibernate.Cfg;
+﻿using System;
+using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Informedica.GenForm.DataAccess.Databases;
 using NHibernate;
@@ -12,20 +13,14 @@ namespace Informedica.GenForm.DataAccess
         private const string ExportPath = @"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.DataAccess\MappingsXml";
         private const string LogPath = @"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.DataAccess\Diagnostics\Log.txt";
 
+        static SessionFactoryCreator()
+        {
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+        }
+
         public static ISessionFactory CreateSessionFactory()
         {
-            return Fluently.Configure()
-                .Database(MsSqlConfiguration.MsSql2008.ConnectionString(GetConnectionString()).ShowSql().AdoNetBatchSize(5).MaxFetchDepth(2))
-                .Mappings(x => x.FluentMappings.AddFromAssemblyOf<Mappings.SubstanceMap>()
-                .ExportTo(ExportPath))
-                .CurrentSessionContext<NHibernate.Context.ThreadStaticSessionContext>()
-                .Diagnostics(x =>
-                {
-                    x.Enable(true);
-                    x.OutputToFile(LogPath);
-                })
-                .ExposeConfiguration(BuildSchema)
-                .BuildSessionFactory();
+            return CreateSessionFactory(string.Empty);
         }
 
         private static void BuildSchema(Configuration config)
@@ -41,6 +36,32 @@ namespace Informedica.GenForm.DataAccess
         {
             return DatabaseConnection.GetLocalConnectionString(
                 DatabaseConnection.DatabaseName.GenFormTest);
+        }
+
+        public static ISessionFactory CreateSessionFactory(string environment)
+        {
+            var connectString = String.IsNullOrEmpty(environment) ? GetConnectionString() :  GetConnectionString(environment);
+
+            return Fluently.Configure()
+                .Database(
+                    MsSqlConfiguration.MsSql2008.ConnectionString(connectString).ShowSql().AdoNetBatchSize(5)
+                        .MaxFetchDepth(2))
+                .Mappings(x => x.FluentMappings.AddFromAssemblyOf<Mappings.SubstanceMap>()
+                                    .ExportTo(ExportPath))
+                .CurrentSessionContext<NHibernate.Context.ThreadStaticSessionContext>()
+                .Diagnostics(x =>
+                                    {
+                                        x.Enable(true);
+                                        x.OutputToFile(LogPath);
+                                    })
+                .ExposeConfiguration(BuildSchema)
+                .BuildSessionFactory();
+    
+        }
+
+        private static string GetConnectionString(string environment)
+        {
+            return DatabaseConnection.GetEnvironment(environment);
         }
     }
 }

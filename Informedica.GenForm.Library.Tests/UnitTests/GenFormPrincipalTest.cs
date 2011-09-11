@@ -85,7 +85,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
         [TestMethod]
         public void LoginWithAsSystemUserWithWrongPasswordShouldReturnFalse()
         {
-            var user = CreateSystemUser();
+            var user = (LoginUser)CreateSystemUser();
             user.Password = "bar";
             GenFormPrincipal.Login(user);
 

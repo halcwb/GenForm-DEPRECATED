@@ -85,8 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseCleanerShould.cs" />
-    <Compile Include="TestBase\RepositoryTestBase.cs" />
-    <Compile Include="IntegrationTests\UserRepositoryTest.cs" />
     <Compile Include="UnitTests\DatabaseConnectionShould.cs" />
     <Compile Include="UnitTests\Mappings\BrandMapShould.cs" />
     <Compile Include="UnitTests\Mappings\PackageMapShould.cs" />

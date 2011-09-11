@@ -23,7 +23,6 @@ Ext.app.config = {
     showLoginWindow: function () {
         var me = this, window;
         window = me.getLoginWindow().show();
-        me.getController('user.Login').setDefaultDatabase(window);
     },
 
     getLoginWindow: function () {
