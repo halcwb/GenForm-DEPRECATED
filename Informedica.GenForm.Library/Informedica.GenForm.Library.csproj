@@ -53,7 +53,7 @@
     <Compile Include="DomainModel\Databases\EmptyDatabase.cs" />
     <Compile Include="DomainModel\Databases\EmptyDatabaseDto.cs" />
     <Compile Include="DomainModel\Databases\IDatabaseConnection.cs" />
-    <Compile Include="DomainModel\Databases\IDatabaseSetting.cs" />
+    <Compile Include="DomainModel\Databases\IEnvironment.cs" />
     <Compile Include="DomainModel\Data\DataTransferObject.cs" />
     <Compile Include="DomainModel\Data\UserDto.cs" />
     <Compile Include="DomainModel\Entity.cs" />
@@ -145,7 +145,7 @@
     <Compile Include="Security\IGenFormIdentity.cs" />
     <Compile Include="Security\IGenFormPrincipal.cs" />
     <Compile Include="Security\LoginUser.cs" />
-    <Compile Include="Services\Databases\DatabaseServices.cs" />
+    <Compile Include="Services\Databases\EnvironmentServices.cs" />
     <Compile Include="Services\Products\BrandServices.cs" />
     <Compile Include="Services\Products\PackageServices.cs" />
     <Compile Include="Services\Products\RouteServices.cs" />

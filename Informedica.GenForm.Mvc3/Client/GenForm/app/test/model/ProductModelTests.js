@@ -6,7 +6,7 @@ Ext.define('GenForm.test.model.ProductModelTests', {
         var me = this, record,
             modelName = 'GenForm.model.product.Product',
             testProduct = {
-                ProductName: 'paracetamol 500 mg tablet',
+                Name: 'paracetamol 500 mg tablet',
                 BrandName: 'Paracetamol',
                 brands: [
                     {BrandName: 'Paracetamol'},
@@ -57,7 +57,7 @@ Ext.define('GenForm.test.model.ProductModelTests', {
         });
 
         it('have a ProductName', function () {
-            expect(record.data.ProductName).toBeDefined();
+            expect(record.data.Name).toBeDefined();
         });
 
         it('have a GenericName', function () {
@@ -116,7 +116,7 @@ Ext.define('GenForm.test.model.ProductModelTests', {
 
             waitsFor(function () {
                return result ? true: false;
-            }, 'waiting for callback of Product.Save', 1000);
+            }, 'waiting for callback of Product.Save', GenForm.test.waitingTime);
         });
 
         it('post a valid ProductModel', function () {
@@ -146,7 +146,7 @@ Ext.define('GenForm.test.model.ProductModelTests', {
 
             waitsFor(function () {
                 return result ? true: false;
-            }, 'product with id = 1', 1000);
+            }, 'product with id = 1', GenForm.test.waitingTime);
 
         })
     }

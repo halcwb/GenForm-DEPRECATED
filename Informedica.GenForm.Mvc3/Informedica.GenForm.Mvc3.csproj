@@ -44,6 +44,9 @@
     <Reference Include="Ext.Direct.Mvc">
       <HintPath>..\..\ext-direct-mvc\version-3.0.0\Mvc3Demo\bin\Ext.Direct.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Informedica.GenForm.Tests">
+      <HintPath>..\Informedica.GenForm.DataAccess.Tests\bin\Debug\Informedica.GenForm.Tests.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\ext-direct-mvc\version-3.0.0\Mvc3Demo\bin\Newtonsoft.Json.dll</HintPath>
@@ -71,7 +74,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ActionResultParser.cs" />
     <Compile Include="Controllers\AppTestController.cs" />
-    <Compile Include="Controllers\DatabaseController.cs" />
+    <Compile Include="Controllers\EnvironmentController.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -101,6 +104,14 @@
     <Content Include="Client\GenForm\.idea\vcs.xml" />
     <Content Include="Client\GenForm\.idea\workspace.xml" />
     <Content Include="Client\GenForm\app\appConfig.js" />
+    <Content Include="Client\GenForm\app\controller\mixin\BrandHandler.js" />
+    <Content Include="Client\GenForm\app\controller\mixin\GenericHandler.js" />
+    <Content Include="Client\GenForm\app\controller\mixin\PackageHandler.js" />
+    <Content Include="Client\GenForm\app\controller\mixin\ProductHandler.js" />
+    <Content Include="Client\GenForm\app\controller\mixin\ProductSubstanceHandler.js" />
+    <Content Include="Client\GenForm\app\controller\mixin\ShapeHandler.js" />
+    <Content Include="Client\GenForm\app\controller\mixin\SubstanceHandler.js" />
+    <Content Include="Client\GenForm\app\controller\mixin\UnitHandler.js" />
     <Content Include="Client\GenForm\app\controller\product\Product.js" />
     <Content Include="Client\GenForm\app\controller\user\Login.js" />
     <Content Include="Client\GenForm\app\data\ProductSubstanceTestData.js" />
@@ -112,7 +123,7 @@
     <Content Include="Client\GenForm\app\lib\view\component\EditableComboBox.js" />
     <Content Include="Client\GenForm\app\lib\view\component\SaveCancelToolbar.js" />
     <Content Include="Client\GenForm\app\lib\view\window\SaveCancelWindow.js" />
-    <Content Include="Client\GenForm\app\model\database\Database.js" />
+    <Content Include="Client\GenForm\app\model\environment\Environment.js" />
     <Content Include="Client\GenForm\app\model\product\BrandName.js" />
     <Content Include="Client\GenForm\app\model\product\GenericName.js" />
     <Content Include="Client\GenForm\app\model\product\PackageName.js" />

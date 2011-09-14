@@ -88,7 +88,7 @@
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="SessionFactoryCreator.cs" />
     <Compile Include="Databases\DatabaseConnection.cs" />
-    <Compile Include="Databases\DatabaseSetting.cs" />
+    <Compile Include="Databases\Environment.cs" />
     <Compile Include="DataContexts\DataContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

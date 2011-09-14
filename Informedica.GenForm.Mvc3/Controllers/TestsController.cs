@@ -4,6 +4,7 @@ using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.Services.Products;
+using Informedica.GenForm.Tests.Fixtures;
 using Newtonsoft.Json.Linq;
 
 namespace Informedica.GenForm.Mvc3.Controllers
@@ -47,11 +48,11 @@ namespace Informedica.GenForm.Mvc3.Controllers
         {
             return this.Direct(new[]
                                    {
-                                       new {BrandName = "Augmentin"},
-                                       new {BrandName = "Zitromax"},
-                                       new {BrandName = "Dynatra"},
-                                       new {BrandName = "Esmeron"},
-                                       new {BrandName = "Perfalgan"}
+                                       new {Name = "Augmentin"},
+                                       new {Name = "Zitromax"},
+                                       new {Name = "Dynatra"},
+                                       new {Name = "Esmeron"},
+                                       new {Name = "Perfalgan"}
                                    });
         }
 
@@ -102,19 +103,9 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult SaveProduct(ProductDto product)
         {
-            var success = true;
+            var success = !String.IsNullOrWhiteSpace(product.GenericName);
             var message = String.Empty;
-            try
-            {
-                // ToDo: mapper for IProduct to ProductDto
-                //product = ProductServices.WithDto(product).Get();
 
-            }
-            catch (Exception e)
-            {
-                success = false;
-                message = e.ToString();
-            }
             return this.Direct(new { success, data = product, message });
         }
 
@@ -128,7 +119,8 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult GetProduct(JObject idObject)
         {
-            return this.Direct(new { success = true, data = GetProduct() });
+            var product = ProductTestFixtures.GetProductDtoWithOneSubstanceAndRoutes();
+            return this.Direct(new { success = true, data = product });
         }
 
         private static IProduct GetProduct()

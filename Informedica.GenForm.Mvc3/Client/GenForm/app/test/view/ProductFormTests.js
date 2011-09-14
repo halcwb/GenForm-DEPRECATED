@@ -18,7 +18,7 @@ Ext.define('GenForm.test.view.ProductFormTests', {
         });
 
         it('have a text field for productname', function () {
-            expect(form.fields.ProductName).toBeDefined();
+            expect(form.fields.Name).toBeDefined();
         });
 
         it('have a text field for productcode', function () {

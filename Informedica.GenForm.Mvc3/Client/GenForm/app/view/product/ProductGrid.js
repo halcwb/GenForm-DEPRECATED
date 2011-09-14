@@ -3,7 +3,7 @@ Ext.define('GenForm.view.product.ProductGrid', {
     alias: 'widget.productgrid',
 
     columns: [
-        { header: 'Artikel', dataIndex: 'ProductName'}
+        { header: 'Artikel', dataIndex: 'Name'}
     ],
 
     initComponent: function () {

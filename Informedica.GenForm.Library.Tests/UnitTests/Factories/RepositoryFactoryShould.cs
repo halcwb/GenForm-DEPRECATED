@@ -2,6 +2,7 @@
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Factories;
+using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
@@ -10,9 +11,13 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
     /// Summary description for RepositoryFactoryShould
     /// </summary>
     [TestClass]
-    public class RepositoryFactoryShould
+    public class RepositoryFactoryShould : TestSessionContext
     {
         private TestContext testContextInstance;
+
+        public RepositoryFactoryShould() : base(false)
+        {
+        }
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -35,7 +40,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
         
         // Use ClassCleanup to run code after all tests in a class have run

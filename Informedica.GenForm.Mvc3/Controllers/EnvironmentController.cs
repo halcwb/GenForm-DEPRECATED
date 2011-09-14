@@ -9,15 +9,15 @@ using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
-    public class DatabaseController : Controller
+    public class EnvironmentController : Controller
     {
         //
         // GET: /Database/
 
         [Transaction]
-        public ActionResult GetDatabases()
+        public ActionResult GetEnvironments()
         {
-            IEnumerable<String> names = DatabaseServices.GetDatabases();
+            var names = new List<string> { "GenFormTest", "GenFormAcceptatie", "GenFormProductie" }; //ToDo: EnvironmentServices.GetDatabases();
             IList<object> list = new List<object>();
             foreach (var name in names)
             {
@@ -27,28 +27,27 @@ namespace Informedica.GenForm.Mvc3.Controllers
         }
 
         [Transaction]
-        public ActionResult SaveDatabaseRegistration(String databaseName, String machine, String connectionString)
+        public ActionResult SaveDatabaseRegistration(String databaseName, String connectionString)
         {
-            var success = SetSetting(machine, databaseName, connectionString);
+            var success = SetSetting(databaseName, connectionString);
             return this.Direct(new {success, databaseName});
         }
 
 
-        private Boolean SetSetting(String computerName, String name, String value)
+        private Boolean SetSetting(String name, String value)
         {
-            var setting = CreateSettings(computerName, name, value);
-            DatabaseServices.MapSettingsPath(HttpContext.ApplicationInstance.Server.MapPath("~/"));
-            DatabaseServices.RegisterDatabaseSetting(setting);
+            var setting = CreateSettings(name, value);
+            EnvironmentServices.MapSettingsPath(HttpContext.ApplicationInstance.Server.MapPath("~/"));
+            EnvironmentServices.RegisterDatabaseSetting(setting);
 
             return true;
         }
 
-        private static IDatabaseSetting CreateSettings(String computerName, String name, String value)
+        private static IEnvironment CreateSettings(String name, String value)
         {
-            var setting = ObjectFactory.GetInstance<IDatabaseSetting>();
+            var setting = ObjectFactory.GetInstance<IEnvironment>();
             setting.ConnectionString = value;
             setting.Name = name;
-            setting.Machine = computerName;
 
             return setting;
         }

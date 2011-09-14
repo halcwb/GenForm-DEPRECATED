@@ -3,8 +3,7 @@ Ext.define('GenForm.test.store.PackageNameStoreTests', {
 
     tests: function () {
         var me = this, store,
-            storeName = 'GenForm.store.product.PackageName',
-            waitingTime = 200;
+            storeName = 'GenForm.store.product.PackageName';
 
         beforeEach(function () {
             if (!store) store = me.createStore();
@@ -68,7 +67,7 @@ Ext.define('GenForm.test.store.PackageNameStoreTests', {
 
             waitsFor(function () {
                 return result && result.length == 5 || false;
-            }, 'PackageNameStore to load', waitingTime);
+            }, 'PackageNameStore to load', GenForm.test.waitingTime);
         });
 
         it('now contain a shape ampul', function () {

@@ -3,8 +3,7 @@ Ext.define('GenForm.test.store.ShapeNameStoreTests', {
 
     tests: function () {
         var me = this, store,
-            storeName = 'GenForm.store.product.ShapeName',
-            waitingTime = 200;
+            storeName = 'GenForm.store.product.ShapeName';
 
         beforeEach(function () {
             if (!store) store = me.createStore();
@@ -68,7 +67,7 @@ Ext.define('GenForm.test.store.ShapeNameStoreTests', {
 
             waitsFor(function () {
                 return result && result.length == 5 || false;
-            }, 'ShapeNameStore to load', waitingTime);
+            }, 'ShapeNameStore to load', GenForm.test.waitingTime);
         });
 
         it('now contain a shape zetpin', function () {

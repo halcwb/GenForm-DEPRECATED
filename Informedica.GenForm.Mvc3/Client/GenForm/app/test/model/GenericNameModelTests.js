@@ -4,7 +4,6 @@ Ext.define('GenForm.test.model.GenericNameModelTests', {
 
     tests: function () {
         var callbackObject, setUpCallBackObject, getGenericNameModelClass,  getGenericNameModel, loadGenericNameModel,
-            waitingTime = 100,
             proxy = {
                 type: 'direct',
                 directFn: Product.GetGenericNames
@@ -54,7 +53,7 @@ Ext.define('GenForm.test.model.GenericNameModelTests', {
                 callback: callbackObject.setCalledBackToTrue
             });
 
-            waitsFor(callbackObject.getCalledBack, 'Calling proxy of GenericNameModel', waitingTime);
+            waitsFor(callbackObject.getCalledBack, 'Calling proxy of GenericNameModel', GenForm.test.waitingTime);
         });
 
         setUpCallBackObject = function () {
@@ -88,7 +87,7 @@ Ext.define('GenForm.test.model.GenericNameModelTests', {
                 }
 
                 return false;
-            }, 'Fetching GenericNameModel', waitingTime);
+            }, 'Fetching GenericNameModel', GenForm.test.waitingTime);
         });
 
     }

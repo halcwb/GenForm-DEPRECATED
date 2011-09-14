@@ -1,8 +1,8 @@
 using System;
 using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Library.DomainModel.Databases;
-using Informedica.GenForm.Library.Services.Databases;
 using StructureMap.Configuration.DSL;
+using Environment = Informedica.GenForm.DataAccess.Databases.Environment;
 
 namespace Informedica.GenForm.Assembler.Assemblers
 {
@@ -16,7 +16,7 @@ namespace Informedica.GenForm.Assembler.Assemblers
             if (_hasBeenCalled) return _registry;
             _registry = new Registry();
 
-            _registry.For<IDatabaseSetting>().Use<DatabaseSetting>();
+            _registry.For<IEnvironment>().Use<Environment>();
             _registry.For<IDatabaseConnection>().Use<DatabaseConnection>();
 
             _hasBeenCalled = true;

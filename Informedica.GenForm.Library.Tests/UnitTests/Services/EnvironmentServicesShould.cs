@@ -10,10 +10,10 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
     /// Summary description for DatabaseServicesShould
     /// </summary>
     [TestClass]
-    public class DatabaseServicesShould
+    public class EnvironmentServicesShould
     {
         private TestContext testContextInstance;
-        private static IDatabaseSetting _databaseSetting;
+        private static IEnvironment _environment;
 
 
         /// <summary>
@@ -40,10 +40,10 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            ObjectFactory.Inject<IDatabaseSetting>(new DatabaseSetting());
+            ObjectFactory.Inject<IEnvironment>(new Environment());
             ObjectFactory.Inject<IDatabaseConnection>(new DatabaseConnection());
 
-            _databaseSetting = ObjectFactory.GetInstance<IDatabaseSetting>();
+            _environment = ObjectFactory.GetInstance<IEnvironment>();
         }
 
         // Use ClassCleanup to run code after all tests in a class have run
@@ -65,14 +65,13 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             SetUpInvalidDatabaseSetting();
 
-            Assert.IsFalse(DatabaseServices.TestDatabaseConnection(_databaseSetting), "Bogus database should not exist");
+            Assert.IsFalse(EnvironmentServices.TestDatabaseConnection(_environment), "Bogus database should not exist");
         }
 
         private static void SetUpInvalidDatabaseSetting()
         {
-            _databaseSetting.Name = "Bogus";
-            _databaseSetting.ConnectionString = @"C:\Bogus";
-            _databaseSetting.Machine = "HAL-WIN7";
+            _environment.Name = "Bogus";
+            _environment.ConnectionString = @"C:\Bogus";
         }
 
         [TestMethod]
@@ -80,15 +79,14 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             SetUpValidDatabaseSetting();
 
-            Assert.IsTrue(DatabaseServices.TestDatabaseConnection(_databaseSetting), "Production database should exists");
+            Assert.IsTrue(EnvironmentServices.TestDatabaseConnection(_environment), "Production database should exists");
         }
 
         private static void SetUpValidDatabaseSetting()
         {
-            _databaseSetting.Name = "ProductieDatabase";
-            _databaseSetting.ConnectionString =
+            _environment.Name = "ProductieDatabase";
+            _environment.ConnectionString =
                 @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
-            _databaseSetting.Machine = "HAL-WIN7";
         }
 
 
@@ -96,9 +94,9 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void RegisterValidDatabaseSetting()
         {
             SetUpValidDatabaseSetting();
-            DatabaseServices.RegisterDatabaseSetting(_databaseSetting);
+            EnvironmentServices.RegisterDatabaseSetting(_environment);
 
-            Assert.IsTrue(DatabaseServices.TestDatabaseConnection(_databaseSetting), "A valid database setting should be registered");
+            Assert.IsTrue(EnvironmentServices.TestDatabaseConnection(_environment), "A valid database setting should be registered");
         }
     }
 }

@@ -3,4 +3,8 @@
   <environment name="R+d18i4jBGx+bHtT7c7x1Q==" connectionString="WsE/6d7gcG1tg9gh6GvjNDLhsz3XnDOBDlVChLeoX389GVuglGaBA0A3ow/0D7kqDAyscnd1cDjTblT9ZZUyuKWbbe+oHmpwNCHaueUQA5vMOnSI5lv8I7wIsIGt352i" />
   <environment name="zii5xVXql2W6RrvqbJEu7k5V4bRc0Lx57sM/kXFHjV8=" connectionString="WsE/6d7gcG1tg9gh6GvjNDLhsz3XnDOBDlVChLeoX389GVuglGaBA0A3ow/0D7kqDAyscnd1cDjTblT9ZZUyuKWbbe+oHmpwNCHaueUQA5vMOnSI5lv8I7wIsIGt352i" />
   <environment name="cdalGlT+P+X3DmWl4eKAqA==" connectionString="Ij7pY/7G9bU0p9FIdf4upQ==" />
+  <environment name="earEFw9uRpr1mqBbxhpy8A==" connectionString="WsE/6d7gcG1tg9gh6GvjNDLhsz3XnDOBDlVChLeoX389GVuglGaBA0A3ow/0D7kqDAyscnd1cDjTblT9ZZUyuKWbbe+oHmpwNCHaueUQA5vMOnSI5lv8I7wIsIGt352i" />
+  <environment name="GenFormTest" connectionString="WsE/6d7gcG1tg9gh6GvjNDLhsz3XnDOBDlVChLeoX389GVuglGaBA0A3ow/0D7kqDAyscnd1cDjTblT9ZZUyuKWbbe+oHmpwNCHaueUQA5vMOnSI5lv8I7wIsIGt352i" />
+  <environment name="Test" connectionString="Ij7pY/7G9bU0p9FIdf4upQ==" />
+  <environment name="ProductieDatabase" connectionString="WsE/6d7gcG1tg9gh6GvjNDLhsz3XnDOBDlVChLeoX389GVuglGaBA0A3ow/0D7kqDAyscnd1cDjTblT9ZZUyuKWbbe+oHmpwNCHaueUQA5vMOnSI5lv8I7wIsIGt352i" />
 </environments>

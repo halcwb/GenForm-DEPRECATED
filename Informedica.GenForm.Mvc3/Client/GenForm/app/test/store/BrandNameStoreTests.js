@@ -3,8 +3,7 @@ Ext.define('GenForm.test.store.BrandNameStoreTests', {
 
     tests: function () {
         var me = this, store,
-            storeName = 'GenForm.store.product.BrandName',
-            waitingTime = 200;
+            storeName = 'GenForm.store.product.BrandName';
 
         beforeEach(function () {
             if (!store) store = me.createStore();
@@ -39,16 +38,16 @@ Ext.define('GenForm.test.store.BrandNameStoreTests', {
 
         it('return an empty record with BrandName property', function () {
             var record = store.create();
-            expect(record.data.BrandName).toBeDefined();
+            expect(record.data.Name).toBeDefined();
         });
 
         it('contain an item', function () {
-            store.add({BrandName: 'test'});
+            store.add({Name: 'test'});
             expect(store.count() > 0).toBeTruthy();
         });
 
         it('have an item with BrandName test', function () {
-            expect(store.findExact('BrandName', 'test') !== -1).toBe(true);
+            expect(store.findExact('Name', 'test') !== -1).toBe(true);
         });
 
         it('have test direct Fn defined', function () {
@@ -68,16 +67,16 @@ Ext.define('GenForm.test.store.BrandNameStoreTests', {
 
             waitsFor(function () {
                 return result && result.length == 5 || false;
-            }, 'BrandNameStore to load', waitingTime);
+            }, 'BrandNameStore to load', GenForm.test.waitingTime);
         });
 
         it('now contain a brand Dynatra', function () {
-            expect(store.findExact('BrandName', 'Dynatra') != -1).toBeTruthy();
+            expect(store.findExact('Name', 'Dynatra') != -1).toBeTruthy();
         });
 
         it('also contain Esmeron after load', function () {
-            var found = store.getAt(store.findExact('BrandName', 'Esmeron'));
-            expect(found.data.BrandName).toBe('Esmeron');
+            var found = store.getAt(store.findExact('Name', 'Esmeron'));
+            expect(found.data.Name).toBe('Esmeron');
         });
 
     }
