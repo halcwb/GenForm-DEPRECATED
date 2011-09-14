@@ -5,7 +5,7 @@ Ext.define('GenForm.test.controller.ProductControllerTests', {
         var me = this,
             productController,
             testProduct = {
-                ProductName: '',
+                Name: '',
                 ProductCode: '',
                 GenericName: '',
                 BrandName: '',
@@ -116,7 +116,7 @@ Ext.define('GenForm.test.controller.ProductControllerTests', {
 
         it('when a form is created with an empty product, productname should be empty', function () {
             var window = productController.getProductWindow();
-            expect(window.forms.ProductForm.getProduct().data.ProductName === '').toBeTruthy();
+            expect(window.forms.ProductForm.getProduct().data.Name === '').toBeTruthy();
         });
 
         it('should have a saveProduct function', function () {
@@ -128,7 +128,7 @@ Ext.define('GenForm.test.controller.ProductControllerTests', {
             var form = productController.getProductWindow().forms.ProductForm,
                 record = form.getRecord();
 
-            testProduct.ProductName = 'paracetamol 500 mg';
+            testProduct.Name = 'paracetamol 500 mg';
             testProduct.GenericName = 'paracetamol';
             testProduct.BrandName = 'Paracetamol';
             testProduct.ShapeName = 'tablet';
@@ -144,7 +144,7 @@ Ext.define('GenForm.test.controller.ProductControllerTests', {
 
             waitsFor(function () {
                 return productController.onProductSaved.wasCalled;
-            }, 'waiting for onProductSaved call', 1000);
+            }, 'waiting for onProductSaved call', GenForm.test.TestList.waitingTime);
         });
 
 
@@ -161,14 +161,6 @@ Ext.define('GenForm.test.controller.ProductControllerTests', {
             me.copyObject(model, validGeneric);
 
             form.loadRecord(model);
-    /*
-            spyOn(controller, 'onGenericSaved');
-            controller.saveGeneric(form.up('panel').down('toolbar').down('button'));
-
-            waitsFor(function () {
-                return controller.onGenericSaved.wasCalled;
-            }, 'waiting for onGenericSaved call', waitingTime)
-    */
 
         });
 

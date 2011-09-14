@@ -4,20 +4,20 @@ using Informedica.GenForm.Library.DomainModel.Databases;
 
 namespace Informedica.GenForm.Library.Services.Databases
 {
-    public static class DatabaseServices
+    public static class EnvironmentServices
     {
         #region Implementation of IDatabaseServices
 
-        public static bool TestDatabaseConnection(IDatabaseSetting databaseSetting)
+        public static bool TestDatabaseConnection(IEnvironment environment)
         {
-            return GetDatabaseConnection().TestConnection(databaseSetting.ConnectionString);
+            return GetDatabaseConnection().TestConnection(environment.ConnectionString);
         }
 
-        public static bool RegisterDatabaseSetting(IDatabaseSetting databaseSetting)
+        public static bool RegisterDatabaseSetting(IEnvironment environment)
         {
-            if(!TestDatabaseConnection(databaseSetting)) return  false;
+            if(!TestDatabaseConnection(environment)) return  false;
 
-            GetDatabaseConnection().RegisterSetting(databaseSetting);
+            GetDatabaseConnection().RegisterSetting(environment);
             return true;
         }
 

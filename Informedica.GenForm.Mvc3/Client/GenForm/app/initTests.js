@@ -19,7 +19,7 @@ Ext.onReady(function () {
 
     //noinspection JSUnusedGlobalSymbols
     Ext.app.config.launch = function() {
-        var me = this, test,
+        var me = this,
             testList = Ext.create('GenForm.test.TestList'),
             testLoader = Ext.create('GenForm.test.TestLoader');
 
@@ -31,6 +31,7 @@ Ext.onReady(function () {
             items: me.getViewPortItems()
         });
 
+        GenForm.test.waitingTime = 1000;
         // Load tests
         testLoader.loadTests(testList);
 

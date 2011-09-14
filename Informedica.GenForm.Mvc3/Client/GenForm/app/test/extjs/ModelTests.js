@@ -1,9 +1,9 @@
 Ext.define('GenForm.test.extjs.ModelTests', {
-    describe: 'Ext.data.Model',
+    describe: 'Ext.data.ModelTests',
 
     tests: function () {
         //noinspection MagicNumberJS
-        var me = this, instance, waitingTime = 200,
+        var me = this, instance,
             namespace = 'GenForm.test.extjs.modeltests.',
             testModel = (namespace + 'TestModel'),
             testModelWithoutStore = (namespace + 'ModelWithoutStore');
@@ -12,8 +12,8 @@ Ext.define('GenForm.test.extjs.ModelTests', {
             extend: 'Ext.data.Model',
 
             fields: [
-                {name: 'Id', type: 'integer', mapping: 'ProductId'},
-                {name: 'Test', type: 'string', mapping: 'ProductName'}
+                {name: 'Id', type: 'string', mapping: 'ProductId'},
+                {name: 'Test', type: 'string', mapping: 'Name'}
             ],
 
             proxy: {
@@ -22,8 +22,8 @@ Ext.define('GenForm.test.extjs.ModelTests', {
                 // If I omit the below line, store test throws an error, but not model tests
                 directFn: Product.GetProduct,
                 api: {
-                    read: Product.GetProduct,
-                    submit: Product.SaveProduct
+                    read: Tests.GetProduct,
+                    submit: Tests.SaveProduct
                 }
             },
             reader: {
@@ -51,11 +51,11 @@ Ext.define('GenForm.test.extjs.ModelTests', {
             return Ext.ModelManager.getModel(testModel);
         };
 
-        it('a test model should be created', function () {
+        it('that a test model should be created', function () {
            expect(me.createTestModelInstance()).toBeDefined();
         });
 
-        it('test model should have a Test field', function () {
+        it('that a test model should have a Test field', function () {
             expect(me.createTestModelInstance().data.Test).toBeDefined();
         });
 
@@ -67,7 +67,7 @@ Ext.define('GenForm.test.extjs.ModelTests', {
             expect(model.getProxy()).toBeDefined();
         });
 
-        it('test model can be loaded using a direct proxy', function () {
+        it('that test model can be loaded using a direct proxy', function () {
             var record, model = me.getTestModel();
 
             model.load('123456', {
@@ -78,7 +78,7 @@ Ext.define('GenForm.test.extjs.ModelTests', {
 
             waitsFor(function () {
                 return record ? true: false;
-            }, 'waiting for Product.GetProduct', waitingTime);
+            }, 'waiting for Product.GetProduct', GenForm.test.waitingTime);
         });
 
         it('testing the model with a store', function () {
@@ -98,7 +98,7 @@ Ext.define('GenForm.test.extjs.ModelTests', {
 
             waitsFor(function () {
                 return result ? true: false;
-            }, 'waiting for loading of store', waitingTime)
+            }, 'waiting for loading of store', GenForm.test.waitingTime)
         });
     }
 });

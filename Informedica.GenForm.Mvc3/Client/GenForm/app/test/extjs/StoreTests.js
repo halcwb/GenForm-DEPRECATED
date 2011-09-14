@@ -1,9 +1,9 @@
 Ext.define('GenForm.test.extjs.StoreTests', {
 
-    describe: 'Ext.data.Store',
+    describe: 'Ext.data.StoreTests',
 
     tests: function () {
-        var me = this, waitingTime = 200,
+        var me = this,
             namespace = 'GenForm.test.extjs.storetests.',
             modelName = namespace + 'TestModel',
             testStore = namespace + 'TestStore',
@@ -14,8 +14,8 @@ Ext.define('GenForm.test.extjs.StoreTests', {
             extend: 'Ext.data.Model',
 
             fields: [
-                {name: 'id', type: 'integer', mapping: 'ProductId'},
-                {name: 'Test', type: 'string', mapping: 'ProductName'}
+                {name: 'id', type: 'string', mapping: 'ProductId'},
+                {name: 'Test', type: 'string', mapping: 'Name'}
             ],
 
             // I can mover proxy and reader over to store and it keeps working
@@ -24,10 +24,10 @@ Ext.define('GenForm.test.extjs.StoreTests', {
                 type: 'direct',
                 paramsAsHash: true,
                 // If I omit the below line, store test throws an error, but not model tests
-                directFn: Product.GetProduct,
+                directFn: Tests.GetProduct,
                 api: {
-                    read: Product.GetProduct,
-                    submit: Product.SaveProduct
+                    read: Tests.GetProduct,
+                    submit: Tests.SaveProduct
                 }
             },
             reader: {
@@ -49,15 +49,15 @@ Ext.define('GenForm.test.extjs.StoreTests', {
             return Ext.create(testStore);
         };
 
-        it('a test model is defined', function () {
+        it('that a test model is defined', function () {
             expect(Ext.ModelManager.getModel(modelName)).toBeDefined();
         });
 
-        it('teststore is created', function () {
+        it('that teststore is created', function () {
             expect(me.createTestStore()).toBeDefined();
         });
 
-        it('teststore can be loaded', function () {
+        it('that teststore can be loaded', function () {
             //noinspection JSUnusedLocalSymbols
             me.createTestStore().load({
                 callback: function (records, operation, success) {
@@ -67,7 +67,7 @@ Ext.define('GenForm.test.extjs.StoreTests', {
 
             waitsFor(function () {
                 return isCalledBack;
-            }, 'waiting for loading of teststore', waitingTime)
+            }, 'waiting for loading of teststore', GenForm.test.waitingTime)
 
         });
     }

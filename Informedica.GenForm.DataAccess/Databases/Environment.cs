@@ -2,13 +2,12 @@
 
 namespace Informedica.GenForm.DataAccess.Databases
 {
-    public class DatabaseSetting : IDatabaseSetting
+    public class Environment : IEnvironment
     {
         #region Implementation of IDatabase
 
         public string Name { get; set; }
         public string ConnectionString { get; set; }
-        public string Machine { get; set; }
 
         #endregion
     }

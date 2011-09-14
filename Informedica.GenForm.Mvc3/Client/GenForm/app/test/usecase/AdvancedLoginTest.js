@@ -6,11 +6,9 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
             queryHelper = Ext.create('GenForm.lib.util.QueryHelper'),
             messageChecker = Ext.create('GenForm.lib.util.MessageChecker'),
             databaseName = 'TestDatabase',
-            machine = 'HAL-WIN7',
             windowName = 'window[title=Registreer Database]',
             connection = 'Data Source=HAL-WIN7\\INFORMEDICA;Initial Catalog=GenFormTest;Integrated Security=True',
-            message = '',
-            waitingTime = 500;
+            message = '';
 
         me.getAdvancedLogin = function () {
             return Ext.ComponentQuery.query('userlogin fieldset')[0];
@@ -20,19 +18,19 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
             me.getAdvancedLogin().toggle();
         };
 
-        me.getSelectDatabaseCombo = function () {
-            return queryHelper.getFormComboBox('userlogin', 'database');
+        me.getSelectEnvironmentCombo = function () {
+            return queryHelper.getFormComboBox('userlogin', 'environment');
         };
 
-        me.clickNewDatabase = function () {
-            queryHelper.clickButton(queryHelper.getButton('window', 'Registreer Database'));
+        me.clickNewEnvironment = function () {
+            queryHelper.clickButton(queryHelper.getButton('window', 'Registreer Omgeving'));
         };
 
         me.getRegisterDatabaseWindow = function () {
             return queryHelper.getWindow('window[title=Registreer Database]');
         };
 
-        me.getDatabaseNameField = function () {
+        me.getEnvironmentNameField = function () {
             return queryHelper.getFormTextField(windowName, 'databasename');
         };
 
@@ -67,18 +65,18 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
             expect(me.getAdvancedLogin().collapsed).toBeFalsy();
         });
 
-        it('Advance login has a combobox to select a database', function () {
+        it('Advance login has a combobox to select a environment', function () {
             expect(me.getSelectDatabaseCombo()).toBeDefined();
         });
 
-        it('The user can open up a window to register a new database', function () {
+        it('The user can open up a window to register a new environment', function () {
             me.clickNewDatabase();
             expect(me.getRegisterDatabaseWindow()).toBeDefined();
         });
 
-        it('User can enter a database name', function () {
-            queryHelper.setFormField(me.getDatabaseNameField(), databaseName);
-            expect(me.getDatabaseNameField().value).toBe(databaseName);
+        it('User can enter a environment name', function () {
+            queryHelper.setFormField(me.getEnvironmentNameField(), databaseName);
+            expect(me.getEnvironmentNameField().value).toBe(databaseName);
         });
 
         it('User can enter the machine name', function () {
@@ -91,11 +89,11 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
             expect(me.getConnectionField().value).toBe(connection);
         });
 
-        it('A database can be registered', function () {
+        it('A environment can be registered', function () {
             message = databaseName;
             me.clickRegisterDatabaseButton();
 
-            waitsFor(me.checkMessage, 'response of save', waitingTime);
+            waitsFor(me.checkMessage, 'response of save', GenForm.test.waitingTime);
         });
     }
 });

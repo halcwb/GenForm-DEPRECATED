@@ -5,8 +5,7 @@ Ext.define('GenForm.test.usecase.LoginTest', {
         var me = this,
             loginMessage = "",
             refusalMessage = "Login geweigerd",
-            successMessage = "Login succesvol",
-            waitingTime = 5000;
+            successMessage = "Login succesvol";
 
         me.getLoginController = function () {
             return GenForm.application.getController('user.Login');
@@ -42,7 +41,7 @@ Ext.define('GenForm.test.usecase.LoginTest', {
                     if (results[0].cfg.msg === loginMessage)
                     {
                         Ext.ComponentQuery.query('button[text=OK]')[0].btnEl.dom.click();
-                        //setTimeout("Ext.ComponentQuery.query('button[text=OK]')[0].btnEl.dom.click();", waitingTime - 2000);
+                        //setTimeout("Ext.ComponentQuery.query('button[text=OK]')[0].btnEl.dom.click();", GenForm.test.waitingTime - 2000);
                         return true;
                     }
                 }
@@ -69,7 +68,7 @@ Ext.define('GenForm.test.usecase.LoginTest', {
 
             me.clickButton(button);
             loginMessage = refusalMessage;
-            waitsFor(me.checkLoginMessage, 'waiting for a refusal message', waitingTime);
+            waitsFor(me.checkLoginMessage, 'waiting for a refusal message', GenForm.test.waitingTime);
         });
 
         it('User can set username and password', function () {
@@ -88,7 +87,7 @@ Ext.define('GenForm.test.usecase.LoginTest', {
 
             me.clickButton(button);
             loginMessage = refusalMessage;
-            waitsFor(me.checkLoginMessage, 'waiting for refusal message', waitingTime)
+            waitsFor(me.checkLoginMessage, 'waiting for refusal message', GenForm.test.waitingTime)
         });
 
         it('User can login using a valid name and password', function () {
@@ -101,7 +100,7 @@ Ext.define('GenForm.test.usecase.LoginTest', {
 
             me.clickButton(button);
             loginMessage = successMessage;
-            waitsFor(me.checkLoginMessage, "waiting for successfull login", waitingTime);
+            waitsFor(me.checkLoginMessage, "waiting for successfull login", GenForm.test.waitingTime);
         });
 
     }

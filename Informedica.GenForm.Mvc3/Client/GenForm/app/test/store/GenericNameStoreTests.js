@@ -4,8 +4,7 @@ Ext.define('GenForm.test.store.GenericNameStoreTests', {
 
     tests: function() {
         var me = this, store,
-            storeName = 'GenForm.store.product.GenericName',
-            waitingTime = 200;
+            storeName = 'GenForm.store.product.GenericName';
 
         beforeEach(function () {
             if (!store) store = me.createStore();
@@ -66,7 +65,7 @@ Ext.define('GenForm.test.store.GenericNameStoreTests', {
 
             waitsFor(function () {
                 return result && result.length == 5 || false;
-            }, 'GenericNameStore to load', waitingTime);
+            }, 'GenericNameStore to load', GenForm.test.waitingTime);
         });
 
         it('now contain a generic morfine', function () {

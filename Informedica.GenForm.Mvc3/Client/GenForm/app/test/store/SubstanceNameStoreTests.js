@@ -3,8 +3,7 @@ Ext.define('GenForm.test.store.SubstanceNameStoreTests', {
 
     tests: function () {
         var me = this, store,
-            storeName = 'GenForm.store.product.SubstanceName',
-            waitingTime = 200;
+            storeName = 'GenForm.store.product.SubstanceName';
 
         beforeEach(function () {
             if (!store) store = me.createStore();
@@ -68,7 +67,7 @@ Ext.define('GenForm.test.store.SubstanceNameStoreTests', {
 
             waitsFor(function () {
                 return result && result.length == 5 || false;
-            }, 'SubstanceNameStore to load', waitingTime);
+            }, 'SubstanceNameStore to load', GenForm.test.waitingTime);
         });
 
         it('now contain a Substance paracetamol', function () {

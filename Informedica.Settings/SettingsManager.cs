@@ -126,14 +126,23 @@ namespace Informedica.Settings
         public string ReadSecureSetting(string name)
         {
             _crypt.Key = _key;
-            return _crypt.Decrypt("test");
+            var value = GetEnvirionment(FindEnvironmentElement(name));
+            return _crypt.Decrypt(value);
+        }
+
+        private string GetEnvirionment(XElement xElement)
+        {
+            if (xElement == null) return String.Empty;
+
+            var xAttribute = xElement.Attribute(ConnectionString);
+            if (xAttribute != null) return xAttribute.Value;
+            return String.Empty;
         }
 
         public void WriteSecureSetting(string key, string value)
         {
             if (String.IsNullOrWhiteSpace(key) || String.IsNullOrWhiteSpace(value)) return;
 
-            key = EncryptSetting(key);
             value = EncryptSetting(value);
 
             var element = FindEnvironmentElement(key);

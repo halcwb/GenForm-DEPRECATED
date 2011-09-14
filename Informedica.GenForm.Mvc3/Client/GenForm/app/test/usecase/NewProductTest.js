@@ -7,7 +7,6 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
             messageChecker = Ext.create('GenForm.lib.util.MessageChecker'),
             domClicker = Ext.create('GenForm.lib.util.DomClicker'),
             message = '',
-            waitingTime = 500,
             product = 'dopamine Dynatra infusievloeistof 5 mL ampul',
             code = '123456',
             generic = 'dopamine',
@@ -92,7 +91,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.getProductName = function () {
-            return queryHelper.getFormTextField('productform', 'ProductName');
+            return queryHelper.getFormTextField('productform', 'Name');
         };
 
         me.setProductName = function (name) {
@@ -309,7 +308,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         it('A new generic with a valid name can be saved', function () {
             message = generic;
             me.clickSaveGenericButton();
-            waitsFor(me.checkMessage, "response of generic save", waitingTime);
+            waitsFor(me.checkMessage, "response of generic save", GenForm.test.waitingTime);
         });
 
         it('The new generic can be set for the product', function () {
@@ -330,7 +329,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         it('User can save the new brand', function () {
             message = brand;
             me.clickSaveBrandButton();
-            waitsFor(me.checkMessage, 'response of brand save', waitingTime);
+            waitsFor(me.checkMessage, 'response of brand save', GenForm.test.waitingTime);
         });
 
         it('The new brand can be set for the product', function () {
@@ -351,7 +350,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         it('User can save the new Shape', function () {
             message = shape;
             me.clickSaveShapeButton();
-            waitsFor(me.checkMessage, 'response of shape save', waitingTime);
+            waitsFor(me.checkMessage, 'response of shape save', GenForm.test.waitingTime);
         });
 
         it('The new Shape can be set for the product', function () {
@@ -372,7 +371,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         it('User can save the new unit', function () {
             message = unit;
             me.clickSaveUnitButton();
-            waitsFor(me.checkMessage, 'response of unit save', waitingTime);
+            waitsFor(me.checkMessage, 'response of unit save', GenForm.test.waitingTime);
         });
 
         it('The new unit can be set for the product', function () {
@@ -393,7 +392,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         it('User can save the new Package', function () {
             message = productPackage;
             me.clickSavePackageButton();
-            waitsFor(me.checkMessage, 'response of package save', waitingTime);
+            waitsFor(me.checkMessage, 'response of package save', GenForm.test.waitingTime);
         });
 
         it('The new package can be set for the product', function () {
@@ -428,7 +427,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         it('User can save the new Substance', function () {
             message = substance;
             me.clickSaveSubstanceButton();
-            waitsFor(me.checkMessage, 'response of substance save', waitingTime);
+            waitsFor(me.checkMessage, 'response of substance save', GenForm.test.waitingTime);
         });
 
         it('The new substance can be set for the productsubstance', function () {
@@ -449,7 +448,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         it('User can save the new substance unit', function () {
             message = substanceUnit;
             me.clickSaveUnitButton();
-            waitsFor(me.checkMessage, 'response of unit save', waitingTime);
+            waitsFor(me.checkMessage, 'response of unit save', GenForm.test.waitingTime);
         });
 
         it('The new unit can be set for the productsubstance unit', function () {
@@ -460,7 +459,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         it('User can save the filled in Product', function () {
             message = product;
             me.clickSaveProductButton();
-            waitsFor(me.checkMessage, 'response of product save', waitingTime);
+            waitsFor(me.checkMessage, 'response of product save', GenForm.test.waitingTime);
         });
 
         it('After saving the product, the new product window is closed', function () {

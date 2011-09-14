@@ -1,43 +1,50 @@
 Ext.define('GenForm.view.user.LoginWindow', {
-    extend: 'Ext.Window',
+    extend: 'GenForm.lib.view.ui.LoginWindow',
     alias: 'widget.userlogin',
-
-    bodyPadding: 5,
-    closable: false,
-
-    title: 'GenForm Login',
-    defaultDatabase: 'Default Database',
+    itemId: 'loginWindow',
 
     initComponent: function() {
         var me = this;
         //noinspection JSUnusedGlobalSymbols
-        me.dockedItems = me.createDockedItems();
-
-        me.items = this.createItems();
 
         me.callParent(arguments);
+        me.addDocked(me.createDockedItems());
+
     },
 
     getLoginButton: function () {
-        return Ext.ComponentQuery.query('toolbar button[action=login]');
+        var me = this;
+        return me.dockedItems.get('barLogin').items.get('btnLogin');
+    },
+
+    getUserNameField: function () {
+        var me = this;
+        return me.getForm().findField('UserName');
+    },
+
+    getPasswordField: function () {
+        var me = this;
+        return me.getForm().findField('Password');
+    },
+
+    getForm: function () {
+        var me = this;
+        return me.getLoginForm().getForm();
+    },
+
+    getLoginForm: function () {
+        var me = this;
+        return me.items.get('frmLogin');
     },
 
     createDockedItems: function () {
         return [
             {
                 xtype: 'toolbar',
+                itemId: 'barLogin',
                 dock: 'bottom',
-                items: ['->', { text: 'Login', action: 'login'}]
+                items: ['->', { itemId: 'btnLogin', text: 'Login', action: 'login'}]
             }
-        ];
-    },
-
-    createItems: function () {
-        var me = this;
-
-        return [
-            me.getHtmlImage(),
-            me.getLoginForm2()
         ];
     },
 
@@ -45,56 +52,8 @@ Ext.define('GenForm.view.user.LoginWindow', {
         return GenForm.application.appFolder + "/style/images/medicalbanner.jpg";
     },
 
-    getHtmlImage: function () {
-        var me = this, imagePath = me.getImagePath();
-        return { html: '<img src=' + imagePath + ' />', height: 180, xtype: 'box' }
-    },
-
-
-    getLoginForm2: function () {
-        var me = this;
-        //noinspection JSUnusedGlobalSymbols
-        return {
-            xtype:'form',
-            border: false,
-            bodyPadding: 15,
-            width: 541,
-            defaults: {
-                allowBlank: false
-            },
-            items:[
-                { xtype: 'textfield', fieldLabel: 'Gebruikersnaam', name:'username', margin: '10 0 10 10', value: '' },
-                { xtype: 'textfield', inputType: 'password', fieldLabel: 'Wachtwoord', name: 'password', margin: '0 0 10 10',  value: '' },
-                me.advancedLoginFieldSet()
-            ]
-        };
-    },
-
-    advancedLoginFieldSet: function () {
-        var me = this;
-        return {
-            xtype: 'fieldset',
-            layout: 'hbox',
-            collapsible: true,
-            collapsed: true,
-            items: [
-                me.createDatabaseCombo(),
-                me.createRegisterDatabaseButton()
-            ]
-        };
-    },
-
-    createDatabaseCombo: function () {
-        var me = this;
-        return {xtype: 'combo', name: 'database', fieldLabel: 'Database', displayField: 'DatabaseName', store: me.getDatabaseStore()};
-    },
-
-    getDatabaseStore: function () {
-        return Ext.create('GenForm.store.database.Database');
-    },
-
-    createRegisterDatabaseButton: function () {
-        return {xtype: 'button', text: 'Registreer Database', action: 'registerdatabase'};
+    getEnvironmentStore: function () {
+        return Ext.create('GenForm.store.environment.Environment');
     }
 
 });

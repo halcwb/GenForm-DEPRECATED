@@ -110,7 +110,7 @@ Ext.define('GenForm.view.product.ProductForm', {
     createProductDetails: function () {
         var me = this, margin = '10 0 10 10';
         return [
-            me.createTextField({name:'ProductName',   fieldLabel: 'Artikel Naam', margin: margin}),
+            me.createTextField({name:'Name',   fieldLabel: 'Artikel Naam', margin: margin}),
             me.createTextField({name: 'ProductCode',  fieldLabel: 'Artikel Code', margin: margin}),
             me.createGenericNameCombo(margin),
             me.createBrandNameCombo(margin),

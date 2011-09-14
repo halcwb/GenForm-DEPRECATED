@@ -2,10 +2,9 @@
 
 namespace Informedica.GenForm.Library.DomainModel.Databases
 {
-    public interface IDatabaseSetting
+    public interface IEnvironment
     {
         String Name { get; set; }
         String ConnectionString { get; set; }
-        String Machine { get; set; }
     }
 }

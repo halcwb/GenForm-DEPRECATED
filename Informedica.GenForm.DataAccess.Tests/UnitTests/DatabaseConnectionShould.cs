@@ -40,7 +40,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         public static void MyClassInitialize(TestContext testContext)
         {
             ObjectFactory.Inject<IDatabaseConnection>(new DatabaseConnection());
-            ObjectFactory.Inject<IDatabaseSetting>(new DatabaseSetting());
+            ObjectFactory.Inject<IEnvironment>(new Environment());
 
             _databaseConnection = ObjectFactory.GetInstance<IDatabaseConnection>();
         }
@@ -76,10 +76,11 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         [TestMethod]
         public void RegisterValidDatabaseSetting()
         {
-            IDatabaseSetting setting = GetValidDatabaseSetting();
+            IEnvironment setting = GetValidEnvironmentSetting();
 
             _databaseConnection.RegisterSetting(setting);
-            Assert.IsTrue(_databaseConnection.GetConnectionString(setting.Name) == setting.ConnectionString);
+            var result = _databaseConnection.GetConnectionString(setting.Name);
+            Assert.IsTrue(result == setting.ConnectionString);
         }
 
         [TestMethod]
@@ -89,13 +90,12 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
             Assert.AreEqual(connection, DatabaseConnection.GetLocalConnectionString(DatabaseConnection.DatabaseName.GenFormTest));
         }
 
-        private IDatabaseSetting GetValidDatabaseSetting()
+        private IEnvironment GetValidEnvironmentSetting()
         {
-            var setting = ObjectFactory.GetInstance<IDatabaseSetting>();
-            setting.Name = "TestDatabase";
+            var setting = ObjectFactory.GetInstance<IEnvironment>();
+            setting.Name = "GenFormTest";
             setting.ConnectionString =
                 ValidConnectionString;
-            setting.Machine = "HAL-WIN7";
 
             return setting;
         }

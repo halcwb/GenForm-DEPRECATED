@@ -32,11 +32,6 @@ namespace Informedica.GenForm.DataAccess.Databases
             return @"Data Source=hal-win7\informedica;Initial Catalog=GenFormTest;Integrated Security=True";
         }
 
-        public static string GetComputerName()
-        {
-            return Environment.MachineName;
-        }
-
         #region Implementation of IDatabaseConnection
 
         public Boolean TestConnection(String connectionString)
@@ -56,10 +51,10 @@ namespace Informedica.GenForm.DataAccess.Databases
             }                            
         }
 
-        public void RegisterSetting(IDatabaseSetting databaseSetting)
+        public void RegisterSetting(IEnvironment environment)
         {
-            SettingsManager.Instance.WriteSecureSetting(databaseSetting.Name,
-                                                         databaseSetting.ConnectionString);
+            SettingsManager.Instance.WriteSecureSetting(environment.Name,
+                                                         environment.ConnectionString);
         }
 
         public string GetConnectionString(String name)

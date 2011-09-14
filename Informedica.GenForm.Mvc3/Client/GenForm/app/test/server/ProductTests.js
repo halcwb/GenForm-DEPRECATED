@@ -3,24 +3,25 @@ Ext.define('GenForm.test.server.ProductTests', {
 
     tests: function () {
         //noinspection JSUnusedGlobalSymbols
-        var testProduct = {
-            Id: 0,
-            ProductName: 'dopamine Dynatra infusievloeistof 200 mg 5 mL ampul',
-            DisplayName: 'dopamine Dynatra infusievloeistof 200 mg 5 mL ampul',
-            BrandName: 'Dynatra',
-            GenericName: 'dopamine',
-            ShapeName: 'infusievloeistof',
-            PackageName: 'ampul',
-            Quantity: 5,
-            UnitName: 'mL',
-            Substances: [
-                {Id: 0, SortOrder: 1, Substance: 'dopamine', Quantity: 200, Unit: 'mg'},
-                {Id: 0, SortOrder: 2, Substance: 'water', Quantity: 5, Unit: 'mL'}
-            ],
-            Routes: [
-                {Id: 0, Route: 'iv'}
-            ]
-        };
+        var me = this, guidGenerator = Ext.create('GenForm.test.util.GuidGenerator'),
+            testProduct = {
+                Id: guidGenerator.emptyGuid(),
+                Name: 'dopamine (Dynatra) 200 mg in 5 mL infusievloeistof per ampul',
+                DisplayName: 'dopamine Dynatra infusievloeistof 200 mg 5 mL ampul',
+                BrandName: 'Dynatra',
+                GenericName: 'dopamine',
+                ShapeName: 'infusievloeistof',
+                PackageName: 'ampul',
+                Quantity: 5,
+                UnitName: 'mL',
+                Substances: [
+                    {Id: guidGenerator.emptyGuid(), SortOrder: 1, Substance: 'dopamine', Quantity: 200, Unit: 'mg'},
+                    {Id: guidGenerator.emptyGuid(), SortOrder: 2, Substance: 'water', Quantity: 5, Unit: 'mL'}
+                ],
+                Routes: [
+                    {Id: guidGenerator.emptyGuid(), Route: 'iv'}
+                ]
+            };
     
 
         it('be defined', function () {
@@ -30,13 +31,13 @@ Ext.define('GenForm.test.server.ProductTests', {
         it('return a  success value when a method is called', function () {
             var result;
 
-            Tests.GetProduct(1, function (response) {
+            Tests.GetProduct(guidGenerator.emptyGuid(), function (response) {
                   result = response;
             });
 
             waitsFor(function () {
                 return result;
-            }, 'return of sussess value');
+            }, 'return of success value', GenForm.test.waitingTime);
 
             runs(function () {
                 expect(result.success).toBeTruthy();
@@ -46,32 +47,32 @@ Ext.define('GenForm.test.server.ProductTests', {
         it('return a valid product when GetProduct is called', function () {
             var result;
 
-            Tests.GetProduct(1, function (response) {
+            Tests.GetProduct(guidGenerator.createGuid(), function (response) {
                   result = response;
             });
 
             waitsFor(function () {
                 return result;
-            }, 'return of GetProduct');
+            }, 'return of GetProduct', GenForm.test.waitingTime);
 
             runs(function () {
                 expect(result.data).toBeDefined();
-                expect(result.data.ProductName).toBe("dopamine Dynatra 5 mL ampul");
+                expect(result.data.Name).toBe(testProduct.Name);
             });
 
-        });
+        }); 
 
         it('save a fully populated product', function () {
             var result;
-
+            testProduct.Id = guidGenerator.createGuid();
             Tests.SaveProduct(testProduct, function (response) {
                 result = response;
-                if (!result.success) console.log(result.message);
+                if (!result.success) console.log(result);
             });
 
             waitsFor(function () {
                 return result;
-            }, 'return of SaveProduct');
+            }, 'return of SaveProduct', GenForm.test.waitingTime);
 
             runs(function () {
                 expect(result.success).toBeTruthy();
@@ -88,10 +89,10 @@ Ext.define('GenForm.test.server.ProductTests', {
 
             waitsFor(function () {
                 return result;
-            }, 'return of saved product with id');
+            }, 'return of saved product with id', GenForm.test.waitingTime);
 
             runs(function () {
-                expect(result.data.Id > 0).toBeTruthy();
+                expect(result.data.Id.length > 0).toBeTruthy();
             });
         });
 
@@ -105,7 +106,7 @@ Ext.define('GenForm.test.server.ProductTests', {
 
             waitsFor(function () {
                 return result;
-            }, 'return of save of invalid product');
+            }, 'return of save of invalid product',GenForm.test.waitingTime);
 
             runs(function () {
                 expect(result.success === false).toBeTruthy();
@@ -122,7 +123,7 @@ Ext.define('GenForm.test.server.ProductTests', {
             
             waitsFor(function () {
                 return result;
-            });
+            }, 'Delete saved Product',GenForm.test.waitingTime);
 
             runs(function () {
                 expect(result.success).toBeTruthy();

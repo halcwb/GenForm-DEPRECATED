@@ -3,8 +3,7 @@ Ext.define('GenForm.test.model.BrandNameModelTests', {
     describe: 'GenForm.model.product.BrandName',
 
     tests: function () {
-        var me = this,
-            waitingTime = 200;
+        var me = this;
 
         me.getBrandNameModel = function () {
             var model = Ext.ModelManager.getModel('GenForm.model.product.BrandName');
@@ -31,7 +30,7 @@ Ext.define('GenForm.test.model.BrandNameModelTests', {
 
             waitsFor(function () {
                 return model ? true: false;
-            }, 'fetching BrandNameModel', waitingTime);
+            }, 'fetching BrandNameModel', GenForm.test.waitingTime);
         });
 
         it('BrandModel data contains a BrandName', function () {
@@ -46,11 +45,11 @@ Ext.define('GenForm.test.model.BrandNameModelTests', {
             waitsFor(function () {
                 if (model) {
                     if (model.data) {
-                        return model.data['BrandName'] !== undefined ? true: false;
+                        return model.data['Name'] !== undefined ? true: false;
                     }
                 }
                 return false;
-            }, 'checking if model contains BrandName prop', waitingTime);
+            }, 'checking if model contains Name prop', GenForm.test.waitingTime);
         });
 
     }

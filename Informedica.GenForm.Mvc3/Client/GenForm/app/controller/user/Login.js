@@ -4,7 +4,7 @@ Ext.define('GenForm.controller.user.Login', {
 
     views: [
         'user.LoginWindow',
-        'database.RegisterDatabaseWindow'
+        'environment.EnvironmentWindow'
     ],
 
     loggedIn: false,
@@ -17,11 +17,14 @@ Ext.define('GenForm.controller.user.Login', {
             'toolbar button[action=login]': {
                 click: me.onClickValidateLogin
             },
-            'button[action=registerdatabase]': {
-                click: me.showRegisterDatabaseWindow
+            'button[itemId=btnAddEnvironment]': {
+                click: me.showEnvironmentWindow
             },
-            'window[title="Registreer Database"] button[action=save]': {
-                click: me.onClickSaveDatabaseRegistration
+            'window[itemId="wndEnvironment"] button[itemId=btnRegisterEnvironment]': {
+                click: me.onClickRegisterEnvironment
+            },
+            'window[itemId="wndEnvironment"]': {
+                beforeclose: me.onBeforeCloseRegisterEnvironment
             }
         });
     },
@@ -60,36 +63,43 @@ Ext.define('GenForm.controller.user.Login', {
         me.loginWindow.close();
     },
 
-    showRegisterDatabaseWindow: function () {
+    showEnvironmentWindow: function (btn, e, eOpts) {
         var me = this;
-        me.createRegisterDatabaseWindow().show();
+
+        btn.disable(true);
+        me.showEnvironmentButton = btn;
+        me.createEnvironmentWindow().show();
     },
 
-    createRegisterDatabaseWindow: function () {
+    createEnvironmentWindow: function () {
         var me = this;
-        return me.getDatabaseRegisterDatabaseWindowView().create();
+        return me.getEnvironmentEnvironmentWindowView().create();
     },
 
-    onClickSaveDatabaseRegistration: function (button) {
+    onClickRegisterEnvironment: function (button) {
         var me = this;
-        Database.SaveDatabaseRegistration(me.getWindowFromButton(button).getDatabaseName(),
-                                          me.getWindowFromButton(button).getMachineName(),
-                                          me.getWindowFromButton(button).getConnectionString(),
-                                          me.onDatabaseRegistrationSaved);
+        Environment.RegisterEnvironment(me.getWindowFromButton(button).getEnvironmentName(),
+                                        me.getWindowFromButton(button).getConnectionString(),
+                                        me.onEnvironmentRegistered);
         me.getWindowFromButton(button).close();
+    },
+
+    onBeforeCloseRegisterEnvironment: function (window, eOpt) {
+        var me = this;
+        me.showEnvironmentButton.enable(true);
     },
 
     getWindowFromButton: function (button) {
         return button.up().up();
     },
 
-    onDatabaseRegistrationSaved: function (result) {
+    onEnvironmentRegistered: function (result) {
         var me = this;
 
         if (result.success) {
-            Ext.MessageBox.alert('Database Registration', result.databaseName);
+            Ext.MessageBox.alert('Omgeving Registratie', result.environmentName);
         } else {
-            Ext.MessageBox.alert('Database Regstration', 'Database could not be registered');
+            Ext.MessageBox.alert('Omgeving Registratie', 'Omgeving kon niet worden geregistreerd');
         }
     }
 

@@ -3,8 +3,7 @@ Ext.define('GenForm.test.store.SubstanceUnitNameStoreTests', {
 
     tests: function () {
         var me = this, store,
-            storeName = 'GenForm.store.product.SubstanceUnitName',
-            waitingTime = 200;
+            storeName = 'GenForm.store.product.SubstanceUnitName';
 
         beforeEach(function () {
             if (!store) store = me.createStore();
@@ -68,7 +67,7 @@ Ext.define('GenForm.test.store.SubstanceUnitNameStoreTests', {
 
             waitsFor(function () {
                 return result && result.length == 5 || false;
-            }, 'SubstanceUnitNameStore to load', waitingTime);
+            }, 'SubstanceUnitNameStore to load', GenForm.test.waitingTime);
         });
 
         it('now contain a SubstanceUnit mg', function () {

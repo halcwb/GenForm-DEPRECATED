@@ -5,7 +5,7 @@ Ext.define('GenForm.model.product.Product', {
 
     fields: [
             { name: 'ProductId',   type: 'integer',  mapping: 'ProductId' },
-            { name: 'ProductName', type: 'string',   mapping: 'ProductName' },
+            { name: 'Name', type: 'string',   mapping: 'Name' },
             { name: 'GenericName', type: 'string',   mapping: 'GenericName' },
             { name: 'BrandName',   type: 'string',   mapping: 'BrandName' },
             { name: 'ShapeName',   type: 'string',   mapping: 'ShapeName' },
