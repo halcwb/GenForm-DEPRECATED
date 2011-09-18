@@ -71,7 +71,7 @@ namespace Informedica.Settings.Tests
         public void FindPathOfSettingsFilterShouldReturnFiles()
         {
             var file = "GenFormSettings.xml";
-            FileFinder.Filter = new List<string> { @"Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\" };
+            FileFinder.Filter = new List<string> { @"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\" };
             var found = FileFinder.FindPath(file);
 
             Assert.IsTrue(found.Count() > 0);

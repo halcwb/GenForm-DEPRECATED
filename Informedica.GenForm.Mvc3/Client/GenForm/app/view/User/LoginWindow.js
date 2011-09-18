@@ -1,7 +1,11 @@
 Ext.define('GenForm.view.user.LoginWindow', {
     extend: 'GenForm.lib.view.ui.LoginWindow',
     alias: 'widget.userlogin',
-    itemId: 'loginWindow',
+    itemId: 'wndLogin',
+
+    mixins: {
+        buttonFinder: 'GenForm.lib.util.mixin.ButtonFinder'
+    },
 
     initComponent: function() {
         var me = this;
@@ -14,7 +18,12 @@ Ext.define('GenForm.view.user.LoginWindow', {
 
     getLoginButton: function () {
         var me = this;
-        return me.dockedItems.get('barLogin').items.get('btnLogin');
+        return me.findButton('btnLogin');
+    },
+
+    getAddEnvironmentButton: function () {
+        var me = this;
+        return me.findButton('btnAddEnvironment');
     },
 
     getUserNameField: function () {
@@ -25,6 +34,11 @@ Ext.define('GenForm.view.user.LoginWindow', {
     getPasswordField: function () {
         var me = this;
         return me.getForm().findField('Password');
+    },
+
+    getEnvironmentField: function () {
+        var me = this;
+        return me.getForm().findField('Environment');
     },
 
     getForm: function () {

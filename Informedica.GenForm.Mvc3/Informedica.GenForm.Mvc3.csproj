@@ -44,9 +44,6 @@
     <Reference Include="Ext.Direct.Mvc">
       <HintPath>..\..\ext-direct-mvc\version-3.0.0\Mvc3Demo\bin\Ext.Direct.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Informedica.GenForm.Tests">
-      <HintPath>..\Informedica.GenForm.DataAccess.Tests\bin\Debug\Informedica.GenForm.Tests.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\ext-direct-mvc\version-3.0.0\Mvc3Demo\bin\Newtonsoft.Json.dll</HintPath>
@@ -93,6 +90,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="TestFixtures\ProductTestFixtures.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client\GenForm\.idea\encodings.xml" />

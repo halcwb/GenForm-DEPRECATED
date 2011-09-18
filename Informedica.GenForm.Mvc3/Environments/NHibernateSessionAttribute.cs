@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using Informedica.GenForm.Assembler;
 using NHibernate;
@@ -17,15 +18,20 @@ namespace Informedica.GenForm.Mvc3.Environments
         {
             get
             {
-                return MvcApplication.SessionFactory;
+                return MvcApplication.GetSessionFactory(GetEnvironment());
             }
+        }
+
+        private static string GetEnvironment()
+        {
+            var environment = (string)HttpContext.Current.Session["environment"];
+            return environment ?? "GenFormTest";
         }
 
         public override void OnActionExecuting(
           ActionExecutingContext filterContext)
         {
-            string environment = "GenFormTest";
-            ObjectFactory.Configure(x => x.For<ISessionFactory>().HttpContextScoped().Use(GenFormApplication.GetSessionFactory(environment)));
+            ObjectFactory.Configure(x => x.For<ISessionFactory>().HttpContextScoped().Use(GenFormApplication.GetSessionFactory(GetEnvironment())));
             var session = SessionFactory.OpenSession();
             CurrentSessionContext.Bind(session);
         }

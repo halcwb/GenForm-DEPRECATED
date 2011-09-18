@@ -44,6 +44,10 @@ namespace Informedica.GenForm.Library.Services.Users
         }
 
 
+        public static string GetLoggedIn()
+        {
+            return GenFormPrincipal.GetPrincipal().Identity.Name;
+        }
     }
 }
 

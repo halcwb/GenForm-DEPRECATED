@@ -85,7 +85,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Isolate.Fake.StaticMethods(typeof(LoginServices));
             Isolate.WhenCalled(() => LoginServices.Login(user)).IgnoreCall();
 
-            var response = controller.Login(InvalidUser, InvalidPassword, "GenFormTest");
+            var response = controller.Login(InvalidUser, InvalidPassword);
 
             Assert.IsFalse(GetSuccessValueFromActionResult(response));
         }
@@ -101,8 +101,9 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Isolate.WhenCalled(() => LoginServices.Login(user)).IgnoreCall();
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(user)).WillReturn(true);
             var controller = new LoginController();
+            Isolate.NonPublic.WhenCalled(controller, "SetLoginCookie").IgnoreCall();
 
-            var response = controller.Login(ValidUser, ValidPassword, "GenFormTest");
+            var response = controller.Login(ValidUser, ValidPassword);
 
             Assert.IsTrue(GetSuccessValueFromActionResult(response));
         }

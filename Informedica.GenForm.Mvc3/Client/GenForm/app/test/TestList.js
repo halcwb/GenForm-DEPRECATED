@@ -6,6 +6,7 @@ Ext.define('GenForm.test.TestList', {
         'GenForm.test.extjs.ModelTests',
         'GenForm.test.extjs.StoreTests',
         'GenForm.test.util.FormCreatorTests',
+        'GenForm.test.server.EnvironmentTests',
         'GenForm.test.server.ProductTests',
         'GenForm.test.controller.LoginControllerTests',
         'GenForm.test.controller.ProductControllerTests',

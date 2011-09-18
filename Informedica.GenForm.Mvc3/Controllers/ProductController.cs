@@ -2,6 +2,7 @@
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.Services.Products;
+using Informedica.GenForm.Mvc3.Environments;
 using Newtonsoft.Json.Linq;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
@@ -142,6 +143,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new { success, data = package, message });
         }
 
+        [Transaction]
         public ActionResult AddNewUnit(JObject unitDto)
         {
             var success = true;

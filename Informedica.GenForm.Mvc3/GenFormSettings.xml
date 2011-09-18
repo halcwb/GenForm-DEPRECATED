@@ -1,4 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <environments>
+  <environment name="GenFormTest" connectionString="WsE/6d7gcG1tg9gh6GvjNDLhsz3XnDOBDlVChLeoX389GVuglGaBA0A3ow/0D7kqJiEdBnpLEMRPW2vHQQqVKOkISrgJ/3I8y/q199CuoMXdWITwBmzvOr3x3erqZqIh" />
+  <environment name="Test" connectionString="Ij7pY/7G9bU0p9FIdf4upQ==" />
   <environment name="ProductieDatabase" connectionString="WsE/6d7gcG1tg9gh6GvjNDLhsz3XnDOBDlVChLeoX389GVuglGaBA0A3ow/0D7kqDAyscnd1cDjTblT9ZZUyuKWbbe+oHmpwNCHaueUQA5vMOnSI5lv8I7wIsIGt352i" />
 </environments>

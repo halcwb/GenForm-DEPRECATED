@@ -15,5 +15,13 @@ Ext.define('GenForm.test.view.LoginWindowTests', {
         it('have a login button', function () {
             expect(loginWindow.getLoginButton().isXType('button')).toBeTruthy();
         });
+
+        it('have a environment combobox', function () {
+            expect(loginWindow.getEnvironmentField().isFormField).toBeTruthy();
+        });
+
+        it('have an add environment button', function () {
+            expect(loginWindow.getAddEnvironmentButton().isXType('button')).toBeTruthy();
+        });
     }
 });

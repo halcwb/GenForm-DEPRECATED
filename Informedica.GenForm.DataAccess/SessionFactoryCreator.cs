@@ -18,9 +18,10 @@ namespace Informedica.GenForm.DataAccess
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
         }
 
+        [Obsolete]
         public static ISessionFactory CreateSessionFactory()
         {
-            return CreateSessionFactory(string.Empty);
+            return CreateSessionFactory("GenFormTest");
         }
 
         private static void BuildSchema(Configuration config)
@@ -32,15 +33,10 @@ namespace Informedica.GenForm.DataAccess
             new SchemaExport(config).Create(false, true);
         }
 
-        private static string GetConnectionString()
-        {
-            return DatabaseConnection.GetLocalConnectionString(
-                DatabaseConnection.DatabaseName.GenFormTest);
-        }
-
         public static ISessionFactory CreateSessionFactory(string environment)
         {
-            var connectString = String.IsNullOrEmpty(environment) ? GetConnectionString() :  GetConnectionString(environment);
+            var connectString = GetConnectionString(environment);
+            connectString = connectString.Replace("\\\\", "\\");
 
             return Fluently.Configure()
                 .Database(
@@ -56,12 +52,11 @@ namespace Informedica.GenForm.DataAccess
                                     })
                 .ExposeConfiguration(BuildSchema)
                 .BuildSessionFactory();
-    
         }
 
         private static string GetConnectionString(string environment)
         {
-            return DatabaseConnection.GetEnvironment(environment);
+            return new DatabaseConnection().GetConnectionString(environment);
         }
     }
 }

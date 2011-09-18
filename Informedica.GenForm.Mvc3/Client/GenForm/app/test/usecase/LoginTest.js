@@ -41,7 +41,6 @@ Ext.define('GenForm.test.usecase.LoginTest', {
                     if (results[0].cfg.msg === loginMessage)
                     {
                         Ext.ComponentQuery.query('button[text=OK]')[0].btnEl.dom.click();
-                        //setTimeout("Ext.ComponentQuery.query('button[text=OK]')[0].btnEl.dom.click();", GenForm.test.waitingTime - 2000);
                         return true;
                     }
                 }
@@ -68,18 +67,18 @@ Ext.define('GenForm.test.usecase.LoginTest', {
 
             me.clickButton(button);
             loginMessage = refusalMessage;
-            waitsFor(me.checkLoginMessage, 'waiting for a refusal message', GenForm.test.waitingTime);
+            waitsFor(me.checkLoginMessage, 'refusal message', GenForm.test.waitingTime);
         });
 
         it('User can set username and password', function () {
-            var userField = me.getFormField('username'),
-                passwField = me.getFormField('password');
+            var userField = me.getFormField('UserName'),
+                passwField = me.getFormField('Password');
 
             me.setFormField(userField, "Invalid");
             me.setFormField(passwField, "Invalid");
 
-            expect(userField.value).toBe("Invalid");
-            expect(passwField.value).toBe("Invalid");
+            expect(userField.getValue()).toBe("Invalid");
+            expect(passwField.getValue()).toBe("Invalid");
         });
 
         it('If Username or password is invalid, user still cannot login', function () {
@@ -87,20 +86,52 @@ Ext.define('GenForm.test.usecase.LoginTest', {
 
             me.clickButton(button);
             loginMessage = refusalMessage;
-            waitsFor(me.checkLoginMessage, 'waiting for refusal message', GenForm.test.waitingTime)
+            waitsFor(me.checkLoginMessage, 'refusal message', GenForm.test.waitingTime)
         });
 
-        it('User can login using a valid name and password', function () {
-            var button = me.getLoginButton(),
-                userField = me.getFormField('username'),
-                passwField = me.getFormField('password');
+        it('User valid user cannot login in, in an invalid environment', function () {
+            var userField = me.getFormField('UserName'),
+                passwField = me.getFormField('Password'),
+                environment = me.getFormField('Environment');
 
             me.setFormField(userField, "Admin");
             me.setFormField(passwField, "Admin");
+            me.setFormField(environment, "GenFormProduction");
 
-            me.clickButton(button);
+            me.clickButton(me.getLoginButton());
+            loginMessage = refusalMessage;
+            waitsFor(me.checkLoginMessage, 'unsuccessfull login', GenForm.test.waitingTime);
+
+        });
+
+        it('User can login using a valid name and password', function () {
+            var userField = me.getFormField('UserName'),
+                passwField = me.getFormField('Password'),
+                environment = me.getFormField('Environment');
+
+            me.setFormField(userField, "Admin");
+            me.setFormField(passwField, "Admin");
+            me.setFormField(environment, "GenFormTest");
+
+            me.clickButton(me.getLoginButton());
             loginMessage = successMessage;
-            waitsFor(me.checkLoginMessage, "waiting for successfull login", GenForm.test.waitingTime);
+            waitsFor(me.checkLoginMessage, "successfull login", GenForm.test.waitingTime);
+        });
+
+        it('After login the logged in user can be retrieved', function () {
+            var loggedIn;
+
+            Login.GetLoggedInUser(function (result) {
+                loggedIn = result.User;
+            });
+
+            waitsFor(function () {
+                return loggedIn ? true : false;
+            });
+
+            runs(function () {
+                expect(loggedIn).toBe('Admin');
+            });
         });
 
     }

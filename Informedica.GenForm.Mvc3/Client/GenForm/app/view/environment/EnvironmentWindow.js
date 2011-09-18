@@ -1,12 +1,22 @@
 Ext.define('GenForm.view.environment.EnvironmentWindow', {
     extend: 'GenForm.lib.view.ui.EnvironmentWindow',
+    alias: 'widget.environmentwindow',
 
     itemId: 'wndEnvironment',
+
+    mixins: {
+        buttonFinder: 'GenForm.lib.util.mixin.ButtonFinder'
+    },
 
     initComponent: function () {
         var me = this;
 
         me.callParent(arguments);
+    },
+    
+    getRegisterEnvironmentButton: function () {
+        var me = this;
+        return me.findButton('btnRegisterEnvironment');
     },
 
     getEnvironmentName: function () {

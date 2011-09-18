@@ -43,15 +43,11 @@ namespace Informedica.Settings
             _fileName = fileName;
             _list = new List<string>();
 
-            foreach (var drive in DriveInfo.GetDrives())
+            foreach (var path in Filter)
             {
-                if (!drive.IsReady) continue;
-
-                foreach (var root in TryGetDirectories(drive.RootDirectory))
-                {
-                    FindPathInDir(root);
-                }
+                _list.AddRange(new DirectoryInfo(path).GetFiles(_fileName, SearchOption.AllDirectories).Select(f => f.FullName));
             }
+
             return _list;
         }
 
@@ -59,67 +55,6 @@ namespace Informedica.Settings
         {
             get { return _filter; }
             set { _filter = value; }
-        }
-
-        private static bool CanSearchDirectory(DirectoryInfo dir)
-        {
-            if (dir.Attributes == FileAttributes.Hidden || dir.Attributes == FileAttributes.System || dir.Attributes == FileAttributes.Offline) return false;
-            return true;
-        }
-
-        private void FindPathInDir(DirectoryInfo dir)
-        {
-            if (!CanSearchDirectory(dir)) return;
-
-            if (TryGetDirectories(dir).Count() == 0)
-            {
-                AddFoundToList(dir);
-                return;
-            }
-            
-            AddFoundToList(dir);
-            foreach (var child in TryGetDirectories(dir))
-            {
-                FindPathInDir(child);
-            }
-        }
-
-        private void AddFoundToList(DirectoryInfo dir)
-        {
-            _list.AddRange(TryGetFiles(dir).Where(file => file.Name == _fileName).Select(file => file.FullName));
-        }
-
-        private static IEnumerable<DirectoryInfo> TryGetDirectories(DirectoryInfo dir)
-        {
-            try
-            {
-                if (_filter.Count() == 0) return dir.GetDirectories();
-
-                var list = new List<DirectoryInfo>();
-                foreach (var item in _filter)
-                {
-                    string filter = item.Substring(0, item.LastIndexOf("\\"));
-                    list.AddRange(dir.GetDirectories(filter));
-                }
-                _filter = new List<string>();
-                return list;
-            }
-            catch (Exception)
-            {
-                return new List<DirectoryInfo>();
-            }
-        }
-
-        private static IEnumerable<FileInfo> TryGetFiles(DirectoryInfo dir)
-        {
-            try
-            {
-                return dir.GetFiles();
-            }
-            catch (Exception)
-            {
-                return new List<FileInfo>();
-            }
         }
     }
 }

@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Mvc3.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TypeMock.ArrangeActAssert;
 
 namespace Informedica.GenForm.Tests.RegressionTests
 {
@@ -65,7 +69,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
             var loginController = CreateLoginController();
             
             // Execute
-            var result = loginController.Login(SystemUserName, SystemUserPassword, "GenFormTest");
+            var result = loginController.Login(SystemUserName, SystemUserPassword);
             
             // Verify
             Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "System user could not successfully log in");
@@ -78,7 +82,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         {
             var loginController = CreateLoginController();
 
-            var result = loginController.Login(SystemUserName, "bar", "GenFormTest");
+            var result = loginController.Login(SystemUserName, "bar");
 
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "System should not be able with password bar");
         }
@@ -88,7 +92,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         {
             var loginController = CreateLoginController();
 
-            var result = loginController.Login("foo", "bar", "GenFormTest");
+            var result = loginController.Login("foo", "bar");
 
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "User foo cannot login with password bar (if not added as users)");
         }
@@ -98,7 +102,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         {
             var loginController = CreateLoginController();
 
-            var result = loginController.Login("", "bar", "GenFormTest");
+            var result = loginController.Login("", "bar");
 
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "User without username cannot log in");
         }
@@ -108,15 +112,25 @@ namespace Informedica.GenForm.Tests.RegressionTests
         {
             var loginController = CreateLoginController();
 
-            var result = loginController.Login("foo", "", "GenFormTest");
+            var result = loginController.Login("foo", "");
 
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "User without a password cannot login");
         }
 
         private static LoginController CreateLoginController()
         {
-            return new LoginController();
+            var loginController =  new LoginController();
+            loginController.ControllerContext = new ControllerContext()
+            {
+                Controller = loginController,
+                RequestContext =  new RequestContext(MockHttpContext(), new RouteData())
+            };
+            return loginController;
         }
 
+        private static HttpContextBase MockHttpContext()
+        {
+            return Isolate.Fake.Instance<HttpContextBase>();
+        }
     }
 }
