@@ -1,0 +1,68 @@
+Ext.define('GenForm.test.server.EnvironmentTests', {
+    describe: 'EnvironmentControllerShould',
+
+    tests: function () {
+        //noinspection JSUnusedGlobalSymbols
+        var me = this,
+            connection = 'Data Source=HAL-WIN7\\INFORMEDICA;Initial Catalog=GenFormTest;Integrated Security=True';
+
+        it('be defined', function () {
+            expect(Environment.GetEnvironments).toBeDefined();
+        });
+
+        it('return a  success value (true or false) when RegisterEnvironment is called', function () {
+            var result;
+
+            Environment.RegisterEnvironment('GenFormTest', connection, function (response) {
+                  result = response;
+                  result.success = true;
+            });
+
+            waitsFor(function () {
+                return result;
+            }, 'return of a success value', GenForm.test.waitingTime);
+
+            runs(function () {
+                expect(result.success).toBeTruthy();
+            });
+        });
+
+        it ('return false when trying to register an environment with an invalid connection', function () {
+            var result;
+
+            Environment.RegisterEnvironment('GenFormTest', 'invalid connection', function (response) {
+                  result = response;
+            });
+
+            waitsFor(function () {
+                return result;
+            }, 'return of a success value', GenForm.test.waitingTime);
+
+            runs(function () {
+                expect(result.success).toBeFalsy();
+            });
+
+        });
+
+        it ('return true when registering an environment with a valid connection', function () {
+            var result;
+
+            Environment.RegisterEnvironment('GenFormTest', connection, function (response) {
+                  result = response;
+            });
+
+            waitsFor(function () {
+                return result;
+                if (!result.success) {
+                    console.log(result);
+                }
+            }, 'return of a success value', GenForm.test.waitingTime);
+
+            runs(function () {
+                expect(result.success).toBeTruthy();
+            });
+
+        });
+
+    }
+});

@@ -82,21 +82,21 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
             Assert.IsTrue(EnvironmentServices.TestDatabaseConnection(_environment), "Production database should exists");
         }
 
-        private static void SetUpValidDatabaseSetting()
-        {
-            _environment.Name = "ProductieDatabase";
-            _environment.ConnectionString =
-                @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
-        }
-
 
         [TestMethod]
         public void RegisterValidDatabaseSetting()
         {
             SetUpValidDatabaseSetting();
-            EnvironmentServices.RegisterDatabaseSetting(_environment);
+            EnvironmentServices.RegisterEnvironment(_environment);
 
             Assert.IsTrue(EnvironmentServices.TestDatabaseConnection(_environment), "A valid database setting should be registered");
+        }
+
+        private static void SetUpValidDatabaseSetting()
+        {
+            _environment.Name = "ProductieDatabase";
+            _environment.ConnectionString =
+                @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
         }
     }
 }

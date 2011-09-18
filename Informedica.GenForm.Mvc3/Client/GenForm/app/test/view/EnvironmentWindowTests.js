@@ -41,6 +41,10 @@ Ext.define('GenForm.test.view.EnvironmentWindowTests', {
             me.setConnectionStringField('test');
             expect(me.getConnectionStringField().value).toBe('test');
         });
+
+        it('Have a register environment button', function () {
+            expect(envRegWindow.getRegisterEnvironmentButton().isXType('button')).toBeTruthy();
+        });
     }
 
 });

@@ -39,13 +39,19 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize]
-        public static void MyClassInitialize(TestContext testContext) { DatabaseCleaner.CleanDataBase(); }
+        //[ClassInitialize]
+        //public static void MyClassInitialize(TestContext testContext) {}
         
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
         //
+
+        [TestInitialize]
+        public void CleanDatabase()
+        {
+            DatabaseCleaner.CleanDataBase();
+        }
 
         #endregion
 

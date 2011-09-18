@@ -6,6 +6,5 @@ namespace Informedica.GenForm.Library.Security
     {
         String UserName { get; }
         String Password { get; }
-        string Environment { get; }
     }
 }

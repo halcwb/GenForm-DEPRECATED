@@ -14,8 +14,8 @@ Ext.define('GenForm.controller.user.Login', {
         var me = this;
 
         this.control({
-            'toolbar button[action=login]': {
-                click: me.onClickValidateLogin
+            'toolbar button[itemId=btnLogin]': {
+                click: me.onClickLogin
             },
             'button[itemId=btnAddEnvironment]': {
                 click: me.showEnvironmentWindow
@@ -35,19 +35,26 @@ Ext.define('GenForm.controller.user.Login', {
         return window;
     },
 
-    onClickValidateLogin: function(button) {
-        var me = this, win, form, record, vals;
+    onClickLogin: function (button) {
+        var me = this, win;
 
         win = button.up('window');
         me.loginWindow = win;
-        form = win.down('form');
-        record = form.getRecord();
-        vals = form.getValues();
 
-        Login.Login(vals.username, vals.password, this.loginCallBackFunction, me);
+        Login.SetEnvironment(win.getEnvironmentField().value, me.onEnvironmentSet, me);
     },
 
-    loginCallBackFunction: function (result) {
+    onEnvironmentSet: function(result) {
+        var me = this, win = me.loginWindow;
+
+        if (!result.success === true) {
+            return;
+        }
+
+        Login.Login(win.getUserNameField().value, win.getPasswordField().value, this.loginCallback, me);
+    },
+
+    loginCallback: function (result) {
         var me = this;
         me.loggedIn = result.success;
         
@@ -97,7 +104,7 @@ Ext.define('GenForm.controller.user.Login', {
         var me = this;
 
         if (result.success) {
-            Ext.MessageBox.alert('Omgeving Registratie', result.environmentName);
+            Ext.MessageBox.alert('Omgeving Registratie', result.Environment);
         } else {
             Ext.MessageBox.alert('Omgeving Registratie', 'Omgeving kon niet worden geregistreerd');
         }

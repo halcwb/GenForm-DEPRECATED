@@ -13,7 +13,7 @@ namespace Informedica.GenForm.Library.Services.Databases
             return GetDatabaseConnection().TestConnection(environment.ConnectionString);
         }
 
-        public static bool RegisterDatabaseSetting(IEnvironment environment)
+        public static bool RegisterEnvironment(IEnvironment environment)
         {
             if(!TestDatabaseConnection(environment)) return  false;
 

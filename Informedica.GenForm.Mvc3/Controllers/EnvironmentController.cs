@@ -14,23 +14,21 @@ namespace Informedica.GenForm.Mvc3.Controllers
         //
         // GET: /Database/
 
-        [Transaction]
         public ActionResult GetEnvironments()
         {
             var names = new List<string> { "GenFormTest", "GenFormAcceptatie", "GenFormProductie" }; //ToDo: EnvironmentServices.GetDatabases();
             IList<object> list = new List<object>();
             foreach (var name in names)
             {
-                list.Add(new {DatabaseName = name});
+                list.Add(new {Environment = name});
             }           
             return this.Direct(list);
         }
 
-        [Transaction]
-        public ActionResult SaveDatabaseRegistration(String databaseName, String connectionString)
+        public ActionResult RegisterEnvironment(String environment, String connectionString)
         {
-            var success = SetSetting(databaseName, connectionString);
-            return this.Direct(new {success, databaseName});
+            var success = SetSetting(environment, connectionString);
+            return this.Direct(new {success, Environment = environment});
         }
 
 
@@ -38,8 +36,10 @@ namespace Informedica.GenForm.Mvc3.Controllers
         {
             var setting = CreateSettings(name, value);
             EnvironmentServices.MapSettingsPath(HttpContext.ApplicationInstance.Server.MapPath("~/"));
-            EnvironmentServices.RegisterDatabaseSetting(setting);
+            
+            if (!EnvironmentServices.TestDatabaseConnection(setting)) return false;
 
+            EnvironmentServices.RegisterEnvironment(setting);
             return true;
         }
 

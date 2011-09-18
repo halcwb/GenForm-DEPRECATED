@@ -13,12 +13,11 @@ namespace Informedica.Settings
         static readonly object LockThis = new object();
 
         private XDocument _settingsDoc = new XDocument();
-        private string _path = @"Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\";
+        private string _path = @"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.Mvc3\";
 
         private readonly string _key = SecurityKey.Key;
         private readonly SymCryptography _crypt = new SymCryptography(SymCryptography.ServiceProviderEnum.Rijndael);
 
-        private const string Drive = @"C:/";
         private const string Environments = "environments";
         private const string ConnectionString = "connectionString";
         private const string EnvironmentElement = "environment";
@@ -52,7 +51,8 @@ namespace Informedica.Settings
             var file = GetFile();
             if (!System.IO.File.Exists(file))
             {
-                throw new Exception("Could not find settings file in path: " + file);
+                file = CreateFile();
+                Initialize();
             }
             _settingsDoc = XDocument.Load(file);
         }
@@ -85,19 +85,26 @@ namespace Informedica.Settings
 
         private string CreateFile()
         {
-            var file = Drive + _path + GenformsettingsXml;
-            //_settingsDoc.
-            //_settingsDoc.AppendChild(_settingsDoc.CreateElement("environments"));
-            _settingsDoc.AddFirst(new XElement(Environments));
-            _settingsDoc.Save(file);
-            
+            _settingsDoc = new XDocument();
+            var file = _path + GenformsettingsXml;
+
+            try
+            {
+                _settingsDoc.AddFirst(new XElement(Environments));
+                _settingsDoc.Save(file);
+
+            }
+            catch (Exception e)
+            {
+                throw new SettingsManagerException(file, e);
+            }            
             return file;
         }
 
         private string GetFile()
         {
             FileFinder.Filter = new List<string> {_path};
-            string file = FileFinder.FindPath(GenformsettingsXml).FirstOrDefault();
+            var file = FileFinder.FindPath(GenformsettingsXml).FirstOrDefault();
             return file;
         }
 
@@ -203,6 +210,14 @@ namespace Informedica.Settings
         private IEnumerable<XElement> EnvironmentElements
         {
             get { return EnvironmentsRoot.Elements(); }
+        }
+    }
+
+    public class SettingsManagerException : Exception
+    {
+        public SettingsManagerException(string file, Exception exception) : base("Could not create: " + file + " throws error:" + exception)
+        {
+            
         }
     }
 }

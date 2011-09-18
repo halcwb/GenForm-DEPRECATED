@@ -11,6 +11,8 @@ namespace Informedica.Settings.Tests
     [TestClass()]
     public class SettingsManagerTests
     {
+        private const string EnvironmentPath = @"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.Mvc3\";
+        private const string EnvironmentConnectionString = @"Data Source=HAL-WIN7\\INFORMEDICA;Initial Catalog=GenFormTest;Integrated Security=True";
 
 
         private TestContext testContextInstance;
@@ -78,6 +80,21 @@ namespace Informedica.Settings.Tests
             var connectionString = "TestConnection";
 
             SettingsManager.Instance.WriteSecureSetting(environment, connectionString);
+        }
+
+        [TestMethod]
+        public void ThatSettingsManagerCanBeInitializedUsingExistingPath()
+        {
+            SettingsManager.Instance.Initialize(EnvironmentPath);
+        }
+
+        [TestMethod]
+        public void ThatSettingsManagerCanRegisterEnvironmentInPath()
+        {
+            SettingsManager.Instance.Initialize(EnvironmentPath);
+            SettingsManager.Instance.WriteSecureSetting("GenFormTest", EnvironmentConnectionString);
+
+            Assert.AreEqual(EnvironmentConnectionString, SettingsManager.Instance.ReadSecureSetting("GenFormTest"));
         }
     }
 }

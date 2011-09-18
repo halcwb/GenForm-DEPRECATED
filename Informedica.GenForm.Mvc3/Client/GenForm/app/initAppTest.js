@@ -33,6 +33,7 @@ Ext.onReady(function () {
         me.showLoginWindow();
         
         testLoader.loadTests(testList);
+        GenForm.test.waitingTime = 500;
 
         jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
         jasmine.Queue(jasmine.getEnv());

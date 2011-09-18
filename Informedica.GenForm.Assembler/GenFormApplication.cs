@@ -14,7 +14,6 @@ namespace Informedica.GenForm.Assembler
         private static GenFormApplication _instance;
         private static readonly Object LockThis = new object();
         
-        private static ISessionFactory _defaultFactory;
         private static readonly IDictionary<string, ISessionFactory> Factories = new ConcurrentDictionary<string, ISessionFactory>();
 
         private GenFormApplication() {}
@@ -31,7 +30,6 @@ namespace Informedica.GenForm.Assembler
                             var instance = new GenFormApplication();
                             Thread.MemoryBarrier();
                             _instance = instance;
-                            _defaultFactory = CreateSessionFactory();
                             Thread.MemoryBarrier();
                         }
                     }
@@ -48,13 +46,8 @@ namespace Informedica.GenForm.Assembler
         {
             get
             {
-                return _defaultFactory;
+                return GetSessionFactory("GenFormTest");
             }
-        }
-
-        private static ISessionFactory CreateSessionFactory()
-        {
-            return SessionFactoryCreator.CreateSessionFactory();            
         }
 
         public static void Initialize()
@@ -69,8 +62,6 @@ namespace Informedica.GenForm.Assembler
 
         public static ISessionFactory GetSessionFactory(string environment)
         {
-            // Todo: Temp hack to enable default test environment
-            if (environment == "GenFormTest") environment = String.Empty;
             if (!Factories.ContainsKey(environment))
             {
                 Factories.Add(environment, SessionFactoryCreator.CreateSessionFactory(environment));

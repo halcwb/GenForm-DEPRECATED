@@ -18,7 +18,7 @@ Ext.define('GenForm.lib.view.ui.EnvironmentWindow', {
                 items: [
                     {
                         xtype: 'fieldset',
-                        itemId: 'flsEnvironmentDetails',
+                        itemId: 'flsEnvironment',
                         title: 'Omgeving Details',
                         items: [
                             {

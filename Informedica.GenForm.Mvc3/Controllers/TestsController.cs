@@ -4,7 +4,7 @@ using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.Services.Products;
-using Informedica.GenForm.Tests.Fixtures;
+using Informedica.GenForm.Mvc3.TestFixtures;
 using Newtonsoft.Json.Linq;
 
 namespace Informedica.GenForm.Mvc3.Controllers
