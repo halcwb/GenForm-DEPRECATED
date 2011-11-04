@@ -71,7 +71,9 @@ Ext.define('GenForm.test.view.ProductSubstanceGridTests', {
         });
 
         it('selectionmodel of grid should be rowmodel', function () {
-            expect(me.getProductSubstanceGrid().getSelectionModel().alias === 'selection.rowmodel').toBe(true);
+            var selectionModel = me.getProductSubstanceGrid().getSelectionModel().alias[0];
+            if (selectionModel !== 'selection.rowmodel') console.log(selectionModel);
+            expect(selectionModel === 'selection.rowmodel').toBe(true);
         });
 
         it('grid should contain one row from teststore', function () {

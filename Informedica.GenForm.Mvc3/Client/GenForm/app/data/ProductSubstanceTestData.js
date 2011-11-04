@@ -8,13 +8,12 @@
 Ext.define('GenForm.data.ProductSubstanceTestData', {
     extend: 'Ext.data.Store',
     storeId: 'productSubstanceTestStore',
-    fields: [ 'OrderNumber', 'GenericName', 'Quantity', 'Unit'],
 
     model: 'GenForm.model.product.ProductSubstance',
 
     data: {
         'items' : [
-            { 'OrderNumber': '1', 'GenericName': 'paracetamol', 'Quantity': '500', 'Unit': 'mg' }
+            { 'SortOrder': '1', 'Substance': 'paracetamol', 'Quantity': '500', 'Unit': 'mg' }
         ]
     },
 

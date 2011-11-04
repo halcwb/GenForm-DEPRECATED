@@ -6,7 +6,7 @@ Ext.define('GenForm.test.extjs.ModelTests', {
         var me = this, instance,
             namespace = 'GenForm.test.extjs.modeltests.',
             testModel = (namespace + 'TestModel'),
-            testModelWithoutStore = (namespace + 'ModelWithoutStore');
+            testModelWithoutProxy = (namespace + 'ModelWithoutStore');
 
         Ext.define(testModel, {
             extend: 'Ext.data.Model',
@@ -20,10 +20,10 @@ Ext.define('GenForm.test.extjs.ModelTests', {
                 type: 'direct',
                 paramsAsHash: true,
                 // If I omit the below line, store test throws an error, but not model tests
-                directFn: Product.GetProduct,
+                directFn: GenForm.server.UnitTest.GetProduct,
                 api: {
-                    read: Tests.GetProduct,
-                    submit: Tests.SaveProduct
+                    read: GenForm.server.UnitTest.GetProduct,
+                    submit: GenForm.server.UnitTest.SaveProduct
                 }
             },
             reader: {
@@ -33,7 +33,7 @@ Ext.define('GenForm.test.extjs.ModelTests', {
             }
         });
 
-        Ext.define(testModelWithoutStore, {
+        Ext.define(testModelWithoutProxy, {
            extend: 'Ext.data.Model',
 
             fields: [
@@ -70,7 +70,7 @@ Ext.define('GenForm.test.extjs.ModelTests', {
         it('that test model can be loaded using a direct proxy', function () {
             var record, model = me.getTestModel();
 
-            model.load('123456', {
+            model.load(GenForm.test.guidGenerator.createGuid(), {
                 callback: function (result) {
                     record = result;
                 }
@@ -78,18 +78,19 @@ Ext.define('GenForm.test.extjs.ModelTests', {
 
             waitsFor(function () {
                 return record ? true: false;
-            }, 'waiting for Product.GetProduct', GenForm.test.waitingTime);
+            }, 'GenForm.server.Tests.GetProduct', GenForm.test.waitingTime);
         });
 
         it('testing the model with a store', function () {
             var result,
                 store = Ext.create('Ext.data.DirectStore', {
-                model: testModel
+                model: testModel,
+                proxy: {
+                    type: 'direct',
+                    directFn: GenForm.server.UnitTest.GetProducts
+                }
             });
 
-            store.setProxy(me.getTestModel().getProxy());
-
-            // Note, do not pass a selection string like in model.load!!
             store.load({
                 callback: function (record) {
                     result = record;

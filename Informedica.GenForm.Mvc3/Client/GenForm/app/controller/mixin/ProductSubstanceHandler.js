@@ -5,6 +5,11 @@ Ext.define('GenForm.controller.mixin.ProductSubstanceHandler', {
         substanceHandler: 'GenForm.controller.mixin.SubstanceHandler'
     },
 
+    onAddProductSubstance: function () {
+        var me = this;
+        me.showProductSubstanceWindow();
+    },
+
     showProductSubstanceWindow: function () {
         var me = this;
         me.getProductSubstanceWindow().show();

@@ -2,19 +2,20 @@
 Ext.define('GenForm.controller.mixin.ProductHandler', {
 
     mixins: {
-        genericHandler: 'GenForm.controller.mixin.GenericHandler',
-        brandHandler: 'GenForm.controller.mixin.BrandHandler',
+        genericHandler: 'GenForm.controller.mixin.GenericNameHandler',
+        brandHandler: 'GenForm.controller.mixin.BrandNameHandler',
         shapeHandler: 'GenForm.controller.mixin.ShapeHandler',
         packageHandler: 'GenForm.controller.mixin.PackageHandler',
         unitHandler: 'GenForm.controller.mixin.UnitHandler',
-        productSubstanceHandler: 'GenForm.controller.mixin.ProductSubstanceHandler'
+        productSubstanceHandler: 'GenForm.controller.mixin.ProductSubstanceHandler',
+        substanceUnitHandler: 'GenForm.controller.mixin.SubstanceUnitHandler'
     },
 
     saveProduct: function (button) {
         var me = this,
             product = me.getProduct(button);
 
-        Product.SaveProduct(product.data, {scope: me, callback: me.onProductSaved});
+        GenForm.server.UnitTest.SaveProduct(product.data, {scope: me, callback: me.onProductSaved});
     },
 
     loadEmptyProduct: function (window) {
@@ -22,9 +23,15 @@ Ext.define('GenForm.controller.mixin.ProductHandler', {
     },
 
     onProductSaved: function (result) {
+
         if (result.success) {
-            Ext.MessageBox.alert('Product saved: ', result.data.Name);
-            Ext.ComponentQuery.query('productwindow')[0].close();
+            Ext.MessageBox.alert('Product saved: ', result.data.DisplayName);
+
+            // ToDo: ugly fix, write something better
+            Ext.Array.each(Ext.ComponentQuery.query('productwindow'), function (item) {
+                item.close();
+                item.destroy();
+            });
         } else {
             Ext.MessageBox.alert('Product could not be saved: ', result.message);
         }

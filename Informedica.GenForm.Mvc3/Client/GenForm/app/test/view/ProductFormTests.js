@@ -18,7 +18,7 @@ Ext.define('GenForm.test.view.ProductFormTests', {
         });
 
         it('have a text field for productname', function () {
-            expect(form.fields.Name).toBeDefined();
+            expect(form.fields.LabelName).toBeDefined();
         });
 
         it('have a text field for productcode', function () {
@@ -38,15 +38,23 @@ Ext.define('GenForm.test.view.ProductFormTests', {
         });
 
         it('have a combobox for shape', function () {
-            expect(form.fields.ShapeName).toBeDefined();
+            expect(form.fields.Shape).toBeDefined();
         });
 
         it('have a combobox for package', function () {
-            expect(form.fields.PackageName).toBeDefined();
+            expect(form.fields.Package).toBeDefined();
         });
 
         it('have a combobox for unit', function () {
-            expect(form.fields.UnitName).toBeDefined();
+            expect(form.fields.Unit).toBeDefined();
+        });
+
+        it('has a tab to enter productsubstances', function () {
+            expect(form.tabs.ProductSubstances).toBeDefined();
+        });
+
+        it('this productsubstances tab has a addProductSubstanceButton', function (){
+            expect(form.tabs.ProductSubstances.controls.buttons.addProductSubstance).toBeDefined();
         });
     }
 });

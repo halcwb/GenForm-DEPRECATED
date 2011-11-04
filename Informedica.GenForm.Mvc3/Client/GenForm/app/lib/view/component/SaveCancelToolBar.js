@@ -13,7 +13,7 @@ Ext.define('GenForm.lib.view.component.SaveCancelToolbar', {
 
     initComponent: function () {
         var me = this;
-        me.buttons = {};
+
         me.items = me.createItems();
         me.callParent(arguments);
     },

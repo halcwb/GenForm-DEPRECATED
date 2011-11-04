@@ -1,9 +1,9 @@
 Ext.define('GenForm.test.server.ProductTests', {
-    describe: 'ProductsShould',
+    describe: 'Server Side ProductController Should',
 
     tests: function () {
         //noinspection JSUnusedGlobalSymbols
-        var me = this, guidGenerator = Ext.create('GenForm.test.util.GuidGenerator'),
+        var me = this, guidGenerator = Ext.create('GenForm.lib.util.GuidGenerator'),
             testProduct = {
                 Id: guidGenerator.emptyGuid(),
                 Name: 'dopamine (Dynatra) 200 mg in 5 mL infusievloeistof per ampul',
@@ -25,13 +25,13 @@ Ext.define('GenForm.test.server.ProductTests', {
     
 
         it('be defined', function () {
-            expect(Product.GetProduct).toBeDefined();
+            expect(GenForm.server.Product.GetProduct).toBeDefined();
         });
 
         it('return a  success value when a method is called', function () {
             var result;
 
-            Tests.GetProduct(guidGenerator.emptyGuid(), function (response) {
+            GenForm.server.UnitTest.GetProduct({id: guidGenerator.createGuid()}, function (response) {
                   result = response;
             });
 
@@ -47,7 +47,7 @@ Ext.define('GenForm.test.server.ProductTests', {
         it('return a valid product when GetProduct is called', function () {
             var result;
 
-            Tests.GetProduct(guidGenerator.createGuid(), function (response) {
+            GenForm.server.UnitTest.GetProduct({id: guidGenerator.createGuid()}, function (response) {
                   result = response;
             });
 
@@ -65,7 +65,7 @@ Ext.define('GenForm.test.server.ProductTests', {
         it('save a fully populated product', function () {
             var result;
             testProduct.Id = guidGenerator.createGuid();
-            Tests.SaveProduct(testProduct, function (response) {
+            GenForm.server.UnitTest.SaveProduct(testProduct, function (response) {
                 result = response;
                 if (!result.success) console.log(result);
             });
@@ -83,7 +83,7 @@ Ext.define('GenForm.test.server.ProductTests', {
         it('return a saved product with id > 0', function () {
             var result;
 
-            Tests.SaveProduct(testProduct, function (response) {
+            GenForm.server.UnitTest.SaveProduct(testProduct, function (response) {
                 result = response;
             });
 
@@ -100,7 +100,7 @@ Ext.define('GenForm.test.server.ProductTests', {
             var result;
             
             testProduct.GenericName = "";
-            Tests.SaveProduct(testProduct, function (response) {
+            GenForm.server.UnitTest.SaveProduct(testProduct, function (response) {
                 result = response;
             });
 
@@ -116,8 +116,8 @@ Ext.define('GenForm.test.server.ProductTests', {
         it('delete the saved product', function () {
             var result;
 
-            testProduct.Id = 1;
-            Tests.DeleteProduct(testProduct.Id, function (response) {
+            testProduct.Id = GenForm.test.guidGenerator.createGuid();
+            GenForm.server.UnitTest.DeleteProduct({id: testProduct.Id}, function (response) {
                 result = response;
             });
             

@@ -3,25 +3,14 @@ Ext.define('GenForm.test.store.ShapeNameStoreTests', {
 
     tests: function () {
         var me = this, store,
-            storeName = 'GenForm.store.product.ShapeName';
+            storeName = 'GenForm.store.common.IdName';
 
         beforeEach(function () {
             if (!store) store = me.createStore();
         });
 
         me.createStore = function () {
-            return Ext.create(storeName);
-        };
-
-        me.setUpTestProxy = function () {
-            store.setProxy(me.getTestProxy());
-        };
-
-        me.getTestProxy = function () {
-            return Ext.create('Ext.data.proxy.Direct', {
-                type: 'direct',
-                directFn: Tests.GetShapeNames
-            });
+            return Ext.create(storeName, { directFn: GenForm.server.UnitTest.GetShapeNames });
         };
 
         it('be defined', function () {
@@ -38,25 +27,25 @@ Ext.define('GenForm.test.store.ShapeNameStoreTests', {
 
         it('return an empty record with ShapeName property', function () {
             var record = store.create();
-            expect(record.data.ShapeName).toBeDefined();
+            expect(record.data.Name).toBeDefined();
         });
 
         it('contain an item', function () {
-            store.add({ShapeName: 'test'});
+            store.add({Name: 'test'});
             expect(store.count() > 0).toBeTruthy();
         });
 
-        it('have an item with ShapeName test', function () {
-            expect(store.findExact('ShapeName', 'test') !== -1).toBe(true);
+        it('have an item with Name test', function () {
+            expect(store.findExact('Name', 'test') !== -1).toBe(true);
         });
 
         it('have test direct Fn defined', function () {
-           expect(Tests.GetShapeNames).toBeDefined();
+           expect(GenForm.server.UnitTest.GetShapeNames).toBeDefined();
         });
 
         it('load five test items', function () {
             var result;
-            me.setUpTestProxy();
+
             store.load({
                 scope   : this,
                 callback: function(records) {
@@ -71,12 +60,12 @@ Ext.define('GenForm.test.store.ShapeNameStoreTests', {
         });
 
         it('now contain a shape zetpin', function () {
-            expect(store.findExact('ShapeName', 'zetpil') != -1).toBeTruthy();
+            expect(store.findExact('Name', 'zetpil') != -1).toBeTruthy();
         });
 
         it('also contain tablet after load', function () {
-            var found = store.getAt(store.findExact('ShapeName', 'tablet'));
-            expect(found.data.ShapeName).toBe('tablet');
+            var found = store.getAt(store.findExact('Name', 'tablet'));
+            expect(found.data.Name).toBe('tablet');
         });
 
     }

@@ -1,7 +1,7 @@
 ﻿using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.Services.Users;
+using Informedica.GenForm.TestFixtures.Fixtures;
 using Informedica.GenForm.Tests;
-using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.Services

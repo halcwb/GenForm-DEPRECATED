@@ -1,13 +1,34 @@
 Ext.define('GenForm.view.product.UnitForm', {
-    extend: 'GenForm.lib.view.form.FormBase',
+    extend: 'GenForm.lib.view.ui.UnitForm',
     alias: 'widget.unitform',
 
-    createItems: function () {
-        var items = [
-            { xtype: 'textfield', name:'UnitName',   fieldLabel: 'Eenheid Naam', margin: '10 0 10 10' }
-        ];
+    initComponent: function () {
+        var me = this;
 
-        return items;
+        me.callParent(arguments);
+    },
+
+    createGrid: function () {
+        var me = this;
+        return me.createShapeGrid();
+    },
+
+    createShapeGrid: function () {
+        var me = this;
+        return me.addGrid(Ext.create('GenForm.view.product.ShapeGrid'), 'ShapeGrid');
+    },
+
+    addGrid: function (grid, name) {
+        var me = this;
+        if (!me.grids) me.grids = {};
+        me.grids[name] = grid;
+
+        return grid;
+    },
+
+    // ToDo: temp hack to get rid of load mask
+    onTabChangeLoadStore: function (panel, newTab) {
+        newTab.store.load();
     },
 
     getUnit: function () {

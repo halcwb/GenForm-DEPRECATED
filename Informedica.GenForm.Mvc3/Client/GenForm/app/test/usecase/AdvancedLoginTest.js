@@ -78,7 +78,7 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
                 } else {
                     console.log(operation);
                     console.log(records);
-                };
+                }
             });
 
             waitsFor(function () {

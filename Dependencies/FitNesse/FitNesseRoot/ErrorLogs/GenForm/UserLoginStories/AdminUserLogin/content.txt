@@ -1,0 +1,458 @@
+!3 !-slim-!
+|'''Date: '''|!-10:48:52 AM (CET) on Friday, November 4, 2011-!|
+|'''Test Page: '''|.GenForm.UserLoginStories.AdminUserLogin|
+|'''Command: '''|!-Debug\Runner.exe -r fitSharp.Slim.Service.Runner,Debug\fitsharp.dll "C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.Acceptance\bin\Debug\Informedica.GenForm.Acceptance.dll"  8086-!|
+|'''Exit code: '''|!-0-!|
+|'''Time elapsed: '''|!-6.217 seconds-!|
+----'''Standard Output:'''
+{{{NHibernate: USE [GenFormTest]
+
+Declare @ResetIdentity Bit
+Set @ResetIdentity = 1
+
+Declare @SQL VarChar(500)
+Declare @TableName VarChar(255)
+Declare @ConstraintName VarChar(500)
+Declare curAllForeignKeys SCROLL CurSor For Select Table_Name,Constraint_Name From Information_Schema.Table_Constraints Where Constraint_Type='FOREIGN KEY'
+Open curAllForeignKeys
+
+Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+
+While @@FETCH_STATUS=0
+
+Begin
+    Set @SQL = 'ALTER TABLE ' + @TableName + ' NOCHECK CONSTRAINT ' + @ConstraintName
+    Execute(@SQL)
+    Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+End
+
+Declare curAllTables Cursor For Select Table_Name From Information_Schema.Tables Where TABLE_TYPE='BASE TABLE'
+
+Open curAllTables
+
+Fetch Next From curAllTables INTO @TableName
+While @@FETCH_STATUS=0
+Begin
+    Set @SQL = 'DELETE FROM [' + @TableName + '] '
+        If @ResetIdentity = 1 AND OBJECTPROPERTY (OBJECT_ID(@TableName),'TableHasIdentity')=1
+                    Begin
+              --Set @SQL = @SQL + '; DBCC CHECKIDENT(''' + @TableName + ''',RESEED,0)'  
+              -- Only reseed tables when they are not virgin tables, otherwise reseed 0
+              -- will result in the first record having an identity of 0 instead of 1
+              Set @SQL = @SQL + '; IF NOT EXISTS(SELECT * FROM sys.identity_columns sic '
+              Set @SQL = @SQL + 'JOIN sys.tables st ON sic.object_id = st.object_id '
+              Set @SQL = @SQL + 'WHERE st.name = ''' + @TableName + ''' AND sic.last_value IS NULL) '
+              Set @SQL = @SQL + 'DBCC CHECKIDENT(''' + @TableName + ''',RESEED,0)'  
+        End
+    Execute(@SQL)
+    Fetch Next From curAllTables INTO @TableName
+End
+
+Fetch First From curAllForeignKeys INTO @TableName,@ConstraintName
+While @@FETCH_STATUS=0
+
+Begin
+    Set @SQL = 'ALTER TABLE ' + @TableName + ' CHECK CONSTRAINT ' + @ConstraintName
+    Execute(@SQL)
+    Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+End
+
+Close curAllTables  
+Deallocate curAllTables
+Close curAllForeignKeys
+Deallocate curAllForeignKeys  
+
+NHibernate: INSERT INTO [GenFormTest].[dbo].[User]
+           ([Id]
+           ,[Version]
+           ,[Name]
+           ,[Email]
+           ,[FirstName]
+           ,[LastName]
+           ,[Pager]
+           ,[Password])
+     VALUES
+           ('800c1806-d7b8-420c-8cdc-ee631a68f3b5'
+           ,1
+           ,'Admin'
+           ,'admin@gmail.com'
+           ,'Admin'
+           ,'Admin'
+           ,'1'
+           ,'Admin')
+NHibernate: USE [GenFormTest]
+
+Declare @ResetIdentity Bit
+Set @ResetIdentity = 1
+
+Declare @SQL VarChar(500)
+Declare @TableName VarChar(255)
+Declare @ConstraintName VarChar(500)
+Declare curAllForeignKeys SCROLL CurSor For Select Table_Name,Constraint_Name From Information_Schema.Table_Constraints Where Constraint_Type='FOREIGN KEY'
+Open curAllForeignKeys
+
+Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+
+While @@FETCH_STATUS=0
+
+Begin
+    Set @SQL = 'ALTER TABLE ' + @TableName + ' NOCHECK CONSTRAINT ' + @ConstraintName
+    Execute(@SQL)
+    Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+End
+
+Declare curAllTables Cursor For Select Table_Name From Information_Schema.Tables Where TABLE_TYPE='BASE TABLE'
+
+Open curAllTables
+
+Fetch Next From curAllTables INTO @TableName
+While @@FETCH_STATUS=0
+Begin
+    Set @SQL = 'DELETE FROM [' + @TableName + '] '
+        If @ResetIdentity = 1 AND OBJECTPROPERTY (OBJECT_ID(@TableName),'TableHasIdentity')=1
+                    Begin
+              --Set @SQL = @SQL + '; DBCC CHECKIDENT(''' + @TableName + ''',RESEED,0)'  
+              -- Only reseed tables when they are not virgin tables, otherwise reseed 0
+              -- will result in the first record having an identity of 0 instead of 1
+              Set @SQL = @SQL + '; IF NOT EXISTS(SELECT * FROM sys.identity_columns sic '
+              Set @SQL = @SQL + 'JOIN sys.tables st ON sic.object_id = st.object_id '
+              Set @SQL = @SQL + 'WHERE st.name = ''' + @TableName + ''' AND sic.last_value IS NULL) '
+              Set @SQL = @SQL + 'DBCC CHECKIDENT(''' + @TableName + ''',RESEED,0)'  
+        End
+    Execute(@SQL)
+    Fetch Next From curAllTables INTO @TableName
+End
+
+Fetch First From curAllForeignKeys INTO @TableName,@ConstraintName
+While @@FETCH_STATUS=0
+
+Begin
+    Set @SQL = 'ALTER TABLE ' + @TableName + ' CHECK CONSTRAINT ' + @ConstraintName
+    Execute(@SQL)
+    Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+End
+
+Close curAllTables  
+Deallocate curAllTables
+Close curAllForeignKeys
+Deallocate curAllForeignKeys  
+
+NHibernate: INSERT INTO [GenFormTest].[dbo].[User]
+           ([Id]
+           ,[Version]
+           ,[Name]
+           ,[Email]
+           ,[FirstName]
+           ,[LastName]
+           ,[Pager]
+           ,[Password])
+     VALUES
+           ('f4501215-1337-4b64-af46-6422aafc7f17'
+           ,1
+           ,'Admin'
+           ,'admin@gmail.com'
+           ,'Admin'
+           ,'Admin'
+           ,'1'
+           ,'Admin')
+NHibernate: USE [GenFormTest]
+
+Declare @ResetIdentity Bit
+Set @ResetIdentity = 1
+
+Declare @SQL VarChar(500)
+Declare @TableName VarChar(255)
+Declare @ConstraintName VarChar(500)
+Declare curAllForeignKeys SCROLL CurSor For Select Table_Name,Constraint_Name From Information_Schema.Table_Constraints Where Constraint_Type='FOREIGN KEY'
+Open curAllForeignKeys
+
+Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+
+While @@FETCH_STATUS=0
+
+Begin
+    Set @SQL = 'ALTER TABLE ' + @TableName + ' NOCHECK CONSTRAINT ' + @ConstraintName
+    Execute(@SQL)
+    Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+End
+
+Declare curAllTables Cursor For Select Table_Name From Information_Schema.Tables Where TABLE_TYPE='BASE TABLE'
+
+Open curAllTables
+
+Fetch Next From curAllTables INTO @TableName
+While @@FETCH_STATUS=0
+Begin
+    Set @SQL = 'DELETE FROM [' + @TableName + '] '
+        If @ResetIdentity = 1 AND OBJECTPROPERTY (OBJECT_ID(@TableName),'TableHasIdentity')=1
+                    Begin
+              --Set @SQL = @SQL + '; DBCC CHECKIDENT(''' + @TableName + ''',RESEED,0)'  
+              -- Only reseed tables when they are not virgin tables, otherwise reseed 0
+              -- will result in the first record having an identity of 0 instead of 1
+              Set @SQL = @SQL + '; IF NOT EXISTS(SELECT * FROM sys.identity_columns sic '
+              Set @SQL = @SQL + 'JOIN sys.tables st ON sic.object_id = st.object_id '
+              Set @SQL = @SQL + 'WHERE st.name = ''' + @TableName + ''' AND sic.last_value IS NULL) '
+              Set @SQL = @SQL + 'DBCC CHECKIDENT(''' + @TableName + ''',RESEED,0)'  
+        End
+    Execute(@SQL)
+    Fetch Next From curAllTables INTO @TableName
+End
+
+Fetch First From curAllForeignKeys INTO @TableName,@ConstraintName
+While @@FETCH_STATUS=0
+
+Begin
+    Set @SQL = 'ALTER TABLE ' + @TableName + ' CHECK CONSTRAINT ' + @ConstraintName
+    Execute(@SQL)
+    Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+End
+
+Close curAllTables  
+Deallocate curAllTables
+Close curAllForeignKeys
+Deallocate curAllForeignKeys  
+
+NHibernate: INSERT INTO [GenFormTest].[dbo].[User]
+           ([Id]
+           ,[Version]
+           ,[Name]
+           ,[Email]
+           ,[FirstName]
+           ,[LastName]
+           ,[Pager]
+           ,[Password])
+     VALUES
+           ('3fcb4533-8d91-4da4-a85a-b139bddbbb67'
+           ,1
+           ,'Admin'
+           ,'admin@gmail.com'
+           ,'Admin'
+           ,'Admin'
+           ,'1'
+           ,'Admin')
+NHibernate: USE [GenFormTest]
+
+Declare @ResetIdentity Bit
+Set @ResetIdentity = 1
+
+Declare @SQL VarChar(500)
+Declare @TableName VarChar(255)
+Declare @ConstraintName VarChar(500)
+Declare curAllForeignKeys SCROLL CurSor For Select Table_Name,Constraint_Name From Information_Schema.Table_Constraints Where Constraint_Type='FOREIGN KEY'
+Open curAllForeignKeys
+
+Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+
+While @@FETCH_STATUS=0
+
+Begin
+    Set @SQL = 'ALTER TABLE ' + @TableName + ' NOCHECK CONSTRAINT ' + @ConstraintName
+    Execute(@SQL)
+    Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+End
+
+Declare curAllTables Cursor For Select Table_Name From Information_Schema.Tables Where TABLE_TYPE='BASE TABLE'
+
+Open curAllTables
+
+Fetch Next From curAllTables INTO @TableName
+While @@FETCH_STATUS=0
+Begin
+    Set @SQL = 'DELETE FROM [' + @TableName + '] '
+        If @ResetIdentity = 1 AND OBJECTPROPERTY (OBJECT_ID(@TableName),'TableHasIdentity')=1
+                    Begin
+              --Set @SQL = @SQL + '; DBCC CHECKIDENT(''' + @TableName + ''',RESEED,0)'  
+              -- Only reseed tables when they are not virgin tables, otherwise reseed 0
+              -- will result in the first record having an identity of 0 instead of 1
+              Set @SQL = @SQL + '; IF NOT EXISTS(SELECT * FROM sys.identity_columns sic '
+              Set @SQL = @SQL + 'JOIN sys.tables st ON sic.object_id = st.object_id '
+              Set @SQL = @SQL + 'WHERE st.name = ''' + @TableName + ''' AND sic.last_value IS NULL) '
+              Set @SQL = @SQL + 'DBCC CHECKIDENT(''' + @TableName + ''',RESEED,0)'  
+        End
+    Execute(@SQL)
+    Fetch Next From curAllTables INTO @TableName
+End
+
+Fetch First From curAllForeignKeys INTO @TableName,@ConstraintName
+While @@FETCH_STATUS=0
+
+Begin
+    Set @SQL = 'ALTER TABLE ' + @TableName + ' CHECK CONSTRAINT ' + @ConstraintName
+    Execute(@SQL)
+    Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+End
+
+Close curAllTables  
+Deallocate curAllTables
+Close curAllForeignKeys
+Deallocate curAllForeignKeys  
+
+NHibernate: INSERT INTO [GenFormTest].[dbo].[User]
+           ([Id]
+           ,[Version]
+           ,[Name]
+           ,[Email]
+           ,[FirstName]
+           ,[LastName]
+           ,[Pager]
+           ,[Password])
+     VALUES
+           ('f6b7b3e9-1c60-47e3-bed6-bf98079f9b8e'
+           ,1
+           ,'Admin'
+           ,'admin@gmail.com'
+           ,'Admin'
+           ,'Admin'
+           ,'1'
+           ,'Admin')
+NHibernate: USE [GenFormTest]
+
+Declare @ResetIdentity Bit
+Set @ResetIdentity = 1
+
+Declare @SQL VarChar(500)
+Declare @TableName VarChar(255)
+Declare @ConstraintName VarChar(500)
+Declare curAllForeignKeys SCROLL CurSor For Select Table_Name,Constraint_Name From Information_Schema.Table_Constraints Where Constraint_Type='FOREIGN KEY'
+Open curAllForeignKeys
+
+Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+
+While @@FETCH_STATUS=0
+
+Begin
+    Set @SQL = 'ALTER TABLE ' + @TableName + ' NOCHECK CONSTRAINT ' + @ConstraintName
+    Execute(@SQL)
+    Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+End
+
+Declare curAllTables Cursor For Select Table_Name From Information_Schema.Tables Where TABLE_TYPE='BASE TABLE'
+
+Open curAllTables
+
+Fetch Next From curAllTables INTO @TableName
+While @@FETCH_STATUS=0
+Begin
+    Set @SQL = 'DELETE FROM [' + @TableName + '] '
+        If @ResetIdentity = 1 AND OBJECTPROPERTY (OBJECT_ID(@TableName),'TableHasIdentity')=1
+                    Begin
+              --Set @SQL = @SQL + '; DBCC CHECKIDENT(''' + @TableName + ''',RESEED,0)'  
+              -- Only reseed tables when they are not virgin tables, otherwise reseed 0
+              -- will result in the first record having an identity of 0 instead of 1
+              Set @SQL = @SQL + '; IF NOT EXISTS(SELECT * FROM sys.identity_columns sic '
+              Set @SQL = @SQL + 'JOIN sys.tables st ON sic.object_id = st.object_id '
+              Set @SQL = @SQL + 'WHERE st.name = ''' + @TableName + ''' AND sic.last_value IS NULL) '
+              Set @SQL = @SQL + 'DBCC CHECKIDENT(''' + @TableName + ''',RESEED,0)'  
+        End
+    Execute(@SQL)
+    Fetch Next From curAllTables INTO @TableName
+End
+
+Fetch First From curAllForeignKeys INTO @TableName,@ConstraintName
+While @@FETCH_STATUS=0
+
+Begin
+    Set @SQL = 'ALTER TABLE ' + @TableName + ' CHECK CONSTRAINT ' + @ConstraintName
+    Execute(@SQL)
+    Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+End
+
+Close curAllTables  
+Deallocate curAllTables
+Close curAllForeignKeys
+Deallocate curAllForeignKeys  
+
+NHibernate: INSERT INTO [GenFormTest].[dbo].[User]
+           ([Id]
+           ,[Version]
+           ,[Name]
+           ,[Email]
+           ,[FirstName]
+           ,[LastName]
+           ,[Pager]
+           ,[Password])
+     VALUES
+           ('ff424e8c-a6e4-4d9d-b7ac-9d05b8ae852d'
+           ,1
+           ,'Admin'
+           ,'admin@gmail.com'
+           ,'Admin'
+           ,'Admin'
+           ,'1'
+           ,'Admin')
+NHibernate: USE [GenFormTest]
+
+Declare @ResetIdentity Bit
+Set @ResetIdentity = 1
+
+Declare @SQL VarChar(500)
+Declare @TableName VarChar(255)
+Declare @ConstraintName VarChar(500)
+Declare curAllForeignKeys SCROLL CurSor For Select Table_Name,Constraint_Name From Information_Schema.Table_Constraints Where Constraint_Type='FOREIGN KEY'
+Open curAllForeignKeys
+
+Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+
+While @@FETCH_STATUS=0
+
+Begin
+    Set @SQL = 'ALTER TABLE ' + @TableName + ' NOCHECK CONSTRAINT ' + @ConstraintName
+    Execute(@SQL)
+    Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+End
+
+Declare curAllTables Cursor For Select Table_Name From Information_Schema.Tables Where TABLE_TYPE='BASE TABLE'
+
+Open curAllTables
+
+Fetch Next From curAllTables INTO @TableName
+While @@FETCH_STATUS=0
+Begin
+    Set @SQL = 'DELETE FROM [' + @TableName + '] '
+        If @ResetIdentity = 1 AND OBJECTPROPERTY (OBJECT_ID(@TableName),'TableHasIdentity')=1
+                    Begin
+              --Set @SQL = @SQL + '; DBCC CHECKIDENT(''' + @TableName + ''',RESEED,0)'  
+              -- Only reseed tables when they are not virgin tables, otherwise reseed 0
+              -- will result in the first record having an identity of 0 instead of 1
+              Set @SQL = @SQL + '; IF NOT EXISTS(SELECT * FROM sys.identity_columns sic '
+              Set @SQL = @SQL + 'JOIN sys.tables st ON sic.object_id = st.object_id '
+              Set @SQL = @SQL + 'WHERE st.name = ''' + @TableName + ''' AND sic.last_value IS NULL) '
+              Set @SQL = @SQL + 'DBCC CHECKIDENT(''' + @TableName + ''',RESEED,0)'  
+        End
+    Execute(@SQL)
+    Fetch Next From curAllTables INTO @TableName
+End
+
+Fetch First From curAllForeignKeys INTO @TableName,@ConstraintName
+While @@FETCH_STATUS=0
+
+Begin
+    Set @SQL = 'ALTER TABLE ' + @TableName + ' CHECK CONSTRAINT ' + @ConstraintName
+    Execute(@SQL)
+    Fetch Next From curAllForeignKeys INTO @TableName,@ConstraintName
+End
+
+Close curAllTables  
+Deallocate curAllTables
+Close curAllForeignKeys
+Deallocate curAllForeignKeys  
+
+NHibernate: INSERT INTO [GenFormTest].[dbo].[User]
+           ([Id]
+           ,[Version]
+           ,[Name]
+           ,[Email]
+           ,[FirstName]
+           ,[LastName]
+           ,[Pager]
+           ,[Password])
+     VALUES
+           ('aecc3fd9-2e10-4bf5-a447-114058693ed8'
+           ,1
+           ,'Admin'
+           ,'admin@gmail.com'
+           ,'Admin'
+           ,'Admin'
+           ,'1'
+           ,'Admin')
+}}}

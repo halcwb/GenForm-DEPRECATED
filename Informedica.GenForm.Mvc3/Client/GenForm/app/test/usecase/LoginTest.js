@@ -30,6 +30,7 @@ Ext.define('GenForm.test.usecase.LoginTest', {
         };
 
         me.clickButton = function (button) {
+            if (!button) Ext.Error.raise('click button has no button');
             button.btnEl.dom.click();
         };
 
@@ -121,13 +122,13 @@ Ext.define('GenForm.test.usecase.LoginTest', {
         it('After login the logged in user can be retrieved', function () {
             var loggedIn;
 
-            Login.GetLoggedInUser(function (result) {
-                loggedIn = result.User;
+            GenForm.server.UnitTest.GetLoggedInUser(function (result) {
+                loggedIn = result.user;
             });
 
             waitsFor(function () {
                 return loggedIn ? true : false;
-            });
+            }, 'logged in user', GenForm.test.waitingTime);
 
             runs(function () {
                 expect(loggedIn).toBe('Admin');

@@ -2,13 +2,12 @@ Ext.define('GenForm.view.product.ProductSubstanceForm', {
     extend: 'GenForm.lib.view.form.FormBase',
     alias: 'widget.productsubstanceform',
 
-    title:'Stoffen',
+    title:'Artikel Stof',
 
     createItems: function () {
         var me = this;
         return [
             {
-                defaults: {width: 230},
                 defaultType: 'textfield',
                 padding: '10x',
 
@@ -27,6 +26,7 @@ Ext.define('GenForm.view.product.ProductSubstanceForm', {
 
         config = {
             fieldLabel: 'Hoeveelheid',
+            margin: '10 10 10 10',
             name: 'Quantity'
         };
         return me.createNumberField(config);
@@ -38,6 +38,7 @@ Ext.define('GenForm.view.product.ProductSubstanceForm', {
         config = {
             fieldLabel: 'Volgorde',
             name: 'OrderNumber',
+            margin: '10 10 10 10',
             allowBlank:true
         };
 
@@ -48,28 +49,44 @@ Ext.define('GenForm.view.product.ProductSubstanceForm', {
         var me = this, config;
 
         config = {
-            name: 'SubstanceName',
-            fieldLabel: 'Stof',
+            xtype: 'comboboxcontainer',
+            editAction: 'editSubstance',
+            addAction: 'addSubstance',
             margin: '10 10 10 10',
-            displayField: 'SubstanceName',
-            store: 'product.SubstanceName'
-        };
+            comboBox: me.createComboBox({
+                idName: true,
+                itemId: 'cboSubstance',
+                fieldLabel: 'Stof naam',
+                name: 'Substance',
+                hideEmptyLabel: true,
+                flex: 1,
+                directFn: GenForm.server.UnitTest.GetSubstanceNames
+            })
+        }
 
-        return me.createComboBox(config);
+        return config;
     },
 
     createUnitCombo: function () {
         var me = this, config;
 
-        config = ({
-            name: 'UnitName',
-            fieldLabel: 'Eenheid',
+        config = {
+            xtype: 'comboboxcontainer',
+            editAction: 'editSubstanceUnit',
+            addAction: 'addSubstanceUnit',
             margin: '10 10 10 10',
-            displayField: 'UnitName',
-            store: 'product.UnitName'
-        });
+            comboBox: me.createComboBox({
+                idName: true,
+                itemId: 'cboSubstanceUnit',
+                fieldLabel: 'Eenheid',
+                name: 'Unit',
+                hideEmptyLabel: true,
+                flex: 1,
+                directFn: GenForm.server.UnitTest.GetUnitNames
+            })
+        };
 
-        return me.createComboBox(config);
+        return config;
     }
 
 });

@@ -3,25 +3,14 @@ Ext.define('GenForm.test.store.UnitNameStoreTests', {
 
     tests: function () {
         var me = this, store,
-            storeName = 'GenForm.store.product.UnitName';
+            storeName = 'GenForm.store.common.IdName';
 
         beforeEach(function () {
             if (!store) store = me.createStore();
         });
 
         me.createStore = function () {
-            return Ext.create(storeName);
-        };
-
-        me.setUpTestProxy = function () {
-            store.setProxy(me.getTestProxy());
-        };
-
-        me.getTestProxy = function () {
-            return Ext.create('Ext.data.proxy.Direct', {
-                type: 'direct',
-                directFn: Tests.GetUnitNames
-            });
+            return Ext.create(storeName, { directFn: GenForm.server.UnitTest.GetUnitNames });
         };
 
         it('be defined', function () {
@@ -38,25 +27,25 @@ Ext.define('GenForm.test.store.UnitNameStoreTests', {
 
         it('return an empty record with UnitName property', function () {
             var record = store.create();
-            expect(record.data.UnitName).toBeDefined();
+            expect(record.data.Name).toBeDefined();
         });
 
         it('contain an item', function () {
-            store.add({UnitName: 'test'});
+            store.add({Name: 'test'});
             expect(store.count() > 0).toBeTruthy();
         });
 
         it('have an item with UnitName test', function () {
-            expect(store.findExact('UnitName', 'test') !== -1).toBe(true);
+            expect(store.findExact('Name', 'test') !== -1).toBe(true);
         });
 
         it('have test direct Fn defined', function () {
-           expect(Tests.GetUnitNames).toBeDefined();
+           expect(GenForm.server.UnitTest.GetUnitNames).toBeDefined();
         });
 
         it('load 2 test items', function () {
             var result;
-            me.setUpTestProxy();
+
             store.load({
                 scope   : this,
                 callback: function(records) {
@@ -71,12 +60,12 @@ Ext.define('GenForm.test.store.UnitNameStoreTests', {
         });
 
         it('now contain a Unit mL', function () {
-            expect(store.findExact('UnitName', 'mL') != -1).toBeTruthy();
+            expect(store.findExact('Name', 'mL') != -1).toBeTruthy();
         });
 
         it('also contain stuk after load', function () {
-            var found = store.getAt(store.findExact('UnitName', 'stuk'));
-            expect(found.data.UnitName).toBe('stuk');
+            var found = store.getAt(store.findExact('Name', 'stuk'));
+            expect(found.data.Name).toBe('stuk');
         });
 
     }

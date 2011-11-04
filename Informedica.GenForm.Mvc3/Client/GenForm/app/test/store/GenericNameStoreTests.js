@@ -21,7 +21,7 @@ Ext.define('GenForm.test.store.GenericNameStoreTests', {
         me.getTestProxy = function () {
             return Ext.create('Ext.data.proxy.Direct', {
                 type: 'direct',
-                directFn: Tests.GetGenericNames
+                directFn: GenForm.server.UnitTest.GetGenericNames
             });
         };
 
@@ -48,7 +48,7 @@ Ext.define('GenForm.test.store.GenericNameStoreTests', {
         });
 
         it('have test direct Fn defined', function () {
-           expect(Tests.GetGenericNames).toBeDefined();
+           expect(GenForm.server.UnitTest.GetGenericNames).toBeDefined();
         });
 
 

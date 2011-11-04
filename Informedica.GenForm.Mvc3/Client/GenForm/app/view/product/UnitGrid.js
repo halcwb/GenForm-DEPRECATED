@@ -30,6 +30,6 @@ Ext.define('GenForm.view.product.UnitGrid', {
     },
 
     getUnitStore: function () {
-        return Ext.create('GenForm.store.product.UnitName');
+        return Ext.create('GenForm.store.product.Unit');
     }
 });

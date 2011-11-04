@@ -18,11 +18,11 @@ Ext.define('GenForm.test.view.ProductSubstanceFormTests', {
         });
 
         it('have a substance combobox', function () {
-            expect(form.fields.SubstanceName).toBeDefined();
+            expect(form.fields.Substance).toBeDefined();
         });
 
         it('have a unit combobox', function () {
-           expect(form.fields.UnitName).toBeDefined();
+           expect(form.fields.Unit).toBeDefined();
         });
 
         it('have a order number field', function () {

@@ -3,7 +3,7 @@ Ext.define('GenForm.test.usecase.ProductListTest', {
     describe: 'ProductListTests that',
 
     tests: function () {
-        var me = this, queryHelper = Ext.create('GenForm.lib.util.QueryHelper');
+        var me = this; //, queryHelper = Ext.create('GenForm.lib.util.QueryHelper');
 
         me.getProductList = function () {
             return Ext.ComponentQuery.query('panel[region=west] gridview')[0];

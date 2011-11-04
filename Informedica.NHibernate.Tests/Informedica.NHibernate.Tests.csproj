@@ -75,6 +75,10 @@
       <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
       <Name>Informedica.GenForm.Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.TestFixtures\Informedica.GenForm.TestFixtures.csproj">
+      <Project>{F772CA62-5400-45BF-B586-AACF5F20D6BC}</Project>
+      <Name>Informedica.GenForm.TestFixtures</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Tests\Informedica.GenForm.Tests.csproj">
       <Project>{819BA760-6C94-4203-8DB0-7F0AAA4B2159}</Project>
       <Name>Informedica.GenForm.Tests</Name>

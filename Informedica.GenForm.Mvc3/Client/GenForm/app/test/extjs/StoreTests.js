@@ -24,10 +24,10 @@ Ext.define('GenForm.test.extjs.StoreTests', {
                 type: 'direct',
                 paramsAsHash: true,
                 // If I omit the below line, store test throws an error, but not model tests
-                directFn: Tests.GetProduct,
+                directFn: GenForm.server.UnitTest.GetProduct,
                 api: {
-                    read: Tests.GetProduct,
-                    submit: Tests.SaveProduct
+                    read: GenForm.server.UnitTest.GetProduct,
+                    submit: GenForm.server.UnitTest.SaveProduct
                 }
             },
             reader: {
@@ -41,6 +41,11 @@ Ext.define('GenForm.test.extjs.StoreTests', {
             extend: 'Ext.data.Store',
             storeId: 'teststore',
             model: modelName,
+
+            proxy: {
+                type: 'direct',
+                directFn: GenForm.server.UnitTest.GetProducts
+            },
 
             autoLoad: false
         });

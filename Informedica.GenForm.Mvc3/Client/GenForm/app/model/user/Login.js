@@ -16,6 +16,6 @@ Ext.define('GenForm.model.user.Login',  {
 
     proxy: {
         type: 'direct',
-        directFn: Login.Login
+        directFn: GenForm.server.Login.Login
     }
 });

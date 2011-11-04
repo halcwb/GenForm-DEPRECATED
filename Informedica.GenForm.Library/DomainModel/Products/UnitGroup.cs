@@ -107,11 +107,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #region Validation
 
-        public static IEnumerable<String> GetBrokenRules(UnitGroup dto)
-        {
-            return ValidationRulesManager.GetBrokenRules(dto);
-        }
-
         private static void RegisterValidationRules()
         {
             ValidationRulesManager.RegisterRule<UnitGroup>(x => !String.IsNullOrWhiteSpace(x.Name));
