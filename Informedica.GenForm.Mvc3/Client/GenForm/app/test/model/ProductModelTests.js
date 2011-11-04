@@ -1,5 +1,4 @@
 Ext.define('GenForm.test.model.ProductModelTests', {
-
     describe: 'ProductModelShould',
 
     tests: function () {
@@ -41,8 +40,8 @@ Ext.define('GenForm.test.model.ProductModelTests', {
             return Ext.create('Ext.data.proxy.Direct', {
                 type: 'direct',
                 api: {
-                    read: Tests.GetProduct,
-                    save: Tests.SaveProduct
+                    read: GenForm.server.UnitTest.GetProduct,
+                    save: GenForm.server.UnitTest.SaveProduct
                 }
             });
         };
@@ -68,32 +67,16 @@ Ext.define('GenForm.test.model.ProductModelTests', {
            expect(me.createTestRecord().data.GenericName).toBe('paracetamol');
         });
 
-        it('have a list of possible GenericNames', function () {
-            expect(record.generics).toBeDefined();
-        });
-
         it('have a BrandName', function () {
             expect(record.data.BrandName).toBeDefined();
-        });
-
-        it('have a list of brands', function () {
-            expect(record.brands).toBeDefined();
         });
 
         it('have a ShapeName', function () {
             expect(record.data.ShapeName).toBeDefined();
         });
 
-        it('have a list of shapes', function () {
-            expect(record.shapes).toBeDefined();
-        });
-
         it('have a PackageName', function () {
             expect(record.data.PackageName).toBeDefined();
-        });
-
-        it('have a list of packages', function () {
-            expect(record.packages).toBeDefined();
         });
 
         it('have a Quantity', function () {
@@ -105,12 +88,16 @@ Ext.define('GenForm.test.model.ProductModelTests', {
         });
 
         it('should have routes', function () {
-            expect(record.routes).toBeDefined();
+            var routes = record.routes;
+            if (!routes) {
+                console.log(record);
+            }
+            expect(routes).toBeDefined();
         });
 
         it('get a success message upon saving the productmodel', function () {
             var result;
-            Product.SaveProduct(record.data, function (record) {
+            GenForm.server.Product.SaveProduct(record.data, function (record) {
                 result = record
              });
 
@@ -121,13 +108,13 @@ Ext.define('GenForm.test.model.ProductModelTests', {
 
         it('post a valid ProductModel', function () {
             var callData;
-            spyOn(Product.SaveProduct.directCfg.method, 'getCallData').andCallFake(
+            spyOn(GenForm.server.UnitTest.SaveProduct.directCfg.method, 'getCallData').andCallFake(
                     function () {
                         callData = arguments;
                     });
 
             try {
-                Product.SaveProduct(record.data, function () {
+                GenForm.server.UnitTest.SaveProduct(record.data, function () {
                 });
             } catch(e) {
                 console.log(e);
@@ -137,8 +124,8 @@ Ext.define('GenForm.test.model.ProductModelTests', {
         });
 
         it ('be able to load a record using the model', function () {
-            var result;
-            me.getModel().load('2', {
+            var result, guidGenerator = Ext.create('GenForm.lib.util.GuidGenerator');
+            me.getModel().load(guidGenerator.createGuid(), {
                 callback: function (record) {
                     result = record;
                 }

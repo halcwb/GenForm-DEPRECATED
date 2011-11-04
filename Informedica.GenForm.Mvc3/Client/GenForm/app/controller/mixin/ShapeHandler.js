@@ -4,20 +4,32 @@ Ext.define('GenForm.controller.mixin.ShapeHandler', {
         var me = this,
             store = me.getShapeStore();
 
-        store.add({ShapeName: shape});
+        store.add(shape);
     },
 
     createEmptyShape: function () {
-        return Ext.ModelManager.create({}, 'GenForm.model.product.ShapeName');
+        return Ext.ModelManager.create({}, 'GenForm.model.product.Shape');
     },
 
     createShapeWindow: function () {
         return Ext.create(this.getProductShapeWindowView());
     },
 
-    editOrAddShape: function () {
-        var me = this;
-        me.getShapeWindow().show();
+    onAddShape: function () {
+        var me = this,
+            window = me.getShapeWindow(me.createEmptyShape()).show();
+
+        window.setTitle('Nieuwe artikel vorm');
+        window.show();
+    },
+
+    onEditShape: function (button) {
+        var me = this,
+            form = button.findParentByType('productform'),
+            shape = form.fields.Shape.findRecord('Name', form.fields.Shape.getValue()),
+            window = me.getShapeWindow(shape);
+
+        window.show();
     },
 
     getShape: function (button) {
@@ -26,19 +38,25 @@ Ext.define('GenForm.controller.mixin.ShapeHandler', {
 
     getShapeStore: function () {
         var me = this;
-        return me.getProductShapeNameStore();
+        return me.getProductShapeStore();
     },
 
     loadEmptyShape: function (window) {
         window.loadWithShape(this.createEmptyShape());
     },
 
-    getShapeWindow: function () {
-        var me = this, form;
+    getShapeWindow: function (shape) {
+        var me = this, window;
 
-        form = me.createShapeWindow();
-        me.loadEmptyShape(form);
-        return form;
+        window = me.createShapeWindow();
+        if (!shape) {
+            me.loadEmptyShape(window);
+        } else {
+            window.setTitle('Bewerk artikel vorm: ' + shape.data.Name);
+            window.loadWithShape(shape);
+        }
+
+        return window;
     },
 
     onShapeSaved: function (result) {
@@ -46,18 +64,18 @@ Ext.define('GenForm.controller.mixin.ShapeHandler', {
             window = Ext.ComponentQuery.query('shapewindow')[0];
 
         if (result.success) {
-            Ext.MessageBox.alert('Shape saved: ', result.data.ShapeName);
-            me.addShapeToStore(result.data.ShapeName);
+            Ext.MessageBox.alert('Shape saved: ', result.data.Name);
+            me.addShapeToStore(result.data);
             if (window) window.close();
         } else {
             Ext.MessageBox.alert('Shape could not be saved: ', result.message);
         }
     },
 
-    saveShape: function (button) {
+    onSaveShape: function (button) {
         var me = this,
             shape = me.getShape(button);
 
-        Product.AddNewShape(shape.data, {scope: me, callback:me.onShapeSaved});
+        GenForm.server.UnitTest.SaveShape(shape.data, {scope: me, callback:me.onShapeSaved});
     }
 });

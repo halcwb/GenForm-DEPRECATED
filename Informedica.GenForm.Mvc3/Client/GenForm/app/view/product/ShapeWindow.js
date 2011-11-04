@@ -23,5 +23,4 @@ Ext.define('GenForm.view.product.ShapeWindow', {
         var me = this;
         me.forms.ShapeForm.loadRecord(shape);
     }
-
 });

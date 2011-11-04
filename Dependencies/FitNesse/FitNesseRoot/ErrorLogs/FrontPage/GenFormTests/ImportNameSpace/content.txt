@@ -1,0 +1,6 @@
+!3 !-slim-!
+|'''Date: '''|!-9:14:34 AM (CEST) on Saturday, October 29, 2011-!|
+|'''Test Page: '''|.FrontPage.GenFormTests.ImportNameSpace|
+|'''Command: '''|!-Debug\Runner.exe -r fitSharp.Slim.Service.Runner,Debug\fitsharp.dll "C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.Acceptance\bin\Debug\Informedica.GenForm.Acceptance.dll"  8091-!|
+|'''Exit code: '''|!-0-!|
+|'''Time elapsed: '''|!-0.622 seconds-!|

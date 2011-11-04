@@ -2,7 +2,7 @@ Ext.define('GenForm.view.product.UnitWindow', {
     extend: 'GenForm.lib.view.window.SaveCancelWindow',
     alias: 'widget.unitwindow',
 
-    width: 300,
+    width: 457,
     height: 300,
     layout: 'fit',
 

@@ -6,10 +6,11 @@ Ext.define('GenForm.test.model.BrandNameModelTests', {
         var me = this;
 
         me.getBrandNameModel = function () {
-            var model = Ext.ModelManager.getModel('GenForm.model.product.BrandName');
+            var model = Ext.ModelManager.getModel('GenForm.model.common.IdName');
+            
             model.setProxy({
                 type: 'direct',
-                directFn: Product.GetBrandNames
+                directFn: GenForm.server.UnitTest.GetBrandNames
             })
 
             return model;

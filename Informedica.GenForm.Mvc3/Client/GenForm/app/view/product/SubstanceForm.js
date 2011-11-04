@@ -4,7 +4,7 @@ Ext.define('GenForm.view.product.SubstanceForm', {
 
     createItems: function () {
         return [
-            { xtype: 'textfield', name:'SubstanceName',   fieldLabel: 'Stof Naam', margin: '10 0 10 10' }
+            { xtype: 'textfield', name:'Name',   fieldLabel: 'Stof Naam', margin: '10 0 10 10' }
         ];
     },
 

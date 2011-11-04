@@ -1,0 +1,26 @@
+![ script
+Given a newly installed genform service
+Then there is only one user
+Then this user has name admin
+And user admin has password Admin
+Then admin can log in with Admin
+]!
+
+![ script
+Given user Foo with password baR
+Then Foo can log in with baR
+Then foo can log in with baR
+Then Foo can not log in with xxyyxx
+Then Foo can not log in with bar
+]!
+
+![ script 
+Given user Bob wants to register
+Then he can set password to xyz
+Then he can not set password to x
+Then he can not set password to xy
+The he can set password to xyz1
+Then he can set password to xyzxyzxyzzxyzxyzxy20
+Then he can not set password to xyzxyzxyzzxyzxyzxy21x
+]!
+

@@ -19,12 +19,12 @@ Ext.define('GenForm.test.controller.ProductControllerTests', {
            me.setProductController();
         });
 
-        me.copyObject = function (model, data) {
+        me.copyRecord = function (model, data) {
             var prop;
             if (!model.data) return;
 
             for (prop in model.data) {
-                if (data[prop]) prop = data[prop];
+                if (data[prop]) model.data[prop] = data[prop];
             }
         };
 
@@ -128,6 +128,7 @@ Ext.define('GenForm.test.controller.ProductControllerTests', {
             var form = productController.getProductWindow().forms.ProductForm,
                 record = form.getRecord();
 
+            testProduct.Id = Ext.create('GenForm.lib.util.GuidGenerator').emptyGuid();
             testProduct.Name = 'paracetamol 500 mg';
             testProduct.GenericName = 'paracetamol';
             testProduct.BrandName = 'Paracetamol';
@@ -135,7 +136,7 @@ Ext.define('GenForm.test.controller.ProductControllerTests', {
             testProduct.Quantity = '1';
             testProduct.Unit = 'stuk';
             testProduct.PackageName = 'tablet';
-            me.copyObject(record, testProduct);
+            me.copyRecord(record, testProduct);
 
             form.loadRecord(record);
 
@@ -148,17 +149,17 @@ Ext.define('GenForm.test.controller.ProductControllerTests', {
         });
 
 
-        it('should have a saveGenericName function', function () {
-           expect(productController.saveGeneric).toBeDefined();
+        it('should have a saveShape function', function () {
+           expect(productController.onSaveShape).toBeDefined();
         });
 
-        it('saveGeneric should be able to save a valid Generic', function () {
-            var form = productController.getGenericWindow().forms.GenericForm,
+        it('saveShape method should save a valid Shape', function () {
+            var form = productController.getShapeWindow().forms.ShapeForm,
             model = form.getRecord(),
-            validGeneric = {
-                GenericName: 'paracetamol'
+            validShape = {
+                ShapeName: 'infusievloeistof'
             };
-            me.copyObject(model, validGeneric);
+            me.copyRecord(model, validShape);
 
             form.loadRecord(model);
 

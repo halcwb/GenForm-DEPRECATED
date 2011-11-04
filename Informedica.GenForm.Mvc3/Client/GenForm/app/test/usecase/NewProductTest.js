@@ -27,11 +27,11 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.clickSaveGenericButton = function () {
-            queryHelper.clickButton(queryHelper.getButton('genericwindow', 'Opslaan'));
+            queryHelper.clickButton(queryHelper.getButton('genericnamewindow', 'Opslaan'));
         };
 
         me.clickSaveBrandButton = function () {
-            queryHelper.clickButton(queryHelper.getButton('brandwindow', 'Opslaan'));
+            queryHelper.clickButton(queryHelper.getButton('brandnamewindow', 'Opslaan'));
         };
 
         me.clickSaveShapeButton = function () {
@@ -40,6 +40,10 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
 
         me.clickSaveUnitButton = function () {
             queryHelper.clickButton(queryHelper.getButton('unitwindow', 'Opslaan'));
+        };
+
+        me.clickSaveSubstanceUnitButton = function () {
+            queryHelper.clickButton(queryHelper.getButton('substanceunitwindow', 'Opslaan'));
         };
 
         me.clickSavePackageButton = function () {
@@ -63,11 +67,11 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.getGenericWindow = function () {
-            return Ext.ComponentQuery.query('genericwindow')[0];
+            return Ext.ComponentQuery.query('genericnamewindow')[0];
         };
 
-        me.getBrandWindow = function () {
-            return Ext.ComponentQuery.query('brandwindow')[0];
+        me.getBrandNameWindow = function () {
+            return Ext.ComponentQuery.query('brandnamewindow')[0];
         };
 
         me.getShapeWindow = function () {
@@ -76,6 +80,10 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
 
         me.getUnitWindow = function () {
             return Ext.ComponentQuery.query('unitwindow')[0];
+        };
+
+        me.getSubstanceUnitWindow = function () {
+            return Ext.ComponentQuery.query('substanceunitwindow')[0];
         };
 
         me.getPackageWindow = function () {
@@ -91,11 +99,11 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.getProductName = function () {
-            return queryHelper.getFormTextField('productform', 'Name');
+            return queryHelper.getFormTextField('productform', 'LabelName');
         };
 
-        me.setProductName = function (name) {
-            queryHelper.setFormField(me.getProductName(), name);
+        me.setProductName = function (value) {
+            queryHelper.setFormField(me.getProductName(), value);
         };
         
         me.getProductCode = function () {
@@ -107,7 +115,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.getGenericName = function () {
-            return queryHelper.getFormTextField('genericwindow', 'GenericName');
+            return queryHelper.getFormTextField('genericnamewindow', 'Name');
         };
 
         me.setGenericName = function (name) {
@@ -115,7 +123,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.getBrandName = function () {
-            return queryHelper.getFormTextField('brandwindow', 'BrandName');
+            return queryHelper.getFormTextField('brandnamewindow', 'Name');
         };
 
         me.setBrandName = function (name) {
@@ -123,7 +131,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.getShapeName = function () {
-            return queryHelper.getFormTextField('shapewindow', 'ShapeName');
+            return queryHelper.getFormTextField('shapewindow', 'Name');
         };
 
         me.setShapeName = function (name) {
@@ -131,15 +139,23 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.getUnitName = function () {
-            return queryHelper.getFormTextField('unitwindow', 'UnitName');
+            return queryHelper.getFormTextField('unitwindow', 'Name');
         };
 
         me.setUnitName = function (name) {
             queryHelper.setFormField(me.getUnitName(), name);
         };
 
+        me.getSubstanceUnitName = function () {
+            return queryHelper.getFormTextField('substanceunitwindow', 'Name');
+        };
+
+        me.setSubstanceUnitName = function (name) {
+            queryHelper.setFormField(me.getSubstanceUnitName(), name);
+        };
+
         me.getPackageName = function () {
-            return queryHelper.getFormTextField('packagewindow', 'PackageName');
+            return queryHelper.getFormTextField('packagewindow', 'Name');
         };
 
         me.setPackageName = function (name) {
@@ -147,7 +163,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.getSubstanceName = function () {
-            return queryHelper.getFormTextField('substancewindow', 'SubstanceName');
+            return queryHelper.getFormTextField('substancewindow', 'Name');
         };
 
         me.setSubstanceName = function (name) {
@@ -175,7 +191,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.getShapeCombo = function () {
-            return queryHelper.getFormComboBox('productwindow', 'ShapeName');
+            return queryHelper.getFormComboBox('productwindow', 'Shape');
         };
 
         me.setUnitCombo = function (name) {
@@ -183,15 +199,15 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.getUnitCombo = function () {
-            return queryHelper.getFormComboBox('productwindow', 'UnitName');
+            return queryHelper.getFormComboBox('productwindow', 'Unit');
         };
 
         me.setSubstanceUnitCombo = function (name) {
-            queryHelper.setFormField(me.getUnitCombo(), name);
+            queryHelper.setFormField(me.getSubstanceUnitCombo(), name);
         };
 
         me.getSubstanceUnitCombo = function () {
-            return queryHelper.getFormComboBox('productsubstancewindow', 'UnitName');
+            return queryHelper.getFormComboBox('productsubstancewindow', 'Unit');
         };
 
         me.setPackageCombo = function (name) {
@@ -203,11 +219,11 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.getPackageCombo = function () {
-            return queryHelper.getFormComboBox('productwindow', 'PackageName');
+            return queryHelper.getFormComboBox('productwindow', 'Package');
         };
 
         me.getSubstanceCombo = function () {
-            return queryHelper.getFormComboBox('productsubstanceform', 'SubstanceName');
+            return queryHelper.getFormComboBox('productsubstanceform', 'Substance');
         };
 
         me.getQuantity = function () {
@@ -227,35 +243,53 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
             }
         };
 
+        me.clickButton = function (button) {
+            if (!button) {
+                Ext.Error.raise('Button is not defined');
+            }
+            domClicker.click(button.getEl().dom);
+        };
+
+        me.getAddButton = function (action) {
+            return Ext.ComponentQuery.query('button[action=' + action + ']')[0];
+        };
+
         me.clickAddGeneric = function () {
-            domClicker.click(me.getAddButton('GenericName'));
+            var button = me.getAddButton('addGenericName');
+            me.clickButton(button);
         };
 
         me.clickAddBrand = function () {
-            domClicker.click(me.getAddButton('BrandName'));
+            var button = me.getAddButton('addBrandName');
+            me.clickButton(button);
         };
 
         me.clickAddShape = function () {
-            domClicker.click(me.getAddButton('ShapeName'));
+            var button = me.getAddButton('addShape');
+            me.clickButton(button);
         };
 
         me.clickAddUnit = function () {
-            domClicker.click(me.getAddButton('UnitName'));
+            var button = me.getAddButton('addProductUnit');
+            me.clickButton(button);
         };
 
         me.clickAddSubstanceUnit = function () {
-            domClicker.click(me.getAddButtonInForm('productsubstancewindow', 'UnitName'));
+            var button = me.getAddButton('addSubstanceUnit');
+            me.clickButton(button);
         };
 
         me.clickAddSubstance = function () {
-            domClicker.click(me.getAddSubstanceButton('SubstanceName'))
+            var button = me.getAddButton('addSubstance');
+            me.clickButton(button);
         };
 
         me.clickAddPackage = function () {
-            domClicker.click(me.getAddButton('PackageName'))
+            var buton = me.getAddButton('addPackage');
+            me.clickButton(buton);
         };
 
-        me.getAddButton = function (name) {
+        me.getComboAddButton = function (name) {
             return me.getAddButtonInForm('productwindow', name);
         };
 
@@ -268,11 +302,8 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.clickAddProductSubstance = function () {
-            queryHelper.clickButton(me.getAddProductSubstanceButton());
-        };
-
-        me.getAddProductSubstanceButton = function() {
-            return queryHelper.getButton('productwindow', 'Voeg stof toe');
+            var button = me.getAddButton('addProductSubstance');
+            me.clickButton(button);
         };
 
         it('User sees an empty Product window', function () {
@@ -318,7 +349,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
 
         it('User can open up a window to add a new Brand', function () {
             me.clickAddBrand();
-            expect(me.getBrandWindow()).toBeDefined();
+            expect(me.getBrandNameWindow()).toBeDefined();
         });
 
         it('User can enter a name for the new brand', function (){
@@ -410,7 +441,7 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
             expect(me.getProductSubstanceWindow()).toBeDefined();
         });
 
-        it('Productwindow has a combobox to enter substance', function () {
+        it('The productsubstance window has a combobox to enter substance', function () {
             expect(me.getSubstanceCombo()).toBeDefined();
         });
 
@@ -435,19 +466,19 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
             expect(me.getSubstanceCombo().value).toBe(substance);
         });
 
-        it('A unit can open a window to add a new unit', function () {
+        it('A user can open a window to add a new unit', function () {
             me.clickAddSubstanceUnit();
-            expect(me.getUnitWindow()).toBeDefined();
+            expect(me.getSubstanceUnitWindow()).toBeDefined();
         });
 
         it('A new unit can be entered', function () {
-            me.setUnitName(substanceUnit);
-            expect(me.getUnitName().value).toBe(substanceUnit);
+            me.setSubstanceUnitName(substanceUnit);
+            expect(me.getSubstanceUnitName().value).toBe(substanceUnit);
         });
 
         it('User can save the new substance unit', function () {
             message = substanceUnit;
-            me.clickSaveUnitButton();
+            me.clickSaveSubstanceUnitButton();
             waitsFor(me.checkMessage, 'response of unit save', GenForm.test.waitingTime);
         });
 
@@ -465,6 +496,10 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         it('After saving the product, the new product window is closed', function () {
             var window = me.getProductWindow();
             expect(window).toBeUndefined();
+        });
+
+        it('After saving the new product, all windows are closed', function () {
+            expect(Ext.ComponentQuery.query('window').length).toBe(0);
         });
         
     }

@@ -32,6 +32,7 @@ Ext.onReady(function () {
         });
 
         GenForm.test.waitingTime = 1000;
+        GenForm.test.guidGenerator = Ext.create('GenForm.lib.util.GuidGenerator');
         // Load tests
         testLoader.loadTests(testList);
 

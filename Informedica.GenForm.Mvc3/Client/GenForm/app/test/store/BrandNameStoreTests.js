@@ -3,25 +3,14 @@ Ext.define('GenForm.test.store.BrandNameStoreTests', {
 
     tests: function () {
         var me = this, store,
-            storeName = 'GenForm.store.product.BrandName';
+            storeName = 'GenForm.store.common.IdName';
 
         beforeEach(function () {
             if (!store) store = me.createStore();
         });
 
         me.createStore = function () {
-            return Ext.create(storeName);
-        };
-
-        me.setUpTestProxy = function () {
-            store.setProxy(me.getTestProxy());
-        };
-
-        me.getTestProxy = function () {
-            return Ext.create('Ext.data.proxy.Direct', {
-                type: 'direct',
-                directFn: Tests.GetBrandNames
-            });
+            return Ext.create(storeName, { directFn: GenForm.server.UnitTest.GetBrandNames });
         };
 
         it('be defined', function () {
@@ -51,12 +40,12 @@ Ext.define('GenForm.test.store.BrandNameStoreTests', {
         });
 
         it('have test direct Fn defined', function () {
-           expect(Tests.GetBrandNames).toBeDefined();
+           expect(GenForm.server.UnitTest.GetBrandNames).toBeDefined();
         });
 
         it('load five test items', function () {
             var result;
-            me.setUpTestProxy();
+
             store.load({
                 scope   : this,
                 callback: function(records) {
@@ -76,6 +65,7 @@ Ext.define('GenForm.test.store.BrandNameStoreTests', {
 
         it('also contain Esmeron after load', function () {
             var found = store.getAt(store.findExact('Name', 'Esmeron'));
+            if (found !== 'Esmeron') console.log(store);
             expect(found.data.Name).toBe('Esmeron');
         });
 

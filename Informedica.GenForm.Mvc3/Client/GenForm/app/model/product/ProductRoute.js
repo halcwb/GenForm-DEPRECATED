@@ -1,7 +1,8 @@
 Ext.define('GenForm.model.product.ProductRoute', {
     extend: 'Ext.data.Model',
-    alias: 'widget.productroutemodel',
 
-    fields: [ {name: 'RouteName', type: 'string' }],
+    fields: [
+        { name: 'Route', type: 'string' }
+    ]
 
 });

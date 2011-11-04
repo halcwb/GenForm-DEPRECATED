@@ -1,12 +1,36 @@
 Ext.define('GenForm.controller.mixin.SubstanceHandler', {
 
+    addSubstanceToStore: function (substance) {
+        var me = this,
+            store = me.getSubstanceStore();
+        store.add({Name: substance});
+    },
+
+    getSubstanceStore: function () {
+        var window = Ext.ComponentQuery.query('productsubstancewindow')[0];
+
+        return window.forms.ProductSubstanceForm.fields.Substance.store;
+    },
+
     createSubstanceWindow: function () {
         return Ext.create(this.getProductSubstanceWindowView());
     },
 
-    editOrAddSubstance: function () {
-        var me = this;
-        me.getSubstanceWindow().show();
+    onAddSubstance: function () {
+        var me = this,
+            window = me.getSubstanceWindow(me.createEmptySubstance()).show();
+
+        window.setTitle('Nieuwe Stof');
+        window.show();
+    },
+
+    onEditSubstance: function (button) {
+        var me = this,
+            form = button.findParentByType('productsubstanceform'),
+            Substance = form.fields.Substance.findRecord('Name', form.fields.Substance.getValue()),
+            window = me.getSubstanceWindow(Substance);
+
+        window.show();
     },
 
     getSubstanceWindow: function () {
@@ -23,7 +47,7 @@ Ext.define('GenForm.controller.mixin.SubstanceHandler', {
     },
 
     createEmptySubstance: function () {
-        return Ext.ModelManager.create({}, 'GenForm.model.product.SubstanceName');
+        return Ext.ModelManager.create({}, 'GenForm.model.product.Substance');
     },
 
     onSubstanceSaved: function (result) {
@@ -31,8 +55,8 @@ Ext.define('GenForm.controller.mixin.SubstanceHandler', {
             window = Ext.ComponentQuery.query('substancewindow')[0];
 
         if (result.success) {
-            Ext.MessageBox.alert('Substance saved: ', result.data.SubstanceName);
-            me.addUnitToStore(result.data.SubstanceName);
+            Ext.MessageBox.alert('Substance saved: ', result.data.Name);
+            me.addSubstanceToStore(result.data.Name);
             if (window) window.close();
         } else {
             Ext.MessageBox.alert('Substance could not be saved: ', result.message);
@@ -47,7 +71,7 @@ Ext.define('GenForm.controller.mixin.SubstanceHandler', {
         var me = this,
             substance = me.getSubstance(button);
 
-        Product.AddNewSubstance(substance.data, {scope: me, callback:me.onSubstanceSaved});
+        GenForm.server.Product.AddNewSubstance(substance.data, {scope: me, callback:me.onSubstanceSaved});
     }
 
 });

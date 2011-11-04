@@ -9,25 +9,27 @@ Ext.define('GenForm.controller.product.Product', {
 
     models: [
         'product.Product',
-        'product.GenericName',
-        'product.BrandName',
-        'product.ShapeName',
-        'product.UnitName',
-        'product.PackageName',
-        'product.ProductRoute',
+        'product.Shape',
+        'product.Unit',
+        'product.Package',
+        'product.Route',
         'product.ProductSubstance',
-        'product.SubstanceName',
+        'product.ProductRoute',
+        'product.Substance',
+        'product.SubstanceGroup',
+        'product.UnitGroup'
     ],
 
     stores: [
-        'product.GenericName',
-        'product.BrandName',
-        'product.ShapeName',
-        'product.UnitName',
-        'product.PackageName',
+        'product.Shape',
+        'product.Package',
         'product.ProductSubstance',
-        'product.SubstanceName',
-        'product.SubstanceUnitName'
+        'product.Substance',
+        'product.SubstanceGroup',
+        'product.ProductRoute',
+        'product.Route',
+        'product.Unit',
+        'product.UnitGroup'
     ],
 
     views: [
@@ -35,16 +37,18 @@ Ext.define('GenForm.controller.product.Product', {
         'product.ProductForm',
         'product.ProductSubstanceForm',
         'product.ProductSubstanceGrid',
-        'product.BrandWindow',
-        'product.BrandForm',
-        'product.GenericWindow',
-        'product.GenericForm',
+        'product.BrandNameWindow',
+        'product.BrandNameForm',
+        'product.GenericNameWindow',
+        'product.GenericNameForm',
         'product.ShapeWindow',
         'product.ShapeForm',
         'product.PackageWindow',
         'product.PackageForm',
         'product.UnitWindow',
+        'product.SubstanceUnitWindow',
         'product.UnitForm',
+        'product.SubstanceUnitForm',
         'product.ProductGrid',
         'product.ProductSubstanceWindow',
         'product.SubstanceWindow',
@@ -62,8 +66,11 @@ Ext.define('GenForm.controller.product.Product', {
             'panel[title=Menu] > buttongroup > button[text=Nieuw Artikel]': {
                 click: me.showProductWindow
             },
-            'panel[title=Menu] > buttongroup > button[text=Nieuw Generiek]': {
-                click: me.editOrAddGeneric
+            'button[action=addGenericName]': {
+                click: me.onAddGenericName
+            },
+            'button[action=editGenericName]': {
+                click: me.onEditGenericName
             },
             'productwindow > toolbar button[action=save]': {
                 click: me.saveProduct
@@ -74,50 +81,78 @@ Ext.define('GenForm.controller.product.Product', {
             'productform button[text=Voeg stof toe]': {
                 click: me.showProductSubstanceWindow
             },
-            'productwindow > productform > fieldset > combobox[name="GenericName"]':
+            'button[action=addBrandName]':
             {
-                editoradd: me.editOrAddGeneric
+                click: me.onAddBrandName
             },
-            'productwindow > productform > fieldset > combobox[name="BrandName"]':
+            'button[action=editBrandName]':
             {
-                editoradd: me.editOrAddBrand
+                click: me.onEditBrandName
             },
-            'productwindow > productform > fieldset > combobox[name="ShapeName"]':
+            'button[action=addShape]':
             {
-                editoradd: me.editOrAddShape
+                click: me.onAddShape
             },
-            'productwindow > productform > fieldset > combobox[name="PackageName"]':
+            'button[action=editShape]':
             {
-                editoradd: me.editOrAddPackage
+                click: me.onEditShape
             },
-            'productwindow > productform > fieldset > combobox[name="UnitName"]':
+            'button[action=addPackage]':
             {
-                editoradd: me.editOrAddUnit
+                click: me.onAddPackage
             },
-            'productsubstancewindow combobox[name="SubstanceName"]':
+            'button[action=editPackage]':
             {
-                editoradd: me.editOrAddSubstance
+                click: me.onEditPackage
             },
-            'brandwindow > toolbar button[action=save]': {
+            'button[action=addProductUnit]':
+            {
+                click: me.onAddUnit
+            },
+            'button[action=editProductUnit]':
+            {
+                click: me.onEditUnit
+            },
+            'button[action=addProductSubstance]':
+            {
+                click: me.onAddProductSubstance
+            },
+            'button[action=editSubstance]':
+            {
+                click: me.onEditSubstance
+            },
+            'button[action=addSubstance]':
+            {
+                click: me.onAddSubstance
+            },
+            'button[action=editSubstanceUnit]':
+            {
+                click: me.onEditSubstanceUnit
+            },
+            'button[action=addSubstanceUnit]':
+            {
+                click: me.onAddSubstanceUnit
+            },
+            'brandnamewindow > toolbar button[action=save]': {
                 click: me.saveBrand
             },
-            'brandwindow > toolbar button[action=cancel]': {
+            'brandnamewindow > toolbar button[action=cancel]': {
                 click: me.showCancelMessage
             },
-            'genericwindow > toolbar button[action=save]': {
+            'genericnamewindow > toolbar button[action=save]': {
                 click: me.saveGeneric
             },
-            'genericwindow > toolbar button[action=cancel]': {
+            'genericnamewindow > toolbar button[action=cancel]': {
                 click: me.showCancelMessage
             },
             'shapewindow > toolbar button[action=save]': {
-                click: me.saveShape
+                click: me.onSaveShape
             },
             'shapewindow > toolbar button[action=cancel]': {
                 click: me.showCancelMessage
             },
             'packagewindow > toolbar button[action=save]': {
-                click: me.savePackage
+                click: me.onSavePackage
             },
             'packagewindow > toolbar button[action=cancel]': {
                 click: me.showCancelMessage
@@ -126,6 +161,12 @@ Ext.define('GenForm.controller.product.Product', {
                 click: me.saveUnit
             },
             'unitwindow > toolbar button[action=cancel]': {
+                click: me.showCancelMessage
+            },
+            'substanceunitwindow > toolbar button[action=save]': {
+                click: me.saveSubstanceUnit
+            },
+            'substanceunitwindow > toolbar button[action=cancel]': {
                 click: me.showCancelMessage
             },
             'substancewindow > toolbar button[action=save]': {
@@ -143,6 +184,15 @@ Ext.define('GenForm.controller.product.Product', {
 
     showCancelMessage: function () {
         Ext.MessageBox.alert('Cancel Product');
+    },
+
+    addKeyValueToStore: function (store, key, value) {
+        var keyValue = Ext.create('GenForm.model.common.KeyValue', {
+            Key: key,
+            Value: value
+        });
+
+        store.add(keyValue);
     }
 
 });

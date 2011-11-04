@@ -1,6 +1,5 @@
 Ext.define('GenForm.controller.user.Login', {
     extend: 'Ext.app.Controller',
-    alias: 'widget.logincontroller',
 
     views: [
         'user.LoginWindow',
@@ -14,13 +13,13 @@ Ext.define('GenForm.controller.user.Login', {
         var me = this;
 
         this.control({
-            'toolbar button[itemId=btnLogin]': {
+            'toolbar button[action=login]': {
                 click: me.onClickLogin
             },
-            'button[itemId=btnAddEnvironment]': {
+            'button[action=addEnvironment]': {
                 click: me.showEnvironmentWindow
             },
-            'window[itemId="wndEnvironment"] button[itemId=btnRegisterEnvironment]': {
+            'window[itemId="wndEnvironment"] button[action=registerEnvironment]': {
                 click: me.onClickRegisterEnvironment
             },
             'window[itemId="wndEnvironment"]': {
@@ -41,17 +40,17 @@ Ext.define('GenForm.controller.user.Login', {
         win = button.up('window');
         me.loginWindow = win;
 
-        Login.SetEnvironment(win.getEnvironmentField().value, me.onEnvironmentSet, me);
+        GenForm.server.UnitTest.SetEnvironment(win.getEnvironmentField().value, me.onEnvironmentSet, me);
     },
 
     onEnvironmentSet: function(result) {
         var me = this, win = me.loginWindow;
 
         if (!result.success === true) {
-            return;
+            me.loginCallback(result);
         }
 
-        Login.Login(win.getUserNameField().value, win.getPasswordField().value, this.loginCallback, me);
+        GenForm.server.UnitTest.Login(win.getUserNameField().value, win.getPasswordField().value, this.loginCallback, me);
     },
 
     loginCallback: function (result) {
@@ -85,7 +84,7 @@ Ext.define('GenForm.controller.user.Login', {
 
     onClickRegisterEnvironment: function (button) {
         var me = this;
-        Environment.RegisterEnvironment(me.getWindowFromButton(button).getEnvironmentName(),
+        GenForm.server.UnitTest.RegisterEnvironment(me.getWindowFromButton(button).getEnvironmentName(),
                                         me.getWindowFromButton(button).getConnectionString(),
                                         me.onEnvironmentRegistered);
         me.getWindowFromButton(button).close();

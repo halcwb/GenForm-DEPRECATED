@@ -56,12 +56,12 @@ namespace Informedica.GenForm.Library.Security
 
         #region Implementation of IPrincipal
 
-        public bool IsInRole(string role)
+        public override bool IsInRole(string role)
         {
             throw new NotImplementedException();
         }
 
-        public IIdentity Identity { get; private set; }
+        public new IIdentity Identity { get; private set; }
 
         public void ChangePassword(string oldPassword, string newPassword)
         {

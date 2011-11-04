@@ -1,91 +1,39 @@
 Ext.define('GenForm.view.product.ShapeForm', {
-    extend: 'GenForm.lib.view.form.FormBase',
+    extend: 'GenForm.lib.view.ui.ShapeForm',
     alias: 'widget.shapeform',
 
-    createItems: function () {
-        var     me = this
-
-        return [
-            me.createShapeFieldSet(),
-            me.createTabPanel()
-        ];
-    },
-
-    createShapeFieldSet: function () {
+    initComponent: function () {
         var me = this;
-        return {
-            xtype: 'fieldset',
-            title: 'Vorm Details',
-            defaults: {
-                width: 300
-            },
-            items: me.createShapeDetails()
-        };
-    },
 
-    createShapeDetails: function () {
-        return [
-            { xtype: 'textfield', name:'ShapeName',   fieldLabel: 'Vorm Naam', margin: '10 0 10 10' }
-        ];
-    },
-
-    createTabPanel: function () {
-        var me = this;
-        return {
-            xtype: 'tabpanel',
-            plain: true,
-            activeTab: 0,
-            height: 235,
-            defaults: { bodyStyle:'padding:10px' },
-            items:[
-                me.createPackageTab(),
-                me.createUnitTab()
-            ]
-        };
-    },
-
-    createPackageTab: function () {
-        var me = this;
-        return {
-            title: 'Verpakkingen',
-            layout: 'fit',
-            items: [ me.createPackageGrid() ]
-        };
-    },
-
-    createUnitTab: function () {
-        var me = this;
-        return {
-            title: 'Eenheden',
-            layout: 'fit',
-            items: [me.createUnitGrid()]
-        };
+        me.callParent(arguments);
     },
 
     createPackageGrid: function () {
-        var config, me = this;
-
-        config = {
-            plugins: [ me.createRowEditor() ]
-        };
-
-        return Ext.create('GenForm.view.product.PackageGrid', config);
+        var me = this;
+        return me.addGrid(Ext.create('GenForm.view.product.PackageGrid'), 'PackageGrid');
     },
 
-    createRowEditor: function () {
-        return Ext.create('Ext.grid.plugin.RowEditing', {
-            clicksToMoveEditor: 1,
-            autoCancel: true
-        });
+    createRouteGrid: function () {
+        var me = this;
+        return me.addGrid(Ext.create('GenForm.view.product.RouteGrid'), 'RouteGrid');
     },
 
-    createUnitGrid: function () {
-        var me = this,
-            config = {
-              plugins: [me.createRowEditor()]
-            };
+    createUnitGroupGrid: function () {
+        var me = this;
+        return me.addGrid(Ext.create('GenForm.view.product.UnitGroupGrid'), 'UnitGroupGrid');
+    },
 
-        return Ext.create('GenForm.view.product.UnitGrid', config);
+    addGrid: function (grid, name) {
+        var me = this;
+        if (!me.grids) me.grids = {};
+        me.grids[name] = grid;
+
+        return grid;
+    },
+
+    // ToDo: temp hack to get rid of load mask
+    onTabChangeLoadStore: function (panel, newTab) {
+        newTab.store.load();
     },
 
     getShape: function () {

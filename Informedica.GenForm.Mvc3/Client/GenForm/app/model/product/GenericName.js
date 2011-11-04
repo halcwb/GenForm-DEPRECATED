@@ -1,7 +1,11 @@
 Ext.define('GenForm.model.product.GenericName', {
     extend: 'Ext.data.Model',
-    alias: 'widget.genericnamemodel',
 
-    fields: [ {name: 'GenericName', type: 'string' }]
+    idProperty: 'Id',
+
+    fields: [
+        { name: 'Id',   type: 'string' },
+        { name: 'Name', type: 'string' }
+    ]
 
 });

@@ -55,11 +55,20 @@ namespace Informedica.GenForm.Mvc3.Controllers
             );
         }
 
+        public ActionResult GetRouteNames()
+        {
+            return this.Direct(new[]
+            {
+                new {}
+            });
+        }
+
         public ActionResult GetProducts()
         {
             return this.Direct(new { success = true });
         }
 
+        [Transaction]
         public ActionResult GetProduct(JObject productId)
         {
             var product = String.IsNullOrEmpty(productId.Value<String>("id")) ? LoadProduct(0) : LoadProduct(Int32.Parse(productId.Value<String>("id")));
@@ -106,6 +115,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
             return this.Direct(new { success, data = brand, message });
         }
+
 
         public ActionResult AddNewShape(JObject shapeDto)
         {

@@ -14,15 +14,15 @@ Ext.define('GenForm.test.view.component.SaveCancelToolbarTests', {
         });
 
         it('has a buttons property', function () {
-            expect(toolbar.buttons).toBeDefined();
+            expect(toolbar.controls.buttons).toBeDefined();
         });
 
         it('has a save button', function () {
-            expect(toolbar.buttons.save).toBeDefined();
+            expect(toolbar.controls.buttons.save).toBeDefined();
         });
 
         it('has a cancel button', function () {
-            expect(toolbar.buttons.cancel).toBeDefined();
+            expect(toolbar.controls.buttons.cancel).toBeDefined();
         });
     }
 });

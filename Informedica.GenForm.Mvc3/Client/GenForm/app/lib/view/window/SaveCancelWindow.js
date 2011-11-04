@@ -2,6 +2,7 @@ Ext.define('GenForm.lib.view.window.SaveCancelWindow', {
     extend: 'Ext.window.Window',
 
     mixins: ['GenForm.lib.util.mixin.FormCreator'],
+    closeAction: 'destroy',
 
     constructor: function (config) {
         var me = this;

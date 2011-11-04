@@ -4,7 +4,7 @@ Ext.define('GenForm.lib.util.mixin.FormCreator', {
         var me = this,
             formClass = me.getConstructor(config);
 
-        if (!me.forms) me.forms = [];
+        if (!me.forms) me.forms = {};
         me.forms[config.name] = Ext.create(formClass, config);
 
         return me.forms[config.name];

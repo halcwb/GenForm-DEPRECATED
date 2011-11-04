@@ -54,7 +54,6 @@ Ext.define('GenForm.lib.view.ui.LoginWindow', {
                         itemId: 'flsEnvironment',
                         height: 67,
                         layout: {
-                            align: 'stretch',
                             padding: 10,
                             type: 'hbox'
                         },
@@ -73,7 +72,9 @@ Ext.define('GenForm.lib.view.ui.LoginWindow', {
                             },
                             {
                                 xtype: 'button',
+                                height: 21,
                                 itemId: 'btnAddEnvironment',
+                                action: 'addEnvironment',
                                 text: 'Nieuwe Omgeving'
                             }
                         ]

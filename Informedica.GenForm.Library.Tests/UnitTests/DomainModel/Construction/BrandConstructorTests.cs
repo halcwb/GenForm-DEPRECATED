@@ -2,7 +2,7 @@
 using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Tests.Fixtures;
+using Informedica.GenForm.TestFixtures.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction

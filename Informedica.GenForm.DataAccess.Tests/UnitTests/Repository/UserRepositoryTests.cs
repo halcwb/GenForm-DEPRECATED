@@ -1,8 +1,8 @@
 ﻿using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.TestFixtures.Fixtures;
 using Informedica.GenForm.Tests;
-using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 
@@ -44,7 +44,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
         
         // Use ClassCleanup to run code after all tests in a class have run

@@ -8,16 +8,28 @@ Ext.define('GenForm.controller.mixin.PackageHandler', {
     },
 
     createEmptyPackage: function () {
-        return Ext.ModelManager.create({}, 'GenForm.model.product.PackageName');
+        return Ext.ModelManager.create({}, 'GenForm.model.product.Package');
     },
 
     createPackageWindow: function () {
         return Ext.create(this.getProductPackageWindowView());
     },
 
-    editOrAddPackage: function () {
-        var me = this;
-        me.getPackageWindow().show();
+    onAddPackage: function () {
+        var me = this,
+            window = me.getPackageWindow(me.createEmptyPackage()).show();
+
+        window.setTitle('Nieuwe verpakking');
+        window.show();
+    },
+
+    onEditPackage: function (button) {
+        var me = this,
+            form = button.findParentByType('productform'),
+            pack = form.fields.Package.findRecord('Name', form.fields.Package.getValue()),
+            window = me.getPackageWindow(pack);
+
+        window.show();
     },
 
     getPackage: function (button) {
@@ -26,7 +38,7 @@ Ext.define('GenForm.controller.mixin.PackageHandler', {
 
     getPackageStore: function () {
         var me = this;
-        return me.getProductPackageNameStore();
+        return me.getProductPackageStore();
     },
 
     loadEmptyPackage: function (window) {
@@ -38,26 +50,32 @@ Ext.define('GenForm.controller.mixin.PackageHandler', {
             window = Ext.ComponentQuery.query('packagewindow')[0];
 
         if (result.success) {
-            Ext.MessageBox.alert('Package saved: ', result.data.PackageName);
-            me.addPackageToStore(result.data.PackageName);
+            Ext.MessageBox.alert('Package saved: ', result.data.Name);
+            me.addPackageToStore(result.data.Name);
             if (window) window.close();
         } else {
             Ext.MessageBox.alert('Package could not be saved: ', result.message);
         }
     },
 
-    savePackage: function (button) {
+    onSavePackage: function (button) {
         var me = this,
             productPackage = me.getPackage(button);
 
-        Product.AddNewPackage(productPackage.data, {scope: me, callback:me.onPackageSaved});
+        GenForm.server.UnitTest.SavePackage(productPackage.data, {scope: me, callback:me.onPackageSaved});
     },
 
-    getPackageWindow: function () {
-        var me = this, form;
+    getPackageWindow: function (pack) {
+        var me = this, window;
 
-        form = me.createPackageWindow();
-        me.loadEmptyPackage(form);
-        return form;
+        window = me.createPackageWindow();
+        if (!pack) {
+            me.loadEmptyPackage(window);
+        } else {
+            window.setTitle('Bewerk verpakking: ' + pack.data.Name);
+            window.loadWithPackage(pack);
+        }
+
+        return window;
     }
 });

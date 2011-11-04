@@ -4,17 +4,34 @@ Ext.define('GenForm.controller.mixin.UnitHandler', {
         return button.up('panel').down('form').getUnit();
     },
 
-    editOrAddUnit: function () {
-        var me = this;
-        me.getUnitWindow().show();
+    onAddUnit: function () {
+        var me = this,
+            window = me.getUnitWindow(me.createEmptyUnit()).show();
+
+        window.setTitle('Nieuwe artikel eenheid');
+        window.show();
     },
 
-    getUnitWindow: function () {
-        var me = this, form;
+    onEditUnit: function (button) {
+        var me = this,
+            form = button.findParentByType('productform'),
+            unit = form.fields.Unit.findRecord('Name', form.fields.Unit.getValue()),
+            window = me.getUnitWindow(unit);
 
-        form = me.createUnitWindow();
-        me.loadEmptyUnit(form);
-        return form;
+        window.show();
+    },
+
+    getUnitWindow: function (unit) {
+        var me = this, window;
+
+        window = me.createUnitWindow();
+        if (!unit) {
+            me.loadEmptyUnit(window);
+        } else {
+            window.setTitle('Bewerk eenheid: ' + unit.data.Name);
+            window.loadWithUnit(unit);
+        }
+        return window;
     },
 
     createUnitWindow: function () {
@@ -32,7 +49,7 @@ Ext.define('GenForm.controller.mixin.UnitHandler', {
         var me = this,
             unit = me.getUnit(button);
 
-        Product.AddNewUnit(unit.data, {scope: me, callback:me.onUnitSaved});
+        GenForm.server.UnitTest.SaveUnit(unit.data, {scope: me, callback:me.onUnitSaved});
     },
 
     onUnitSaved: function (result) {
@@ -40,8 +57,8 @@ Ext.define('GenForm.controller.mixin.UnitHandler', {
             window = Ext.ComponentQuery.query('unitwindow')[0];
 
         if (result.success) {
-            Ext.MessageBox.alert('Unit saved: ', result.data.UnitName);
-            me.addUnitToStore(result.data.UnitName);
+            Ext.MessageBox.alert('Unit saved: ', result.data.Name);
+            me.addUnitToStore(result.data.Name);
             if (window) window.close();
         } else {
             Ext.MessageBox.alert('Unit could not be saved: ', result.message);
@@ -50,11 +67,11 @@ Ext.define('GenForm.controller.mixin.UnitHandler', {
 
     getUnitStore: function () {
         var me = this;
-        return me.getProductUnitNameStore();
+        return me.getProductUnitStore();
     },
 
     createEmptyUnit: function () {
-        return Ext.ModelManager.create({}, 'GenForm.model.product.UnitName');
+        return Ext.ModelManager.create({}, 'GenForm.model.product.Unit');
     },
 
     loadEmptyUnit: function (window) {

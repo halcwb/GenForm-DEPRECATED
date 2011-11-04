@@ -184,11 +184,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #region Validation
 
-        public static IEnumerable<String> GetBrokenRules(Shape shape)
-        {
-            return ValidationRulesManager.GetBrokenRules(shape);
-        }
-
         private static void RegisterValidationRules()
         {
             ValidationRulesManager.RegisterRule<Shape>(x => !String.IsNullOrWhiteSpace(x.Name));

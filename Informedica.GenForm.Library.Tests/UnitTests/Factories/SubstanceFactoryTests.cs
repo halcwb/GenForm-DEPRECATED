@@ -2,8 +2,8 @@
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Library.Factories;
+using Informedica.GenForm.TestFixtures.Fixtures;
 using Informedica.GenForm.Tests;
-using Informedica.GenForm.Tests.Fixtures;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Library.Tests.UnitTests.Factories

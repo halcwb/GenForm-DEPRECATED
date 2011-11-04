@@ -20,8 +20,8 @@ Ext.define('GenForm.lib.view.form.FormBase', {
 
     initComponent: function () {
         var me = this;
-        me.fields = {};
-        me.items = me.createItems();
+
+        if (me.createItems) me.items = me.createItems();
         me.callParent(arguments);
     },
 

@@ -76,7 +76,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\TestsController.cs" />
+    <Compile Include="Controllers\UnitTestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -90,7 +90,6 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="TestFixtures\ProductTestFixtures.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client\GenForm\.idea\encodings.xml" />
@@ -538,7 +537,7 @@
     <None Include="Client\Library\platform\core\test\unit\build.sh" />
     <None Include="Client\Library\platform\core\test\unit\spec\Ext-mess.backup" />
     <None Include="readme.txt" />
-    <Content Include="Views\Tests\Index.cshtml" />
+    <Content Include="Views\UnitTest\Index.cshtml" />
     <Content Include="Views\Debug\Index.cshtml" />
     <Content Include="Views\AppTest\Index.cshtml" />
   </ItemGroup>
@@ -546,6 +545,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Client\GenForm\app\lib\view\form\" />
     <Folder Include="Models\Product\" />
+    <Folder Include="TestFixtures\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Informedica.GenForm.Assembler\Informedica.GenForm.Assembler.csproj">
@@ -559,6 +559,10 @@
     <ProjectReference Include="..\Informedica.GenForm.Presentation\Informedica.GenForm.Presentation.csproj">
       <Project>{63800128-7BE0-4B57-A789-27CB9E5EED3B}</Project>
       <Name>Informedica.GenForm.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.TestFixtures\Informedica.GenForm.TestFixtures.csproj">
+      <Project>{F772CA62-5400-45BF-B586-AACF5F20D6BC}</Project>
+      <Name>Informedica.GenForm.TestFixtures</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.Settings\Informedica.Settings.csproj">
       <Project>{B30C5371-DDDD-46BE-827A-72798E743B60}</Project>

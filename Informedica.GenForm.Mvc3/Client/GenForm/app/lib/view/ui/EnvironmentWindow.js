@@ -43,6 +43,7 @@ Ext.define('GenForm.lib.view.ui.EnvironmentWindow', {
                         xtype: 'button',
                         height: 43,
                         itemId: 'btnRegisterEnvironment',
+                        action: 'registerEnvironment',
                         width: 134,
                         text: 'Registreer Omgeving',
                         dock: 'bottom'
