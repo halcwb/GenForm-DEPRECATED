@@ -1,11 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Mvc3.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TypeMock.ArrangeActAssert;
 
 namespace Informedica.GenForm.Tests.RegressionTests
 {
@@ -120,8 +120,8 @@ namespace Informedica.GenForm.Tests.RegressionTests
         private static LoginController CreateLoginController()
         {
             var loginController =  new LoginController();
-            loginController.ControllerContext = new ControllerContext()
-            {
+            loginController.ControllerContext = new ControllerContext
+                                                    {
                 Controller = loginController,
                 RequestContext =  new RequestContext(MockHttpContext(), new RouteData())
             };
@@ -130,7 +130,8 @@ namespace Informedica.GenForm.Tests.RegressionTests
 
         private static HttpContextBase MockHttpContext()
         {
-            return Isolate.Fake.Instance<HttpContextBase>();
+            
+            return new HttpContextWrapper(new HttpContext(new HttpRequest("","http://localhost/genform/default.aspx",""), new HttpResponse(TextWriter.Null)));
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
         {
             var expires = DateTime.Now.AddHours(1);
             var loginCookie = new HttpCookie("loginCookie", LoginServices.GetLoggedIn());
-            Session["user"] = LoginServices.GetLoggedIn();
+            if (Session != null) Session["user"] = LoginServices.GetLoggedIn();
             loginCookie.Expires = expires;
             Response.AppendCookie(loginCookie);
         }

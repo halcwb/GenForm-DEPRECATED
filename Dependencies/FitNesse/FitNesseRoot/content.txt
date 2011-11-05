@@ -1,4 +1,4 @@
 !define TEST_SYSTEM {slim}
 !define COMMAND_PATTERN {%m -r fitSharp.Slim.Service.Runner,Debug\fitsharp.dll %p}
-!define TEST_RUNNER {Debug\Runner.exe}
+!define TEST_RUNNER {Debug\RunnerW.exe}
 !path C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.Acceptance\bin\Debug\Informedica.GenForm.Acceptance.dll

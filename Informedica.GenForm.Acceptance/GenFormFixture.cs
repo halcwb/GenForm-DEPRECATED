@@ -1,5 +1,11 @@
-﻿using Informedica.GenForm.TestFixtures.Fixtures;
-using fit;
+﻿using System.Collections;
+using System.Data;
+using System.Data.Common;
+using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Tests.RegressionTests;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NHibernate;
+using StructureMap;
 
 namespace Informedica.GenForm.Acceptance
 {
@@ -15,7 +21,7 @@ namespace Informedica.GenForm.Acceptance
             return new UserLogInScenario().RegisterUserWith(userName, password);
         }
 
-        public bool ThenUserCanLoginWith(string userName, string password)
+        public string ThenUserCanLoginWith(string userName, string password)
         {
             return new UserLogInScenario().ThenUserCanLogInWith(userName, password);
         }
@@ -39,9 +45,9 @@ namespace Informedica.GenForm.Acceptance
             return 1;
         }
 
-        public bool UserExists(string user)
+        public string UserExists(string user)
         {
-            return true;
+            return new UserLogInScenario().ThenUserCanLogInWith("admin", "Admin");
         }
     }
 
@@ -54,22 +60,67 @@ namespace Informedica.GenForm.Acceptance
 
     }
 
-    public class ProductFixture: ColumnFixture
+    public class MyTestContext: TestContext
     {
-        public new object GetTargetObject()
+        public override void WriteLine(string format, params object[] args)
         {
-            return ProductTestFixtures.GetDopamineDto();
+            throw new System.NotImplementedException();
+        }
+
+        public override void AddResultFile(string fileName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void BeginTimer(string timerName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void EndTimer(string timerName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override IDictionary Properties
+        {
+            get { throw new System.NotImplementedException(); }
+        }
+
+        public override DataRow DataRow
+        {
+            get { throw new System.NotImplementedException(); }
+        }
+
+        public override DbConnection DataConnection
+        {
+            get { throw new System.NotImplementedException(); }
         }
     }
 
     public class UserLogInScenario
     {
-        public bool ThenUserCanLogInWith(string userName, string password)
+        public string ThenUserCanLogInWith(string userName, string password)
         {
-            var login =new UserLoginDecisions();
-            login.GivenUser = userName;
-            login.GivenPassword = password;
-            return login.GivenUserLogsIn(userName);
+
+            LoginAcceptanceTests.MyClassInitialize(new MyTestContext());
+            var test = new LoginAcceptanceTests();
+
+            try
+            {
+                test.MyTestInitialize();
+                test.SystemUserCanLogin();
+                return "true";
+
+            }
+            catch (System.Exception e)
+            {
+                return e.ToString();
+            }
+            finally
+            {
+                test.MyTestCleanup();
+            }
         }
 
         public bool RegisterUserWith(string userName, string password)

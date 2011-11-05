@@ -37,6 +37,7 @@
     <Reference Include="fitSharp">
       <HintPath>..\..\fitsharp\build\Debug\fitSharp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="NHibernate, Version=3.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
     <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -49,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NewProductDecisions.cs" />
-    <Compile Include="ProductFixture.cs" />
+    <Compile Include="GenFormFixture.cs" />
     <Compile Include="UserLoginDecisions.cs" />
     <Compile Include="HelloFitNesse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,13 +60,9 @@
       <Project>{DB3FE453-4FEA-43EC-BAC7-B0679A432BE2}</Project>
       <Name>Informedica.GenForm.Assembler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
-      <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
-      <Name>Informedica.GenForm.Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.TestFixtures\Informedica.GenForm.TestFixtures.csproj">
-      <Project>{F772CA62-5400-45BF-B586-AACF5F20D6BC}</Project>
-      <Name>Informedica.GenForm.TestFixtures</Name>
+    <ProjectReference Include="..\Informedica.GenForm.Mvc3.Tests\Informedica.GenForm.Mvc3.Tests.csproj">
+      <Project>{7A87B746-06AA-4DBF-918D-1371C27AF744}</Project>
+      <Name>Informedica.GenForm.Mvc3.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Tests\Informedica.GenForm.Tests.csproj">
       <Project>{819BA760-6C94-4203-8DB0-7F0AAA4B2159}</Project>
