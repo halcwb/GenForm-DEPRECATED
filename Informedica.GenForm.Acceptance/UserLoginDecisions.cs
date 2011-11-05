@@ -1,23 +1,10 @@
-﻿using Informedica.GenForm.Assembler;
-using Informedica.GenForm.Assembler.Contexts;
-using Informedica.GenForm.Library.Security;
-using Informedica.GenForm.Library.Services.Users;
-using Informedica.GenForm.Tests;
-using NHibernate;
-using StructureMap;
+﻿using Informedica.GenForm.Mvc3.Tests.UnitTests;
 
 namespace Informedica.GenForm.Acceptance
 {
     public class UserLoginDecisions
     {
         private static bool _loggedIn;
-
-        public UserLoginDecisions()
-        {
-            GenFormApplication.Initialize();
-            ObjectFactory.Configure(x => x.For<ISessionFactory>().Use(GenFormApplication.SessionFactory));
-            DatabaseCleaner.CleanDataBase();
-        }
 
         public string GivenUser { get; set; }
 
@@ -29,12 +16,17 @@ namespace Informedica.GenForm.Acceptance
 
         public bool IsUserAuthenticated()
         {
-            using (new SessionContext())
+            var test = new LoginControllerShould();
+
+            try
             {
-                var user = LoginUser.NewLoginUser(GivenUser, GivenPassword);
-                LoginServices.Login(user);
-                return LoginServices.IsLoggedIn(user);
-                
+                test.ReturnSuccessValueIsTrueWhenValidUserLogin();
+                return true;
+
+            }
+            catch (System.Exception)
+            {
+                return false;
             }
         }
 
@@ -46,7 +38,7 @@ namespace Informedica.GenForm.Acceptance
         public bool GivenUserLogsIn(string user)
         {
             _loggedIn = user == "Admin";
-            return _loggedIn;
+            return IsUserAuthenticated();
         }
 
         public bool IsLoggedInUser(string user)

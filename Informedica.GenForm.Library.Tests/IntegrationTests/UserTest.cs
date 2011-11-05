@@ -1,10 +1,8 @@
-﻿using System.Linq;
-using Informedica.GenForm.Assembler;
-using Informedica.GenForm.Library.DomainModel.Users;
+﻿using Informedica.GenForm.Assembler;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock.ArrangeActAssert;
 
-namespace Informedica.GenForm.Library.Tests
+namespace Informedica.GenForm.Library.Tests.IntegrationTests
 {
     
     
@@ -12,10 +10,9 @@ namespace Informedica.GenForm.Library.Tests
     ///This is a test class for UserTest and is intended
     ///to contain all UserTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class UserTest
     {
-
 
         private TestContext testContextInstance;
 
@@ -40,7 +37,7 @@ namespace Informedica.GenForm.Library.Tests
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
             GenFormApplication.Initialize();
