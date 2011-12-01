@@ -32,3 +32,5 @@ Client/Library*/
 Client/Library/Ext4/
 Client/Library/extjs/
 Client/Library/platform/
+
+*.zip
