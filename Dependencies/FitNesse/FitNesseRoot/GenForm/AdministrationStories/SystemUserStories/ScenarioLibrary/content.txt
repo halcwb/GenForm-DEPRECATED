@@ -1,0 +1,40 @@
+!|script|TestFixture|
+
+!|scenario|Given a server with server name _ user name _ and password _|server,user,password                              |
+|check    |Connect to server                                           |@server|as user|@user|with password|@password|true|
+
+!|scenario|And list of environments contains _|environment      |
+|check    |List of environments contains      |@environment|true|
+
+!|scenario|And list of environments does not contain _|environment       |
+|check    |List of environments contains              |@environment|false|
+
+!|scenario|Then the list of environments contains _|environment      |
+|check    |List of environments contains           |@environment|true|
+
+!|scenario    |When user _ registers environment _ for server _ with login _ and password _|user, environment, server, login, password                              |
+|$envreg=     |Register environment                                                        |@environment|for server|@server|with login|@login|and password|@password|
+|$environment=|Echo                                                                        |@environment                                                            |
+
+!|scenario|Then an error is thrown|
+|check    |Echo  |$envreg  |error |
+
+!|scenario           |Given a new environment _|environment |
+|Register environment|@environment                          |
+|$environment=       |Echo                     |@environment|
+
+!|scenario|When a list of databases is requested         |
+|$list=   |Get database list for environment|$environment|
+
+!|scenario|Then this list contains no databases  |
+|check    |List|$list|contains|$environment|false|
+
+!|scenario   |When a new database with name _ is added to environment|databaseName               |
+|Add database|@databaseName                                          |to environment|$environment|
+|$database=  |Echo                                                   |@databaseName              |
+
+!|scenario|And list of databases is requested|
+|When a list of databases is requested       |
+
+!|scenario|Then this list contains _|database                     |
+|check    |List                     |$list|contains|@database|true|

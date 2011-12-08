@@ -1,0 +1,19 @@
+![ script
+Given a list of shapes with count 0
+When list of shapes is retrieved
+Then the list count is 0
+]!
+![ script
+Given a list of shapes with shape tablet
+When list of shapes is retrieved
+Then the list count is 1 
+And the list contains tablet
+But the list does not contain ampul
+]!
+![ script 
+Given a list of shapes with shape tablet and ampul
+When list of shapes is retrieved
+Then the list count is 2
+And the list contains tablet
+And the list contains ampul
+]!

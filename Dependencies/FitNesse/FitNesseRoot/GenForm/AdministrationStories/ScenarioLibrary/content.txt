@@ -1,0 +1,108 @@
+!|import                       |
+|Informedica.GenForm.Acceptance|
+
+!|scenario           |Given environment _ with database _|environment, database  |
+|Register environment|@environment                       |with database|@database|
+|$envir=             |Echo                               |@environment           |
+|$db=                |Echo                               |@database              |
+
+!|scenario |When _ user is logged in|user |
+|Log in    |@user                         |
+|$userName=|Echo                    |@user|
+
+!|scenario    |Then he can register an admin user _ with password _|user, password                                               |
+|Register user|@user                                               |with password|@password|in database|$db|in environment|$envir|
+
+!|scenario|Given a newly installed genform service|
+|Install new genform service                      |
+
+!|scenario|Given user with name _ wants to register|userName |
+|$user=   |echo user                               |@userName|
+
+!|scenario|Then he can set password to|password      |
+|check    |Set password               |@password|true|
+
+!|scenario|Then he can not set password to|password       |
+|check    |Set password                   |@password|false|
+
+!|scenario    |Given user _ with password _|userName, password|
+|Register user|@userName                   |with  |@password  |
+|$user=       |echo user                   |@userName         |
+
+!|scenario    |Given admin adds user with name _ and password _|userName, password|
+|Register user|@userName                                       |with  |@password  |
+|$user=       |echo user                                       |@userName         |
+
+!|scenario|Then _ can log in with _|userName, password                    |
+|check    |Log in user             |@userName|with password|@password|true|
+
+!|scenario|Then _ can not log in with _|userName, password                    |
+|check not|Log in user                 |@userName|with password|@password|true|
+
+!|scenario|Then there is only one user|
+|check    |Get user count      |1     |
+
+!|scenario|Then this user has name _|userName      |
+|check    |User exists              |@userName|true|
+
+!|scenario|And user _ has password _|userName, password                   |
+|check    |User                     |@userName|has password|@password|true|
+
+!|scenario                              |Given a user _ with valid credentials|userName |
+|Set valid credential for user with name|@userName                                      |
+|$user=                                 |echo user                            |@userName|
+
+!|scenario|And user with name _ does not exist|userName       |
+|check    |User exists                        |@userName|false|
+
+!|scenario|And user with name _ does exist|userName      |
+|check    |User exists                    |@userName|true|
+
+!|scenario|Then he can set his user name to _|userName      |
+|check    |Set user name                     |@userName|true|
+
+!|scenario|Then he can not set his user name to _|userName       |
+|check    |Set user name                         |@userName|false|
+
+!|scenario|And this user is the system user|
+|$user=   |Get first user from user list   |
+|check    |User is system user |$user |true|
+
+!|scenario|And this user has name system       |
+|check    |Get first user from user list|system|
+
+!|scenario|And user _ has password _|userName, password                    |
+|check    |Log in user              |@userName|with password|@password|true|
+
+!|scenario|And _ can log in with _|userName, password                    |
+|check    |Log in user            |@userName|with password|@password|true|
+
+!|scenario     |When the list of environments is retrieved|
+|$environments=|Get environments                          |
+
+!|scenario|Then this list is empty|
+|check    |Get environments   |   |
+
+!|scenario           |And environment _ contains database _|environment, database|
+|Environment contains|@environment                         |database  |@database |
+|$envir=             |Echo                                 |@environment         |
+|$db=                |Echo                                 |@database            |
+
+!|scenario|And user is allowed to access database _|database                                         |
+|User     |$user                                   |can access database|database|in environmet|$envir|
+
+!|scenario|But user is not allowed to access database _|database                                                    |
+|Check not|User                                        |$user|can access database|database|in environmet|$envir|true|
+
+!|scenario  |Then _ can log in with _ in database Test|user, password, database                                           |
+|Log in user|@user                                    |with password|@password|in database|@database|in environment|$envir|
+
+!|scenario  |When he logs in                                                          |
+|Log in user|$user|with password|@password|in database|@database|in environment|$envir|
+
+!|scenario|Then he is logged in database _ in environment _|database, environment                                   |
+|Is user  |$user                                           |logged in database|@database|in environment|@environment|
+
+!|scenario  |But he can not log in with _ in database _|password, database                                                 |
+|Log in user|$user                                     |with password|@password|in database|@database|in environment|$envir|
+
