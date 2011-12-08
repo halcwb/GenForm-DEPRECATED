@@ -18,7 +18,8 @@ namespace Informedica.GenForm.Tests.RegressionTests
         private const String SystemUserName = "Admin";
         private const String SystemUserPassword = "Admin";
 
-        public LoginAcceptanceTests() : base(true)
+        public LoginAcceptanceTests()
+            : base(true)
         {
         }
 
@@ -47,7 +48,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         // Use ClassInitialize to run code before running the first test in the class
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
-        
+
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
@@ -67,10 +68,10 @@ namespace Informedica.GenForm.Tests.RegressionTests
         {
             // Setup
             var loginController = CreateLoginController();
-            
+
             // Execute
             var result = loginController.Login(SystemUserName, SystemUserPassword);
-            
+
             // Verify
             Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "System user could not successfully log in");
 
@@ -108,7 +109,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         }
 
         [TestMethod]
-        public  void UserWithoutPasswordCannotLogin()
+        public void UserWithoutPasswordCannotLogin()
         {
             var loginController = CreateLoginController();
 
@@ -119,19 +120,19 @@ namespace Informedica.GenForm.Tests.RegressionTests
 
         private static LoginController CreateLoginController()
         {
-            var loginController =  new LoginController();
+            var loginController = new LoginController();
             loginController.ControllerContext = new ControllerContext
                                                     {
-                Controller = loginController,
-                RequestContext =  new RequestContext(MockHttpContext(), new RouteData())
-            };
+                                                        Controller = loginController,
+                                                        RequestContext = new RequestContext(MockHttpContext(), new RouteData())
+                                                    };
             return loginController;
         }
 
         private static HttpContextBase MockHttpContext()
         {
-            
-            return new HttpContextWrapper(new HttpContext(new HttpRequest("","http://localhost/genform/default.aspx",""), new HttpResponse(TextWriter.Null)));
+
+            return new HttpContextWrapper(new HttpContext(new HttpRequest("", "http://localhost/genform/default.aspx", ""), new HttpResponse(TextWriter.Null)));
         }
     }
 }
