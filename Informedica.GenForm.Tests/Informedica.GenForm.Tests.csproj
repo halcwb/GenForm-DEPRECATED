@@ -77,6 +77,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegressionTests\LoginAcceptanceTests.cs" />
     <Compile Include="TestSessionContext.cs" />
+    <Compile Include="Utilities\GenFormList.cs" />
+    <Compile Include="Utilities\GenFormLists.cs" />
     <Compile Include="Utilities\ProductChecker.cs" />
   </ItemGroup>
   <ItemGroup>

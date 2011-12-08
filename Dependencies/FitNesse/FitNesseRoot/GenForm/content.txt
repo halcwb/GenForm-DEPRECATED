@@ -1,1 +1,1 @@
-!contents -R2 -g -p -f -h
+!contents -R100 -g -p -f -h

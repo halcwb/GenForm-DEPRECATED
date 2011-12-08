@@ -26,15 +26,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SubstanceUnitHandler.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controller/mixin/SubstanceUnitHandler.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="4" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SubstanceWindow.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/product/SubstanceWindow.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -89,10 +80,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewProductTest.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="NewProductTest.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/test/usecase/NewProductTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="507" column="0" selection-start="17387" selection-end="17387" vertical-scroll-proportion="0.96586347">
+            <state line="477" column="0" selection-start="16294" selection-end="16294" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductListTest.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/test/usecase/ProductListTest.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="11" selection-start="648" selection-end="648" vertical-scroll-proportion="0.29016066">
               <folding />
             </state>
           </provider>
@@ -130,7 +130,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/view/product/SubstanceForm.js" />
         <option value="$PROJECT_DIR$/app/controller/mixin/ProductSubstanceHandler.js" />
         <option value="$PROJECT_DIR$/app/lib/util/mixin/FormCreator.js" />
         <option value="$PROJECT_DIR$/app/controller/mixin/SubstanceHandler.js" />
@@ -146,6 +145,7 @@
         <option value="$PROJECT_DIR$/app/controller/mixin/SubstanceUnitHandler.js" />
         <option value="$PROJECT_DIR$/app/test/usecase/NewProductTest.js" />
         <option value="$PROJECT_DIR$/app/controller/mixin/ProductHandler.js" />
+        <option value="$PROJECT_DIR$/app/test/usecase/ProductListTest.js" />
       </list>
     </option>
   </component>
@@ -197,6 +197,17 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Favorites">
+        <subPane subId="GenForm">
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" />
+              <option name="myItemType" value="com.intellij.ide.favoritesTreeView.FavoritesTreeNodeDescriptor" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -401,17 +412,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Favorites">
-        <subPane subId="GenForm">
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" />
-              <option name="myItemType" value="com.intellij.ide.favoritesTreeView.FavoritesTreeNodeDescriptor" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -420,8 +420,8 @@
     <property name="options.lastSelected" value="JavaScript.Libraries" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Library/deployment" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -492,21 +492,21 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11745862" sideWeight="0.6001955" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942328" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39198437" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16657768" sideWeight="0.4408602" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1687133" sideWeight="0.44477028" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16657768" sideWeight="0.55131966" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1687133" sideWeight="0.5474096" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39198437" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2922776" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -555,114 +555,86 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/view/product/UnitWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="3" selection-start="0" selection-end="601" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/view/product/ShapeGrid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="3" selection-start="428" selection-end="428" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="15" column="3" selection-start="428" selection-end="428" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/product/SubstanceGrid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="3" selection-start="448" selection-end="448" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="15" column="3" selection-start="448" selection-end="448" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/lib/view/ui/ShapeGrid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="11" column="13" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/lib/view/ui/SubstanceGrid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="13" selection-start="545" selection-end="545" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="18" column="13" selection-start="545" selection-end="545" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/product/ProductForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="4" selection-start="1346" selection-end="1346" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/product/SubstanceForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="44" selection-start="225" selection-end="225" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/product/UnitForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="6" selection-start="316" selection-end="316" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/product/SubstanceWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/product/SubstanceUnitForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="662" selection-end="662" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/product/SubstanceUnitWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="35" selection-start="559" selection-end="559" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/lib/view/ui/UnitForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="13" selection-start="1985" selection-end="1985" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="48" column="4" selection-start="1346" selection-end="1346" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controller/mixin/SubstanceUnitHandler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="4" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="23" column="4" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/product/SubstanceWindow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controller/product/Product.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="160" column="34" selection-start="4990" selection-end="4990" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="160" column="34" selection-start="4990" selection-end="4990" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/product/SubstanceUnitWindow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="35" selection-start="559" selection-end="559" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/product/SubstanceForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="44" selection-start="225" selection-end="225" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/product/SubstanceUnitForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="0" selection-start="662" selection-end="662" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/lib/view/ui/UnitForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="13" selection-start="1985" selection-end="1985" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/product/UnitForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="6" selection-start="316" selection-end="316" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controller/mixin/ProductHandler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="9" selection-start="1410" selection-end="1410" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="36" column="9" selection-start="1410" selection-end="1410" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/test/usecase/NewProductTest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="507" column="0" selection-start="17387" selection-end="17387" vertical-scroll-proportion="0.96586347">
+        <state line="477" column="0" selection-start="16294" selection-end="16294" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/test/usecase/ProductListTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="11" selection-start="648" selection-end="648" vertical-scroll-proportion="0.29016066">
           <folding />
         </state>
       </provider>

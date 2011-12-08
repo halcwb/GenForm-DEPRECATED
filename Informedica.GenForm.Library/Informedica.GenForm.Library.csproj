@@ -86,6 +86,7 @@
     <Compile Include="DomainModel\Products\Collections\PackageSet.cs" />
     <Compile Include="DomainModel\Products\Collections\ProductSet.cs" />
     <Compile Include="DomainModel\Products\Collections\RouteSet.cs" />
+    <Compile Include="DomainModel\Products\Collections\ShapeList.cs" />
     <Compile Include="DomainModel\Products\Collections\SubstanceSet.cs" />
     <Compile Include="DomainModel\Products\Interfaces\IBrand.cs" />
     <Compile Include="DomainModel\Products\Interfaces\IPackage.cs" />

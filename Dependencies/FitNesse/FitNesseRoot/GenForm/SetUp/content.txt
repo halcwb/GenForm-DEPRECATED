@@ -1,8 +1,14 @@
-!|import|
+!|import                       |
 |Informedica.GenForm.Acceptance|
 
-!|script|genform fixture|
+!|Library       |
+|genform fixture|
+|Product fixture|
+|Shape fixture  |
 
 !|scenario|Install new genform service|
-|Install test genform service|
+|Install test genform service         |
 
+!|scenario|Echo something|something|
+|Echo it  |@something              |
+ 
