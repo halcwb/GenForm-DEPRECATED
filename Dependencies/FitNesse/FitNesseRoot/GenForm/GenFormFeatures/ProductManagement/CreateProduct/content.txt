@@ -1,0 +1,30 @@
+!|Product Management|Stories                              |Points|
+|Create product     |Get shape list                       |1     |
+|                   |Add shape to shape list              |3     |
+|                   |Get package list                     |1     |
+|                   |Add package to package list          |3     |
+|                   |Get unitgroup list                   |1     |
+|                   |Add unitgroup to unitgroup list      |2     |
+|                   |Get unit list                        |1     |
+|                   |Add unit to unit group               |2     |
+|                   |Add unit to list                     |3     |
+|                   |Get substance list                   |1     |
+|                   |Add substance to list                |2     |
+|                   |Associate shape with package and unit|3     |
+|                   |Enter product name                   |1     |
+|                   |Enter generic name                   |1     |
+|                   |Enter product quantity               |1     |
+|                   |Select shape                         |1     |
+|                   |Select package                       |1     |
+|                   |Select unit                          |1     |
+|                   |Create product substance             |4     |
+|                   |Add product substance to product     |2     |
+|Add product        |Get product list                     |2     |
+|                   |Check if product is in list          |3     |
+|                   |Add product to list                  |4     |
+|Update product     |                                     |      |
+|Delete product     |                                     |      |
+|Get product list   |                                     |      |
+
+!contents
+

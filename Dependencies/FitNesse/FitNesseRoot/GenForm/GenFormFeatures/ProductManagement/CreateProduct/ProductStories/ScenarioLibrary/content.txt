@@ -1,0 +1,9 @@
+!|scenario|Given a list of _ with count _|type, count |
+|check    |Get count of list of          |@type|@count|
+|$type=   |Echo                          |@type       |
+
+!|scenario           |When list of _ is retrieved|type|
+|Get count of list of|@type                           |
+
+!|scenario|Then the list count is _|count       |
+|check    |Get count of list of    |$type|@count|

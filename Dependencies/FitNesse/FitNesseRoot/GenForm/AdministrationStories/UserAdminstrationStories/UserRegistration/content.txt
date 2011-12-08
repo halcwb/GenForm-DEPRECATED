@@ -1,0 +1,60 @@
+''System user can add an admin user to a database''
+![ script 
+Given environment .GenForm.AdministrationStories.UserAdminstrationStories.TestGenForm with database .GenForm.AdministrationStories.UserAdminstrationStories.TestDatabase
+When system user is logged in
+Then he can register an admin user Bob with password xyz
+]!
+''A user can have a user name with min. 3 characters and max 30 characters''
+''Valid user names''  
+                               
+!|Valid user names                                      |
+|User name                |Existing user name|Is valid?|
+|foo                      |                  |true     |
+|bar                      |                  |true     |
+|foobar                   |                  |true     |
+|foo                      |foo               |false    |
+|Foo                      |foo               |false    |
+|fooBar                   |foobar            |false    |
+|f                        |                  |false    |
+|foofoofoofoofoofoofoofoo1|                  |false    |
+|fo                       |                  |false    |
+|123                      |                  |false    |
+|1foo                     |                  |false    |
+|foo1                     |                  |true     |
+|@foo                     |                  |false    |
+|foo!                     |                  |false    |
+
+![ script
+Given a user Bob with valid credentials
+And user with name bob does not exist
+And user with name fred does exist
+Then he can set his user name to bob
+Then he can set his user name to bobbobbobbobbobbobbobbobbobbob
+Then he can not set his user name to bobbobbobbobbobbobbobbobbobbobb
+Then he can not set his user name to fred
+Then he can not set his user name to Fred 
+]!
+''Valid passwords''
+
+!|Valid passwords|
+|Password  |Is Valid?|
+|baR        |true     |
+|b          |false    |
+|ba         |false    |
+|1baR       |true     |
+|$baR1      |true     |
+|baRbaRbaR11|false    |
+
+
+''A user can register with name and password''
+![ script 
+Given user with name Bob wants to register
+Then he can set password to xyz
+Then he can not set password to x
+Then he can not set password to xy
+Then he can set password to xyz1
+Then he can set password to xyzxyzxyzzxyzxyzxy20
+Then he can not set password to xyzxyzxyzzxyzxyzxy21x
+]!
+
+
