@@ -33,11 +33,11 @@
   <ItemGroup>
     <Reference Include="fit, Version=1.9.4317.19029, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\FitNesse\Debug\fit.dll</HintPath>
+      <HintPath>..\Dependencies\FitNesse\fit.dll</HintPath>
     </Reference>
     <Reference Include="fitSharp, Version=1.9.4317.19026, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\FitNesse\Debug\fitSharp.dll</HintPath>
+      <HintPath>..\Dependencies\FitNesse\fitSharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
