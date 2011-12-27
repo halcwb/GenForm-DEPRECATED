@@ -1,1 +1,1 @@
-java -jar fitnesse.jar -p 8888
+java -jar fitnesse.jar -d ../../ -p 8888
