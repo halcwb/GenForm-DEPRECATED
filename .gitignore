@@ -1,3 +1,4 @@
+
 #ignore thumbnails created by windows
 Thumbs.db
 
@@ -39,3 +40,8 @@ ext/
 #ignore fitnesse system files
 FitNesseRoot/ErrorLogs/
 FitNesseRoot/files/
+FitNesseRoot/FitNesse/
+FitNesseRoot/Suite*/
+FitNesseRoot/SampleWiki/
+FitNesseRoot/UserGuide/
+FitNesseRoot/SampleWiki/
