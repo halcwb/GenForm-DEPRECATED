@@ -30,8 +30,8 @@ _ReSharper*/
 #ignore msunit test results
 [Tt]est[Rr]esult*
 
-#ignore javascript libraries
-Client/Library*/
+#ignore ext javascript libraries
+ext/
 
 #ignore zip files
 *.zip
