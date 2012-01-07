@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Xml.Linq;
+using StructureMap;
 
 namespace Informedica.Settings
 {
@@ -36,7 +37,7 @@ namespace Informedica.Settings
                         var instance = new SettingsManager();
                         Thread.MemoryBarrier();
                         _instance = instance;
-                        _instance.Initialize();
+                        //_instance.Initialize();
                     }
                     return _instance;
                 }
@@ -132,9 +133,12 @@ namespace Informedica.Settings
 
         public string ReadSecureSetting(string name)
         {
-            _crypt.Key = _key;
-            var value = GetEnvirionment(FindEnvironmentElement(name));
-            return _crypt.Decrypt(value);
+            return GetSettingReader().ReadSetting(name);
+        }
+
+        private SettingReader GetSettingReader()
+        {
+            return ObjectFactory.GetInstance<SettingReader>();
         }
 
         private string GetEnvirionment(XElement xElement)
@@ -148,16 +152,12 @@ namespace Informedica.Settings
 
         public void WriteSecureSetting(string key, string value)
         {
-            if (String.IsNullOrWhiteSpace(key) || String.IsNullOrWhiteSpace(value)) return;
+            GetSettingWriter().WriteSetting(key, value);
+        }
 
-            value = EncryptSetting(value);
-
-            var element = FindEnvironmentElement(key);
-
-            if (element == null) AddEnvironment(key, value);
-            else ChangeEnvironment(element, value);
-
-            _settingsDoc.Save(GetFile());
+        private ConfigurationManagerSettingWriter GetSettingWriter()
+        {
+            return new ConfigurationManagerSettingWriter();
         }
 
         private static void ChangeEnvironment(XElement environment, string connectionString)

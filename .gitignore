@@ -28,6 +28,9 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 
+#ignore setting files
+[Ss]ettings.*
+
 #ignore msunit test results
 [Tt]est[Rr]esult*
 

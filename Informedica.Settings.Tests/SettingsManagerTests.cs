@@ -8,14 +8,13 @@ namespace Informedica.Settings.Tests
     ///This is a test class for SettingsManagerTest and is intended
     ///to contain all SettingsManagerTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class SettingsManagerTests
     {
-        private const string EnvironmentPath = @"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.Mvc3\";
         private const string EnvironmentConnectionString = @"Data Source=HAL-WIN7\\INFORMEDICA;Initial Catalog=GenFormTest;Integrated Security=True";
 
 
-        private TestContext testContextInstance;
+        private TestContext _testContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -25,11 +24,11 @@ namespace Informedica.Settings.Tests
         {
             get
             {
-                return testContextInstance;
+                return _testContextInstance;
             }
             set
             {
-                testContextInstance = value;
+                _testContextInstance = value;
             }
         }
 
@@ -63,16 +62,6 @@ namespace Informedica.Settings.Tests
         //
         #endregion
 
-
-        /// <summary>
-        ///A test for Initialize
-        ///</summary>
-        [TestMethod()]
-        public void ThatSettingsManagerInitializesExistingFilePath()
-        {
-            SettingsManager.Instance.Initialize();
-        }
-
         [TestMethod]
         public void ThatSettingsManagerCanRegisterASetting()
         {
@@ -83,15 +72,8 @@ namespace Informedica.Settings.Tests
         }
 
         [TestMethod]
-        public void ThatSettingsManagerCanBeInitializedUsingExistingPath()
+        public void ThatSettingsManagerCanRegisterEnvironmen()
         {
-            SettingsManager.Instance.Initialize(EnvironmentPath);
-        }
-
-        [TestMethod]
-        public void ThatSettingsManagerCanRegisterEnvironmentInPath()
-        {
-            SettingsManager.Instance.Initialize(EnvironmentPath);
             SettingsManager.Instance.WriteSecureSetting("GenFormTest", EnvironmentConnectionString);
 
             Assert.AreEqual(EnvironmentConnectionString, SettingsManager.Instance.ReadSecureSetting("GenFormTest"));
