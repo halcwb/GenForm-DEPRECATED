@@ -10,8 +10,8 @@ namespace Informedica.GenForm.DataAccess
 {
     public static class SessionFactoryCreator
     {
-        private const string ExportPath = @"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.DataAccess\MappingsXml";
-        private const string LogPath = @"C:\Users\halcwb\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.DataAccess\Diagnostics\Log.txt";
+        private const string ExportPath = @"C:\Users\hal\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.DataAccess\MappingsXml";
+        private const string LogPath = @"C:\Users\hal\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.DataAccess\Diagnostics\Log.txt";
 
         static SessionFactoryCreator()
         {
