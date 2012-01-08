@@ -30,6 +30,7 @@ _ReSharper*/
 
 #ignore setting files
 [Ss]ettings.*
+SecurityKey.cs
 
 #ignore msunit test results
 [Tt]est[Rr]esult*
