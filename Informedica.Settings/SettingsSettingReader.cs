@@ -4,7 +4,7 @@ namespace Informedica.Settings
     {
         public override string ReadSetting(string key)
         {
-            return Properties.Settings.Default.GenFormTest;
+            return key == "GenForm" ? Properties.Settings.Default.GenForm : Properties.Settings.Default.GenFormTest;
         }
     }
 }

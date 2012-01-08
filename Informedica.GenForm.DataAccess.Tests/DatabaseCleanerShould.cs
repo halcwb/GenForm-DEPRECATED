@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Assembler.Contexts;
 using Informedica.GenForm.Library.DomainModel.Databases;
 using Informedica.GenForm.Tests;
@@ -37,9 +38,9 @@ namespace Informedica.GenForm.DataAccess.Tests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
+        
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
