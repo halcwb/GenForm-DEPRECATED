@@ -211,6 +211,16 @@ namespace Informedica.Settings
         {
             get { return EnvironmentsRoot.Elements(); }
         }
+
+        public string GetExporthPath()
+        {
+            return Properties.Settings.Default.ExportPath;
+        }
+
+        public string GetLogPath()
+        {
+            return Properties.Settings.Default.LogPath;
+        }
     }
 
     public class SettingsManagerException : Exception

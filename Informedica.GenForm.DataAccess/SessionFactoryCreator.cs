@@ -2,6 +2,7 @@
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Informedica.GenForm.DataAccess.Databases;
+using Informedica.Settings;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -10,8 +11,8 @@ namespace Informedica.GenForm.DataAccess
 {
     public static class SessionFactoryCreator
     {
-        private const string ExportPath = @"C:\Users\hal\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.DataAccess\MappingsXml";
-        private const string LogPath = @"C:\Users\hal\Documents\Visual Studio 2010\Projects\GenForm\Informedica.GenForm.DataAccess\Diagnostics\Log.txt";
+        private static readonly string ExportPath = SettingsManager.Instance.GetExporthPath();
+        private static readonly string LogPath = SettingsManager.Instance.GetLogPath();
 
         static SessionFactoryCreator()
         {

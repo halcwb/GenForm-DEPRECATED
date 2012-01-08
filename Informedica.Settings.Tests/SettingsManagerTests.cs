@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StructureMap;
 
 namespace Informedica.Settings.Tests
 {
@@ -37,11 +38,13 @@ namespace Informedica.Settings.Tests
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
-        //
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            ObjectFactory.Inject(typeof(SettingReader), new ConfigurationManagerSettingReader());
+            ObjectFactory.Inject(typeof(SettingWriter), new ConfigurationManagerSettingWriter());
+        }
+        
         //Use ClassCleanup to run code after all tests in a class have run
         //[ClassCleanup()]
         //public static void MyClassCleanup()
@@ -77,6 +80,18 @@ namespace Informedica.Settings.Tests
             SettingsManager.Instance.WriteSecureSetting("GenFormTest", EnvironmentConnectionString);
 
             Assert.AreEqual(EnvironmentConnectionString, SettingsManager.Instance.ReadSecureSetting("GenFormTest"));
+        }
+
+        [TestMethod]
+        public void ThatSessionManagerCanReturnExportPath()
+        {
+            Assert.IsFalse(string.IsNullOrWhiteSpace(SettingsManager.Instance.GetExporthPath()));
+        }
+
+        [TestMethod]
+        public void ThatSessionManagerCanReturnLogPath()
+        {
+            Assert.IsFalse(string.IsNullOrWhiteSpace(SettingsManager.Instance.GetLogPath()));
         }
     }
 }
