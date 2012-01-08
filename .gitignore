@@ -31,6 +31,7 @@ _ReSharper*/
 #ignore setting files
 [Ss]ettings.*
 SecurityKey.cs
+app.config
 
 #ignore msunit test results
 [Tt]est[Rr]esult*
