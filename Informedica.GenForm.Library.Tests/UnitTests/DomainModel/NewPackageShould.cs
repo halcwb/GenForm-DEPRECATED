@@ -115,7 +115,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             }
             catch (Exception e)
             {
-                Assert.IsInstanceOfType(e, typeof(CannotAddItemException<Shape>));
+                Assert.IsInstanceOfType(e, typeof(DuplicateEntityException<Shape>));
                 Assert.AreEqual(1, package.ShapeSet.Count);
             } 
         }

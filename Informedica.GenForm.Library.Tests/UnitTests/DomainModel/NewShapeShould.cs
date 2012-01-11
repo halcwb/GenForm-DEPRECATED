@@ -79,14 +79,16 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         [TestMethod]
         public void NotAcceptTheSameRouteTwice()
         {
-            var route = AssociateShapeWithRoute(CreateRoute());
+            AssociateShapeWithRoute(CreateRoute());
+            var route = CreateRoute();
             try
             {
-                AssociateShapeWithRoute(route);
+                _newShape.AddRoute(route);
+                Assert.Fail("Accepts a duplicate entity");
             }
             catch ( Exception e)
             {
-                Assert.IsInstanceOfType(e, typeof(CannotAddItemException<Shape>));
+                Assert.IsInstanceOfType(e, typeof(DuplicateEntityException<Route>));
             }
             Assert.IsFalse(_newShape.RouteSet.Count() == 2);
         }
@@ -102,7 +104,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             }
             catch (Exception e)
             {
-                Assert.IsInstanceOfType(e, typeof(CannotAddItemException<Route>));
+                Assert.IsInstanceOfType(e, typeof(DuplicateEntityException<Route>));
             }
             Assert.IsFalse(_newShape.RouteSet.Count() == 2);
         }
@@ -150,7 +152,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
             }
             catch (Exception e)
             {
-                Assert.IsInstanceOfType(e, typeof(CannotAddItemException<Unit>));
+                Assert.IsInstanceOfType(e, typeof(DuplicateEntityException<Unit>));
             }
             Assert.IsTrue(_newShape.UnitGroupSet.Count() == 1);
             Assert.IsTrue(_newShape.UnitGroupSet.Contains(group1, new UnitGroupComparer()));

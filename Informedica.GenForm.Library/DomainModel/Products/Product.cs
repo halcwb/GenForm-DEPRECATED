@@ -125,7 +125,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual bool ContainsRoute(IRoute route)
         {
-            return _routes.Contains((Route)route);
+            return _routes.ContainsEntity((Route)route);
         }
 
         public virtual void AddRoute(IRoute route)

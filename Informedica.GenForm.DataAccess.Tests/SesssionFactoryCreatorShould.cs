@@ -1,8 +1,8 @@
-﻿using Informedica.GenForm.DataAccess;
+using Informedica.GenForm.Assembler;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 
-namespace Informedica.GenForm.Assembler.Tests
+namespace Informedica.GenForm.DataAccess.Tests
 {
     /// <summary>
     /// Summary description for SesssionFactoryCreatorShould
@@ -10,7 +10,7 @@ namespace Informedica.GenForm.Assembler.Tests
     [TestClass]
     public class SesssionFactoryCreatorShould
     {
-        private TestContext testContextInstance;
+        private TestContext _testContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -20,11 +20,11 @@ namespace Informedica.GenForm.Assembler.Tests
         {
             get
             {
-                return testContextInstance;
+                return _testContextInstance;
             }
             set
             {
-                testContextInstance = value;
+                _testContextInstance = value;
             }
         }
 

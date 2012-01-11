@@ -1,6 +1,7 @@
 ﻿using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Library.DomainModel.Databases;
 using Informedica.GenForm.Library.Services.Databases;
+using Informedica.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 
@@ -42,6 +43,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             ObjectFactory.Inject<IEnvironment>(new Environment());
             ObjectFactory.Inject<IDatabaseConnection>(new DatabaseConnection());
+            ObjectFactory.Inject<SettingReader>(new SettingsSettingReader());
 
             _environment = ObjectFactory.GetInstance<IEnvironment>();
         }
@@ -94,9 +96,8 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 
         private static void SetUpValidDatabaseSetting()
         {
-            _environment.Name = "ProductieDatabase";
-            _environment.ConnectionString =
-                @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
+            _environment.Name = "GenFormTest";
+            _environment.ConnectionString = SettingsManager.Instance.ReadSecureSetting(_environment.Name);
         }
     }
 }

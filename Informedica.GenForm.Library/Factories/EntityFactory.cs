@@ -27,6 +27,7 @@ namespace Informedica.GenForm.Library.Factories
             return Find() ?? Create();
         }
 
+        // ToDo: Fix problem that entity comparer is not used!! So duplicate entity errors can occur.
         protected TEnt Find()
         {
             return Repository.SingleOrDefault(x => x.Name == Dto.Name);
