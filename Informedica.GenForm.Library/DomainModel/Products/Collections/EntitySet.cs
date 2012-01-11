@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Informedica.GenForm.Library.Exceptions;
 
@@ -30,7 +31,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Collections
             return GetEnumerator();
         }
 
-        public bool Contains(TEnt entity)
+        public bool ContainsEntity(TEnt entity)
         {
             return _set.Any(x => _comparer.Equals(x, entity));
         }
@@ -42,12 +43,23 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Collections
 
         internal protected virtual void Add(TEnt entity, Action<TParent> addParent)
         {
-            if (_set.Contains(entity)) return;
+            Contract.Requires<ArgumentNullException>(entity != null);
 
-            if (Contains(entity)) throw new CannotAddItemException<TEnt>(entity);
+            if (ContainsReference(entity)) return;
+            if (ContainsEntity(entity)) throw new DuplicateEntityException<TEnt>(entity);
 
             _set.Add(entity);
             addParent.Invoke(_parent);
+        }
+
+        internal String GetEntityString(TEnt entity)
+        {
+            return entity.ToString();
+        }
+
+        public bool ContainsReference(TEnt entity)
+        {
+            return _set.Contains(entity);
         }
 
         internal protected virtual void Remove(TEnt entity, Action<TParent> removeParent)
