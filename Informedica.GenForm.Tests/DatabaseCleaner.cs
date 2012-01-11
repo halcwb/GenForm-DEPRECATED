@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using Informedica.GenForm.Assembler;
+using NHibernate;
 
 namespace Informedica.GenForm.Tests
 {
@@ -72,12 +73,17 @@ Deallocate curAllForeignKeys
             using (var session = GenFormApplication.SessionFactory.OpenSession())
             {
                 session.Transaction.Begin();
-                var query = session.CreateSQLQuery(GetEmptyAllTablesSql());
-                query.ExecuteUpdate();
-                query = session.CreateSQLQuery(RestoreSystemAdminSql());
-                query.ExecuteUpdate();
+                CleanDataBaseUsingSession(session);
                 session.Transaction.Commit();
             }
+        }
+
+        private static void CleanDataBaseUsingSession(ISession session)
+        {
+            var query = session.CreateSQLQuery(GetEmptyAllTablesSql());
+            query.ExecuteUpdate();
+            query = session.CreateSQLQuery(RestoreSystemAdminSql());
+            query.ExecuteUpdate();
         }
 
         private static string GetEmptyAllTablesSql()
@@ -109,6 +115,11 @@ Deallocate curAllForeignKeys
            ,'Admin')", Guid.NewGuid());
 
             return sql.ToString();
+        }
+
+        public static void CleanDataBase(ISession session)
+        {
+            CleanDataBaseUsingSession(session);
         }
     }
 }

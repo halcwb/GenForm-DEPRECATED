@@ -82,7 +82,7 @@ namespace Informedica.GenForm.DataAccess.Tests
                 Assert.AreEqual(1, session.Query<EmptyDatabase>().Count());
 
                 session.Transaction.Begin();
-                DatabaseCleaner.CleanDataBase();
+                DatabaseCleaner.CleanDataBase(session);
                 session.Transaction.Commit();
 
                 Assert.AreEqual(0, session.Query<EmptyDatabase>().Count());
