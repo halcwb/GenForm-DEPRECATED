@@ -55,7 +55,6 @@
     <Compile Include="DatabaseAssemblerShouldRegister.cs" />
     <Compile Include="ObjectFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SesssionFactoryCreatorShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Informedica.Factory\Informedica.Factory.csproj">

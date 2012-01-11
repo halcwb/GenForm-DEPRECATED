@@ -1,5 +1,6 @@
 ﻿using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Library.DomainModel.Databases;
+using Informedica.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 
@@ -11,8 +12,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
     [TestClass]
     public class DatabaseConnectionShould
     {
-        private const string ValidConnectionString = @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=GenForm;Integrated Security=True";
-        private TestContext testContextInstance;
+        private readonly string _validConnectionString = SettingsManager.Instance.ReadSecureSetting("GenFormTest");
+        private TestContext _testContextInstance;
         private static IDatabaseConnection _databaseConnection;
 
         /// <summary>
@@ -23,11 +24,11 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         {
             get
             {
-                return testContextInstance;
+                return _testContextInstance;
             }
             set
             {
-                testContextInstance = value;
+                _testContextInstance = value;
             }
         }
 
@@ -36,11 +37,12 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
             ObjectFactory.Inject<IDatabaseConnection>(new DatabaseConnection());
             ObjectFactory.Inject<IEnvironment>(new Environment());
+            ObjectFactory.Inject<SettingReader>(new SettingsSettingReader());
 
             _databaseConnection = ObjectFactory.GetInstance<IDatabaseConnection>();
         }
@@ -62,14 +64,14 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         [TestMethod]
         public void ReturnFalseWhenConnectionStringCannotConnectToDatabase()
         {
-            const string connectionString = @"Data Source=HAL-WIN7\INFORMEDICA;Initial Catalog=Bogus;Integrated Security=True";
+            const string connectionString = @"Data Source=unknown;Initial Catalog=Bogus;Integrated Security=True";
             Assert.IsFalse(_databaseConnection.TestConnection(connectionString), "Using connection: " + connectionString + " test connection should return false");
         }
 
         [TestMethod] 
         public void ReturnTrueWhenConnectectionStringCanConnectToDatabase()
         {
-            const string connectionString = ValidConnectionString;
+            var connectionString = _validConnectionString;
             Assert.IsTrue(_databaseConnection.TestConnection(connectionString), "Using connection: " + connectionString + " test connection should return true");
         }
 
@@ -86,8 +88,8 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         [TestMethod]
         public void ConnectToLocalTestDatabase()
         {
-            const string connection = @"Data Source=hal-win7\informedica;Initial Catalog=GenFormTest;Integrated Security=True";
-            Assert.AreEqual(connection, DatabaseConnection.GetLocalConnectionString(DatabaseConnection.DatabaseName.GenFormTest));
+            const string envName = "GenFormTest";
+            Assert.IsTrue(DatabaseConnection.GetLocalConnectionString(DatabaseConnection.DatabaseName.GenFormTest).Contains(envName));
         }
 
         private IEnvironment GetValidEnvironmentSetting()
@@ -95,7 +97,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
             var setting = ObjectFactory.GetInstance<IEnvironment>();
             setting.Name = "GenFormTest";
             setting.ConnectionString =
-                ValidConnectionString;
+                _validConnectionString;
 
             return setting;
         }

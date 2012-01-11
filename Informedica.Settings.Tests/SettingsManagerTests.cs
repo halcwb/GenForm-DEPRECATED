@@ -66,15 +66,6 @@ namespace Informedica.Settings.Tests
         #endregion
 
         [TestMethod]
-        public void ThatSettingsManagerCanRegisterASetting()
-        {
-            var environment = "Test";
-            var connectionString = "TestConnection";
-
-            SettingsManager.Instance.WriteSecureSetting(environment, connectionString);
-        }
-
-        [TestMethod]
         public void ThatSettingsManagerCanRegisterEnvironmen()
         {
             SettingsManager.Instance.WriteSecureSetting("GenFormTest", EnvironmentConnectionString);

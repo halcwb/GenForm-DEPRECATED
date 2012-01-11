@@ -23,7 +23,6 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
         [TestMethod]
         public void ThatUnitCollectionContainsUnit()
         {
-
             var unit = UnitServices.WithDto((UnitTestFixtures.GetTestUnitMilligram())).Get();
             var group = unit.UnitGroup;
 

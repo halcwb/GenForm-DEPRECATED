@@ -65,7 +65,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual bool ContainsShape(IShape shape)
         {
-            return _shapes.Contains((Shape)shape);
+            return _shapes.ContainsEntity((Shape)shape);
         }
 
         public virtual void AddShape(IShape shape)
