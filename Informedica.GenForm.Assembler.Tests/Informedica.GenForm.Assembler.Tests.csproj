@@ -33,14 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\NHibernate\FluentNHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="NHibernate">
-      <HintPath>..\Dependencies\NHibernate\NHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data.Linq" />
@@ -57,25 +50,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Informedica.Factory\Informedica.Factory.csproj">
-      <Project>{893473D6-D384-4CCD-9877-FBC05BC3E351}</Project>
-      <Name>Informedica.Factory</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Assembler\Informedica.GenForm.Assembler.csproj">
       <Project>{DB3FE453-4FEA-43EC-BAC7-B0679A432BE2}</Project>
       <Name>Informedica.GenForm.Assembler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.DataAccess\Informedica.GenForm.DataAccess.csproj">
-      <Project>{9EC2E9E4-CEEF-4A78-A8DE-EB12F8C6DAE1}</Project>
-      <Name>Informedica.GenForm.DataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Database\Informedica.GenForm.Database.csproj">
       <Project>{46C54F92-FF84-4F84-A6E0-CD141EAFBE60}</Project>
       <Name>Informedica.GenForm.Database</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
-      <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
-      <Name>Informedica.GenForm.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

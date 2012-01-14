@@ -33,7 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="NHibernate, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -44,7 +43,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -66,10 +64,6 @@
     <ProjectReference Include="..\Informedica.GenForm.DataAccess\Informedica.GenForm.DataAccess.csproj">
       <Project>{9EC2E9E4-CEEF-4A78-A8DE-EB12F8C6DAE1}</Project>
       <Name>Informedica.GenForm.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Library.Tests\Informedica.GenForm.Library.Tests.csproj">
-      <Project>{4B54E8E1-2205-4C86-81B8-70B3695CEA7E}</Project>
-      <Name>Informedica.GenForm.Library.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
       <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>

@@ -72,8 +72,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseCleanerShould.cs" />
@@ -98,10 +96,6 @@
     <Content Include="AuthoringTests.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Informedica.Factory\Informedica.Factory.csproj">
-      <Project>{893473D6-D384-4CCD-9877-FBC05BC3E351}</Project>
-      <Name>Informedica.Factory</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Assembler\Informedica.GenForm.Assembler.csproj">
       <Project>{DB3FE453-4FEA-43EC-BAC7-B0679A432BE2}</Project>
       <Name>Informedica.GenForm.Assembler</Name>
@@ -109,10 +103,6 @@
     <ProjectReference Include="..\Informedica.GenForm.DataAccess\Informedica.GenForm.DataAccess.csproj">
       <Project>{9EC2E9E4-CEEF-4A78-A8DE-EB12F8C6DAE1}</Project>
       <Name>Informedica.GenForm.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Database\Informedica.GenForm.Database.csproj">
-      <Project>{46C54F92-FF84-4F84-A6E0-CD141EAFBE60}</Project>
-      <Name>Informedica.GenForm.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
       <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>

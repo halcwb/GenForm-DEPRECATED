@@ -40,7 +40,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Products\IProductPresentation.cs" />
@@ -62,12 +61,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\ILoginForm.cs" />
     <Compile Include="Security\LoginForm.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
-      <Project>{B8679F93-88AC-480F-8287-179F43685081}</Project>
-      <Name>Informedica.GenForm.Library</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

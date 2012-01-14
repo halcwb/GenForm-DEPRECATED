@@ -51,10 +51,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentNHibernate, Version=1.2.0.712, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dependencies\NHibernate\FluentNHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\NHibernate\Iesi.Collections.dll</HintPath>
@@ -72,9 +68,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="TypeMock, Version=6.2.3.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
     <Reference Include="Typemock.ArrangeActAssert, Version=6.2.3.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
   </ItemGroup>
@@ -134,10 +127,6 @@
       <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
       <Name>Informedica.GenForm.Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Mvc3\Informedica.GenForm.Mvc3.csproj">
-      <Project>{76148642-857A-4186-8A7B-C4AFC05E0152}</Project>
-      <Name>Informedica.GenForm.Mvc3</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.TestFixtures\Informedica.GenForm.TestFixtures.csproj">
       <Project>{F772CA62-5400-45BF-B586-AACF5F20D6BC}</Project>
       <Name>Informedica.GenForm.TestFixtures</Name>
@@ -149,10 +138,6 @@
     <ProjectReference Include="..\Informedica.Settings\Informedica.Settings.csproj">
       <Project>{B30C5371-DDDD-46BE-827A-72798E743B60}</Project>
       <Name>Informedica.Settings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Informedica.Utilities\Informedica.Utilities.csproj">
-      <Project>{A1C3A418-F89E-41A3-9D32-E05C7E38577F}</Project>
-      <Name>Informedica.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
