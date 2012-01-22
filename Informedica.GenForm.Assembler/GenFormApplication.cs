@@ -42,6 +42,8 @@ namespace Informedica.GenForm.Assembler
             get { return Instance.SessionFactoryFromInstance; }
         }
 
+        public static ISessionFactory TestSessionFactory { get { return SessionFactoryCreator.CreateSessionFactory(); } }
+
         private ISessionFactory SessionFactoryFromInstance
         {
             get

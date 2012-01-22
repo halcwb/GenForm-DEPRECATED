@@ -1,3 +1,0 @@
-!|Informedica.GenForm.Acceptance.HelloFitNesse|
-|TestFitNesse?|
-|Hello FitNesse|

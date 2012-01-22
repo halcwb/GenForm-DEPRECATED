@@ -58,19 +58,5 @@ namespace Informedica.GenForm.Assembler.Tests
         //}
         //
         #endregion
-
-        [TestMethod]
-        public void NotADefaultInstanceOfGenFormDataContext()
-        {
-            try
-            {
-                ObjectFactoryAssertUtility.AssertRegistration<GenFormDataContext>("default instance");
-                Assert.Fail("should not be able to create context without connection");
-            }
-            catch (System.Exception e)
-            {
-                Assert.IsNotNull(e);
-            }
-        }
     }
 }

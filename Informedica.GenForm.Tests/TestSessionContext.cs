@@ -1,6 +1,7 @@
 using System;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Assembler.Contexts;
+using Informedica.GenForm.DataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 using StructureMap;
@@ -21,14 +22,15 @@ namespace Informedica.GenForm.Tests
 
         private static void Initialize()
         {
-            ObjectFactory.Configure(x => x.For<ISessionFactory>().HybridHttpOrThreadLocalScoped().Use(GenFormApplication.SessionFactory));
+            ObjectFactory.Configure(x => x.For<ISessionFactory>().HybridHttpOrThreadLocalScoped().Use(GenFormApplication.TestSessionFactory));
         }
 
         [TestInitialize]
         public void MyTestInitialize()
         {
-            if (_commit) DatabaseCleaner.CleanDataBase();
+            //if (_commit) DatabaseCleaner.CleanDataBase();
             Context = new SessionContext();
+            SessionFactoryCreator.BuildSchema(Context.CurrentSession());
             Context.CurrentSession().BeginTransaction();
         }
 
