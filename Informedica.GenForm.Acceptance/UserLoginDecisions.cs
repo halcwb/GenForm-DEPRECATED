@@ -1,6 +1,4 @@
-﻿using Informedica.GenForm.Mvc3.Tests.UnitTests;
-
-namespace Informedica.GenForm.Acceptance
+﻿namespace Informedica.GenForm.Acceptance
 {
     public class UserLoginDecisions
     {
@@ -14,20 +12,10 @@ namespace Informedica.GenForm.Acceptance
 
         public string GivenFormularium { get; set; }
 
+        //ToDo Rewrite test.
         public bool IsUserAuthenticated()
         {
-            var test = new LoginControllerShould();
-
-            try
-            {
-                test.ReturnSuccessValueIsTrueWhenValidUserLogin();
-                return true;
-
-            }
-            catch (System.Exception)
-            {
-                return false;
-            }
+            return false;
         }
 
         public bool IsUserLoggedIn()

@@ -31,35 +31,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="fit, Version=1.9.4317.19029, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="fit, Version=1.9.4252.15746, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\FitNesse\fit.dll</HintPath>
     </Reference>
-    <Reference Include="fitSharp, Version=1.9.4317.19026, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="fitSharp, Version=1.9.4252.15744, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\FitNesse\fitSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NewProductDecisions.cs" />
+    <Compile Include="AdminUserLogin.cs" />
     <Compile Include="GenFormFixture.cs" />
-    <Compile Include="UserLoginDecisions.cs" />
     <Compile Include="HelloFitNesse.cs" />
+    <Compile Include="NewProductDecisions.cs" />
+    <Compile Include="ProductFixture.cs" />
+    <Compile Include="SetupGenFormService.cs" />
+    <Compile Include="ShapeFixture.cs" />
+    <Compile Include="UserLoginDecisions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Informedica.GenForm.Mvc3.Tests\Informedica.GenForm.Mvc3.Tests.csproj">
-      <Project>{7A87B746-06AA-4DBF-918D-1371C27AF744}</Project>
-      <Name>Informedica.GenForm.Mvc3.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Tests\Informedica.GenForm.Tests.csproj">
-      <Project>{819BA760-6C94-4203-8DB0-7F0AAA4B2159}</Project>
-      <Name>Informedica.GenForm.Tests</Name>
-    </ProjectReference>
+    <Compile Include="UserLogInScenario.cs" />
+    <Compile Include="ValidInputForProductWithOneSubstance.cs" />
+    <Compile Include="ValidPasswords.cs" />
+    <Compile Include="ValidUserNames.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

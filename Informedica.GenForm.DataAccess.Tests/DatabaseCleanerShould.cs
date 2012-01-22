@@ -1,10 +1,12 @@
 ﻿using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Assembler.Contexts;
+using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Library.DomainModel.Databases;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate.Linq;
+using StructureMap;
 using TestContext = Microsoft.VisualStudio.TestTools.UnitTesting.TestContext;
 
 namespace Informedica.GenForm.DataAccess.Tests
@@ -15,7 +17,7 @@ namespace Informedica.GenForm.DataAccess.Tests
     [TestClass]
     public class DatabaseCleanerShould
     {
-        private TestContext testContextInstance;
+        private TestContext _testContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -25,11 +27,11 @@ namespace Informedica.GenForm.DataAccess.Tests
         {
             get
             {
-                return testContextInstance;
+                return _testContextInstance;
             }
             set
             {
-                testContextInstance = value;
+                _testContextInstance = value;
             }
         }
 
@@ -38,7 +40,7 @@ namespace Informedica.GenForm.DataAccess.Tests
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
         
         // Use ClassCleanup to run code after all tests in a class have run
@@ -46,9 +48,9 @@ namespace Informedica.GenForm.DataAccess.Tests
         // public static void MyClassCleanup() { }
         //
         // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
+        [TestInitialize]
+        public void MyTestInitialize() {}
+        
         // Use TestCleanup to run code after each test has run
         // [TestCleanup()]
         // public void MyTestCleanup() { }
@@ -71,6 +73,8 @@ namespace Informedica.GenForm.DataAccess.Tests
         [TestMethod]
         public void BeAbleToClearTheEmptyDatabase()
         {
+            var logger = log4net.LogManager.GetLogger("test");
+            
             using(var context = new SessionContext())
             {
                 var session = context.CurrentSession();
@@ -87,6 +91,7 @@ namespace Informedica.GenForm.DataAccess.Tests
 
                 Assert.AreEqual(0, session.Query<EmptyDatabase>().Count());
             }
+            logger.Info("Have run BeAbleToClearTheEmtpyDatabaseTest");
         }
     }
 }

@@ -23,7 +23,6 @@
 
         public string ThenProductNameIs()
         {
-               
             return "";
         }
 

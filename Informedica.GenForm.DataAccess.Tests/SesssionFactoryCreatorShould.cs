@@ -1,6 +1,8 @@
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.DataAccess.Databases;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
+using StructureMap;
 
 namespace Informedica.GenForm.DataAccess.Tests
 {
@@ -62,6 +64,15 @@ namespace Informedica.GenForm.DataAccess.Tests
         {
             var factory = GenFormApplication.SessionFactory;
             Assert.IsInstanceOfType(factory, typeof(ISessionFactory));
+        }
+
+        [TestMethod]
+        public void BeAbleToCreateASqlLiteDatabase()
+        {
+            ObjectFactory.Inject(typeof (IDatabaseConfig), new SqlLiteConfig());
+
+            var fact = GenFormApplication.SessionFactory;
+            Assert.IsNotNull(fact);
         }
 
     }

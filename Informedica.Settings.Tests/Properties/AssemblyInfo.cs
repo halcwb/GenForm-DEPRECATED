@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Informedica.Settings.Tests")]
+[assembly: AssemblyTitle("Informedica.GenForm.Settings.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Informedica.Settings.Tests")]
+[assembly: AssemblyProduct("Informedica.GenForm.Settings.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3b537478-2ee4-463d-a1fb-a3ecc16595b2")]
+[assembly: Guid("4c0cda83-8788-4e95-bb17-dd2fa3506540")]
 
 // Version information for an assembly consists of the following four values:
 //

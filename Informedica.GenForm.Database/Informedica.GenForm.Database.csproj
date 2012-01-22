@@ -40,46 +40,8 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LINQtoSQL2\CompleteDatabase.cs">
-      <DependentUpon>CompleteDatabase.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="LINQtoSQL2\CompleteDatabase.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CompleteDatabase.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="LinqToSQL3\GenFormDataContext.cs" />
-    <Compile Include="LinqToSQL3\GenFormDB.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GenFormDB.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="LINQtoSQL\Administration.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Administration.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="LINQtoSQL\Formularia.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Formularia.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="LINQtoSQL\FormulariumImport.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FormulariumImport.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="LINQtoSQL\Products.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Products.dbml</DependentUpon>
-    </Compile>
     <Compile Include="ORM\Formularium2010._ORMCustomToolReport.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Formularium2010.orm</DependentUpon>
@@ -106,36 +68,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="LINQtoSQL\Administration.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Administration.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="LINQtoSQL\Administration.dbml.layout">
-      <DependentUpon>Administration.dbml</DependentUpon>
-    </None>
-    <None Include="LINQtoSQL\Products.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Products.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="ORM\StoredProcedures.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="LINQtoSQL\Formularia.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Formularia.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="LINQtoSQL\Products.dbml.layout">
-      <DependentUpon>Products.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup Condition="Exists('ORM/Formularium2010.orm')">
     <None Include="ORM\Formularium2010.DCIL.xml">
@@ -156,14 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FormulariumImport" />
-    <None Include="LINQtoSQL\Formularia.dbml.layout">
-      <DependentUpon>Formularia.dbml</DependentUpon>
-    </None>
-    <None Include="LINQtoSQL\FormulariumImport.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>FormulariumImport.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="LinqPad\DoseText.linq" />
@@ -173,32 +104,11 @@
     <None Include="LinqPad\GenPresDoseText.linq" />
     <None Include="LinqPad\GenPresDoseText2.linq" />
     <None Include="LinqPad\GenPresUnits.linq" />
-    <None Include="LINQtoSQL2\CompleteDatabase.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>CompleteDatabase.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="LINQtoSQL\FormulariumImport.dbml.layout">
-      <DependentUpon>FormulariumImport.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="LINQtoSQL2\CompleteDatabase.dbml.layout">
-      <DependentUpon>CompleteDatabase.dbml</DependentUpon>
-    </None>
-    <None Include="LinqToSQL3\GenFormDB.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>GenFormDB.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="ORM\GenFormDatabase.orm">
       <Generator>ORMCustomTool</Generator>
       <LastGenOutput>GenFormDatabase._ORMCustomToolReport.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="LinqToSQL3\GenFormDB.dbml.layout">
-      <DependentUpon>GenFormDB.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup />

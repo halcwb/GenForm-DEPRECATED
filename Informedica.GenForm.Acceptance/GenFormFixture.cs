@@ -1,10 +1,4 @@
-﻿using System.Collections;
-using System.Data;
-using System.Data.Common;
 using System.Linq;
-using Informedica.GenForm.Tests.RegressionTests;
-using Informedica.GenForm.Tests.Utilities;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Acceptance
 {
@@ -12,7 +6,9 @@ namespace Informedica.GenForm.Acceptance
     {
         public int GetCountOfListOf(string type)
         {
-            return new GenFormLists().GetListByType(type).Count;
+            // ToDo Rewrite test
+            return 0;
+            //return new GenFormLists().GetListByType(type).Count;
         }
 
         public bool SetValidCredentialForUserWithName(string userName)
@@ -172,176 +168,6 @@ namespace Informedica.GenForm.Acceptance
         public bool RegisterUserWithPasswordInDatabaseInEnvironment(string user, string password, string database, string environmnet)
         {
             return true;
-        }
-    }
-
-    public class ValidPasswords
-    {
-        public string Password { get; set; }
-
-        public bool IsValid()
-        {
-            return true;
-        }
-    }
-
-    public class ValidUserNames
-    {
-
-        public string UserName { get; set; }
-        public string ExistingUserName { get; set; }
-
-        public bool IsValid()
-        {
-            return true;
-        }
-
-    }
-
-    public class ValidInputForProductWithOneSubstance
-    {
-        public string GenericName { get; set; }
-        public string BrandName { get; set; }
-        public string ShapeName { get; set; }
-        public string ProductQuantity { get; set; }
-        public string ProductUnit { get; set; }
-        public string PackageName { get; set; }
-        public string SubstanceOrder { get; set; }
-        public string SubstanceName { get; set; }
-        public string SubstanceQuantity { get; set; }
-        public string SubstanceQuantityUnit { get; set; }
-        public string SubstanceConcentration { get; set; }
-        public string ConcentrationUnit { get; set; }
-
-        public bool IsValid()
-        {
-            return false;
-        }
-
-        public string ErrorMessage { get; set; }
-    }
-
-    public class SetupGenFormService
-    {
-        public bool InstallTestGenformService()
-        {
-            return true;
-        }
-
-    }
-
-    public class ProductFixture
-    {
-        
-    }
-
-    public class ShapeFixture
-    {
-        
-    }
-
-    public class MyTestContext : TestContext
-    {
-        public override void WriteLine(string format, params object[] args)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void AddResultFile(string fileName)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void BeginTimer(string timerName)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void EndTimer(string timerName)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IDictionary Properties
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public override DataRow DataRow
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public override DbConnection DataConnection
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-    }
-
-    public class UserLogInScenario
-    {
-        public string ThenUserCanLogInWith(string userName, string password)
-        {
-
-            LoginAcceptanceTests.MyClassInitialize(new MyTestContext());
-            var test = new LoginAcceptanceTests();
-
-            try
-            {
-                test.MyTestInitialize();
-                test.SystemUserCanLogin();
-                return "true";
-
-            }
-            catch (System.Exception e)
-            {
-                return e.ToString();
-            }
-            finally
-            {
-                test.MyTestCleanup();
-            }
-        }
-
-        public bool RegisterUserWith(string userName, string password)
-        {
-            return true;
-        }
-
-        public string EchoUser(string user)
-        {
-            return user;
-        }
-
-        public bool LogInUserWithPassword(string userName, string password)
-        {
-            var login = new UserLoginDecisions();
-            login.GivenUser = userName;
-            login.GivenPassword = password;
-            return login.GivenUserLogsIn(userName);
-        }
-
-        public bool UserHasPassword(string userName, string password)
-        {
-            return LogInUserWithPassword(userName, password);
-        }
-    }
-
-    public class AdminUserLogin
-    {
-        public void SetUser(string user)
-        {
-
-        }
-
-        public string UserLogsInWithPassword(string user, string password)
-        {
-            return "succesfull";
-        }
-
-        public string EchoUser(string user)
-        {
-            return user;
         }
     }
 }

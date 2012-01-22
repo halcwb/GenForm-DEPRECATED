@@ -13,7 +13,6 @@ namespace Informedica.GenForm.Library.DomainModel
         {
         } 
 
-
         public const int NameLength = 255;
 
         public virtual Guid Id { get; protected set; }

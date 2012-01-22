@@ -1,4 +1,0 @@
-!define TEST_SYSTEM {slim}
-!define COMMAND_PATTERN {%m -r fitSharp.Slim.Service.Runner,fitsharp.dll %p}
-!define TEST_RUNNER {Runner.exe}
-!path ..\..\GenForm\Informedica.GenForm.Acceptance\bin\Debug\Informedica.GenForm.Acceptance.dll
