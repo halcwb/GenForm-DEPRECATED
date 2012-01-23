@@ -5,6 +5,7 @@ using NHibernate;
 
 namespace Informedica.GenForm.Tests
 {
+    // ToDo: Rewrite, this database cleaner only works for Microsoft Sql Server databases
     public static class DatabaseCleaner
     {
         private const string EmptyAllTables = 

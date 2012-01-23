@@ -42,7 +42,6 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public static void MyClassInitialize(TestContext testContext)
         {
             GenFormApplication.Initialize();
-            DatabaseCleaner.CleanDataBase();
         }
         
         // Use ClassCleanup to run code after all tests in a class have run
@@ -70,7 +69,6 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatServicesGetsTheUnitFromTheRepositoryOnceItsAdded()
         {
-            Context.CurrentSession().SetBatchSize(2);
             var unit = UnitServices.WithDto(GetUnitDto()).AddToGroup(GetGroupDto()).Get();
             Assert.AreEqual(unit, UnitServices.GetUnit(unit.Id));
         }

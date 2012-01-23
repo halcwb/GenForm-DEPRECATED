@@ -2,12 +2,13 @@
 using System.Diagnostics;
 using System.Linq;
 using Informedica.GenForm.Assembler;
-using Informedica.GenForm.Assembler.Contexts;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
+using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NHibernate;
 using NHibernate.Linq;
 using StructureMap;
 
@@ -17,11 +18,13 @@ namespace Informedica.NHibernate.Tests
     /// Summary description for NHibernateRepositoryShould
     /// </summary>
     [TestClass]
-    public class NHibernateRepositoryOfTypeBrand
+    public class NHibernateRepositoryOfTypeBrand: TestSessionContext
     {
         private TestContext testContextInstance;
         private static NHibernateRepository<Brand> _repository;
         private Brand _brand;
+
+        public NHibernateRepositoryOfTypeBrand() : base(true) {}
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -47,7 +50,7 @@ namespace Informedica.NHibernate.Tests
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            _repository = new BrandRepository(GenFormApplication.SessionFactory);
+            GenFormApplication.Initialize();
         }
         
         // Use ClassCleanup to run code after all tests in a class have run
@@ -67,25 +70,19 @@ namespace Informedica.NHibernate.Tests
         [TestMethod]
         public void Should()
         {
-            using (GetContext())
-            {
-                BeInstantiated();
-                BeAbleToUseTypedSessionQuery();
-                BeAbleGiveACountOfZeroWhenNothingSaved();
-                NotThrowAnErrorWhenAddingANewBrand();
-                AfterSaveReturnACountOfOne();
-                BeAbleToFindTheNewBrand();
-                TheFoundBrandShouldReferenceTheSameObject();
-                ReturnTrueForContainsBrand();
-                ReturnFalseForAnotherBrand();
-                ReturnsTrueForNewBrandWithTheSameName();
-                CanRemoveTheInsertedBrand();   
-            }
-        }
+            _repository = new BrandRepository(ObjectFactory.GetInstance<ISessionFactory>());
 
-        private IDisposable GetContext()
-        {
-            return ObjectFactory.GetInstance<SessionContext>();
+            BeInstantiated();
+            BeAbleToUseTypedSessionQuery();
+            BeAbleGiveACountOfZeroWhenNothingSaved();
+            NotThrowAnErrorWhenAddingANewBrand();
+            AfterSaveReturnACountOfOne();
+            BeAbleToFindTheNewBrand();
+            TheFoundBrandShouldReferenceTheSameObject();
+            ReturnTrueForContainsBrand();
+            ReturnFalseForAnotherBrand();
+            ReturnsTrueForNewBrandWithTheSameName();
+            CanRemoveTheInsertedBrand();   
         }
 
         private void CanRemoveTheInsertedBrand()
@@ -137,7 +134,7 @@ namespace Informedica.NHibernate.Tests
         {
             try
             {
-                var session = GenFormApplication.SessionFactory.OpenSession();
+                var session = GenFormApplication.SessionFactory.GetCurrentSession();
                 Assert.IsTrue(session.Query<Brand>().Count() == 0);
 
             }

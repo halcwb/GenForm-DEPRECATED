@@ -108,7 +108,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
 
 
         [TestMethod]
-        public void ThatUserCanBeRetrievedByNameIsCapitalInsensitive()
+        public void ThatUserCanBeRetrievedByNameIsCapitalSensitive()
         {
             var repos = GetRepository();
             var user = CreateUser();
@@ -116,7 +116,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
             repos.Add(user);
             const string name = "FooBar";
 
-            var user2 = repos.GetByName(name);
+            var user2 = repos.GetByName(name.ToLower());
             Assert.AreEqual(name.ToLower(), user2.Name.ToLower());
         }
 

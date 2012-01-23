@@ -28,10 +28,9 @@ namespace Informedica.GenForm.Tests
         [TestInitialize]
         public void MyTestInitialize()
         {
-            //if (_commit) DatabaseCleaner.CleanDataBase();
             Context = new SessionContext();
             SessionFactoryCreator.BuildSchema(Context.CurrentSession());
-            Context.CurrentSession().BeginTransaction();
+            Context.CurrentSession().Transaction.Begin();
         }
 
         [TestCleanup]

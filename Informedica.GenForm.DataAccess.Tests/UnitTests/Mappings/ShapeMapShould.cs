@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FluentNHibernate.Testing;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Equality;
 using Informedica.GenForm.Library.DomainModel.Products;
@@ -40,7 +41,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         //
         // Use ClassInitialize to run code before running the first test in the class
         [ClassInitialize]
-        public static void MyClassInitialize(TestContext testContext) { DatabaseCleaner.CleanDataBase(); }
+        public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
         
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
