@@ -50,3 +50,5 @@ FitNesseRoot/Suite*/
 FitNesseRoot/SampleWiki/
 FitNesseRoot/UserGuide/
 FitNesseRoot/SampleWiki/
+#ignore log files
+log.txt

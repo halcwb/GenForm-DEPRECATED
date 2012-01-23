@@ -1,4 +1,6 @@
-﻿using Informedica.GenForm.Library.Security;
+﻿using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.Security;
 using Informedica.GenForm.Library.Services.Users;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -41,9 +43,9 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
+        
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
@@ -61,9 +63,24 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         [TestMethod]
         public void ThatUserCanCheckWhetherCanLoginIntoDatabase()
         {
+            var user = UserServices.WithDto(GetAdminUserDto()).Get();
+
             var login = LoginUser.NewLoginUser("Admin", "Admin", "GenFormTest");
             LoginServices.Login(login);
             Assert.IsTrue(LoginServices.IsLoggedIn(login));
+        }
+
+        private static UserDto GetAdminUserDto()
+        {
+            return new UserDto
+                       {
+                           Email = "admin@gmail.com",
+                           FirstName = "Admin",
+                           LastName = "Admin",
+                           Name = "Admin",
+                           Pager = "1",
+                           Password = "Admin"
+                       };
         }
     }
 }

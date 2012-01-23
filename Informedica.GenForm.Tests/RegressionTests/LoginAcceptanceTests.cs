@@ -4,6 +4,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Library.DomainModel.Data;
+using Informedica.GenForm.Library.Services.Users;
 using Informedica.GenForm.Mvc3.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -67,6 +69,7 @@ namespace Informedica.GenForm.Tests.RegressionTests
         public void SystemUserCanLogin()
         {
             // Setup
+            UserServices.WithDto(GetAdminDto()).Get();
             var loginController = CreateLoginController();
 
             // Execute
@@ -76,6 +79,19 @@ namespace Informedica.GenForm.Tests.RegressionTests
             Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "System user could not successfully log in");
 
             // No Teardown
+        }
+
+        private UserDto GetAdminDto()
+        {
+            return new UserDto
+                       {
+                           Email = "admin@admin.com",
+                           FirstName = "Admin",
+                           LastName = "Admin",
+                           Name = "Admin",
+                           Pager = "123",
+                           Password = "Admin"
+                       };
         }
 
         [TestMethod]
