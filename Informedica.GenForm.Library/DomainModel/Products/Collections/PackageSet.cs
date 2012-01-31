@@ -16,7 +16,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Collections
             base.Add(package, package.AddShape);
         }
 
-        internal void Remove(Package package)
+        internal new void Remove(Package package)
         {
             base.Remove(package, package.RemoveShape);
         }

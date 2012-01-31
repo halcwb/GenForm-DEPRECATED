@@ -9,7 +9,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
             Map(x => x.Abbreviation).Not.Nullable().Length(30);
             Map(x => x.Multiplier);
             Map(x => x.IsReference);
-            References<UnitGroup>(x => x.UnitGroup)
+            References(x => x.UnitGroup)
                 .Cascade
                 .SaveUpdate()
                 .Not.Nullable();

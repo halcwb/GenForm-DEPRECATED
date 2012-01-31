@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.DomainModel.Users.Interfaces;
 using Informedica.GenForm.Library.Factories;
 
 namespace Informedica.GenForm.Library.Services.Users

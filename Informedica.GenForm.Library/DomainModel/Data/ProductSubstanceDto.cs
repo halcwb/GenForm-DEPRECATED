@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Informedica.GenForm.Library.DomainModel.Data
+﻿namespace Informedica.GenForm.Library.DomainModel.Data
 {
     public class ProductSubstanceDto : DataTransferObject<ProductSubstanceDto>
     {

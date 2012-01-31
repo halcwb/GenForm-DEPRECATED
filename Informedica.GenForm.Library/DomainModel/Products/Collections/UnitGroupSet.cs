@@ -19,7 +19,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Collections
             base.Add(unitGroup, unitGroup.AddShape);
         }
 
-        internal void Remove(UnitGroup unitGroup)
+        internal new void Remove(UnitGroup unitGroup)
         {
             base.Remove(unitGroup, unitGroup.RemoveShape);
         }

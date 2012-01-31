@@ -1,5 +1,3 @@
-using Informedica.GenForm.Library.DomainModel.Users;
-
 namespace Informedica.GenForm.Library.DomainModel.Data
 {
     public class UserDto : DataTransferObject<UserDto>

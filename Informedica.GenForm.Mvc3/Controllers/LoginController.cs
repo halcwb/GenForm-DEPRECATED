@@ -5,7 +5,7 @@ using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.Services.Users;
 using Informedica.GenForm.Library.Security;
 using Informedica.GenForm.Mvc3.Environments;
-using Informedica.GenForm.PresentationLayer.Security;
+using Informedica.GenForm.Presentation.Security;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {

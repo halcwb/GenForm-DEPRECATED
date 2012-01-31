@@ -11,23 +11,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
     [TestClass]
     public class FluentFactoryTests
     {
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         //
@@ -80,13 +68,17 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Factories
             PropertyInfo propertyInfo = null;
             if (property.Body is MemberExpression)
             {
-                propertyInfo = (property.Body as MemberExpression).Member as PropertyInfo;
+                var memberExpression= property.Body as MemberExpression;
+                if (memberExpression != null)
+                    propertyInfo = memberExpression.Member as PropertyInfo;
             }
             else
             {
-                propertyInfo = (((UnaryExpression)property.Body).Operand as MemberExpression).Member as PropertyInfo;
+                var memberExpression = ((UnaryExpression) property.Body).Operand as MemberExpression;
+                if (memberExpression != null)
+                    propertyInfo = memberExpression.Member as PropertyInfo;
             }
-            propertyInfo.SetValue(_entity, value, null);
+            if (propertyInfo != null) propertyInfo.SetValue(_entity, value, null);
 
             return this;
         }

@@ -1,6 +1,4 @@
-﻿using Informedica.GenForm.Presentation.Forms;
-
-namespace Informedica.GenForm.Presentation.Forms
+﻿namespace Informedica.GenForm.Presentation.Forms
 {
     public class NumericField: FormField
     {

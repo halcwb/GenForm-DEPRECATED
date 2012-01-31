@@ -6,34 +6,17 @@ namespace Informedica.GenForm.Presentation.Forms
     {
         #region Implementation of IButton
 
-        private String _caption;
+        public string Caption { get; private set; }
 
-        private Boolean _enabled;
+        public bool Enabled { get; set; }
 
-        private Boolean _isPressed;
-
-        public String Caption
-        {
-            get { return _caption; }
-        }
-
-        public Boolean Enabled
-        {
-            get { return _enabled; }
-            set { _enabled = value; }
-        }
-
-        public Boolean IsPressed
-        {
-            get { return _isPressed; }
-            set { _isPressed = value; }
-        }
+        public bool IsPressed { get; set; }
 
         #endregion
 
         private Button(String caption)
         {
-            _caption = caption ?? String.Empty;
+            Caption = caption ?? String.Empty;
         }
 
         public static IButton NewButton()

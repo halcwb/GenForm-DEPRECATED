@@ -89,7 +89,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
             try
             {
-                var prod = ProductServices.WithDto(product).Get();
+                ProductServices.WithDto(product).Get();
             }
             catch (Exception e)
             {

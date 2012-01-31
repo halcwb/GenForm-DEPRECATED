@@ -36,7 +36,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             }
         }
 
-        public static T GetPropertyValue<T>(ActionResult result, System.String propertyName)
+        public static T GetPropertyValue<T>(ActionResult result, String propertyName)
         {
             var json = CastToJsonResult(result);
 

@@ -16,25 +16,13 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
     [TestClass]
     public class ProductServicesTests : TestSessionContext
     {
-        private TestContext testContextInstance;
-
         public ProductServicesTests() : base(true) {}
 
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         //
@@ -157,7 +145,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatAProductWithOneSubstanceCanBeDeleted()
         {
             var product = GetProduct();
-            Assert.IsTrue(product.Substances.Count() > 0, "substances were not added");
+            Assert.IsTrue(product.Substances.Any(), "substances were not added");
             ProductServices.Delete(product);
 
             product = ProductServices.Products.SingleOrDefault(x => x.Name == ProductTestFixtures.ProductName);
@@ -168,7 +156,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatProductWithSubstancesAndRoutesCanBeDeleted()
         {
             var product = GetProduct();
-            Assert.IsTrue(product.Substances.Count() > 0, "substances were not added");
+            Assert.IsTrue(product.Substances.Any(), "substances were not added");
 
             ProductServices.Delete(product);
             product = ProductServices.Products.SingleOrDefault(x => x.Name == ProductTestFixtures.ProductName);

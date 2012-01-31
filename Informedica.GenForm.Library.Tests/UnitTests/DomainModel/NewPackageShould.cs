@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Text;
-using System.Collections.Generic;
 using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
@@ -16,30 +13,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel
     [TestClass]
     public class NewPackageShould
     {
-        public NewPackageShould()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         //

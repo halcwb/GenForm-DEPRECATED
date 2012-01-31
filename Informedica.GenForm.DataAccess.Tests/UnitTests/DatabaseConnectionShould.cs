@@ -13,24 +13,13 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
     public class DatabaseConnectionShould
     {
         private readonly string _validConnectionString = SettingsManager.Instance.ReadSecureSetting("GenFormTest");
-        private TestContext _testContextInstance;
         private static IDatabaseConnection _databaseConnection;
 
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return _testContextInstance;
-            }
-            set
-            {
-                _testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         //

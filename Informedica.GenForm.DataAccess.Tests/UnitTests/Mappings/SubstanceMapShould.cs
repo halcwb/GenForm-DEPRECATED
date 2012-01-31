@@ -14,25 +14,13 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
     [TestClass]
     public class SubstanceMapShould : TestSessionContext
     {
-        private TestContext testContextInstance;
-
         public SubstanceMapShould() : base(false) {}
 
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         //

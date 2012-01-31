@@ -91,7 +91,7 @@ namespace Informedica.GenForm.Tests.Utilities
 
         public static bool ProductHasProductSubstance(IProduct product)
         {
-            var valid = product.Substances.Count() > 0 &&
+            var valid = product.Substances.Any() &&
                    product.Substances.First().SortOrder > 0 &&
                    product.Substances.First().Substance != null &&
                    product.Substances.First().Substance.Products.Contains(product) &&
@@ -104,7 +104,7 @@ namespace Informedica.GenForm.Tests.Utilities
 
         public static bool ProductHasRoutes(IProduct product)
         {
-            var valid = product.Routes.Count() > 0 &&
+            var valid = product.Routes.Any() &&
                    !String.IsNullOrWhiteSpace(product.Routes.First().Name) &&
                    !String.IsNullOrWhiteSpace(product.Routes.First().Abbreviation) &&
                    product.Routes.First().Products.Contains(product) &&

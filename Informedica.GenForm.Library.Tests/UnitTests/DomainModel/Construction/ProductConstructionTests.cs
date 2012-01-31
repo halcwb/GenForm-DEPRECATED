@@ -11,23 +11,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
     [TestClass]
     public class ProductConstructionTests
     {
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         //
@@ -72,11 +60,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
             dto.DisplayName = string.Empty;
             var shape = ShapeTestFixtures.CreateIvFluidShape();
             var package = PackageTestFixtures.CreatePackageAmpul();
-            decimal prodQuantity = 5M;
+            const decimal prodQuantity = 5M;
             var unit = UnitTestFixtures.CreateUnitMililiter();
             var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
-            int order = 1;
-            decimal quantity = 200;
+            const int order = 1;
+            const decimal quantity = 200;
             var substUnit = UnitTestFixtures.CreateUnitMilligram();
             var route = RouteTestFixtures.CreateRouteIv();
 
@@ -90,11 +78,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
             dto.GenericName = string.Empty;
             var shape = ShapeTestFixtures.CreateIvFluidShape();
             var package = PackageTestFixtures.CreatePackageAmpul();
-            decimal prodQuantity = 5M;
+            const decimal prodQuantity = 5M;
             var unit = UnitTestFixtures.CreateUnitMililiter();
             var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
-            int order = 1;
-            decimal quantity = 200;
+            const int order = 1;
+            const decimal quantity = 200;
             var substUnit = UnitTestFixtures.CreateUnitMilligram();
             var route = RouteTestFixtures.CreateRouteIv();
 
@@ -106,11 +94,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         {
             var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
             var package = PackageTestFixtures.CreatePackageAmpul();
-            decimal prodQuantity = 5M;
+            const decimal prodQuantity = 5M;
             var unit = UnitTestFixtures.CreateUnitMililiter();
             var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
-            int order = 1;
-            decimal quantity = 200;
+            const int order = 1;
+            const decimal quantity = 200;
             var substUnit = UnitTestFixtures.CreateUnitMilligram();
             var route = RouteTestFixtures.CreateRouteIv();
 
@@ -122,11 +110,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         {
             var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
             var shape = ShapeTestFixtures.CreateIvFluidShape();
-            decimal prodQuantity = 5M;
+            const decimal prodQuantity = 5M;
             var unit = UnitTestFixtures.CreateUnitMililiter();
             var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
-            int order = 1;
-            decimal quantity = 200;
+            const int order = 1;
+            const int quantity = 200;
             var substUnit = UnitTestFixtures.CreateUnitMilligram();
             var route = RouteTestFixtures.CreateRouteIv();
 
@@ -139,11 +127,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
             var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
             var shape = ShapeTestFixtures.CreateIvFluidShape();
             var package = PackageTestFixtures.CreatePackageAmpul();
-            decimal prodQuantity = 0;
+            const decimal prodQuantity = 0;
             var unit = UnitTestFixtures.CreateUnitMililiter();
             var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
-            int order = 1;
-            decimal quantity = 200;
+            const int order = 1;
+            const decimal quantity = 200;
             var substUnit = UnitTestFixtures.CreateUnitMilligram();
             var route = RouteTestFixtures.CreateRouteIv();
 
@@ -156,10 +144,10 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
             var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
             var shape = ShapeTestFixtures.CreateIvFluidShape();
             var package = PackageTestFixtures.CreatePackageAmpul();
-            decimal prodQuantity = 5M;
+            const decimal prodQuantity = 5M;
             var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
-            int order = 1;
-            decimal quantity = 200;
+            const int order = 1;
+            const decimal quantity = 200;
             var substUnit = UnitTestFixtures.CreateUnitMilligram();
             var route = RouteTestFixtures.CreateRouteIv();
 
@@ -172,10 +160,10 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
             var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
             var shape = ShapeTestFixtures.CreateIvFluidShape();
             var package = PackageTestFixtures.CreatePackageAmpul();
-            decimal prodQuantity = 5M;
+            const decimal prodQuantity = 5M;
             var unit = UnitTestFixtures.CreateUnitMililiter();
-            int order = 1;
-            decimal quantity = 200;
+            const int order = 1;
+            const decimal quantity = 200;
             var substUnit = UnitTestFixtures.CreateUnitMilligram();
             var route = RouteTestFixtures.CreateRouteIv();
 
@@ -188,11 +176,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
             var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
             var shape = ShapeTestFixtures.CreateIvFluidShape();
             var package = PackageTestFixtures.CreatePackageAmpul();
-            decimal prodQuantity = 5M;
+            const decimal prodQuantity = 5M;
             var unit = UnitTestFixtures.CreateUnitMililiter();
             var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
-            int order = 0;
-            decimal quantity = 200;
+            const int order = 0;
+            const decimal quantity = 200;
             var substUnit = UnitTestFixtures.CreateUnitMilligram();
             var route = RouteTestFixtures.CreateRouteIv();
 
@@ -205,11 +193,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
             var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
             var shape = ShapeTestFixtures.CreateIvFluidShape();
             var package = PackageTestFixtures.CreatePackageAmpul();
-            decimal prodQuantity = 5M;
+            const decimal prodQuantity = 5M;
             var unit = UnitTestFixtures.CreateUnitMililiter();
             var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
-            int order = 1;
-            decimal quantity = 0;
+            const int order = 1;
+            const decimal quantity = 0;
             var substUnit = UnitTestFixtures.CreateUnitMilligram();
             var route = RouteTestFixtures.CreateRouteIv();
 
@@ -222,11 +210,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
             var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
             var shape = ShapeTestFixtures.CreateIvFluidShape();
             var package = PackageTestFixtures.CreatePackageAmpul();
-            decimal prodQuantity = 5M;
+            const decimal prodQuantity = 5M;
             var unit = UnitTestFixtures.CreateUnitMililiter();
             var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
-            int order = 1;
-            decimal quantity = 0;
+            const int order = 1;
+            const decimal quantity = 0;
             var substUnit = UnitTestFixtures.CreateUnitMilligram();
             var route = RouteTestFixtures.CreateRouteIv();
 
@@ -239,11 +227,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
             var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
             var shape = ShapeTestFixtures.CreateIvFluidShape();
             var package = PackageTestFixtures.CreatePackageAmpul();
-            decimal prodQuantity = 5M;
+            const decimal prodQuantity = 5M;
             var unit = UnitTestFixtures.CreateUnitMililiter();
             var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
-            int order = 1;
-            decimal quantity = 200;
+            const int order = 1;
+            const decimal quantity = 200;
             var route = RouteTestFixtures.CreateRouteIv();
 
             AssertCreateFails(quantity, subst, null, route, order, shape, dto, package, prodQuantity, unit);
@@ -255,11 +243,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
             var dto = ProductTestFixtures.GetProductDtoWithNoSubstances();
             var shape = ShapeTestFixtures.CreateIvFluidShape();
             var package = PackageTestFixtures.CreatePackageAmpul();
-            decimal prodQuantity = 5M;
+            const decimal prodQuantity = 5M;
             var unit = UnitTestFixtures.CreateUnitMililiter();
             var subst = SubstanceTestFixtures.CreateSubstanceWithoutGroup();
-            int order = 1;
-            decimal quantity = 200;
+            const int order = 1;
+            const decimal quantity = 200;
             var substUnit = UnitTestFixtures.CreateUnitMilligram();
 
             AssertCreateFails(quantity, subst, substUnit, null, order, shape, dto, package, prodQuantity, unit);

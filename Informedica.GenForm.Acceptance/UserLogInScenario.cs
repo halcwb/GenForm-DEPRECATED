@@ -21,9 +21,7 @@ namespace Informedica.GenForm.Acceptance
 
         public bool LogInUserWithPassword(string userName, string password)
         {
-            var login = new UserLoginDecisions();
-            login.GivenUser = userName;
-            login.GivenPassword = password;
+            var login = new UserLoginDecisions {GivenUser = userName, GivenPassword = password};
             return login.GivenUserLogsIn(userName);
         }
 

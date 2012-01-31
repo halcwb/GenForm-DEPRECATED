@@ -11,7 +11,7 @@ namespace Informedica.GenForm.DataAccess.Mappings
             return unitValue =>
                        {
                            unitValue.Map(x => x.Value).Not.Nullable();
-                           unitValue.References<Unit>(x => x.Unit)
+                           unitValue.References(x => x.Unit)
                                .Cascade.SaveUpdate()
                                .Not.Nullable();
                        };

@@ -3,7 +3,7 @@ using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.Security;
 using Informedica.GenForm.Library.Services.Users;
 using Informedica.GenForm.Mvc3.Controllers;
-using Informedica.GenForm.PresentationLayer.Security;
+using Informedica.GenForm.Presentation.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Mvc;
 using TypeMock.ArrangeActAssert;
@@ -25,23 +25,11 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         private const String InvalidUser = "foo";
         private const String InvalidPassword = "bar";
 
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -149,7 +137,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public void ReturnLoginPresentationWithDisabledLoginButtonForInValidLogin()
         {
-            LoginController controller = new LoginController();
+            var controller = new LoginController();
             Isolate.Fake.StaticMethods(typeof(LoginForm));
 
             var result = controller.GetLoginPresentation("", "");
@@ -164,7 +152,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public void ReturnLoginPresentationForValidUserWithLoginButtonEnabled()
         {
-            LoginController controller = new LoginController();
+            var controller = new LoginController();
             Isolate.Fake.StaticMethods(typeof(LoginForm));
 
             var result = controller.GetLoginPresentation("Admin", "Admin");

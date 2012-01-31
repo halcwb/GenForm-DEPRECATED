@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace Informedica.Utilities
@@ -12,11 +13,7 @@ namespace Informedica.Utilities
         {
             if (obj == null) return false;
 
-            foreach (var property in obj.GetType().GetProperties())
-            {
-                if (!PropertyIsEmpty(property, obj)) return false;
-            }
-            return true;
+            return obj.GetType().GetProperties().All(property => PropertyIsEmpty(property, obj));
         }
 
         public static Boolean PropertyIsEmpty(PropertyInfo property, Object product)

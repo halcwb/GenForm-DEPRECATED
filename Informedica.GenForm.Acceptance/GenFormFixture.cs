@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Linq;
 
 namespace Informedica.GenForm.Acceptance
@@ -24,7 +25,7 @@ namespace Informedica.GenForm.Acceptance
 
         public string UserIsSystemUser(string userName)
         {
-            return (userName == "system").ToString().ToLower();
+            return (userName == "system").ToString(CultureInfo.InvariantCulture).ToLower();
         }
 
         public bool SetUserName(string userName)
@@ -82,7 +83,7 @@ namespace Informedica.GenForm.Acceptance
         public string UserExists(string user)
         {
             //ToDo: write tests
-            return (user.ToLower().Trim() == "admin" || user.ToLower().Trim() == "fred").ToString().ToLower();
+            return (user.ToLower().Trim() == "admin" || user.ToLower().Trim() == "fred").ToString(CultureInfo.InvariantCulture).ToLower();
         }
 
         public string GetEnvironments()
@@ -92,7 +93,7 @@ namespace Informedica.GenForm.Acceptance
 
         public string ConnectToServerAsUserWithPassword(string server, string user, string password)
         {
-            return (server == "GenFormServer").ToString().ToLower();
+            return (server == "GenFormServer").ToString(CultureInfo.InvariantCulture).ToLower();
         }
 
         public bool ListOfEnvironmentsContains(string environment)

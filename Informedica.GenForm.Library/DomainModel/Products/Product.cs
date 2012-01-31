@@ -106,10 +106,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual void RemoveSubstance(ISubstance substance)
         {
-            var _prodSubst = _substances.SingleOrDefault(x => x.Substance == substance);
-            if (_prodSubst == null) return;
+            var prodSubst = _substances.SingleOrDefault(x => x.Substance == substance);
+            if (prodSubst == null) return;
 
-            _substances.Remove(_prodSubst);
+            _substances.Remove(prodSubst);
         }
 
         public virtual IEnumerable<IRoute> Routes

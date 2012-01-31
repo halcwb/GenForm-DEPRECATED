@@ -1,5 +1,5 @@
 ﻿using System;
-using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.DomainModel.Users.Interfaces;
 using Informedica.GenForm.Library.Security;
 using Informedica.GenForm.Library.Services.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,25 +17,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
     [TestClass]
     public class GenFormIdentityTest
     {
-
-
-        private TestContext _testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return _testContextInstance;
-            }
-            set
-            {
-                _testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -90,7 +76,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void GetIdentity_of_system_user_with_wrong_password_should_return_AnonymousIdentity()
+        public void GetIdentityOfSystemUserWithWrongPasswordShouldReturnAnonymousIdentity()
         {
             const String name = "Admin";
             var user = CreateFakeIuser();

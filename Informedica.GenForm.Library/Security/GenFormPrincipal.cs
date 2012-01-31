@@ -2,7 +2,7 @@
 using System.Security;
 using System.Security.Principal;
 using System.Threading;
-using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.DomainModel.Users.Interfaces;
 using Informedica.GenForm.Library.Services.Users;
 
 namespace Informedica.GenForm.Library.Security
