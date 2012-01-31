@@ -1,7 +1,7 @@
 ﻿using System;
 using Informedica.GenForm.Library.Security;
 
-namespace Informedica.GenForm.Library.DomainModel.Users
+namespace Informedica.GenForm.Library.DomainModel.Users.Interfaces
 {
     public interface IUser: IGenFormIdentity
     {

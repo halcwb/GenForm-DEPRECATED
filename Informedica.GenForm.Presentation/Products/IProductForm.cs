@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Informedica.GenForm.Presentation.Forms;
 
-namespace Informedica.GenForm.PresentationLayer.Products
+namespace Informedica.GenForm.Presentation.Products
 {
     /// <summary>
     /// Describes the visual presentation of a input

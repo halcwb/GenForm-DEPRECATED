@@ -21,8 +21,6 @@ namespace Informedica.GenForm.DataAccess.Tests
     [TestClass]
     public class DatabaseCleanerShould: TestSessionContext
     {
-        private TestContext _testContextInstance;
-
         public DatabaseCleanerShould() : base(true)
         {
         }
@@ -31,17 +29,7 @@ namespace Informedica.GenForm.DataAccess.Tests
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return _testContextInstance;
-            }
-            set
-            {
-                _testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         //

@@ -1,6 +1,5 @@
 ﻿using Informedica.GenForm.Presentation.Forms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using TypeMock.ArrangeActAssert;
 
 namespace Informedica.GenForm.Presentation.Tests
@@ -11,28 +10,14 @@ namespace Informedica.GenForm.Presentation.Tests
     ///This is a test class for IFormTest and is intended
     ///to contain all IFormTest Unit Tests
     ///</summary>
-    [TestClass()]
-    public class IFormTest
+    [TestClass]
+    public class FormTest
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -65,34 +50,33 @@ namespace Informedica.GenForm.Presentation.Tests
         #endregion
 
 
-        [TestMethod()]
-        public void Caption_of_presentation_can_be_set_to_test()
+        [TestMethod]
+        public void CaptionOfPresentationCanBeSetToTest()
         {
             IForm target = CreateIForm(); // Get Fake Instance
-            string caption = "Test";
-            string expected = caption; 
-            string actual;
+            const string caption = "Test";
+            const string expected = caption;
             target.Caption = expected;
-            actual = target.Caption;
+            var actual = target.Caption;
             Assert.AreEqual(expected, actual);
         }
 
         internal virtual IForm CreateIForm()
         {
-            IForm target = Isolate.Fake.Instance<IForm>();
-            
+            var target = Isolate.Fake.Instance<IForm>();
+
             return target;
         }
 
         private IButton CreateIButton()
         {
-            IButton button = Isolate.Fake.Instance<IButton>();
+            var button = Isolate.Fake.Instance<IButton>();
             return button;
         }
 
         [Isolated]
         [TestMethod]
-        public void A_button_can_be_added_to_a_presentation()
+        public void AButtonCanBeAddedToAPresentation()
         {
             IForm target = CreateIForm();
             Isolate.WhenCalled(() => target.Buttons.Count).WillReturn(1);

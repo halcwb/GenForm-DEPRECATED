@@ -8,10 +8,12 @@ namespace Informedica.GenForm.TestFixtures.Fixtures
     {
         public static IEnumerable<SubstanceDto> GetSubstanceDtoListWithThreeItems()
         {
-            var list = new List<SubstanceDto>();
-            list.Add(new SubstanceDto{Name = "paracetamol"});
-            list.Add(new SubstanceDto{Name = "dopamine"});
-            list.Add(new SubstanceDto{Name = "lactulose"});
+            var list = new List<SubstanceDto>
+                           {
+                               new SubstanceDto {Name = "paracetamol"},
+                               new SubstanceDto {Name = "dopamine"},
+                               new SubstanceDto {Name = "lactulose"}
+                           };
 
             return list;
         }

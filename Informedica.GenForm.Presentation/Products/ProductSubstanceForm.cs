@@ -1,6 +1,6 @@
 ﻿using Informedica.GenForm.Presentation.Forms;
 
-namespace Informedica.GenForm.PresentationLayer.Products
+namespace Informedica.GenForm.Presentation.Products
 {
     public class ProductSubstanceForm : IProductSubstanceForm
     {

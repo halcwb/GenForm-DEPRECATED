@@ -15,25 +15,13 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
     [TestClass]
     public class PackageServicesTests : TestSessionContext
     {
-        private TestContext testContextInstance;
-
         public PackageServicesTests() : base(true) { }
 
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         //
@@ -89,7 +77,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         public void ThatAPackagaWithAshapeCanBeGet()
         {
             var package = GetPackageWithShape();
-            Assert.IsTrue(package.ShapeSet.Count() > 0);
+            Assert.IsTrue(package.ShapeSet.Any());
             PackageServices.Delete(package);
         }
 

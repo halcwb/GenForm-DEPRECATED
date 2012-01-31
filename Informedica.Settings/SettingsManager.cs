@@ -20,8 +20,6 @@ namespace Informedica.Settings
         private readonly SymCryptography _crypt = new SymCryptography(SymCryptography.ServiceProviderEnum.Rijndael);
 
         private const string Environments = "environments";
-        private const string ConnectionString = "connectionString";
-        private const string EnvironmentElement = "environment";
         private const string EnvironmentName = "name";
 
         #region Singleton
@@ -124,13 +122,6 @@ namespace Informedica.Settings
             return computerName; //_crypt.Encrypt(computerName.ToLower());
         }
 
-        private string EncryptSetting(string value)
-        {
-            _crypt.Key = _key;
-            return _crypt.Encrypt(value);
-
-        }
-
         public string ReadSecureSetting(string name)
         {
             return GetSettingReader().ReadSetting(name);
@@ -141,15 +132,6 @@ namespace Informedica.Settings
             return ObjectFactory.GetInstance<SettingReader>();
         }
 
-        private string GetEnvirionment(XElement xElement)
-        {
-            if (xElement == null) return String.Empty;
-
-            var xAttribute = xElement.Attribute(ConnectionString);
-            if (xAttribute != null) return xAttribute.Value;
-            return String.Empty;
-        }
-
         public void WriteSecureSetting(string key, string value)
         {
             GetSettingWriter().WriteSetting(key, value);
@@ -158,30 +140,6 @@ namespace Informedica.Settings
         private ConfigurationManagerSettingWriter GetSettingWriter()
         {
             return new ConfigurationManagerSettingWriter();
-        }
-
-        private static void ChangeEnvironment(XElement environment, string connectionString)
-        {
-            var xAttribute = environment.Attribute(ConnectionString);
-            if (xAttribute != null)
-                xAttribute.Value = connectionString;
-        }
-
-        private void AddEnvironment(string key, string value)
-        {
-            EnvironmentsRoot.Add((new XElement(EnvironmentElement, 
-                                      new XAttribute(EnvironmentName, key), 
-                                      new XAttribute(ConnectionString, value))));
-        }
-
-        private XElement FindEnvironmentElement(string environmentName)
-        {
-            return EnvironmentsRoot.Elements().Count() == 0 ? null : EnvironmentsRoot.Elements().SingleOrDefault(
-                x =>
-                {
-                    var xAttribute = x.Attribute(EnvironmentName);
-                    return xAttribute != null && xAttribute.Value == environmentName;
-                });
         }
 
         public IEnumerable<String> GetNames()

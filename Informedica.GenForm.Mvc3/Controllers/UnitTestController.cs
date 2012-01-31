@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Library.DomainModel.Data;
@@ -51,7 +50,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult Login(String userName, String password)
         {
-            if (HttpContext.Session["environment"] == null)
+            if (HttpContext.Session != null && HttpContext.Session["environment"] == null)
                 return this.Direct(new { success = false });
 
             return this.Direct(new { success = (userName == "Admin" && password == "Admin") });

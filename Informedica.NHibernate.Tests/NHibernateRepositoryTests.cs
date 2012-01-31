@@ -15,8 +15,6 @@ namespace Informedica.NHibernate.Tests
     [TestClass]
     public class NHibernateRepositoryTests : TestSessionContext
     {
-        private TestContext testContextInstance;
-
         public NHibernateRepositoryTests() : base(true)
         {
         }
@@ -25,17 +23,7 @@ namespace Informedica.NHibernate.Tests
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         //
@@ -63,8 +51,7 @@ namespace Informedica.NHibernate.Tests
         public void ThatSubstanceCanBeAdded()
         {
             var subst = Substance.Create(SubstanceTestFixtures.GetSubstanceWithGroup());
-            var repos = new SubstanceRepository(GenFormApplication.SessionFactory);
-            repos.Add(subst);
+            var repos = new SubstanceRepository(GenFormApplication.SessionFactory) {subst};
 
             Assert.IsTrue(repos.Contains(subst));
         }
@@ -73,9 +60,8 @@ namespace Informedica.NHibernate.Tests
         public void ThatSubstanceHasSubstanceGroup()
         {
             var subst = SubstanceTestFixtures.CreateSubstanceWitGroup();
-            var repos = new SubstanceRepository(GenFormApplication.SessionFactory);
-            repos.Add(subst);
-            
+            new SubstanceRepository(GenFormApplication.SessionFactory) {subst};
+
             Assert.IsNotNull(subst.SubstanceGroup);
         }
 

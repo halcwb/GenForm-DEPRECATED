@@ -1,5 +1,4 @@
 ﻿using System;
-using Informedica.GenForm.Presentation.Forms;
 
 namespace Informedica.GenForm.Presentation.Forms
 {
@@ -39,26 +38,11 @@ namespace Informedica.GenForm.Presentation.Forms
             set { _maxLength = value; }
         }
 
-        private Int32 _minLength;
-        public virtual Int32 MinLength
-        {
-            get { return _minLength; }
-            set { _minLength = value; }
-        }
+        public virtual int MinLength { get; set; }
 
-        private Boolean _required;
-        public virtual Boolean Required
-        {
-            get { return  _required; }
-            set { _required = value; }
-        }
+        public virtual bool Required { get; set; }
 
-        private Boolean _isUnique;
-        public virtual Boolean IsUnique
-        {
-            get { return _isUnique; }
-            set { _isUnique = value; }
-        }
+        public virtual bool IsUnique { get; set; }
 
         private String _errorMesssage;
         public virtual String ErrorMessage

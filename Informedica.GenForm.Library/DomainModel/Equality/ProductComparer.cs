@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Library.DomainModel.Equality
@@ -17,12 +18,7 @@ namespace Informedica.GenForm.Library.DomainModel.Equality
             if (!x.Package.Equals(y.Package)) return false;
             if (!x.Quantity.Equals(y.Quantity)) return false;
 
-            foreach (var substance in x.SubstanceList)
-            {
-                if (y.SubstanceList.Contains(substance)) return false;
-            }
-
-            return true;
+            return x.SubstanceList.All(substance => !y.SubstanceList.Contains(substance));
         }
 
         public int GetHashCode(Product obj)

@@ -20,7 +20,6 @@ namespace Informedica.NHibernate.Tests
     [TestClass]
     public class NHibernateRepositoryOfTypeBrand: TestSessionContext
     {
-        private TestContext testContextInstance;
         private static NHibernateRepository<Brand> _repository;
         private Brand _brand;
 
@@ -30,17 +29,7 @@ namespace Informedica.NHibernate.Tests
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         //
@@ -135,7 +124,7 @@ namespace Informedica.NHibernate.Tests
             try
             {
                 var session = GenFormApplication.SessionFactory.GetCurrentSession();
-                Assert.IsTrue(session.Query<Brand>().Count() == 0);
+                Assert.IsTrue(!session.Query<Brand>().Any());
 
             }
             catch (Exception e)

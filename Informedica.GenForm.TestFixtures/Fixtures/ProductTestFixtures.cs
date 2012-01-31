@@ -98,8 +98,7 @@ namespace Informedica.GenForm.TestFixtures.Fixtures
         public static IEnumerable<ProductDto> GetProductDtoListWithThreeItems()
         {
             var dto = GetProductDtoWithNoSubstances();
-            var list = new List<ProductDto>();
-            list.Add(dto);
+            var list = new List<ProductDto> {dto};
             dto = dto.CloneDto();
             dto.Name = "paracetamol Paracetamol zetpil 1 stuk";
             dto.BrandName = "Paracetamol";

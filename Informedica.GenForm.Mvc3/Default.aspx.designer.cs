@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Informedica.GenForm.Mvc3.Views
+namespace Informedica.GenForm.Mvc3
 {
 
 

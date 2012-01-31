@@ -19,9 +19,9 @@ namespace Informedica.GenForm.Assembler.Tests
             }
         }
 
-        public static void AssertRegistrationWith<T,C>(T parameter)
+        public static void AssertRegistrationWith<T,TC>(T parameter)
         {
-            var instance = ObjectFactory.With(parameter).GetInstance<C>();
+            var instance = ObjectFactory.With(parameter).GetInstance<TC>();
             Assert.IsNotNull(instance);
         }
 

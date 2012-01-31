@@ -14,25 +14,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
     [TestClass]
     public class LoginServicesShould
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -83,7 +69,9 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             var identity = Isolate.Fake.Instance<IGenFormIdentity>();
             Isolate.WhenCalled(() => GenFormIdentity.GetIdentity(criteria)).WillReturn(identity);
+// ReSharper disable ConvertClosureToMethodGroup
             Isolate.WhenCalled(() => GenFormPrincipal.Logout()).IgnoreCall();
+// ReSharper restore ConvertClosureToMethodGroup
             Isolate.WhenCalled(() => GenFormPrincipal.GetPrincipal().IsLoggedIn()).WillReturn(false);
         }
 
@@ -113,7 +101,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 
         [Isolated]
         [TestMethod]
-        public void System_user_can_change_password()
+        public void SystemUserCanChangePassword()
         {
             var user = CreateSystemLoginCriteria();
             IsolateSystemUserLoginReturnsTrue(user);

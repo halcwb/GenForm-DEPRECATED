@@ -52,9 +52,8 @@ namespace Informedica.Settings
 		public SymCryptography()
 		{
 			// Default symmetric algorithm
-			_cryptoService = new RijndaelManaged();
-			_cryptoService.Mode = CipherMode.CBC;
-			_algorithm = ServiceProviderEnum.Rijndael;
+		    _cryptoService = new RijndaelManaged {Mode = CipherMode.CBC};
+		    _algorithm = ServiceProviderEnum.Rijndael;
 		}
 
 		public SymCryptography(ServiceProviderEnum serviceProvider)

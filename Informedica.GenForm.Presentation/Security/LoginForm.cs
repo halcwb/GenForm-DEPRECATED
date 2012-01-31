@@ -1,7 +1,7 @@
 ﻿using System;
 using Informedica.GenForm.Presentation.Forms;
 
-namespace Informedica.GenForm.PresentationLayer.Security
+namespace Informedica.GenForm.Presentation.Security
 {
     public class LoginForm : ILoginForm
     {
