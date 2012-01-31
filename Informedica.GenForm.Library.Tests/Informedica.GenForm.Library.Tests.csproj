@@ -73,9 +73,7 @@
       <HintPath>..\packages\SQLitex64.1.0.66\lib\32\System.Data.SQLite.DLL</HintPath>
     </Reference>
     <Reference Include="TypeMock, Version=6.2.3.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
-    <Reference Include="Typemock.ArrangeActAssert, Version=6.2.3.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL">
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="Typemock.ArrangeActAssert, Version=6.2.3.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UnitTests\DomainModel\Construction\BrandConstructorTests.cs" />
