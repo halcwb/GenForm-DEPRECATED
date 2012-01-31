@@ -1,4 +1,5 @@
 ﻿using FluentNHibernate.Testing;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Products;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -38,9 +39,9 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Mappings
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext) { GenFormApplication.Initialize(); }
+        
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
