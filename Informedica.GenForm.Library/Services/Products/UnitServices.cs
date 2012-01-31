@@ -54,7 +54,7 @@ namespace Informedica.GenForm.Library.Services.Products
 
         public static void ChangeUnitName(Unit unit, string newName)
         {
-            IdentityChanger.ChangeIdentity(unit.ChangeName, newName, Instance.Repository);
+            unit.Name = newName;
         }
     }
 }

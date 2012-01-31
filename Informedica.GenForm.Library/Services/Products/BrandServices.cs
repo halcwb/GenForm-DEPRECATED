@@ -47,7 +47,7 @@ namespace Informedica.GenForm.Library.Services.Products
 
         public static void ChangeBrandName(Brand brand, string name)
         {
-            IdentityChanger.ChangeIdentity(brand.ChangeName, name, Instance.Repository);
+            brand.Name = name;
         }
     }
 }

@@ -14,9 +14,6 @@ namespace Informedica.GenForm.Library.Repositories
         void Add(TEnt entity);
         bool Remove(TEnt entity);
         int Count { get; }
-
-        void Flush();
-        void Clear();
     }
 
 }

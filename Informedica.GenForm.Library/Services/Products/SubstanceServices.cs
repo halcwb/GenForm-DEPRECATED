@@ -49,7 +49,7 @@ namespace Informedica.GenForm.Library.Services.Products
 
         public static void ChangeSubstanceName(Substance substance, string newName)
         {
-            IdentityChanger.ChangeIdentity(substance.ChangeName, newName, Instance.Repository);
+            substance.Name = newName;
         }
     }
 }
