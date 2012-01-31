@@ -50,7 +50,7 @@ namespace Informedica.GenForm.Library.Services.Products
 
         public static void ChangeRouteName(Route route, string newName)
         {
-            IdentityChanger.ChangeIdentity(route.ChangeName, newName, Instance.Repository);
+            route.Name = newName;
         }
     }
 }

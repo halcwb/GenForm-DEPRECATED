@@ -92,7 +92,6 @@
     <Compile Include="DomainModel\Data\UserDto.cs" />
     <Compile Include="DomainModel\Entity.cs" />
     <Compile Include="DomainModel\Equality\BrandComparer.cs" />
-    <Compile Include="DomainModel\Equality\IdentityChanger.cs" />
     <Compile Include="DomainModel\Equality\NameComparer.cs" />
     <Compile Include="DomainModel\Equality\PackageComparer.cs" />
     <Compile Include="DomainModel\Equality\ProductComparer.cs" />
