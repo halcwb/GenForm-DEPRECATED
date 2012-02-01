@@ -49,7 +49,7 @@ namespace Informedica.GenForm.Assembler
             get
             {
                 return GetSessionFactory("GenFormTest");
-            }
+            } 
         }
 
         public static void Initialize()
