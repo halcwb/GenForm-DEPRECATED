@@ -67,6 +67,7 @@
       <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -1956,6 +1957,7 @@
     <Content Include="Client\Library\jasmine\lib\jasmine-1.0.2\jasmine.css" />
     <Content Include="Client\Library\jasmine\lib\jasmine-1.0.2\jasmine.js" />
     <Content Include="Client\Library\jasmine\lib\jasmine-1.0.2\json2.js" />
+    <Content Include="appSettings.config" />
     <None Include="connections.config" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />

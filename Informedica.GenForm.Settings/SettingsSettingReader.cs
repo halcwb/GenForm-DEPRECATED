@@ -1,4 +1,4 @@
-namespace Informedica.Settings
+namespace Informedica.GenForm.Settings
 {
     public class SettingsSettingReader : SettingReader
     {

@@ -1,7 +1,7 @@
 ﻿using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Library.DomainModel.Databases;
 using Informedica.GenForm.Library.Services.Databases;
-using Informedica.Settings;
+using Informedica.GenForm.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 

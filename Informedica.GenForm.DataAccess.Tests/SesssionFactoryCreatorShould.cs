@@ -43,7 +43,7 @@ namespace Informedica.GenForm.DataAccess.Tests
         [TestMethod]
         public void BeAbleToCreateASessionFactory()
         {
-            var factory = SessionFactoryCreator.CreateSessionFactory();
+            var factory = SessionFactoryManager.GetSessionFactory();
             Assert.IsNotNull(factory);
         }
 

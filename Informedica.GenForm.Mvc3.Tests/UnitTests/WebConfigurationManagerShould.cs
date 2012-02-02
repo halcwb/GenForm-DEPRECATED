@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Web.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -43,6 +44,28 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             man.ConnectionStrings.ConnectionStrings.Remove(Testsetting);
             man.Save();
             Assert.IsNull(man.ConnectionStrings.ConnectionStrings[Testsetting]);
+        }
+
+        [TestMethod]
+        public void BeAbleToReadTheAppSettings()
+        {
+            var man = GetConfigurationManager();
+            Assert.IsTrue(man.AppSettings.Settings.Count > 0);
+        }
+
+        [TestMethod]
+        public void BeAbleToGetTheInformedicaSectionGroup()
+        {
+            var man = GetConfigurationManager();
+
+            try
+            {
+                Assert.IsFalse(String.IsNullOrWhiteSpace(man.SectionGroups["Informedica"].Sections[0].SectionInformation.Name));
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.ToString());
+            }
         }
 
         private static Configuration GetConfigurationManager()

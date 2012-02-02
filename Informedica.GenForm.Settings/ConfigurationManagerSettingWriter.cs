@@ -1,7 +1,7 @@
 using System;
 using System.Configuration;
 
-namespace Informedica.Settings
+namespace Informedica.GenForm.Settings
 {
     public class ConfigurationManagerSettingWriter : SettingWriter
     {

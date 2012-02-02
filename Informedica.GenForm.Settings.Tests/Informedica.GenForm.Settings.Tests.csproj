@@ -49,9 +49,9 @@
     <Compile Include="SettingsManagerShould.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Informedica.Settings\Informedica.Settings.csproj">
+    <ProjectReference Include="..\Informedica.Settings\Informedica.GenForm.Settings.csproj">
       <Project>{B30C5371-DDDD-46BE-827A-72798E743B60}</Project>
-      <Name>Informedica.Settings</Name>
+      <Name>Informedica.GenForm.Settings</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

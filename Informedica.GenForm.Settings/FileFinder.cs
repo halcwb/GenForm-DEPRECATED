@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 
-namespace Informedica.Settings
+namespace Informedica.GenForm.Settings
 {
     public class FileFinder
     {

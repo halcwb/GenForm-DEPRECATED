@@ -1,5 +1,4 @@
-﻿using Informedica.Settings;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Settings.Tests
 {

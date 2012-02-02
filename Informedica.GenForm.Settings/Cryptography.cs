@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace Informedica.Settings
+namespace Informedica.GenForm.Settings
 {
 	#region Symmetric cryptography class...
 
