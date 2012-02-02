@@ -1,4 +1,4 @@
-namespace Informedica.Settings
+namespace Informedica.GenForm.Settings
 {
     public abstract class SettingWriter
     {

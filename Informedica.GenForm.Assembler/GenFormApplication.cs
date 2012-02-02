@@ -42,7 +42,7 @@ namespace Informedica.GenForm.Assembler
             get { return Instance.SessionFactoryFromInstance; }
         }
 
-        public static ISessionFactory TestSessionFactory { get { return SessionFactoryCreator.CreateSessionFactory(); } }
+        public static ISessionFactory TestSessionFactory { get { return SessionFactoryManager.GetSessionFactory(); } }
 
         private ISessionFactory SessionFactoryFromInstance
         {
@@ -67,7 +67,7 @@ namespace Informedica.GenForm.Assembler
         {
             if (!Factories.ContainsKey(environment))
             {
-                Factories.Add(environment, SessionFactoryCreator.CreateSessionFactory(environment));
+                Factories.Add(environment, SessionFactoryManager.GetSessionFactory(environment));
             }
 
             return Factories[environment];

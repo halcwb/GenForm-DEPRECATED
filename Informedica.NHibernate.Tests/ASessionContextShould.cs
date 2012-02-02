@@ -1,7 +1,7 @@
 ﻿using System;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Assembler.Contexts;
-using Informedica.Settings;
+using Informedica.GenForm.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 

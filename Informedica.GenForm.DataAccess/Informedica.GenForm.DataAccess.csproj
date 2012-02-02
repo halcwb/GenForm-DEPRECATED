@@ -97,7 +97,7 @@
     <Compile Include="Repositories\UnitGroupRepository.cs" />
     <Compile Include="Repositories\UnitRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="SessionFactoryCreator.cs" />
+    <Compile Include="SessionFactoryManager.cs" />
     <Compile Include="Databases\DatabaseConnection.cs" />
     <Compile Include="Databases\Environment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,9 +107,9 @@
       <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
       <Name>Informedica.GenForm.Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Informedica.Settings\Informedica.Settings.csproj">
+    <ProjectReference Include="..\Informedica.GenForm.Settings\Informedica.GenForm.Settings.csproj">
       <Project>{B30C5371-DDDD-46BE-827A-72798E743B60}</Project>
-      <Name>Informedica.Settings</Name>
+      <Name>Informedica.GenForm.Settings</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

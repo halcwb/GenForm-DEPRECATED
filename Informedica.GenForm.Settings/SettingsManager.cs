@@ -5,7 +5,7 @@ using System.Threading;
 using System.Xml.Linq;
 using StructureMap;
 
-namespace Informedica.Settings
+namespace Informedica.GenForm.Settings
 {
     public class SettingsManager
     {
@@ -178,6 +178,11 @@ namespace Informedica.Settings
         public string GetLogPath()
         {
             return Properties.Settings.Default.LogPath;
+        }
+
+        public string GetConnectionString(string environment)
+        {
+            return "Data Source=:memory:;Version=3;New=True;Pooling=True;Max Pool Size=1;";
         }
     }
 

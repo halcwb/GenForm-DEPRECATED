@@ -194,12 +194,6 @@
     <Compile Include="Services\Users\UserServices.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Informedica.Factory\Informedica.Factory.csproj">
-      <Project>{893473D6-D384-4CCD-9877-FBC05BC3E351}</Project>
-      <Name>Informedica.Factory</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="DomainModel\Users\Collections\" />
   </ItemGroup>
   <ItemGroup>
