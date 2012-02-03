@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Informedica.SecureSettings">
+      <HintPath>..\..\scsm\Informedica.SecureSettings\bin\Debug\Informedica.SecureSettings.dll</HintPath>
+    </Reference>
     <Reference Include="Informedica.Settings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Informedica.Settings.dll</HintPath>
@@ -42,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
