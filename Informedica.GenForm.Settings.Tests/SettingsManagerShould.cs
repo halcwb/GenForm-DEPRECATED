@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using TypeMock.ArrangeActAssert;
+using Informedica.SecureSettings;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Settings.Tests
 {
@@ -41,6 +43,23 @@ namespace Informedica.GenForm.Settings.Tests
         {
             const string path = @"/";
             SettingsManager.Instance.Initialize(path);
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void BeCreatedWithASecureSettingsManager()
+        {
+            ISettingSource fakeISettingSource = Isolate.Fake.Instance<ISettingSource>();
+            var man = new SettingsManager(new SecureSettingsManager(fakeISettingSource));
+        }
+
+        [TestMethod]
+        public void BeAbleToRetrieveAConnectionStringByName()
+        {
+            var exp = "Data Source=:memory:;Version=3;New=True;Pooling=True;Max Pool Size=1;";
+            SettingsManager.Instance.AddConnectionString("Test", exp);
+            var con = SettingsManager.Instance.GetConnectionString("Test");
+            Assert.AreEqual(exp, con);
         }
     }
 }
