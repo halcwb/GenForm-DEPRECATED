@@ -38,13 +38,6 @@ namespace Informedica.GenForm.Settings.Tests
         //
         #endregion
 
-        [TestMethod]
-        public void ThatInitializedWithPathToSettingsFileCanReadFile()
-        {
-            const string path = @"/";
-            SettingsManager.Instance.Initialize(path);
-        }
-
         [Isolated]
         [TestMethod]
         public void BeCreatedWithASecureSettingsManager()

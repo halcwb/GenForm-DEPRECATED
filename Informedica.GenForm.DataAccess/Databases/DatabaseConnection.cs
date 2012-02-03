@@ -56,14 +56,9 @@ namespace Informedica.GenForm.DataAccess.Databases
             return connectionString;
         }
 
-        public void SetSettingsPath(string path)
-        {
-            SettingsManager.Instance.Initialize(path);
-        }
-
         public IEnumerable<string> GetDatabases()
         {
-            return SettingsManager.Instance.GetNames();
+            throw new NotImplementedException();
         }
 
     }

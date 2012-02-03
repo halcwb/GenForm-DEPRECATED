@@ -48,7 +48,7 @@ namespace Informedica.GenForm.Assembler
         {
             get
             {
-                return GetSessionFactory("GenFormTest");
+                return GetSessionFactory("Test");
             } 
         }
 

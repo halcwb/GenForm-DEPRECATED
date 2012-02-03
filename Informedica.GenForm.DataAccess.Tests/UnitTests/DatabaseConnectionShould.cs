@@ -12,7 +12,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
     [TestClass]
     public class DatabaseConnectionShould
     {
-        private readonly string _validConnectionString = SettingsManager.Instance.ReadSecureSetting("GenFormTest");
+        private readonly string _validConnectionString = SettingsManager.Instance.GetConnectionString("Test");
         private static IDatabaseConnection _databaseConnection;
 
         /// <summary>
@@ -77,14 +77,14 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         [TestMethod]
         public void ConnectToLocalTestDatabase()
         {
-            const string envName = "GenFormTest";
+            const string envName = "Test";
             Assert.IsTrue(DatabaseConnection.GetLocalConnectionString(DatabaseConnection.DatabaseName.GenFormTest).Contains(envName));
         }
 
         private IEnvironment GetValidEnvironmentSetting()
         {
             var setting = ObjectFactory.GetInstance<IEnvironment>();
-            setting.Name = "GenFormTest";
+            setting.Name = "Test";
             setting.ConnectionString =
                 _validConnectionString;
 
