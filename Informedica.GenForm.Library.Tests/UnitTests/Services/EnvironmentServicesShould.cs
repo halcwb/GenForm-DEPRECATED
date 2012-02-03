@@ -85,7 +85,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 
         private static void SetUpValidDatabaseSetting()
         {
-            _environment.Name = "GenFormTest";
+            _environment.Name = "Test";
             _environment.ConnectionString = SettingsManager.Instance.ReadSecureSetting(_environment.Name);
         }
     }

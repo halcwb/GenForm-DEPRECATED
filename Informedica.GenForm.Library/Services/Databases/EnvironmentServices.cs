@@ -24,7 +24,6 @@ namespace Informedica.GenForm.Library.Services.Databases
 
         public static void MapSettingsPath(String path)
         {
-            GetDatabaseConnection().SetSettingsPath(path);
         }
 
         public static IEnumerable<string> GetDatabases()
