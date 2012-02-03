@@ -29,9 +29,10 @@ obj/
 _ReSharper*/
 
 #ignore setting files
-[Ss]ettings.*
-SecurityKey.cs
-app.config
+#[Ss]ettings.*
+#SecurityKey.cs
+#app.config
+#No longer nescessary
 
 #ignore msunit test results
 [Tt]est[Rr]esult*
