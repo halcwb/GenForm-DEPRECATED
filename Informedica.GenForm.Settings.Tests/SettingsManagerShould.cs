@@ -42,14 +42,22 @@ namespace Informedica.GenForm.Settings.Tests
         [TestMethod]
         public void BeCreatedWithASecureSettingsManager()
         {
-            ISettingSource fakeISettingSource = Isolate.Fake.Instance<ISettingSource>();
-            var man = new SettingsManager(new SecureSettingsManager(fakeISettingSource));
+            var fakeISettingSource = Isolate.Fake.Instance<ISettingSource>();
+            try
+            {
+                new SettingsManager(new SecureSettingsManager(fakeISettingSource));
+
+            }
+            catch (System.Exception e)
+            {
+                Assert.Fail(e.ToString());
+            }
         }
 
         [TestMethod]
         public void BeAbleToRetrieveAConnectionStringByName()
         {
-            var exp = "Data Source=:memory:;Version=3;New=True;Pooling=True;Max Pool Size=1;";
+            const string exp = "Data Source=:memory:;Version=3;New=True;Pooling=True;Max Pool Size=1;";
             SettingsManager.Instance.AddConnectionString("Test", exp);
             var con = SettingsManager.Instance.GetConnectionString("Test");
             Assert.AreEqual(exp, con);

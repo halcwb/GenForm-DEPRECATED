@@ -64,7 +64,7 @@ namespace Informedica.GenForm.DataAccess.Tests
         }
 
         // ToDo: Refactor this ugly test.
-        [TestMethod]
+        //[TestMethod]
         public void BeAbleToClearTheEmptyDatabase()
         {
             ConfigureLog4NetSmtp();

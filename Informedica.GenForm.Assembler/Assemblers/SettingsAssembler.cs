@@ -11,8 +11,6 @@ namespace Informedica.GenForm.Assembler.Assemblers
         {
             _registry = new Registry();
 
-            _registry.For<SettingReader>().Use(new SettingsSettingReader());
-
             return _registry;
         }
     }

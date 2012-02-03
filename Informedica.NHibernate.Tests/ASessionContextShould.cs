@@ -13,7 +13,6 @@ namespace Informedica.NHibernate.Tests
         [ClassInitialize]
         public static void Initialize(TestContext context)
         {
-            ObjectFactory.Inject(typeof(SettingReader), new SettingsSettingReader());
         }
 
         [TestMethod]

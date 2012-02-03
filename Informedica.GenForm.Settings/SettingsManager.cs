@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using Informedica.SecureSettings;
-using StructureMap;
 
 namespace Informedica.GenForm.Settings
 {
@@ -49,32 +48,22 @@ namespace Informedica.GenForm.Settings
 
         public string ReadSecureSetting(string name)
         {
-            return GetSettingReader().ReadSetting(name);
-        }
-
-        private SettingReader GetSettingReader()
-        {
-            return ObjectFactory.GetInstance<SettingReader>();
+            return _secure.GetSecureSetting(name);
         }
 
         public void WriteSecureSetting(string key, string value)
         {
-            GetSettingWriter().WriteSetting(key, value);
-        }
-
-        private ConfigurationManagerSettingWriter GetSettingWriter()
-        {
-            return new ConfigurationManagerSettingWriter();
+            _secure.WriteSecureSetting(key, value);
         }
 
         public string GetExporthPath()
         {
-            return Properties.Settings.Default.ExportPath;
+            return _secure.GetSecureSetting("exppath");
         }
 
         public string GetLogPath()
         {
-            return Properties.Settings.Default.LogPath;
+            return _secure.GetSecureSetting("logpath");
         }
 
         public string GetConnectionString(string environment)
