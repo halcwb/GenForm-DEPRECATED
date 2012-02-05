@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Configuration;
+using System.Threading;
 using Informedica.SecureSettings;
 
 namespace Informedica.GenForm.Settings
@@ -48,7 +49,7 @@ namespace Informedica.GenForm.Settings
 
         public string ReadSecureSetting(string name)
         {
-            return _secure.GetSecureSetting(name);
+            return _secure.ReadSecureSetting(name);
         }
 
         public void WriteSecureSetting(string key, string value)
@@ -58,22 +59,36 @@ namespace Informedica.GenForm.Settings
 
         public string GetExporthPath()
         {
-            return _secure.GetSecureSetting("exppath");
+            return _secure.ReadSecureSetting("exppath");
         }
 
         public string GetLogPath()
         {
-            return _secure.GetSecureSetting("logpath");
+            return _secure.ReadSecureSetting("logpath");
         }
 
-        public string GetConnectionString(string environment)
+        public ConnectionStringSettings GetConnectionString(string environment)
         {
-            return _secure.GetConnectionString(environment);
+            return new ConnectionStringSettings
+                       {
+                           ConnectionString = _secure.GetConnectionString(environment),
+                           Name = environment
+                       };
         }
 
         public void AddConnectionString(string name, string connectionString)
         {
             _secure.SetConnectionString(name, connectionString);
+        }
+
+        public void RemoveSecureSetting(string appSettingName)
+        {
+            _secure.RemoveSecureSetting(appSettingName);
+        }
+
+        public void RemoveConnectionString(string name)
+        {
+            _secure.RemoveConnectionString(name);
         }
     }
 }

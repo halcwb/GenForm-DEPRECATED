@@ -29,7 +29,7 @@ namespace Informedica.GenForm.Tests
         public void MyTestInitialize()
         {
             Context = new SessionContext();
-            SessionFactoryManager.BuildSchema(Context.CurrentSession());
+            SessionFactoryManager.BuildSchema("Test", Context.CurrentSession());
             Context.CurrentSession().Transaction.Begin();
         }
 

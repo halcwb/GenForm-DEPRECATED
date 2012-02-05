@@ -24,23 +24,16 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         }
 
         [TestMethod]
-        public void HaveAnConnectionStringForSqLite()
-        {
-            var man = GetConfigurationManager();
-            Assert.IsNotNull(man.ConnectionStrings.ConnectionStrings["Test"]);
-        }
-
-        [TestMethod]
         public void BeAbleToAddAndRemoveAConnectionString()
         {
-            var man = GetConfigurationManager();
+            var man = GetWebConfiguration();
             var testSetting = new ConnectionStringSettings(Testsetting, "this is a test connectionstring");
 
             man.ConnectionStrings.ConnectionStrings.Add(testSetting);
             man.Save();
             Assert.IsNotNull(man.ConnectionStrings.ConnectionStrings[Testsetting]);
 
-            man = GetConfigurationManager();
+            man = GetWebConfiguration();
             man.ConnectionStrings.ConnectionStrings.Remove(Testsetting);
             man.Save();
             Assert.IsNull(man.ConnectionStrings.ConnectionStrings[Testsetting]);
@@ -49,14 +42,14 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public void BeAbleToReadTheAppSettings()
         {
-            var man = GetConfigurationManager();
+            var man = GetWebConfiguration();
             Assert.IsTrue(man.AppSettings.Settings.Count > 0);
         }
 
         [TestMethod]
         public void BeAbleToGetTheInformedicaSectionGroup()
         {
-            var man = GetConfigurationManager();
+            var man = GetWebConfiguration();
 
             try
             {
@@ -68,7 +61,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             }
         }
 
-        private static Configuration GetConfigurationManager()
+        private static Configuration GetWebConfiguration()
         {
             var man = WebConfigurationManager.OpenWebConfiguration("/GenForm");
             return man;

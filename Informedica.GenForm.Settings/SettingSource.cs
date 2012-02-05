@@ -10,7 +10,8 @@ namespace Informedica.GenForm.Settings
     public class SettingSource: ISettingSource
     {
         private static readonly IList<Setting> Settings = new List<Setting>();
-        private static readonly Configuration Configuration = WebConfigurationManager.OpenWebConfiguration("/GenForm");
+        private static Configuration _configuration;
+        private const string VirtualPath = "/GenForm";
 
         #region Implementation of IEnumerable
 
@@ -28,6 +29,11 @@ namespace Informedica.GenForm.Settings
             {
                 Settings.Add(new Setting(connstr.Name, connstr.ConnectionString));
             }
+            foreach (KeyValueConfigurationElement setting in Configuration.AppSettings.Settings)
+            {
+                Settings.Add(new Setting(setting.Key, setting.Value));
+            }
+
             return Settings.GetEnumerator();
         }
 
@@ -59,22 +65,63 @@ namespace Informedica.GenForm.Settings
             {
                 Configuration.ConnectionStrings.ConnectionStrings[name].ConnectionString = connectionString;
             }
-            Configuration.Save();
+
+            SaveConfiguration();
         }
 
         public string ReadConnectionString(string name)
         {
-            return Configuration.ConnectionStrings.ConnectionStrings[name].ConnectionString;
+            return Configuration.ConnectionStrings.ConnectionStrings[name] == null ?
+                string.Empty:
+                Configuration.ConnectionStrings.ConnectionStrings[name].ConnectionString;
         }
 
-        public void WriteAppSetting(string name, string setting)
+        public void WriteAppSetting(string name, string value)
         {
-            throw new NotImplementedException();
+            if (Configuration.AppSettings.Settings[name] == null)
+            {
+                var setting  = new KeyValueConfigurationElement(name, value);
+                Configuration.AppSettings.Settings.Add(setting);
+            }
+
+            Configuration.AppSettings.Settings[name].Value = value;
+            SaveConfiguration();
+        }
+
+        private static Configuration Configuration
+        {
+            get { return _configuration ?? (_configuration = WebConfigurationManager.OpenWebConfiguration(VirtualPath)); }
+        }
+
+        private static void SaveConfiguration()
+        {
+            Configuration.Save();
+            _configuration = null;
         }
 
         public string ReadAppSetting(string name)
         {
-            throw new NotImplementedException();
+            return Configuration.AppSettings.Settings[name] == null ? 
+                String.Empty:
+                Configuration.AppSettings.Settings[name].Value;
+        }
+
+        public void Remove(string setting)
+        {
+            Configuration.AppSettings.Settings.Remove(setting);
+            SaveConfiguration();
+        }
+
+        public void Remove(Setting setting)
+        {
+            Remove(setting.Name);
+        }
+
+        public void RemoveConnectionString(string name)
+        {
+            var setting = Configuration.ConnectionStrings.ConnectionStrings[name];
+            Configuration.ConnectionStrings.ConnectionStrings.Remove(setting);
+            SaveConfiguration();
         }
 
         #endregion

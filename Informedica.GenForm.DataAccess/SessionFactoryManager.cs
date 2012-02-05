@@ -1,32 +1,36 @@
-﻿using Informedica.GenForm.DataAccess.Mappings;
-using Informedica.DataAccess;
-using Informedica.GenForm.Settings;
+﻿using Informedica.DataAccess.Configurations;
+using Informedica.GenForm.DataAccess.Mappings;
 using NHibernate;
 
 namespace Informedica.GenForm.DataAccess
 {
     public static class SessionFactoryManager
     {
-        private static Informedica.DataAccess.Databases.SessionFactoryCreator _creator;
+        private const string Test = "Test";
+
+        static SessionFactoryManager()
+        {
+            ConfigurationManager.Instance.AddInMemorySqLiteEnvironment<SubstanceMap>(Test);
+        }
 
         public static ISessionFactory GetSessionFactory()
         {
             return GetSessionFactory("Test");
         }
 
-        public static void BuildSchema(ISession session)
+        public static void BuildSchema(string environment, ISession session)
         {
-            _creator.BuildSchema(session);
+            GetEnvironmentConfiguration(environment).BuildSchema(session);
         }
 
         public static ISessionFactory GetSessionFactory(string environment)
         {
-            var connectionString = SettingsManager.Instance.GetConnectionString(environment);
-            if (_creator == null)
-            {
-                _creator = Informedica.DataAccess.Databases.SessionFactoryCreator.CreatSqLiteFactory<SubstanceMap>(connectionString);
-            }
-            return _creator.CreateSessionFactory();
+            return GetEnvironmentConfiguration(environment).GetSessionFactory();
+        }
+
+        private static IEnvironmentConfiguration GetEnvironmentConfiguration(string name)
+        {
+            return ConfigurationManager.Instance.GetConfiguration(name);
         }
     }
 }
