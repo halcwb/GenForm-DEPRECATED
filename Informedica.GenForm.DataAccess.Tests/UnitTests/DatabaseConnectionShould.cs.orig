@@ -12,8 +12,12 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
     [TestClass]
     public class DatabaseConnectionShould
     {
+<<<<<<< HEAD
+        private readonly string _validConnectionString = SettingsManager.Instance.GetConnectionString("Test");
+=======
         private readonly string _validConnectionString =
             SettingsManager.Instance.GetConnectionString("Test").ConnectionString;
+>>>>>>> WorkOnSecureSettings
         private static IDatabaseConnection _databaseConnection;
 
         /// <summary>

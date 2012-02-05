@@ -24,16 +24,33 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         }
 
         [TestMethod]
+<<<<<<< HEAD
+        public void HaveAnConnectionStringForSqLite()
+        {
+            var man = GetConfigurationManager();
+            Assert.IsNotNull(man.ConnectionStrings.ConnectionStrings["Test"]);
+        }
+
+        [TestMethod]
+        public void BeAbleToAddAndRemoveAConnectionString()
+        {
+            var man = GetConfigurationManager();
+=======
         public void BeAbleToAddAndRemoveAConnectionString()
         {
             var man = GetWebConfiguration();
+>>>>>>> WorkOnSecureSettings
             var testSetting = new ConnectionStringSettings(Testsetting, "this is a test connectionstring");
 
             man.ConnectionStrings.ConnectionStrings.Add(testSetting);
             man.Save();
             Assert.IsNotNull(man.ConnectionStrings.ConnectionStrings[Testsetting]);
 
+<<<<<<< HEAD
+            man = GetConfigurationManager();
+=======
             man = GetWebConfiguration();
+>>>>>>> WorkOnSecureSettings
             man.ConnectionStrings.ConnectionStrings.Remove(Testsetting);
             man.Save();
             Assert.IsNull(man.ConnectionStrings.ConnectionStrings[Testsetting]);
@@ -42,14 +59,22 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public void BeAbleToReadTheAppSettings()
         {
+<<<<<<< HEAD
+            var man = GetConfigurationManager();
+=======
             var man = GetWebConfiguration();
+>>>>>>> WorkOnSecureSettings
             Assert.IsTrue(man.AppSettings.Settings.Count > 0);
         }
 
         [TestMethod]
         public void BeAbleToGetTheInformedicaSectionGroup()
         {
+<<<<<<< HEAD
+            var man = GetConfigurationManager();
+=======
             var man = GetWebConfiguration();
+>>>>>>> WorkOnSecureSettings
 
             try
             {
@@ -61,7 +86,11 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             }
         }
 
+<<<<<<< HEAD
+        private static Configuration GetConfigurationManager()
+=======
         private static Configuration GetWebConfiguration()
+>>>>>>> WorkOnSecureSettings
         {
             var man = WebConfigurationManager.OpenWebConfiguration("/GenForm");
             return man;

@@ -10,8 +10,12 @@ namespace Informedica.GenForm.Settings
     public class SettingSource: ISettingSource
     {
         private static readonly IList<Setting> Settings = new List<Setting>();
+<<<<<<< HEAD
+        private static readonly Configuration Configuration = WebConfigurationManager.OpenWebConfiguration("/GenForm");
+=======
         private static Configuration _configuration;
         private const string VirtualPath = "/GenForm";
+>>>>>>> WorkOnSecureSettings
 
         #region Implementation of IEnumerable
 
@@ -29,11 +33,14 @@ namespace Informedica.GenForm.Settings
             {
                 Settings.Add(new Setting(connstr.Name, connstr.ConnectionString));
             }
+<<<<<<< HEAD
+=======
             foreach (KeyValueConfigurationElement setting in Configuration.AppSettings.Settings)
             {
                 Settings.Add(new Setting(setting.Key, setting.Value));
             }
 
+>>>>>>> WorkOnSecureSettings
             return Settings.GetEnumerator();
         }
 
@@ -65,12 +72,24 @@ namespace Informedica.GenForm.Settings
             {
                 Configuration.ConnectionStrings.ConnectionStrings[name].ConnectionString = connectionString;
             }
+<<<<<<< HEAD
+            Configuration.Save();
+=======
 
             SaveConfiguration();
+>>>>>>> WorkOnSecureSettings
         }
 
         public string ReadConnectionString(string name)
         {
+<<<<<<< HEAD
+            return Configuration.ConnectionStrings.ConnectionStrings[name].ConnectionString;
+        }
+
+        public void WriteAppSetting(string name, string setting)
+        {
+            throw new NotImplementedException();
+=======
             return Configuration.ConnectionStrings.ConnectionStrings[name] == null ?
                 string.Empty:
                 Configuration.ConnectionStrings.ConnectionStrings[name].ConnectionString;
@@ -97,10 +116,14 @@ namespace Informedica.GenForm.Settings
         {
             Configuration.Save();
             _configuration = null;
+>>>>>>> WorkOnSecureSettings
         }
 
         public string ReadAppSetting(string name)
         {
+<<<<<<< HEAD
+            throw new NotImplementedException();
+=======
             return Configuration.AppSettings.Settings[name] == null ? 
                 String.Empty:
                 Configuration.AppSettings.Settings[name].Value;
@@ -122,6 +145,7 @@ namespace Informedica.GenForm.Settings
             var setting = Configuration.ConnectionStrings.ConnectionStrings[name];
             Configuration.ConnectionStrings.ConnectionStrings.Remove(setting);
             SaveConfiguration();
+>>>>>>> WorkOnSecureSettings
         }
 
         #endregion

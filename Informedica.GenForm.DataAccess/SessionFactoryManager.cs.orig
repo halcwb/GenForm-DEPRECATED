@@ -1,36 +1,61 @@
+<<<<<<< HEAD
+﻿using Informedica.GenForm.DataAccess.Mappings;
+using Informedica.DataAccess;
+using Informedica.GenForm.Settings;
+=======
 ﻿using Informedica.DataAccess.Configurations;
 using Informedica.GenForm.DataAccess.Mappings;
+>>>>>>> WorkOnSecureSettings
 using NHibernate;
 
 namespace Informedica.GenForm.DataAccess
 {
     public static class SessionFactoryManager
     {
+<<<<<<< HEAD
+        private static Informedica.DataAccess.Databases.SessionFactoryCreator _creator;
+=======
         private const string Test = "Test";
 
         static SessionFactoryManager()
         {
             ConfigurationManager.Instance.AddInMemorySqLiteEnvironment<SubstanceMap>(Test);
         }
+>>>>>>> WorkOnSecureSettings
 
         public static ISessionFactory GetSessionFactory()
         {
             return GetSessionFactory("Test");
         }
 
+<<<<<<< HEAD
+        public static void BuildSchema(ISession session)
+        {
+            _creator.BuildSchema(session);
+=======
         public static void BuildSchema(string environment, ISession session)
         {
             GetEnvironmentConfiguration(environment).BuildSchema(session);
+>>>>>>> WorkOnSecureSettings
         }
 
         public static ISessionFactory GetSessionFactory(string environment)
         {
+<<<<<<< HEAD
+            var connectionString = SettingsManager.Instance.GetConnectionString(environment);
+            if (_creator == null)
+            {
+                _creator = Informedica.DataAccess.Databases.SessionFactoryCreator.CreatSqLiteFactory<SubstanceMap>(connectionString);
+            }
+            return _creator.CreateSessionFactory();
+=======
             return GetEnvironmentConfiguration(environment).GetSessionFactory();
         }
 
         private static IEnvironmentConfiguration GetEnvironmentConfiguration(string name)
         {
             return ConfigurationManager.Instance.GetConfiguration(name);
+>>>>>>> WorkOnSecureSettings
         }
     }
 }

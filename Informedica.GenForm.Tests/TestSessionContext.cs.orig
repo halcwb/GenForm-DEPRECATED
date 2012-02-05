@@ -29,7 +29,11 @@ namespace Informedica.GenForm.Tests
         public void MyTestInitialize()
         {
             Context = new SessionContext();
+<<<<<<< HEAD
+            SessionFactoryManager.BuildSchema(Context.CurrentSession());
+=======
             SessionFactoryManager.BuildSchema("Test", Context.CurrentSession());
+>>>>>>> WorkOnSecureSettings
             Context.CurrentSession().Transaction.Begin();
         }
 

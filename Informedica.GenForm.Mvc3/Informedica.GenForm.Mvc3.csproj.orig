@@ -1958,9 +1958,13 @@
     <Content Include="Client\Library\jasmine\lib\jasmine-1.0.2\jasmine.js" />
     <Content Include="Client\Library\jasmine\lib\jasmine-1.0.2\json2.js" />
     <Content Include="appSettings.config" />
+<<<<<<< HEAD
+    <None Include="connections.config" />
+=======
     <None Include="connections.config">
       <SubType>Designer</SubType>
     </None>
+>>>>>>> WorkOnSecureSettings
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />

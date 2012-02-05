@@ -1,4 +1,9 @@
 <connectionStrings>
+<<<<<<< HEAD
+  <add name="Test" connectionString="UrEjybAIXlth6Fh3odsYwhhpEcN17rYz+mE1dUs+fhsLEG2n98rweO72yJByfQ66BmD4/8yh1adHZ8TC/LLbwHJqpzj3JRSO6gIkoqovwVU="
+    providerName="System.Data.SQLite" />
+=======
   <add name="iCjhnFwaYyeSWXoL5FL7yw==" connectionString="MIwslAvaU0oJDYCnnjkaA58MCH0XsCxesdeCC1ENpFbgUgbs44XbzxjgOLRrtfou+M7jz2bFIw6PyKXNLXWzikIWkps6lrhYuvIffqCrotM=" />
   <add name="YUzORWR2umN7nTHu+rmRVQ==" connectionString="UrEjybAIXlth6Fh3odsYwhhpEcN17rYz+mE1dUs+fhsLEG2n98rweO72yJByfQ66BmD4/8yh1adHZ8TC/LLbwHJqpzj3JRSO6gIkoqovwVU=" />
+>>>>>>> WorkOnSecureSettings
 </connectionStrings>

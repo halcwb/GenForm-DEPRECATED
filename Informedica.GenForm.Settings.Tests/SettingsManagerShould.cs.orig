@@ -10,9 +10,12 @@ namespace Informedica.GenForm.Settings.Tests
     [TestClass]
     public class SettingsManagerShould
     {
+<<<<<<< HEAD
+=======
         private const string AppSettingValue = "Test app setting";
         private const string AppSettingName = "testSetting";
 
+>>>>>>> WorkOnSecureSettings
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
@@ -62,6 +65,11 @@ namespace Informedica.GenForm.Settings.Tests
         {
             const string exp = "Data Source=:memory:;Version=3;New=True;Pooling=True;Max Pool Size=1;";
             SettingsManager.Instance.AddConnectionString("Test", exp);
+<<<<<<< HEAD
+            var con = SettingsManager.Instance.GetConnectionString("Test");
+            Assert.AreEqual(exp, con);
+        }
+=======
             var con = SettingsManager.Instance.GetConnectionString("Test").ConnectionString;
             Assert.AreEqual(exp, con);
         }
@@ -92,5 +100,6 @@ namespace Informedica.GenForm.Settings.Tests
             SettingsManager.Instance.RemoveSecureSetting(AppSettingName);
             Assert.IsTrue(string.IsNullOrWhiteSpace(SettingsManager.Instance.ReadSecureSetting(AppSettingName)));
         }
+>>>>>>> WorkOnSecureSettings
     }
 }

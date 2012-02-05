@@ -23,13 +23,20 @@ namespace Informedica.GenForm.DataAccess.Databases
 
         public static string GetLocalConnectionString(DatabaseName databaseName)
         {
+<<<<<<< HEAD
+            return @"Data Source=hal-win7\informedica;Initial Catalog=GenFormTest;Integrated Security=True";
+=======
             return @"Data Source=hal-win7\informedica;Initial Catalog=GenFormTest;Integrated Security=True;Connect TimeOut=0.5";
+>>>>>>> WorkOnSecureSettings
         }
 
 
         public Boolean TestConnection(String connectionString)
         {
+<<<<<<< HEAD
+=======
             connectionString += ";Connect TimeOut=0.5";
+>>>>>>> WorkOnSecureSettings
             try
             {
                 using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(connectionString))
