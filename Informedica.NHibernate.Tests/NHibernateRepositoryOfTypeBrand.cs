@@ -20,7 +20,7 @@ namespace Informedica.NHibernate.Tests
     [TestClass]
     public class NHibernateRepositoryOfTypeBrand: TestSessionContext
     {
-        private static NHibernateRepository<Brand> _repository;
+        private static BrandRepository _repository;
         private Brand _brand;
 
         public NHibernateRepositoryOfTypeBrand() : base(true) {}

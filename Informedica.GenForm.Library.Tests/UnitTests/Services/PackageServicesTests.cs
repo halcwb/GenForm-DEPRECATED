@@ -74,6 +74,13 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         }
 
         [TestMethod]
+        public void ThatPackageCanBeFoundByName()
+        {
+            var package = PackageServices.WithDto(PackageTestFixtures.GetAmpulDto()).Get();
+            Assert.AreEqual(package, PackageServices.GetByName(package.Name));
+        }
+
+        [TestMethod]
         public void ThatAPackagaWithAshapeCanBeGet()
         {
             var package = GetPackageWithShape();

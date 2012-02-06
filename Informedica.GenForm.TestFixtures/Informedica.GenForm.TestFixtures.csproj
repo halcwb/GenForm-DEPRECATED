@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Informedica.EntityRepository">
+      <HintPath>..\..\Informedica.DataAccess\Informedica.DataAccess\bin\Debug\Informedica.EntityRepository.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>

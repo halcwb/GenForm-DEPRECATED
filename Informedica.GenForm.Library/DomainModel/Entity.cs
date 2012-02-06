@@ -6,21 +6,13 @@ using Informedica.GenForm.Library.Exceptions;
 
 namespace Informedica.GenForm.Library.DomainModel
 {
-    public abstract class Entity<TEnt> 
-        where TEnt : Entity<TEnt>
+    public abstract class Entity<TEnt>: EntityRepository.Entities.Entity<TEnt, Guid> where TEnt : Entity<TEnt>
     {
         public const int NameLength = 255;
-
-        public virtual Guid Id { get; protected set; }
 
         public virtual string Name { get; set; }
 
         public virtual int Version  { get; protected set; }
-
-        public virtual bool IsTransient()
-        {
-            return Id == Guid.Empty;
-        }
 
         public virtual IEnumerable<String> GetBrokenRules(TEnt entity)
         {

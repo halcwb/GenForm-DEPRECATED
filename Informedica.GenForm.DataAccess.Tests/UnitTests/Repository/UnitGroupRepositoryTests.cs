@@ -71,7 +71,6 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         }
 
 
-
         private IDisposable GetContext()
         {
             return ObjectFactory.GetInstance<SessionContext>();

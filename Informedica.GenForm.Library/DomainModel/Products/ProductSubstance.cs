@@ -117,5 +117,14 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             Validate(prodSubst);
             return prodSubst;
         }
+
+        #region Overrides of Entity<ProductSubstance,Guid>
+
+        public override bool IsIdentical(ProductSubstance entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

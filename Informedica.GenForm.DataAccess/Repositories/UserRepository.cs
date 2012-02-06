@@ -1,18 +1,22 @@
-﻿using Informedica.GenForm.Library.DomainModel.Equality;
+﻿using System;
+using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.Repositories;
 using NHibernate;
 
 namespace Informedica.GenForm.DataAccess.Repositories
 {
-    public class UserRepository : NHibernateRepository<User>
+    public class UserRepository : Informedica.DataAccess.Repositories.Repository<User, Guid>, IRepository<User>
     {
-        private static readonly UserComparer Comparer = new UserComparer(); 
-
         public UserRepository(ISessionFactory factory) : base(factory) {}
 
-        public override void Add(User item)
+        #region Implementation of IRepository<User>
+
+        public User GetByName(string name)
         {
-            Add(item, Comparer);
+            return this.SingleOrDefault(u => u.Name == name);
         }
+
+        #endregion
     }
 }

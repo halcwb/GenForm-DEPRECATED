@@ -40,6 +40,11 @@ namespace Informedica.GenForm.Library.Services.Products
             return (PackageFactory)Instance.GetFactory(dto);
         }
 
+        public static new Package GetByName(string name)
+        {
+            return Instance.Repository.GetByName(name);
+        }
+
         public static void Delete(Package package)
         {
             package.RemoveAllShapes();

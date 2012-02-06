@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Informedica.EntityRepository;
 using Informedica.GenForm.Library.DomainModel;
 using Informedica.GenForm.Library.Repositories;
 using NHibernate;
@@ -40,6 +41,11 @@ namespace Informedica.GenForm.DataAccess.Repositories
             return Transact(() => Session.QueryOver<TEnt>().Where(x => x.Name == name).SingleOrDefault());
         }
 
+        public void Remove(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual int Count
         {
             // ToDo: This causes N+1 select problem
@@ -51,6 +57,10 @@ namespace Informedica.GenForm.DataAccess.Repositories
         #region Add and Remove
 
         public abstract void Add(TEnt item);
+        void IRepository<TEnt, Guid>.Remove(TEnt entity)
+        {
+            throw new NotImplementedException();
+        }
 
         public virtual void Add(TEnt item, IEqualityComparer<TEnt> comparer)
         {

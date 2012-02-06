@@ -58,6 +58,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Informedica.DataAccess\Informedica.DataAccess\Informedica.DataAccess.csproj">
+      <Project>{A7844906-1F6F-4AD9-BA9A-D70E501CDC98}</Project>
+      <Name>Informedica.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Informedica.EntityRepository\Informedica.EntityRepository\Informedica.EntityRepository.csproj">
+      <Project>{E3780309-03FF-43DC-A134-828269F2008C}</Project>
+      <Name>Informedica.EntityRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.DataAccess\Informedica.GenForm.DataAccess.csproj">
       <Project>{9EC2E9E4-CEEF-4A78-A8DE-EB12F8C6DAE1}</Project>
       <Name>Informedica.GenForm.DataAccess</Name>

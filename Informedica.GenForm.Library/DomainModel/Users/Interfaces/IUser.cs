@@ -5,7 +5,6 @@ namespace Informedica.GenForm.Library.DomainModel.Users.Interfaces
 {
     public interface IUser: IGenFormIdentity
     {
-        Guid Id { get; }
         String UserName { get; set; }
         String Password { get; set; }
         String LastName { get; set; }

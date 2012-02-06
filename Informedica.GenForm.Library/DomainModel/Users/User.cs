@@ -83,5 +83,14 @@ namespace Informedica.GenForm.Library.DomainModel.Users
         }
 
         #endregion
+
+        #region Overrides of Entity<User,Guid>
+
+        public override bool IsIdentical(User entity)
+        {
+            return Name == entity.Name;
+        }
+
+        #endregion
     }
 }

@@ -55,6 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\ExtMvc3\Ext.Direct.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Informedica.EntityRepository, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Informedica.EntityRepository\Informedica.EntityRepository\bin\Debug\Informedica.EntityRepository.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Dependencies\ExtMvc3\Newtonsoft.Json.dll</HintPath>

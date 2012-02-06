@@ -44,6 +44,11 @@ namespace Informedica.GenForm.Library.Services.Products
             Instance.Repository.Remove(brand);
         }
 
+        public new static Brand GetByName(string name)
+        {
+            return Instance.Repository.GetByName(name);
+        }
+
         public static void ChangeBrandName(Brand brand, string name)
         {
             brand.Name = name;

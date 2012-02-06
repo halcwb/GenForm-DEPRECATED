@@ -62,7 +62,7 @@ namespace Informedica.GenForm.Library.Factories
             var key = typeof (EntityFactory<TEnt, TDto>);
             if (!_factories.ContainsKey(key)) throw new FactoryNotFoundException(key.ToString());
 
-            Type type = _factories[key];
+            var type = _factories[key];
             return (EntityFactory<TEnt, TDto>)Activator.CreateInstance(type, new object[] { dto });            
         }
 

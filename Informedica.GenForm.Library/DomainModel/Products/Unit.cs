@@ -102,5 +102,13 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         #endregion
 
+        #region Overrides of Entity<Unit,Guid>
+
+        public override bool IsIdentical(Unit entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

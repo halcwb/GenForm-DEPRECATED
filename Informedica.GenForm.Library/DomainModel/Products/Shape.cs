@@ -190,5 +190,14 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         }
 
         #endregion
+
+        #region Overrides of Entity<Shape,Guid>
+
+        public override bool IsIdentical(Shape entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

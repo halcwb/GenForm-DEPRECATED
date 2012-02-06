@@ -1,4 +1,5 @@
-﻿using Informedica.GenForm.Assembler;
+﻿using System;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess.Repositories;
 using Informedica.GenForm.Library.DomainModel.Users;
 using Informedica.GenForm.TestFixtures.Fixtures;
@@ -59,14 +60,64 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Repository
         }
 
         [TestMethod]
+        public void AnErrorIsThrownWhenTheSameUserIsAddedTwice()
+        {
+            var repos = GetRepository();
+            var user = CreateUser();
+            repos.Add(user);
+
+            try
+            {
+                repos.Add(user);
+                Assert.Fail();
+
+            }
+            catch (System.Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
+
+        [TestMethod]
+        public void AnErrorIsThrownWhenAUserIsRemovedThatHasNotBeenAdded()
+        {
+            var user = CreateUser();
+            var repos = GetRepository();
+
+            try
+            {
+                repos.Remove(user);
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
+
+        [TestMethod]
         public void ThatUserCanBeRemoved()
         {
             var repos = GetRepository();
             var count = repos.Count;
             var user = CreateUser();
+
             repos.Add(user);
+            user = repos.GetByName(user.Name);
+
             repos.Remove(user);
             Assert.AreEqual(count, repos.Count);
+        }
+
+        [TestMethod]
+        public void ThatUserCanBeRemoveFromDirectlyCreatedRepository()
+        {
+            var repos = new Informedica.DataAccess.Repositories.Repository<User, Guid>(GenFormApplication.SessionFactory);
+            var user = CreateUser();
+
+            repos.Add(user);
+            Assert.IsTrue(repos.Contains(user));
+
         }
 
         [TestMethod]

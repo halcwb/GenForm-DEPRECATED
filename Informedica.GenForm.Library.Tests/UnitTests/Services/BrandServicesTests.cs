@@ -67,6 +67,13 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         }
 
         [TestMethod]
+        public void ThatBrandCanBeFoundByName()
+        {
+            var brand = BrandServices.WithDto(BrandTestFixtures.GetDto()).Get();
+            Assert.AreEqual(brand, BrandServices.GetByName(brand.Name));
+        }
+
+        [TestMethod]
         public void ThatBrandCanBeUpdated()
         {
             var brand = BrandServices.WithDto(BrandTestFixtures.GetDto()).Get();
