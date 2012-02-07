@@ -1,3 +1,0 @@
-<p>README file for GenForm</p>
-
-<p>Content has yet to come&#8230;</p>
