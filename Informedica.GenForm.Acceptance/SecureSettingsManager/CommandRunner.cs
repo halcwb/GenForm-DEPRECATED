@@ -4,19 +4,19 @@
     {
         private static SecureSettings.CommandRunner runner = new SecureSettings.CommandRunner();
 
-        public bool RunCommandWithArgument(string option, string arg)
+        public bool RunOptionWithArguments(string option, string arguments)
         {
-            return runner.RunCommandWithArgument(option, arg);
+            return runner.RunOptionWithArguments(option, arguments);
         }
 
-        public string GetCommandResult(string arg)
+        public string GetCommandResult(string optsargs)
         {
-            return runner.GetCommandResult(arg);
+            return runner.GetCommandResult(optsargs);
         }
 
         public bool CheckCommandLine()
         {
-            return RunCommandWithArgument(string.Empty, string.Empty);
+            return RunOptionWithArguments(string.Empty, string.Empty);
         }
     }
 

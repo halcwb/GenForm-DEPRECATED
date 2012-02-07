@@ -5,6 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		GenForm2.vsmdi = GenForm2.vsmdi
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		..\..\Users\hal\Dropbox\README.md = ..\..\Users\hal\Dropbox\README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Library", "Informedica.GenForm.Library\Informedica.GenForm.Library.csproj", "{584C03D3-A148-4125-B9DB-32B8B144E101}"
@@ -45,16 +46,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Setting
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Settings.Tests", "Informedica.GenForm.Settings.Tests\Informedica.GenForm.Settings.Tests.csproj", "{5097D0D6-F5B2-4AC2-BC06-6A68F6BD4CC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.EntityRepository", "..\Informedica.EntityRepository\Informedica.EntityRepository\Informedica.EntityRepository.csproj", "{E3780309-03FF-43DC-A134-828269F2008C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.DataAccess", "..\Informedica.DataAccess\Informedica.DataAccess\Informedica.DataAccess.csproj", "{A7844906-1F6F-4AD9-BA9A-D70E501CDC98}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.SecureSettings", "..\scsm\Informedica.SecureSettings\Informedica.SecureSettings.csproj", "{B426CCA3-460C-44B8-BEF0-C2D8E7263C3E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architecture", "{55569BEA-5C4C-41FC-AED2-DBFC5557C150}"
 	ProjectSection(SolutionItems) = preProject
 		GenFormAssemblyDependencies.dgml = GenFormAssemblyDependencies.dgml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.EntityRepository", "..\EntityRepository\Informedica.EntityRepository\Informedica.EntityRepository.csproj", "{E3780309-03FF-43DC-A134-828269F2008C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.DataAccess", "..\DataAccess\Informedica.DataAccess\Informedica.DataAccess.csproj", "{A7844906-1F6F-4AD9-BA9A-D70E501CDC98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.SecureSettings", "..\SecureSettings\Informedica.SecureSettings\Informedica.SecureSettings.csproj", "{B426CCA3-460C-44B8-BEF0-C2D8E7263C3E}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

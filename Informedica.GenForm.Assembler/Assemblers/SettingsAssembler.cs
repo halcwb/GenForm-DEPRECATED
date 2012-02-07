@@ -1,4 +1,3 @@
-using Informedica.GenForm.Settings;
 using StructureMap.Configuration.DSL;
 
 namespace Informedica.GenForm.Assembler.Assemblers

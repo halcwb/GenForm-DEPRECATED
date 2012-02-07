@@ -39,9 +39,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\FitNesse\fitSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Informedica.SecureSettings">
-      <HintPath>..\..\scsm\Informedica.SecureSettings\bin\Debug\Informedica.SecureSettings.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -65,6 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GenForm\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SecureSettings\Informedica.SecureSettings\Informedica.SecureSettings.csproj">
+      <Project>{B426CCA3-460C-44B8-BEF0-C2D8E7263C3E}</Project>
+      <Name>Informedica.SecureSettings</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

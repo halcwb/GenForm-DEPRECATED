@@ -55,10 +55,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\ExtMvc3\Ext.Direct.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Informedica.EntityRepository, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Informedica.EntityRepository\Informedica.EntityRepository\bin\Debug\Informedica.EntityRepository.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Dependencies\ExtMvc3\Newtonsoft.Json.dll</HintPath>
@@ -81,6 +77,10 @@
     <Compile Include="UnitTests\WebConfigurationManagerShould.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EntityRepository\Informedica.EntityRepository\Informedica.EntityRepository.csproj">
+      <Project>{E3780309-03FF-43DC-A134-828269F2008C}</Project>
+      <Name>Informedica.EntityRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Assembler\Informedica.GenForm.Assembler.csproj">
       <Project>{DB3FE453-4FEA-43EC-BAC7-B0679A432BE2}</Project>
       <Name>Informedica.GenForm.Assembler</Name>

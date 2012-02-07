@@ -101,11 +101,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Informedica.DataAccess\Informedica.DataAccess\Informedica.DataAccess.csproj">
+    <ProjectReference Include="..\..\DataAccess\Informedica.DataAccess\Informedica.DataAccess.csproj">
       <Project>{A7844906-1F6F-4AD9-BA9A-D70E501CDC98}</Project>
       <Name>Informedica.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Informedica.EntityRepository\Informedica.EntityRepository\Informedica.EntityRepository.csproj">
+    <ProjectReference Include="..\..\EntityRepository\Informedica.EntityRepository\Informedica.EntityRepository.csproj">
       <Project>{E3780309-03FF-43DC-A134-828269F2008C}</Project>
       <Name>Informedica.EntityRepository</Name>
     </ProjectReference>
@@ -123,6 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Start\NHibernateProfilerBootstrapper.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

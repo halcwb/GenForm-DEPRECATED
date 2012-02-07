@@ -200,7 +200,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Informedica.EntityRepository\Informedica.EntityRepository\Informedica.EntityRepository.csproj">
+    <ProjectReference Include="..\..\EntityRepository\Informedica.EntityRepository\Informedica.EntityRepository.csproj">
       <Project>{E3780309-03FF-43DC-A134-828269F2008C}</Project>
       <Name>Informedica.EntityRepository</Name>
     </ProjectReference>
