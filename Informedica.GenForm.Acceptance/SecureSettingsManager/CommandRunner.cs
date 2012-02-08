@@ -16,7 +16,17 @@
 
         public bool CheckCommandLine()
         {
-            return RunOptionWithArguments(string.Empty, string.Empty);
+            return GetCommandResult(string.Empty).Contains("Options are");
+        }
+
+        public bool SetSecret(string secret)
+        {
+            var original = GetCommandResult("get.secret");
+            var result = RunOptionWithArguments("set.secret", secret);
+
+            RunOptionWithArguments("set.secret", original);
+
+            return result;
         }
     }
 

@@ -1,7 +1,4 @@
-using Informedica.GenForm.Acceptance.SecureSettingsManager;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Informedica.GenForm.Acceptance.Tests.SecureSettingsManager
+namespace Informedica.GenForm.Acceptance.SecureSettingsManager
 {
     [TestClass]
     public class CommandLineToolForSsmShould
