@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Informedica.GenForm.Settings.EnvironmentSettings">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAABAAACAAAAAgEAAAAAAEgACAARAQAAA=</HashCode>
+      <FileName>EnvironmentSettings.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_settingsManager" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Informedica.GenForm.Settings.EnvironmentSetting">
+    <Position X="0.5" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAQEAAAAAAAAAAQAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>EnvironmentSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Informedica.GenForm.Settings.SettingsManager">
+    <Position X="3" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAEAABAAjAAAAQAACAAAAoACAAACAAAQBAAAAAAAEA=</HashCode>
+      <FileName>SettingsManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_secure" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Informedica.GenForm.Settings.SettingSource">
+    <Position X="9.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAQAQBAAEAAABAAAAAAAgAAEhAEgAAAAAAA=</HashCode>
+      <FileName>SettingSource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Informedica.SecureSettings.Setting">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Informedica.SecureSettings.SecureSettingsManager">
+    <Position X="6" Y="3.5" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="Informedica.SecureSettings.ISettingSource">
+    <Position X="7.25" Y="0.5" Width="2" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

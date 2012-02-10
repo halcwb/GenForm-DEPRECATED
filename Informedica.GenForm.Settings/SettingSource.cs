@@ -27,11 +27,11 @@ namespace Informedica.GenForm.Settings
             Settings.Clear();
             foreach (ConnectionStringSettings connstr in Configuration.ConnectionStrings.ConnectionStrings)
             {
-                Settings.Add(new Setting(connstr.Name, connstr.ConnectionString));
+                Settings.Add(new Setting(connstr.Name, connstr.ConnectionString, "conn"));
             }
             foreach (KeyValueConfigurationElement setting in Configuration.AppSettings.Settings)
             {
-                Settings.Add(new Setting(setting.Key, setting.Value));
+                Settings.Add(new Setting(setting.Key, setting.Value, "app"));
             }
 
             return Settings.GetEnumerator();

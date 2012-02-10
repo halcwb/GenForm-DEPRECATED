@@ -39,16 +39,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\FitNesse\fitSharp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminUserLogin.cs" />
+    <Compile Include="FitNesse\EnvironmentScenarios.cs" />
+    <Compile Include="FitNesse\HelloFitNesse.cs" />
+    <Compile Include="FitNesse\SecureSettingsManagerCommandLineTool.cs" />
     <Compile Include="GenFormFixture.cs" />
-    <Compile Include="HelloFitNesse.cs" />
     <Compile Include="NewProductDecisions.cs" />
     <Compile Include="ProductFixture.cs" />
-    <Compile Include="SecureSettingsManager\CommandRunner.cs" />
+    <Compile Include="SecureSettingsManager\CommandLineToolForScsmShould.cs" />
     <Compile Include="SetupGenFormService.cs" />
     <Compile Include="ShapeFixture.cs" />
     <Compile Include="UserLoginDecisions.cs" />
@@ -56,17 +60,27 @@
     <Compile Include="UserLogInScenario.cs" />
     <Compile Include="Utilities\Comparer.cs" />
     <Compile Include="Utilities\Echo.cs" />
+    <Compile Include="Utilities\TryCatchTestMethod.cs" />
     <Compile Include="ValidInputForProductWithOneSubstance.cs" />
     <Compile Include="ValidPasswords.cs" />
     <Compile Include="ValidUserNames.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Environments\" />
     <Folder Include="GenForm\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SecureSettings\Informedica.SecureSettings\Informedica.SecureSettings.csproj">
       <Project>{B426CCA3-460C-44B8-BEF0-C2D8E7263C3E}</Project>
       <Name>Informedica.SecureSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Assembler\Informedica.GenForm.Assembler.csproj">
+      <Project>{DB3FE453-4FEA-43EC-BAC7-B0679A432BE2}</Project>
+      <Name>Informedica.GenForm.Assembler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Settings\Informedica.GenForm.Settings.csproj">
+      <Project>{B30C5371-DDDD-46BE-827A-72798E743B60}</Project>
+      <Name>Informedica.GenForm.Settings</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

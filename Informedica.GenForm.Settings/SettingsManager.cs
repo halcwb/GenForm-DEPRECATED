@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Threading;
 using Informedica.SecureSettings;
 
@@ -67,12 +69,12 @@ namespace Informedica.GenForm.Settings
             return _secure.ReadSecureSetting("logpath");
         }
 
-        public ConnectionStringSettings GetConnectionString(string environment)
+        public ConnectionStringSettings GetConnectionString(string name)
         {
             return new ConnectionStringSettings
                        {
-                           ConnectionString = _secure.GetConnectionString(environment),
-                           Name = environment
+                           ConnectionString = _secure.GetConnectionString(name),
+                           Name = name
                        };
         }
 
@@ -89,6 +91,13 @@ namespace Informedica.GenForm.Settings
         public void RemoveConnectionString(string name)
         {
             _secure.RemoveConnectionString(name);
+        }
+
+        public IEnumerable<ConnectionStringSettings> GetConnectionStrings()
+        {
+            return (from setting in _secure.Settings where setting.Group == "conn" 
+                    select new ConnectionStringSettings(setting.Name, setting.Value))
+                    .ToList();
         }
     }
 }

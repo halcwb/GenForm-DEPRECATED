@@ -1,9 +1,8 @@
 using System;
-using fit;
 
-namespace Informedica.GenForm.Acceptance
+namespace Informedica.GenForm.Acceptance.FitNesse
 {
-    public class HelloFitNesse : ColumnFixture
+    public class HelloFitNesse
     {
         public String TestFitNesse()
         {
