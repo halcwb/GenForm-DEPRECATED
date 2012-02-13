@@ -25,16 +25,26 @@ namespace Informedica.GenForm.Settings
         public IEnumerator<Setting> GetEnumerator()
         {
             Settings.Clear();
+            RefreshSettings();
+
+            return Settings.GetEnumerator();
+        }
+
+        private void RefreshSettings()
+        {
             foreach (ConnectionStringSettings connstr in Configuration.ConnectionStrings.ConnectionStrings)
             {
-                Settings.Add(new Setting(connstr.Name, connstr.ConnectionString, "conn"));
+                Settings.Add(new Setting(connstr.Name, connstr.ConnectionString, "conn", SettingIsEncrypted(connstr.Name)));
             }
             foreach (KeyValueConfigurationElement setting in Configuration.AppSettings.Settings)
             {
-                Settings.Add(new Setting(setting.Key, setting.Value, "app"));
+                Settings.Add(new Setting(setting.Key, setting.Value, "app", false));
             }
+        }
 
-            return Settings.GetEnumerator();
+        private static bool SettingIsEncrypted(string name)
+        {
+            return name.StartsWith("[Secure]");
         }
 
         /// <summary>
@@ -120,6 +130,8 @@ namespace Informedica.GenForm.Settings
         public void RemoveConnectionString(string name)
         {
             var setting = Configuration.ConnectionStrings.ConnectionStrings[name];
+            if (setting == null) setting = Configuration.ConnectionStrings.ConnectionStrings["[Secure]" + name];
+
             Configuration.ConnectionStrings.ConnectionStrings.Remove(setting);
             SaveConfiguration();
         }

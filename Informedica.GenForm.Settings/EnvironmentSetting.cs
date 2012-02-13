@@ -3,7 +3,7 @@ namespace Informedica.GenForm.Settings
     public class EnvironmentSetting
     {
 
-        public EnvironmentSetting(string machineName, string provider, string name, string connectionString)
+        public EnvironmentSetting(string machineName, string name, string provider, string connectionString)
         {
             MachineName = machineName;
             Provider = provider;

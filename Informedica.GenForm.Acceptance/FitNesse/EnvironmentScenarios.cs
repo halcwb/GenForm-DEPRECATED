@@ -17,9 +17,13 @@ namespace Informedica.GenForm.Acceptance.FitNesse
                 Environment.MachineName: string.Empty;
         }
 
-        public bool EnvironmentNameShouldBe(string name)
+        public bool SettingNameShouldBe(string name)
         {
-            return TryCatch(Should.HaveEnvironmentNameConsistingOfMachineNameAndProviderName);
+            name = name.Replace("MyMachine", Environment.MachineName);
+            var env = GenFormApplication.Environments.Single(e => e.SettingName == name);
+
+            GenFormApplication.Environments.RemoveEnvironment(env);
+            return env != null;
         }
 
         public bool EnvironmentConnectionStringCanBeSet(string connString)
@@ -40,7 +44,7 @@ namespace Informedica.GenForm.Acceptance.FitNesse
 
         public bool RegisterEnvironmentWithNameAndProviderWithConnectionString(string name, string provider, string connectionString)
         {
-            if (!GenFormApplication.GetRegisterdProviders().Any(p => p.ProviderName == provider)) return false;
+            if (GenFormApplication.GetRegisterdProviders().All(p => p.ProviderName != provider)) return false;
 
             var env = new EnvironmentSetting(Environment.MachineName, name, provider, connectionString);
             GenFormApplication.Environments.AddEnvironment(env);

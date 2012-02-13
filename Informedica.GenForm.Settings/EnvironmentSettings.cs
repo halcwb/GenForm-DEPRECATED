@@ -38,6 +38,8 @@ namespace Informedica.GenForm.Settings
             IList<EnvironmentSetting> envs = new List<EnvironmentSetting>();
             foreach (var setting in conns)
             {
+                if (setting.Name.Split('.').GetUpperBound(0) < 2) continue;
+             
                 var mach = GetMachineNameFromConnectionString(setting);
                 var name = GetNameFromConnectionString(setting);
                 var prov = GetProviderFromConnectionString(setting);
