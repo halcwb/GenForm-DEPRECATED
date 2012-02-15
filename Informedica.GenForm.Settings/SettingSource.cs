@@ -30,7 +30,7 @@ namespace Informedica.GenForm.Settings
             return Settings.GetEnumerator();
         }
 
-        private void RefreshSettings()
+        private static void RefreshSettings()
         {
             foreach (ConnectionStringSettings connstr in Configuration.ConnectionStrings.ConnectionStrings)
             {
@@ -44,7 +44,7 @@ namespace Informedica.GenForm.Settings
 
         private static bool SettingIsEncrypted(string name)
         {
-            return name.StartsWith("[Secure]");
+            return name.StartsWith(SecureSettingsManager.SecureMarker);
         }
 
         /// <summary>
@@ -129,8 +129,8 @@ namespace Informedica.GenForm.Settings
 
         public void RemoveConnectionString(string name)
         {
-            var setting = Configuration.ConnectionStrings.ConnectionStrings[name];
-            if (setting == null) setting = Configuration.ConnectionStrings.ConnectionStrings["[Secure]" + name];
+            var setting = Configuration.ConnectionStrings.ConnectionStrings[name] ??
+                          Configuration.ConnectionStrings.ConnectionStrings[SecureSettingsManager.SecureMarker + name];
 
             Configuration.ConnectionStrings.ConnectionStrings.Remove(setting);
             SaveConfiguration();

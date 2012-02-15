@@ -1,39 +1,51 @@
 ﻿using System;
 using System.Linq;
-using Informedica.GenForm.Acceptance.Utilities;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Settings;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Acceptance.FitNesse
 {
-    public class EnvironmentScenarios: TryCatchTestMethod
+    public class EnvironmentScenarios
     {
-        public static ANewEnvironmentSettingShould Should = new ANewEnvironmentSettingShould();
 
         public string GetMachineName()
         {
-            return TryCatch(Should.HaveAMachineName) ? 
-                Environment.MachineName: string.Empty;
+            return Environment.MachineName;
+        }
+
+        public int TheNumberOfEnvironments()
+        {
+            return new EnvironmentServices().GetEnvironments().Count();
+        }
+
+        public string GetListOfEnvironments(int skip)
+        {
+            return string.Join(", ", GenFormApplication.Environments.Skip(skip).Select(e => e.Name).ToArray());
         }
 
         public bool SettingNameShouldBe(string name)
         {
-            name = name.Replace("MyMachine", Environment.MachineName);
+            name = name.Replace("MyMachine", Environment.MachineName); 
             var env = GenFormApplication.Environments.Single(e => e.SettingName == name);
 
             GenFormApplication.Environments.RemoveEnvironment(env);
             return env != null;
         }
 
+        public bool EnvironmentNameShouldBe(string name)
+        {
+            var envs = new EnvironmentServices().GetEnvironments();
+            return envs.Any(e => e.Name == name);
+        }
+
         public bool EnvironmentConnectionStringCanBeSet(string connString)
         {
-            return TryCatch(Should.HaveAConnectionString);
+            return false;
         }
 
         public bool AddEnvironmentToEnvironmentManager()
         {
-            return TryCatch(Should.BeAddedToEnvironmnentManager);
+            return false;
         }
 
         public bool CurrentMachineHasProvider(string provider)
@@ -42,72 +54,59 @@ namespace Informedica.GenForm.Acceptance.FitNesse
             return providers.Any(p => p.ProviderName == provider);
         }
 
-        public bool RegisterEnvironmentWithNameAndProviderWithConnectionString(string name, string provider, string connectionString)
+        public string RegisterEnvironmentWithNameAndProviderWithConnectionString(string name, string provider, string connectionString)
         {
-            if (GenFormApplication.GetRegisterdProviders().All(p => p.ProviderName != provider)) return false;
+            if (GenFormApplication.GetRegisterdProviders().All(p => p.ProviderName != provider)) return string.Empty;
 
             var env = new EnvironmentSetting(Environment.MachineName, name, provider, connectionString);
             GenFormApplication.Environments.AddEnvironment(env);
 
-            return true;
-        }
-    }
-
-    [TestClass]
-    public class ANewEnvironmentSettingShould
-    {
-        private static string _connectionString;
-        private static string _name;
-        private static string _provider;
-        private static string _machineName;
-
-        [TestMethod]
-        public void HaveAMachineName()
-        {
-            var mach = Environment.MachineName;
-            var env = CreateEnvironmentSetting();
-            Assert.AreEqual(mach, env.MachineName);
+            return env.SettingName;
         }
 
-        [TestMethod]
-        public void HaveEnvironmentNameConsistingOfMachineNameAndProviderName()
+        public string ProviderForShouldBe(string setname)
         {
-            var env = CreateEnvironmentSetting();
-            
-            Assert.AreEqual(env.MachineName + "." + env.Name + "." + env.Provider, env.SettingName);
+            var env = GetEnvironment(setname);
+
+            return env == null ? string.Empty : env.Provider;
         }
 
-        private static EnvironmentSetting CreateEnvironmentSetting()
+        private static EnvironmentSetting GetEnvironment(string settingName)
         {
-            _machineName = Environment.MachineName;
-            _provider = "SqLite";
-            _name = "Test";
-            _connectionString = "Data Source=:memory:;Version=3;New=True;Pooling=True;Max Pool Size=1;";
-
-            var env = new EnvironmentSetting(_machineName, _provider, _name, _connectionString);
-
+            var serv = new EnvironmentServices();
+            var env = serv.GetEnvironments().Single(e => e.SettingName == settingName);
             return env;
         }
 
-        [TestMethod]
-        public void HaveAConnectionString()
+        public string MachineForShouldBe(string settingName)
         {
-            var env = CreateEnvironmentSetting();
+            var env = GetEnvironment(settingName);
 
-            Assert.AreEqual(_connectionString, env.ConnectionString);
+            return env == null ? string.Empty : env.MachineName.Replace(Environment.MachineName, "MyMachine");
         }
 
-        public void BeAddedToEnvironmnentManager()
+        public string EnvironmentSettingForShouldBe(string settingName)
         {
-            var env = CreateEnvironmentSetting();
-            var man = GetEnvironmentManager();
+            var env = GetEnvironment(settingName);
 
-            Assert.IsTrue(man.Contains(env));
+            return env == null ? string.Empty : env.SettingName.Replace(env.MachineName, "MyMachine");
         }
 
-        private static EnvironmentSettings GetEnvironmentManager()
+        public string CreateEnvironmentSettingWithConnectionString(string settingName, string connectionString)
         {
-            return new EnvironmentSettings(SettingsManager.Instance);
+            var a = settingName.Split('.');
+            var setting = new EnvironmentSetting(a[0], a[1], a[2], connectionString);
+
+            return setting.SettingName;
+        }
+    }
+
+    public class EnvironmentServices
+    {
+        public EnvironmentSettings GetEnvironments()
+        {
+            return GenFormApplication.Environments;
+
         }
     }
 }

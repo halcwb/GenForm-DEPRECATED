@@ -52,7 +52,6 @@
     <Compile Include="GenFormFixture.cs" />
     <Compile Include="NewProductDecisions.cs" />
     <Compile Include="ProductFixture.cs" />
-    <Compile Include="SecureSettingsManager\CommandLineToolForScsmShould.cs" />
     <Compile Include="SetupGenFormService.cs" />
     <Compile Include="ShapeFixture.cs" />
     <Compile Include="UserLoginDecisions.cs" />
@@ -60,7 +59,7 @@
     <Compile Include="UserLogInScenario.cs" />
     <Compile Include="Utilities\Comparer.cs" />
     <Compile Include="Utilities\Echo.cs" />
-    <Compile Include="Utilities\TryCatchTestMethod.cs" />
+    <Compile Include="Utilities\ListMethods.cs" />
     <Compile Include="ValidInputForProductWithOneSubstance.cs" />
     <Compile Include="ValidPasswords.cs" />
     <Compile Include="ValidUserNames.cs" />
@@ -68,6 +67,7 @@
   <ItemGroup>
     <Folder Include="Environments\" />
     <Folder Include="GenForm\" />
+    <Folder Include="SecureSettingsManager\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SecureSettings\Informedica.SecureSettings\Informedica.SecureSettings.csproj">

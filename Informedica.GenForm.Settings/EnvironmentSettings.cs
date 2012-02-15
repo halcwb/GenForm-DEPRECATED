@@ -44,7 +44,7 @@ namespace Informedica.GenForm.Settings
                 var name = GetNameFromConnectionString(setting);
                 var prov = GetProviderFromConnectionString(setting);
 
-                envs.Add(new EnvironmentSetting(mach, prov, name, setting.ConnectionString));
+                envs.Add(new EnvironmentSetting(mach, name, prov, setting.ConnectionString));
             }
 
             return envs.GetEnumerator();

@@ -45,13 +45,23 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ANewEnvironmentSettingShould.cs" />
+    <Compile Include="CommandLineToolForScsmShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EnvironmentScenariosTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SecureSettings\Informedica.SecureSettings\Informedica.SecureSettings.csproj">
+      <Project>{B426CCA3-460C-44B8-BEF0-C2D8E7263C3E}</Project>
+      <Name>Informedica.SecureSettings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Acceptance\Informedica.GenForm.Acceptance.csproj">
       <Project>{89E1888D-7CFF-404A-B76A-1EF33FD97DE7}</Project>
       <Name>Informedica.GenForm.Acceptance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Settings\Informedica.GenForm.Settings.csproj">
+      <Project>{B30C5371-DDDD-46BE-827A-72798E743B60}</Project>
+      <Name>Informedica.GenForm.Settings</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

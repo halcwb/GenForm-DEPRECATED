@@ -2,28 +2,28 @@ using System;
 using Informedica.SecureSettings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Informedica.GenForm.Acceptance.SecureSettingsManager
+namespace Informedica.GenForm.Acceptance.Tests
 {
     [TestClass]
     public class CommandLineToolForScsmShould
     {
         private const string TestSecret = "\"This is a test secret\"";
-        private static CommandRunner _runner = new CommandRunner();
+        private static readonly CommandRunner Runner = new CommandRunner();
 
         [TestMethod]
         public void BeAbleToReadASecureKey()
         {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(_runner.GetCommandResult("get.secret")));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(Runner.GetCommandResult("get.secret")));
         }
 
         [TestMethod]
         public void BeAbleToSetASecureKey()
         {
-            var secret = GetSecret(_runner);
+            var secret = GetSecret(Runner);
 
-            Assert.IsTrue(_runner.RunOptionWithArguments("set.secret", TestSecret));
+            Assert.IsTrue(Runner.RunOptionWithArguments("set.secret", TestSecret));
 
-            _runner.RunOptionWithArguments("set.secret", secret);
+            Runner.RunOptionWithArguments("set.secret", secret);
         }
 
         private static string GetSecret(CommandRunner runner)
@@ -36,9 +36,9 @@ namespace Informedica.GenForm.Acceptance.SecureSettingsManager
         [TestMethod]
         public void ReturnTrueWhenSecretIsSecret()
         {
-            var secret = GetSecret(_runner);
+            var secret = GetSecret(Runner);
 
-            Assert.IsTrue(_runner.RunOptionWithArguments("has.secret", secret));
+            Assert.IsTrue(Runner.RunOptionWithArguments("has.secret", secret));
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace Informedica.GenForm.Acceptance.SecureSettingsManager
         [TestMethod]
         public void ReturnOptionList()
         {
-            var result = _runner.GetCommandResult(string.Empty);
+            var result = Runner.GetCommandResult(string.Empty);
             Assert.IsTrue(result.Contains("Options"));
         }
     }

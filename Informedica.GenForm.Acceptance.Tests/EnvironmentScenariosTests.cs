@@ -19,8 +19,9 @@ namespace Informedica.GenForm.Acceptance.Tests
 
         private static bool RunRegisterEnvironmentScenario(EnvironmentScenarios scen)
         {
-            return scen.RegisterEnvironmentWithNameAndProviderWithConnectionString(Testing, "SqLite",
+            var setName = scen.RegisterEnvironmentWithNameAndProviderWithConnectionString(Testing, "SqLite",
                                                                                    "This is a test connection string");
+            return !string.IsNullOrWhiteSpace(setName);
         }
 
         [TestMethod]
@@ -31,6 +32,15 @@ namespace Informedica.GenForm.Acceptance.Tests
 
             var expected = "MyMachine." + Testing + ".SqLite";
             Assert.IsTrue(scen.SettingNameShouldBe(expected));
+        }
+
+        [TestMethod]
+        public void WhenEnvironmentWithNameTestingIsAddedNameShouldBeTesting()
+        {
+            var scen = new EnvironmentScenarios();
+            RunRegisterEnvironmentScenario(scen);
+
+            Assert.IsTrue(scen.EnvironmentNameShouldBe(Testing));
         }
     }
 }

@@ -1,35 +1,31 @@
-﻿using Informedica.GenForm.Acceptance.SecureSettingsManager;
-using Informedica.GenForm.Acceptance.Utilities;
-
-namespace Informedica.GenForm.Acceptance.FitNesse
+﻿namespace Informedica.GenForm.Acceptance.FitNesse
 {
-    public class SecureSettingsManagerCommandLineTool: TryCatchTestMethod
+    public class SecureSettingsManagerCommandLineTool
     {
-        public static CommandLineToolForScsmShould Should = new CommandLineToolForScsmShould();
 
         public bool CheckCommandLine()
         {
-            return TryCatch((Should.BeAbleToRun));
+            return false;
         }
 
         public bool CanEnterScsm()
         {
-            return TryCatch(Should.BeAbleToRun);
+            return false;
         }
 
         public bool ReturnsOptionList()
         {
-            return TryCatch(Should.ReturnOptionList);
+            return false;
         }
 
         public bool WhenUserEntersSecretKey(string key)
         {
-            return TryCatch(Should.BeAbleToSetASecureKey);
+            return false;
         }
 
         public bool ThenHasSecretKeyReturnsTrue(string key)
         {
-            return TryCatch(Should.ReturnTrueWhenSecretIsSecret);
+            return false;
         }
 
     }
