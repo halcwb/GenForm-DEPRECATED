@@ -99,6 +99,20 @@ namespace Informedica.GenForm.Acceptance.FitNesse
 
             return setting.SettingName;
         }
+
+        public string CanCreateEnvironment()
+        {
+            try
+            {
+                GenFormApplication.TestSessionFactory.OpenSession();
+                return string.Empty;
+
+            }
+            catch ( Exception e)
+            {
+                return e.ToString();
+            } 
+        }
     }
 
     public class EnvironmentServices

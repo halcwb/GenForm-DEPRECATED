@@ -1,3 +1,4 @@
+using Informedica.DataAccess.Configurations;
 using Informedica.DataAccess.Databases;
 using StructureMap.Configuration.DSL;
 
