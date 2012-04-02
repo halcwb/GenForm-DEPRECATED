@@ -1,5 +1,4 @@
-﻿using System;
-using Informedica.GenForm.Acceptance.FitNesse;
+﻿using Informedica.GenForm.Acceptance.FitNesse;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Acceptance.Tests

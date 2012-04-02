@@ -44,6 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.79.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=AMD64">
       <HintPath>..\packages\System.Data.SQLite.x64.1.0.79.0\lib\net40\System.Data.SQLite.dll</HintPath>
     </Reference>
@@ -84,6 +85,14 @@
     <ProjectReference Include="..\Informedica.GenForm.Assembler\Informedica.GenForm.Assembler.csproj">
       <Project>{DB3FE453-4FEA-43EC-BAC7-B0679A432BE2}</Project>
       <Name>Informedica.GenForm.Assembler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
+      <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
+      <Name>Informedica.GenForm.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.Services.csproj">
+      <Project>{7C647ECA-EB02-4779-A829-A73122341338}</Project>
+      <Name>Informedica.GenForm.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Settings\Informedica.GenForm.Settings.csproj">
       <Project>{B30C5371-DDDD-46BE-827A-72798E743B60}</Project>

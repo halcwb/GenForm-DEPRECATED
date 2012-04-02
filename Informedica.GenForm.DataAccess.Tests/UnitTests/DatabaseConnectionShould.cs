@@ -3,6 +3,7 @@ using Informedica.GenForm.Library.DomainModel.Databases;
 using Informedica.GenForm.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
+using Environment = Informedica.GenForm.DataAccess.Databases.Environment;
 
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests
 {

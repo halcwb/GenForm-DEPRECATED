@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Informedica.GenForm.Library.DomainModel.Databases;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
-using Informedica.GenForm.Library.Services.Databases;
+using Informedica.GenForm.Services.Databases;
 using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers

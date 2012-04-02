@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Informedica.GenForm.Library.DomainModel;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.Factories;

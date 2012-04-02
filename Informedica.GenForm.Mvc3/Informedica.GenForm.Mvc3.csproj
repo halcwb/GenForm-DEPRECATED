@@ -2173,6 +2173,10 @@
       <Project>{63800128-7BE0-4B57-A789-27CB9E5EED3B}</Project>
       <Name>Informedica.GenForm.Presentation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.Services.csproj">
+      <Project>{7C647ECA-EB02-4779-A829-A73122341338}</Project>
+      <Name>Informedica.GenForm.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.TestFixtures\Informedica.GenForm.TestFixtures.csproj">
       <Project>{F772CA62-5400-45BF-B586-AACF5F20D6BC}</Project>
       <Name>Informedica.GenForm.TestFixtures</Name>

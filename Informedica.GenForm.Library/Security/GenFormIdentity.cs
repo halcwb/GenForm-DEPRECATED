@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Security.Principal;
-using Informedica.GenForm.Library.Services.Users;
+using Informedica.GenForm.Library.DomainModel.Users;
+using Informedica.GenForm.Library.Factories;
+using Informedica.GenForm.Library.Repositories;
 
 namespace Informedica.GenForm.Library.Security
 {
@@ -19,9 +21,14 @@ namespace Informedica.GenForm.Library.Security
         {
             if (name == null) throw new ArgumentNullException("name");
 
-            var user = UserServices.GetUserByName(name);
+            var user = GetUserRepository().GetByName(name);
             if (user == null || String.IsNullOrWhiteSpace(password) || user.Password != password) return new AnonymousIdentity();
             return new GenFormIdentity(name);
+        }
+
+        private static IRepository<User> GetUserRepository()
+        {
+            return RepositoryFactory.Create<User>();
         }
 
         internal static IGenFormIdentity GetIdentity(ILoginCriteria criteria)

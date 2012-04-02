@@ -15,7 +15,7 @@ namespace Informedica.GenForm.Acceptance.Tests
         [TestMethod]
         public void HaveAMachineName()
         {
-            var mach = Environment.MachineName;
+            var mach = System.Environment.MachineName;
             var env = CreateEnvironmentSetting();
             Assert.AreEqual(mach, env.MachineName);
         }
@@ -30,7 +30,7 @@ namespace Informedica.GenForm.Acceptance.Tests
 
         private static EnvironmentSetting CreateEnvironmentSetting()
         {
-            _machineName = Environment.MachineName;
+            _machineName = System.Environment.MachineName;
             _provider = "SqLite";
             _name = "Test";
             _connectionString = "Data Source=:memory:;Version=3;New=True;Pooling=True;Max Pool Size=1;";

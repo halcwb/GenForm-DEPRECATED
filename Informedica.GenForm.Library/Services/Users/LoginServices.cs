@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Informedica.GenForm.Library.Security;
 
 namespace Informedica.GenForm.Library.Services.Users
