@@ -79,7 +79,7 @@ namespace Informedica.GenForm.Settings
 
         #endregion
 
-        public void AddEnvironment(EnvironmentSetting env)
+        public void AddSetting(EnvironmentSetting env)
         {
             _settingsManager.AddConnectionString(GetEnvironmentName(env), env.ConnectionString);
         }

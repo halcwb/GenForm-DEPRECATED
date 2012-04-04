@@ -7,6 +7,7 @@ using Informedica.GenForm.DataAccess;
 using Informedica.GenForm.Settings;
 using NHibernate;
 using StructureMap;
+using Environment = Informedica.GenForm.Settings.Environment;
 
 namespace Informedica.GenForm.Assembler
 {
@@ -16,7 +17,7 @@ namespace Informedica.GenForm.Assembler
         private static readonly Object LockThis = new object();
         
         private static readonly IDictionary<string, ISessionFactory> Factories = new ConcurrentDictionary<string, ISessionFactory>();
-        private static EnvironmentSettings _environments;
+        private static Environments _environments;
 
         private GenFormApplication() {}
 
@@ -54,9 +55,9 @@ namespace Informedica.GenForm.Assembler
             } 
         }
 
-        public static EnvironmentSettings Environments
+        public static Environments Environments
         {
-            get { return _environments ?? (_environments = new EnvironmentSettings(SettingsManager.Instance)); }
+            get { return _environments ?? (_environments = new Environments(new List<Environment>())); }
         }
 
         public static void Initialize()
@@ -85,26 +86,5 @@ namespace Informedica.GenForm.Assembler
             return ProviderCollector.GetRegisteredProviders();
         }
 
-    }
-
-    public static class ProviderCollector
-    {
-        public static IEnumerable<RegisteredProvider> GetRegisteredProviders()
-        {
-            return new List<RegisteredProvider>
-                       {
-                           new RegisteredProvider("SqLite")
-                       };
-        }
-    }
-
-    public class RegisteredProvider
-    {
-        public RegisteredProvider(string providerName)
-        {
-            ProviderName = providerName;
-        }
-
-        public string ProviderName { get; private set; }
     }
 }

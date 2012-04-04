@@ -63,6 +63,8 @@
     <Compile Include="Contexts\SessionContext.cs" />
     <Compile Include="GenFormApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderCollector.cs" />
+    <Compile Include="RegisteredProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DataAccess\Informedica.DataAccess\Informedica.DataAccess.csproj">
@@ -91,6 +93,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Architecture\Application.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

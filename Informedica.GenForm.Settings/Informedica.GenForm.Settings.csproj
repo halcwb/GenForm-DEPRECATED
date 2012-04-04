@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Environment.cs" />
+    <Compile Include="Environments.cs" />
     <Compile Include="EnvironmentSettings.cs" />
     <Compile Include="EnvironmentSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -14,6 +14,17 @@ namespace Informedica.GenForm.Acceptance.FitNesse
         private Environment _environment;
         private IEnumerable<Environment> _environments;
 
+
+        public EnvironmentScenarios()
+        {
+            Init();
+        }
+
+        private void Init()
+        {
+            _environments = new List<Environment>();
+        }
+
         public string GetTheEnvironmentMachineName()
         {
             return _environment.MachineName;
@@ -94,7 +105,7 @@ namespace Informedica.GenForm.Acceptance.FitNesse
         public bool SettingNameShouldBe(string name)
         {
             name = name.Replace("MyMachine", System.Environment.MachineName);
-            var env = GenFormApplication.Environments.Single(e => e.SettingName == name);
+            var env = GenFormApplication.Environments.Single(e => e.Settings.Any(s => s.SettingName == name));
 
             GenFormApplication.Environments.RemoveEnvironment(env);
             return env != null;
@@ -126,10 +137,12 @@ namespace Informedica.GenForm.Acceptance.FitNesse
         {
             if (GenFormApplication.GetRegisterdProviders().All(p => p.ProviderName != provider)) return string.Empty;
 
-            var env = new EnvironmentSetting(System.Environment.MachineName, name, provider, connectionString);
-            GenFormApplication.Environments.AddEnvironment(env);
+            var setting = new EnvironmentSetting(System.Environment.MachineName, name, provider, connectionString);
 
-            return env.SettingName;
+            GenFormApplication.Environments.AddEnvironment(new Environment(name));
+            GenFormApplication.Environments.Single(e => e.Name == name).Settings.AddSetting(setting);
+
+            return setting.SettingName;
         }
 
         public string ProviderForShouldBe(string setname)

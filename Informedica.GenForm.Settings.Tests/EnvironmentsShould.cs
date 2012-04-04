@@ -45,7 +45,7 @@ namespace Informedica.GenForm.Settings.Tests
 
             try
             {
-                envs.AddEnvironment(env);
+                envs.AddSetting(env);
 
             }
             catch (System.Exception e)
@@ -72,7 +72,7 @@ namespace Informedica.GenForm.Settings.Tests
             var envs = GetEnvironments();
             var env = GetFakeEnvironmentSetting();
 
-            envs.AddEnvironment(env);
+            envs.AddSetting(env);
 
             try
             {
@@ -92,7 +92,7 @@ namespace Informedica.GenForm.Settings.Tests
             var source = new TestSettingSource();
             var envs = new EnvironmentSettings(new SettingsManager(new SecureSettingsManager(source)));
             var env = new EnvironmentSetting("test", "test", "test", "test");
-            envs.AddEnvironment(env);
+            envs.AddSetting(env);
 
             Assert.IsTrue(envs.Any(e => e.Name == env.Name));
         }
@@ -104,7 +104,7 @@ namespace Informedica.GenForm.Settings.Tests
             var source = new TestSettingSource();
             var envs = new EnvironmentSettings(new SettingsManager(new SecureSettingsManager(source)));
             var env = new EnvironmentSetting("test", "test", "test", "test");
-            envs.AddEnvironment(env);
+            envs.AddSetting(env);
             envs.RemoveEnvironment(env);
 
             Assert.IsFalse(envs.Any(e => e.Name == env.Name));
