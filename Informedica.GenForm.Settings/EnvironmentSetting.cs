@@ -22,6 +22,6 @@ namespace Informedica.GenForm.Settings
             get { return MachineName + "." + Name + "." + Provider; }
         }
 
-        public string ConnectionString  { get; private set; }
+        public string ConnectionString  { get; set; }
     }
 }

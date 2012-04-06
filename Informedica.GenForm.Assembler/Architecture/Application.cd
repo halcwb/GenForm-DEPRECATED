@@ -13,11 +13,6 @@
       <Property Name="Environments" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Informedica.GenForm.Settings.EnvironmentSettings">
-    <Position X="7.5" Y="2.75" Width="2.25" />
-    <TypeIdentifier />
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="Informedica.GenForm.Settings.EnvironmentSetting">
     <Position X="7.5" Y="5" Width="2.25" />
     <TypeIdentifier />
@@ -37,9 +32,6 @@
   <Class Name="Informedica.GenForm.Settings.Environment">
     <Position X="4" Y="2.75" Width="2.25" />
     <TypeIdentifier />
-    <ShowAsAssociation>
-      <Property Name="Settings" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="Informedica.GenForm.Settings.Environments">
     <Position X="4" Y="0.75" Width="1.75" />
@@ -59,6 +51,11 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
       <FileName>RegisteredProvider.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="Informedica.GenForm.Settings.EnvironmentSettings">
+    <Position X="7.5" Y="2.75" Width="2.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
