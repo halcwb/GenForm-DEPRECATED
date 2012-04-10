@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Informedica.GenForm.Assembler;
@@ -13,7 +12,6 @@ namespace Informedica.GenForm.Acceptance.FitNesse
     {
         private Environment _environment;
         private IEnumerable<Environment> _environments;
-
 
         public EnvironmentScenarios()
         {
@@ -32,14 +30,17 @@ namespace Informedica.GenForm.Acceptance.FitNesse
 
         public bool CanAddNewEnvironmentForMachine(string envName, string machine)
         {
+            if (machine == "local machine name") return CanAddNewEnvironment(envName);
+
             _environment = EnvironmentServices.AddNewEnvironment(envName, machine);
+            _environments = EnvironmentServices.GetEnvironments(machine);
             return _environment != null;
         }
 
         public bool CanAddNewEnvironment(string name)
         {
             _environment = EnvironmentServices.AddNewEnvironment(name);
-
+            _environments = EnvironmentServices.GetEnvironments(System.Environment.MachineName);
             return _environment != null;
         }
 
@@ -76,7 +77,7 @@ namespace Informedica.GenForm.Acceptance.FitNesse
             return _environments.Count();
         }
 
-        public bool GetEnvironmentsForMachine(string name)
+        public bool SetEnvironmentsForMachine(string name)
         {
             _environments = EnvironmentServices.GetEnvironments(name);
             return _environments != null;
@@ -185,18 +186,5 @@ namespace Informedica.GenForm.Acceptance.FitNesse
             return setting.SettingName;
         }
 
-        public string CanAddNewEnvironment()
-        {
-            try
-            {
-                GenFormApplication.TestSessionFactory.OpenSession();
-                return string.Empty;
-
-            }
-            catch (Exception e)
-            {
-                return e.ToString();
-            }
-        }
     }
 }
