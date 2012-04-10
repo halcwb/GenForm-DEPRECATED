@@ -3,7 +3,7 @@
   <Class Name="Informedica.GenForm.Settings.EnvironmentSettings">
     <Position X="0.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAABAAACAAAAAgEAAAAAAEgACAARAQAAA=</HashCode>
+      <HashCode>AAAAAAAAAACAABAAACAAAAAgEAAgAAAEgACAAQAQAAA=</HashCode>
       <FileName>EnvironmentSettings.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -31,17 +31,17 @@
   <Class Name="Informedica.GenForm.Settings.SettingSource">
     <Position X="9.5" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAAQAQBAAEAAABAAAAAAAgAAEhAEgAAAAAAA=</HashCode>
+      <HashCode>IAAAAAAAAAQAQBAAEAAABAAAAAAAgAAEhAEhAAEAAAA=</HashCode>
       <FileName>SettingSource.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Informedica.SecureSettings.Setting">
-    <Position X="5.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier />
-  </Class>
   <Class Name="Informedica.SecureSettings.SecureSettingsManager">
     <Position X="6" Y="3.5" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Informedica.SecureSettings.Setting">
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Interface Name="Informedica.SecureSettings.ISettingSource">

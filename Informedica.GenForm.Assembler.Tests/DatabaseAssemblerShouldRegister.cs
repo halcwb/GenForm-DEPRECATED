@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Informedica.DataAccess.Configurations;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Assembler.Tests
 {   
@@ -45,5 +46,11 @@ namespace Informedica.GenForm.Assembler.Tests
         //}
         //
         #endregion
+
+        [TestMethod]
+        public void CreateNewSqlLiteConfig()
+        {
+            var config = new SqlLiteConfig();
+        }
     }
 }

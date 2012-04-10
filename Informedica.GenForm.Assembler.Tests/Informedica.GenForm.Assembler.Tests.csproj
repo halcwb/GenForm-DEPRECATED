@@ -60,6 +60,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DataAccess\Informedica.DataAccess\Informedica.DataAccess.csproj">
+      <Project>{A7844906-1F6F-4AD9-BA9A-D70E501CDC98}</Project>
+      <Name>Informedica.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Assembler\Informedica.GenForm.Assembler.csproj">
       <Project>{DB3FE453-4FEA-43EC-BAC7-B0679A432BE2}</Project>
       <Name>Informedica.GenForm.Assembler</Name>
