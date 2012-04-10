@@ -1,7 +1,9 @@
 ﻿using System;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Users.Interfaces;
 using Informedica.GenForm.Library.Security;
 using Informedica.GenForm.Library.Services.Users;
+using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
@@ -15,8 +17,12 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
     ///to contain all GenFormIdentityTest Unit Tests
     ///</summary>
     [TestClass]
-    public class GenFormIdentityTest
+    public class GenFormIdentityTest : TestSessionContext
     {
+        public GenFormIdentityTest() : base(false)
+        {
+        }
+
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
@@ -28,10 +34,11 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
+        [ClassInitialize]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            GenFormApplication.Initialize();
+        }
         //
         //Use ClassCleanup to run code after all tests in a class have run
         //[ClassCleanup()]
@@ -53,26 +60,6 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
         //
         #endregion
 
-
-        [Isolated]
-        [TestMethod]
-        public void GetIdentityCallsUserServiceToGetUser()
-        {
-            const String name = "Admin";
-            var user = CreateFakeIuser();
-            IsolateGetUserByName(user, name);
-
-            try
-            {
-                GenFormIdentity.GetIdentity(name);
-                Isolate.Verify.WasCalledWithExactArguments(() => UserServices.GetUserByName(name));
-
-            }
-            catch (VerifyException e)
-            {
-                Assert.Fail("GenFormIdentity did not call User.GetUser: " + e);
-            }
-        }
 
         [Isolated]
         [TestMethod]
