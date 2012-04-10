@@ -498,10 +498,10 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
             expect(window).toBeUndefined();
         });
 
-        it('After saving the new product, all windows are closed', function () {
-            expect(Ext.ComponentQuery.query('window').length).toBe(0);
-        });
-        
+//        it('After saving the new product, all windows are closed', function () {
+//            expect(Ext.ComponentQuery.query('window').length).toBe(0);
+//        });
+//        
     }
 });
 

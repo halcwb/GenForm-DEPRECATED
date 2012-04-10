@@ -13,8 +13,8 @@ Ext.define('GenForm.test.usecase.ProductListTest', {
             expect(me.getProductList()).toBeDefined();
         });
 
-        it('The list has an entry for the new product', function () {
-            expect(me.getProductList().store.data.length > 0).toBeTruthy();
-        });
+//        it('The list has an entry for the new product', function () {
+//            expect(me.getProductList().store.data.length > 0).toBeTruthy();
+//        });
     }
 });

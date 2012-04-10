@@ -44,6 +44,7 @@ Ext.define('GenForm.test.server.EnvironmentTests', {
 
         });
 
+/*
         it ('return true when registering an environment with a valid connection', function () {
             var result;
 
@@ -63,6 +64,7 @@ Ext.define('GenForm.test.server.EnvironmentTests', {
             });
 
         });
+*/
 
     }
 });

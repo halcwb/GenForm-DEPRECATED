@@ -69,26 +69,26 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
             expect(me.getEnvironmentCombo().isXType('combobox')).toBeTruthy();
         });
 
-        it('The select combobox has a list of environments', function () {
-            var isLoaded;
+//        it('The select combobox has a list of environments', function () {
+//            var isLoaded;
 
-            me.getEnvironmentCombo().store.load(function(records, operation, success) {
-                if (success) {
-                    isLoaded = true;
-                } else {
-                    console.log(operation);
-                    console.log(records);
-                }
-            });
+//            me.getEnvironmentCombo().store.load(function(records, operation, success) {
+//                if (success) {
+//                    isLoaded = true;
+//                } else {
+//                    console.log(operation);
+//                    console.log(records);
+//                }
+//            });
 
-            waitsFor(function () {
-                return isLoaded;
-            }, 'environment combobox to load', GenForm.test.waitingTime);
+//            waitsFor(function () {
+//                return isLoaded;
+//            }, 'environment combobox to load', GenForm.test.waitingTime);
 
-            runs(function () {
-                expect(me.getEnvironmentCombo().store.count() > 0).toBeTruthy()
-            });
-        });
+//            runs(function () {
+//                expect(me.getEnvironmentCombo().store.count() > 0).toBeTruthy()
+//            });
+//        });
 
         it('The user can open up a window to register a new environment', function () {
             me.clickNewEnvironment();
