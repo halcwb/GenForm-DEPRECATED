@@ -11,7 +11,15 @@ namespace Informedica.GenForm.Settings
     {
         private static readonly IList<Setting> Settings = new List<Setting>();
         private static Configuration _configuration;
-        private const string VirtualPath = "/GenForm";
+
+        private readonly string _virtualPath = "/GenForm";
+
+        public SettingSource() {}
+
+        public SettingSource(string path)
+        {
+            _virtualPath = path;
+        }
 
         #region Implementation of IEnumerable
 
@@ -25,21 +33,31 @@ namespace Informedica.GenForm.Settings
         public IEnumerator<Setting> GetEnumerator()
         {
             Settings.Clear();
-            RefreshSettings();
+            ReloadSettings();
 
             return Settings.GetEnumerator();
         }
 
-        private static void RefreshSettings()
+        private void ReloadSettings()
         {
             foreach (ConnectionStringSettings connstr in Configuration.ConnectionStrings.ConnectionStrings)
             {
-                Settings.Add(new Setting(connstr.Name, connstr.ConnectionString, "conn", SettingIsEncrypted(connstr.Name)));
+                Settings.Add(GetConnectionSetting(connstr));
             }
-            foreach (KeyValueConfigurationElement setting in Configuration.AppSettings.Settings)
+            foreach (KeyValueConfigurationElement appSetting in Configuration.AppSettings.Settings)
             {
-                Settings.Add(new Setting(setting.Key, setting.Value, "app", false));
+                Settings.Add(GetAppSetting(appSetting));
             }
+        }
+
+        private static Setting GetAppSetting(KeyValueConfigurationElement setting)
+        {
+            return new Setting(setting.Key, setting.Value, "app", false);
+        }
+
+        private static Setting GetConnectionSetting(ConnectionStringSettings connstr)
+        {
+            return new Setting(connstr.Name, connstr.ConnectionString, "conn", SettingIsEncrypted(connstr.Name));
         }
 
         private static bool SettingIsEncrypted(string name)
@@ -98,12 +116,12 @@ namespace Informedica.GenForm.Settings
             SaveConfiguration();
         }
 
-        private static Configuration Configuration
+        private Configuration Configuration
         {
-            get { return _configuration ?? (_configuration = WebConfigurationManager.OpenWebConfiguration(VirtualPath)); }
+            get { return _configuration ?? (_configuration = WebConfigurationManager.OpenWebConfiguration(_virtualPath)); }
         }
 
-        private static void SaveConfiguration()
+        private void SaveConfiguration()
         {
             Configuration.Save();
             _configuration = null;

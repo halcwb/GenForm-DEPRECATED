@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Informedica.GenForm.Settings
 {
@@ -35,12 +37,21 @@ namespace Informedica.GenForm.Settings
 
         #endregion
 
-        public GenFormEnvironment AddNewEnvironment(string name)
+        public GenFormEnvironment CreateNewEnvironment(string name, string machine)
         {
-            var env = new GenFormEnvironment(new Environment(name));
-            _environments.Add(env);
+            const int settingCount = 3;
+            var env = Environment.Create(name, machine);
+            for (var i = 0; i < settingCount; i++)
+            {
+                env.Settings.AddSetting(new EnvironmentSetting(i, machine, name, string.Empty, string.Empty));
+            }
+            return new GenFormEnvironment(env);
+        }
 
-            return env;
+        public void AddEnvironment(GenFormEnvironment environment)
+        {
+            if (string.IsNullOrWhiteSpace(environment.GenFormDatabaseConnectionString)) throw new Exception();
+            _environments.Add(environment);
         }
     }
 }

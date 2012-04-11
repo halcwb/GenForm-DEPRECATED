@@ -51,11 +51,13 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AListOfGenFormEnvironmentsShoud.cs" />
-    <Compile Include="AGenFormEnvironmentShould.cs" />
-    <Compile Include="EnvironmentsShould.cs" />
+    <Compile Include="Environments\AGenFormEnvironmentShould.cs" />
+    <Compile Include="Environments\AListOfGenFormEnvironmentsShoud.cs" />
+    <Compile Include="Environments\EnvironmentsShould.cs" />
+    <Compile Include="Environments\EnvironmentTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SettingsManagerShould.cs" />
+    <Compile Include="SettingManager\SettingsManagerShould.cs" />
+    <Compile Include="SettingManager\SettingSourceShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SecureSettings\Informedica.SecureSettings\Informedica.SecureSettings.csproj">

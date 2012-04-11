@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace Informedica.GenForm.Settings
@@ -12,6 +13,7 @@ namespace Informedica.GenForm.Settings
 
         public GenFormEnvironment(Environment environment)
         {
+            if (environment.Settings.Count() < 3) throw new Exception("Not enough settings!");
             _environment = environment;
         }
 
@@ -19,8 +21,15 @@ namespace Informedica.GenForm.Settings
 
         public string GenFormDatabaseConnectionString
         {
-            get { return _environment.Settings.ElementAt(DatabaseConnectionStringIndex).ConnectionString; }
+            get { return GetConnectionString(); }
             set { _environment.Settings.ElementAt(DatabaseConnectionStringIndex).ConnectionString = value; }
+        }
+
+        private string GetConnectionString()
+        {
+            return _environment.Settings.Count() <= DatabaseConnectionStringIndex ? 
+                string.Empty : 
+                _environment.Settings.ElementAt(DatabaseConnectionStringIndex).ConnectionString;
         }
 
         public string LogPath

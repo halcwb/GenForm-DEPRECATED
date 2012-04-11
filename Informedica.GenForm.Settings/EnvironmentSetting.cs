@@ -3,13 +3,16 @@ namespace Informedica.GenForm.Settings
     public class EnvironmentSetting
     {
 
-        public EnvironmentSetting(string machineName, string name, string provider, string connectionString)
+        public EnvironmentSetting(int id, string machineName, string name, string provider, string connectionString)
         {
+            Id = id;
             MachineName = machineName;
             Provider = provider;
             Name = name;
             ConnectionString = connectionString;
         }
+
+        public int Id { get; private set; }
 
         public string MachineName { get; private set; }
 
@@ -23,5 +26,12 @@ namespace Informedica.GenForm.Settings
         }
 
         public string ConnectionString  { get; set; }
+
+        public bool IsIdentical(EnvironmentSetting setting)
+        {
+            return Id == setting.Id &&
+                   MachineName == setting.MachineName &&
+                   Name == setting.Name;
+        }
     }
 }

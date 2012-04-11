@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock.ArrangeActAssert;
 
-namespace Informedica.GenForm.Settings.Tests
+namespace Informedica.GenForm.Settings.Tests.Environments
 {
     [TestClass]
     public class AGenFormEnvironmentShould
@@ -12,13 +12,29 @@ namespace Informedica.GenForm.Settings.Tests
         private GenFormEnvironment _genFormEnvironment;
         private EnvironmentSettings _settings;
         private const string EnvironmentName = "TestEnvironment";
+        private const int SettingCount = 3;
 
+        [TestMethod]
+        [Isolated]
+        public void UseAnEnvironmentWithThreeSettings()
+        {
+            try
+            {
+                var wrongSettingCount = 0;
+                SetUpFakeEnvironmentToGetSettings(wrongSettingCount);
+                Assert.Fail("GenForm environment was instantiated with less than 3 settings");
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
 
         [TestMethod]
         [Isolated]
         public void UseAnEnvironmentToGetTheName()
         {
-            SetUpFakeEnvironmentToGetSettings(0);
+            SetUpFakeEnvironmentToGetSettings(SettingCount);
 
             Assert.AreEqual(EnvironmentName, _genFormEnvironment.Name);
 
@@ -38,7 +54,7 @@ namespace Informedica.GenForm.Settings.Tests
         public void UseTheFirstSettingInEnvironmentSettingsToSetAndGetTheDatabaseConnectionString()
         {
             const int firstSetting = 0;
-            SetUpFakeEnvironmentToGetSettings(firstSetting);
+            SetUpFakeEnvironmentToGetSettings(SettingCount);
             
             try
             {
@@ -57,7 +73,7 @@ namespace Informedica.GenForm.Settings.Tests
         public void UseTheSecondSettingInEnvironmentToSetAndGetTheLogPath()
         {
             const int secondSetting = 1;
-            SetUpFakeEnvironmentToGetSettings(secondSetting);
+            SetUpFakeEnvironmentToGetSettings(SettingCount);
 
             try
             {
@@ -78,7 +94,7 @@ namespace Informedica.GenForm.Settings.Tests
         public void UseTheThirdSettingInEnvironmentToSetAndGetTheExportPath()
         {
             const int thirdSetting = 2;
-            SetUpFakeEnvironmentToGetSettings(thirdSetting);
+            SetUpFakeEnvironmentToGetSettings(SettingCount);
 
             try
             {
@@ -96,7 +112,7 @@ namespace Informedica.GenForm.Settings.Tests
         public void NotUseTheSecondSettingInEnvironmentToSetAndGetDatabaseConnectionString()
         {
             const int secondSetting = 1;
-            SetUpFakeEnvironmentToGetSettings(secondSetting);
+            SetUpFakeEnvironmentToGetSettings(SettingCount);
 
             try
             {
@@ -111,14 +127,20 @@ namespace Informedica.GenForm.Settings.Tests
             }
         }
 
-        private void SetUpFakeEnvironmentToGetSettings(int settingIndex)
+        private void SetUpFakeEnvironmentToGetSettings(int count)
         {
             _environment = Isolate.Fake.Instance<Environment>();
             Isolate.WhenCalled(() => _environment.Name).WillReturn(EnvironmentName);
 
             _settings = Isolate.Fake.Instance<EnvironmentSettings>();
+            Isolate.WhenCalled(() => _settings.Count()).WillReturn(count);
             Isolate.WhenCalled(() => _environment.Settings).WillReturn(_settings);
-            Isolate.WhenCalled(() => _settings.ElementAt(settingIndex)).WillReturn(Isolate.Fake.Instance<EnvironmentSetting>());
+            for (var i = 0; i < count; i++)
+            {
+                var index = i;
+                Isolate.WhenCalled(() => _settings.ElementAt(index)).WillReturn(
+                    Isolate.Fake.Instance<EnvironmentSetting>());
+            }
 
             _genFormEnvironment = new GenFormEnvironment(_environment);
         }

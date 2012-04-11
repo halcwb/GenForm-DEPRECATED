@@ -8,14 +8,15 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 
         public GenFormEnvironmentValidityCheck()
         {
-            SetEnvironment(string.Empty);
+            SetEnvironment(string.Empty, string.Empty);
         }
 
-        private void SetEnvironment(string name)
+        private void SetEnvironment(string name, string machine)
         {
-            _environment = new GenFormEnvironment(new Environment(name));
+            _environment = new GenFormEnvironment(new Environment(name, machine));
         }
 
+        public string Machine { get; set; }
         public string Name { get; set; }
         public string DatabaseConnection { get; set; }
         public string DatabaseProvider { get; set; }
@@ -24,7 +25,7 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 
         public string IsValid()
         {
-            SetEnvironment(Name);
+            SetEnvironment(Name, Machine);
             _environment.GenFormDatabaseConnectionString = DatabaseConnection;
 
             return _environment.GenFormDatabaseConnectionString; //_environment.IsValid() ? "Yes" : "No";

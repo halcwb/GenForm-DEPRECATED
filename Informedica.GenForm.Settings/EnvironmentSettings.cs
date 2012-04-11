@@ -1,16 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
+using System.Linq;
 
 namespace Informedica.GenForm.Settings
 {
     public class EnvironmentSettings: IEnumerable<EnvironmentSetting>
     {
-        private SettingsManager _settingsManager;
+        public const char Separator = '.';
 
-        public EnvironmentSettings(SettingsManager settingsManager)
+        private readonly SettingsManager _settingsManager;
+        private readonly string _machine;
+        private readonly string _environment;
+
+        public EnvironmentSettings(SettingsManager settingsManager, string machine, string environment)
         {
             _settingsManager = settingsManager;
+            _machine = machine;
+            _environment = environment;
         }
 
         public bool Contains(EnvironmentSetting env)
@@ -38,31 +47,37 @@ namespace Informedica.GenForm.Settings
             IList<EnvironmentSetting> envs = new List<EnvironmentSetting>();
             foreach (var setting in conns)
             {
-                if (setting.Name.Split('.').GetUpperBound(0) < 2) continue;
-             
+                if (setting.Name.Split(Separator).GetUpperBound(0) < 3) continue;
+
+                var id = GetIdFromConnectionString(setting);
                 var mach = GetMachineNameFromConnectionString(setting);
                 var name = GetNameFromConnectionString(setting);
                 var prov = GetProviderFromConnectionString(setting);
 
-                envs.Add(new EnvironmentSetting(mach, name, prov, setting.ConnectionString));
+                if (_machine == mach && name == _environment) envs.Add(new EnvironmentSetting(id, mach, name, prov, setting.ConnectionString));
             }
 
             return envs.GetEnumerator();
         }
 
+        private static int GetIdFromConnectionString(ConnectionStringSettings setting)
+        {
+            return int.Parse(setting.Name.Split(Separator)[0]);
+        }
+
         private static string GetProviderFromConnectionString(ConnectionStringSettings setting)
         {
-            return setting.Name.Split('.')[2];
+            return setting.Name.Split(Separator)[3];
         }
 
         private static string GetMachineNameFromConnectionString(ConnectionStringSettings setting)
         {
-            return setting.Name.Split('.')[0];
+            return setting.Name.Split(Separator)[1];
         }
 
         private static string GetNameFromConnectionString(ConnectionStringSettings setting)
         {
-            return setting.Name.Split('.')[1];
+            return setting.Name.Split(Separator)[2];
         }
 
         /// <summary>
@@ -79,19 +94,24 @@ namespace Informedica.GenForm.Settings
 
         #endregion
 
-        public void AddSetting(EnvironmentSetting env)
+        public void AddSetting(EnvironmentSetting setting)
         {
-            _settingsManager.AddConnectionString(GetEnvironmentName(env), env.ConnectionString);
+            if (this.Any(set => set.IsIdentical(setting))) throw new DuplicateSettingError();
+            _settingsManager.AddConnectionString(GetEnvironmentName(setting), setting.ConnectionString);
         }
 
         private static string GetEnvironmentName(EnvironmentSetting env)
         {
-            return env.MachineName + "." + env.Name + "." + env.Provider;
+            return env.Id.ToString(CultureInfo.InvariantCulture) + Separator + env.MachineName + Separator + env.Name + Separator + env.Provider;
         }
 
         public void RemoveEnvironment(EnvironmentSetting env)
         {
             _settingsManager.RemoveConnectionString(GetEnvironmentName(env));
         }
+    }
+
+    public class DuplicateSettingError : Exception
+    {
     }
 }

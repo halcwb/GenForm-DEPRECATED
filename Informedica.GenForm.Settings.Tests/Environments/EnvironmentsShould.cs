@@ -1,18 +1,40 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Web.Configuration;
 using Informedica.SecureSettings;
 using Informedica.SecureSettings.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
 
-namespace Informedica.GenForm.Settings.Tests
+namespace Informedica.GenForm.Settings.Tests.Environments
 {
     [TestClass]
     public class EnvironmentsShould
     {
+
+        [Isolated]
+        [TestMethod]
+        public void NotAcceptTheSameSettingTwice()
+        {
+            var envs = GetEnvironments();
+            var setting = GetFakeEnvironmentSetting();
+            Isolate.WhenCalled(() => setting.IsIdentical(setting)).WillReturn(true);
+
+            envs.AddSetting(setting);
+
+            try
+            {
+                envs.AddSetting(setting);
+                Assert.Fail("should not accept the same setting twice");
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException), e.ToString());
+            }
+
+        }
 
         [Isolated]
         [TestMethod]
@@ -28,7 +50,7 @@ namespace Informedica.GenForm.Settings.Tests
             var setman = Isolate.Fake.Instance<SettingsManager>();
             Isolate.WhenCalled(() => setman.GetConnectionStrings()).DoInstead(ReturnEmptyConnectionStringList);
 
-            return new EnvironmentSettings(setman);
+            return new EnvironmentSettings(setman, "Test", "Test");
         }
 
         private static IEnumerable<ConnectionStringSettings> ReturnEmptyConnectionStringList(MethodCallContext arg)
@@ -57,6 +79,7 @@ namespace Informedica.GenForm.Settings.Tests
         private static EnvironmentSetting GetFakeEnvironmentSetting()
         {
             var env = Isolate.Fake.Instance<EnvironmentSetting>();
+            Isolate.WhenCalled(() => env.Id).WillReturn(1);
             Isolate.WhenCalled(() => env.MachineName).WillReturn("test");
             Isolate.WhenCalled(() => env.Name).WillReturn("test");
             Isolate.WhenCalled(() => env.Provider).WillReturn("test");
@@ -89,9 +112,12 @@ namespace Informedica.GenForm.Settings.Tests
         [TestMethod]
         public void HaveTestEnvironmentWhenTestEnvironmentIsAdded()
         {
+            const string machine = "test";
+            const string environment = "test";
+
             var source = new TestSettingSource();
-            var envs = new EnvironmentSettings(new SettingsManager(new SecureSettingsManager(source)));
-            var env = new EnvironmentSetting("test", "test", "test", "test");
+            var envs = new EnvironmentSettings(new SettingsManager(new SecureSettingsManager(source)), machine, environment);
+            var env = new EnvironmentSetting(1, machine, environment, "test", "test");
             envs.AddSetting(env);
 
             Assert.IsTrue(envs.Any(e => e.Name == env.Name));
@@ -102,8 +128,8 @@ namespace Informedica.GenForm.Settings.Tests
         public void BeAbleToRemoveTestEnvironmentAfterTestEnvironmentIsAdded()
         {
             var source = new TestSettingSource();
-            var envs = new EnvironmentSettings(new SettingsManager(new SecureSettingsManager(source)));
-            var env = new EnvironmentSetting("test", "test", "test", "test");
+            var envs = new EnvironmentSettings(new SettingsManager(new SecureSettingsManager(source)), "test", "test");
+            var env = new EnvironmentSetting(1, "test", "test", "test", "test");
             envs.AddSetting(env);
             envs.RemoveEnvironment(env);
 
@@ -114,7 +140,7 @@ namespace Informedica.GenForm.Settings.Tests
         {
             var setman = GetFakeSettingsManager();
 
-            return new EnvironmentSettings(setman);
+            return new EnvironmentSettings(setman, "Test", "Test");
         }
 
         private static SettingsManager GetFakeSettingsManager()

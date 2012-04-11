@@ -1,8 +1,7 @@
-﻿using TypeMock.ArrangeActAssert;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Informedica.GenForm.Settings.Tests
+namespace Informedica.GenForm.Settings.Tests.Environments
 {
     [TestClass]
     public class AListOfGenFormEnvironmentsShoud
@@ -18,26 +17,32 @@ namespace Informedica.GenForm.Settings.Tests
         [TestMethod]
         public void OnlyAddANewGenFormEnvironmentWithAName()
         {
-            AddNewGenFormEnvironment();
-
-            AssertIsNotNullOrWhiteSpace(_environments.ElementAt(0).Name);
+            try
+            {
+                AddNewGenFormEnvironment();
+            }
+            catch (System.Exception e)
+            {
+                Assert.Fail(e.ToString());
+            }
         }
 
         [TestMethod]
         public void OnlyAddNewGenFormEnvironmentWithDatabaseConnectionString()
         {
-            AddNewGenFormEnvironment();
-
-            AssertIsNotNullOrWhiteSpace(_environments.ElementAt(0).GenFormDatabaseConnectionString);
-        }
-
-        private static void AssertIsNotNullOrWhiteSpace(string value)
-        {
-            Assert.IsFalse(string.IsNullOrWhiteSpace(value));
+            try
+            {
+                AddNewGenFormEnvironment();
+                Assert.Fail("Should throw an error");
+            }
+            catch (System.Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
         }
 
         [TestMethod]
-        public void HaveACountIncreasedWithOneWhenANewGenFormEnvironmetIsAdded()
+        public void HaveACountIncreasedWithOneWhenANewGenFormEnvironmentIsAdded()
         {
             var count = _environments.Count();
             AddNewGenFormEnvironment();
@@ -47,7 +52,9 @@ namespace Informedica.GenForm.Settings.Tests
 
         private void AddNewGenFormEnvironment()
         {
-            var genv = _environments.AddNewEnvironment("Test");
+            var genv = _environments.CreateNewEnvironment("Test", "Test");
+            genv.GenFormDatabaseConnectionString = "Some connection string";
+            _environments.AddEnvironment(genv);
         }
     }
 

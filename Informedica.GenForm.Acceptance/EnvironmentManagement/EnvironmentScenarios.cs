@@ -59,7 +59,7 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
             var envs = new List<Environment>();
             for (var i = 0; i < numberOfEnvironments; i++)
             {
-                envs.Add(Environment.Create(i.ToString(CultureInfo.InvariantCulture)));
+                envs.Add(Environment.Create("TestMachine", i.ToString(CultureInfo.InvariantCulture)));
             }
 
             _environments = envs;
@@ -133,13 +133,13 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
             return providers.Any(p => p.ProviderName == provider);
         }
 
-        public string RegisterEnvironmentWithNameAndProviderWithConnectionString(string name, string provider, string connectionString)
+        public string RegisterEnvironmentWithNameAndProviderWithConnectionString(string machine, string name, string provider, string connectionString)
         {
             if (GenFormApplication.GetRegisterdProviders().All(p => p.ProviderName != provider)) return string.Empty;
 
             var setting = new EnvironmentSetting(System.Environment.MachineName, name, provider, connectionString);
 
-            GenFormApplication.Environments.AddEnvironment(new Environment(name));
+            GenFormApplication.Environments.AddEnvironment(Environment.Create(name, machine));
             GenFormApplication.Environments.Single(e => e.Name == name).Settings.AddSetting(setting);
 
             return setting.SettingName;
