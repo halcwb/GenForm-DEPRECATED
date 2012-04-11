@@ -1,6 +1,6 @@
 using System;
 
-namespace Informedica.GenForm.Acceptance.FitNesse
+namespace Informedica.GenForm.Acceptance
 {
     public class HelloFitNesse
     {

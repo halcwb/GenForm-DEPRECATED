@@ -53,29 +53,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminUserLogin.cs" />
-    <Compile Include="FitNesse\EnvironmentScenarios.cs" />
-    <Compile Include="FitNesse\HelloFitNesse.cs" />
-    <Compile Include="FitNesse\SecureSettingsManagerCommandLineTool.cs" />
-    <Compile Include="GenFormFixture.cs" />
-    <Compile Include="NewProductDecisions.cs" />
-    <Compile Include="ProductFixture.cs" />
-    <Compile Include="SetupGenFormService.cs" />
-    <Compile Include="ShapeFixture.cs" />
-    <Compile Include="UserLoginDecisions.cs" />
+    <Compile Include="EnvironmentManagement\EnvironmentScenarios.cs" />
+    <Compile Include="EnvironmentManagement\GenFormEnvironmentValidityCheck.cs" />
+    <Compile Include="EnvironmentManagement\GenFormFixture.cs" />
+    <Compile Include="EnvironmentManagement\SecureSettingsManagerCommandLineTool.cs" />
+    <Compile Include="HelloFitNesse.cs" />
+    <Compile Include="ProductManagement\NewProductDecisions.cs" />
+    <Compile Include="UserLogin\UserLoginDecisions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserLogInScenario.cs" />
+    <Compile Include="UserLogin\UserLogInScenario.cs" />
+    <Compile Include="UserManagement\AdminUserLogin.cs" />
     <Compile Include="Utilities\Comparer.cs" />
     <Compile Include="Utilities\Echo.cs" />
     <Compile Include="Utilities\ListMethods.cs" />
-    <Compile Include="ValidInputForProductWithOneSubstance.cs" />
-    <Compile Include="ValidPasswords.cs" />
-    <Compile Include="ValidUserNames.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Environments\" />
-    <Folder Include="GenForm\" />
-    <Folder Include="SecureSettingsManager\" />
+    <Folder Include="FormulariumManagement\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SecureSettings\Informedica.SecureSettings\Informedica.SecureSettings.csproj">

@@ -1,4 +1,4 @@
-namespace Informedica.GenForm.Acceptance
+namespace Informedica.GenForm.Acceptance.UserManagement
 {
     public class AdminUserLogin
     {

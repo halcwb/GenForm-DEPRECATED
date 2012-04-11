@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Settings;
-using Environment = Informedica.GenForm.Settings.Environment;
 
-namespace Informedica.GenForm.Acceptance.FitNesse
+namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 {
     public class EnvironmentScenarios
     {

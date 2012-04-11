@@ -1,7 +1,8 @@
 using System.Globalization;
 using System.Linq;
+using Informedica.GenForm.Acceptance.UserLogin;
 
-namespace Informedica.GenForm.Acceptance
+namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 {
     public class GenFormFixture
     {
@@ -20,7 +21,7 @@ namespace Informedica.GenForm.Acceptance
 
         public string GetFirstUserFromUserList()
         {
-            return "system";
+            return string.Empty;
         }
 
         public string UserIsSystemUser(string userName)
@@ -31,18 +32,18 @@ namespace Informedica.GenForm.Acceptance
         public bool SetUserName(string userName)
         {
             // ToDo: write testfixture
-            return userName.Length > 2 && userName.Length < 31 && UserExists(userName) != "true";
+            return false;
         }
 
         public bool SetPassword(string password)
         {
             //ToDo: write testcode
-            return password.Length > 2 && password.Length < 21;
+            return false;
         }
 
         public bool InstallTestGenFormService()
         {
-            return new SetupGenFormService().InstallTestGenformService();
+            return false;
         }
 
         public bool RegisterUserWith(string userName, string password)
@@ -70,36 +71,34 @@ namespace Informedica.GenForm.Acceptance
         public bool UserHasPassword(string userName, string password)
         {
             //ToDo: write testcode
-            return (userName.ToLower().Trim() == "system" && password.Trim() == "Admin") ||
-                   (userName.ToLower().Trim() == "admin" && password.Trim() == "Admin") ||
-                   (userName.ToLower().Trim() == "foo" && password.Trim() == "baR");
+            return false;
         }
 
         public int GetUserCount()
         {
-            return 1;
+            return 999999999;
         }
 
         public string UserExists(string user)
         {
             //ToDo: write tests
-            return (user.ToLower().Trim() == "admin" || user.ToLower().Trim() == "fred").ToString(CultureInfo.InvariantCulture).ToLower();
+            return string.Empty;
         }
 
         public string GetEnvironments()
         {
-            return "";
+            return "No environments";
         }
 
         public string ConnectToServerAsUserWithPassword(string server, string user, string password)
         {
-            return (server == "GenFormServer").ToString(CultureInfo.InvariantCulture).ToLower();
+            return string.Empty;
         }
 
         public bool ListOfEnvironmentsContains(string environment)
         {
             // ToDo: write testfixture
-            return (environment == "TestGenForm");
+            return (environment == "kjhkjhkhkjhh");
         }
 
         public string Echo(string it)
@@ -115,12 +114,12 @@ namespace Informedica.GenForm.Acceptance
 
         public bool RegisterEnvironmentForServerWithLoginAndPassword(string environment, string server, string login, string password)
         {
-            return true;
+            return false;
         }
 
         public bool RegisterEnvironmentWithDatabase(string environment, string database)
         {
-            return true;
+            return false;
         }
 
         public string GetDatabaseListForEnvironment(string environment)
@@ -130,7 +129,7 @@ namespace Informedica.GenForm.Acceptance
 
         public bool Login(string user)
         {
-            return true;
+            return false;
         }
 
         public bool ListContains(string list, string search)

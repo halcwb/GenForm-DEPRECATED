@@ -34,5 +34,11 @@ namespace Informedica.GenForm.Settings
             get { return _environment.Settings.ElementAt(ExporthPathIndex).ConnectionString; }
             set { _environment.Settings.ElementAt(ExporthPathIndex).ConnectionString = value; }
         }
+
+        public bool IsValid()
+        {
+            return !string.IsNullOrWhiteSpace(Name) &&
+                   !string.IsNullOrWhiteSpace(GenFormDatabaseConnectionString);
+        }
     }
 }

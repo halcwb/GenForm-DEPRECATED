@@ -1,4 +1,4 @@
-﻿namespace Informedica.GenForm.Acceptance
+namespace Informedica.GenForm.Acceptance.UserLogin
 {
     public class UserLoginDecisions
     {
