@@ -42,7 +42,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
         //    return UnitGroupFactory.CreateUnitGroup(new UnitGroupDto
         //            {
         //                AllowConversion = true,
-        //                Name = "massa"
+        //                Environment = "massa"
         //            });
         //}
 

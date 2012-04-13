@@ -133,16 +133,21 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
             return providers.Any(p => p.ProviderName == provider);
         }
 
-        public string RegisterEnvironmentWithNameAndProviderWithConnectionString(string machine, string name, string provider, string connectionString)
+        public string RegisterEnvironmentWithNameAndProviderWithConnectionString(string machine, string name, string machinename, string environment)
         {
-            if (GenFormApplication.GetRegisterdProviders().All(p => p.ProviderName != provider)) return string.Empty;
+            if (GenFormApplication.GetRegisterdProviders().All(p => p.ProviderName != machinename)) return string.Empty;
 
-            var setting = new EnvironmentSetting(System.Environment.MachineName, name, provider, connectionString);
+            var setting = GetEnvironmentSetting(name, machinename, environment);
 
             GenFormApplication.Environments.AddEnvironment(Environment.Create(name, machine));
             GenFormApplication.Environments.Single(e => e.Name == name).Settings.AddSetting(setting);
 
             return setting.SettingName;
+        }
+
+        private static EnvironmentSetting GetEnvironmentSetting(string name, string machinename, string environment)
+        {
+            return EnvironmentSetting.CreateEnvironment(name, machinename, environment);
         }
 
         public string ProviderForShouldBe(string setname)
@@ -180,10 +185,18 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
         public string CreateEnvironmentSettingWithConnectionString(string settingName, string connectionString)
         {
             var a = settingName.Split('.');
-            var setting = new EnvironmentSetting(a[0], a[1], a[2], connectionString);
+            var setting = CreateEnvironmentSetting(a[0], a[1], a[2], settingName, connectionString);
 
             return setting.SettingName;
         }
 
+        private EnvironmentSetting CreateEnvironmentSetting(string name, string machinename, string environment, string provider, string connectionString)
+        {
+            var envset = EnvironmentSetting.CreateEnvironment(name, machinename, environment);
+            envset.Provider = provider;
+            envset.ConnectionString = connectionString;
+
+            return envset;
+        }
     }
 }

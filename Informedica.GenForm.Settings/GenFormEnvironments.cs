@@ -43,7 +43,7 @@ namespace Informedica.GenForm.Settings
             var env = Environment.Create(name, machine);
             for (var i = 0; i < settingCount; i++)
             {
-                env.Settings.AddSetting(new EnvironmentSetting(i, machine, name, string.Empty, string.Empty));
+                env.Settings.AddSetting(new EnvironmentSetting(i.ToString(), machine, name, string.Empty, string.Empty));
             }
             return new GenFormEnvironment(env);
         }

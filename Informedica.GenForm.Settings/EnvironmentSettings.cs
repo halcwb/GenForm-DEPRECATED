@@ -24,7 +24,7 @@ namespace Informedica.GenForm.Settings
 
         public bool Contains(EnvironmentSetting env)
         {
-            return _settingsManager.GetConnectionString(env.Name) != null;
+            return _settingsManager.GetConnectionString(env.Environment) != null;
         }
 
         #region Implementation of IEnumerable
@@ -60,9 +60,9 @@ namespace Informedica.GenForm.Settings
             return envs.GetEnumerator();
         }
 
-        private static int GetIdFromConnectionString(ConnectionStringSettings setting)
+        private static string GetIdFromConnectionString(ConnectionStringSettings setting)
         {
-            return int.Parse(setting.Name.Split(Separator)[0]);
+            return setting.Name.Split(Separator)[0];
         }
 
         private static string GetProviderFromConnectionString(ConnectionStringSettings setting)
@@ -102,7 +102,7 @@ namespace Informedica.GenForm.Settings
 
         private static string GetEnvironmentName(EnvironmentSetting env)
         {
-            return env.Id.ToString(CultureInfo.InvariantCulture) + Separator + env.MachineName + Separator + env.Name + Separator + env.Provider;
+            return env.Name.ToString(CultureInfo.InvariantCulture) + Separator + env.MachineName + Separator + env.Environment + Separator + env.Provider;
         }
 
         public void RemoveEnvironment(EnvironmentSetting env)

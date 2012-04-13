@@ -79,9 +79,9 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         private static EnvironmentSetting GetFakeEnvironmentSetting()
         {
             var env = Isolate.Fake.Instance<EnvironmentSetting>();
-            Isolate.WhenCalled(() => env.Id).WillReturn(1);
-            Isolate.WhenCalled(() => env.MachineName).WillReturn("test");
             Isolate.WhenCalled(() => env.Name).WillReturn("test");
+            Isolate.WhenCalled(() => env.MachineName).WillReturn("test");
+            Isolate.WhenCalled(() => env.Environment).WillReturn("test");
             Isolate.WhenCalled(() => env.Provider).WillReturn("test");
             Isolate.WhenCalled(() => env.ConnectionString).WillReturn("test");
 
@@ -117,10 +117,10 @@ namespace Informedica.GenForm.Settings.Tests.Environments
 
             var source = new TestSettingSource();
             var envs = new EnvironmentSettings(new SettingsManager(new SecureSettingsManager(source)), machine, environment);
-            var env = new EnvironmentSetting(1, machine, environment, "test", "test");
+            var env = new EnvironmentSetting("test", machine, environment, "test", "test");
             envs.AddSetting(env);
 
-            Assert.IsTrue(envs.Any(e => e.Name == env.Name));
+            Assert.IsTrue(envs.Any(e => e.Environment == env.Environment));
         }
 
         [Isolated]
@@ -129,11 +129,11 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var source = new TestSettingSource();
             var envs = new EnvironmentSettings(new SettingsManager(new SecureSettingsManager(source)), "test", "test");
-            var env = new EnvironmentSetting(1, "test", "test", "test", "test");
+            var env = new EnvironmentSetting("test", "test", "test", "test", "test");
             envs.AddSetting(env);
             envs.RemoveEnvironment(env);
 
-            Assert.IsFalse(envs.Any(e => e.Name == env.Name));
+            Assert.IsFalse(envs.Any(e => e.Environment == env.Environment));
         }
 
         private static EnvironmentSettings GetEnvironments()

@@ -56,7 +56,7 @@ namespace Informedica.GenForm.Library.Tests.IntegrationTests
         {
             //ArrangeFakeRepository(name);
             // ToDo: fix test
-            //Assert.IsTrue(User.GetUser(name).FirstOrDefault().Name == name);
+            //Assert.IsTrue(User.GetUser(name).FirstOrDefault().Environment == name);
         }
     }
 }

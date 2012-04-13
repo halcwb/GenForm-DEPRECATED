@@ -74,7 +74,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             var shape = ShapeServices.WithDto(ShapeTestFixtures.GetIvFluidDto()).Get();
             // ToDo: rewrite
-            // shape.Name = shape.Name + "_changed";
+            // shape.Environment = shape.Environment + "_changed";
             Assert.IsNotNull(ShapeServices.Shapes.SingleOrDefault(x => x.Name == shape.Name));
         }
 
