@@ -55,6 +55,7 @@
     <Compile Include="Environments\AListOfGenFormEnvironmentsShoud.cs" />
     <Compile Include="Environments\EnvironmentsShould.cs" />
     <Compile Include="Environments\EnvironmentTests.cs" />
+    <Compile Include="Environments\TestGenFormEnvironment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingManager\SettingsManagerShould.cs" />
     <Compile Include="SettingManager\SettingSourceShould.cs" />

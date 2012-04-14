@@ -6,7 +6,7 @@ namespace Informedica.GenForm.Settings
     {
         private static EnvironmentSettings CreateEnvironmentSettings(string machine, string environment)
         {
-            return new EnvironmentSettings(new SettingsManager(new SecureSettingsManager(new SettingSource())), machine, environment);
+            return new EnvironmentSettings(new SettingsManager(new SecureSettingSource(new WebConfigSettingSource())), machine, environment);
         }
 
         public Environment(string machine, string name, EnvironmentSettings settings)

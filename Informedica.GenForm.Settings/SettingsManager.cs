@@ -11,9 +11,9 @@ namespace Informedica.GenForm.Settings
         static SettingsManager _instance;
         static readonly object LockThis = new object();
 
-        private readonly SecureSettingsManager _secure;
+        private readonly SecureSettingSource _secure;
 
-        public SettingsManager(SecureSettingsManager secureSettingsManager)
+        public SettingsManager(SecureSettingSource secureSettingsManager)
         {
             _secure = secureSettingsManager;
         }
@@ -37,14 +37,14 @@ namespace Informedica.GenForm.Settings
             }
         }
 
-        private static SecureSettingsManager GetSecureSettingsManager()
+        private static SecureSettingSource GetSecureSettingsManager()
         {
-            return new SecureSettingsManager(GetSettingSource());
+            return new SecureSettingSource(GetSettingSource());
         }
 
         private static ISettingSource GetSettingSource()
         {
-           return new SettingSource();
+           return new WebConfigSettingSource();
         }
 
         #endregion
@@ -57,16 +57,6 @@ namespace Informedica.GenForm.Settings
         public void WriteSecureSetting(string key, string value)
         {
             _secure.WriteSecureSetting(key, value);
-        }
-
-        public string GetExporthPath()
-        {
-            return _secure.ReadSecureSetting("exppath");
-        }
-
-        public string GetLogPath()
-        {
-            return _secure.ReadSecureSetting("logpath");
         }
 
         public ConnectionStringSettings GetConnectionString(string name)
@@ -95,7 +85,7 @@ namespace Informedica.GenForm.Settings
 
         public IEnumerable<ConnectionStringSettings> GetConnectionStrings()
         {
-            return (from setting in _secure.Settings where setting.Group == "conn" 
+            return (from setting in _secure.Settings where setting.Type == "conn" 
                     select new ConnectionStringSettings(setting.Name, setting.Value))
                     .ToList();
         }

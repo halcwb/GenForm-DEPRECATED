@@ -48,7 +48,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingManager
             var fakeISettingSource = Isolate.Fake.Instance<ISettingSource>();
             try
             {
-                new SettingsManager(new SecureSettingsManager(fakeISettingSource));
+                new SettingsManager(new SecureSettingSource(fakeISettingSource));
 
             }
             catch (System.Exception e)

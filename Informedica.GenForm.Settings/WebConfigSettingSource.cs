@@ -7,16 +7,16 @@ using Informedica.SecureSettings;
 
 namespace Informedica.GenForm.Settings
 {
-    public class SettingSource: ISettingSource
+    public class WebConfigSettingSource: ISettingSource
     {
         private static readonly IList<Setting> Settings = new List<Setting>();
         private static Configuration _configuration;
 
         private readonly string _virtualPath = "/GenForm";
 
-        public SettingSource() {}
+        public WebConfigSettingSource() {}
 
-        public SettingSource(string path)
+        public WebConfigSettingSource(string path)
         {
             _virtualPath = path;
         }
@@ -62,7 +62,7 @@ namespace Informedica.GenForm.Settings
 
         private static bool SettingIsEncrypted(string name)
         {
-            return name.StartsWith(SecureSettingsManager.SecureMarker);
+            return name.StartsWith(SecureSettingSource.SecureMarker);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Informedica.GenForm.Settings
         public void RemoveConnectionString(string name)
         {
             var setting = Configuration.ConnectionStrings.ConnectionStrings[name] ??
-                          Configuration.ConnectionStrings.ConnectionStrings[SecureSettingsManager.SecureMarker + name];
+                          Configuration.ConnectionStrings.ConnectionStrings[SecureSettingSource.SecureMarker + name];
 
             Configuration.ConnectionStrings.ConnectionStrings.Remove(setting);
             SaveConfiguration();

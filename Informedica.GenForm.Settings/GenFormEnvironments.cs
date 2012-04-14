@@ -1,12 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace Informedica.GenForm.Settings
 {
     public class GenFormEnvironments: IEnumerable<GenFormEnvironment>
     {
+        public enum Settings
+        {
+            Database,
+            LogPath,
+            ExportPath
+        }
+
         private IList<GenFormEnvironment> _environments = new List<GenFormEnvironment>();
 
         #region Implementation of IEnumerable
@@ -37,21 +43,29 @@ namespace Informedica.GenForm.Settings
 
         #endregion
 
-        public GenFormEnvironment CreateNewEnvironment(string name, string machine)
+        public static GenFormEnvironment CreateNewEnvironment(string name, string machine)
         {
-            const int settingCount = 3;
             var env = Environment.Create(name, machine);
-            for (var i = 0; i < settingCount; i++)
-            {
-                env.Settings.AddSetting(new EnvironmentSetting(i.ToString(), machine, name, string.Empty, string.Empty));
-            }
+            env.Settings.AddSetting(Settings.Database.ToString(), machine, name);
+            env.Settings.AddSetting(Settings.ExportPath.ToString(), machine, name);
+            env.Settings.AddSetting(Settings.LogPath.ToString(), machine, name);
+            
             return new GenFormEnvironment(env);
         }
 
         public void AddEnvironment(GenFormEnvironment environment)
         {
-            if (string.IsNullOrWhiteSpace(environment.GenFormDatabaseConnectionString)) throw new Exception();
+            if (string.IsNullOrWhiteSpace(environment.Database))
+                throw new GenFormEnvironmentException("Database connection string cannot be empty");
             _environments.Add(environment);
+        }
+    }
+
+    public class GenFormEnvironmentException : Exception
+    {
+        public GenFormEnvironmentException(string message): base(message)
+        {
+            
         }
     }
 }

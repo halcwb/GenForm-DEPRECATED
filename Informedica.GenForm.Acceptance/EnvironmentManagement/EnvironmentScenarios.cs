@@ -135,19 +135,7 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 
         public string RegisterEnvironmentWithNameAndProviderWithConnectionString(string machine, string name, string machinename, string environment)
         {
-            if (GenFormApplication.GetRegisterdProviders().All(p => p.ProviderName != machinename)) return string.Empty;
-
-            var setting = GetEnvironmentSetting(name, machinename, environment);
-
-            GenFormApplication.Environments.AddEnvironment(Environment.Create(name, machine));
-            GenFormApplication.Environments.Single(e => e.Name == name).Settings.AddSetting(setting);
-
-            return setting.SettingName;
-        }
-
-        private static EnvironmentSetting GetEnvironmentSetting(string name, string machinename, string environment)
-        {
-            return EnvironmentSetting.CreateEnvironment(name, machinename, environment);
+            return string.Empty;
         }
 
         public string ProviderForShouldBe(string setname)
@@ -180,23 +168,6 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
             var env = GetEnvironmentSetting(settingName);
 
             return env == null ? string.Empty : env.SettingName.Replace(env.MachineName, "MyMachine");
-        }
-
-        public string CreateEnvironmentSettingWithConnectionString(string settingName, string connectionString)
-        {
-            var a = settingName.Split('.');
-            var setting = CreateEnvironmentSetting(a[0], a[1], a[2], settingName, connectionString);
-
-            return setting.SettingName;
-        }
-
-        private EnvironmentSetting CreateEnvironmentSetting(string name, string machinename, string environment, string provider, string connectionString)
-        {
-            var envset = EnvironmentSetting.CreateEnvironment(name, machinename, environment);
-            envset.Provider = provider;
-            envset.ConnectionString = connectionString;
-
-            return envset;
         }
     }
 }

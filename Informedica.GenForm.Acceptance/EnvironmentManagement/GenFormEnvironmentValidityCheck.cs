@@ -26,9 +26,9 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
         public string IsValid()
         {
             SetEnvironment(Name, Machine);
-            _environment.GenFormDatabaseConnectionString = DatabaseConnection;
+            _environment.Database = DatabaseConnection;
 
-            return _environment.GenFormDatabaseConnectionString; //_environment.IsValid() ? "Yes" : "No";
+            return _environment.Database; //_environment.IsValid() ? "Yes" : "No";
         }
     }
 }

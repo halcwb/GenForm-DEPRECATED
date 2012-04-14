@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
 using System.Linq;
 
 namespace Informedica.GenForm.Settings
@@ -11,20 +10,22 @@ namespace Informedica.GenForm.Settings
     {
         public const char Separator = '.';
 
-        private readonly SettingsManager _settingsManager;
+        private readonly SettingsManager _manager;
         private readonly string _machine;
         private readonly string _environment;
 
-        public EnvironmentSettings(SettingsManager settingsManager, string machine, string environment)
+        public EnvironmentSettings(SettingsManager manager, string machine, string environment)
         {
-            _settingsManager = settingsManager;
+            if (manager == null) throw  new NullReferenceException("Settings manager cannot be null");
+
+            _manager = manager;
             _machine = machine;
             _environment = environment;
         }
 
         public bool Contains(EnvironmentSetting env)
         {
-            return _settingsManager.GetConnectionString(env.Environment) != null;
+            return _manager.GetConnectionString(env.Environment) != null;
         }
 
         #region Implementation of IEnumerable
@@ -43,18 +44,17 @@ namespace Informedica.GenForm.Settings
 
         private IEnumerator<EnvironmentSetting> GetEnvironments()
         {
-            var conns = _settingsManager.GetConnectionStrings();
+            var conns = _manager.GetConnectionStrings();
             IList<EnvironmentSetting> envs = new List<EnvironmentSetting>();
             foreach (var setting in conns)
             {
                 if (setting.Name.Split(Separator).GetUpperBound(0) < 3) continue;
 
-                var id = GetIdFromConnectionString(setting);
+                var name = GetIdFromConnectionString(setting);
                 var mach = GetMachineNameFromConnectionString(setting);
-                var name = GetNameFromConnectionString(setting);
-                var prov = GetProviderFromConnectionString(setting);
+                var environment = GetNameFromConnectionString(setting);
 
-                if (_machine == mach && name == _environment) envs.Add(new EnvironmentSetting(id, mach, name, prov, setting.ConnectionString));
+                if (_machine == mach && environment == _environment) envs.Add(EnvironmentSetting.CreateEnvironment(name, mach, environment, _manager));
             }
 
             return envs.GetEnumerator();
@@ -63,11 +63,6 @@ namespace Informedica.GenForm.Settings
         private static string GetIdFromConnectionString(ConnectionStringSettings setting)
         {
             return setting.Name.Split(Separator)[0];
-        }
-
-        private static string GetProviderFromConnectionString(ConnectionStringSettings setting)
-        {
-            return setting.Name.Split(Separator)[3];
         }
 
         private static string GetMachineNameFromConnectionString(ConnectionStringSettings setting)
@@ -94,20 +89,21 @@ namespace Informedica.GenForm.Settings
 
         #endregion
 
+        public void AddSetting(string name, string machinename, string environment)
+        {
+            var setting = EnvironmentSetting.CreateEnvironment(name, machinename, environment, _manager);
+            AddSetting(setting);
+        }
+
+        public void RemoveEnvironment(EnvironmentSetting setting)
+        {
+            _manager.RemoveConnectionString(setting.SettingName);
+        }
+
         public void AddSetting(EnvironmentSetting setting)
         {
-            if (this.Any(set => set.IsIdentical(setting))) throw new DuplicateSettingError();
-            _settingsManager.AddConnectionString(GetEnvironmentName(setting), setting.ConnectionString);
-        }
-
-        private static string GetEnvironmentName(EnvironmentSetting env)
-        {
-            return env.Name.ToString(CultureInfo.InvariantCulture) + Separator + env.MachineName + Separator + env.Environment + Separator + env.Provider;
-        }
-
-        public void RemoveEnvironment(EnvironmentSetting env)
-        {
-            _settingsManager.RemoveConnectionString(GetEnvironmentName(env));
+            if (this.Any(s => s.IsIdentical(setting))) throw new DuplicateSettingError();
+            _manager.AddConnectionString(setting.SettingName, setting.ConnectionString);
         }
     }
 

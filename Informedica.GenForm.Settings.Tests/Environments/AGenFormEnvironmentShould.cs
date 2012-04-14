@@ -58,7 +58,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             
             try
             {
-                _genFormEnvironment.GenFormDatabaseConnectionString = "Some string";
+                _genFormEnvironment.Database = "Some string";
                 Isolate.Verify.WasCalledWithExactArguments(() => _settings.ElementAt(firstSetting));
             }
             catch (Exception e)
@@ -116,7 +116,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
 
             try
             {
-                _genFormEnvironment.GenFormDatabaseConnectionString = "This is a connection string";
+                _genFormEnvironment.Database = "This is a connection string";
                 Isolate.Verify.WasCalledWithExactArguments(() => _settings.ElementAt(secondSetting));
 
                 Assert.Fail("The test should fail with a verify exeption");
@@ -125,6 +125,15 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             {
                 Assert.IsInstanceOfType(e, typeof(TypeMock.VerifyException));
             }
+        }
+
+        [TestMethod]
+        public void HaveDatabaseTestWhenSetToTest()
+        {
+            var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment();
+            genv.Database = "Test";
+
+            Assert.AreEqual("Test", genv.Database);
         }
 
         private void SetUpFakeEnvironmentToGetSettings(int count)

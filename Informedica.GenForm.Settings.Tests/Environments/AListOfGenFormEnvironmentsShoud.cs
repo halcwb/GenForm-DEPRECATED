@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using System.Linq;
+using Informedica.SecureSettings;
+using Informedica.SecureSettings.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Settings.Tests.Environments
@@ -19,7 +22,10 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             try
             {
-                AddNewGenFormEnvironment();
+                var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment();
+                genv.Database = "Test";
+                _environments.AddEnvironment(genv);
+
             }
             catch (System.Exception e)
             {
@@ -32,7 +38,8 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             try
             {
-                AddNewGenFormEnvironment();
+                var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment();
+                _environments.AddEnvironment(genv);
                 Assert.Fail("Should throw an error");
             }
             catch (System.Exception e)
@@ -45,16 +52,11 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         public void HaveACountIncreasedWithOneWhenANewGenFormEnvironmentIsAdded()
         {
             var count = _environments.Count();
-            AddNewGenFormEnvironment();
+            var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment();
+            genv.Database = "Test";
+            _environments.AddEnvironment(genv);
 
             Assert.AreEqual((count + 1), _environments.Count());
-        }
-
-        private void AddNewGenFormEnvironment()
-        {
-            var genv = _environments.CreateNewEnvironment("Test", "Test");
-            genv.GenFormDatabaseConnectionString = "Some connection string";
-            _environments.AddEnvironment(genv);
         }
     }
 

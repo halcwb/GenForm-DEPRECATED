@@ -1,15 +1,22 @@
+using System;
+
 namespace Informedica.GenForm.Settings
 {
     public class EnvironmentSetting
     {
+        private SettingsManager _manager;
+        public const string Seperator = ".";
 
-        public EnvironmentSetting(string name, string machineName, string environment, string provider, string connectionString)
+        public EnvironmentSetting(string name, string machineName, string environment, string provider, string connectionString, SettingsManager manager)
         {
+            if (manager == null) throw new NullReferenceException("Settingsmanager cannot be null");
+            _manager = manager;
+
             Name = name;
             MachineName = machineName;
             Environment = environment;
             Provider = provider;
-            ConnectionString = connectionString;
+            ConnectionString = connectionString;    
         }
 
         public string Name { get; private set; }
@@ -20,23 +27,21 @@ namespace Informedica.GenForm.Settings
 
         public string Provider { get; set; }
 
+        public string ConnectionString { get { return _manager.GetConnectionString(SettingName).ConnectionString; } set { _manager.AddConnectionString(SettingName, value); } }
+
         public string SettingName
         {
-            get { return MachineName + "." + Environment + "." + Name; }
+            get { return Name + Seperator + MachineName + Seperator + Environment; }
         }
-
-        public string ConnectionString  { get; set; }
 
         public bool IsIdentical(EnvironmentSetting setting)
         {
-            return Name == setting.Name &&
-                   MachineName == setting.MachineName &&
-                   Environment == setting.Environment;
+            return setting.SettingName == SettingName;
         }
 
-        public static EnvironmentSetting CreateEnvironment(string name, string machinename, string environment)
+        public static EnvironmentSetting CreateEnvironment(string name, string machinename, string environment, SettingsManager manager)
         {
-            return new EnvironmentSetting(name, machinename, environment, string.Empty, string.Empty);
+            return new EnvironmentSetting(name, machinename, environment, string.Empty, string.Empty, manager);
         }
     }
 }

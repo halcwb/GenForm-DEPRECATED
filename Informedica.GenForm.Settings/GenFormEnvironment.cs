@@ -5,7 +5,14 @@ namespace Informedica.GenForm.Settings
 {
     public class GenFormEnvironment
     {
-        private const int DatabaseConnectionStringIndex = 0;
+        public enum Settings
+        {
+            Database,
+            LogPath,
+            ExportPath
+        }
+
+        private const int DatabaseIndex = 0;
         private const int LogPathIndex = 1;
         private const int ExporthPathIndex = 2;
 
@@ -19,17 +26,10 @@ namespace Informedica.GenForm.Settings
 
         public string Name { get { return _environment.Name; } }
 
-        public string GenFormDatabaseConnectionString
+        public string Database
         {
-            get { return GetConnectionString(); }
-            set { _environment.Settings.ElementAt(DatabaseConnectionStringIndex).ConnectionString = value; }
-        }
-
-        private string GetConnectionString()
-        {
-            return _environment.Settings.Count() <= DatabaseConnectionStringIndex ? 
-                string.Empty : 
-                _environment.Settings.ElementAt(DatabaseConnectionStringIndex).ConnectionString;
+            get { return _environment.Settings.ElementAt(DatabaseIndex).ConnectionString; }
+            set { _environment.Settings.ElementAt(DatabaseIndex).ConnectionString = value; }
         }
 
         public string LogPath
@@ -47,7 +47,7 @@ namespace Informedica.GenForm.Settings
         public bool IsValid()
         {
             return !string.IsNullOrWhiteSpace(Name) &&
-                   !string.IsNullOrWhiteSpace(GenFormDatabaseConnectionString);
+                   !string.IsNullOrWhiteSpace(Database);
         }
     }
 }

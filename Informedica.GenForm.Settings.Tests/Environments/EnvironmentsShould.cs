@@ -115,12 +115,20 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             const string machine = "test";
             const string environment = "test";
 
-            var source = new TestSettingSource();
-            var envs = new EnvironmentSettings(new SettingsManager(new SecureSettingsManager(source)), machine, environment);
-            var env = new EnvironmentSetting("test", machine, environment, "test", "test");
-            envs.AddSetting(env);
+            var man = CreateIsolatedSettingsManager();
+            var setting = new EnvironmentSetting("test", machine, environment, "test", "test", man);
 
-            Assert.IsTrue(envs.Any(e => e.Environment == env.Environment));
+            var envs = new EnvironmentSettings(man, machine, environment);
+            envs.AddSetting(setting);
+
+            Assert.IsTrue(envs.Any(e => e.Environment == setting.Environment));
+        }
+
+        private static SettingsManager CreateIsolatedSettingsManager()
+        {
+            var source = new TestSettingSource();
+            var man = new SettingsManager(new SecureSettingSource(source));
+            return man;
         }
 
         [Isolated]
@@ -128,8 +136,8 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         public void BeAbleToRemoveTestEnvironmentAfterTestEnvironmentIsAdded()
         {
             var source = new TestSettingSource();
-            var envs = new EnvironmentSettings(new SettingsManager(new SecureSettingsManager(source)), "test", "test");
-            var env = new EnvironmentSetting("test", "test", "test", "test", "test");
+            var envs = new EnvironmentSettings(new SettingsManager(new SecureSettingSource(source)), "test", "test");
+            var env = new EnvironmentSetting("test", "test", "test", "test", "test", CreateIsolatedSettingsManager());
             envs.AddSetting(env);
             envs.RemoveEnvironment(env);
 
