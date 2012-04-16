@@ -21,6 +21,7 @@ namespace Informedica.GenForm.Settings
             _virtualPath = path;
         }
 
+
         #region Implementation of IEnumerable
 
         /// <summary>
