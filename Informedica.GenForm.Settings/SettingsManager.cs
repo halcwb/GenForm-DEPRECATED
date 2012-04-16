@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Linq;
 using System.Threading;
-using Informedica.SecureSettings;
+using Informedica.SecureSettings.Sources;
 
 namespace Informedica.GenForm.Settings
 {
@@ -11,9 +11,9 @@ namespace Informedica.GenForm.Settings
         static SettingsManager _instance;
         static readonly object LockThis = new object();
 
-        private readonly SecureSettingSource _secure;
+        private readonly ISettingSource _secure;
 
-        public SettingsManager(SecureSettingSource secureSettingsManager)
+        public SettingsManager(ISettingSource secureSettingsManager)
         {
             _secure = secureSettingsManager;
         }
@@ -44,7 +44,7 @@ namespace Informedica.GenForm.Settings
 
         private static ISettingSource GetSettingSource()
         {
-           return new WebConfigSettingSource();
+           return SettingSourceFactory.GetSettingSource();
         }
 
         #endregion
@@ -85,7 +85,7 @@ namespace Informedica.GenForm.Settings
 
         public IEnumerable<ConnectionStringSettings> GetConnectionStrings()
         {
-            return (from setting in _secure.Settings where setting.Type == "conn" 
+            return (from setting in _secure where setting.Type == "conn" 
                     select new ConnectionStringSettings(setting.Name, setting.Value))
                     .ToList();
         }

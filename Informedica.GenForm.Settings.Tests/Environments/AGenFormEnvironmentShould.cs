@@ -14,6 +14,24 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         private const string EnvironmentName = "TestEnvironment";
         private const int SettingCount = 3;
 
+        private void SetUpFakeEnvironmentToGetSettings(int count)
+        {
+            _environment = Isolate.Fake.Instance<Environment>();
+            Isolate.WhenCalled(() => _environment.Name).WillReturn(EnvironmentName);
+
+            _settings = Isolate.Fake.Instance<EnvironmentSettings>();
+            Isolate.WhenCalled(() => _settings.Count()).WillReturn(count);
+            Isolate.WhenCalled(() => _environment.Settings).WillReturn(_settings);
+            for (var i = 0; i < count; i++)
+            {
+                var index = i;
+                Isolate.WhenCalled(() => _settings.ElementAt(index)).WillReturn(
+                    Isolate.Fake.Instance<EnvironmentSetting>());
+            }
+
+            _genFormEnvironment = new GenFormEnvironment(_environment);
+        }
+
         [TestMethod]
         [Isolated]
         public void UseAnEnvironmentWithThreeSettings()
@@ -136,22 +154,5 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             Assert.AreEqual("Test", genv.Database);
         }
 
-        private void SetUpFakeEnvironmentToGetSettings(int count)
-        {
-            _environment = Isolate.Fake.Instance<Environment>();
-            Isolate.WhenCalled(() => _environment.Name).WillReturn(EnvironmentName);
-
-            _settings = Isolate.Fake.Instance<EnvironmentSettings>();
-            Isolate.WhenCalled(() => _settings.Count()).WillReturn(count);
-            Isolate.WhenCalled(() => _environment.Settings).WillReturn(_settings);
-            for (var i = 0; i < count; i++)
-            {
-                var index = i;
-                Isolate.WhenCalled(() => _settings.ElementAt(index)).WillReturn(
-                    Isolate.Fake.Instance<EnvironmentSetting>());
-            }
-
-            _genFormEnvironment = new GenFormEnvironment(_environment);
-        }
     }
 }

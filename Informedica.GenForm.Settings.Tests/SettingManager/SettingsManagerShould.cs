@@ -1,4 +1,4 @@
-using Informedica.SecureSettings;
+using Informedica.SecureSettings.Sources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock.ArrangeActAssert;
 

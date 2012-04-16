@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Informedica.SecureSettings;
+using Informedica.SecureSettings.Sources;
 using Informedica.SecureSettings.Testing;
 
 namespace Informedica.GenForm.Settings.Tests.Environments
@@ -9,8 +10,8 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         public static GenFormEnvironment CreateTestGenFormEnvironment()
         {
             var source = new TestSettingSource(new List<Setting>());
-            var securemanager = new SecureSettingSource(source);
-            var manager = new SettingsManager(securemanager);
+            var secureSource = new SecureSettingSource(source);
+            var manager = new SettingsManager(secureSource);
             var settings = new EnvironmentSettings(manager, "Test", "Test");
             
             var env = new Environment("Test", "Test", settings);

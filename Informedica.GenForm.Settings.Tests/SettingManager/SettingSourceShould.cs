@@ -9,7 +9,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingManager
         [TestMethod]
         public void GetAllSettingsForGenForm()
         {
-            var source = new WebConfigSettingSource();
+            var source = SettingSourceFactory.GetSettingSource();
 
             Assert.IsTrue(source.Any());
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using Informedica.SecureSettings;
+using Informedica.SecureSettings.Sources;
 using Informedica.SecureSettings.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock;
@@ -13,6 +14,18 @@ namespace Informedica.GenForm.Settings.Tests.Environments
     [TestClass]
     public class EnvironmentsShould
     {
+
+        private static EnvironmentSetting GetFakeEnvironmentSetting()
+        {
+            var env = Isolate.Fake.Instance<EnvironmentSetting>();
+            Isolate.WhenCalled(() => env.Name).WillReturn("test");
+            Isolate.WhenCalled(() => env.MachineName).WillReturn("test");
+            Isolate.WhenCalled(() => env.Environment).WillReturn("test");
+            Isolate.WhenCalled(() => env.Provider).WillReturn("test");
+            Isolate.WhenCalled(() => env.ConnectionString).WillReturn("test");
+
+            return env;
+        }
 
         [Isolated]
         [TestMethod]
@@ -74,18 +87,6 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             {
                 Assert.Fail(e.ToString());
             }
-        }
-
-        private static EnvironmentSetting GetFakeEnvironmentSetting()
-        {
-            var env = Isolate.Fake.Instance<EnvironmentSetting>();
-            Isolate.WhenCalled(() => env.Name).WillReturn("test");
-            Isolate.WhenCalled(() => env.MachineName).WillReturn("test");
-            Isolate.WhenCalled(() => env.Environment).WillReturn("test");
-            Isolate.WhenCalled(() => env.Provider).WillReturn("test");
-            Isolate.WhenCalled(() => env.ConnectionString).WillReturn("test");
-
-            return env;
         }
 
         [Isolated]

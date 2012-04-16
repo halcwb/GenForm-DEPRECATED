@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Configuration;
-using Informedica.SecureSettings;
+using Informedica.SecureSettings.Sources;
 
 namespace Informedica.GenForm.Settings
 {
@@ -152,6 +152,31 @@ namespace Informedica.GenForm.Settings
 
             Configuration.ConnectionStrings.ConnectionStrings.Remove(setting);
             SaveConfiguration();
+        }
+
+        public string ReadSecureSetting(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteSecureSetting(string key, string value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetConnectionString(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetConnectionString(string name, string connectionString)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveSecureSetting(string appSettingName)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

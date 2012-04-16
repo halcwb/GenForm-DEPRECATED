@@ -1,0 +1,325 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="Generator" content="LINQ to XML, baby!" />
+  <style type='text/css'>
+body
+{
+	margin: 0.3em 0.3em 0.4em 0.5em;
+	font-family: Verdana;
+	font-size: 80%;
+	background: white;
+}
+
+p, pre
+{
+	margin:0;
+	padding:0;
+	font-family: Verdana;
+}
+
+table
+{
+	border-collapse: collapse;
+	border: 2px solid #17b;
+	border-top: 1px;
+	margin: 0.3em 0.2em;
+}
+
+table.limit
+{
+	border-collapse: collapse;
+	border-bottom: 2px solid #c31;
+}
+
+td, th
+{
+	vertical-align: top;
+	border: 1px solid #aaa;
+	padding: 0.1em 0.2em;
+	margin: 0;
+}
+
+th
+{
+	text-align: left;
+	background-color: #ddd;
+	border: 1px solid #777;
+	font-family: tahoma;
+	font-size:90%;
+	font-weight: bold;
+}
+
+th.member
+{
+	padding: 0.1em 0.2em 0.1em 0.2em;
+}
+
+td.typeheader
+{
+	font-family: tahoma;
+	font-size: 90%;
+	font-weight: bold;
+	background-color: #17b;
+	color: white;
+	padding: 0 0.2em 0.1em 0.1em;
+}
+
+td.n { text-align: right }
+
+a:link.typeheader, a:visited.typeheader
+{
+	font-family: tahoma;
+	font-size: 90%;
+	font-weight: bold;
+	text-decoration: none;
+	background-color: #17b;
+	color: white;
+}
+
+span.typeglyph
+{
+	font-family: webdings;
+	padding: 0 0.2em 0 0;
+	margin: 0;
+}
+
+table.group
+{
+	border: none;
+	margin: 0;
+}
+
+td.group
+{
+	border: none;
+	padding: 0 0.1em;
+}
+
+div.spacer
+{
+	margin: 0.6em 0;
+}
+
+table.headingpresenter
+{
+	border: none;
+	border-left: 3px dotted #1a5;
+	margin: 1em 0em 1.2em 0.15em;
+}
+
+th.headingpresenter
+{
+	font-family: Arial;
+	border: none;
+	padding: 0 0 0.2em 0.5em;
+	background-color: white;
+	color: green;
+	font-size: 110%;        
+}
+
+td.headingpresenter
+{
+	border: none;
+	padding: 0 0 0 0.6em;
+}
+
+td.summary
+{ 
+	background-color: #def;
+	color: #024;
+	font-family: Tahoma;
+	padding: 0 0.1em 0.1em 0.1em;
+}
+
+td.columntotal
+{
+	font-family: Tahoma;
+	background-color: #eee;
+	font-weight: bold;
+	color: #17b;
+	font-size:90%;
+	text-align:right;
+}
+
+span.graphbar
+{
+	background: #17b;
+	color: #17b;
+	margin-left: -2px;
+	margin-right: -2px;
+}
+
+a:link.graphcolumn, a:visited.graphcolumn
+{
+	color: #17b;
+	text-decoration: none;
+	font-weight: bold;
+	font-family: Arial;
+	font-size: 110%;
+	letter-spacing: -0.4em;	
+	margin-left: 0.3em;
+}
+
+i { color: green; }
+
+em { color: red; }
+
+span.highlight { background: #ff8; }
+  </style>
+
+  <script language='JavaScript' type='text/javascript'>
+
+      function toggle(id)
+      {
+        table = document.getElementById(id);
+        if (table == null) return false;
+        updown = document.getElementById(id + 'ud');
+        if (updown == null) return false;
+        expand = updown.innerText == '6';
+        updown.innerText = expand ? '5' : '6';
+        table.style.borderBottom = expand ? '2px solid' : 'dashed 2px';
+        elements = table.rows;
+        if (elements.length == 0 || elements.length == 1) return false;
+        for (i = 1; i != elements.length; i++)
+          if (elements[i].id.substring(0,3) != 'sum')
+            elements[i].style.display = expand ? 'block' : 'none';
+        return false;
+      }
+    
+  </script>
+</head>
+<body>
+<div>
+  <div class="spacer">
+    <table id="t2">
+      <tr>
+        <td class="typeheader" colspan="4">
+          <a href="" class="typeheader" onclick="return toggle('t2');">
+            <span class="typeglyph" id="t2ud">5</span>WebConfigSettingSource (8 items)</a>
+        </td>
+      </tr>
+      <tr>
+        <th title="System.String">Name</th>
+        <th title="System.String">Value</th>
+        <th title="System.String">Type</th>
+        <th title="System.Boolean">IsEncrypted</th>
+      </tr>
+      <tr>
+        <td>
+          <p>LocalSqlServer</p>
+        </td>
+        <td>
+          <p>data source=.\SQLEXPRESS;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|aspnetdb.mdf;User Instance=true</p>
+        </td>
+        <td>
+          <p>conn</p>
+        </td>
+        <td>
+          <p>False</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>[Secure]iCjhnFwaYyeSWXoL5FL7yw==</p>
+        </td>
+        <td>
+          <p>MIwslAvaU0oJDYCnnjkaA58MCH0XsCxesdeCC1ENpFbgUgbs44XbzxjgOLRrtfou+M7jz2bFIw6PyKXNLXWzikIWkps6lrhYuvIffqCrotM=</p>
+        </td>
+        <td>
+          <p>conn</p>
+        </td>
+        <td>
+          <p>True</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Smiqbv/75FI87o2VMmY12A==</p>
+        </td>
+        <td>
+          <p>xtjsh9SN6XgNluSJcjeCEDumz7FpCeueQH9aUJCOAow=</p>
+        </td>
+        <td>
+          <p>app</p>
+        </td>
+        <td>
+          <p>False</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>webpages:Version</p>
+        </td>
+        <td>
+          <p>1.0.0.0</p>
+        </td>
+        <td>
+          <p>app</p>
+        </td>
+        <td>
+          <p>False</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>ClientValidationEnabled</p>
+        </td>
+        <td>
+          <p>true</p>
+        </td>
+        <td>
+          <p>app</p>
+        </td>
+        <td>
+          <p>False</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>UnobtrusiveJavaScriptEnabled</p>
+        </td>
+        <td>
+          <p>true</p>
+        </td>
+        <td>
+          <p>app</p>
+        </td>
+        <td>
+          <p>False</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>logPath</p>
+        </td>
+        <td>
+          <p>&#160;</p>
+        </td>
+        <td>
+          <p>app</p>
+        </td>
+        <td>
+          <p>False</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>expPath</p>
+        </td>
+        <td>
+          <p>&#160;</p>
+        </td>
+        <td>
+          <p>app</p>
+        </td>
+        <td>
+          <p>False</p>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>

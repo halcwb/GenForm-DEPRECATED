@@ -1,4 +1,4 @@
-using Informedica.SecureSettings;
+using Informedica.SecureSettings.Sources;
 
 namespace Informedica.GenForm.Settings
 {
@@ -6,7 +6,7 @@ namespace Informedica.GenForm.Settings
     {
         private static EnvironmentSettings CreateEnvironmentSettings(string machine, string environment)
         {
-            return new EnvironmentSettings(new SettingsManager(new SecureSettingSource(new WebConfigSettingSource())), machine, environment);
+            return new EnvironmentSettings(new SettingsManager(SettingSourceFactory.GetSecureSource()), machine, environment);
         }
 
         public Environment(string machine, string name, EnvironmentSettings settings)
