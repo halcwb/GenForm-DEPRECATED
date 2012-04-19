@@ -1,6 +1,6 @@
 using Informedica.SecureSettings.Sources;
 
-namespace Informedica.GenForm.Settings
+namespace Informedica.GenForm.Settings.ConfigurationSettings
 {
     public class SettingSourceFactory
     {

@@ -43,16 +43,22 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Environment.cs" />
-    <Compile Include="GenFormEnvironments.cs" />
-    <Compile Include="Environments.cs" />
-    <Compile Include="EnvironmentSettings.cs" />
-    <Compile Include="EnvironmentSetting.cs" />
-    <Compile Include="GenFormEnvironment.cs" />
+    <Compile Include="ConfigurationSettings\ConfigurationFactory.cs" />
+    <Compile Include="ConfigurationSettings\ConfigurationSettingSource.cs" />
+    <Compile Include="ConfigurationSettings\SettingNotFoundException.cs" />
+    <Compile Include="ConfigurationSettings\SettingSourceFactory.cs" />
+    <Compile Include="ConfigurationSettings\UnknownSettingTypeException.cs" />
+    <Compile Include="Environments\DuplicateSettingError.cs" />
+    <Compile Include="Environments\Environment.cs" />
+    <Compile Include="Environments\EnvironmentCollection.cs" />
+    <Compile Include="Environments\EnvironmentSetting.cs" />
+    <Compile Include="Environments\EnvironmentSettingsCollection.cs" />
+    <Compile Include="Environments\GenFormEnvironment.cs" />
+    <Compile Include="Environments\GenFormEnvironmentCollection.cs" />
+    <Compile Include="Environments\GenFormEnvironmentException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsManager.cs" />
     <Compile Include="SettingsManagerException.cs" />
-    <Compile Include="SettingSourceFactory.cs" />
     <Compile Include="WebConfigSettingSource.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +71,7 @@
       <Name>Informedica.SecureSettings</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

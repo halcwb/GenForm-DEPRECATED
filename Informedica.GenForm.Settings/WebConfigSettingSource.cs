@@ -7,6 +7,7 @@ using Informedica.SecureSettings.Sources;
 
 namespace Informedica.GenForm.Settings
 {
+    [Obsolete]
     public class WebConfigSettingSource: ISettingSource
     {
         private static readonly IList<Setting> Settings = new List<Setting>();

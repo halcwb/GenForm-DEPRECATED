@@ -1,10 +1,14 @@
 using System;
+using Informedica.GenForm.Settings.ConfigurationSettings;
+using Informedica.SecureSettings.Sources;
 
-namespace Informedica.GenForm.Settings
+namespace Informedica.GenForm.Settings.Environments
 {
     public class EnvironmentSetting
     {
         private SettingsManager _manager;
+        private Setting _setting;
+        private SecureSettingSource _source;
         public const string Seperator = ".";
 
         public EnvironmentSetting(string name, string machineName, string environment, string provider, string connectionString, SettingsManager manager)
@@ -12,11 +16,28 @@ namespace Informedica.GenForm.Settings
             if (manager == null) throw new NullReferenceException("Settingsmanager cannot be null");
             _manager = manager;
 
+            Init(name, machineName, environment, provider, connectionString);
+        }
+
+        private void Init(string name, string machineName, string environment, string provider, string connectionString)
+        {
             Name = name;
             MachineName = machineName;
             Environment = environment;
             Provider = provider;
-            ConnectionString = connectionString;    
+            ConnectionString_New = connectionString;
+        }
+
+        public string ConnectionString_New
+        {
+            get { return _source.ReadSecure(ConfigurationSettingSource.Types.Conn, SettingName).Value; } 
+            set { _source.WriteSecure(new Setting(SettingName, value, "Conn", true)); }
+        }
+
+        public EnvironmentSetting(string name, string machineName, string environment, string provider, string connectionString, SecureSettingSource secureSettingSource)
+        {
+            _source = secureSettingSource;
+            Init(name, machineName, environment, provider, connectionString);
         }
 
         public string Name { get; private set; }

@@ -4,6 +4,7 @@ using System.Linq;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Settings;
+using Informedica.GenForm.Settings.Environments;
 
 namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 {

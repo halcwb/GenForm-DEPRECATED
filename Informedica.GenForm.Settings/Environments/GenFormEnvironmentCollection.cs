@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Informedica.GenForm.Settings
+namespace Informedica.GenForm.Settings.Environments
 {
-    public class GenFormEnvironments: IEnumerable<GenFormEnvironment>
+    public class GenFormEnvironmentCollection: IEnumerable<GenFormEnvironment>
     {
         public enum Settings
         {
@@ -58,14 +57,6 @@ namespace Informedica.GenForm.Settings
             if (string.IsNullOrWhiteSpace(environment.Database))
                 throw new GenFormEnvironmentException("Database connection string cannot be empty");
             _environments.Add(environment);
-        }
-    }
-
-    public class GenFormEnvironmentException : Exception
-    {
-        public GenFormEnvironmentException(string message): base(message)
-        {
-            
         }
     }
 }

@@ -2,7 +2,7 @@ using Informedica.SecureSettings.Sources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock.ArrangeActAssert;
 
-namespace Informedica.GenForm.Settings.Tests.SettingManager
+namespace Informedica.GenForm.Settings.Tests.SettingsManagement
 {
     /// <summary>
     /// Summary description for SettingsManagerShould

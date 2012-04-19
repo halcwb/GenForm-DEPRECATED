@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Informedica.GenForm.Settings.Environments;
 using Informedica.SecureSettings;
 using Informedica.SecureSettings.Sources;
 using Informedica.SecureSettings.Testing;
@@ -63,7 +64,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var setman = Isolate.Fake.Instance<SettingsManager>();
             Isolate.WhenCalled(() => setman.GetConnectionStrings()).DoInstead(ReturnEmptyConnectionStringList);
 
-            return new EnvironmentSettings(setman, "Test", "Test");
+            return new EnvironmentSettingsCollection(setman, "Test", "Test");
         }
 
         private static IEnumerable<ConnectionStringSettings> ReturnEmptyConnectionStringList(MethodCallContext arg)
@@ -119,7 +120,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var man = CreateIsolatedSettingsManager();
             var setting = new EnvironmentSetting("test", machine, environment, "test", "test", man);
 
-            var envs = new EnvironmentSettings(man, machine, environment);
+            var envs = new EnvironmentSettingsCollection(man, machine, environment);
             envs.AddSetting(setting);
 
             Assert.IsTrue(envs.Any(e => e.Environment == setting.Environment));
@@ -137,7 +138,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         public void BeAbleToRemoveTestEnvironmentAfterTestEnvironmentIsAdded()
         {
             var source = new TestSettingSource();
-            var envs = new EnvironmentSettings(new SettingsManager(new SecureSettingSource(source)), "test", "test");
+            var envs = new EnvironmentSettingsCollection(new SettingsManager(new SecureSettingSource(source)), "test", "test");
             var env = new EnvironmentSetting("test", "test", "test", "test", "test", CreateIsolatedSettingsManager());
             envs.AddSetting(env);
             envs.RemoveEnvironment(env);
@@ -145,11 +146,11 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             Assert.IsFalse(envs.Any(e => e.Environment == env.Environment));
         }
 
-        private static EnvironmentSettings GetEnvironments()
+        private static EnvironmentSettingsCollection GetEnvironments()
         {
             var setman = GetFakeSettingsManager();
 
-            return new EnvironmentSettings(setman, "Test", "Test");
+            return new EnvironmentSettingsCollection(setman, "Test", "Test");
         }
 
         private static SettingsManager GetFakeSettingsManager()

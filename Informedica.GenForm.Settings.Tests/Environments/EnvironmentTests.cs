@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
+using Informedica.GenForm.Settings.Environments;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock.ArrangeActAssert;
+using Environment = Informedica.GenForm.Settings.Environments.Environment;
 
 namespace Informedica.GenForm.Settings.Tests.Environments
 {
@@ -45,7 +47,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             [TestMethod]
             public void UsesEnvironmentSettingsToGetTheSettings()
             {
-                var fakeEnvironmentSettings = Isolate.Fake.Instance<EnvironmentSettings>();
+                var fakeEnvironmentSettings = Isolate.Fake.Instance<EnvironmentSettingsCollection>();
                 Isolate.WhenCalled(() => fakeEnvironmentSettings.Any()).WillReturn(false);
                 var env = new Environment("Test", "Test", fakeEnvironmentSettings);
 

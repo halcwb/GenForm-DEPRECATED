@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Informedica.GenForm.Settings
+namespace Informedica.GenForm.Settings.Environments
 {
     public class GenFormEnvironment
     {

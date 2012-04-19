@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading;
+using Informedica.GenForm.Settings.ConfigurationSettings;
 using Informedica.SecureSettings.Sources;
 
 namespace Informedica.GenForm.Settings
 {
+    [Obsolete]
     public class SettingsManager
     {
         static SettingsManager _instance;

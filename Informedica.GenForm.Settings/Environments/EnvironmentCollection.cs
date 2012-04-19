@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Informedica.GenForm.Settings
+namespace Informedica.GenForm.Settings.Environments
 {
-    public class Environments: IEnumerable<Environment>
+    public class EnvironmentCollection: IEnumerable<Environment>
     {
         private readonly IList<Environment> _environments;
 
-        public Environments(IList<Environment> environments)
+        public EnvironmentCollection(IList<Environment> environments)
         {
             _environments = environments;
         }

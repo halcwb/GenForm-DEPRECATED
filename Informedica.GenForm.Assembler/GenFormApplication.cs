@@ -5,9 +5,10 @@ using System.Threading;
 using Informedica.GenForm.Assembler.Assemblers;
 using Informedica.GenForm.DataAccess;
 using Informedica.GenForm.Settings;
+using Informedica.GenForm.Settings.Environments;
 using NHibernate;
 using StructureMap;
-using Environment = Informedica.GenForm.Settings.Environment;
+using Environment = Informedica.GenForm.Settings.Environments.Environment;
 
 namespace Informedica.GenForm.Assembler
 {
@@ -17,7 +18,7 @@ namespace Informedica.GenForm.Assembler
         private static readonly Object LockThis = new object();
         
         private static readonly IDictionary<string, ISessionFactory> Factories = new ConcurrentDictionary<string, ISessionFactory>();
-        private static Environments _environments;
+        private static EnvironmentCollection _environments;
 
         private GenFormApplication() {}
 
@@ -55,9 +56,9 @@ namespace Informedica.GenForm.Assembler
             } 
         }
 
-        public static Environments Environments
+        public static EnvironmentCollection Environments
         {
-            get { return _environments ?? (_environments = new Environments(new List<Environment>())); }
+            get { return _environments ?? (_environments = new EnvironmentCollection(new List<Environment>())); }
         }
 
         public static void Initialize()

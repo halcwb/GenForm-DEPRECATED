@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Informedica.GenForm.Settings.Environments;
 using Informedica.SecureSettings;
 using Informedica.SecureSettings.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,12 +10,12 @@ namespace Informedica.GenForm.Settings.Tests.Environments
     [TestClass]
     public class AListOfGenFormEnvironmentsShoud
     {
-        private GenFormEnvironments _environments;
+        private GenFormEnvironmentCollection _environments;
 
         [TestInitialize]
         public void SetUpGenFormEnvironments()
         {
-            _environments = new GenFormEnvironments();
+            _environments = new GenFormEnvironmentCollection();
         }
 
         [TestMethod]

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 
-namespace Informedica.GenForm.Settings
+namespace Informedica.GenForm.Settings.Environments
 {
-    public class EnvironmentSettings: IEnumerable<EnvironmentSetting>
+    public class EnvironmentSettingsCollection: IEnumerable<EnvironmentSetting>
     {
         public const char Separator = '.';
 
@@ -14,7 +14,7 @@ namespace Informedica.GenForm.Settings
         private readonly string _machine;
         private readonly string _environment;
 
-        public EnvironmentSettings(SettingsManager manager, string machine, string environment)
+        public EnvironmentSettingsCollection(SettingsManager manager, string machine, string environment)
         {
             if (manager == null) throw  new NullReferenceException("Settings manager cannot be null");
 
@@ -105,9 +105,5 @@ namespace Informedica.GenForm.Settings
             if (this.Any(s => s.IsIdentical(setting))) throw new DuplicateSettingError();
             _manager.AddConnectionString(setting.SettingName, setting.ConnectionString);
         }
-    }
-
-    public class DuplicateSettingError : Exception
-    {
     }
 }
