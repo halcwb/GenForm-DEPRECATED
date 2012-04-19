@@ -3,24 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Informedica.SecureSettings.Sources;
 
 namespace Informedica.GenForm.Settings.Environments
 {
-    public class EnvironmentSettingsCollection: IEnumerable<EnvironmentSetting>
+    public class EnvironmentSettingsCollection : IEnumerable<EnvironmentSetting>
     {
         public const char Separator = '.';
 
         private readonly SettingsManager _manager;
         private readonly string _machine;
         private readonly string _environment;
+        private SecureSettingSource _source;
 
         public EnvironmentSettingsCollection(SettingsManager manager, string machine, string environment)
         {
-            if (manager == null) throw  new NullReferenceException("Settings manager cannot be null");
+            if (manager == null) throw new NullReferenceException("Settings manager cannot be null");
 
             _manager = manager;
             _machine = machine;
             _environment = environment;
+        }
+
+        public EnvironmentSettingsCollection(string machine, string environment, SecureSettingSource source)
+        {
+            _machine = machine;
+            _environment = environment;
+            _source = source;
         }
 
         public bool Contains(EnvironmentSetting env)
@@ -48,16 +57,32 @@ namespace Informedica.GenForm.Settings.Environments
             IList<EnvironmentSetting> envs = new List<EnvironmentSetting>();
             foreach (var setting in conns)
             {
-                if (setting.Name.Split(Separator).GetUpperBound(0) < 3) continue;
-
-                var name = GetIdFromConnectionString(setting);
-                var mach = GetMachineNameFromConnectionString(setting);
-                var environment = GetNameFromConnectionString(setting);
-
-                if (_machine == mach && environment == _environment) envs.Add(EnvironmentSetting.CreateEnvironment(name, mach, environment, _manager));
+                GetValue(envs, setting);
             }
 
             return envs.GetEnumerator();
+        }
+
+        private void GetValue(IList<EnvironmentSetting> envs, ConnectionStringSettings setting)
+        {
+            if (setting.Name.Split(Separator).GetUpperBound(0) < 3) return;
+
+            var name = GetIdFromConnectionString(setting);
+            var mach = GetMachineNameFromConnectionString(setting);
+            var environment = GetNameFromConnectionString(setting);
+
+            if (_machine == mach && environment == _environment)
+                envs.Add(EnvironmentSetting.CreateEnvironmentSetting(name, mach, environment, _manager));
+        }
+
+        private IEnumerable<EnvironmentSetting> GetEnvironmentSettings()
+        {
+            IList<EnvironmentSetting> envs = new List<EnvironmentSetting>();
+            foreach (var setting in _source)
+            {
+            }
+
+            return envs;
         }
 
         private static string GetIdFromConnectionString(ConnectionStringSettings setting)
@@ -89,18 +114,31 @@ namespace Informedica.GenForm.Settings.Environments
 
         #endregion
 
-        public void AddSetting(string name, string machinename, string environment)
+        [Obsolete]
+        public void AddSetting_Old(string name, string machinename, string environment)
         {
-            var setting = EnvironmentSetting.CreateEnvironment(name, machinename, environment, _manager);
+            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, machinename, environment, _manager);
+            AddSetting_Old(setting);
+        }
+
+        public void AddSetting(string name, string machine, string environment)
+        {
+            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, machine, environment, _source);
             AddSetting(setting);
         }
 
-        public void RemoveEnvironment(EnvironmentSetting setting)
+        private void AddSetting(EnvironmentSetting environmentSetting)
         {
-            _manager.RemoveConnectionString(setting.SettingName);
+            _source.WriteSecure(new Setting(environmentSetting.SettingName, string.Empty, "Conn", true));
         }
 
-        public void AddSetting(EnvironmentSetting setting)
+        public void RemoveEnvironment(EnvironmentSetting environmentSetting)
+        {
+            _manager.RemoveConnectionString(environmentSetting.SettingName);
+        }
+
+        [Obsolete]
+        public void AddSetting_Old(EnvironmentSetting setting)
         {
             if (this.Any(s => s.IsIdentical(setting))) throw new DuplicateSettingError();
             _manager.AddConnectionString(setting.SettingName, setting.ConnectionString);

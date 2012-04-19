@@ -36,11 +36,11 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var setting = GetFakeEnvironmentSetting();
             Isolate.WhenCalled(() => setting.IsIdentical(setting)).WillReturn(true);
 
-            envs.AddSetting(setting);
+            envs.AddSetting_Old(setting);
 
             try
             {
-                envs.AddSetting(setting);
+                envs.AddSetting_Old(setting);
                 Assert.Fail("should not accept the same setting twice");
             }
             catch (Exception e)
@@ -81,7 +81,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
 
             try
             {
-                envs.AddSetting(env);
+                envs.AddSetting_Old(env);
 
             }
             catch (System.Exception e)
@@ -97,7 +97,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var envs = GetEnvironments();
             var env = GetFakeEnvironmentSetting();
 
-            envs.AddSetting(env);
+            envs.AddSetting_Old(env);
 
             try
             {
@@ -121,7 +121,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var setting = new EnvironmentSetting("test", machine, environment, "test", "test", man);
 
             var envs = new EnvironmentSettingsCollection(man, machine, environment);
-            envs.AddSetting(setting);
+            envs.AddSetting_Old(setting);
 
             Assert.IsTrue(envs.Any(e => e.Environment == setting.Environment));
         }
@@ -140,7 +140,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var source = new TestSettingSource();
             var envs = new EnvironmentSettingsCollection(new SettingsManager(new SecureSettingSource(source)), "test", "test");
             var env = new EnvironmentSetting("test", "test", "test", "test", "test", CreateIsolatedSettingsManager());
-            envs.AddSetting(env);
+            envs.AddSetting_Old(env);
             envs.RemoveEnvironment(env);
 
             Assert.IsFalse(envs.Any(e => e.Environment == env.Environment));

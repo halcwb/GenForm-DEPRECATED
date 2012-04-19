@@ -11,6 +11,7 @@ namespace Informedica.GenForm.Settings.Environments
         private SecureSettingSource _source;
         public const string Seperator = ".";
 
+        [Obsolete]
         public EnvironmentSetting(string name, string machineName, string environment, string provider, string connectionString, SettingsManager manager)
         {
             if (manager == null) throw new NullReferenceException("Settingsmanager cannot be null");
@@ -25,7 +26,7 @@ namespace Informedica.GenForm.Settings.Environments
             MachineName = machineName;
             Environment = environment;
             Provider = provider;
-            ConnectionString_New = connectionString;
+            //ConnectionString_New = connectionString;
         }
 
         public string ConnectionString_New
@@ -48,6 +49,7 @@ namespace Informedica.GenForm.Settings.Environments
 
         public string Provider { get; set; }
 
+        [Obsolete]
         public string ConnectionString { get { return _manager.GetConnectionString(SettingName).ConnectionString; } set { _manager.AddConnectionString(SettingName, value); } }
 
         public string SettingName
@@ -60,9 +62,15 @@ namespace Informedica.GenForm.Settings.Environments
             return setting.SettingName == SettingName;
         }
 
-        public static EnvironmentSetting CreateEnvironment(string name, string machinename, string environment, SettingsManager manager)
+        [Obsolete]
+        public static EnvironmentSetting CreateEnvironmentSetting(string name, string machinename, string environment, SettingsManager manager)
         {
             return new EnvironmentSetting(name, machinename, environment, string.Empty, string.Empty, manager);
+        }
+
+        public static EnvironmentSetting CreateEnvironmentSetting(string name, string machine, string environment, SecureSettingSource source)
+        {
+            return new EnvironmentSetting(name, machine, environment, string.Empty, string.Empty, source);
         }
     }
 }

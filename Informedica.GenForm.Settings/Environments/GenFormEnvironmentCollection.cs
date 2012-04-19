@@ -45,9 +45,9 @@ namespace Informedica.GenForm.Settings.Environments
         public static GenFormEnvironment CreateNewEnvironment(string name, string machine)
         {
             var env = Environment.Create(name, machine);
-            env.Settings.AddSetting(Settings.Database.ToString(), machine, name);
-            env.Settings.AddSetting(Settings.ExportPath.ToString(), machine, name);
-            env.Settings.AddSetting(Settings.LogPath.ToString(), machine, name);
+            env.Settings.AddSetting_Old(Settings.Database.ToString(), machine, name);
+            env.Settings.AddSetting_Old(Settings.ExportPath.ToString(), machine, name);
+            env.Settings.AddSetting_Old(Settings.LogPath.ToString(), machine, name);
             
             return new GenFormEnvironment(env);
         }

@@ -23,7 +23,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             try
             {
-                var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment();
+                var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment_Old();
                 genv.Database = "Test";
                 _environments.AddEnvironment(genv);
 
@@ -39,7 +39,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             try
             {
-                var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment();
+                var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment_Old();
                 _environments.AddEnvironment(genv);
                 Assert.Fail("Should throw an error");
             }
@@ -53,7 +53,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         public void HaveACountIncreasedWithOneWhenANewGenFormEnvironmentIsAdded()
         {
             var count = _environments.Count();
-            var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment();
+            var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment_Old();
             genv.Database = "Test";
             _environments.AddEnvironment(genv);
 
