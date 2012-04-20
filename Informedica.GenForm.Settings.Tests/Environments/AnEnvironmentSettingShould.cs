@@ -20,8 +20,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var environment = "Test";
             var name = "MyDatabase";
 
-            var envset = new EnvironmentSetting(name, machine, environment, string.Empty, string.Empty,
-                                                _secureSettingSource);
+            var envset = new EnvironmentSetting(name, machine, environment, _secureSettingSource);
 
             Assert.AreEqual(settingName, envset.SettingName);
         }
@@ -33,16 +32,11 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var fakeSetting = Isolate.Fake.Instance<Setting>();
             SetupSecureSettingSource();
             Isolate.WhenCalled(() => _secureSettingSource.ReadSecure(ConfigurationSettingSource.Types.Conn, null)).WillReturn(fakeSetting);
+            var envset = EnvironmentSetting.CreateEnvironmentSetting("Test", "Test", "Test", _secureSettingSource);
 
-            var machine = "MyMachine";
-            var environment = "Test";
-            var name = "MyDatabase";
-            var provider = "SqLite";
-            var connstring = "This is a connectionstring";
-
-            var envset = new EnvironmentSetting(name, machine, environment, provider, string.Empty, _secureSettingSource);
-
-            connstring = envset.ConnectionString;
+            envset.ConnectionString = "Some connection string";
+            var connstr = envset.ConnectionString;
+            Assert.AreEqual(connstr, envset.ConnectionString);
             Isolate.Verify.WasCalledWithAnyArguments(() => _secureSettingSource.ReadSecure(ConfigurationSettingSource.Types.Conn, null));            
         }
 
@@ -57,10 +51,9 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var machine = "MyMachine";
             var environment = "Test";
             var name = "MyDatabase";
-            var provider = "SqLite";
             var connstring = "This is a connectionstring";
 
-            var envset = new EnvironmentSetting(name, machine, environment, provider, string.Empty, _secureSettingSource);
+            var envset = new EnvironmentSetting(name, machine, environment, _secureSettingSource);
 
             envset.ConnectionString = connstring;
             Isolate.Verify.WasCalledWithAnyArguments(() => _secureSettingSource.WriteSecure(fakeSetting));

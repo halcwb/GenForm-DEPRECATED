@@ -39,7 +39,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             try
             {
-                var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment_Old();
+                var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment();
                 _environments.AddEnvironment(genv);
                 Assert.Fail("Should throw an error");
             }

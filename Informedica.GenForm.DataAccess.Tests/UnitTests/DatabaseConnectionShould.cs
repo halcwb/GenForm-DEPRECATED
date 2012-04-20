@@ -14,7 +14,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
     public class DatabaseConnectionShould
     {
         private readonly string _validConnectionString =
-            SettingsManager.Instance.GetConnectionString("Test").ConnectionString;
+            "Data Source=:memory:;Version=3;New=True;Pooling=True;Max Pool Size=1;";
         private static IDatabaseConnection _databaseConnection;
 
         /// <summary>
@@ -56,25 +56,6 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests
         {
             const string connectionString = @"Data Source=unknown;Initial Catalog=Bogus;Integrated Security=True";
             Assert.IsFalse(_databaseConnection.TestConnection(connectionString), "Using connection: " + connectionString + " test connection should return false");
-        }
-
-        // ToDo Fix broken test
-        //[TestMethod] 
-        public void ReturnTrueWhenConnectectionStringCanConnectToDatabase()
-        {
-            var connectionString = _validConnectionString;
-            Assert.IsTrue(_databaseConnection.TestConnection(connectionString), "Using connection: " + connectionString + " test connection should return true");
-        }
-
-        // ToDo Fix this test
-        //[TestMethod]
-        public void RegisterValidDatabaseSetting()
-        {
-            IEnvironment setting = GetValidEnvironmentSetting();
-
-            _databaseConnection.RegisterSetting(setting);
-            var result = _databaseConnection.GetConnectionString(setting.Name);
-            Assert.IsTrue(result == setting.ConnectionString);
         }
 
         [TestMethod]

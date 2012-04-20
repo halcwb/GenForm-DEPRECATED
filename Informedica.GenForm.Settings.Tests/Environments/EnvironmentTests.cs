@@ -7,76 +7,66 @@ using Environment = Informedica.GenForm.Settings.Environments.Environment;
 
 namespace Informedica.GenForm.Settings.Tests.Environments
 {
+    [TestClass]
     public class EnvironmentTests
     {
-        [TestClass]
-        public class ThatNameProperty
+        private EnvironmentSettingsCollection _fakeEnvironmentSettings;
+
+        [TestMethod]
+        public void ThatNameHasAValueWhenEnvironmentIsCreated()
         {
-            [TestMethod]
-            public void HasAValueWhenEnvironmentIsCreated()
-            {
-                var env = Environment.Create("Test", "Test");
-                Assert.AreEqual("Test", env.Name);
-            }
+            var env = Environment.Create("Test", "Test");
+            Assert.AreEqual("Test", env.Name);
         }
 
-        [TestClass]
-        public class ThatMachineNameProperty
+        [TestMethod]
+        public void ThatMachineIsSetToLocalMachineNameWhenNotExplicitlySetInConstructor()
         {
-            [TestMethod]
-            public void IsSetToLocalMachineNameWhenNotExplicitlySetInConstructor()
-            {
-                var env = Environment.Create("Test", System.Environment.MachineName);
-                Assert.AreEqual(System.Environment.MachineName, env.MachineName);
-            }
-
-            [TestMethod]
-            public void IsSetToNameSuppliedInConstructor()
-            {
-                var machine = "MyMachine";
-                var env = new Environment("Test", machine);
-
-                Assert.AreEqual(machine, env.MachineName);
-            }
+            var env = Environment.Create("Test", System.Environment.MachineName);
+            Assert.AreEqual(System.Environment.MachineName, env.MachineName);
         }
 
-        [TestClass]
-        public class ThatSettingsProperty
+        [TestMethod]
+        public void MachineNameIsSetToMacineNameSuppliedInConstructor()
         {
-            private EnvironmentSettingsCollection _fakeEnvironmentSettings;
+            var machine = "MyMachine";
+            var env = new Environment("Test", machine);
 
-            [Isolated]
-            [TestMethod]
-            public void UsesEnvironmentSettingsToGetTheSettings()
+            Assert.AreEqual(machine, env.MachineName);
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void SettingsUsesEnvironmentSettingsToGetTheSettings()
+        {
+            SetupFakeEnvironmentSettings();
+            var env = new Environment("Test", "Test", _fakeEnvironmentSettings);
+
+            try
             {
-                SetupFakeEnvironmentSettings();
-                var env = new Environment("Test", "Test", _fakeEnvironmentSettings);
-
-                try
-                {
-                    Assert.IsTrue(!env.Settings.Any());
-                    Isolate.Verify.WasCalledWithAnyArguments(() => _fakeEnvironmentSettings.Any());
-                }
-                catch (Exception e)
-                {
-                    Assert.Fail(e.ToString());
-                }
-            }
-
-            private void SetupFakeEnvironmentSettings()
-            {
-                _fakeEnvironmentSettings = Isolate.Fake.Instance<EnvironmentSettingsCollection>();
-                Isolate.WhenCalled(() => _fakeEnvironmentSettings.Any()).WillReturn(false);
-            }
-
-            [TestMethod]
-            public void HasCountZeroWhenEnvironmentIsNew()
-            {
-                SetupFakeEnvironmentSettings();
-                var env = new Environment("Test", "Test", _fakeEnvironmentSettings);
-                
                 Assert.IsTrue(!env.Settings.Any());
+                Isolate.Verify.WasCalledWithAnyArguments(() => _fakeEnvironmentSettings.Any());
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.ToString());
             }
         }
+
+        [TestMethod]
+        public void ThatSettingsHasCountZeroWhenEnvironmentIsNew()
+        {
+            SetupFakeEnvironmentSettings();
+            var env = new Environment("Test", "Test", _fakeEnvironmentSettings);
+
+            Assert.IsTrue(!env.Settings.Any());
+        }
+
+        private void SetupFakeEnvironmentSettings()
+        {
+            _fakeEnvironmentSettings = Isolate.Fake.Instance<EnvironmentSettingsCollection>();
+            Isolate.WhenCalled(() => _fakeEnvironmentSettings.Any()).WillReturn(false);
+        }
+
     }
 }

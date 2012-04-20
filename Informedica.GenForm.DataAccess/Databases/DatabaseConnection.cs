@@ -45,15 +45,16 @@ namespace Informedica.GenForm.DataAccess.Databases
             }                            
         }
 
+        //ToDo Have to implement this method
         public void RegisterSetting(IEnvironment environment)
         {
-            SettingsManager.Instance.WriteSecureSetting(environment.Name,
-                                                        environment.ConnectionString);
+            //SettingsManager.Instance.WriteSecureSetting(environment.Name,
+            //                                            environment.ConnectionString);
         }
 
         public string GetConnectionString(String name)
         {
-            var connectionString =  SettingsManager.Instance.ReadSecureSetting(name);
+            var connectionString = "Data Source=:memory:;Version=3;New=True;Pooling=True;Max Pool Size=1;";
             return connectionString;
         }
 

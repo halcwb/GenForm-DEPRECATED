@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using Informedica.GenForm.Settings.ConfigurationSettings;
 using Informedica.SecureSettings.Sources;
@@ -12,30 +10,15 @@ namespace Informedica.GenForm.Settings.Environments
     {
         public const char Separator = '.';
 
-        private readonly SettingsManager _manager;
         private readonly string _machine;
         private readonly string _environment;
         private SecureSettingSource _source;
-
-        public EnvironmentSettingsCollection(SettingsManager manager, string machine, string environment)
-        {
-            if (manager == null) throw new NullReferenceException("Settings manager cannot be null");
-
-            _manager = manager;
-            _machine = machine;
-            _environment = environment;
-        }
 
         public EnvironmentSettingsCollection(string machine, string environment, SecureSettingSource source)
         {
             _machine = machine;
             _environment = environment;
             _source = source;
-        }
-
-        public bool Contains(EnvironmentSetting env)
-        {
-            return _manager.GetConnectionString(env.Environment) != null;
         }
 
         #region Implementation of IEnumerable
@@ -52,37 +35,13 @@ namespace Informedica.GenForm.Settings.Environments
             return GetEnvironmentSettings().GetEnumerator();
         }
 
-        private IEnumerator<EnvironmentSetting> GetEnvironments()
-        {
-            var conns = _manager.GetConnectionStrings();
-            IList<EnvironmentSetting> envs = new List<EnvironmentSetting>();
-            foreach (var setting in conns)
-            {
-                GetValue(envs, setting);
-            }
-
-            return envs.GetEnumerator();
-        }
-
-        private void GetValue(IList<EnvironmentSetting> envs, ConnectionStringSettings setting)
-        {
-            if (setting.Name.Split(Separator).GetUpperBound(0) < 3) return;
-
-            var name = GetIdFromConnectionString(setting);
-            var mach = GetMachineNameFromConnectionString(setting);
-            var environment = GetNameFromConnectionString(setting);
-
-            if (_machine == mach && environment == _environment)
-                envs.Add(EnvironmentSetting.CreateEnvironmentSetting(name, mach, environment, _manager));
-        }
-
         private IEnumerable<EnvironmentSetting> GetEnvironmentSettings()
         {
             IList<EnvironmentSetting> envs = new List<EnvironmentSetting>();
             foreach (var setting in _source)
             {
-                if (setting.Type == ConfigurationSettingSource.Types.Conn.ToString());
-                envs.Add(new EnvironmentSetting(GetNameFromSetting(setting), _machine, _environment, string.Empty, setting.Value, _source));
+                if (setting.Type == ConfigurationSettingSource.Types.Conn.ToString())
+                    envs.Add(new EnvironmentSetting(GetNameFromSetting(setting), _machine, _environment, _source));
             }
 
             return envs;
@@ -93,20 +52,6 @@ namespace Informedica.GenForm.Settings.Environments
             return setting.Name.Split(Separator)[0];
         }
 
-        private static string GetIdFromConnectionString(ConnectionStringSettings setting)
-        {
-            return setting.Name.Split(Separator)[0];
-        }
-
-        private static string GetMachineNameFromConnectionString(ConnectionStringSettings setting)
-        {
-            return setting.Name.Split(Separator)[1];
-        }
-
-        private static string GetNameFromConnectionString(ConnectionStringSettings setting)
-        {
-            return setting.Name.Split(Separator)[2];
-        }
 
         /// <summary>
         /// Returns an enumerator that iterates through a collection.
@@ -122,17 +67,17 @@ namespace Informedica.GenForm.Settings.Environments
 
         #endregion
 
-        [Obsolete]
-        public void AddSetting_Old(string name, string machinename, string environment)
-        {
-            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, machinename, environment, _manager);
-            AddSetting_Old(setting);
-        }
-
         public void AddSetting(string name, string machine, string environment)
         {
             var setting = EnvironmentSetting.CreateEnvironmentSetting(name, machine, environment, _source);
-            if (this.Any(s => s.Name == name)) throw new DuplicateSettingError();
+            if (this.Any(s => s.Name == name)) throw new DuplicateSettingError("EnvironmentSetting with name " + name + "already exists");
+            AddSetting(setting);
+        }
+
+        public void AddSetting(string name)
+        {
+            if (this.Any(envset => envset.Name == name)) throw new DuplicateSettingError("EnvironmentSetting with name " + name + "already exists");
+            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, _source);
             AddSetting(setting);
         }
 
@@ -143,21 +88,9 @@ namespace Informedica.GenForm.Settings.Environments
 
         public void RemoveEnvironmentSetting(string name)
         {
-            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, _source);            
+            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, _source);
             _source.Remove(_source.SingleOrDefault(s => s.Name == setting.SettingName));
         }
 
-        [Obsolete]
-        public void RemoveEnvironment_Old(EnvironmentSetting environmentSetting)
-        {
-            _manager.RemoveConnectionString(environmentSetting.SettingName);
-        }
-
-        [Obsolete]
-        public void AddSetting_Old(EnvironmentSetting setting)
-        {
-            if (this.Any(s => s.IsIdentical(setting))) throw new DuplicateSettingError();
-            _manager.AddConnectionString(setting.SettingName, setting.ConnectionString_Old);
-        }
     }
 }

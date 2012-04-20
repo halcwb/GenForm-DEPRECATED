@@ -1,7 +1,6 @@
 ﻿using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Library.DomainModel.Databases;
 using Informedica.GenForm.Services.Databases;
-using Informedica.GenForm.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
 using Environment = Informedica.GenForm.DataAccess.Databases.Environment;
@@ -88,7 +87,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         private static void SetUpValidDatabaseSetting()
         {
             _environment.Name = "Test";
-            _environment.ConnectionString = SettingsManager.Instance.ReadSecureSetting(_environment.Name);
+            _environment.ConnectionString = "Data Source=:memory:;Version=3;New=True;Pooling=True;Max Pool Size=1;";
         }
     }
 }

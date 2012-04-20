@@ -61,9 +61,6 @@
       <HintPath>..\packages\NHibernate.3.2.0.4000\lib\Net35\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="scsm">
-      <HintPath>..\..\scsm\scsm\bin\Debug\scsm.exe</HintPath>
-    </Reference>
     <Reference Include="StructureMap, Version=2.6.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
       <Private>True</Private>
@@ -2157,6 +2154,10 @@
     <Folder Include="TestFixtures\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SecureSettings\Informedica.SecureSettings\Informedica.SecureSettings.csproj">
+      <Project>{B426CCA3-460C-44B8-BEF0-C2D8E7263C3E}</Project>
+      <Name>Informedica.SecureSettings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Acceptance\Informedica.GenForm.Acceptance.csproj">
       <Project>{89E1888D-7CFF-404A-B76A-1EF33FD97DE7}</Project>
       <Name>Informedica.GenForm.Acceptance</Name>

@@ -53,9 +53,9 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
             return new Setting(element.Key, element.Value, Types.App.ToString(), false);
         }
 
-        private Setting ReadConnectionString(string arg)
+        private Setting ReadConnectionString(string name)
         {
-            return CreateSetting(Configuration.ConnectionStrings.ConnectionStrings[arg]);
+            return CreateSetting(Configuration.ConnectionStrings.ConnectionStrings[name]);
         }
 
         private static Setting CreateSetting(ConnectionStringSettings connectionString)

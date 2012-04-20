@@ -62,7 +62,6 @@
     <Compile Include="SettingsManagement\AConfigurationSettingSourceShould.cs" />
     <Compile Include="SettingsManagement\ASecureConfigurationSettingSourceShould.cs" />
     <Compile Include="SettingsManagement\SecureSettingSourceTest.cs" />
-    <Compile Include="SettingsManagement\SettingsManagerShould.cs" />
     <Compile Include="SettingsManagement\TestConfigurationFactory.cs" />
   </ItemGroup>
   <ItemGroup>
