@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Informedica.GenForm.Settings.ConfigurationSettings;
 using Informedica.SecureSettings.Sources;
 
 namespace Informedica.GenForm.Settings.Environments
@@ -48,7 +49,7 @@ namespace Informedica.GenForm.Settings.Environments
         /// <filterpriority>1</filterpriority>
         public IEnumerator<EnvironmentSetting> GetEnumerator()
         {
-            return GetEnvironments();
+            return GetEnvironmentSettings().GetEnumerator();
         }
 
         private IEnumerator<EnvironmentSetting> GetEnvironments()
@@ -80,9 +81,16 @@ namespace Informedica.GenForm.Settings.Environments
             IList<EnvironmentSetting> envs = new List<EnvironmentSetting>();
             foreach (var setting in _source)
             {
+                if (setting.Type == ConfigurationSettingSource.Types.Conn.ToString());
+                envs.Add(new EnvironmentSetting(GetNameFromSetting(setting), _machine, _environment, string.Empty, setting.Value, _source));
             }
 
             return envs;
+        }
+
+        private string GetNameFromSetting(Setting setting)
+        {
+            return setting.Name.Split(Separator)[0];
         }
 
         private static string GetIdFromConnectionString(ConnectionStringSettings setting)
@@ -124,6 +132,7 @@ namespace Informedica.GenForm.Settings.Environments
         public void AddSetting(string name, string machine, string environment)
         {
             var setting = EnvironmentSetting.CreateEnvironmentSetting(name, machine, environment, _source);
+            if (this.Any(s => s.Name == name)) throw new DuplicateSettingError();
             AddSetting(setting);
         }
 
@@ -132,7 +141,14 @@ namespace Informedica.GenForm.Settings.Environments
             _source.WriteSecure(new Setting(environmentSetting.SettingName, string.Empty, "Conn", true));
         }
 
-        public void RemoveEnvironment(EnvironmentSetting environmentSetting)
+        public void RemoveEnvironmentSetting(string name)
+        {
+            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, _source);            
+            _source.Remove(_source.SingleOrDefault(s => s.Name == setting.SettingName));
+        }
+
+        [Obsolete]
+        public void RemoveEnvironment_Old(EnvironmentSetting environmentSetting)
         {
             _manager.RemoveConnectionString(environmentSetting.SettingName);
         }
@@ -141,7 +157,7 @@ namespace Informedica.GenForm.Settings.Environments
         public void AddSetting_Old(EnvironmentSetting setting)
         {
             if (this.Any(s => s.IsIdentical(setting))) throw new DuplicateSettingError();
-            _manager.AddConnectionString(setting.SettingName, setting.ConnectionString);
+            _manager.AddConnectionString(setting.SettingName, setting.ConnectionString_Old);
         }
     }
 }

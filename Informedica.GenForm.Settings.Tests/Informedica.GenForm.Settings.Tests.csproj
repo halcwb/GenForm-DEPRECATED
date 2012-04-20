@@ -54,9 +54,10 @@
     <Compile Include="Environments\AGenFormEnvironmentShould.cs" />
     <Compile Include="Environments\AListOfGenFormEnvironmentsShoud.cs" />
     <Compile Include="Environments\AnEnvironmentSettingShould.cs" />
-    <Compile Include="Environments\EnvironmentsShould.cs" />
+    <Compile Include="Environments\EnvironmentSettingsCollectionShould.cs" />
     <Compile Include="Environments\EnvironmentTests.cs" />
     <Compile Include="Environments\TestGenFormEnvironment.cs" />
+    <Compile Include="Environments\TestSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsManagement\AConfigurationSettingSourceShould.cs" />
     <Compile Include="SettingsManagement\ASecureConfigurationSettingSourceShould.cs" />

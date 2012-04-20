@@ -43,18 +43,19 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         [TestClass]
         public class ThatSettingsProperty
         {
+            private EnvironmentSettingsCollection _fakeEnvironmentSettings;
+
             [Isolated]
             [TestMethod]
             public void UsesEnvironmentSettingsToGetTheSettings()
             {
-                var fakeEnvironmentSettings = Isolate.Fake.Instance<EnvironmentSettingsCollection>();
-                Isolate.WhenCalled(() => fakeEnvironmentSettings.Any()).WillReturn(false);
-                var env = new Environment("Test", "Test", fakeEnvironmentSettings);
+                SetupFakeEnvironmentSettings();
+                var env = new Environment("Test", "Test", _fakeEnvironmentSettings);
 
                 try
                 {
                     Assert.IsTrue(!env.Settings.Any());
-                    Isolate.Verify.WasCalledWithAnyArguments(() => fakeEnvironmentSettings.Any());
+                    Isolate.Verify.WasCalledWithAnyArguments(() => _fakeEnvironmentSettings.Any());
                 }
                 catch (Exception e)
                 {
@@ -62,11 +63,18 @@ namespace Informedica.GenForm.Settings.Tests.Environments
                 }
             }
 
+            private void SetupFakeEnvironmentSettings()
+            {
+                _fakeEnvironmentSettings = Isolate.Fake.Instance<EnvironmentSettingsCollection>();
+                Isolate.WhenCalled(() => _fakeEnvironmentSettings.Any()).WillReturn(false);
+            }
+
             [TestMethod]
             public void HasCountZeroWhenEnvironmentIsNew()
             {
-                var env = new Environment("Test", "Test");
-
+                SetupFakeEnvironmentSettings();
+                var env = new Environment("Test", "Test", _fakeEnvironmentSettings);
+                
                 Assert.IsTrue(!env.Settings.Any());
             }
         }

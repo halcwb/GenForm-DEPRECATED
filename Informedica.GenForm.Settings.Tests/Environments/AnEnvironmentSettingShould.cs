@@ -42,7 +42,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
 
             var envset = new EnvironmentSetting(name, machine, environment, provider, string.Empty, _secureSettingSource);
 
-            connstring = envset.ConnectionString_New;
+            connstring = envset.ConnectionString;
             Isolate.Verify.WasCalledWithAnyArguments(() => _secureSettingSource.ReadSecure(ConfigurationSettingSource.Types.Conn, null));            
         }
 
@@ -62,7 +62,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
 
             var envset = new EnvironmentSetting(name, machine, environment, provider, string.Empty, _secureSettingSource);
 
-            envset.ConnectionString_New = connstring;
+            envset.ConnectionString = connstring;
             Isolate.Verify.WasCalledWithAnyArguments(() => _secureSettingSource.WriteSecure(fakeSetting));
 
         }

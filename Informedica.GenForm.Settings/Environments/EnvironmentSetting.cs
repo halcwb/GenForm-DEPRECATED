@@ -29,7 +29,7 @@ namespace Informedica.GenForm.Settings.Environments
             //ConnectionString_New = connectionString;
         }
 
-        public string ConnectionString_New
+        public string ConnectionString
         {
             get { return _source.ReadSecure(ConfigurationSettingSource.Types.Conn, SettingName).Value; } 
             set { _source.WriteSecure(new Setting(SettingName, value, "Conn", true)); }
@@ -50,7 +50,7 @@ namespace Informedica.GenForm.Settings.Environments
         public string Provider { get; set; }
 
         [Obsolete]
-        public string ConnectionString { get { return _manager.GetConnectionString(SettingName).ConnectionString; } set { _manager.AddConnectionString(SettingName, value); } }
+        public string ConnectionString_Old { get { return _manager.GetConnectionString(SettingName).ConnectionString; } set { _manager.AddConnectionString(SettingName, value); } }
 
         public string SettingName
         {
