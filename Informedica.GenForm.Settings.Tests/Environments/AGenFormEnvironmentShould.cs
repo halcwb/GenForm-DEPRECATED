@@ -1,6 +1,7 @@
 using System;
-using System.Linq;
 using Informedica.GenForm.Settings.Environments;
+using Informedica.SecureSettings.Cryptographers;
+using Informedica.SecureSettings.Sources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock.ArrangeActAssert;
 using Environment = Informedica.GenForm.Settings.Environments.Environment;
@@ -13,36 +14,99 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         private Environment _environment;
         private GenFormEnvironment _genFormEnvironment;
         private EnvironmentSettingsCollection _settings;
-        private const string EnvironmentName = "TestEnvironment";
-        private const int SettingCount = 3;
+        private SettingSource _source;
+        private Setting _setting;
+        private SecretKeyManager _keyMan;
+        private CryptoGraphy _crypt;
+        private SecureSettingSource _secureSource;
+        private const string EnvironmentName = "Test";
 
-        private void SetUpFakeEnvironmentToGetSettings(int count)
+        private EnvironmentSettingsCollection GetIsolatedEnvironmentSettingsCollection()
         {
-            _environment = Isolate.Fake.Instance<Environment>();
-            Isolate.WhenCalled(() => _environment.Name).WillReturn(EnvironmentName);
+            _source = new TestSource();
+            _setting = Isolate.Fake.Instance<Setting>();
+            Isolate.WhenCalled(() => _source.WriteSetting(_setting)).CallOriginal();
 
-            _settings = Isolate.Fake.Instance<EnvironmentSettingsCollection>();
-            Isolate.WhenCalled(() => _settings.Count()).WillReturn(count);
-            Isolate.WhenCalled(() => _environment.Settings).WillReturn(_settings);
-            for (var i = 0; i < count; i++)
-            {
-                var index = i;
-                Isolate.WhenCalled(() => _settings.ElementAt(index)).WillReturn(
-                    Isolate.Fake.Instance<EnvironmentSetting>());
-            }
+            _keyMan = Isolate.Fake.Instance<SecretKeyManager>();
+            Isolate.WhenCalled(() => _keyMan.GetKey()).WillReturn("secretkey");
 
+            _crypt = new CryptographyAdapter(new SymCryptography());
+            _secureSource = new SecureSettingSource(_source, _keyMan, _crypt);
+
+            var col = new EnvironmentSettingsCollection("TestMachine", "TestEnvironment", _secureSource);
+
+            return col;
+        }
+
+        private void GetEnvironment(string database, string logpath, string exportpath, string connectionstring)
+        {
+            _settings = GetIsolatedEnvironmentSettingsCollection();
+            if (!string.IsNullOrWhiteSpace(database)) _settings.AddSetting(database, connectionstring);
+            if (!string.IsNullOrWhiteSpace(logpath)) _settings.AddSetting(logpath);
+            if (!string.IsNullOrWhiteSpace(exportpath)) _settings.AddSetting(exportpath);
+
+            _environment = new Environment("Test", "Test", _settings);
             _genFormEnvironment = new GenFormEnvironment(_environment);
         }
 
-        [TestMethod]
+
         [Isolated]
-        public void UseAnEnvironmentWithThreeSettings()
+        [TestMethod]
+        public void ThrowAnExceptionWhenCreatedWithoutADatabaseConnectionString()
         {
             try
             {
-                var wrongSettingCount = 0;
-                SetUpFakeEnvironmentToGetSettings(wrongSettingCount);
-                Assert.Fail("GenForm environment was instantiated with less than 3 settings");
+                GetEnvironment("Database", "LogPath", "ExportPath", string.Empty);
+                Assert.Fail("GenFormEnvironment cannot be created without a database connection string");
+
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void ThrowAnExceptionWhenCreatedWithoutADatabaseSetting()
+        {
+            try
+            {
+                GetEnvironment(string.Empty, "LogPath", "ExportPath", "Some connection string");
+                Assert.Fail("GenFormEnvironment cannot be created without a database connection string");
+
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void ThrowAnExceptionWhenCreatedWithoutALogPathSetting()
+        {
+            try
+            {
+                GetEnvironment("Database", string.Empty, "ExportPath", "Some connection string");
+                Assert.Fail("GenFormEnvironment cannot be created without a database connection string");
+
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void ThrowAnExceptionWhenCreatedWithoutAnExportPathSetting()
+        {
+            try
+            {
+                GetEnvironment("Database", "LogPath", string.Empty, "Some connection string");
+                Assert.Fail("GenFormEnvironment cannot be created without a database connection string");
+
             }
             catch (Exception e)
             {
@@ -54,96 +118,17 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         [Isolated]
         public void UseAnEnvironmentToGetTheName()
         {
-            SetUpFakeEnvironmentToGetSettings(SettingCount);
+            GetEnvironment("Database", "LogPath", "ExportPath", "Some connection string");
 
-            Assert.AreEqual(EnvironmentName, _genFormEnvironment.Name);
-
+            Isolate.WhenCalled(() => _environment.Name).CallOriginal();
             try
             {
+                Assert.AreEqual(EnvironmentName, _genFormEnvironment.Name);
                 Isolate.Verify.WasCalledWithAnyArguments(() => _environment.Name);
             }
             catch (Exception e)
             {
                 Assert.Fail(e.ToString());
-            }
-        }
-
-
-        [TestMethod]
-        [Isolated]
-        public void UseTheFirstSettingInEnvironmentSettingsToSetAndGetTheDatabaseConnectionString()
-        {
-            const int firstSetting = 0;
-            SetUpFakeEnvironmentToGetSettings(SettingCount);
-            
-            try
-            {
-                _genFormEnvironment.Database = "Some string";
-                Isolate.Verify.WasCalledWithExactArguments(() => _settings.ElementAt(firstSetting));
-            }
-            catch (Exception e)
-            {
-                Assert.Fail(e.ToString());
-            }
-        }
-
- 
-        [TestMethod]
-        [Isolated]
-        public void UseTheSecondSettingInEnvironmentToSetAndGetTheLogPath()
-        {
-            const int secondSetting = 1;
-            SetUpFakeEnvironmentToGetSettings(SettingCount);
-
-            try
-            {
-                const string logpath = "Some logpath";
-                _genFormEnvironment.LogPath = logpath;
-                Isolate.Verify.WasCalledWithExactArguments(() => _settings.ElementAt(secondSetting));
-
-            }
-            catch (Exception e)
-            {
-                Assert.Fail(e.ToString());
-            }
-
-        }
-
-        [TestMethod]
-        [Isolated]
-        public void UseTheThirdSettingInEnvironmentToSetAndGetTheExportPath()
-        {
-            const int thirdSetting = 2;
-            SetUpFakeEnvironmentToGetSettings(SettingCount);
-
-            try
-            {
-                _genFormEnvironment.ExportPath = "An export path";
-                Isolate.Verify.WasCalledWithExactArguments(() => _settings.ElementAt(thirdSetting));
-            }
-            catch (Exception e)
-            {
-                Assert.Fail(e.ToString());
-            }
-        }
-
-        [TestMethod]
-        [Isolated]
-        public void NotUseTheSecondSettingInEnvironmentToSetAndGetDatabaseConnectionString()
-        {
-            const int secondSetting = 1;
-            SetUpFakeEnvironmentToGetSettings(SettingCount);
-
-            try
-            {
-                _genFormEnvironment.Database = "This is a connection string";
-                Isolate.Verify.WasCalledWithExactArguments(() => _settings.ElementAt(secondSetting));
-
-                Assert.Fail("The test should fail with a verify exeption");
-            }
-            catch (Exception e)
-            {
-                Assert.IsInstanceOfType(e, typeof(TypeMock.VerifyException));
             }
         }
 

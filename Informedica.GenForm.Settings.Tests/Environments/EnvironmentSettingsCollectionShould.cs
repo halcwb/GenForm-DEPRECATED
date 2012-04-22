@@ -19,15 +19,63 @@ namespace Informedica.GenForm.Settings.Tests.Environments
 
         [Isolated]
         [TestMethod]
+        public void ThrowAnExceptionIfNotCreatedWithEnvironmentNameName()
+        {
+            GetIsolatedEnvironmentSettingsCollection();
+            try
+            {
+                new EnvironmentSettingsCollection("Test", string.Empty, _secureSource);
+                Assert.Fail("Environment setting collection cannot be created without a machinename");
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void ThrowAnExceptionIfNotCreatedWithSecureSource()
+        {
+            GetIsolatedEnvironmentSettingsCollection();
+            try
+            {
+                new EnvironmentSettingsCollection("Test", "Test", null);
+                Assert.Fail("Environment setting collection cannot be created without a machinename");
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void ThrowAnExceptionIfNotCreatedWithMachineName()
+        {
+            GetIsolatedEnvironmentSettingsCollection();
+            try
+            {
+                new EnvironmentSettingsCollection(string.Empty, "Test", _secureSource);
+                Assert.Fail("Environment setting collection cannot be created without a machinename");
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
+
+        [Isolated]
+        [TestMethod]
         public void NotAcceptTheSameSettingTwice()
         {
             Isolate.CleanUp();
             var envs = GetIsolatedEnvironmentSettingsCollection();
-            envs.AddSetting("Test", "TestMachine", "Test");
+            envs.AddSetting("Test");
 
             try
             {
-                envs.AddSetting("Test", "TestMachine", "Test");
+                envs.AddSetting("Test");
                 Assert.Fail("should not accept the same setting twice");
             }
             catch (Exception e)
@@ -55,7 +103,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
 
             try
             {
-                envs.AddSetting("Test", "TestMachine", "TestEnvironment");
+                envs.AddSetting("Test");
                 Isolate.Verify.WasCalledWithAnyArguments(() => _source.WriteSetting(fakeSetting));
 
             }
@@ -71,7 +119,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var envs = GetIsolatedEnvironmentSettingsCollection();
 
-            envs.AddSetting("Test", "TestMachine", "TestEnvironment");
+            envs.AddSetting("Test");
 
             try
             {
@@ -89,8 +137,18 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var envs = GetIsolatedEnvironmentSettingsCollection();
 
-            envs.AddSetting("Test", "TestMachine", "TestEnvironment");
+            envs.AddSetting("Test");
             Assert.IsNotNull(envs.SingleOrDefault(s => s.Name == "Test"));
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void HaveASettingDatabaseWithValueConnectionStringWhenThisSettingIsAdded()
+        {
+            var envs = GetIsolatedEnvironmentSettingsCollection();
+
+            envs.AddSetting("Database", "ConnectionString");
+            Assert.AreEqual("ConnectionString", envs.Single(s => s.Name == "Database").ConnectionString);
         }
 
         private EnvironmentSettingsCollection GetIsolatedEnvironmentSettingsCollection()

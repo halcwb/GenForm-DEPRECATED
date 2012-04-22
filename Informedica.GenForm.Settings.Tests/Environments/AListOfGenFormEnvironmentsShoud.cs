@@ -35,21 +35,6 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         }
 
         [TestMethod]
-        public void OnlyAddNewGenFormEnvironmentWithDatabaseConnectionString()
-        {
-            try
-            {
-                var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment();
-                _environments.AddEnvironment(genv);
-                Assert.Fail("Should throw an error");
-            }
-            catch (System.Exception e)
-            {
-                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
-            }
-        }
-
-        [TestMethod]
         public void HaveACountIncreasedWithOneWhenANewGenFormEnvironmentIsAdded()
         {
             var count = _environments.Count();

@@ -50,5 +50,6 @@ namespace Informedica.GenForm.Settings.Environments
         {
             return new EnvironmentSetting(name, machine, environment, source);
         }
+
     }
 }

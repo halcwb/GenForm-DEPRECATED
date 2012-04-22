@@ -8,34 +8,34 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
 {
     public class SecureSettingSourceTest
     {
-        protected Configuration _configuration;
-        protected TestConfigurationFactory _factory;
-        protected ConfigurationSettingSource _settingSource;
-        protected SecretKeyManager _keyManager;
-        protected string _key;
-        protected CryptoGraphy _cryptoGraphy;
-        protected string _name;
-        protected string _encrypted;
-        protected SecureSettingSource _secureSettingSource;
+        protected Configuration Configuration;
+        protected TestConfigurationFactory Factory;
+        protected ConfigurationSettingSource SettingSource;
+        protected SecretKeyManager KeyManager;
+        protected string Key;
+        protected CryptoGraphy CryptoGraphy;
+        protected string Name;
+        protected string Encrypted;
+        protected SecureSettingSource SecureSettingSource;
 
         protected void SetupSecureSettingSource()
         {
-            _configuration = Isolate.Fake.Instance<Configuration>();
-            _factory = new TestConfigurationFactory(_configuration);
-            _settingSource = new ConfigurationSettingSource(_factory);
+            Configuration = Isolate.Fake.Instance<Configuration>();
+            Factory = new TestConfigurationFactory(Configuration);
+            SettingSource = new ConfigurationSettingSource(Factory);
 
-            _keyManager = Isolate.Fake.Instance<SecretKeyManager>();
-            _key = "key";
-            Isolate.WhenCalled((() => _keyManager.GetKey())).WillReturn(_key);
+            KeyManager = Isolate.Fake.Instance<SecretKeyManager>();
+            Key = "key";
+            Isolate.WhenCalled((() => KeyManager.GetKey())).WillReturn(Key);
 
-            _cryptoGraphy = Isolate.Fake.Instance<CryptoGraphy>();
-            Isolate.WhenCalled(() => _cryptoGraphy.SetKey(_key)).IgnoreCall();
-            _name = "secret";
-            _encrypted = "[Secure]=";
-            Isolate.WhenCalled((() => _cryptoGraphy.Encrypt(_name))).WillReturn(_encrypted);
-            Isolate.WhenCalled((() => _cryptoGraphy.Decrypt(_encrypted))).WillReturn(_name);
+            CryptoGraphy = Isolate.Fake.Instance<CryptoGraphy>();
+            Isolate.WhenCalled(() => CryptoGraphy.SetKey(Key)).IgnoreCall();
+            Name = "secret";
+            Encrypted = "[Secure]=";
+            Isolate.WhenCalled((() => CryptoGraphy.Encrypt(Name))).WillReturn(Encrypted);
+            Isolate.WhenCalled((() => CryptoGraphy.Decrypt(Encrypted))).WillReturn(Name);
 
-            _secureSettingSource = new SecureSettingSource(_settingSource, _keyManager, _cryptoGraphy);
+            SecureSettingSource = new SecureSettingSource(SettingSource, KeyManager, CryptoGraphy);
         }
     }
 }

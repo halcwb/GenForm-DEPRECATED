@@ -22,9 +22,9 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             Readers.Add(ConfigurationSettingSource.Types.Conn, ReadConnSetting);
         }
 
-        private Setting ReadConnSetting(string arg)
+        private Setting ReadConnSetting(string name)
         {
-            return Settings.SingleOrDefault(S => S.Name == arg);
+            return Settings.SingleOrDefault(S => S.Name == name);
         }
 
         protected override void RegisterWriters()
@@ -32,10 +32,11 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             Writers.Add(ConfigurationSettingSource.Types.Conn, WriteConnSetting);
         }
 
-        private void WriteConnSetting(Setting obj)
+        private void WriteConnSetting(Setting setting)
         {
-            if (!Settings.Any(s => s.Name == obj.Name)) _settings.Add(obj);
-            else Settings.Single(s => s.Name == obj.Name).Value = obj.Value;
+            var old = (Settings.SingleOrDefault(s => s.Name == setting.Name));
+            if (old != null) _settings.Remove(old);
+            _settings.Add(setting);
         }
 
         protected override void RegisterRemovers()

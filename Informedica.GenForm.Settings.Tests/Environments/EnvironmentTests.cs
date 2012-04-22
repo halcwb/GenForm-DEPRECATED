@@ -13,6 +13,20 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         private EnvironmentSettingsCollection _fakeEnvironmentSettings;
 
         [TestMethod]
+        public void ThatWhenAnEnvironmentIsCreatedWithoutANameAnExceptionIsThrown()
+        {
+            try
+            {
+                Environment.Create(string.Empty, "Test");
+                Assert.Fail("An exception should be thrown");
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
+
+        [TestMethod]
         public void ThatNameHasAValueWhenEnvironmentIsCreated()
         {
             var env = Environment.Create("Test", "Test");

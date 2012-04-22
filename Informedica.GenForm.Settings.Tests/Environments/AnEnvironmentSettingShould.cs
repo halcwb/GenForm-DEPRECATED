@@ -20,7 +20,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var environment = "Test";
             var name = "MyDatabase";
 
-            var envset = new EnvironmentSetting(name, machine, environment, _secureSettingSource);
+            var envset = new EnvironmentSetting(name, machine, environment, SecureSettingSource);
 
             Assert.AreEqual(settingName, envset.SettingName);
         }
@@ -31,33 +31,53 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var fakeSetting = Isolate.Fake.Instance<Setting>();
             SetupSecureSettingSource();
-            Isolate.WhenCalled(() => _secureSettingSource.ReadSecure(ConfigurationSettingSource.Types.Conn, null)).WillReturn(fakeSetting);
-            var envset = EnvironmentSetting.CreateEnvironmentSetting("Test", "Test", "Test", _secureSettingSource);
+            Isolate.WhenCalled(() => SecureSettingSource.ReadSecure(ConfigurationSettingSource.Types.Conn, null)).WillReturn(fakeSetting);
+            var envset = EnvironmentSetting.CreateEnvironmentSetting("Test", "Test", "Test", SecureSettingSource);
 
             envset.ConnectionString = "Some connection string";
             var connstr = envset.ConnectionString;
             Assert.AreEqual(connstr, envset.ConnectionString);
-            Isolate.Verify.WasCalledWithAnyArguments(() => _secureSettingSource.ReadSecure(ConfigurationSettingSource.Types.Conn, null));            
+            Isolate.Verify.WasCalledWithAnyArguments(() => SecureSettingSource.ReadSecure(ConfigurationSettingSource.Types.Conn, null));
         }
 
-    [Isolated]
+        [Isolated]
+        [TestMethod]
+        public void ReturnSameConnectionStringAsSetToConnectionString()
+        {
+            var fakeSetting = Isolate.Fake.Instance<Setting>();
+            SetupSecureSettingSource();
+            Isolate.WhenCalled(() => SecureSettingSource.ReadSecure(ConfigurationSettingSource.Types.Conn, null)).WillReturn(fakeSetting);
+            var envset = EnvironmentSetting.CreateEnvironmentSetting("Test", "Test", "Test", SecureSettingSource);
+
+            envset.ConnectionString = "Some connection string";
+            var connstr = envset.ConnectionString;
+            Assert.AreEqual(connstr, envset.ConnectionString);
+        }
+
+        [Isolated]
         [TestMethod]
         public void UseSecureSettingSourceToWriteAConnectionString()
         {
             var fakeSetting = Isolate.Fake.Instance<Setting>();
             SetupSecureSettingSource();
-            Isolate.WhenCalled(() => _secureSettingSource.WriteSecure(fakeSetting)).IgnoreCall();
+            Isolate.WhenCalled(() => SecureSettingSource.WriteSecure(fakeSetting)).IgnoreCall();
 
+            var envset = GetEnvironmentSetting();
+
+            var connstring = "This is a connectionstring";
+            envset.ConnectionString = connstring;
+            Isolate.Verify.WasCalledWithAnyArguments(() => SecureSettingSource.WriteSecure(fakeSetting));
+
+        }
+
+        private EnvironmentSetting GetEnvironmentSetting()
+        {
             var machine = "MyMachine";
             var environment = "Test";
             var name = "MyDatabase";
-            var connstring = "This is a connectionstring";
 
-            var envset = new EnvironmentSetting(name, machine, environment, _secureSettingSource);
-
-            envset.ConnectionString = connstring;
-            Isolate.Verify.WasCalledWithAnyArguments(() => _secureSettingSource.WriteSecure(fakeSetting));
-
+            return new EnvironmentSetting(name, machine, environment, SecureSettingSource);
         }
+
     }
 }

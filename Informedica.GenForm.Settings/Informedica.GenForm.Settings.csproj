@@ -51,6 +51,7 @@
     <Compile Include="Environments\DuplicateSettingError.cs" />
     <Compile Include="Environments\Environment.cs" />
     <Compile Include="Environments\EnvironmentCollection.cs" />
+    <Compile Include="Environments\EnvironmentFactory.cs" />
     <Compile Include="Environments\EnvironmentSetting.cs" />
     <Compile Include="Environments\EnvironmentSettingsCollection.cs" />
     <Compile Include="Environments\GenFormEnvironment.cs" />

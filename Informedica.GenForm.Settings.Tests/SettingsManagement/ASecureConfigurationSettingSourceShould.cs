@@ -14,10 +14,10 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         {
             SetupSecureSettingSource();
 
-            var setting = new Setting(_name, _name, ConfigurationSettingSource.Types.App.ToString(), true);
-            _secureSettingSource.WriteSecure(setting);
+            var setting = new Setting(Name, Name, ConfigurationSettingSource.Types.App.ToString(), true);
+            SecureSettingSource.WriteSecure(setting);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => _configuration.AppSettings.Settings[_encrypted]);
+            Isolate.Verify.WasCalledWithExactArguments(() => Configuration.AppSettings.Settings[Encrypted]);
         }
 
         [TestMethod]
@@ -25,10 +25,10 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         {
             SetupSecureSettingSource();
 
-            var setting = new Setting(_name, _name, ConfigurationSettingSource.Types.Conn.ToString(), true);
-            _secureSettingSource.WriteSecure(setting);
+            var setting = new Setting(Name, Name, ConfigurationSettingSource.Types.Conn.ToString(), true);
+            SecureSettingSource.WriteSecure(setting);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => _configuration.ConnectionStrings.ConnectionStrings[_encrypted]);
+            Isolate.Verify.WasCalledWithExactArguments(() => Configuration.ConnectionStrings.ConnectionStrings[Encrypted]);
         }
     }
 }

@@ -1,35 +1,79 @@
-﻿using Informedica.GenForm.Settings;
+﻿using System;
 using Informedica.GenForm.Settings.Environments;
 
 namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 {
-    public class GenFormEnvironmentValidityCheck
+    public class GenFormEnvironmentValidityCheck : fit.ColumnFixture
     {
         private GenFormEnvironment _environment;
+        private string _machineName;
+        private string _name;
+        private string _connectionString;
 
-        public GenFormEnvironmentValidityCheck()
+        public string Machine
         {
-            SetEnvironment(string.Empty, string.Empty);
+            get { return Environment == null ? string.Empty : Environment.MachineName; }
+            set 
+            { 
+                _machineName = value;
+                _environment = null;
+            }
         }
 
-        private void SetEnvironment(string name, string machine)
+        public string Name
         {
-            _environment = new GenFormEnvironment(new Environment(name, machine));
+            get { return Environment ==  null ? string.Empty : Environment.Name; }
+            set
+            {
+                _name = value;
+                _environment = null;
+            }
         }
 
-        public string Machine { get; set; }
-        public string Name { get; set; }
-        public string DatabaseConnection { get; set; }
+        public string DatabaseConnection
+        {
+            get { return Environment == null ? string.Empty : Environment.Database; }
+            set
+            {
+                _connectionString = value;
+                _environment = null;
+            }
+        }
+
         public string DatabaseProvider { get; set; }
-        public string LogPath { get; set; }
-        public string ExportPath { get; set; }
+
+        public string LogPath
+        {
+            get { return Environment == null ? string.Empty : Environment.LogPath; } 
+            set { if (Environment != null) Environment.LogPath = value; }
+        }
+
+        public string ExportPath
+        {
+            get { return Environment == null ? string.Empty : Environment.ExportPath; } 
+            set { if (Environment != null) Environment.ExportPath = value; }
+        }
+
+        private GenFormEnvironment Environment
+        {
+            get { return _environment ?? (_environment = TryCreateEnvironment()); }
+        }
+
+        private GenFormEnvironment TryCreateEnvironment()
+        {
+            try
+            {
+               return EnvironmentFactory.GetGenFormEnvironment(_name, _machineName, _connectionString);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
         public string IsValid()
         {
-            SetEnvironment(Name, Machine);
-            _environment.Database = DatabaseConnection;
-
-            return _environment.Database; //_environment.IsValid() ? "Yes" : "No";
+            return Environment == null ? "No" : "Yes";
         }
     }
 }

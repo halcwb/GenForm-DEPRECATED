@@ -13,7 +13,7 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
             ConfigurationFactory factory = new WebConfigurationFactory();
             var source = new ConfigurationSettingSource(factory);
             var keyMan = new SecretKeyManager();
-            return new SecureSettingSource(source, keyMan, CryptographyFactory.GetCryptographt());
+            return new SecureSettingSource(source, keyMan, CryptographyFactory.GetCryptography());
         }
     }
 

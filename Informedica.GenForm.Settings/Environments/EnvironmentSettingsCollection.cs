@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,15 @@ namespace Informedica.GenForm.Settings.Environments
             _machine = machine;
             _environment = environment;
             _source = source;
+
+            CheckConstruction();
+        }
+
+        private void CheckConstruction()
+        {
+            if (string.IsNullOrWhiteSpace(_machine)) throw new Exception("Machine name not supplied");
+            if (string.IsNullOrWhiteSpace(_environment)) throw new Exception("Environment name not supplied");
+            if (_source == null) throw new Exception("Source not supplied");
         }
 
         #region Implementation of IEnumerable
@@ -67,23 +77,14 @@ namespace Informedica.GenForm.Settings.Environments
 
         #endregion
 
-        public void AddSetting(string name, string machine, string environment)
-        {
-            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, machine, environment, _source);
-            if (this.Any(s => s.Name == name)) throw new DuplicateSettingError("EnvironmentSetting with name " + name + "already exists");
-            AddSetting(setting);
-        }
-
         public void AddSetting(string name)
         {
-            if (this.Any(envset => envset.Name == name)) throw new DuplicateSettingError("EnvironmentSetting with name " + name + "already exists");
-            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, _source);
-            AddSetting(setting);
+            AddSetting(name, string.Empty);
         }
 
-        private void AddSetting(EnvironmentSetting environmentSetting)
+        private void AddSetting(EnvironmentSetting environmentSetting, string value)
         {
-            _source.WriteSecure(new Setting(environmentSetting.SettingName, string.Empty, "Conn", true));
+            _source.WriteSecure(new Setting(environmentSetting.SettingName, value, "Conn", true));
         }
 
         public void RemoveEnvironmentSetting(string name)
@@ -92,5 +93,12 @@ namespace Informedica.GenForm.Settings.Environments
             _source.Remove(_source.SingleOrDefault(s => s.Name == setting.SettingName));
         }
 
+        public void AddSetting(string name, string value)
+        {
+            if (this.Any(envset => envset.Name == name)) throw new DuplicateSettingError("EnvironmentSetting with name " + name + "already exists");
+
+            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, _source);
+            AddSetting(setting, value);
+        }
     }
 }

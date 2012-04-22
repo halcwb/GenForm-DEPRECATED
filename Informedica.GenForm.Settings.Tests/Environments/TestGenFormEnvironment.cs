@@ -21,9 +21,9 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var secureSource = new SecureSettingSource(source, keyMan, crypt);
 
             var envSets = new EnvironmentSettingsCollection("MyMachine", "Test", secureSource);
-            envSets.AddSetting("Database", "MyMachine", "Test");
-            envSets.AddSetting("LogPath", "MyMachine", "Test");
-            envSets.AddSetting("ExportPath", "MyMachine", "Test");
+            envSets.AddSetting("Database", "Some connection string");
+            envSets.AddSetting("LogPath");
+            envSets.AddSetting("ExportPath");
 
             var env = new Environment("MyMachine", "Test", envSets);
             return new GenFormEnvironment(env);
