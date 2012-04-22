@@ -18,7 +18,7 @@ namespace Informedica.GenForm.Settings.Environments
         {
             _environment = environment;
             CheckEnvironmentSettings();
-            CheckIfDatabaseConnectionStringIsNotNullOrWhiteSpace();
+            CheckIfConnectionStringAndProviderNotEmpty();
         }
 
         private void CheckEnvironmentSettings()
@@ -33,9 +33,10 @@ namespace Informedica.GenForm.Settings.Environments
             return (_environment.Settings.SingleOrDefault(s => s.Name == settings.ToString()) != null);
         }
 
-        private void CheckIfDatabaseConnectionStringIsNotNullOrWhiteSpace()
+        private void CheckIfConnectionStringAndProviderNotEmpty()
         {
             if (string.IsNullOrWhiteSpace(Database)) throw new Exception("Database connection string cannot be empty");
+            if (string.IsNullOrWhiteSpace(Provider)) throw new Exception("Provider cannot be empty");
         }
 
         public string Name { get { return _environment.Name; } }
@@ -61,6 +62,11 @@ namespace Informedica.GenForm.Settings.Environments
         public string MachineName
         {
             get { return _environment.MachineName; }
+        }
+
+        public string Provider
+        {
+            get { return GetDatabaseSetting().Provider; }
         }
 
         public bool IsValid()

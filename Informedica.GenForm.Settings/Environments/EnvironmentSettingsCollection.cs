@@ -14,6 +14,7 @@ namespace Informedica.GenForm.Settings.Environments
         private readonly string _machine;
         private readonly string _environment;
         private SecureSettingSource _source;
+        private string _provider;
 
         public EnvironmentSettingsCollection(string machine, string environment, SecureSettingSource source)
         {
@@ -51,15 +52,29 @@ namespace Informedica.GenForm.Settings.Environments
             foreach (var setting in _source)
             {
                 if (setting.Type == ConfigurationSettingSource.Types.Conn.ToString())
-                    envs.Add(new EnvironmentSetting(GetNameFromSetting(setting), _machine, _environment, _source));
+                {
+                    if (CheckIfNameIsAValidSettingName(setting.Name))
+                        envs.Add(new EnvironmentSetting(_machine, _environment, GetNameFromSettingName(setting.Name),
+                                                        GetProviderFromSettingName(setting.Name), _source));
+                }
             }
 
             return envs;
         }
 
-        private string GetNameFromSetting(Setting setting)
+        private static bool CheckIfNameIsAValidSettingName(string name)
         {
-            return setting.Name.Split(Separator)[0];
+            return name.Split(Separator).GetUpperBound(0) >= 3;
+        }
+
+        private string GetNameFromSettingName(string settingName)
+        {
+            return settingName.Split(Separator)[2];
+        }
+
+        private string GetProviderFromSettingName(string settingName)
+        {
+            return settingName.Split(Separator)[3];
         }
 
 
@@ -77,9 +92,9 @@ namespace Informedica.GenForm.Settings.Environments
 
         #endregion
 
-        public void AddSetting(string name)
+        public void AddSetting(string name, string provider)
         {
-            AddSetting(name, string.Empty);
+            AddSetting(name, provider, string.Empty);
         }
 
         private void AddSetting(EnvironmentSetting environmentSetting, string value)
@@ -87,17 +102,17 @@ namespace Informedica.GenForm.Settings.Environments
             _source.WriteSecure(new Setting(environmentSetting.SettingName, value, "Conn", true));
         }
 
-        public void RemoveEnvironmentSetting(string name)
+        public void RemoveEnvironmentSetting(string name, string provider)
         {
-            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, _source);
+            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, provider, _source);
             _source.Remove(_source.SingleOrDefault(s => s.Name == setting.SettingName));
         }
 
-        public void AddSetting(string name, string value)
+        public void AddSetting(string name, string provider, string value)
         {
             if (this.Any(envset => envset.Name == name)) throw new DuplicateSettingError("EnvironmentSetting with name " + name + "already exists");
 
-            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, _source);
+            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, provider, _source);
             AddSetting(setting, value);
         }
     }

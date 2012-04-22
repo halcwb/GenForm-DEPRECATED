@@ -38,17 +38,16 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             return col;
         }
 
-        private void GetEnvironment(string database, string logpath, string exportpath, string connectionstring)
+        private void GetEnvironment(string database, string logpath, string exportpath, string connectionstring, string provider)
         {
             _settings = GetIsolatedEnvironmentSettingsCollection();
-            if (!string.IsNullOrWhiteSpace(database)) _settings.AddSetting(database, connectionstring);
-            if (!string.IsNullOrWhiteSpace(logpath)) _settings.AddSetting(logpath);
-            if (!string.IsNullOrWhiteSpace(exportpath)) _settings.AddSetting(exportpath);
+            if (!string.IsNullOrWhiteSpace(database)) _settings.AddSetting(database, provider, connectionstring);
+            if (!string.IsNullOrWhiteSpace(logpath)) _settings.AddSetting(logpath, provider);
+            if (!string.IsNullOrWhiteSpace(exportpath)) _settings.AddSetting(exportpath, provider);
 
             _environment = new Environment("Test", "Test", _settings);
             _genFormEnvironment = new GenFormEnvironment(_environment);
         }
-
 
         [Isolated]
         [TestMethod]
@@ -56,7 +55,24 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             try
             {
-                GetEnvironment("Database", "LogPath", "ExportPath", string.Empty);
+                GetEnvironment("Database", "LogPath", "ExportPath", string.Empty, "provider");
+                Assert.Fail("GenFormEnvironment cannot be created without a database connection string");
+
+            }
+            catch (Exception e)
+            {
+                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
+        }
+
+
+        [Isolated]
+        [TestMethod]
+        public void ThrowAnExceptionWhenCreatedWithoutADatabaseProvider()
+        {
+            try
+            {
+                GetEnvironment("Database", "LogPath", "ExportPath", "Some connection string", string.Empty);
                 Assert.Fail("GenFormEnvironment cannot be created without a database connection string");
 
             }
@@ -72,7 +88,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             try
             {
-                GetEnvironment(string.Empty, "LogPath", "ExportPath", "Some connection string");
+                GetEnvironment(string.Empty, "LogPath", "ExportPath", "Some connection string", "provider");
                 Assert.Fail("GenFormEnvironment cannot be created without a database connection string");
 
             }
@@ -88,7 +104,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             try
             {
-                GetEnvironment("Database", string.Empty, "ExportPath", "Some connection string");
+                GetEnvironment("Database", string.Empty, "ExportPath", "Some connection string", "provider");
                 Assert.Fail("GenFormEnvironment cannot be created without a database connection string");
 
             }
@@ -104,7 +120,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             try
             {
-                GetEnvironment("Database", "LogPath", string.Empty, "Some connection string");
+                GetEnvironment("Database", "LogPath", string.Empty, "Some connection string", "provider");
                 Assert.Fail("GenFormEnvironment cannot be created without a database connection string");
 
             }
@@ -118,7 +134,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         [Isolated]
         public void UseAnEnvironmentToGetTheName()
         {
-            GetEnvironment("Database", "LogPath", "ExportPath", "Some connection string");
+            GetEnvironment("Database", "LogPath", "ExportPath", "Some connection string", "provider");
 
             Isolate.WhenCalled(() => _environment.Name).CallOriginal();
             try

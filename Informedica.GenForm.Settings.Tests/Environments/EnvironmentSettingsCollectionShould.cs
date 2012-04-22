@@ -71,11 +71,11 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             Isolate.CleanUp();
             var envs = GetIsolatedEnvironmentSettingsCollection();
-            envs.AddSetting("Test");
+            envs.AddSetting("Test", "Test");
 
             try
             {
-                envs.AddSetting("Test");
+                envs.AddSetting("Test", "Test");
                 Assert.Fail("should not accept the same setting twice");
             }
             catch (Exception e)
@@ -103,7 +103,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
 
             try
             {
-                envs.AddSetting("Test");
+                envs.AddSetting("Test", "Test");
                 Isolate.Verify.WasCalledWithAnyArguments(() => _source.WriteSetting(fakeSetting));
 
             }
@@ -119,11 +119,11 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var envs = GetIsolatedEnvironmentSettingsCollection();
 
-            envs.AddSetting("Test");
+            envs.AddSetting("Test", "Test");
 
             try
             {
-                envs.RemoveEnvironmentSetting("Test");
+                envs.RemoveEnvironmentSetting("Test", "Test");
             }
             catch (Exception e)
             {
@@ -137,7 +137,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var envs = GetIsolatedEnvironmentSettingsCollection();
 
-            envs.AddSetting("Test");
+            envs.AddSetting("Test", "Test");
             Assert.IsNotNull(envs.SingleOrDefault(s => s.Name == "Test"));
         }
 
@@ -147,8 +147,19 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var envs = GetIsolatedEnvironmentSettingsCollection();
 
-            envs.AddSetting("Database", "ConnectionString");
+            envs.AddSetting("Database", "Provider", "ConnectionString");
             Assert.AreEqual("ConnectionString", envs.Single(s => s.Name == "Database").ConnectionString);
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void TurnTheSettingNameInMachineEnvironmentNameAndProvider()
+        {
+            var settingname = "TestMachine.TestEnvironment.Test.MyProvider";
+            var col = GetIsolatedEnvironmentSettingsCollection();
+            _source.WriteSetting(new Setting(settingname, "Connection string", "Conn", false));
+
+            Assert.AreEqual("MyProvider", col.Single(s => s.Name == "Test").Provider);
         }
 
         private EnvironmentSettingsCollection GetIsolatedEnvironmentSettingsCollection()

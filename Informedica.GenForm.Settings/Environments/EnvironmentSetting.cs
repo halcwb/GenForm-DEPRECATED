@@ -1,4 +1,3 @@
-using System;
 using Informedica.GenForm.Settings.ConfigurationSettings;
 using Informedica.SecureSettings.Sources;
 
@@ -9,11 +8,12 @@ namespace Informedica.GenForm.Settings.Environments
         private SecureSettingSource _source;
         public const string Seperator = ".";
 
-        private void Init(string name, string machineName, string environment)
+        private void Init(string name, string machineName, string environment, string provider)
         {
             Name = name;
             MachineName = machineName;
             Environment = environment;
+            Provider = provider;
         }
 
         public string ConnectionString
@@ -22,10 +22,10 @@ namespace Informedica.GenForm.Settings.Environments
             set { _source.WriteSecure(new Setting(SettingName, value, "Conn", true)); }
         }
 
-        public EnvironmentSetting(string name, string machineName, string environment, SecureSettingSource secureSettingSource)
+        public EnvironmentSetting(string machineName, string environment, string name, string provider, SecureSettingSource secureSettingSource)
         {
             _source = secureSettingSource;
-            Init(name, machineName, environment);
+            Init(name, machineName, environment, provider);
         }
 
         public string Name { get; private set; }
@@ -34,11 +34,11 @@ namespace Informedica.GenForm.Settings.Environments
 
         public string Environment { get; private set; }
 
-        public string Provider { get; set; }
+        public string Provider { get; private set; }
 
         public string SettingName
         {
-            get { return Name + Seperator + MachineName + Seperator + Environment; }
+            get { return MachineName + Seperator + Environment + Seperator + Name + Seperator + Provider; }
         }
 
         public bool IsIdentical(EnvironmentSetting setting)
@@ -46,9 +46,9 @@ namespace Informedica.GenForm.Settings.Environments
             return setting.SettingName == SettingName;
         }
 
-        public static EnvironmentSetting CreateEnvironmentSetting(string name, string machine, string environment, SecureSettingSource source)
+        public static EnvironmentSetting CreateEnvironmentSetting(string name, string machine, string environment, string provider, SecureSettingSource source)
         {
-            return new EnvironmentSetting(name, machine, environment, source);
+            return new EnvironmentSetting(machine, environment, name, provider, source);
         }
 
     }

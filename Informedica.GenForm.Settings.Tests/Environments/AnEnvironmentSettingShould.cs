@@ -11,16 +11,17 @@ namespace Informedica.GenForm.Settings.Tests.Environments
     public class AnEnvironmentSettingShould : SecureSettingSourceTest
     {
         [TestMethod]
-        public void TranslateMachineEnvironmentAndNameToASettingName()
+        public void TranslateMachineEnvironmentProviderAndNameToASettingName()
         {
             SetupSecureSettingSource();
 
-            var settingName = "MyDatabase.MyMachine.Test";
+            var settingName = "MyMachine.TestEnvironment.MyDatabase.Provider";
             var machine = "MyMachine";
-            var environment = "Test";
+            var environment = "TestEnvironment";
             var name = "MyDatabase";
+            var provider = "Provider";
 
-            var envset = new EnvironmentSetting(name, machine, environment, SecureSettingSource);
+            var envset = new EnvironmentSetting(machine, environment, name, provider, SecureSettingSource);
 
             Assert.AreEqual(settingName, envset.SettingName);
         }
@@ -32,7 +33,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var fakeSetting = Isolate.Fake.Instance<Setting>();
             SetupSecureSettingSource();
             Isolate.WhenCalled(() => SecureSettingSource.ReadSecure(ConfigurationSettingSource.Types.Conn, null)).WillReturn(fakeSetting);
-            var envset = EnvironmentSetting.CreateEnvironmentSetting("Test", "Test", "Test", SecureSettingSource);
+            var envset = EnvironmentSetting.CreateEnvironmentSetting("Test", "Test", "Test","Test", SecureSettingSource);
 
             envset.ConnectionString = "Some connection string";
             var connstr = envset.ConnectionString;
@@ -47,7 +48,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var fakeSetting = Isolate.Fake.Instance<Setting>();
             SetupSecureSettingSource();
             Isolate.WhenCalled(() => SecureSettingSource.ReadSecure(ConfigurationSettingSource.Types.Conn, null)).WillReturn(fakeSetting);
-            var envset = EnvironmentSetting.CreateEnvironmentSetting("Test", "Test", "Test", SecureSettingSource);
+            var envset = EnvironmentSetting.CreateEnvironmentSetting("Test", "Test", "Test","Test", SecureSettingSource);
 
             envset.ConnectionString = "Some connection string";
             var connstr = envset.ConnectionString;
@@ -75,8 +76,9 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             var machine = "MyMachine";
             var environment = "Test";
             var name = "MyDatabase";
+            var provider = "Provider";
 
-            return new EnvironmentSetting(name, machine, environment, SecureSettingSource);
+            return new EnvironmentSetting(name, machine, environment, provider, SecureSettingSource);
         }
 
     }

@@ -9,6 +9,7 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
         private string _machineName;
         private string _name;
         private string _connectionString;
+        private string _provider;
 
         public string Machine
         {
@@ -40,7 +41,15 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
             }
         }
 
-        public string DatabaseProvider { get; set; }
+        public string DatabaseProvider
+        {
+            get { return Environment == null ? string.Empty : Environment.Provider; }
+            set
+            {
+                _environment = null;
+                _provider = value;
+            }
+        }
 
         public string LogPath
         {
@@ -63,10 +72,11 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
         {
             try
             {
-               return EnvironmentFactory.GetGenFormEnvironment(_name, _machineName, _connectionString);
+               return EnvironmentFactory.GetGenFormEnvironment(_name, _machineName, _provider, _connectionString);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                var error = e.ToString();
                 return null;
             }
         }
