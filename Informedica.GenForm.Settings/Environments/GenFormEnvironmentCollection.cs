@@ -12,7 +12,7 @@ namespace Informedica.GenForm.Settings.Environments
             ExportPath
         }
 
-        private IList<GenFormEnvironment> _environments = new List<GenFormEnvironment>();
+        private readonly IList<GenFormEnvironment> _environments = new List<GenFormEnvironment>();
 
         #region Implementation of IEnumerable
 

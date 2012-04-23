@@ -53,10 +53,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnvironmentManagement\AListOfEnvironmentsWillContain.cs" />
     <Compile Include="EnvironmentManagement\EnvironmentScenarios.cs" />
+    <Compile Include="EnvironmentManagement\GenFormEnvironmentFixture.cs" />
     <Compile Include="EnvironmentManagement\GenFormEnvironmentValidityCheck.cs" />
     <Compile Include="EnvironmentManagement\GenFormFixture.cs" />
     <Compile Include="EnvironmentManagement\SecureSettingsManagerCommandLineTool.cs" />
+    <Compile Include="EnvironmentManagement\TestSource.cs" />
     <Compile Include="HelloFitNesse.cs" />
     <Compile Include="ProductManagement\NewProductDecisions.cs" />
     <Compile Include="UserLogin\UserLoginDecisions.cs" />
