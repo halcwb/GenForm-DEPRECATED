@@ -99,13 +99,13 @@ namespace Informedica.GenForm.Settings.Environments
 
         private void AddSetting(EnvironmentSetting environmentSetting, string value)
         {
-            _source.WriteSecure(new Setting(environmentSetting.SettingName, value, "Conn", true));
+            _source.WriteSetting(new Setting(environmentSetting.SettingName, value, "Conn", true));
         }
 
         public void RemoveEnvironmentSetting(string name, string provider)
         {
             var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, provider, _source);
-            _source.Remove(_source.SingleOrDefault(s => s.Name == setting.SettingName));
+            _source.RemoveSetting(_source.SingleOrDefault(s => s.Name == setting.SettingName));
         }
 
         public void AddSetting(string name, string provider, string value)

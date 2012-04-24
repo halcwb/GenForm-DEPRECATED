@@ -151,7 +151,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         [TestMethod]
         public void HaveDatabaseTestWhenSetToTest()
         {
-            var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment();
+            var genv = TestGenFormEnvironmentFactory.CreateTestGenFormEnvironment();
             genv.Database = "Test";
 
             Assert.AreEqual("Test", genv.Database);

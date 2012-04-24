@@ -6,11 +6,11 @@ using TypeMock.ArrangeActAssert;
 
 namespace Informedica.GenForm.Settings.Tests.SettingsManagement
 {
-    public class SecureSettingSourceTest
+    public class SecureSettingSourceTestFixture
     {
         protected Configuration Configuration;
         protected TestConfigurationFactory Factory;
-        protected ConfigurationSettingSource SettingSource;
+        protected SettingSource SettingSource;
         protected SecretKeyManager KeyManager;
         protected string Key;
         protected CryptoGraphy CryptoGraphy;

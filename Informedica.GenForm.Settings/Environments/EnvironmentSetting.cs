@@ -18,8 +18,8 @@ namespace Informedica.GenForm.Settings.Environments
 
         public string ConnectionString
         {
-            get { return _source.ReadSecure(ConfigurationSettingSource.Types.Conn, SettingName).Value; } 
-            set { _source.WriteSecure(new Setting(SettingName, value, "Conn", true)); }
+            get { return _source.ReadSetting(ConfigurationSettingSource.Types.Conn, SettingName).Value; } 
+            set { _source.WriteSetting(new Setting(SettingName, value, "Conn", true)); }
         }
 
         public EnvironmentSetting(string machineName, string environment, string name, string provider, SecureSettingSource secureSettingSource)

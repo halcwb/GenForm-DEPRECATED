@@ -8,7 +8,7 @@ using TypeMock.ArrangeActAssert;
 namespace Informedica.GenForm.Settings.Tests.Environments
 {
     [TestClass]
-    public class AnEnvironmentSettingShould : SecureSettingSourceTest
+    public class AnEnvironmentSettingShould : SecureSettingSourceTestFixture
     {
         [TestMethod]
         public void TranslateMachineEnvironmentProviderAndNameToASettingName()
@@ -32,13 +32,13 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var fakeSetting = Isolate.Fake.Instance<Setting>();
             SetupSecureSettingSource();
-            Isolate.WhenCalled(() => SecureSettingSource.ReadSecure(ConfigurationSettingSource.Types.Conn, null)).WillReturn(fakeSetting);
+            Isolate.WhenCalled(() => SecureSettingSource.ReadSetting(ConfigurationSettingSource.Types.Conn, null)).WillReturn(fakeSetting);
             var envset = EnvironmentSetting.CreateEnvironmentSetting("Test", "Test", "Test","Test", SecureSettingSource);
 
             envset.ConnectionString = "Some connection string";
             var connstr = envset.ConnectionString;
             Assert.AreEqual(connstr, envset.ConnectionString);
-            Isolate.Verify.WasCalledWithAnyArguments(() => SecureSettingSource.ReadSecure(ConfigurationSettingSource.Types.Conn, null));
+            Isolate.Verify.WasCalledWithAnyArguments(() => SecureSettingSource.ReadSetting(ConfigurationSettingSource.Types.Conn, null));
         }
 
         [Isolated]
@@ -47,7 +47,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var fakeSetting = Isolate.Fake.Instance<Setting>();
             SetupSecureSettingSource();
-            Isolate.WhenCalled(() => SecureSettingSource.ReadSecure(ConfigurationSettingSource.Types.Conn, null)).WillReturn(fakeSetting);
+            Isolate.WhenCalled(() => SecureSettingSource.ReadSetting(ConfigurationSettingSource.Types.Conn, null)).WillReturn(fakeSetting);
             var envset = EnvironmentSetting.CreateEnvironmentSetting("Test", "Test", "Test","Test", SecureSettingSource);
 
             envset.ConnectionString = "Some connection string";
@@ -61,13 +61,13 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var fakeSetting = Isolate.Fake.Instance<Setting>();
             SetupSecureSettingSource();
-            Isolate.WhenCalled(() => SecureSettingSource.WriteSecure(fakeSetting)).IgnoreCall();
+            Isolate.WhenCalled(() => SecureSettingSource.WriteSetting(fakeSetting)).IgnoreCall();
 
             var envset = GetEnvironmentSetting();
 
             var connstring = "This is a connectionstring";
             envset.ConnectionString = connstring;
-            Isolate.Verify.WasCalledWithAnyArguments(() => SecureSettingSource.WriteSecure(fakeSetting));
+            Isolate.Verify.WasCalledWithAnyArguments(() => SecureSettingSource.WriteSetting(fakeSetting));
 
         }
 

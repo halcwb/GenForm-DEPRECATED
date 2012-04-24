@@ -49,5 +49,10 @@ namespace Informedica.GenForm.Settings.Environments
         }
 
         #endregion
+
+        public IEnumerable<Environment> GetEnvironmentsForMachine(string mymachine)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

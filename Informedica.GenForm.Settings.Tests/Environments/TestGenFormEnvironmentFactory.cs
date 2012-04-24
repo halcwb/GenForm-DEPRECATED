@@ -6,7 +6,7 @@ using Environment = Informedica.GenForm.Settings.Environments.Environment;
 
 namespace Informedica.GenForm.Settings.Tests.Environments
 {
-    static internal class TestGenFormEnvironment
+    static internal class TestGenFormEnvironmentFactory
     {
         public static GenFormEnvironment CreateTestGenFormEnvironment()
         {

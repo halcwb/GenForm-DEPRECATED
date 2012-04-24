@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Informedica.GenForm.Settings.Environments;
-using Informedica.SecureSettings;
-using Informedica.SecureSettings.Testing;
+using Informedica.GenForm.Settings.Tests.SettingsManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TypeMock.ArrangeActAssert;
 
 namespace Informedica.GenForm.Settings.Tests.Environments
 {
     [TestClass]
-    public class AListOfGenFormEnvironmentsShoud
+    public class AListOfGenFormEnvironmentsShoud : SecureSettingSourceTestFixture
     {
         private GenFormEnvironmentCollection _environments;
 
@@ -23,7 +23,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             try
             {
-                var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment();
+                var genv = TestGenFormEnvironmentFactory.CreateTestGenFormEnvironment();
                 genv.Database = "Test";
                 _environments.AddEnvironment(genv);
 
@@ -38,11 +38,28 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         public void HaveACountIncreasedWithOneWhenANewGenFormEnvironmentIsAdded()
         {
             var count = _environments.Count();
-            var genv = TestGenFormEnvironment.CreateTestGenFormEnvironment();
+            var genv = TestGenFormEnvironmentFactory.CreateTestGenFormEnvironment();
             genv.Database = "Test";
             _environments.AddEnvironment(genv);
 
             Assert.AreEqual((count + 1), _environments.Count());
+        }
+
+        [TestMethod]
+        [Isolated]
+        public void UseAEnvironmentsCollectionToGetTheGenFormEnvironments()
+        {
+            
+            var envCol = Isolate.Fake.Instance<EnvironmentCollection>();
+            var genformenvs = new List<Environment>();
+            var fakeEnv = Isolate.Fake.Instance<Environment>();
+            genformenvs.Add(fakeEnv);
+            Isolate.WhenCalled(() => fakeEnv.Name).WillReturn("TestEnvironment");
+            Isolate.WhenCalled(() => fakeEnv.MachineName).WillReturn("MyMachine");
+            
+            Isolate.WhenCalled(() => envCol.GetEnvironmentsForMachine("MyMachine")).CallOriginal();
+
+            var col = new GenFormEnvironmentCollection(envCol);
         }
     }
 

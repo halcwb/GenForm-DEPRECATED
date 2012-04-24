@@ -1,5 +1,4 @@
-﻿using System;
-using Informedica.GenForm.Settings.ConfigurationSettings;
+﻿using Informedica.GenForm.Settings.ConfigurationSettings;
 using Informedica.SecureSettings.Sources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock.ArrangeActAssert;
@@ -7,7 +6,7 @@ using TypeMock.ArrangeActAssert;
 namespace Informedica.GenForm.Settings.Tests.SettingsManagement
 {
     [TestClass]
-    public class ASecureConfigurationSettingSourceShould: SecureSettingSourceTest
+    public class ASecureConfigurationSettingSourceShould: SecureSettingSourceTestFixture
     {
         [TestMethod]
         public void WriteAnEncryptedAppSettingNameToConfiguration()
@@ -15,7 +14,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
             SetupSecureSettingSource();
 
             var setting = new Setting(Name, Name, ConfigurationSettingSource.Types.App.ToString(), true);
-            SecureSettingSource.WriteSecure(setting);
+            SecureSettingSource.WriteSetting(setting);
 
             Isolate.Verify.WasCalledWithExactArguments(() => Configuration.AppSettings.Settings[Encrypted]);
         }
@@ -26,7 +25,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
             SetupSecureSettingSource();
 
             var setting = new Setting(Name, Name, ConfigurationSettingSource.Types.Conn.ToString(), true);
-            SecureSettingSource.WriteSecure(setting);
+            SecureSettingSource.WriteSetting(setting);
 
             Isolate.Verify.WasCalledWithExactArguments(() => Configuration.ConnectionStrings.ConnectionStrings[Encrypted]);
         }

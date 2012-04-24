@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Informedica.GenForm.Settings.Environments;
+using Informedica.GenForm.Settings.Tests.SettingsManagement;
 using Informedica.SecureSettings.Cryptographers;
 using Informedica.SecureSettings.Sources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,12 +10,8 @@ using TypeMock.ArrangeActAssert;
 namespace Informedica.GenForm.Settings.Tests.Environments
 {
     [TestClass]
-    public class EnvironmentSettingsCollectionShould
+    public class EnvironmentSettingsCollectionShould : SecureSettingSourceTestFixture
     {
-        private SecureSettingSource _secureSource;
-        private SettingSource _source;
-        private SecretKeyManager _keyMan;
-        private CryptoGraphy _crypt;
         private Setting _setting;
 
         [Isolated]
@@ -24,7 +21,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             GetIsolatedEnvironmentSettingsCollection();
             try
             {
-                new EnvironmentSettingsCollection("Test", string.Empty, _secureSource);
+                new EnvironmentSettingsCollection("Test", string.Empty, SecureSettingSource);
                 Assert.Fail("Environment setting collection cannot be created without a machinename");
             }
             catch (Exception e)
@@ -56,7 +53,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             GetIsolatedEnvironmentSettingsCollection();
             try
             {
-                new EnvironmentSettingsCollection(string.Empty, "Test", _secureSource);
+                new EnvironmentSettingsCollection(string.Empty, "Test", SecureSettingSource);
                 Assert.Fail("Environment setting collection cannot be created without a machinename");
             }
             catch (Exception e)
@@ -103,8 +100,9 @@ namespace Informedica.GenForm.Settings.Tests.Environments
 
             try
             {
+                Isolate.WhenCalled(() => SecureSettingSource.WriteSetting(fakeSetting)).CallOriginal();
                 envs.AddSetting("Test", "Test");
-                Isolate.Verify.WasCalledWithAnyArguments(() => _source.WriteSetting(fakeSetting));
+                Isolate.Verify.WasCalledWithAnyArguments(() => SecureSettingSource.WriteSetting(fakeSetting));
 
             }
             catch (Exception e)
@@ -157,24 +155,55 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var settingname = "TestMachine.TestEnvironment.Test.MyProvider";
             var col = GetIsolatedEnvironmentSettingsCollection();
-            _source.WriteSetting(new Setting(settingname, "Connection string", "Conn", false));
+            SettingSource.WriteSetting(new Setting(settingname, "Connection string", "Conn", false));
 
             Assert.AreEqual("MyProvider", col.Single(s => s.Name == "Test").Provider);
         }
 
+        [Isolated]
+        [TestMethod]
+        public void ContainEnvironmentSettingWithNameTestEnvironment()
+        {
+            var col = GetIsolatedEnvironmentSettingsCollectionWithSettings();
+            Assert.IsTrue(col.Any(s => s.Environment == "TestEnvironment"));
+        }
+
         private EnvironmentSettingsCollection GetIsolatedEnvironmentSettingsCollection()
         {
-            _source = new TestSource();
+            SettingSource = new TestSource();
             _setting = Isolate.Fake.Instance<Setting>();
-            Isolate.WhenCalled(() => _source.WriteSetting(_setting)).CallOriginal();
+            Isolate.WhenCalled(() => SettingSource.WriteSetting(_setting)).CallOriginal();
 
-            _keyMan = Isolate.Fake.Instance<SecretKeyManager>();
-            Isolate.WhenCalled(() => _keyMan.GetKey()).WillReturn("secretkey");
+            KeyManager = Isolate.Fake.Instance<SecretKeyManager>();
+            Isolate.WhenCalled(() => KeyManager.GetKey()).WillReturn("secretkey");
 
-            _crypt = new CryptographyAdapter(new SymCryptography());
-            _secureSource = new SecureSettingSource(_source, _keyMan, _crypt);
+            CryptoGraphy = new CryptographyAdapter(new SymCryptography());
+            SecureSettingSource = new SecureSettingSource(SettingSource, KeyManager, CryptoGraphy);
 
-            var col = new EnvironmentSettingsCollection("TestMachine", "TestEnvironment", _secureSource);
+            var col = new EnvironmentSettingsCollection("TestMachine", "TestEnvironment", SecureSettingSource);
+
+            return col;
+
+        }
+
+        public EnvironmentSettingsCollection GetIsolatedEnvironmentSettingsCollectionWithSettings()
+        {
+            SettingSource = new TestSource();
+            SettingSource.WriteSetting(new Setting("MyMachine.TestEnvironment.Database.SqlProvider", "Connection string to database", "Conn", false));
+            SettingSource.WriteSetting(new Setting("MyMachine.TestEnvironment.LogPath.FileSystem", "Path to logp", "Conn", false));
+            SettingSource.WriteSetting(new Setting("MyMachine.TestEnvironment.ExportPath.FileSystem", "Path to export", "Conn", false));
+
+            SettingSource.WriteSetting(new Setting("OtherMachine.OtherEnvironment.Database.SqlProvider", "Connection string to database", "Conn", false));
+            SettingSource.WriteSetting(new Setting("OtherMachine.OtherEnvironment.LogPath.FileSystem", "Path to logp", "Conn", false));
+            SettingSource.WriteSetting(new Setting("OtherMachine.OtherEnvironment.ExportPath.FileSystem", "Path to export", "Conn", false));
+
+            KeyManager = Isolate.Fake.Instance<SecretKeyManager>();
+            Isolate.WhenCalled(() => KeyManager.GetKey()).WillReturn("secretkey");
+
+            CryptoGraphy = new CryptographyAdapter(new SymCryptography());
+            SecureSettingSource = new SecureSettingSource(SettingSource, KeyManager, CryptoGraphy);
+
+            var col = new EnvironmentSettingsCollection("TestMachine", "TestEnvironment", SecureSettingSource);
 
             return col;
         }

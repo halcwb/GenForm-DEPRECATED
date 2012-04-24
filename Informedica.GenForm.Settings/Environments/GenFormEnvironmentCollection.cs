@@ -12,7 +12,15 @@ namespace Informedica.GenForm.Settings.Environments
             ExportPath
         }
 
-        private readonly IList<GenFormEnvironment> _environments = new List<GenFormEnvironment>();
+        private readonly IList<GenFormEnvironment> _genFormEnvironments = new List<GenFormEnvironment>();
+        private EnvironmentCollection _environments;
+
+        public GenFormEnvironmentCollection(EnvironmentCollection envCol)
+        {
+            _environments = envCol;
+        }
+
+        public GenFormEnvironmentCollection() {}
 
         #region Implementation of IEnumerable
 
@@ -25,7 +33,7 @@ namespace Informedica.GenForm.Settings.Environments
         /// <filterpriority>1</filterpriority>
         public IEnumerator<GenFormEnvironment> GetEnumerator()
         {
-            return _environments.GetEnumerator();
+            return _genFormEnvironments.GetEnumerator();
         }
 
         /// <summary>
@@ -46,7 +54,7 @@ namespace Informedica.GenForm.Settings.Environments
         {
             if (string.IsNullOrWhiteSpace(environment.Database))
                 throw new GenFormEnvironmentException("Database connection string cannot be empty");
-            _environments.Add(environment);
+            _genFormEnvironments.Add(environment);
         }
     }
 }
