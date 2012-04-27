@@ -3,26 +3,28 @@ using System.Collections.Generic;
 
 namespace Informedica.GenForm.Settings.Environments
 {
-    public class GenFormEnvironmentCollection: IEnumerable<GenFormEnvironment>
+    public class GenFormEnvironmentCollection: ICollection<GenFormEnvironment>
     {
-        public enum Settings
-        {
-            Database,
-            LogPath,
-            ExportPath
-        }
-
-        private readonly IList<GenFormEnvironment> _genFormEnvironments = new List<GenFormEnvironment>();
+        private readonly ICollection<GenFormEnvironment> _genFormEnvironments = new List<GenFormEnvironment>();
         private EnvironmentCollection _environments;
 
-        public GenFormEnvironmentCollection(EnvironmentCollection envCol)
+        public GenFormEnvironmentCollection(EnvironmentCollection environments)
         {
-            _environments = envCol;
+            _environments = environments;
         }
 
         public GenFormEnvironmentCollection() {}
 
-        #region Implementation of IEnumerable
+
+        private void AddEnvironment(GenFormEnvironment environment)
+        {
+            if (string.IsNullOrWhiteSpace(environment.Database))
+                throw new GenFormEnvironmentException("Database connection string cannot be empty");
+            _genFormEnvironments.Add(environment);
+        }
+
+
+        #region Implementation of ICollection<GenFormEnvironment>
 
         /// <summary>
         /// Returns an enumerator that iterates through the collection.
@@ -48,13 +50,42 @@ namespace Informedica.GenForm.Settings.Environments
             return GetEnumerator();
         }
 
-        #endregion
 
-        public void AddEnvironment(GenFormEnvironment environment)
+        public void Add(GenFormEnvironment item)
         {
-            if (string.IsNullOrWhiteSpace(environment.Database))
-                throw new GenFormEnvironmentException("Database connection string cannot be empty");
-            _genFormEnvironments.Add(environment);
+            AddEnvironment(item);
         }
+
+        public void Clear()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool Contains(GenFormEnvironment item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void CopyTo(GenFormEnvironment[] array, int arrayIndex)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool Remove(GenFormEnvironment item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int Count
+        {
+            get { throw new System.NotImplementedException(); }
+        }
+
+        public bool IsReadOnly
+        {
+            get { throw new System.NotImplementedException(); }
+        }
+
+        #endregion
     }
 }

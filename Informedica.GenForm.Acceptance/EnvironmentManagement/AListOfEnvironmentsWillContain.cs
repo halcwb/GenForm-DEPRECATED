@@ -19,9 +19,9 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
         private void Init()
         {
             _source = new TestSource();
-            _source.WriteSetting(new Setting(GetDatabaseSettingName(), ConnectionString, "Conn", false));
-            _source.WriteSetting(new Setting(GetLogPathSettingName(), LogPath, "Conn", false));
-            _source.WriteSetting(new Setting(GetExportPathSettingName(), LogPath, "Conn", false));
+            _source.Add(new Setting(GetDatabaseSettingName(), ConnectionString, "Conn", false));
+            _source.Add(new Setting(GetLogPathSettingName(), LogPath, "Conn", false));
+            _source.Add(new Setting(GetExportPathSettingName(), LogPath, "Conn", false));
 
             _environments = new GenFormEnvironmentCollection();
         }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Informedica.GenForm.Settings.Environments;
 using Informedica.GenForm.Settings.Tests.SettingsManagement;
@@ -10,7 +11,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
     [TestClass]
     public class AListOfGenFormEnvironmentsShoud : SecureSettingSourceTestFixture
     {
-        private GenFormEnvironmentCollection _environments;
+        private ICollection<GenFormEnvironment> _environments;
 
         [TestInitialize]
         public void SetUpGenFormEnvironments()
@@ -25,24 +26,13 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             {
                 var genv = TestGenFormEnvironmentFactory.CreateTestGenFormEnvironment();
                 genv.Database = "Test";
-                _environments.AddEnvironment(genv);
+                _environments.Add(genv);
 
             }
             catch (System.Exception e)
             {
                 Assert.Fail(e.ToString());
             }
-        }
-
-        [TestMethod]
-        public void HaveACountIncreasedWithOneWhenANewGenFormEnvironmentIsAdded()
-        {
-            var count = _environments.Count();
-            var genv = TestGenFormEnvironmentFactory.CreateTestGenFormEnvironment();
-            genv.Database = "Test";
-            _environments.AddEnvironment(genv);
-
-            Assert.AreEqual((count + 1), _environments.Count());
         }
 
         [TestMethod]

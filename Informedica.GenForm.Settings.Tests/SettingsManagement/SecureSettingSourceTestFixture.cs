@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Configuration;
 using Informedica.GenForm.Settings.ConfigurationSettings;
 using Informedica.SecureSettings.Cryptographers;
@@ -10,13 +11,13 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
     {
         protected Configuration Configuration;
         protected TestConfigurationFactory Factory;
-        protected SettingSource SettingSource;
+        protected ICollection<Setting> SettingSource;
         protected SecretKeyManager KeyManager;
         protected string Key;
         protected CryptoGraphy CryptoGraphy;
         protected string Name;
         protected string Encrypted;
-        protected SecureSettingSource SecureSettingSource;
+        protected ICollection<Setting> SecureSettingSource;
 
         protected void SetupSecureSettingSource()
         {

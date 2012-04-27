@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Configuration;
 using Informedica.SecureSettings.Cryptographers;
@@ -8,7 +8,7 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
 {
     public class SettingSourceFactory
     {
-        public static SecureSettingSource GetSecureSettingSource()
+        public static ICollection<Setting> GetSecureSettingSource()
         {
             ConfigurationFactory factory = new WebConfigurationFactory();
             var source = new ConfigurationSettingSource(factory);

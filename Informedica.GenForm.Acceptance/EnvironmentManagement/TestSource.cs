@@ -44,9 +44,14 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
             Removers.Add(ConfigurationSettingSource.Types.Conn, RemoveConnSetting);
         }
 
-        private void RemoveConnSetting(Setting setting)
+        private bool RemoveConnSetting(Setting setting)
         {
-            if (Settings.Any(s => s.Name == setting.Name)) _settings.Remove(Settings.Single(s => s.Name == setting.Name));
+            if (Settings.Any(s => s.Name == setting.Name))
+            {
+                _settings.Remove(Settings.Single(s => s.Name == setting.Name));
+                return true;
+            }
+            return false;
         }
 
         protected override IEnumerable<Setting> Settings

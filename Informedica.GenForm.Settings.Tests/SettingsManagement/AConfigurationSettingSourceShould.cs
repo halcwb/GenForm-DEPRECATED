@@ -32,7 +32,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         private Setting WriteAppSetting()
         {
             var setting = new Setting("TestApp", "TestValue", ConfigurationSettingSource.Types.App.ToString(), false);
-            _configSettingSource.WriteSetting(setting);
+            _configSettingSource.Add(setting);
             return setting;
         }
 
@@ -122,7 +122,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         {
             try
             {
-                _configSettingSource.ReadSetting(ConfigurationSettingSource.Types.App, _settingName);
+                ReadSetting(ConfigurationSettingSource.Types.App, _settingName);
                 Isolate.Verify.WasCalledWithExactArguments(() => _settings[_settingName]);
 
             }
@@ -136,9 +136,14 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         [TestMethod]
         public void ReturnASettingWithTheSameNameAsTheReadSettingNameArgument()
         {
-            var setting = _configSettingSource.ReadSetting(ConfigurationSettingSource.Types.App, _settingName);
+            var setting = ReadSetting(ConfigurationSettingSource.Types.App, _settingName);
 
             Assert.AreEqual(_settingName, setting.Name);
+        }
+
+        private Setting ReadSetting(ConfigurationSettingSource.Types type, string name)
+        {
+            return _configSettingSource.SingleOrDefault(s => s.Type == type.ToString() && s.Name == name);
         }
 
         [Isolated]
@@ -147,7 +152,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         {
             try
             {
-                _configSettingSource.ReadSetting(ConfigurationSettingSource.Types.Conn, _settingName);
+                ReadSetting(ConfigurationSettingSource.Types.Conn, _settingName);
                 Isolate.Verify.WasCalledWithExactArguments(() => _connections[_settingName]);
             }
             catch (Exception e)
@@ -206,7 +211,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
             try
             {
                 var setting = new Setting("TestApp", "TestValue", ConfigurationSettingSource.Types.Conn.ToString(), false);
-                _configSettingSource.WriteSetting(setting);
+                _configSettingSource.Add(setting);
                 Isolate.Verify.WasCalledWithExactArguments(() => _configuration.ConnectionStrings);
             }
             catch (Exception e)
@@ -222,7 +227,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
             try
             {
                 var setting = new Setting("TestApp", "TestValue", ConfigurationSettingSource.Types.App.ToString(), false);
-                _configSettingSource.RemoveSetting(setting);
+                _configSettingSource.Remove(setting);
                 Isolate.Verify.WasCalledWithExactArguments(() => _configuration.AppSettings);
             }
             catch (Exception e)
@@ -238,7 +243,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
             try
             {
                 var setting = new Setting("TestApp", "TestValue", ConfigurationSettingSource.Types.Conn.ToString(), false);
-                _configSettingSource.RemoveSetting(setting);
+                _configSettingSource.Remove(setting);
                 Isolate.Verify.WasCalledWithExactArguments(() => _configuration.ConnectionStrings);
 
             }
@@ -255,7 +260,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
             try
             {
                 SetUpGenFormWebConfiguration();
-                _configSettingSource.ReadSetting(ConfigurationSettingSource.Types.App, "Foo");
+                ReadSetting(ConfigurationSettingSource.Types.App, "Foo");
                 Assert.Fail("Trying to read a non-existent setting should throw an exception");
             }
             catch (Exception e)
@@ -270,12 +275,12 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         {
             SetUpGenFormWebConfiguration();
             var setting = WriteAppSetting();
-            Assert.IsNotNull(_configSettingSource.ReadSetting(ConfigurationSettingSource.Types.App, setting.Name));
+            Assert.IsNotNull(ReadSetting(ConfigurationSettingSource.Types.App, setting.Name));
 
             try
             {
-                _configSettingSource.RemoveSetting(setting);
-                _configSettingSource.ReadSetting(ConfigurationSettingSource.Types.App, setting.Name);
+                _configSettingSource.Remove(setting);
+                ReadSetting(ConfigurationSettingSource.Types.App, setting.Name);
                 Assert.Fail("Reading removed setting should throw an error");
 
             }

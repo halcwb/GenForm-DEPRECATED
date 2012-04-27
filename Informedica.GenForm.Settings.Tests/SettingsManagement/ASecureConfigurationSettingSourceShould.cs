@@ -14,7 +14,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
             SetupSecureSettingSource();
 
             var setting = new Setting(Name, Name, ConfigurationSettingSource.Types.App.ToString(), true);
-            SecureSettingSource.WriteSetting(setting);
+            SecureSettingSource.Add(setting);
 
             Isolate.Verify.WasCalledWithExactArguments(() => Configuration.AppSettings.Settings[Encrypted]);
         }
@@ -25,7 +25,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
             SetupSecureSettingSource();
 
             var setting = new Setting(Name, Name, ConfigurationSettingSource.Types.Conn.ToString(), true);
-            SecureSettingSource.WriteSetting(setting);
+            SecureSettingSource.Add(setting);
 
             Isolate.Verify.WasCalledWithExactArguments(() => Configuration.ConnectionStrings.ConnectionStrings[Encrypted]);
         }

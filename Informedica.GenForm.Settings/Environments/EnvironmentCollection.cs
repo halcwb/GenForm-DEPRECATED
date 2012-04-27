@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Informedica.GenForm.Settings.Environments
 {
-    public class EnvironmentCollection: IEnumerable<Environment>
+    public class EnvironmentCollection: ICollection<Environment>
     {
         private readonly IList<Environment> _environments;
 
@@ -12,14 +12,14 @@ namespace Informedica.GenForm.Settings.Environments
             _environments = environments;
         }
 
-        public void AddEnvironment(Environment env)
+        private void AddEnvironment(Environment env)
         {
             _environments.Add(env);
         }
 
-        public void RemoveEnvironment(Environment env)
+        private bool RemoveEnvironment(Environment env)
         {
-            _environments.Remove(env);
+            return _environments.Remove(env);
         }
 
         #region Implementation of IEnumerable
@@ -54,5 +54,44 @@ namespace Informedica.GenForm.Settings.Environments
         {
             throw new System.NotImplementedException();
         }
+
+        #region Implementation of ICollection<Environment>
+
+        public void Add(Environment item)
+        {
+            AddEnvironment(item);
+        }
+
+        public void Clear()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool Contains(Environment item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void CopyTo(Environment[] array, int arrayIndex)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool Remove(Environment item)
+        {
+            return RemoveEnvironment(item);
+        }
+
+        public int Count
+        {
+            get { throw new System.NotImplementedException(); }
+        }
+
+        public bool IsReadOnly
+        {
+            get { throw new System.NotImplementedException(); }
+        }
+
+        #endregion
     }
 }

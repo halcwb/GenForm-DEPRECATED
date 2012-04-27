@@ -25,7 +25,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             _source = new TestSource();
             _setting = Isolate.Fake.Instance<Setting>();
-            Isolate.WhenCalled(() => _source.WriteSetting(_setting)).CallOriginal();
+            Isolate.WhenCalled(() => _source.Add(_setting)).CallOriginal();
 
             _keyMan = Isolate.Fake.Instance<SecretKeyManager>();
             Isolate.WhenCalled(() => _keyMan.GetKey()).WillReturn("secretkey");

@@ -92,14 +92,24 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
             Removers.Add(Types.Conn, RemoveConnectionString);
         }
 
-        private void RemoveConnectionString(Setting setting)
+        private bool RemoveConnectionString(Setting setting)
         {
-            Configuration.ConnectionStrings.ConnectionStrings.Remove(setting.Name);
+            if (Configuration.ConnectionStrings.ConnectionStrings[setting.Name] != null)
+            {
+                Configuration.ConnectionStrings.ConnectionStrings.Remove(setting.Name);
+                return true;
+            }
+            return false;
         }
 
-        private void RemoveAppSetting(Setting setting)
+        private bool RemoveAppSetting(Setting setting)
         {
-            Configuration.AppSettings.Settings.Remove(setting.Name);
+            if (Configuration.AppSettings.Settings.AllKeys.Any(k => k == setting.Name))
+            {
+                Configuration.AppSettings.Settings.Remove(setting.Name);
+                return true;
+            }
+            return false;
         }
 
         protected override IEnumerable<Setting> Settings

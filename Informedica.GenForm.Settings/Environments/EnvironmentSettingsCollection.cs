@@ -13,10 +13,9 @@ namespace Informedica.GenForm.Settings.Environments
 
         private readonly string _machine;
         private readonly string _environment;
-        private SecureSettingSource _source;
-        private string _provider;
+        private ICollection<Setting> _source;
 
-        public EnvironmentSettingsCollection(string machine, string environment, SecureSettingSource source)
+        public EnvironmentSettingsCollection(string machine, string environment, ICollection<Setting> source)
         {
             _machine = machine;
             _environment = environment;
@@ -99,13 +98,13 @@ namespace Informedica.GenForm.Settings.Environments
 
         private void AddSetting(EnvironmentSetting environmentSetting, string value)
         {
-            _source.WriteSetting(new Setting(environmentSetting.SettingName, value, "Conn", true));
+            _source.Add(new Setting(environmentSetting.SettingName, value, "Conn", true));
         }
 
         public void RemoveEnvironmentSetting(string name, string provider)
         {
             var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, provider, _source);
-            _source.RemoveSetting(_source.SingleOrDefault(s => s.Name == setting.SettingName));
+            _source.Remove(_source.SingleOrDefault(s => s.Name == setting.SettingName));
         }
 
         public void AddSetting(string name, string provider, string value)

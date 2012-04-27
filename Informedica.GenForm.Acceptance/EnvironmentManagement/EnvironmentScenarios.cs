@@ -108,7 +108,7 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
             name = name.Replace("MyMachine", System.Environment.MachineName);
             var env = GenFormApplication.Environments.Single(e => e.Settings.Any(s => s.SettingName == name));
 
-            GenFormApplication.Environments.RemoveEnvironment(env);
+            GenFormApplication.Environments.Remove(env);
             return env != null;
         }
 
