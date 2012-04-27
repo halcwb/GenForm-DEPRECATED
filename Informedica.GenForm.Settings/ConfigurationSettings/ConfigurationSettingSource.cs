@@ -55,19 +55,19 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
 
         private void WriteConnectionString(Setting setting)
         {
-            if (Configuration.ConnectionStrings.ConnectionStrings[setting.Name] == null) 
-                Configuration.ConnectionStrings.ConnectionStrings.Add(new ConnectionStringSettings(setting.Name, setting.Value));
+            if (Configuration.ConnectionStrings.ConnectionStrings[setting.Key] == null) 
+                Configuration.ConnectionStrings.ConnectionStrings.Add(new ConnectionStringSettings(setting.Key, setting.Value));
             else
             {
-                Configuration.ConnectionStrings.ConnectionStrings[setting.Name].ConnectionString = setting.Value;
+                Configuration.ConnectionStrings.ConnectionStrings[setting.Key].ConnectionString = setting.Value;
             }
         }
 
         private void WriteAppSetting(Setting setting)
         {
-            if (Configuration.AppSettings.Settings[setting.Name] == null) 
-                Configuration.AppSettings.Settings.Add(new KeyValueConfigurationElement(setting.Name, setting.Value));
-            else Configuration.AppSettings.Settings[setting.Name].Value = setting.Value;
+            if (Configuration.AppSettings.Settings[setting.Key] == null) 
+                Configuration.AppSettings.Settings.Add(new KeyValueConfigurationElement(setting.Key, setting.Value));
+            else Configuration.AppSettings.Settings[setting.Key].Value = setting.Value;
         }
 
         protected override void RegisterRemovers()
@@ -78,9 +78,9 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
 
         private bool RemoveConnectionString(Setting setting)
         {
-            if (Configuration.ConnectionStrings.ConnectionStrings[setting.Name] != null)
+            if (Configuration.ConnectionStrings.ConnectionStrings[setting.Key] != null)
             {
-                Configuration.ConnectionStrings.ConnectionStrings.Remove(setting.Name);
+                Configuration.ConnectionStrings.ConnectionStrings.Remove(setting.Key);
                 return true;
             }
             return false;
@@ -88,9 +88,9 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
 
         private bool RemoveAppSetting(Setting setting)
         {
-            if (Configuration.AppSettings.Settings.AllKeys.Any(k => k == setting.Name))
+            if (Configuration.AppSettings.Settings.AllKeys.Any(k => k == setting.Key))
             {
-                Configuration.AppSettings.Settings.Remove(setting.Name);
+                Configuration.AppSettings.Settings.Remove(setting.Key);
                 return true;
             }
             return false;

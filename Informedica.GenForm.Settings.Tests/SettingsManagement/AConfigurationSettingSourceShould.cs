@@ -187,7 +187,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
             SetUpGenFormWebConfiguration();
             var setting = WriteAppSetting();
 
-            Assert.IsTrue(_configSettingSource.Any(s => s.Name == setting.Name));
+            Assert.IsTrue(_configSettingSource.Any(s => s.Key == setting.Key));
         }
 
         [Isolated]
@@ -255,16 +255,16 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         {
             SetUpGenFormWebConfiguration();
             var setting = WriteAppSetting();
-            Assert.IsNotNull(ReadSetting(ConfigurationSettingSource.Types.App, setting.Name));
+            Assert.IsNotNull(ReadSetting(ConfigurationSettingSource.Types.App, setting.Key));
 
             _configSettingSource.Remove(setting);
-            setting = ReadSetting(ConfigurationSettingSource.Types.App, setting.Name);
+            setting = ReadSetting(ConfigurationSettingSource.Types.App, setting.Key);
             Assert.IsNull(setting);
         }
 
         private Setting ReadSetting(ConfigurationSettingSource.Types type, string name)
         {
-            return _configSettingSource.SingleOrDefault(s => s.Type == type.ToString() && s.Name == name);
+            return _configSettingSource.SingleOrDefault(s => s.Type == type.ToString() && s.Key == name);
         }
 
     }

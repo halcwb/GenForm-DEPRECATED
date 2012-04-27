@@ -47,23 +47,14 @@ namespace Informedica.GenForm.Settings.Environments
 
         private IEnumerable<EnvironmentSetting> GetEnvironmentSettings()
         {
-            IList<EnvironmentSetting> envs = new List<EnvironmentSetting>();
-            foreach (var setting in _source)
-            {
-                if (setting.Type == ConfigurationSettingSource.Types.Conn.ToString())
-                {
-                    if (CheckIfNameIsAValidSettingName(setting.Name))
-                    {
-                        var envSetting = new EnvironmentSetting(_machine, _environment,
-                                                                GetNameFromSettingName(setting.Name),
-                                                                GetProviderFromSettingName(setting.Name), _source)
-                                             {ConnectionString = setting.Value};
-                        envs.Add(envSetting);
-                    }
-                }
-            }
-
-            return envs;
+            return (from setting in _source
+                    where setting.Type == ConfigurationSettingSource.Types.Conn.ToString()
+                    where CheckIfNameIsAValidSettingName(setting.Key)
+                    select new EnvironmentSetting(_machine, 
+                                                  _environment, 
+                                                  GetNameFromSettingName(setting.Key), 
+                                                  GetProviderFromSettingName(setting.Key), 
+                                                  _source) {ConnectionString = setting.Value}).ToList();
         }
 
         private static bool CheckIfNameIsAValidSettingName(string name)
@@ -109,7 +100,7 @@ namespace Informedica.GenForm.Settings.Environments
         public void RemoveEnvironmentSetting(string name, string provider)
         {
             var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, provider, _source);
-            _source.Remove(_source.SingleOrDefault(s => s.Name == setting.SettingName));
+            _source.Remove(_source.SingleOrDefault(s => s.Key == setting.SettingName));
         }
 
         public void AddSetting(string name, string provider, string value)

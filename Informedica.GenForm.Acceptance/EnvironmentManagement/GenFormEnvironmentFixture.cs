@@ -74,7 +74,7 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
             {
                 return EnvironmentFactory.GetGenFormEnvironment(EnvironmentName, MachineName, Provider, ConnectionString);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }

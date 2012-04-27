@@ -24,7 +24,7 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 
         private void WriteConnSetting(Setting setting)
         {
-            var old = (Settings.SingleOrDefault(s => s.Name == setting.Name));
+            var old = (Settings.SingleOrDefault(s => s.Key == setting.Key));
             if (old != null) _settings.Remove(old);
             _settings.Add(setting);
         }
@@ -36,9 +36,9 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 
         private bool RemoveConnSetting(Setting setting)
         {
-            if (Settings.Any(s => s.Name == setting.Name))
+            if (Settings.Any(s => s.Key == setting.Key))
             {
-                _settings.Remove(Settings.Single(s => s.Name == setting.Name));
+                _settings.Remove(Settings.Single(s => s.Key == setting.Key));
                 return true;
             }
             return false;

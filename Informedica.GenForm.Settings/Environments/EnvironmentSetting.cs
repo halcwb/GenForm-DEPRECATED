@@ -28,7 +28,7 @@ namespace Informedica.GenForm.Settings.Environments
         {
             var setting =
                 _source.SingleOrDefault(
-                    s => s.Type == ConfigurationSettingSource.Types.Conn.ToString() && s.Name == SettingName);
+                    s => s.Type == ConfigurationSettingSource.Types.Conn.ToString() && s.Key == SettingName);
 
             return setting == null ? string.Empty : setting.Value;
         }
