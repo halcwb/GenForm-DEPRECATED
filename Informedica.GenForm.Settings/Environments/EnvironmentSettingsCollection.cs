@@ -47,14 +47,16 @@ namespace Informedica.GenForm.Settings.Environments
 
         private IEnumerable<EnvironmentSetting> GetEnvironmentSettings()
         {
-            return (from setting in _source
-                    where setting.Type == ConfigurationSettingSource.Types.Conn.ToString()
-                    where CheckIfNameIsAValidSettingName(setting.Key)
-                    select new EnvironmentSetting(_machine, 
-                                                  _environment, 
-                                                  GetNameFromSettingName(setting.Key), 
-                                                  GetProviderFromSettingName(setting.Key), 
-                                                  _source) {ConnectionString = setting.Value}).ToList();
+            var source = new List<Setting>(_source);
+            var result = (from setting in source
+                          where setting.Type == ConfigurationSettingSource.Types.Conn.ToString()
+                          where CheckIfNameIsAValidSettingName(setting.Key)
+                          select new EnvironmentSetting(setting.Machine,
+                                                        setting.Environment,
+                                                        GetNameFromSettingName(setting.Key),
+                                                        GetProviderFromSettingName(setting.Key),
+                                                        _source) { ConnectionString = setting.Value }).ToList();
+            return result;
         }
 
         private static bool CheckIfNameIsAValidSettingName(string name)

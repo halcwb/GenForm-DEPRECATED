@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Informedica.GenForm.Settings.Environments
 {
     public class GenFormEnvironmentCollection: ICollection<GenFormEnvironment>
     {
-        private readonly ICollection<GenFormEnvironment> _genFormEnvironments = new List<GenFormEnvironment>();
+        private IList<GenFormEnvironment> _genFormEnvironments = new List<GenFormEnvironment>();
         private EnvironmentCollection _environments;
 
         public GenFormEnvironmentCollection(EnvironmentCollection environments)
@@ -35,7 +36,25 @@ namespace Informedica.GenForm.Settings.Environments
         /// <filterpriority>1</filterpriority>
         public IEnumerator<GenFormEnvironment> GetEnumerator()
         {
+            RefreshEnvironments();
             return _genFormEnvironments.GetEnumerator();
+        }
+
+        private void RefreshEnvironments()
+        {
+            _genFormEnvironments = new List<GenFormEnvironment>();
+
+            foreach (var environment in _environments)
+            {
+                if (IsGenFormEnvironment(environment)) _genFormEnvironments.Add(new GenFormEnvironment(environment));
+            }
+        }
+
+        private static bool IsGenFormEnvironment(Environment environment)
+        {
+            return environment.Settings.Any(s => s.Name == "Database") &&
+                   environment.Settings.Any(s => s.Name == "LogPath") &&
+                   environment.Settings.Any(s => s.Name == "ExportPath");
         }
 
         /// <summary>

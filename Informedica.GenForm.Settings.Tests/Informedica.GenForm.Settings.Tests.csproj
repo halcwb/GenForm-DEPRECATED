@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="Environments\ACollectionOfEnvironmentsShould.cs" />
     <Compile Include="Environments\AGenFormEnvironmentShould.cs" />
-    <Compile Include="Environments\AListOfGenFormEnvironmentsShoud.cs" />
+    <Compile Include="Environments\AListOfGenFormEnvironmentsShould.cs" />
     <Compile Include="Environments\AnEnvironmentSettingShould.cs" />
     <Compile Include="Environments\EnvironmentSettingsCollectionShould.cs" />
     <Compile Include="Environments\EnvironmentTests.cs" />

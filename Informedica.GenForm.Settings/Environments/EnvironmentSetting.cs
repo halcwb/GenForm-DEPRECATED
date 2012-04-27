@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Informedica.GenForm.Settings.ConfigurationSettings;
@@ -33,9 +34,9 @@ namespace Informedica.GenForm.Settings.Environments
             return setting == null ? string.Empty : setting.Value;
         }
 
-        public EnvironmentSetting(string machineName, string environment, string name, string provider, ICollection<Setting> secureSettingSource)
+        public EnvironmentSetting(string machineName, string environment, string name, string provider, ICollection<Setting> source)
         {
-            _source = secureSettingSource;
+            _source = source;
             Init(name, machineName, environment, provider);
         }
 

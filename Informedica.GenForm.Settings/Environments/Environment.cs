@@ -1,9 +1,13 @@
+using System.Collections.Generic;
+using System.Linq;
 using Informedica.GenForm.Settings.ConfigurationSettings;
 
 namespace Informedica.GenForm.Settings.Environments
 {
     public class Environment
     {
+        private EnvironmentSettingsCollection _settings;
+
         private static EnvironmentSettingsCollection CreateEnvironmentSettings(string machine, string environment)
         {
             return new EnvironmentSettingsCollection(machine, environment, SettingSourceFactory.GetSecureSettingSource());
@@ -23,18 +27,31 @@ namespace Informedica.GenForm.Settings.Environments
         {
             Name = environmentName;
             MachineName = machineName;
-            Settings = settings;
+            _settings = settings;
         }
 
         public string Name { get; private set; }
 
-        public EnvironmentSettingsCollection Settings { get; private set; }
+        public IEnumerable<EnvironmentSetting> Settings
+        {
+            get { return _settings.Where(s => s.MachineName == MachineName && s.Environment == Name).ToList(); }
+        }
 
         public string MachineName { get; private set; }
 
         public static Environment Create(string name, string machine)
         {
             return new Environment(name, machine);
+        }
+
+        public void AddSetting(string name, string provider, string connectionString)
+        {
+            _settings.AddSetting(name, provider, connectionString);
+        }
+
+        public void AddSetting(string name, string provider)
+        {
+            AddSetting(name, provider, string.Empty);
         }
     }
 }

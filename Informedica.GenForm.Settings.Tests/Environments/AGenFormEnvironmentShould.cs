@@ -19,7 +19,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         private SecretKeyManager _keyMan;
         private CryptoGraphy _crypt;
         private SecureSettingSource _secureSource;
-        private const string EnvironmentName = "Test";
+        private const string EnvironmentName = "TestEnvironment";
 
         private EnvironmentSettingsCollection GetIsolatedEnvironmentSettingsCollection()
         {
@@ -45,7 +45,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             if (!string.IsNullOrWhiteSpace(logpath)) _settings.AddSetting(logpath, provider);
             if (!string.IsNullOrWhiteSpace(exportpath)) _settings.AddSetting(exportpath, provider);
 
-            _environment = new Environment("Test", "Test", _settings);
+            _environment = new Environment("TestMachine", "TestEnvironment", _settings);
             _genFormEnvironment = new GenFormEnvironment(_environment);
         }
 
