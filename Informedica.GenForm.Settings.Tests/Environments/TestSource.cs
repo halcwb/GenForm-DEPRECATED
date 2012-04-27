@@ -17,16 +17,6 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             return ConfigurationSettingSource.Types.Conn;
         }
 
-        protected override void RegisterReaders()
-        {
-            Readers.Add(ConfigurationSettingSource.Types.Conn, ReadConnSetting);
-        }
-
-        private Setting ReadConnSetting(string name)
-        {
-            return Settings.SingleOrDefault(S => S.Name == name);
-        }
-
         protected override void RegisterWriters()
         {
             Writers.Add(ConfigurationSettingSource.Types.Conn, WriteConnSetting);

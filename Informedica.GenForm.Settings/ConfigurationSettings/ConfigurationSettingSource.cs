@@ -31,12 +31,6 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
             throw new UnknownSettingTypeException();
         }
 
-        protected override void RegisterReaders()
-        {
-            Readers.Add(Types.App, ReadAppSetting);
-            Readers.Add(Types.Conn, ReadConnectionString);
-        }
-
         public Setting ReadAppSetting(string name)
         {
             if (!ConfigurationContainsAppSetting(name)) throw new SettingNotFoundException(name);
@@ -51,16 +45,6 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
         private static Setting CreateSetting(KeyValueConfigurationElement element)
         {
             return new Setting(element.Key, element.Value, Types.App.ToString(), false);
-        }
-
-        private Setting ReadConnectionString(string name)
-        {
-            return CreateSetting(Configuration.ConnectionStrings.ConnectionStrings[name]);
-        }
-
-        private static Setting CreateSetting(ConnectionStringSettings connectionString)
-        {
-            return new Setting(connectionString.Name, connectionString.ConnectionString, Types.Conn.ToString(), false);
         }
 
         protected override void RegisterWriters()
