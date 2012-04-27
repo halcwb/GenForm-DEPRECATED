@@ -123,7 +123,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
             try
             {
                 ReadSetting(ConfigurationSettingSource.Types.App, _settingName);
-                Isolate.Verify.WasCalledWithExactArguments(() => _settings[_settingName]);
+                Isolate.Verify.WasCalledWithAnyArguments(() => _configuration.AppSettings);
 
             }
             catch (Exception e)
@@ -134,26 +134,12 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
 
         [Isolated]
         [TestMethod]
-        public void ReturnASettingWithTheSameNameAsTheReadSettingNameArgument()
-        {
-            var setting = ReadSetting(ConfigurationSettingSource.Types.App, _settingName);
-
-            Assert.AreEqual(_settingName, setting.Name);
-        }
-
-        private Setting ReadSetting(ConfigurationSettingSource.Types type, string name)
-        {
-            return _configSettingSource.SingleOrDefault(s => s.Type == type.ToString() && s.Name == name);
-        }
-
-        [Isolated]
-        [TestMethod]
         public void CallConfigurationConnectionStringsToReadAnConnectionSetting()
         {
             try
             {
                 ReadSetting(ConfigurationSettingSource.Types.Conn, _settingName);
-                Isolate.Verify.WasCalledWithExactArguments(() => _connections[_settingName]);
+                Isolate.Verify.WasCalledWithAnyArguments(() => _configuration.ConnectionStrings);
             }
             catch (Exception e)
             {
@@ -255,39 +241,31 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
 
         [Isolated]
         [TestMethod]
-        public void ThrowAnSettingNotFoundExceptionWhenReadingANonExistentSetting()
+        public void ReturnNullWhenTryingToGetANonExistingSetting()
         {
-            try
-            {
-                SetUpGenFormWebConfiguration();
-                ReadSetting(ConfigurationSettingSource.Types.App, "Foo");
-                Assert.Fail("Trying to read a non-existent setting should throw an exception");
-            }
-            catch (Exception e)
-            {
-                Assert.IsInstanceOfType(e, typeof(SettingNotFoundException));
-            }
+            SetUpGenFormWebConfiguration();
+
+            var setting = ReadSetting(ConfigurationSettingSource.Types.App, "Foo");
+            Assert.IsNull(setting);
         }
 
         [Isolated]
         [TestMethod]
-        public void NoLongerBeAbleToReadAnSettingThatWasRemoved()
+        public void ReturnANullValueWhenSettingCannotBeRead()
         {
             SetUpGenFormWebConfiguration();
             var setting = WriteAppSetting();
             Assert.IsNotNull(ReadSetting(ConfigurationSettingSource.Types.App, setting.Name));
 
-            try
-            {
-                _configSettingSource.Remove(setting);
-                ReadSetting(ConfigurationSettingSource.Types.App, setting.Name);
-                Assert.Fail("Reading removed setting should throw an error");
-
-            }
-            catch (Exception e)
-            {
-                Assert.IsInstanceOfType(e, typeof(SettingNotFoundException));
-            }
+            _configSettingSource.Remove(setting);
+            setting = ReadSetting(ConfigurationSettingSource.Types.App, setting.Name);
+            Assert.IsNull(setting);
         }
+
+        private Setting ReadSetting(ConfigurationSettingSource.Types type, string name)
+        {
+            return _configSettingSource.SingleOrDefault(s => s.Type == type.ToString() && s.Name == name);
+        }
+
     }
 }

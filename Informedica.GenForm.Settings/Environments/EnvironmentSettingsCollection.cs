@@ -53,8 +53,13 @@ namespace Informedica.GenForm.Settings.Environments
                 if (setting.Type == ConfigurationSettingSource.Types.Conn.ToString())
                 {
                     if (CheckIfNameIsAValidSettingName(setting.Name))
-                        envs.Add(new EnvironmentSetting(_machine, _environment, GetNameFromSettingName(setting.Name),
-                                                        GetProviderFromSettingName(setting.Name), _source));
+                    {
+                        var envSetting = new EnvironmentSetting(_machine, _environment,
+                                                                GetNameFromSettingName(setting.Name),
+                                                                GetProviderFromSettingName(setting.Name), _source)
+                                             {ConnectionString = setting.Value};
+                        envs.Add(envSetting);
+                    }
                 }
             }
 

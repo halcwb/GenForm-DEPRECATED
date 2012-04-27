@@ -7,7 +7,7 @@ namespace Informedica.GenForm.Settings.Environments
 {
     public class EnvironmentSetting
     {
-        private ICollection<Setting> _source;
+        private readonly ICollection<Setting> _source;
         public const string Seperator = ".";
 
         private void Init(string name, string machineName, string environment, string provider)
@@ -28,7 +28,7 @@ namespace Informedica.GenForm.Settings.Environments
         {
             var setting =
                 _source.SingleOrDefault(
-                    s => s.Type == ConfigurationSettingSource.Types.Conn.ToString() && s.Name == Name);
+                    s => s.Type == ConfigurationSettingSource.Types.Conn.ToString() && s.Name == SettingName);
 
             return setting == null ? string.Empty : setting.Value;
         }
