@@ -24,8 +24,6 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 
         private void WriteConnSetting(Setting setting)
         {
-            var old = (Settings.SingleOrDefault(s => s.Key == setting.Key));
-            if (old != null) _settings.Remove(old);
             _settings.Add(setting);
         }
 
@@ -51,6 +49,11 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 
         public override void Save()
         {
+        }
+
+        new public void Clear()
+        {
+            _settings.Clear();
         }
 
         #endregion

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Informedica.GenForm.Settings.Environments;
 using Informedica.GenForm.Settings.Tests.SettingsManagement;
@@ -74,9 +73,27 @@ namespace Informedica.GenForm.Settings.Tests.Environments
 
             var genFCol = new GenFormEnvironmentCollection(col);
 
-            Isolate.WhenCalled(() => col.GetEnumerator()).CallOriginal();
             Assert.IsTrue(genFCol.Any());
-            Isolate.Verify.WasCalledWithAnyArguments(() => col.GetEnumerator());
+        }
+
+        [TestMethod]
+        [Isolated]
+        public void HaveOneGenFormEnvironmentWhenOtherEnvironmentTypesWithSameNameInTestSource()
+        {
+            var source = new TestSource
+                             {
+                                 new Setting("TestMachine1.GenFormEnv.Test1", "Test", "Conn", false),
+                                 new Setting("TestMachine1.Env2.Test1", "Test", "Conn", false),
+                                 new Setting("TestMachine2.GenFormEnv.Database.SqLite", "Test", "Conn", false),
+                                 new Setting("TestMachine2.GenFormEnv.LogPath.FileSystem", "Test", "Conn", false),
+                                 new Setting("TestMachine1.Env1.Test2", "Test", "Conn", false),
+                                 new Setting("TestMachine2.GenFormEnv.ExportPath.FileSystem", "Test", "Conn", false)
+                             };
+            var col = new EnvironmentCollection(source);
+
+            var genFCol = new GenFormEnvironmentCollection(col);
+
+            Assert.IsTrue(genFCol.Any());
         }
     }
 }

@@ -31,22 +31,6 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
             throw new UnknownSettingTypeException();
         }
 
-        public Setting ReadAppSetting(string name)
-        {
-            if (!ConfigurationContainsAppSetting(name)) throw new SettingNotFoundException(name);
-            return CreateSetting(Configuration.AppSettings.Settings[name]);
-        }
-
-        private bool ConfigurationContainsAppSetting(string name)
-        {
-            return Configuration.AppSettings.Settings.AllKeys.Any(k => k == name);
-        }
-
-        private static Setting CreateSetting(KeyValueConfigurationElement element)
-        {
-            return new Setting(element.Key, element.Value, Types.App.ToString(), false);
-        }
-
         protected override void RegisterWriters()
         {
             Writers.Add(Types.App, WriteAppSetting);

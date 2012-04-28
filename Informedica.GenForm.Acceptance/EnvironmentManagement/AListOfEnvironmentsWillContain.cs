@@ -13,7 +13,6 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 
         public AListOfEnvironmentsWillContain()
         {
-            Init();
         }
 
         private void Init()
@@ -26,7 +25,7 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
                           };
             var col = new EnvironmentCollection(_source);
 
-            _environments = new GenFormEnvironmentCollection();
+            _environments = new GenFormEnvironmentCollection(col);
         }
 
         private string GetDatabaseSettingName()
@@ -46,12 +45,13 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 
         private string GetSettingName()
         {
-            return MachineName + Seperator + EnvironmentName + SettingPlaceHolder + Provider;
+            return MachineName + Seperator + EnvironmentName + Seperator + SettingPlaceHolder + Seperator + Provider;
         }
 
         public string IsInTheList()
         {
-            return _environments.Any(e => e.MachineName == MachineName && e.Name == Name) ? "Yes" : "No";
+            Init();
+            return _environments.Any(e => e.MachineName == "MyMachine") ? "Yes" : "No";
         }
     }
 }
