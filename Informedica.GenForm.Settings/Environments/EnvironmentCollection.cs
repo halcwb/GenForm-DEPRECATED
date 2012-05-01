@@ -1,18 +1,16 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Informedica.SecureSettings.Sources;
 
 namespace Informedica.GenForm.Settings.Environments
 {
     public class EnvironmentCollection: ICollection<Environment>
     {
         private IList<Environment> _environments;
-        private ICollection<Setting> _source;
+        private ICollection<EnvironmentSetting> _settings;
 
-        public EnvironmentCollection(ICollection<Setting> source)
+        public EnvironmentCollection(ICollection<EnvironmentSetting> settings)
         {
-            _source = source;
+            _settings = settings;
         }
 
         public EnvironmentCollection(List<Environment> environments)
@@ -49,30 +47,35 @@ namespace Informedica.GenForm.Settings.Environments
         private void RefreshEnvironments()
         {
             _environments = new List<Environment>();
-            var source = new List<Setting>(_source);
-            source.Sort(KeyOrder);
-
-            var machine = string.Empty;
-            var environment = string.Empty;
-
-            foreach (var setting in source)
+            foreach (var setting in _settings)
             {
-                if (setting.Machine == machine && setting.Environment == environment) continue;
-
-                machine = setting.Machine;
-                environment = setting.Environment;
-
-                if (string.IsNullOrWhiteSpace(machine) || string.IsNullOrWhiteSpace(environment)) continue;
-
-                _environments.Add(new Environment(machine, environment,
-                                                  new EnvironmentSettingsCollection(machine, environment, _source)));
+                var env = new Environment(setting.MachineName, setting.Environment, _settings);
+                _environments.Add(env);
             }
         }
 
-        private static int KeyOrder(Setting x, Setting y)
-        {
-            return (String.CompareOrdinal(x.Key, y.Key));
-        }
+        //private void RefreshEnvironments()
+        //{
+        //    _environments = new List<Environment>();
+        //    var source = new List<ISetting>(_source);
+        //    source.Sort(KeyOrder);
+
+        //    var machine = string.Empty;
+        //    var environment = string.Empty;
+
+        //    foreach (var setting in source)
+        //    {
+        //        if (setting.Machine == machine && setting.Environment == environment) continue;
+
+        //        machine = setting.Machine;
+        //        environment = setting.Environment;
+
+        //        if (string.IsNullOrWhiteSpace(machine) || string.IsNullOrWhiteSpace(environment)) continue;
+
+        //        _environments.Add(new Environment(machine, environment,
+        //                                          new EnvironmentSettingsCollection(machine, environment, _source)));
+        //    }
+        //}
 
 
         /// <summary>

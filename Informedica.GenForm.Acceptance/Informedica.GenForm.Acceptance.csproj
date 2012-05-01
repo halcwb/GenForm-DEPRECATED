@@ -51,10 +51,12 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.79.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.x64.1.0.79.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="Typemock.ArrangeActAssert, Version=6.2.3.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnvironmentManagement\AListOfEnvironmentsWillContain.cs" />
     <Compile Include="EnvironmentManagement\CreateEnvironmentsUsingSettings.cs" />
+    <Compile Include="EnvironmentManagement\CurrentEnvironmentsReporter.cs" />
     <Compile Include="EnvironmentManagement\EnvironmentScenarios.cs" />
     <Compile Include="EnvironmentManagement\GenFormEnvironmentFixture.cs" />
     <Compile Include="EnvironmentManagement\GenFormEnvironmentValidityCheck.cs" />

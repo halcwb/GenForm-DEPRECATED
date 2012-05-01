@@ -29,9 +29,11 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
             _configSettingSource = new ConfigurationSettingSource(_factory);
         }
 
-        private Setting WriteAppSetting()
+        private ISetting WriteAppSetting()
         {
-            var setting = new Setting("TestApp", "TestValue", ConfigurationSettingSource.Types.App.ToString(), false);
+            var el = new KeyValueConfigurationElement("Test", "Test");
+            Isolate.WhenCalled(() => el.Key).WillReturn("Test");
+            var setting = SettingFactory.CreateSecureSetting(el);
             _configSettingSource.Add(setting);
             return setting;
         }
@@ -122,7 +124,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         {
             try
             {
-                ReadSetting(ConfigurationSettingSource.Types.App, _settingName);
+                ReadSetting(typeof(KeyValueConfigurationElement), _settingName);
                 Isolate.Verify.WasCalledWithAnyArguments(() => _configuration.AppSettings);
 
             }
@@ -138,7 +140,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         {
             try
             {
-                ReadSetting(ConfigurationSettingSource.Types.Conn, _settingName);
+                ReadSetting(typeof(ConnectionStringSettings), _settingName);
                 Isolate.Verify.WasCalledWithAnyArguments(() => _configuration.ConnectionStrings);
             }
             catch (Exception e)
@@ -196,7 +198,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         {
             try
             {
-                var setting = new Setting("TestApp", "TestValue", ConfigurationSettingSource.Types.Conn.ToString(), false);
+                var setting = SettingFactory.CreateSecureSetting(new ConnectionStringSettings("Test", "Test"));
                 _configSettingSource.Add(setting);
                 Isolate.Verify.WasCalledWithExactArguments(() => _configuration.ConnectionStrings);
             }
@@ -212,7 +214,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         {
             try
             {
-                var setting = new Setting("TestApp", "TestValue", ConfigurationSettingSource.Types.App.ToString(), false);
+                var setting = WriteAppSetting();
                 _configSettingSource.Remove(setting);
                 Isolate.Verify.WasCalledWithExactArguments(() => _configuration.AppSettings);
             }
@@ -228,7 +230,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         {
             try
             {
-                var setting = new Setting("TestApp", "TestValue", ConfigurationSettingSource.Types.Conn.ToString(), false);
+                var setting = SettingFactory.CreateSecureSetting(new ConnectionStringSettings("Test", "Test"));
                 _configSettingSource.Remove(setting);
                 Isolate.Verify.WasCalledWithExactArguments(() => _configuration.ConnectionStrings);
 
@@ -245,7 +247,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         {
             SetUpGenFormWebConfiguration();
 
-            var setting = ReadSetting(ConfigurationSettingSource.Types.App, "Foo");
+            var setting = _configSettingSource.SingleOrDefault(s => s.Key == "FooBar");
             Assert.IsNull(setting);
         }
 
@@ -255,16 +257,29 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
         {
             SetUpGenFormWebConfiguration();
             var setting = WriteAppSetting();
-            Assert.IsNotNull(ReadSetting(ConfigurationSettingSource.Types.App, setting.Key));
+            Assert.IsNotNull(ReadSetting(typeof(KeyValueConfigurationElement), setting.Key));
 
             _configSettingSource.Remove(setting);
-            setting = ReadSetting(ConfigurationSettingSource.Types.App, setting.Key);
+            setting = ReadSetting(typeof(KeyValueConfigurationElement), setting.Key);
             Assert.IsNull(setting);
         }
 
-        private Setting ReadSetting(ConfigurationSettingSource.Types type, string name)
+        [Isolated]
+        [TestMethod]
+        public void HaveTheSameAmountOfSettingsAsInTheSettingsFile()
         {
-            return _configSettingSource.SingleOrDefault(s => s.Type == type.ToString() && s.Key == name);
+            var config = (new WebConfigurationFactory()).GetConfiguration();
+            var count = config.ConnectionStrings.ConnectionStrings.Count;
+            count += config.AppSettings.Settings.Count;
+
+            var source = SettingSourceFactory.GetSettingSource();
+
+            Assert.AreEqual(count, source.Count);
+        }
+
+        private ISetting ReadSetting(Type type, string name)
+        {
+            return _configSettingSource.SingleOrDefault(s => s.Type == type && s.Key == name);
         }
 
     }

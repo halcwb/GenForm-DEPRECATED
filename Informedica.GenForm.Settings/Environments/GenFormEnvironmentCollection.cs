@@ -97,7 +97,11 @@ namespace Informedica.GenForm.Settings.Environments
 
         public int Count
         {
-            get { throw new System.NotImplementedException(); }
+            get
+            {
+                RefreshEnvironments();
+                return _genFormEnvironments.Count;
+            }
         }
 
         public bool IsReadOnly

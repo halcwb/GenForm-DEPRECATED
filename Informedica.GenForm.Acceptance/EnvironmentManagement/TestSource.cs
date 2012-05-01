@@ -1,38 +1,35 @@
-using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
-using Informedica.GenForm.Settings.ConfigurationSettings;
 using Informedica.SecureSettings.Sources;
 
 namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 {
-    public class TestSource: SettingSource
+    public class TestSource : SettingSource
     {
-        private IList<Setting> _settings;
+        private IList<ISetting> _settings;
 
         #region Overrides of SettingSource
 
-        protected override Enum SettingTypeToEnum(Setting setting)
-        {
-            return ConfigurationSettingSource.Types.Conn;
-        }
 
         protected override void RegisterWriters()
         {
-            Writers.Add(ConfigurationSettingSource.Types.Conn, WriteConnSetting);
+            Writers.Add(typeof(ConnectionStringSettings), WriteConnSetting);
         }
 
-        private void WriteConnSetting(Setting setting)
+        private void WriteConnSetting(ISetting setting)
         {
+            var old = (Settings.SingleOrDefault(s => s.Key == setting.Key));
+            if (old != null) _settings.Remove(old);
             _settings.Add(setting);
         }
 
         protected override void RegisterRemovers()
         {
-            Removers.Add(ConfigurationSettingSource.Types.Conn, RemoveConnSetting);
+            Removers.Add(typeof(ConnectionStringSettings), RemoveConnSetting);
         }
 
-        private bool RemoveConnSetting(Setting setting)
+        private bool RemoveConnSetting(ISetting setting)
         {
             if (Settings.Any(s => s.Key == setting.Key))
             {
@@ -42,20 +39,16 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
             return false;
         }
 
-        protected override IEnumerable<Setting> Settings
+        protected override IEnumerable<ISetting> Settings
         {
-            get { return _settings ?? (_settings =  new List<Setting>()); }
+            get { return _settings ?? (_settings = new List<ISetting>()); }
         }
 
         public override void Save()
         {
         }
 
-        new public void Clear()
-        {
-            _settings.Clear();
-        }
-
         #endregion
     }
+
 }

@@ -11,19 +11,17 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
     {
         protected Configuration Configuration;
         protected TestConfigurationFactory Factory;
-        protected ICollection<Setting> SettingSource;
         protected SecretKeyManager KeyManager;
         protected string Key;
         protected CryptoGraphy CryptoGraphy;
         protected string Name;
         protected string Encrypted;
-        protected ICollection<Setting> SecureSettingSource;
+        protected ICollection<ISetting> SecureSettingSource;
 
         protected void SetupSecureSettingSource()
         {
             Configuration = Isolate.Fake.Instance<Configuration>();
             Factory = new TestConfigurationFactory(Configuration);
-            SettingSource = new ConfigurationSettingSource(Factory);
 
             KeyManager = Isolate.Fake.Instance<SecretKeyManager>();
             Key = "key";
@@ -36,7 +34,7 @@ namespace Informedica.GenForm.Settings.Tests.SettingsManagement
             Isolate.WhenCalled((() => CryptoGraphy.Encrypt(Name))).WillReturn(Encrypted);
             Isolate.WhenCalled((() => CryptoGraphy.Decrypt(Encrypted))).WillReturn(Name);
 
-            SecureSettingSource = new SecureSettingSource(SettingSource, KeyManager, CryptoGraphy);
+            SecureSettingSource = new ConfigurationSettingSource(Factory);
         }
     }
 }

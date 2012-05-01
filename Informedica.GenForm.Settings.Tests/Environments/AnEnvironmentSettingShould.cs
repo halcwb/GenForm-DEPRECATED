@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Informedica.GenForm.Settings.Environments;
-using Informedica.GenForm.Settings.Tests.SettingsManagement;
+﻿using Informedica.GenForm.Settings.Environments;
 using Informedica.SecureSettings.Sources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock.ArrangeActAssert;
@@ -8,79 +6,81 @@ using TypeMock.ArrangeActAssert;
 namespace Informedica.GenForm.Settings.Tests.Environments
 {
     [TestClass]
-    public class AnEnvironmentSettingShould : SecureSettingSourceTestFixture
+    public class AnEnvironmentSettingShould
     {
-        [TestMethod]
-        public void TranslateMachineEnvironmentProviderAndNameToASettingName()
+        private EnvironmentSetting _envsetting;
+        private string _provider;
+        private string _name;
+        private string _environment;
+        private string _machineName;
+        private string _settingName;
+
+        [TestInitialize]
+        public void SetupIsolatedEnvironmentSetting()
         {
-            SetupSecureSettingSource();
+            _settingName = "MyMachine.TestEnvironment.MyDatabase.SqLite";
+            _machineName = "MyMachine";
+            _environment = "TestEnvironment";
+            _name = "MyDatabase";
+            _provider = "SqLite";
 
-            var settingName = "MyMachine.TestEnvironment.MyDatabase.Provider";
-            var machine = "MyMachine";
-            var environment = "TestEnvironment";
-            var name = "MyDatabase";
-            var provider = "Provider";
-
-            var envset = new EnvironmentSetting(machine, environment, name, provider, SecureSettingSource);
-
-            Assert.AreEqual(settingName, envset.SettingName);
+            _envsetting = new EnvironmentSetting(_machineName, _environment, _name, _provider, Isolate.Fake.Instance<ISetting>());
         }
 
         [Isolated]
         [TestMethod]
-        public void UseSecureSettingSourceToReadAConnectionString()
+        public void HaveMachineNameMyMachineFromSettingKey()
         {
-            var fakeSetting = Isolate.Fake.Instance<Setting>();
-            SetupSecureSettingSource();
-            Isolate.WhenCalled(() => SecureSettingSource.SingleOrDefault(s => s.Type == "Conn" && s.Key == Name)).WillReturn(fakeSetting);
-            var envset = EnvironmentSetting.CreateEnvironmentSetting("Test", "Test", "Test","Test", SecureSettingSource);
+            Assert.AreEqual(_machineName, _envsetting.MachineName);
+        }
 
-            envset.ConnectionString = "Some connection string";
-            var connstr = envset.ConnectionString;
-            Assert.AreEqual(connstr, envset.ConnectionString);
-            Isolate.Verify.WasCalledWithAnyArguments(
-                () => SecureSettingSource.SingleOrDefault(s => s.Type == "Conn" && s.Key == Name));
+
+        [Isolated]
+        [TestMethod]
+        public void HaveEnvironmentTestEnvironmentFromSettingKey()
+        {
+            Assert.AreEqual(_environment, _envsetting.Environment);
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void HaveNameMyDatabaseFromSettingKey()
+        {
+            Assert.AreEqual(_name, _envsetting.Name);
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void HaveProviderSqLiteFromSettingKey()
+        {
+            Assert.AreEqual(_provider, _envsetting.Provider);
+        }
+        [Isolated]
+        [TestMethod]
+        public void TranslateMachineEnvironmentProviderAndNameToASettingName()
+        {
+            SetupIsolatedEnvironmentSetting();
+
+            Assert.AreEqual(_settingName, _envsetting.SettingName);
+        }
+
+
+        [Isolated]
+        [TestMethod]
+        public void UseASecureSettingToReadAConnectionString()
+        {
         }
 
         [Isolated]
         [TestMethod]
         public void ReturnSameConnectionStringAsSetToConnectionString()
         {
-            var fakeSetting = Isolate.Fake.Instance<Setting>();
-            SetupSecureSettingSource();
-            Isolate.WhenCalled(() => SecureSettingSource.SingleOrDefault(s =>s.Key == Name)).WillReturn(fakeSetting);
-            var envset = EnvironmentSetting.CreateEnvironmentSetting("Test", "Test", "Test","Test", SecureSettingSource);
-
-            envset.ConnectionString = "Some connection string";
-            var connstr = envset.ConnectionString;
-            Assert.AreEqual(connstr, envset.ConnectionString);
         }
 
         [Isolated]
         [TestMethod]
         public void UseSecureSettingSourceToWriteAConnectionString()
         {
-            var fakeSetting = Isolate.Fake.Instance<Setting>();
-            SetupSecureSettingSource();
-            Isolate.WhenCalled(() => SecureSettingSource.Add(fakeSetting)).IgnoreCall();
-
-            var envset = GetEnvironmentSetting();
-
-            var connstring = "This is a connectionstring";
-            envset.ConnectionString = connstring;
-            Isolate.Verify.WasCalledWithAnyArguments(() => SecureSettingSource.Add(fakeSetting));
-
         }
-
-        private EnvironmentSetting GetEnvironmentSetting()
-        {
-            var machine = "MyMachine";
-            var environment = "Test";
-            var name = "MyDatabase";
-            var provider = "Provider";
-
-            return new EnvironmentSetting(name, machine, environment, provider, SecureSettingSource);
-        }
-
     }
 }

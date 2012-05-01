@@ -48,11 +48,13 @@
     <Compile Include="ConfigurationSettings\SettingNotFoundException.cs" />
     <Compile Include="ConfigurationSettings\SettingSourceFactory.cs" />
     <Compile Include="ConfigurationSettings\UnknownSettingTypeException.cs" />
+    <Compile Include="ConfigurationSettings\WebConfigurationFactory.cs" />
     <Compile Include="Environments\DuplicateSettingError.cs" />
     <Compile Include="Environments\Environment.cs" />
     <Compile Include="Environments\EnvironmentCollection.cs" />
     <Compile Include="Environments\EnvironmentFactory.cs" />
     <Compile Include="Environments\EnvironmentSetting.cs" />
+    <Compile Include="Environments\EnvironmentSettingFactory.cs" />
     <Compile Include="Environments\EnvironmentSettingsCollection.cs" />
     <Compile Include="Environments\GenFormEnvironment.cs" />
     <Compile Include="Environments\GenFormEnvironmentCollection.cs" />

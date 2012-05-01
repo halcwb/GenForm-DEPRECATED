@@ -1,21 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
-using Informedica.GenForm.Settings.ConfigurationSettings;
 using Informedica.SecureSettings.Sources;
 
 namespace Informedica.GenForm.Settings.Environments
 {
-    public class EnvironmentSettingsCollection : IEnumerable<EnvironmentSetting>
+    public class EnvironmentSettingsCollection : ICollection<EnvironmentSetting>
     {
-        public const char Separator = '.';
-
         private readonly string _machine;
         private readonly string _environment;
-        private ICollection<Setting> _source;
+        private ICollection<ISetting> _source;
+        private IList<EnvironmentSetting> _settings;
 
-        public EnvironmentSettingsCollection(string machine, string environment, ICollection<Setting> source)
+        public EnvironmentSettingsCollection(string machine, string environment, ICollection<ISetting> source)
         {
             _machine = machine;
             _environment = environment;
@@ -47,31 +46,27 @@ namespace Informedica.GenForm.Settings.Environments
 
         private IEnumerable<EnvironmentSetting> GetEnvironmentSettings()
         {
-            var source = new List<Setting>(_source);
-            var result = (from setting in source
-                          where setting.Type == ConfigurationSettingSource.Types.Conn.ToString()
-                          where CheckIfNameIsAValidSettingName(setting.Key)
-                          select new EnvironmentSetting(setting.Machine,
-                                                        setting.Environment,
-                                                        GetNameFromSettingName(setting.Key),
-                                                        GetProviderFromSettingName(setting.Key),
-                                                        _source) { ConnectionString = setting.Value }).ToList();
-            return result;
+            _settings = new List<EnvironmentSetting>();
+
+            foreach (var setting in _source)
+            {
+                if (EnvironmentSetting.CheckIfNameIsAValidSettingName(setting.Key) && setting.Type == typeof(ConnectionStringSettings))
+                {
+                    var envSet = EnvironmentSettingFactory.CreateSetting(setting);
+                    if (envSet.MachineName == _machine && envSet.Environment == _environment && !ContainsEnvironmentSetting(envSet)) _settings.Add(envSet);
+                }
+            }
+
+            return _settings;
         }
 
-        private static bool CheckIfNameIsAValidSettingName(string name)
+        private bool ContainsEnvironmentSetting(EnvironmentSetting envSet)
         {
-            return name.Split(Separator).GetUpperBound(0) >= 3;
-        }
-
-        private string GetNameFromSettingName(string settingName)
-        {
-            return settingName.Split(Separator)[2];
-        }
-
-        private string GetProviderFromSettingName(string settingName)
-        {
-            return settingName.Split(Separator)[3];
+            return
+                _settings.Any(
+                    s =>
+                    s.MachineName == envSet.MachineName && s.Environment == envSet.Environment &&
+                    s.Name == envSet.Name);
         }
 
 
@@ -89,28 +84,72 @@ namespace Informedica.GenForm.Settings.Environments
 
         #endregion
 
-        public void AddSetting(string name, string provider)
+        private void AddSetting(EnvironmentSetting environmentSetting)
         {
-            AddSetting(name, provider, string.Empty);
-        }
-
-        private void AddSetting(EnvironmentSetting environmentSetting, string value)
-        {
-            _source.Add(new Setting(environmentSetting.SettingName, value, "Conn", true));
+            _source.Add(environmentSetting.Setting);
         }
 
         public void RemoveEnvironmentSetting(string name, string provider)
         {
-            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, provider, _source);
-            _source.Remove(_source.SingleOrDefault(s => s.Key == setting.SettingName));
+            var setting = GetSettingFromSource(this.Single(s => s.Name == name && s.Provider == provider));
+            _source.Remove(_source.SingleOrDefault(s => s.Key == setting.Key));
+        }
+
+        private ISetting GetSettingFromSource(EnvironmentSetting setting)
+        {
+            return _source.SingleOrDefault(s => s.Key == setting.SettingName);
+        }
+
+        public void AddSetting(string name, string provider)
+        {
+            AddSetting(name, provider, string.Empty);
         }
 
         public void AddSetting(string name, string provider, string value)
         {
             if (this.Any(envset => envset.Name == name)) throw new DuplicateSettingError("EnvironmentSetting with name " + name + "already exists");
 
-            var setting = EnvironmentSetting.CreateEnvironmentSetting(name, _machine, _environment, provider, _source);
-            AddSetting(setting, value);
+            var setting = EnvironmentSettingFactory.CreateSetting(_machine, _environment, name, provider, value);
+            AddSetting(setting);
         }
+
+        #region Implementation of ICollection<EnvironmentSetting>
+
+        public void Add(EnvironmentSetting item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(EnvironmentSetting item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CopyTo(EnvironmentSetting[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(EnvironmentSetting item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Count
+        {
+            get { return GetEnvironmentSettings().Count(); }
+        }
+
+        public bool IsReadOnly
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        #endregion
     }
 }

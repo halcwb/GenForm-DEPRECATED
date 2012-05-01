@@ -1,5 +1,7 @@
 using System;
+using System.Configuration;
 using System.Linq;
+using Informedica.GenForm.Settings.ConfigurationSettings;
 using Informedica.GenForm.Settings.Environments;
 using Informedica.GenForm.Settings.Tests.SettingsManagement;
 using Informedica.SecureSettings.Cryptographers;
@@ -12,7 +14,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
     [TestClass]
     public class EnvironmentSettingsCollectionShould : SecureSettingSourceTestFixture
     {
-        private Setting _setting;
+        private ISetting _setting;
 
         [Isolated]
         [TestMethod]
@@ -96,8 +98,8 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         public void UseSettingSourceToAddAnEnvironmentSetting()
         {
             var envs =GetIsolatedEnvironmentSettingsCollection();
-            var fakeSetting = Isolate.Fake.Instance<Setting>();
-
+            var fakeSetting = Isolate.Fake.Instance<ISetting>();
+            Isolate.WhenCalled(() => fakeSetting.Key).WillReturn("Test");
             try
             {
                 Isolate.WhenCalled(() => SecureSettingSource.Add(fakeSetting)).CallOriginal();
@@ -155,7 +157,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var settingname = "TestMachine.TestEnvironment.Test.MyProvider";
             var col = GetIsolatedEnvironmentSettingsCollection();
-            SettingSource.Add(new Setting(settingname, "Connection string", "Conn", false));
+            SecureSettingSource.Add(SettingFactory.CreateSecureSetting(new ConnectionStringSettings(settingname, string.Empty)));
 
             Assert.AreEqual("MyProvider", col.Single(s => s.Name == "Test").Provider);
         }
@@ -170,15 +172,15 @@ namespace Informedica.GenForm.Settings.Tests.Environments
 
         private EnvironmentSettingsCollection GetIsolatedEnvironmentSettingsCollection()
         {
-            SettingSource = new TestSource();
-            _setting = Isolate.Fake.Instance<Setting>();
-            Isolate.WhenCalled(() => SettingSource.Add(_setting)).CallOriginal();
+            SecureSettingSource = new TestSource();
+            _setting = Isolate.Fake.Instance<ISetting>();
+            Isolate.WhenCalled(() => SecureSettingSource.Add(_setting)).CallOriginal();
 
             KeyManager = Isolate.Fake.Instance<SecretKeyManager>();
             Isolate.WhenCalled(() => KeyManager.GetKey()).WillReturn("secretkey");
 
             CryptoGraphy = new CryptographyAdapter(new SymCryptography());
-            SecureSettingSource = new SecureSettingSource(SettingSource, KeyManager, CryptoGraphy);
+            SecureSettingSource = SettingSourceFactory.GetSettingSource();
 
             var col = new EnvironmentSettingsCollection("TestMachine", "TestEnvironment", SecureSettingSource);
 
@@ -188,22 +190,22 @@ namespace Informedica.GenForm.Settings.Tests.Environments
 
         public EnvironmentSettingsCollection GetIsolatedEnvironmentSettingsCollectionWithSettings()
         {
-            SettingSource = new TestSource();
-            SettingSource.Add(new Setting("MyMachine.TestEnvironment.Database.SqlProvider", "Connection string to database", "Conn", false));
-            SettingSource.Add(new Setting("MyMachine.TestEnvironment.LogPath.FileSystem", "Path to logp", "Conn", false));
-            SettingSource.Add(new Setting("MyMachine.TestEnvironment.ExportPath.FileSystem", "Path to export", "Conn", false));
+            SecureSettingSource = new TestSource();
+            SecureSettingSource.Add(SettingFactory.CreateSecureSetting<ConnectionStringSettings>("MyMachine.TestEnvironment.Database.SqlProvider", "Connection string to database"));
+            //SettingSource.Add(new Setting("MyMachine.TestEnvironment.Database.SqlProvider", "Connection string to database", "Conn", false));
+            //SettingSource.Add(new Setting("MyMachine.TestEnvironment.LogPath.FileSystem", "Path to logp", "Conn", false));
+            //SettingSource.Add(new Setting("MyMachine.TestEnvironment.ExportPath.FileSystem", "Path to export", "Conn", false));
 
-            SettingSource.Add(new Setting("OtherMachine.OtherEnvironment.Database.SqlProvider", "Connection string to database", "Conn", false));
-            SettingSource.Add(new Setting("OtherMachine.OtherEnvironment.LogPath.FileSystem", "Path to logp", "Conn", false));
-            SettingSource.Add(new Setting("OtherMachine.OtherEnvironment.ExportPath.FileSystem", "Path to export", "Conn", false));
+            //SettingSource.Add(new Setting("OtherMachine.OtherEnvironment.Database.SqlProvider", "Connection string to database", "Conn", false));
+            //SettingSource.Add(new Setting("OtherMachine.OtherEnvironment.LogPath.FileSystem", "Path to logp", "Conn", false));
+            //SettingSource.Add(new Setting("OtherMachine.OtherEnvironment.ExportPath.FileSystem", "Path to export", "Conn", false));
 
             KeyManager = Isolate.Fake.Instance<SecretKeyManager>();
             Isolate.WhenCalled(() => KeyManager.GetKey()).WillReturn("secretkey");
 
             CryptoGraphy = new CryptographyAdapter(new SymCryptography());
-            SecureSettingSource = new SecureSettingSource(SettingSource, KeyManager, CryptoGraphy);
 
-            var col = new EnvironmentSettingsCollection("TestMachine", "TestEnvironment", SecureSettingSource);
+            var col = new EnvironmentSettingsCollection("MyMachine", "TestEnvironment", SecureSettingSource);
 
             return col;
         }

@@ -6,11 +6,11 @@ namespace Informedica.GenForm.Settings.Environments
 {
     public class Environment
     {
-        private EnvironmentSettingsCollection _settings;
+        private ICollection<EnvironmentSetting> _settings;
 
         private static EnvironmentSettingsCollection CreateEnvironmentSettings(string machine, string environment)
         {
-            return new EnvironmentSettingsCollection(machine, environment, SettingSourceFactory.GetSecureSettingSource());
+            return new EnvironmentSettingsCollection(machine, environment, SettingSourceFactory.GetSettingSource());
         }
 
         public Environment(string machine, string name, EnvironmentSettingsCollection settings)
@@ -23,7 +23,14 @@ namespace Informedica.GenForm.Settings.Environments
             Init(name, machine, CreateEnvironmentSettings(machine, name));
         }
 
-        private void Init(string environmentName, string machineName, EnvironmentSettingsCollection settings)
+        public Environment(string machineName, string environment, ICollection<EnvironmentSetting> settings)
+        {
+            MachineName = machineName;
+            Name = environment;
+            _settings = settings;
+        }
+
+        private void Init(string environmentName, string machineName, ICollection<EnvironmentSetting> settings)
         {
             Name = environmentName;
             MachineName = machineName;
@@ -46,7 +53,7 @@ namespace Informedica.GenForm.Settings.Environments
 
         public void AddSetting(string name, string provider, string connectionString)
         {
-            _settings.AddSetting(name, provider, connectionString);
+            _settings.Add(EnvironmentSettingFactory.CreateSetting(MachineName, Name, name, provider, connectionString));
         }
 
         public void AddSetting(string name, string provider)

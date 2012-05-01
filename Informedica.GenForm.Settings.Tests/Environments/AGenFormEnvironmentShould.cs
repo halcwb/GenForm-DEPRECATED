@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Informedica.GenForm.Settings.ConfigurationSettings;
 using Informedica.GenForm.Settings.Environments;
 using Informedica.SecureSettings.Cryptographers;
 using Informedica.SecureSettings.Sources;
@@ -15,23 +17,21 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         private GenFormEnvironment _genFormEnvironment;
         private EnvironmentSettingsCollection _settings;
         private SettingSource _source;
-        private Setting _setting;
+        private ISetting _setting;
         private SecretKeyManager _keyMan;
-        private CryptoGraphy _crypt;
-        private SecureSettingSource _secureSource;
+        private ICollection<ISetting> _secureSource;
         private const string EnvironmentName = "TestEnvironment";
 
         private EnvironmentSettingsCollection GetIsolatedEnvironmentSettingsCollection()
         {
             _source = new TestSource();
-            _setting = Isolate.Fake.Instance<Setting>();
+            _setting = Isolate.Fake.Instance<ISetting>();
             Isolate.WhenCalled(() => _source.Add(_setting)).CallOriginal();
 
             _keyMan = Isolate.Fake.Instance<SecretKeyManager>();
             Isolate.WhenCalled(() => _keyMan.GetKey()).WillReturn("secretkey");
 
-            _crypt = new CryptographyAdapter(new SymCryptography());
-            _secureSource = new SecureSettingSource(_source, _keyMan, _crypt);
+            _secureSource = SettingSourceFactory.GetSettingSource();
 
             var col = new EnvironmentSettingsCollection("TestMachine", "TestEnvironment", _secureSource);
 

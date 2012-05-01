@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -8,12 +7,6 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
 {
     public class ConfigurationSettingSource : SettingSource
     {
-        public enum Types
-        {
-            App,
-            Conn
-        }
-
         private Configuration _configuration;
         private readonly ConfigurationFactory _factory;
 
@@ -24,20 +17,13 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
             _factory = factory;
         }
 
-        protected override Enum SettingTypeToEnum(Setting setting)
-        {
-            if (setting.Type == Types.App.ToString()) return Types.App;
-            if (setting.Type == Types.Conn.ToString()) return Types.Conn;
-            throw new UnknownSettingTypeException();
-        }
-
         protected override void RegisterWriters()
         {
-            Writers.Add(Types.App, WriteAppSetting);
-            Writers.Add(Types.Conn, WriteConnectionString);
+            Writers.Add(typeof(KeyValueConfigurationElement), WriteAppSetting);
+            Writers.Add(typeof(ConnectionStringSettings), WriteConnectionString);
         }
 
-        private void WriteConnectionString(Setting setting)
+        private void WriteConnectionString(ISetting setting)
         {
             if (Configuration.ConnectionStrings.ConnectionStrings[setting.Key] == null) 
                 Configuration.ConnectionStrings.ConnectionStrings.Add(new ConnectionStringSettings(setting.Key, setting.Value));
@@ -47,7 +33,7 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
             }
         }
 
-        private void WriteAppSetting(Setting setting)
+        private void WriteAppSetting(ISetting setting)
         {
             if (Configuration.AppSettings.Settings[setting.Key] == null) 
                 Configuration.AppSettings.Settings.Add(new KeyValueConfigurationElement(setting.Key, setting.Value));
@@ -56,11 +42,11 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
 
         protected override void RegisterRemovers()
         {
-            Removers.Add(Types.App, RemoveAppSetting);
-            Removers.Add(Types.Conn, RemoveConnectionString);
+            Removers.Add(typeof(KeyValueConfigurationElement), RemoveAppSetting);
+            Removers.Add(typeof(ConnectionStringSettings), RemoveConnectionString);
         }
 
-        private bool RemoveConnectionString(Setting setting)
+        private bool RemoveConnectionString(ISetting setting)
         {
             if (Configuration.ConnectionStrings.ConnectionStrings[setting.Key] != null)
             {
@@ -70,7 +56,7 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
             return false;
         }
 
-        private bool RemoveAppSetting(Setting setting)
+        private bool RemoveAppSetting(ISetting setting)
         {
             if (Configuration.AppSettings.Settings.AllKeys.Any(k => k == setting.Key))
             {
@@ -80,11 +66,11 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
             return false;
         }
 
-        protected override IEnumerable<Setting> Settings
+        protected override IEnumerable<ISetting> Settings
         {
             get
             {
-                var list = new List<Setting>();
+                var list = new List<ISetting>();
                 list.AddRange(ReadAppSettings());
                 list.AddRange(ReadConnectionStrings());
                 return list;
@@ -98,16 +84,16 @@ namespace Informedica.GenForm.Settings.ConfigurationSettings
             _configuration = null;
         }
 
-        private IEnumerable<Setting> ReadConnectionStrings()
+        private IEnumerable<ISetting> ReadConnectionStrings()
         {
-            return (from ConnectionStringSettings connstring in Configuration.ConnectionStrings.ConnectionStrings
-                    select new Setting(connstring.Name, connstring.ConnectionString, Types.Conn.ToString(), false)).ToList();
+            return (from ConnectionStringSettings s in Configuration.ConnectionStrings.ConnectionStrings
+                    select SettingFactory.CreateSecureSetting(s)).ToList();
         }
 
-        private IEnumerable<Setting> ReadAppSettings()
+        private IEnumerable<ISetting> ReadAppSettings()
         {
-            return (from KeyValueConfigurationElement element in Configuration.AppSettings.Settings 
-                    select new Setting(element.Key, element.Value, Types.App.ToString(), false)).ToList();
+            return (from KeyValueConfigurationElement e in Configuration.AppSettings.Settings 
+                    select SettingFactory.CreateSecureSetting(e)).ToList();
         }
 
         #endregion

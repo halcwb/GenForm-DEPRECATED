@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using Informedica.GenForm.Settings.Environments;
 using Informedica.SecureSettings.Sources;
@@ -7,19 +8,20 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 {
     public class CreateEnvironmentsUsingSettings
     {
-        private ICollection<Setting> _settings = new TestSource();
+        private ICollection<ISetting> _settings = new TestSource();
+        private EnvironmentSettingsCollection _envSettings;
         private GenFormEnvironmentCollection _environments;
 
         public void CreateSettingWithKeyAndValue (string key, string value)
         {
-            _settings.Add(new Setting(key, value, "Conn", false));
+            _settings.Add(SettingFactory.CreateSecureSetting(new ConnectionStringSettings()));
         }
 
         public bool ListOfEnvironmentsContainsForMachine(string environment, string machine)
         {
             try
             {
-                var envs = new EnvironmentCollection(_settings);
+                var envs = new EnvironmentCollection(_envSettings);
                 _environments = new GenFormEnvironmentCollection(envs);
 
                 return _environments.Any(e => e.Name == environment && e.MachineName == machine);

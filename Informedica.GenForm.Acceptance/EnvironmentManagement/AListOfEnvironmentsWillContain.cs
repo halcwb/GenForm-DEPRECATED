@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Informedica.GenForm.Settings.Environments;
-using Informedica.SecureSettings.Sources;
+using TypeMock.ArrangeActAssert;
 
 namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 {
@@ -8,22 +8,15 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
     {
         private TestSource _source;
         private GenFormEnvironmentCollection _environments;
+        private EnvironmentSettingsCollection _settings;
         private const string Seperator = ".";
         private const string SettingPlaceHolder = "Setting";
 
-        public AListOfEnvironmentsWillContain()
-        {
-        }
-
         private void Init()
         {
-            _source = new TestSource
-                          {
-                              new Setting(GetDatabaseSettingName(), ConnectionString, "Conn", false),
-                              new Setting(GetLogPathSettingName(), LogPath, "Conn", false),
-                              new Setting(GetExportPathSettingName(), LogPath, "Conn", false)
-                          };
-            var col = new EnvironmentCollection(_source);
+            _source = new TestSource();
+            _settings = Isolate.Fake.Instance<EnvironmentSettingsCollection>();
+            var col = new EnvironmentCollection(_settings);
 
             _environments = new GenFormEnvironmentCollection(col);
         }
