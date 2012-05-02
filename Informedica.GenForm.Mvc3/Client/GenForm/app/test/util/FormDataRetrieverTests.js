@@ -5,6 +5,7 @@ Ext.define('GenForm.test.util.FormDataRetrieverTests', {
         var me = this;
 
         Ext.define('TestRetrieverForm', {
+            title: 'TestRetrieverForm',
             extend: 'Ext.form.Panel',
 
             requires: [
@@ -23,7 +24,7 @@ Ext.define('GenForm.test.util.FormDataRetrieverTests', {
         me.getTestForm = function () {
             var form =  Ext.create('TestRetrieverForm');
             form.loadRecord(Ext.create('GenForm.model.product.Substance', {
-                SubstanceName: 'paracetamol'
+                Name: 'paracetamol'
             }));
             return form;
         };
@@ -37,7 +38,7 @@ Ext.define('GenForm.test.util.FormDataRetrieverTests', {
         });
 
         it('getFormData returns a populated model', function () {
-            expect(me.getTestForm().getFormData().data.SubstanceName).toBe('paracetamol');
+            expect(me.getTestForm().getFormData().data.Name).toBe('paracetamol');
         });
 
     }

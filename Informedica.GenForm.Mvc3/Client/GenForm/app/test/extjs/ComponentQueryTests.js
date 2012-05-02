@@ -1,7 +1,7 @@
 Ext.define('GenForm.test.extjs.ComponentQueryTests', {
     describe: 'Ext.ComponentQuery',
     tests: function () {
-        var createTestForm;
+        var createTestForm, findForm;
 
         createTestForm = function () {
             return Ext.create('Ext.form.Panel', {
@@ -13,12 +13,16 @@ Ext.define('GenForm.test.extjs.ComponentQueryTests', {
             });
         };
 
+        findForm = function () {
+            return Ext.ComponentQuery.query('#testform');
+        };
+
         it('a test form should be created', function () {
            expect(createTestForm()).toBeDefined();
         });
 
         it('component query finds the panel', function () {
-           expect(Ext.ComponentQuery.query('#testform').length).toBe(1);
+           expect(findForm().length).toBe(1);
         });
 
         it('should be able to get the testform using the title', function () {
@@ -26,7 +30,7 @@ Ext.define('GenForm.test.extjs.ComponentQueryTests', {
         });
 
         it('if you go down from testform you get a textfield', function () {
-            expect(createTestForm().down('textfield').name).toBe('test');
+            expect(findForm()[0].down('textfield').name).toBe('test');
         });
     }
 });
