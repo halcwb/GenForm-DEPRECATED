@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using Informedica.GenForm.Settings.Environments;
@@ -13,6 +14,21 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
         private EnvironmentSettingsCollection _settings;
         private GenFormEnvironmentCollection _environments;
         private const string Fail = "Fail";
+
+        public string ChangeSettingOfEnvironmentOfMachineTo(string setting, string environment, string machine, string value)
+        {
+            try
+            {
+                RefreshEnvironments();
+                _environments.Single(e => e.MachineName == machine && e.Name == environment).Database = value;
+
+                return Success;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
 
         public string CreateSettingWithKeyAndValue(string key, string value)
         {
@@ -64,7 +80,6 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
                     return (_environments.Single(e => e.Name == environment).ExportPath == value).ToString();
                 
                 return false.ToString();
-
             }
             catch (System.Exception e)
             {
