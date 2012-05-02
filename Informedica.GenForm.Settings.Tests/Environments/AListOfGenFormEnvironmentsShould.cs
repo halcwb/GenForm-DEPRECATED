@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Linq;
 using Informedica.GenForm.Settings.Environments;
@@ -13,15 +12,71 @@ namespace Informedica.GenForm.Settings.Tests.Environments
     [TestClass]
     public class AListOfGenFormEnvironmentsShould : SecureSettingSourceTestFixture
     {
-        private ICollection<GenFormEnvironment> _environments;
+        private ICollection<GenFormEnvironment> _genFormEnvironments;
         private ICollection<EnvironmentSetting> _settings;
         private TestSource _source;
+        private EnvironmentCollection _environments;
 
         [TestInitialize]
         public void SetUpGenFormEnvironments()
         {
-            _settings = new Collection<EnvironmentSetting>();
-            _environments = new GenFormEnvironmentCollection();
+            _source = new TestSource();
+            _settings = new EnvironmentSettingsCollection(_source);
+            _environments = new EnvironmentCollection(_settings);
+            _genFormEnvironments = new GenFormEnvironmentCollection(_environments);
+        }
+
+        [TestMethod]
+        public void UseEnvironmentCollectionToAddANewGenFormEnvironment()
+        {
+            try
+            {
+                var genEnv = EnvironmentFactory.GetGenFormEnvironment("Test", "Test", "Test", "Test");
+                Isolate.WhenCalled(() => _environments.Add(null)).IgnoreCall();
+                _genFormEnvironments.Add(genEnv);
+                Isolate.Verify.WasCalledWithAnyArguments(() => _environments.Add(null));
+            }
+            catch (System.Exception e)
+            {
+                Assert.Fail(e.ToString());
+            }
+        }
+
+        [TestMethod]
+        public void ContainAnEnvironmentWithDatabaseTestEnvironmentTestDatabaseTestDbLogPathTestLpAndExportPathTestEpAfterAdding()
+        {
+            var genfenv = EnvironmentFactory.GetGenFormEnvironment("Test", "Test", "Test", "TestDb", "TestLp", "TestEp");
+            Assert.AreEqual("TestDb", genfenv.Database);
+            Assert.AreEqual("TestLp", genfenv.LogPath);
+            Assert.AreEqual("TestEp", genfenv.ExportPath);
+
+            _genFormEnvironments.Add(genfenv);
+            genfenv = _genFormEnvironments.Single(e => e.MachineName == genfenv.MachineName && e.Name == genfenv.Name);
+
+            Assert.IsNotNull(genfenv);
+            Assert.AreEqual("TestDb", genfenv.Database);
+            Assert.AreEqual("TestLp", genfenv.LogPath);
+            Assert.AreEqual("TestEp", genfenv.ExportPath);
+        }
+
+        [TestMethod]
+        public void HaveACountPlusOneAfterAddingANewGenFormEnvironment()
+        {
+            var count = _genFormEnvironments.Count;
+
+            var genFormEnv = EnvironmentFactory.GetGenFormEnvironment("Test", "Test", "Test", "test");
+            _genFormEnvironments.Add(genFormEnv);
+
+            Assert.AreEqual(count + 1, _genFormEnvironments.Count);
+        }
+
+        [TestMethod]
+        public void ContainTheNewGenFormEnvironmentAfterAddingIt()
+        {
+            var genFormEnv = EnvironmentFactory.GetGenFormEnvironment("Test", "Test", "Test", "Test");
+            _genFormEnvironments.Add(genFormEnv);
+
+            Assert.IsTrue(_genFormEnvironments.Any(e => e.MachineName == genFormEnv.MachineName && e.Name == genFormEnv.Name));
         }
 
         [TestMethod]
@@ -31,7 +86,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             {
                 var genv = TestGenFormEnvironmentFactory.CreateTestGenFormEnvironment();
                 genv.Database = "Test";
-                _environments.Add(genv);
+                _genFormEnvironments.Add(genv);
 
             }
             catch (System.Exception e)
@@ -52,13 +107,13 @@ namespace Informedica.GenForm.Settings.Tests.Environments
                                  SettingFactory.CreateSecureSetting<ConnectionStringSettings>("TestMachine1.Env2.Test4.Provider", "Test")
                              };
             _settings = new EnvironmentSettingsCollection(_source);
-            var col = new EnvironmentCollection(_settings);
+            _environments = new EnvironmentCollection(_settings);
 
-            var genFCol = new GenFormEnvironmentCollection(col);
+            var genFCol = new GenFormEnvironmentCollection(_environments);
 
-            Isolate.WhenCalled(() => col.GetEnumerator()).CallOriginal();
+            Isolate.WhenCalled(() => _environments.GetEnumerator()).CallOriginal();
             Assert.IsTrue(genFCol.Any());
-            Isolate.Verify.WasCalledWithAnyArguments(() => col.GetEnumerator());
+            Isolate.Verify.WasCalledWithAnyArguments(() => _environments.GetEnumerator());
         }
 
         [TestMethod]
@@ -75,9 +130,9 @@ namespace Informedica.GenForm.Settings.Tests.Environments
                                  SettingFactory.CreateSecureSetting<ConnectionStringSettings>("TestMachine2.GenFormEnv.ExportPath.FileSystem", "Test")
                              };
             _settings = new EnvironmentSettingsCollection(_source);
-            var col = new EnvironmentCollection(_settings);
+            _environments = new EnvironmentCollection(_settings);
 
-            var genFCol = new GenFormEnvironmentCollection(col);
+            var genFCol = new GenFormEnvironmentCollection(_environments);
 
             Assert.IsTrue(genFCol.Any());
         }
@@ -99,9 +154,9 @@ namespace Informedica.GenForm.Settings.Tests.Environments
                                  SettingFactory.CreateSecureSetting<ConnectionStringSettings>("TestMachine2.GenFormEnv2.ExportPath.FileSystem", "Test")
                              };
             _settings = new EnvironmentSettingsCollection(_source);
-            var col = new EnvironmentCollection(_settings);
+            _environments = new EnvironmentCollection(_settings);
 
-            var genFCol = new GenFormEnvironmentCollection(col);
+            var genFCol = new GenFormEnvironmentCollection(_environments);
 
             Assert.IsTrue(genFCol.Count == 2);
         }
@@ -124,13 +179,13 @@ namespace Informedica.GenForm.Settings.Tests.Environments
                              };
 
             _settings = new EnvironmentSettingsCollection(_source);
-            var col = new EnvironmentCollection(_settings);
+            _environments = new EnvironmentCollection(_settings);
 
-            Assert.AreEqual(2, col.Count, "There should be two environments");
-            Assert.AreEqual(3, col.Single(e => e.Name == "AcceptanceTest1").Settings.Count(), "Environment AcceptanceTest1 should have 3 settings");
-            Assert.AreEqual(3, col.Single(e => e.Name == "AcceptanceTest2").Settings.Count(), "Environment AcceptanceTest2 should have 3 settings");
+            Assert.AreEqual(2, _environments.Count, "There should be two environments");
+            Assert.AreEqual(3, _environments.Single(e => e.Name == "AcceptanceTest1").Settings.Count(), "Environment AcceptanceTest1 should have 3 settings");
+            Assert.AreEqual(3, _environments.Single(e => e.Name == "AcceptanceTest2").Settings.Count(), "Environment AcceptanceTest2 should have 3 settings");
 
-            var genfCol = new GenFormEnvironmentCollection(col);
+            var genfCol = new GenFormEnvironmentCollection(_environments);
 
             Assert.AreEqual(2, genfCol.Count, "There should be only two GenForm environments");
 
@@ -150,9 +205,9 @@ namespace Informedica.GenForm.Settings.Tests.Environments
                                  SettingFactory.CreateSecureSetting<ConnectionStringSettings>("TestMachine2.GenFormEnv.ExportPath.FileSystem", "Test")
                              };
             _settings = new EnvironmentSettingsCollection(_source);
-            var col = new EnvironmentCollection(_settings);
+            _environments = new EnvironmentCollection(_settings);
 
-            var genFCol = new GenFormEnvironmentCollection(col);
+            var genFCol = new GenFormEnvironmentCollection(_environments);
 
             Assert.IsTrue(genFCol.Any());
         }

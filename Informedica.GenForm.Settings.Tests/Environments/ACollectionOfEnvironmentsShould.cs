@@ -6,6 +6,7 @@ using Informedica.GenForm.Settings.Environments;
 using Informedica.SecureSettings.Sources;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock.ArrangeActAssert;
+using Environment = Informedica.GenForm.Settings.Environments.Environment;
 
 namespace Informedica.GenForm.Settings.Tests.Environments
 {
@@ -13,11 +14,27 @@ namespace Informedica.GenForm.Settings.Tests.Environments
     public class ACollectionOfEnvironmentsShould
     {
         private TestSource _source;
-        private ICollection<EnvironmentSetting> _settings;
+        private EnvironmentSettingsCollection _settings;
 
         [Isolated]
         [TestMethod]
-        public void UseAnEnvironmentSettingSourceToEnumerateThroughEnvironments()
+        public void UseEnvironmentSettingsToAdAnEnvironment()
+        {
+            var env = new Environment("Test", "Test");
+            env.AddSetting("Test", "Test");
+
+            _source = new TestSource();
+            _settings = new EnvironmentSettingsCollection(_source);
+            var col = new EnvironmentCollection(_settings);
+
+            Isolate.WhenCalled(() => _settings.Add(null)).IgnoreCall();
+            col.Add(env);
+            Isolate.Verify.WasCalledWithAnyArguments(() => _settings.Add(null));
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void UseAnEnvironmentSettingsToEnumerateThroughEnvironments()
         {
             _source = new TestSource();
             _settings = new EnvironmentSettingsCollection(_source);

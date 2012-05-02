@@ -48,6 +48,11 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
         {
         }
 
+        public new void Clear()
+        {
+            _settings.Clear();
+        }
+
         #endregion
     }
 

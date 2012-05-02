@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 
 namespace Informedica.GenForm.Settings.Environments
@@ -69,6 +70,11 @@ namespace Informedica.GenForm.Settings.Environments
             get { return GetDatabaseSetting().Provider; }
         }
 
+        internal Environment Environmnent
+        {
+            get { return _environment; }
+        }
+
         public bool IsValid()
         {
             return !string.IsNullOrWhiteSpace(Name) &&
@@ -77,22 +83,22 @@ namespace Informedica.GenForm.Settings.Environments
 
         private EnvironmentSetting GetDatabaseSetting()
         {
-            return GetSetting("Database");
+            return GetSetting(Settings.Database);
         }
 
         private EnvironmentSetting GetLogPathSetting()
         {
-            return GetSetting("ExportPath");
+            return GetSetting(Settings.LogPath);
         }
 
         private EnvironmentSetting GetExportPathSetting()
         {
-            return GetSetting("LogPath");
+            return GetSetting(Settings.ExportPath);
         }
 
-        private EnvironmentSetting GetSetting(string name)
+        private EnvironmentSetting GetSetting(Enum setting)
         {
-            return _environment.Settings.Single(s => s.Name == name);
+            return _environment.Settings.Single(s => s.Name == setting.ToString(CultureInfo.InvariantCulture));
         }
 
     }

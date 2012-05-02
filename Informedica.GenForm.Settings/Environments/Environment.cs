@@ -49,14 +49,14 @@ namespace Informedica.GenForm.Settings.Environments
             return new Environment(machineName, environmentName);
         }
 
-        public void AddSetting(string name, string provider, string connectionString)
+        public void AddSetting(string settingName, string provider, string connectionString)
         {
-            _settings.Add(EnvironmentSettingFactory.CreateSetting(MachineName, Name, name, provider, connectionString));
+            _settings.Add(EnvironmentSettingFactory.CreateSetting(MachineName, Name, settingName, provider, connectionString));
         }
 
-        public void AddSetting(string name, string provider)
+        public void AddSetting(string settingName, string provider)
         {
-            AddSetting(name, provider, string.Empty);
+            AddSetting(settingName, provider, string.Empty);
         }
     }
 }

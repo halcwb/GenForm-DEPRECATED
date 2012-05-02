@@ -21,7 +21,10 @@ namespace Informedica.GenForm.Settings.Environments
 
         private void AddEnvironment(Environment env)
         {
-            Environments.Add(env);
+            foreach (var setting in env.Settings)
+            {
+                _settings.Add(setting);
+            }
         }
 
         private bool RemoveEnvironment(Environment env)

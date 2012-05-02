@@ -14,14 +14,12 @@ namespace Informedica.GenForm.Settings.Environments
             _environments = environments;
         }
 
-        public GenFormEnvironmentCollection() {}
-
-
         private void AddEnvironment(GenFormEnvironment environment)
         {
             if (string.IsNullOrWhiteSpace(environment.Database))
                 throw new GenFormEnvironmentException("Database connection string cannot be empty");
-            _genFormEnvironments.Add(environment);
+
+            _environments.Add(environment.Environmnent);
         }
 
 
