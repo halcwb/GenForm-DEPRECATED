@@ -1,6 +1,7 @@
-﻿using System.Linq;
+﻿using System.Configuration;
+using System.Linq;
 using Informedica.GenForm.Settings.Environments;
-using TypeMock.ArrangeActAssert;
+using Informedica.SecureSettings.Sources;
 
 namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 {
@@ -14,8 +15,17 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 
         private void Init()
         {
-            _source = new TestSource();
-            _settings = Isolate.Fake.Instance<EnvironmentSettingsCollection>();
+            _source = new TestSource
+                          {
+                              SettingFactory.CreateSecureSetting<ConnectionStringSettings>(GetDatabaseSettingName(),
+                                                                                           DatabaseConnection),
+                              SettingFactory.CreateSecureSetting<ConnectionStringSettings>(GetLogPathSettingName(),
+                                                                                           LogPath),
+                              SettingFactory.CreateSecureSetting<ConnectionStringSettings>(GetExportPathSettingName(),
+                                                                                           ExportPath)
+                          };
+
+            _settings = new EnvironmentSettingsCollection(_source);
             var col = new EnvironmentCollection(_settings);
 
             _environments = new GenFormEnvironmentCollection(col);

@@ -117,7 +117,7 @@ namespace Informedica.GenForm.Settings.Environments
 
         public void Add(EnvironmentSetting item)
         {
-            throw new NotImplementedException();
+            AddSetting(item);
         }
 
         public void Clear()

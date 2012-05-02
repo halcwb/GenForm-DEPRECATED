@@ -16,6 +16,7 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
         public void Init()
         {
             _source = SettingSourceFactory.GetSettingSource();
+            _settings = new EnvironmentSettingsCollection(_source);
             _environments = new EnvironmentCollection(_settings);
             _genformEnvs = new GenFormEnvironmentCollection(_environments);
         }

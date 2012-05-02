@@ -8,20 +8,29 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 {
     public class CreateEnvironmentsUsingSettings
     {
-        private ICollection<ISetting> _settings = new TestSource();
-        private EnvironmentSettingsCollection _envSettings;
+        private readonly ICollection<ISetting> _source = new TestSource();
+        private EnvironmentSettingsCollection _settings;
         private GenFormEnvironmentCollection _environments;
 
-        public void CreateSettingWithKeyAndValue (string key, string value)
+        public string CreateSettingWithKeyAndValue(string key, string value)
         {
-            _settings.Add(SettingFactory.CreateSecureSetting(new ConnectionStringSettings()));
+            try
+            {
+                _source.Add(SettingFactory.CreateSecureSetting<ConnectionStringSettings>(key, value));
+                return "Success";
+            }
+            catch (System.Exception e)
+            {
+                return e.ToString();
+            }
         }
 
         public bool ListOfEnvironmentsContainsForMachine(string environment, string machine)
         {
             try
             {
-                var envs = new EnvironmentCollection(_envSettings);
+                _settings = new EnvironmentSettingsCollection(_source);
+                var envs = new EnvironmentCollection(_settings);
                 _environments = new GenFormEnvironmentCollection(envs);
 
                 return _environments.Any(e => e.Name == environment && e.MachineName == machine);
@@ -58,12 +67,12 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
 
         public bool CheckIfSettingWithKeyAndValueExists(string key, string value)
         {
-            return _settings.Any(s => s.Key == key && s.Value == value);
+            return _source.Any(s => s.Key == key && s.Value == value);
         }
 
         public bool ClearSettingList()
         {
-            ((TestSource)_settings).Clear();
+            ((TestSource)_source).Clear();
             return true;
         }
     }
