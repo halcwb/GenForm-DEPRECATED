@@ -32,7 +32,7 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
         {
             if (machine == "local machine name") return CanAddNewEnvironment(envName);
 
-            _environment = EnvironmentServices.AddNewEnvironment(envName, machine);
+            _environment = EnvironmentServices.AddNewEnvironment(machine, envName);
             _environments = EnvironmentServices.GetEnvironments(machine);
             return _environment != null;
         }

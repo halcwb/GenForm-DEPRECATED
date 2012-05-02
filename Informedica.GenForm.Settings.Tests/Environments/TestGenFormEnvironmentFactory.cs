@@ -16,10 +16,10 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             Isolate.WhenCalled(() => keyMan.SetKey("secret")).IgnoreCall();
 
 
-            var envSets = new EnvironmentSettingsCollection("MyMachine", "Test", source);
-            envSets.AddSetting("Database", "Provider", "Some connection string");
-            envSets.AddSetting("LogPath", "File");
-            envSets.AddSetting("ExportPath", "File");
+            var envSets = new EnvironmentSettingsCollection(source);
+            envSets.AddSetting("MyMachine", "Test", "Database", "Provider", "Some connection string");
+            envSets.AddSetting("MyMachine", "Test", "LogPath", "File", string.Empty);
+            envSets.AddSetting("MyMachine", "Test","ExportPath", "File", string.Empty);
 
             var env = new Environment("MyMachine", "Test", envSets);
             return new GenFormEnvironment(env);

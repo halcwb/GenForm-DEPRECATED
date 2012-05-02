@@ -13,12 +13,12 @@ namespace Informedica.GenForm.Services.Environments
 
         public static Environment AddNewEnvironment(string name)
         {
-            return Environment.Create(name, System.Environment.MachineName);
+            return Environment.Create(System.Environment.MachineName, name);
         }
 
-        public static Environment AddNewEnvironment(string name, string machine)
+        public static Environment AddNewEnvironment(string machine, string name)
         {
-            return Environment.Create(name, machine);
+            return Environment.Create(machine, name);
         }
 
         public static IEnumerable<Environment> GetEmptyListOfEnvironments()

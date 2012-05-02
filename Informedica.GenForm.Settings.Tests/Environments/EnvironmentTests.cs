@@ -17,7 +17,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             try
             {
-                Environment.Create(string.Empty, "Test");
+                Environment.Create("Test", string.Empty);
                 Assert.Fail("An exception should be thrown");
             }
             catch (Exception e)
@@ -36,7 +36,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         [TestMethod]
         public void ThatMachineIsSetToLocalMachineNameWhenNotExplicitlySetInConstructor()
         {
-            var env = Environment.Create("Test", System.Environment.MachineName);
+            var env = Environment.Create(System.Environment.MachineName, "Test");
             Assert.AreEqual(System.Environment.MachineName, env.MachineName);
         }
 
@@ -44,7 +44,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         public void MachineNameIsSetToMacineNameSuppliedInConstructor()
         {
             var machine = "MyMachine";
-            var env = new Environment("Test", machine);
+            var env = new Environment(machine, "test");
 
             Assert.AreEqual(machine, env.MachineName);
         }

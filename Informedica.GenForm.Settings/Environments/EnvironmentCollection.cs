@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Informedica.GenForm.Settings.Environments
 {
@@ -20,12 +21,12 @@ namespace Informedica.GenForm.Settings.Environments
 
         private void AddEnvironment(Environment env)
         {
-            _environments.Add(env);
+            Environments.Add(env);
         }
 
         private bool RemoveEnvironment(Environment env)
         {
-            return _environments.Remove(env);
+            return Environments.Remove(env);
         }
 
         #region Implementation of IEnumerable
@@ -39,9 +40,16 @@ namespace Informedica.GenForm.Settings.Environments
         /// <filterpriority>1</filterpriority>
         public IEnumerator<Environment> GetEnumerator()
         {
-            RefreshEnvironments();
+            return Environments.GetEnumerator();
+        }
 
-            return _environments.GetEnumerator();
+        private IList<Environment> Environments
+        {
+            get
+            {
+                RefreshEnvironments();
+                return _environments;
+            }
         }
 
         private void RefreshEnvironments()
@@ -50,33 +58,10 @@ namespace Informedica.GenForm.Settings.Environments
             foreach (var setting in _settings)
             {
                 var env = new Environment(setting.MachineName, setting.Environment, _settings);
-                _environments.Add(env);
+                if (!_environments.Any(e => e.MachineName == env.MachineName &&
+                                            e.Name == env.Name)) _environments.Add(env);
             }
         }
-
-        //private void RefreshEnvironments()
-        //{
-        //    _environments = new List<Environment>();
-        //    var source = new List<ISetting>(_source);
-        //    source.Sort(KeyOrder);
-
-        //    var machine = string.Empty;
-        //    var environment = string.Empty;
-
-        //    foreach (var setting in source)
-        //    {
-        //        if (setting.Machine == machine && setting.Environment == environment) continue;
-
-        //        machine = setting.Machine;
-        //        environment = setting.Environment;
-
-        //        if (string.IsNullOrWhiteSpace(machine) || string.IsNullOrWhiteSpace(environment)) continue;
-
-        //        _environments.Add(new Environment(machine, environment,
-        //                                          new EnvironmentSettingsCollection(machine, environment, _source)));
-        //    }
-        //}
-
 
         /// <summary>
         /// Returns an enumerator that iterates through a collection.
@@ -128,8 +113,7 @@ namespace Informedica.GenForm.Settings.Environments
         {
             get
             {   
-                RefreshEnvironments();
-                return _environments.Count;
+                return Environments.Count;
             }
         }
 

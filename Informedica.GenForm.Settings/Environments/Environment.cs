@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Informedica.GenForm.Settings.ConfigurationSettings;
@@ -8,30 +9,27 @@ namespace Informedica.GenForm.Settings.Environments
     {
         private ICollection<EnvironmentSetting> _settings;
 
-        private static EnvironmentSettingsCollection CreateEnvironmentSettings(string machine, string environment)
+        private static EnvironmentSettingsCollection CreateEnvironmentSettings()
         {
-            return new EnvironmentSettingsCollection(machine, environment, SettingSourceFactory.GetSettingSource());
+            return new EnvironmentSettingsCollection(SettingSourceFactory.GetSettingSource());
         }
 
-        public Environment(string machine, string name, EnvironmentSettingsCollection settings)
+        public Environment(string machineName, string environmentName)
         {
-            Init(name, machine, settings);
+            Init(machineName, environmentName, CreateEnvironmentSettings());
         }
 
-        public Environment(string name, string machine)
+        public Environment(string machineName, string environmentName, ICollection<EnvironmentSetting> settings)
         {
-            Init(name, machine, CreateEnvironmentSettings(machine, name));
+            Init(machineName, environmentName, settings);
         }
 
-        public Environment(string machineName, string environment, ICollection<EnvironmentSetting> settings)
+        private void Init(string machineName, string environmentName, ICollection<EnvironmentSetting> settings)
         {
-            MachineName = machineName;
-            Name = environment;
-            _settings = settings;
-        }
+            if (string.IsNullOrWhiteSpace(machineName)) throw new ArgumentNullException(machineName);
+            if (string.IsNullOrWhiteSpace(environmentName)) throw new ArgumentNullException(environmentName);
+            if (settings == null) throw new ArgumentNullException(typeof(EnvironmentSettingsCollection).ToString());
 
-        private void Init(string environmentName, string machineName, ICollection<EnvironmentSetting> settings)
-        {
             Name = environmentName;
             MachineName = machineName;
             _settings = settings;
@@ -46,9 +44,9 @@ namespace Informedica.GenForm.Settings.Environments
 
         public string MachineName { get; private set; }
 
-        public static Environment Create(string name, string machine)
+        public static Environment Create(string machineName, string environmentName)
         {
-            return new Environment(name, machine);
+            return new Environment(machineName, environmentName);
         }
 
         public void AddSetting(string name, string provider, string connectionString)

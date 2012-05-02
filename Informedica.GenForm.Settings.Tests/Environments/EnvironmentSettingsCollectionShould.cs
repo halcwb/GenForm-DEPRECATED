@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using Informedica.GenForm.Settings.ConfigurationSettings;
 using Informedica.GenForm.Settings.Environments;
 using Informedica.GenForm.Settings.Tests.SettingsManagement;
 using Informedica.SecureSettings.Cryptographers;
@@ -15,22 +15,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
     public class EnvironmentSettingsCollectionShould : SecureSettingSourceTestFixture
     {
         private ISetting _setting;
-
-        [Isolated]
-        [TestMethod]
-        public void ThrowAnExceptionIfNotCreatedWithEnvironmentNameName()
-        {
-            GetIsolatedEnvironmentSettingsCollection();
-            try
-            {
-                new EnvironmentSettingsCollection("Test", string.Empty, SecureSettingSource);
-                Assert.Fail("Environment setting collection cannot be created without a machinename");
-            }
-            catch (Exception e)
-            {
-                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
-            }
-        }
+        private ICollection<ISetting> _source;
 
         [Isolated]
         [TestMethod]
@@ -39,23 +24,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             GetIsolatedEnvironmentSettingsCollection();
             try
             {
-                new EnvironmentSettingsCollection("Test", "Test", null);
-                Assert.Fail("Environment setting collection cannot be created without a machinename");
-            }
-            catch (Exception e)
-            {
-                Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
-            }
-        }
-
-        [Isolated]
-        [TestMethod]
-        public void ThrowAnExceptionIfNotCreatedWithMachineName()
-        {
-            GetIsolatedEnvironmentSettingsCollection();
-            try
-            {
-                new EnvironmentSettingsCollection(string.Empty, "Test", SecureSettingSource);
+                new EnvironmentSettingsCollection(null);
                 Assert.Fail("Environment setting collection cannot be created without a machinename");
             }
             catch (Exception e)
@@ -70,11 +39,11 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             Isolate.CleanUp();
             var envs = GetIsolatedEnvironmentSettingsCollection();
-            envs.AddSetting("Test", "Test");
+            envs.AddSetting("Test", "Test", "Test", "Test", string.Empty);
 
             try
             {
-                envs.AddSetting("Test", "Test");
+                envs.AddSetting("Test", "Test", "Test", "Test", string.Empty);
                 Assert.Fail("should not accept the same setting twice");
             }
             catch (Exception e)
@@ -103,7 +72,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             try
             {
                 Isolate.WhenCalled(() => SecureSettingSource.Add(fakeSetting)).CallOriginal();
-                envs.AddSetting("Test", "Test");
+                envs.AddSetting("Test", "Test", "Test", "Test", string.Empty);
                 Isolate.Verify.WasCalledWithAnyArguments(() => SecureSettingSource.Add(fakeSetting));
 
             }
@@ -119,7 +88,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var envs = GetIsolatedEnvironmentSettingsCollection();
 
-            envs.AddSetting("Test", "Test");
+            envs.AddSetting("Test", "Test", "Test", "Test", string.Empty);
 
             try
             {
@@ -137,7 +106,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var envs = GetIsolatedEnvironmentSettingsCollection();
 
-            envs.AddSetting("Test", "Test");
+            envs.AddSetting("Test", "Test", "Test", "Test", string.Empty);
             Assert.IsNotNull(envs.SingleOrDefault(s => s.Name == "Test"));
         }
 
@@ -147,7 +116,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var envs = GetIsolatedEnvironmentSettingsCollection();
 
-            envs.AddSetting("Database", "Provider", "ConnectionString");
+            envs.AddSetting("MyMachine", "Test", "Database", "Provider", "ConnectionString");
             Assert.AreEqual("ConnectionString", envs.Single(s => s.Name == "Database").ConnectionString);
         }
 
@@ -155,9 +124,10 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         [TestMethod]
         public void TurnTheSettingNameInMachineEnvironmentNameAndProvider()
         {
+            var source = new TestSource();
             var settingname = "TestMachine.TestEnvironment.Test.MyProvider";
-            var col = GetIsolatedEnvironmentSettingsCollection();
-            SecureSettingSource.Add(SettingFactory.CreateSecureSetting(new ConnectionStringSettings(settingname, string.Empty)));
+            source.Add(SettingFactory.CreateSecureSetting(new ConnectionStringSettings(settingname, string.Empty)));
+            var col = new EnvironmentSettingsCollection(source);
 
             Assert.AreEqual("MyProvider", col.Single(s => s.Name == "Test").Provider);
         }
@@ -167,6 +137,8 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         public void ContainEnvironmentSettingWithNameTestEnvironment()
         {
             var col = GetIsolatedEnvironmentSettingsCollectionWithSettings();
+            col.AddSetting("Test", "TestEnvironment", "Test", "Test");
+
             Assert.IsTrue(col.Any(s => s.Environment == "TestEnvironment"));
         }
 
@@ -176,17 +148,26 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             _setting = Isolate.Fake.Instance<ISetting>();
             Isolate.WhenCalled(() => SecureSettingSource.Add(_setting)).CallOriginal();
 
-            KeyManager = Isolate.Fake.Instance<SecretKeyManager>();
-            Isolate.WhenCalled(() => KeyManager.GetKey()).WillReturn("secretkey");
-
-            CryptoGraphy = new CryptographyAdapter(new SymCryptography());
-            SecureSettingSource = SettingSourceFactory.GetSettingSource();
-
-            var col = new EnvironmentSettingsCollection("TestMachine", "TestEnvironment", SecureSettingSource);
+            var col = new EnvironmentSettingsCollection(SecureSettingSource);
 
             return col;
 
         }
+
+        [TestMethod]
+        public void NotAcceptTwiceASettingWithTheSameNameForTestMachine1AndEnv1()
+        {
+            _source = new TestSource
+                             {
+                                 SettingFactory.CreateSecureSetting<ConnectionStringSettings>("TestMachine1.Env1.Test1.Provider", "Test"),
+                                 SettingFactory.CreateSecureSetting<ConnectionStringSettings>("TestMachine1.Env1.Test1.Provider", "Other test")                             
+                             };
+
+            var col = new EnvironmentSettingsCollection(_source);
+
+            Assert.AreEqual(1, col.Count);
+        }
+
 
         public EnvironmentSettingsCollection GetIsolatedEnvironmentSettingsCollectionWithSettings()
         {
@@ -205,7 +186,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
 
             CryptoGraphy = new CryptographyAdapter(new SymCryptography());
 
-            var col = new EnvironmentSettingsCollection("MyMachine", "TestEnvironment", SecureSettingSource);
+            var col = new EnvironmentSettingsCollection(SecureSettingSource);
 
             return col;
         }

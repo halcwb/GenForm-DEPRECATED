@@ -19,7 +19,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         private SettingSource _source;
         private ISetting _setting;
         private SecretKeyManager _keyMan;
-        private ICollection<ISetting> _secureSource;
+        private const string MachineName = "TestMachine";
         private const string EnvironmentName = "TestEnvironment";
 
         private EnvironmentSettingsCollection GetIsolatedEnvironmentSettingsCollection()
@@ -31,9 +31,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
             _keyMan = Isolate.Fake.Instance<SecretKeyManager>();
             Isolate.WhenCalled(() => _keyMan.GetKey()).WillReturn("secretkey");
 
-            _secureSource = SettingSourceFactory.GetSettingSource();
-
-            var col = new EnvironmentSettingsCollection("TestMachine", "TestEnvironment", _secureSource);
+            var col = new EnvironmentSettingsCollection(_source);
 
             return col;
         }
@@ -41,11 +39,11 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         private void GetEnvironment(string database, string logpath, string exportpath, string connectionstring, string provider)
         {
             _settings = GetIsolatedEnvironmentSettingsCollection();
-            if (!string.IsNullOrWhiteSpace(database)) _settings.AddSetting(database, provider, connectionstring);
-            if (!string.IsNullOrWhiteSpace(logpath)) _settings.AddSetting(logpath, provider);
-            if (!string.IsNullOrWhiteSpace(exportpath)) _settings.AddSetting(exportpath, provider);
+            if (!string.IsNullOrWhiteSpace(database)) _settings.AddSetting(MachineName, EnvironmentName, database, provider, connectionstring);
+            if (!string.IsNullOrWhiteSpace(logpath)) _settings.AddSetting(MachineName, EnvironmentName, logpath, provider);
+            if (!string.IsNullOrWhiteSpace(exportpath)) _settings.AddSetting(MachineName, EnvironmentName, exportpath, provider);
 
-            _environment = new Environment("TestMachine", "TestEnvironment", _settings);
+            _environment = new Environment(MachineName, EnvironmentName, _settings);
             _genFormEnvironment = new GenFormEnvironment(_environment);
         }
 

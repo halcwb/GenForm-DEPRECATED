@@ -9,24 +9,19 @@ namespace Informedica.GenForm.Settings.Environments
 {
     public class EnvironmentSettingsCollection : ICollection<EnvironmentSetting>
     {
-        private readonly string _machine;
-        private readonly string _environment;
         private ICollection<ISetting> _source;
-        private IList<EnvironmentSetting> _settings;
+        private IList<EnvironmentSetting> _settings = new List<EnvironmentSetting>();
 
-        public EnvironmentSettingsCollection(string machine, string environment, ICollection<ISetting> source)
+        public EnvironmentSettingsCollection(ICollection<ISetting> source)
         {
-            _machine = machine;
-            _environment = environment;
             _source = source;
-
             CheckConstruction();
+
+            RefreshCollection();
         }
 
         private void CheckConstruction()
         {
-            if (string.IsNullOrWhiteSpace(_machine)) throw new Exception("Machine name not supplied");
-            if (string.IsNullOrWhiteSpace(_environment)) throw new Exception("Environment name not supplied");
             if (_source == null) throw new Exception("Source not supplied");
         }
 
@@ -41,23 +36,30 @@ namespace Informedica.GenForm.Settings.Environments
         /// <filterpriority>1</filterpriority>
         public IEnumerator<EnvironmentSetting> GetEnumerator()
         {
-            return GetEnvironmentSettings().GetEnumerator();
+            return Settings.GetEnumerator();
         }
 
-        private IEnumerable<EnvironmentSetting> GetEnvironmentSettings()
+        private IEnumerable<EnvironmentSetting> Settings
+        {
+            get
+            {
+                return _settings;
+            }
+        }
+
+        private void RefreshCollection()
         {
             _settings = new List<EnvironmentSetting>();
 
             foreach (var setting in _source)
             {
-                if (EnvironmentSetting.CheckIfNameIsAValidSettingName(setting.Key) && setting.Type == typeof(ConnectionStringSettings))
+                if (EnvironmentSetting.CheckIfNameIsAValidSettingName(setting.Key) &&
+                    setting.Type == typeof (ConnectionStringSettings))
                 {
                     var envSet = EnvironmentSettingFactory.CreateSetting(setting);
-                    if (envSet.MachineName == _machine && envSet.Environment == _environment && !ContainsEnvironmentSetting(envSet)) _settings.Add(envSet);
+                    if (!ContainsEnvironmentSetting(envSet)) _settings.Add(envSet);
                 }
             }
-
-            return _settings;
         }
 
         private bool ContainsEnvironmentSetting(EnvironmentSetting envSet)
@@ -68,7 +70,6 @@ namespace Informedica.GenForm.Settings.Environments
                     s.MachineName == envSet.MachineName && s.Environment == envSet.Environment &&
                     s.Name == envSet.Name);
         }
-
 
         /// <summary>
         /// Returns an enumerator that iterates through a collection.
@@ -87,12 +88,16 @@ namespace Informedica.GenForm.Settings.Environments
         private void AddSetting(EnvironmentSetting environmentSetting)
         {
             _source.Add(environmentSetting.Setting);
+            
+            RefreshCollection();
         }
 
         public void RemoveEnvironmentSetting(string name, string provider)
         {
             var setting = GetSettingFromSource(this.Single(s => s.Name == name && s.Provider == provider));
             _source.Remove(_source.SingleOrDefault(s => s.Key == setting.Key));
+            
+            RefreshCollection();
         }
 
         private ISetting GetSettingFromSource(EnvironmentSetting setting)
@@ -100,17 +105,12 @@ namespace Informedica.GenForm.Settings.Environments
             return _source.SingleOrDefault(s => s.Key == setting.SettingName);
         }
 
-        public void AddSetting(string name, string provider)
+        public void AddSetting(string machine, string environment, string name, string provider, string value)
         {
-            AddSetting(name, provider, string.Empty);
-        }
+            var envSet = EnvironmentSettingFactory.CreateSetting(machine, environment, name, provider, value);
+            if (ContainsEnvironmentSetting(envSet)) throw new DuplicateSettingError("EnvironmentSetting with name " + name + "already exists");
 
-        public void AddSetting(string name, string provider, string value)
-        {
-            if (this.Any(envset => envset.Name == name)) throw new DuplicateSettingError("EnvironmentSetting with name " + name + "already exists");
-
-            var setting = EnvironmentSettingFactory.CreateSetting(_machine, _environment, name, provider, value);
-            AddSetting(setting);
+            AddSetting(envSet);
         }
 
         #region Implementation of ICollection<EnvironmentSetting>
@@ -142,7 +142,7 @@ namespace Informedica.GenForm.Settings.Environments
 
         public int Count
         {
-            get { return GetEnvironmentSettings().Count(); }
+            get { return Settings.Count(); }
         }
 
         public bool IsReadOnly
@@ -151,5 +151,10 @@ namespace Informedica.GenForm.Settings.Environments
         }
 
         #endregion
+
+        public void AddSetting(string machine, string environment, string name, string provider)
+        {
+            AddSetting(machine, environment, name, provider, string.Empty);
+        }
     }
 }

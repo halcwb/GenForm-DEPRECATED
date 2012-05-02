@@ -20,7 +20,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         public void UseAnEnvironmentSettingSourceToEnumerateThroughEnvironments()
         {
             _source = new TestSource();
-            _settings = new EnvironmentSettingsCollection("TestMachine", "Test", _source);
+            _settings = new EnvironmentSettingsCollection(_source);
             var col = new EnvironmentCollection(_settings);
 
             try
@@ -36,7 +36,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         }
 
         [TestMethod]
-        public void ContainFourEnvironmnentSettingsAsSpecifiedInTheTestSource()
+        public void ContainOneEnvironmnentAsSpecifiedInTheTestSource()
         {
             _source = new TestSource
                              {
@@ -45,10 +45,10 @@ namespace Informedica.GenForm.Settings.Tests.Environments
                                  SettingFactory.CreateSecureSetting<ConnectionStringSettings>("TestMachine1.Env1.Test3.Provider", "Test"),
                                  SettingFactory.CreateSecureSetting<ConnectionStringSettings>("TestMachine1.Env1.Test4.Provider", "Test")
                              };
-            _settings = new EnvironmentSettingsCollection("TestMachine1", "Env1", _source);
+            _settings = new EnvironmentSettingsCollection(_source);
             var col = new EnvironmentCollection(_settings);
 
-            Assert.AreEqual(4, col.Count);
+            Assert.AreEqual(1, col.Count);
         }
 
         [TestMethod]
@@ -65,14 +65,14 @@ namespace Informedica.GenForm.Settings.Tests.Environments
                                  SettingFactory.CreateSecureSetting<ConnectionStringSettings>("TestMachine1.Env1.Test2.Provider", "Test")
                              };
 
-            _settings = new EnvironmentSettingsCollection("TestMachine1", "Env2", _source);
+            _settings = new EnvironmentSettingsCollection(_source);
             var col = new EnvironmentCollection(_settings);
 
-            Assert.AreEqual(3, col.Count);
+            Assert.AreEqual(3, col.Single(e => e.MachineName == "TestMachine1" && e.Name == "Env2").Settings.Count());
         }
 
         [TestMethod]
-        public void ContainTwoEnvironmnentsForTestMachine1AsSpecifiedInTheUnsortedTestSource()
+        public void ContainFourEnvironmnentsForTestMachine1AsSpecifiedInTheUnsortedTestSource()
         {
             _source = new TestSource
                              {
@@ -83,24 +83,11 @@ namespace Informedica.GenForm.Settings.Tests.Environments
                                  SettingFactory.CreateSecureSetting<ConnectionStringSettings>("TestMachine1.Env1.Test2.Provider", "Test")
                              };
 
-            _settings = new EnvironmentSettingsCollection("TestMachine1", "Env1", _source);
+            _settings = new EnvironmentSettingsCollection(_source);
             var col = new EnvironmentCollection(_settings);
 
-            Assert.AreEqual(2, col.Count());
+            Assert.AreEqual(4, col.Count());
         }
 
-        [TestMethod]
-        public void NotAcceptTwiceASettingWithTheSameNameForTestMachine1AndEnv1()
-        {
-            _source = new TestSource
-                             {
-                                 SettingFactory.CreateSecureSetting<ConnectionStringSettings>("TestMachine1.Env1.Test1.Provider", "Test"),
-                                 SettingFactory.CreateSecureSetting<ConnectionStringSettings>("TestMachine1.Env1.Test1.SomeOtherProvider", "Other test")                             
-                             };
-
-            _settings = new EnvironmentSettingsCollection("TestMachine1", "Env1", _source);
-
-            Assert.AreEqual(1, _settings.Count);
-        }
     }
 }
