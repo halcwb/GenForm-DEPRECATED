@@ -2,15 +2,17 @@ Ext.define('GenForm.lib.view.ui.LoginWindow', {
     extend: 'Ext.window.Window',
 
     height: 475,
-    margin: 10,
-    padding: 10,
+    margin: 5,
+    padding: 5,
     width: 553,
-    bodyPadding: 10,
+    layout: 'fit',
+    bodyPadding: 5,
     closable: false,
     title: 'GenForm Login',
 
     initComponent: function() {
         var me = this;
+
         me.dockedItems = [
             {
                 xtype: 'image',
@@ -20,16 +22,17 @@ Ext.define('GenForm.lib.view.ui.LoginWindow', {
                 dock: 'top'
             }
         ];
+
         me.items = [
             {
                 xtype: 'form',
                 itemId: 'frmLogin',
-                bodyPadding: 10,
+                bodyPadding: 5,
                 items: [
                     {
                         xtype: 'fieldset',
                         itemId: 'flsLogin',
-                        height: 81,
+                        height: 100,
                         title: 'Gebruiker Login',
                         itemId: 'userLogin',
                         items: [
@@ -52,9 +55,9 @@ Ext.define('GenForm.lib.view.ui.LoginWindow', {
                     {
                         xtype: 'fieldset',
                         itemId: 'flsEnvironment',
-                        height: 67,
+                        height: 70,
                         layout: {
-                            padding: 10,
+                            padding: 5,
                             type: 'hbox'
                         },
                         collapsed: true,

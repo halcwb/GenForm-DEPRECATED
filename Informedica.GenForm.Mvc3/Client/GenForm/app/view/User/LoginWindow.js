@@ -3,6 +3,7 @@ Ext.define('GenForm.view.user.LoginWindow', {
     alias: 'widget.userlogin',
     itemId: 'wndLogin',
 
+
     mixins: {
         buttonFinder: 'GenForm.lib.util.mixin.ButtonFinder'
     },
@@ -69,5 +70,4 @@ Ext.define('GenForm.view.user.LoginWindow', {
     getEnvironmentStore: function () {
         return Ext.create('GenForm.store.environment.Environment');
     }
-
 });
