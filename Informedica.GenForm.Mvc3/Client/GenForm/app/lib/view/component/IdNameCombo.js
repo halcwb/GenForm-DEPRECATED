@@ -4,7 +4,7 @@ Ext.define('GenForm.lib.view.component.IdNameCombo', {
 
     displayField: 'Name',
     valueField: 'Name',
-    editable: false,
+    editable: true,
     typeAhead: true,
     queryMode: 'local',
 

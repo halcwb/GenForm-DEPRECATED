@@ -4,7 +4,7 @@ Ext.define('GenForm.lib.view.component.KeyValueCombo', {
 
     displayField: 'value',
     valueField: 'value',
-    editable: false,
+    editable: true,
     typeAhead: true,
     queryMode: 'local',
 

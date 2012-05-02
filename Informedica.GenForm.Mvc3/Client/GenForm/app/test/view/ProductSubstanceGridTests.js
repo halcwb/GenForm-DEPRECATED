@@ -10,6 +10,8 @@ Ext.define('GenForm.test.view.ProductSubstanceGridTests', {
 
         me.getProductSubstanceGrid = function () {
             var grid, rowEditor;
+            grid = Ext.ComponentQuery.query('grid[id=productSubstanceTestGrid]')[0];
+            if (grid) return grid;
 
             rowEditor = Ext.create('Ext.grid.plugin.RowEditing', {
                 clicksToMoveEditor: 1,
@@ -58,8 +60,8 @@ Ext.define('GenForm.test.view.ProductSubstanceGridTests', {
             return false;
         };
 
-        me.findRecordByGenericName = function (grid, value) {
-            return grid.store.findRecord('GenericName', value);
+        me.findRecordBySubstance = function (grid, value) {
+            return grid.store.findRecord('Substance', value);
         };
 
         it('StoreManager contains a productSubstanceTestStore', function  () {
@@ -94,24 +96,26 @@ Ext.define('GenForm.test.view.ProductSubstanceGridTests', {
 
         it('first data row can be changed', function () {
             var record = me.getProductSubstanceGrid().store.first();
-            record.data.GenericName = 'changed';
+            record.data.Substance = 'changed';
 
-            expect(me.getProductSubstanceGrid().store.first().data.GenericName).toBe('changed');
+            expect(me.getProductSubstanceGrid().store.first().data.Substance).toBe('changed');
         });
 
         it('a second data row can be added', function () {
-            var record = { OrderNumber: '2', GenericName: 'codeine', Quantity: '20', Unit: 'mg' };
+            var record = { OrderNumber: '2', Substance: 'codeine', Quantity: '20', Unit: 'mg' };
             me.getProductSubstanceGrid().store.add(record);
 
             expect(me.getProductSubstanceGrid().store.count()).toBe(2);
         });
 
         it('the second data row can be found', function () {
-            expect(me.findRecordByGenericName(me.getProductSubstanceGrid(), 'codeine')).toBeDefined();
+            var record = me.findRecordBySubstance(me.getProductSubstanceGrid(), 'codeine');
+            expect(record == null).toBeFalsy();
         });
 
         it('a second data row can be deleted', function () {
-            var record = me.findRecordByGenericName(me.getProductSubstanceGrid(), 'codeine');
+            var record = me.findRecordBySubstance(me.getProductSubstanceGrid(), 'codeine');
+
             me.getProductSubstanceGrid().store.remove(record);
             expect(me.getProductSubstanceGrid().store.count()).toBe(1);
         });
