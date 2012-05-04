@@ -22,16 +22,16 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         #region LoginController
 
-        public ActionResult GetEnvironments()
-        {
-            var names = new List<string> { "GenFormTest", "GenFormAcceptatie", "GenFormProductie" }; //ToDo: EnvironmentServices.GetDatabases();
-            IList<object> list = new List<object>();
-            foreach (var name in names)
-            {
-                list.Add(new { Environment = name });
-            }
-            return this.Direct(list);
-        }
+        //public ActionResult GetEnvironments()
+        //{
+        //    var names = new List<string> { "GenFormTest", "GenFormAcceptatie", "GenFormProductie" }; //ToDo: EnvironmentServices.GetDatabases();
+        //    IList<object> list = new List<object>();
+        //    foreach (var name in names)
+        //    {
+        //        list.Add(new { Environment = name });
+        //    }
+        //    return this.Direct(list);
+        //}
 
         public ActionResult RegisterEnvironment(String environment, String connection)
         {
@@ -414,6 +414,45 @@ namespace Informedica.GenForm.Mvc3.Controllers
                 success = !String.IsNullOrWhiteSpace(dto.Name),
                 data = dto
             });
+        }
+
+        #endregion
+
+        #region EnvironmentController
+
+        public ActionResult GetEnvironments()
+        {
+            return this.Direct(new
+                                   {
+                                       success = true,
+                                       data = new[]
+                                                  {
+                                                      new
+                                                          {
+                                                              Id = '1',
+                                                              Environment = "GenFormTest",
+                                                              Connection = "TestConnection",
+                                                              LogPath = "c/test/logpath",
+                                                              ExportPath = "c/test/exportpath"
+                                                          },
+                                                      new
+                                                          {
+                                                              Id = '2',
+                                                              Environment = "GenFormAcceptance",
+                                                              Connection = "TestConnection",
+                                                              LogPath = "c/test/logpath",
+                                                              ExportPath = "c/test/exportpath"
+                                                          },
+                                                      new
+                                                          {
+                                                              Id = '3',
+                                                              Environment = "GenFormProduction",
+                                                              Connection = "TestConnection",
+                                                              LogPath = "c/test/logpath",
+                                                              ExportPath = "c/test/exportpath"
+                                                          }
+                                                  }
+                                   });
         }
 
         #endregion

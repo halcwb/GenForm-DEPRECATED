@@ -20,6 +20,22 @@ Ext.define('GenForm.test.view.EnvironmentWindowTests', {
             me.getConnectionStringField().value = connection;
         };
 
+        me.getLogPathField = function () {
+            return envRegWindow.getLogPathField();
+        };
+
+        me.setLogPathField = function (logPath) {
+            me.getLogPathField().value = logPath;
+        };
+
+        me.getExportPathField = function () {
+            return envRegWindow.getExportPathField();
+        };
+
+        me.setExportPathField = function (exportPath) {
+            me.getExportPathField().value = exportPath;
+        };
+
         it('Be defined', function () {
             expect(envRegWindow).toBeDefined();
         });
@@ -32,6 +48,14 @@ Ext.define('GenForm.test.view.EnvironmentWindowTests', {
             expect(envRegWindow.getConnectionString).toBeDefined();
         });
 
+        it('Have a field for the log path', function () {
+            expect(envRegWindow.getLogPath).toBeDefined();
+        });
+
+        it('Have a field for the export path', function () {
+            expect(envRegWindow.getExportPath).toBeDefined();
+        });
+
         it('Be able to set the environment name field', function () {
             me.setEnvironmentNameField('test');
             expect(me.getEnvironmentNameField().value).toBe('test');
@@ -40,6 +64,16 @@ Ext.define('GenForm.test.view.EnvironmentWindowTests', {
         it('Be able to set the connection string field', function () {
             me.setConnectionStringField('test');
             expect(me.getConnectionStringField().value).toBe('test');
+        });
+
+        it('Be able to set log path string field', function () {
+            me.setLogPathField('test');
+            expect(me.getLogPathField().value).toBe('test');
+        });
+
+        it('Be able to set the export path field', function () {
+            me.setExportPathField('test');
+            expect(me.getExportPathField().value).toBe('test');
         });
 
         it('Have a register environment button', function () {

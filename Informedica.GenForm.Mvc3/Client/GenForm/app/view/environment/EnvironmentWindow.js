@@ -39,6 +39,26 @@ Ext.define('GenForm.view.environment.EnvironmentWindow', {
         return me.getForm().findField('Connection');
     },
 
+    getLogPath: function () {
+        var me = this;
+        return me.getConnectionStringField().value;
+    },
+
+    getLogPathField: function () {
+        var me = this;
+        return me.getForm().findField('LogPath');
+    },
+
+    getExportPath: function () {
+        var me = this;
+        return me.getConnectionStringField().value;
+    },
+
+    getExportPathField: function () {
+        var me = this;
+        return me.getForm().findField('ExportPath');
+    },
+
     getForm: function () {
         var me = this;
         return me.getEnvironmentRegistrationForm().getForm();

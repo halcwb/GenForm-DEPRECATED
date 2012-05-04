@@ -17,10 +17,6 @@ Ext.define('GenForm.test.store.UnitNameStoreTests', {
             expect(store).toBeDefined();
         });
 
-        it('be defined', function () {
-            expect(store).toBeDefined();
-        });
-
         it('to have a direct function', function () {
             expect(store.proxy.directFn).toBeDefined();
         });

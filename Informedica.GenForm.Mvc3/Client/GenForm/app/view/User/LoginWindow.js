@@ -68,6 +68,6 @@ Ext.define('GenForm.view.user.LoginWindow', {
     },
 
     getEnvironmentStore: function () {
-        return Ext.create('GenForm.store.environment.Environment');
+        return Ext.create('GenForm.store.environment.Environment', { directFn: GenForm.server.UnitTest.GetEnvironments });
     }
 });

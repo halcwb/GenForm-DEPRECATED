@@ -15,5 +15,6 @@ Ext.define('GenForm.test.model.UnitModelTests', {
         it('have a UnitName field', function () {
             expect(model.data.Name).toBeDefined();
         });
+
     }
 });

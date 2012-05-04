@@ -1,17 +1,18 @@
 Ext.define('GenForm.lib.view.ui.EnvironmentWindow', {
     extend: 'Ext.window.Window',
 
-    height: 216,
+    height: 400,
     width: 415,
     bodyPadding: 10,
     title: 'Omgeving Registreren',
+    layout: 'fit',
 
     initComponent: function() {
         var me = this;
         me.items = [
             {
                 xtype: 'form',
-                height: 153,
+                //height: 153,
                 itemId: 'frmRegisterEnvironment',
                 bodyPadding: 10,
                 title: '',
@@ -33,6 +34,20 @@ Ext.define('GenForm.lib.view.ui.EnvironmentWindow', {
                                 itemId: 'fldConnection',
                                 name: 'Connection',
                                 fieldLabel: 'Connectie',
+                                anchor: '100%'
+                            },
+                            {
+                                xtype: 'textfield',
+                                itemId: 'fldLogPath',
+                                name: 'LogPath',
+                                fieldLabel: 'Log pad',
+                                anchor: '100%'
+                            },
+                            {
+                                xtype: 'textfield',
+                                itemId: 'fldExportPath',
+                                name: 'ExportPath',
+                                fieldLabel: 'Export pad',
                                 anchor: '100%'
                             }
                         ]
