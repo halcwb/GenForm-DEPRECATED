@@ -8,6 +8,8 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
             windowName = 'environmentwindow',
             environment = 'GenFormTest',
             connection = 'Data Source=HAL-WIN7\\INFORMEDICA;Initial Catalog=GenFormTest;Integrated Security=True',
+            logPath = 'c\\Development\\GenForm\\LogPath',
+            exportPath = 'c\\Development\\GenForm\\ExportPath',
             message = '';
 
         me.getLoginWindow = function () {
@@ -103,6 +105,16 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
         it('User can enter a connection string', function () {
             queryHelper.setFormField(me.getConnectionField(), connection);
             expect(me.getConnectionField().value).toBe(connection);
+        });
+
+        it('User can enter a log path', function () {
+            queryHelper.setFormField(me.getLogPath(), logPath);
+            expect(me.getLogPathField().value).toBe(logPath);
+        });
+
+        it('User can enter an export path', function () {
+            queryHelper.setFormField(me.getExportPath(), exportPath);
+            expect(me.getExportPathField().value).toBe(exportPath);
         });
 
         it('A environment can be registered', function () {

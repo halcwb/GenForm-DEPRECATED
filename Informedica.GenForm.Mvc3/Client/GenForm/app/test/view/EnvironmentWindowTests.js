@@ -53,7 +53,7 @@ Ext.define('GenForm.test.view.EnvironmentWindowTests', {
         });
 
         it('Have a field for the export path', function () {
-            expect(envRegWindow.getExportPath).toBeDefined();
+            expect(me.getExportPathField()).toBeDefined();
         });
 
         it('Be able to set the environment name field', function () {

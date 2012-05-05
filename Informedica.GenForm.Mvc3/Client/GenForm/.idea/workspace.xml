@@ -43,28 +43,28 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="AdvancedLoginTest.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/test/usecase/AdvancedLoginTest.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="78" selection-start="1275" selection-end="1275" vertical-scroll-proportion="0.54273945">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Index.cshtml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../Views/AppTest/Index.cshtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="0" selection-start="827" selection-end="827" vertical-scroll-proportion="-13.730769">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="EnvironmentWindowTests.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/test/view/EnvironmentWindowTests.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="65" selection-start="1368" selection-end="1368" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FormBase.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/lib/view/form/FormBase.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginWindow.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/lib/view/ui/LoginWindow.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="52" selection-start="2596" selection-end="2596" vertical-scroll-proportion="0.0">
+            <state line="29" column="0" selection-start="966" selection-end="966" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -82,16 +82,16 @@
       <file leaf-file-name="EnvironmentWindow.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/environment/EnvironmentWindow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="6" selection-start="1466" selection-end="1466" vertical-scroll-proportion="0.0">
+            <state line="38" column="32" selection-start="972" selection-end="972" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EnvironmentWindow.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="EnvironmentWindow.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/lib/view/ui/EnvironmentWindow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="18" selection-start="336" selection-end="336" vertical-scroll-proportion="0.24016145">
+            <state line="31" column="29" selection-start="1039" selection-end="1039" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -125,7 +125,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/initAppTest.js" />
         <option value="$PROJECT_DIR$/../../Views/Home/Index.cshtml" />
         <option value="$PROJECT_DIR$/../../Views/Shared/_Layout.cshtml" />
         <option value="$PROJECT_DIR$/app/lib/view/ui/LoginWindow.js" />
@@ -138,9 +137,10 @@
         <option value="$PROJECT_DIR$/app/view/User/LoginWindow.js" />
         <option value="$PROJECT_DIR$/app/test/TestList.js" />
         <option value="$PROJECT_DIR$/app/test/store/EnvironmentStoreTests.js" />
-        <option value="$PROJECT_DIR$/app/test/view/EnvironmentWindowTests.js" />
-        <option value="$PROJECT_DIR$/app/view/environment/EnvironmentWindow.js" />
         <option value="$PROJECT_DIR$/app/lib/view/ui/EnvironmentWindow.js" />
+        <option value="$PROJECT_DIR$/app/test/usecase/AdvancedLoginTest.js" />
+        <option value="$PROJECT_DIR$/app/view/environment/EnvironmentWindow.js" />
+        <option value="$PROJECT_DIR$/app/test/view/EnvironmentWindowTests.js" />
       </list>
     </option>
   </component>
@@ -293,6 +293,46 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="environment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GenForm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="usecase" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -568,16 +608,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/test/store/ProductSubstanceStoreTests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/test/store/UnitNameStoreTests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="49" selection-start="285" selection-end="285" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/store/product/Product.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -638,6 +668,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../Views/AppTest/Index.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="0" selection-start="827" selection-end="827" vertical-scroll-proportion="-13.730769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/test/TestList.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="45" selection-start="1828" selection-end="1828" vertical-scroll-proportion="0.0">
@@ -645,23 +682,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/test/view/EnvironmentWindowTests.js">
+    <entry file="file://$PROJECT_DIR$/app/lib/view/ui/EnvironmentWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="65" selection-start="1368" selection-end="1368" vertical-scroll-proportion="0.0">
+        <state line="31" column="29" selection-start="1039" selection-end="1039" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/environment/EnvironmentWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="6" selection-start="1466" selection-end="1466" vertical-scroll-proportion="0.0">
+        <state line="38" column="32" selection-start="972" selection-end="972" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/lib/view/ui/EnvironmentWindow.js">
+    <entry file="file://$PROJECT_DIR$/app/test/view/EnvironmentWindowTests.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="18" selection-start="336" selection-end="336" vertical-scroll-proportion="0.24016145">
+        <state line="29" column="0" selection-start="966" selection-end="966" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/test/usecase/AdvancedLoginTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="78" selection-start="1275" selection-end="1275" vertical-scroll-proportion="0.54273945">
           <folding />
         </state>
       </provider>
