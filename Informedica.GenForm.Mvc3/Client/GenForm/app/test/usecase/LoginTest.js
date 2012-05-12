@@ -62,6 +62,18 @@ Ext.define('GenForm.test.usecase.LoginTest', {
             var window = me.getLoginWindow();
             expect(window.closable === false).toBeTruthy();
         });
+/*
+        it('The login controller should listen to the login click event', function () {
+            var controller = me.getLoginController(),
+                button = me.getLoginButton();
+
+            spyOn(controller, 'onClickLogin').andCallFake();
+
+            me.clickButton(button);
+
+            expect(controller.onClickLogin).toHaveBeenCalled();
+        });
+        */
 
         it('Only with a valid username and password, you can log in', function () {
             var button = me.getLoginButton();

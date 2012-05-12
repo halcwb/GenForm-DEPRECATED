@@ -10,6 +10,7 @@ Ext.define('GenForm.lib.util.mixin.ButtonFinder', {
             buttons = me._buttons = Ext.create('Ext.util.MixedCollection');
             buttons.addAll(me.query('button'));
         }
+
         return buttons;
     },
 

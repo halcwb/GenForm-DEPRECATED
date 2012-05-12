@@ -251,7 +251,13 @@ Ext.define('GenForm.test.usecase.NewProductTest', {
         };
 
         me.getAddButton = function (action) {
-            return Ext.ComponentQuery.query('button[action=' + action + ']')[0];
+            var results = Ext.ComponentQuery.query('button[action=' + action + ']');
+
+            if (results.length === 0) {
+                Ext.Error.raise('action: ' + action + ' not found');
+            }
+
+            return results[0];
         };
 
         me.clickAddGeneric = function () {
