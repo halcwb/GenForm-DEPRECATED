@@ -3,8 +3,6 @@ Ext.define('GenForm.lib.util.DomClicker', {
     click: function (domelement) {
         var me = this;
 
-        console.log(domelement);
-
         if (domelement === undefined || domelement === null) {
             Ext.Error.raise('domelement cannot be null or undefined');
         }

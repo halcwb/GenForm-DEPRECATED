@@ -9,15 +9,15 @@ Ext.define('GenForm.controller.user.Login', {
     loggedIn: false,
     loginWindow: null,
 
-    init: function() {
+    init: function () {
         var me = this;
 
-        this.control({
+        me.control({
             'toolbar button[action=login]': {
                 click: me.onClickLogin
             },
             'button[action=addEnvironment]': {
-                click: me.showEnvironmentWindow
+                click: me.onClickAddEnvironment
             },
             'window[itemId="wndEnvironment"] button[action=registerEnvironment]': {
                 click: me.onClickRegisterEnvironment
@@ -34,6 +34,11 @@ Ext.define('GenForm.controller.user.Login', {
         return window;
     },
 
+    getEnvironmentWindow: function () {
+        var me = this;
+        return me.getEnvironmentEnvironmentWindowView().create();
+    },
+
     onClickLogin: function (button) {
         var me = this, win;
 
@@ -43,7 +48,7 @@ Ext.define('GenForm.controller.user.Login', {
         GenForm.server.UnitTest.SetEnvironment(win.getEnvironmentField().value, me.onEnvironmentSet, me);
     },
 
-    onEnvironmentSet: function(result) {
+    onEnvironmentSet: function (result) {
         var me = this, win = me.loginWindow;
 
         if (!result.success === true) {
@@ -69,7 +74,7 @@ Ext.define('GenForm.controller.user.Login', {
         me.loginWindow.close();
     },
 
-    showEnvironmentWindow: function (btn, e, eOpts) {
+    onClickAddEnvironment: function (btn, e, eOpts) {
         var me = this;
 
         btn.disable(true);
@@ -82,12 +87,20 @@ Ext.define('GenForm.controller.user.Login', {
         return me.getEnvironmentEnvironmentWindowView().create();
     },
 
-    onClickRegisterEnvironment: function (button) {
+    onClickRegisterEnvironment: function () {
         var me = this;
+            button = arguments[1];
+        me.registerEnvironment(button);
+    },
+
+    registerEnvironment: function (button) {
+        var me = this;
+
         GenForm.server.UnitTest.RegisterEnvironment(me.getWindowFromButton(button).getEnvironmentName(),
-                                        me.getWindowFromButton(button).getConnectionString(),
-                                        me.onEnvironmentRegistered);
+            me.getWindowFromButton(button).getConnectionString(),
+            me.onEnvironmentRegistered);
         me.getWindowFromButton(button).close();
+
     },
 
     onBeforeCloseRegisterEnvironment: function (window, eOpt) {

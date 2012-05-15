@@ -1,5 +1,5 @@
 Ext.define('GenForm.test.TestList', {
-    tests: [
+    tests: [/*
         'GenForm.test.extjs.ClassTests',
         'GenForm.test.extjs.ComponentQueryTests',
         'GenForm.test.extjs.LoaderTests',
@@ -8,8 +8,8 @@ Ext.define('GenForm.test.TestList', {
         'GenForm.test.util.FormCreatorTests',
         'GenForm.test.util.FormDataRetrieverTests',
         'GenForm.test.server.EnvironmentTests',
-        'GenForm.test.server.ProductTests',
-        'GenForm.test.controller.LoginControllerTests',
+        'GenForm.test.server.ProductTests',*/
+        'GenForm.test.controller.LoginControllerTests'/*,
         'GenForm.test.controller.ProductControllerTests',
         'GenForm.test.controller.handler.ProductHandlerTests',
         'GenForm.test.model.BrandNameModelTests',
@@ -36,6 +36,6 @@ Ext.define('GenForm.test.TestList', {
         'GenForm.test.view.ProductSubstanceFormTests',
         'GenForm.test.view.ProductFormTests',
         'GenForm.test.view.BrandNameFormTests',
-        'GenForm.test.view.BrandNameWindowTests'
+        'GenForm.test.view.BrandNameWindowTests'*/
     ]
 });
