@@ -46,6 +46,7 @@ Ext.define('GenForm.test.controller.LoginControllerTests', {
             spyOn(controller, 'onClickLogin').andCallFake(function () {
             });
             controller.init();
+
             loginWindow = controller.getLoginWindow();
 
             loginWindow.show();
@@ -80,7 +81,7 @@ Ext.define('GenForm.test.controller.LoginControllerTests', {
 
         it('pass an object with username, password and environment to the login user method', function () {
             var controller = me.getLoginController(),
-                loginWindow, user;
+                loginWindow, user = {};
 
             controller.init();
             controller.loginUser = function (userModel) {
@@ -97,9 +98,28 @@ Ext.define('GenForm.test.controller.LoginControllerTests', {
             expect(user.Environment).toBeDefined();
         });
 
+
+        it('have an environment store', function () {
+            var controller = me.getLoginController(), store;
+
+            controller.init();
+            store = controller.getEnvironmentEnvironmentStore();
+            expect(store).toBeDefined();
+        });
+
+        it('should pass the store to the login window', function () {
+            var controller = me.getLoginController(), loginWindow, store;
+
+            controller.init();
+            store = controller.getEnvironmentEnvironmentStore();
+            loginWindow = controller.getLoginWindow();
+
+            expect(loginWindow.environmentStore === store).toBeTruthy();
+        });
+
         it('update the user login model after the login click event before passing to the login user method', function () {
             var controller = me.getLoginController(),
-                loginWindow, user;
+                loginWindow, user = {};
 
             controller.init();
             controller.loginUser = function (userModel) {
@@ -199,7 +219,9 @@ Ext.define('GenForm.test.controller.LoginControllerTests', {
 
             controller.init();
             environmentWindow = controller.getEnvironmentWindow();
-            spyOn(environmentWindow, 'updateModel').andCallFake();
+            spyOn(environmentWindow, 'updateModel').andCallFake(function () {
+                // Do nothing
+            });
 
             environmentWindow.show();
             me.clickButton(environmentWindow.getRegisterEnvironmentButton());
@@ -222,7 +244,7 @@ Ext.define('GenForm.test.controller.LoginControllerTests', {
             expect(controller.registerEnvironment).toHaveBeenCalled();
         });
 
-        it('should call a callback function afte click register environment', function () {
+        it('call a callback function afte click register environment', function () {
             var controller = me.getLoginController(),
                 environmentWindow, response;
 
@@ -238,6 +260,30 @@ Ext.define('GenForm.test.controller.LoginControllerTests', {
             waitsFor(function () {
                 if (response) return true;
             }, 'response of register environment call back', GenForm.test.waitingTime);
+        });
+
+        it('add the new test environment to the store', function () {
+            var controller = me.getLoginController(),
+                environmentWindow, response;
+
+            spyOn(controller, 'environmentRegistrationCallBack').andCallThrough();
+            controller.init();
+            environmentWindow = controller.getEnvironmentWindow();
+
+            environmentWindow.getEnvironmentNameField().setValue('New Environment');
+            environmentWindow.getDatabaseField().setValue('Data Source=new datasource');
+
+            environmentWindow.show();
+            me.clickButton(environmentWindow.getRegisterEnvironmentButton());
+
+            waitsFor(function () {
+                return controller.environmentRegistrationCallBack.wasCalled;
+            }, 'response of register environment call back', GenForm.test.waitingTime);
+
+            runs(function () {
+                expect(controller.getEnvironmentEnvironmentStore().findExact('Name', 'New Environment')).toBeGreaterThan(-1);
+            });
+
         });
     }
 });

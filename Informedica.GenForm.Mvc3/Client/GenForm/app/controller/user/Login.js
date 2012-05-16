@@ -11,6 +11,10 @@ Ext.define('GenForm.controller.user.Login', {
         'environment.Environment'
     ],
 
+    stores: [
+        'environment.Environment'
+    ],
+
     loggedIn: false,
     loginWindow: null,
 
@@ -38,7 +42,10 @@ Ext.define('GenForm.controller.user.Login', {
 
     getLoginWindow: function () {
         var me = this, window;
-        window = me.getUserLoginWindowView().create();
+        window = me.getUserLoginWindowView().create({
+            environmentStore: me.getEnvironmentEnvironmentStore()
+        });
+
         return window;
     },
 
@@ -55,7 +62,7 @@ Ext.define('GenForm.controller.user.Login', {
         me.loginWindow = win;
         model = win.updateModel(model);
 
-        me.loginUser(model.data, me.loginCallBack);
+        me.loginUser(model.data, me.loginCallBack, me);
     },
 
     loginCallBack: function (result) {
@@ -93,7 +100,7 @@ Ext.define('GenForm.controller.user.Login', {
         window = button.up('window');
         model = window.updateModel(model);
 
-        me.registerEnvironment(model.data, me.environmentRegistrationCallBack);
+        me.registerEnvironment(model.data, me.environmentRegistrationCallBack, me);
 
         window.close();
     },
@@ -104,8 +111,14 @@ Ext.define('GenForm.controller.user.Login', {
     },
 
     environmentRegistrationCallBack: function (result) {
+        var me = this, model;
+
         if (result.success) {
             Ext.MessageBox.alert('Omgeving Registratie', result.data.Name);
+
+            model = me.getEnvironmentEnvironmentModel().create(result.data);
+            me.getEnvironmentEnvironmentStore().add(model);
+
         } else {
             Ext.MessageBox.alert('Omgeving Registratie', 'Omgeving kon niet worden geregistreerd');
         }
