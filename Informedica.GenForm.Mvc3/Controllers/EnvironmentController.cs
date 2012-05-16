@@ -19,7 +19,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             IList<object> list = new List<object>();
             foreach (var name in names)
             {
-                list.Add(new {Environment = name});
+                list.Add(new {Name = name});
             }           
             return this.Direct(list);
         }

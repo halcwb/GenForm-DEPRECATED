@@ -10,7 +10,7 @@ Ext.define('GenForm.store.environment.Environment', {
         var me = this;
 
         if (!config || !config.directFn || !(config.directFn instanceof Function)) {
-            Ext.Error.raise('Environment store has to be constructed with a valid directFn');
+            config.directFn = GenForm.server.Environment.GetEnvironments;
         }
 
         config.root = 'data';

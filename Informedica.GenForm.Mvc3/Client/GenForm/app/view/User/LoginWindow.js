@@ -3,15 +3,29 @@ Ext.define('GenForm.view.user.LoginWindow', {
     alias: 'widget.userlogin',
     itemId: 'wndLogin',
 
+    config: {
+        environmentStore: null
+    },
 
     mixins: {
         buttonFinder: 'GenForm.lib.util.mixin.ButtonFinder'
     },
 
+    constructor: function (config) {
+        var me = this;
+
+        if (!config || !config.environmentStore) {
+            config = config || {};
+            config.environmentStore = Ext.create('GenForm.store.environment.Environment', { directFn: GenForm.server.Environment.GetEnvironments });
+        }
+
+        me.initConfig(config);
+        me.callParent(arguments);
+    },
+
     initComponent: function() {
         var me = this;
         //noinspection JSUnusedGlobalSymbols
-
         me.callParent(arguments);
         me.addDocked(me.createDockedItems());
 
@@ -75,6 +89,7 @@ Ext.define('GenForm.view.user.LoginWindow', {
     },
 
     getEnvironmentStore: function () {
-        return Ext.create('GenForm.store.environment.Environment', { directFn: GenForm.server.UnitTest.GetEnvironments });
+        var me = this;
+        return me.environmentStore;
     }
 });
