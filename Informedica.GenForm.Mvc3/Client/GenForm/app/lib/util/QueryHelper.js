@@ -20,8 +20,7 @@ Ext.define('GenForm.lib.util.QueryHelper', {
     },
 
     setFormField: function (formfield, value) {
-        formfield.inputEl.dom.value = value;
-        formfield.value = value;
+        formfield.setValue(value);
         return true;
     },
 

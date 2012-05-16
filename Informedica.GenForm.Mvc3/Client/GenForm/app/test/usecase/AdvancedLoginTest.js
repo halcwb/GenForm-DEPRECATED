@@ -7,9 +7,9 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
             messageChecker = Ext.create('GenForm.lib.util.MessageChecker'),
             windowName = 'environmentwindow',
             environment = 'GenFormTest',
-            connection = 'Data Source=HAL-WIN7\\INFORMEDICA;Initial Catalog=GenFormTest;Integrated Security=True',
-            logPath = 'c\\Development\\GenForm\\LogPath',
-            exportPath = 'c\\Development\\GenForm\\ExportPath',
+            database = 'Data Source=HAL-WIN7\\INFORMEDICA;Initial Catalog=GenFormTest;Integrated Security=True',
+            logPath = 'c:\\Development\\GenForm\\LogPath',
+            exportPath = 'c:\\Development\\GenForm\\ExportPath',
             message = '';
 
         me.getLoginWindow = function () {
@@ -37,11 +37,19 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
         };
 
         me.getEnvironmentNameField = function () {
-            return queryHelper.getFormTextField(windowName, 'Environment');
+            return queryHelper.getFormTextField(windowName, 'Name');
         };
 
-        me.getConnectionField = function () {
-            return queryHelper.getFormTextField(windowName, 'Connection');
+        me.getDatabaseField = function () {
+            return queryHelper.getFormTextField(windowName, 'Database');
+        };
+
+        me.getLogPathField = function () {
+            return queryHelper.getFormTextField(windowName, 'LogPath');
+        };
+
+        me.getExportPathField = function () {
+            return queryHelper.getFormTextField(windowName, 'ExportPath');
         };
 
         me.clickRegisterEnvironmentButton = function () {
@@ -99,26 +107,27 @@ Ext.define('GenForm.test.usecase.AdvancedLoginTest', {
 
         it('User can enter a environment name', function () {
             queryHelper.setFormField(me.getEnvironmentNameField(), environment);
-            expect(me.getEnvironmentNameField().value).toBe(environment);
+            expect(me.getEnvironmentNameField().getValue()).toBe(environment);
         });
 
         it('User can enter a connection string', function () {
-            queryHelper.setFormField(me.getConnectionField(), connection);
-            expect(me.getConnectionField().value).toBe(connection);
+            queryHelper.setFormField(me.getDatabaseField(), database);
+            expect(me.getDatabaseField().getValue()).toBe(database);
         });
 
         it('User can enter a log path', function () {
-            queryHelper.setFormField(me.getLogPath(), logPath);
-            expect(me.getLogPathField().value).toBe(logPath);
+            queryHelper.setFormField(me.getLogPathField(), logPath);
+            expect(me.getLogPathField().getValue()).toBe(logPath);
         });
 
         it('User can enter an export path', function () {
-            queryHelper.setFormField(me.getExportPath(), exportPath);
-            expect(me.getExportPathField().value).toBe(exportPath);
+            queryHelper.setFormField(me.getExportPathField(), exportPath);
+            expect(me.getExportPathField().getValue()).toBe(exportPath);
         });
 
         it('A environment can be registered', function () {
             message = environment;
+            console.log(me.getEnvironmentWindow());
             me.clickRegisterEnvironmentButton();
 
             waitsFor(me.checkMessage, 'response of save', GenForm.test.waitingTime);

@@ -25,24 +25,24 @@ Ext.define('GenForm.test.store.EnvironmentStoreTests', {
 
         it('return an empty record with Environment property', function () {
             var record = store.create();
-            expect(record.data.Environment).toBeDefined();
+            expect(record.data.Name).toBeDefined();
         });
 
-        it('contain an Environment', function () {
+        it('contain an Environment with name test, a logpath and an export path', function () {
             expect(store.count() == 0).toBeTruthy();
-            store.add({Id: '999', Environment: 'Test', LogPath: 'c/test/logpath', ExportPath: 'c/test/ExportPath' });
+            store.add({Id: '999', Name: 'Test', LogPath: 'c/test/logpath', ExportPath: 'c/test/ExportPath' });
             expect(store.count() > 0).toBeTruthy();
         });
 
         it('have an item with Environment Test', function () {
-            expect(store.findExact('Environment', 'Test') !== -1).toBe(true);
+            expect(store.findExact('Name', 'Test') !== -1).toBe(true);
         });
 
         it('have test direct Fn defined', function () {
             expect(GenForm.server.UnitTest.GetEnvironments).toBeDefined();
         });
 
-        it('load 2 test items', function () {
+        it('load 3 test items from the server', function () {
             var result;
 
             store.load({
@@ -59,7 +59,7 @@ Ext.define('GenForm.test.store.EnvironmentStoreTests', {
         });
 
         it('now contain an Environment LoadTest', function () {
-            expect(store.findExact('Environment', 'GenFormTest') != -1).toBeTruthy();
+            expect(store.findExact('Name', 'GenFormTest') != -1).toBeTruthy();
         });
 
 

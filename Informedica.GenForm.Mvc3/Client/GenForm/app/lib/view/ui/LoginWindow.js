@@ -68,7 +68,7 @@ Ext.define('GenForm.lib.view.ui.LoginWindow', {
                                 xtype: 'combobox',
                                 itemId: 'cboLoginEnvironment',
                                 name: 'Environment',
-                                displayField: 'Environment',
+                                displayField: 'Name',
                                 fieldLabel: 'Omgeving',
                                 anchor: '100%',
                                 store: me.getEnvironmentStore()

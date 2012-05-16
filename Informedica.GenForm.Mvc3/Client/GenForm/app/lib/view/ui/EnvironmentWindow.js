@@ -25,15 +25,15 @@ Ext.define('GenForm.lib.view.ui.EnvironmentWindow', {
                             {
                                 xtype: 'textfield',
                                 itemId: 'fldEnvironment',
-                                name: 'Environment',
-                                fieldLabel: 'Omgeving',
+                                name: 'Name',
+                                fieldLabel: 'Naam',
                                 anchor: '100%'
                             },
                             {
                                 xtype: 'textfield',
-                                itemId: 'fldConnection',
-                                name: 'Connection',
-                                fieldLabel: 'Connectie',
+                                itemId: 'fldDatabase',
+                                name: 'Database',
+                                fieldLabel: 'Database',
                                 anchor: '100%'
                             },
                             {

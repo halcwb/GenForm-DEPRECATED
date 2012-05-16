@@ -2,22 +2,29 @@ Ext.define('GenForm.test.view.EnvironmentWindowTests', {
     describe: 'EnvironmentRegistrationWindowShould',
 
     tests: function () {
-        var me = this, envRegWindow = Ext.create('GenForm.view.environment.EnvironmentWindow');
+        var me = this, envRegWindow;
+
+        beforeEach(function () {
+           if (!envRegWindow) {
+               envRegWindow = Ext.create('GenForm.view.environment.EnvironmentWindow');
+               envRegWindow.show();
+           }
+        });
 
         me.getEnvironmentNameField = function () {
             return envRegWindow.getEnvironmentNameField();
         };
 
         me.setEnvironmentNameField = function (name) {
-            me.getEnvironmentNameField().value = name;
+            me.getEnvironmentNameField().setValue(name);
         };
             
-        me.getConnectionStringField = function () {
-            return envRegWindow.getConnectionStringField();
+        me.getDatabaseField = function () {
+            return envRegWindow.getDatabaseField();
         };
 
-        me.setConnectionStringField = function (connection) {
-            me.getConnectionStringField().value = connection;
+        me.setDatabaseField = function (database) {
+            me.getDatabaseField().setValue(database);
         };
 
         me.getLogPathField = function () {
@@ -25,7 +32,7 @@ Ext.define('GenForm.test.view.EnvironmentWindowTests', {
         };
 
         me.setLogPathField = function (logPath) {
-            me.getLogPathField().value = logPath;
+            me.getLogPathField().setValue(logPath);
         };
 
         me.getExportPathField = function () {
@@ -33,11 +40,12 @@ Ext.define('GenForm.test.view.EnvironmentWindowTests', {
         };
 
         me.setExportPathField = function (exportPath) {
-            me.getExportPathField().value = exportPath;
+            me.getExportPathField().setValue(exportPath);
         };
 
         it('Be defined', function () {
             expect(envRegWindow).toBeDefined();
+            envRegWindow.show();
         });
 
         it('Have a field for the environment name', function () {
@@ -58,26 +66,46 @@ Ext.define('GenForm.test.view.EnvironmentWindowTests', {
 
         it('Be able to set the environment name field', function () {
             me.setEnvironmentNameField('test');
-            expect(me.getEnvironmentNameField().value).toBe('test');
+            expect(me.getEnvironmentNameField().getValue()).toBe('test');
         });
 
-        it('Be able to set the connection string field', function () {
-            me.setConnectionStringField('test');
-            expect(me.getConnectionStringField().value).toBe('test');
+        it('Be able to set the database string field', function () {
+            me.setDatabaseField('test');
+            expect(me.getDatabaseField().getValue()).toBe('test');
         });
 
         it('Be able to set log path string field', function () {
             me.setLogPathField('test');
-            expect(me.getLogPathField().value).toBe('test');
+            expect(me.getLogPathField().getValue()).toBe('test');
         });
 
         it('Be able to set the export path field', function () {
             me.setExportPathField('test');
-            expect(me.getExportPathField().value).toBe('test');
+            expect(me.getExportPathField().getValue()).toBe('test');
         });
 
         it('Have a register environment button', function () {
             expect(envRegWindow.getRegisterEnvironmentButton().isXType('button')).toBeTruthy();
+        });
+
+        it('have a update model function', function () {
+            expect(envRegWindow.updateModel).toBeDefined();
+        });
+
+        it('set the model fields of the model', function () {
+            var model = Ext.create('GenForm.model.environment.Environment', {});
+            me.setEnvironmentNameField('Test');
+            me.setDatabaseField('Test');
+            me.setLogPathField('Test');
+            me.setExportPathField('Test');
+
+            model = envRegWindow.updateModel(model);
+
+            console.log(model);
+            expect(model.data.Name).toBe('Test');
+            expect(model.data.Database).toBe('Test');
+            expect(model.data.LogPath).toBe('Test');
+            expect(model.data.ExportPath).toBe('Test');
         });
     }
 

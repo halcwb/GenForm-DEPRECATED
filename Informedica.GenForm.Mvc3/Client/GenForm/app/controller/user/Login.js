@@ -6,11 +6,19 @@ Ext.define('GenForm.controller.user.Login', {
         'environment.EnvironmentWindow'
     ],
 
+    models: [
+        'user.Login',
+        'environment.Environment'
+    ],
+
     loggedIn: false,
     loginWindow: null,
 
     init: function () {
-        var me = this;
+        var me = this
+
+        me.registerEnvironment = GenForm.server.UnitTest.RegisterEnvironment;
+        me.loginUser = GenForm.server.UnitTest.Login;
 
         me.control({
             'toolbar button[action=login]': {
@@ -40,31 +48,23 @@ Ext.define('GenForm.controller.user.Login', {
     },
 
     onClickLogin: function (button) {
-        var me = this, win;
+        var me = this, win, model;
 
         win = button.up('window');
+        model = me.getUserLoginModel().create();
         me.loginWindow = win;
+        model = win.updateModel(model);
 
-        GenForm.server.UnitTest.SetEnvironment(win.getEnvironmentField().value, me.onEnvironmentSet, me);
+        me.loginUser(model.data, me.loginCallBack);
     },
 
-    onEnvironmentSet: function (result) {
-        var me = this, win = me.loginWindow;
-
-        if (!result.success === true) {
-            me.loginCallback(result);
-        }
-
-        GenForm.server.UnitTest.Login(win.getUserNameField().value, win.getPasswordField().value, this.loginCallback, me);
-    },
-
-    loginCallback: function (result) {
+    loginCallBack: function (result) {
         var me = this;
         me.loggedIn = result.success;
-        
+
         if (result.success) {
             Ext.MessageBox.alert('Formularium 2011 Login', 'Login succesvol', me.closeLoginWindow, me);
-        }else{
+        } else {
             Ext.MessageBox.alert('Formularium 2011 Login', 'Login geweigerd');
         }
     },
@@ -87,20 +87,15 @@ Ext.define('GenForm.controller.user.Login', {
         return me.getEnvironmentEnvironmentWindowView().create();
     },
 
-    onClickRegisterEnvironment: function () {
-        var me = this;
-            button = arguments[1];
-        me.registerEnvironment(button);
-    },
+    onClickRegisterEnvironment: function (button) {
+        var me = this, model = me.getEnvironmentEnvironmentModel().create(), window;
 
-    registerEnvironment: function (button) {
-        var me = this;
+        window = button.up('window');
+        model = window.updateModel(model);
 
-        GenForm.server.UnitTest.RegisterEnvironment(me.getWindowFromButton(button).getEnvironmentName(),
-            me.getWindowFromButton(button).getConnectionString(),
-            me.onEnvironmentRegistered);
-        me.getWindowFromButton(button).close();
+        me.registerEnvironment(model.data, me.environmentRegistrationCallBack);
 
+        window.close();
     },
 
     onBeforeCloseRegisterEnvironment: function (window, eOpt) {
@@ -108,15 +103,9 @@ Ext.define('GenForm.controller.user.Login', {
         me.showEnvironmentButton.enable(true);
     },
 
-    getWindowFromButton: function (button) {
-        return button.up().up();
-    },
-
-    onEnvironmentRegistered: function (result) {
-        var me = this;
-
+    environmentRegistrationCallBack: function (result) {
         if (result.success) {
-            Ext.MessageBox.alert('Omgeving Registratie', result.Environment);
+            Ext.MessageBox.alert('Omgeving Registratie', result.data.Name);
         } else {
             Ext.MessageBox.alert('Omgeving Registratie', 'Omgeving kon niet worden geregistreerd');
         }

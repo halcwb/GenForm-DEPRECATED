@@ -26,22 +26,22 @@ Ext.define('GenForm.view.environment.EnvironmentWindow', {
 
     getEnvironmentNameField: function () {
         var me = this;
-        return me.getForm().findField('Environment');
+        return me.getForm().findField('Name');
     },
 
     getConnectionString: function () {
         var me = this;
-        return me.getConnectionStringField().value;
+        return me.getDatabaseField().value;
     },
 
-    getConnectionStringField: function () {
+    getDatabaseField: function () {
         var me = this;
-        return me.getForm().findField('Connection');
+        return me.getForm().findField('Database');
     },
 
     getLogPath: function () {
         var me = this;
-        return me.getConnectionStringField().value;
+        return me.getLogPathField().value;
     },
 
     getLogPathField: function () {
@@ -51,7 +51,7 @@ Ext.define('GenForm.view.environment.EnvironmentWindow', {
 
     getExportPath: function () {
         var me = this;
-        return me.getConnectionStringField().value;
+        return me.getExportPathField().value;
     },
 
     getExportPathField: function () {
@@ -67,6 +67,13 @@ Ext.define('GenForm.view.environment.EnvironmentWindow', {
     getEnvironmentRegistrationForm: function () {
         var me = this;
         return me.items.get('frmRegisterEnvironment');
+    },
+
+    updateModel: function (model) {
+        var me = this;
+        me.getForm().updateRecord(model);
+
+        return model;
     }
 
 });

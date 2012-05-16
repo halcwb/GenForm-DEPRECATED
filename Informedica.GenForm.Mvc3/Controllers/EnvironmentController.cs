@@ -24,10 +24,10 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(list);
         }
 
-        public ActionResult RegisterEnvironment(String environment, String connectionString)
+        public ActionResult RegisterEnvironment(EnvironmentDto dto)
         {
-            var success = SetSetting(environment, connectionString);
-            return this.Direct(new {success, Environment = environment});
+            var success = SetSetting(dto.Name, dto.Database);
+            return this.Direct(new {success, Environment = dto});
         }
 
 

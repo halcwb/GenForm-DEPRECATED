@@ -16,8 +16,8 @@ Ext.define('GenForm.test.model.EnvironmentModelTests', {
             expect(model.data.Id).toBeDefined();
         });
 
-        it('have an Environment field', function () {
-            expect(model.data.Environment).toBeDefined();
+        it('have an Name field', function () {
+            expect(model.data.Name).toBeDefined();
         });
 
         it('have a Log Path field', function () {

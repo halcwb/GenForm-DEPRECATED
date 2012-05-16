@@ -9,7 +9,7 @@ Ext.define('GenForm.model.user.Login',  {
     ],
 
     fields: [
-        { name: 'Username' , type: 'string' },
+        { name: 'UserName' , type: 'string' },
         { name: 'Password', type: 'string'},
         { name: 'Environment', type: 'string'}
     ],

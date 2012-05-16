@@ -5,8 +5,8 @@ Ext.define('GenForm.model.environment.Environment', {
 
     fields: [
         {name: 'Id', type: 'string'},
-        {name: 'Environment', type: 'string'},
-        {name: 'Connection', type: 'string'},
+        {name: 'Name', type: 'string'},
+        {name: 'Database', type: 'string'},
         {name: 'LogPath', type: 'string'},
         {name: 'ExportPath', type: 'string'}
     ]

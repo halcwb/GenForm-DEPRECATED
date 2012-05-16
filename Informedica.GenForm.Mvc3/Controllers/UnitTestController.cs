@@ -33,12 +33,14 @@ namespace Informedica.GenForm.Mvc3.Controllers
         //    return this.Direct(list);
         //}
 
-        public ActionResult RegisterEnvironment(String environment, String connection)
+        public ActionResult RegisterEnvironment(EnvironmentDto environment)
         {
-            if (String.IsNullOrWhiteSpace(environment) || String.IsNullOrWhiteSpace(connection))
-                return this.Direct(new { success = false });
+            var success = !String.IsNullOrWhiteSpace(environment.Name) &&
+                          !String.IsNullOrWhiteSpace(environment.Database) && environment.Database.StartsWith("Data Source=") &&
+                          (String.IsNullOrWhiteSpace(environment.LogPath) || environment.LogPath.StartsWith("c:\\")) &&
+                          (String.IsNullOrWhiteSpace(environment.ExportPath) || environment.ExportPath.StartsWith("c:\\"));
 
-            return this.Direct(new { success = true, Environment = environment });
+            return this.Direct(new { success, data = environment });
         }
 
         public ActionResult SetEnvironment(String environment)
@@ -48,12 +50,13 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new { success = !String.IsNullOrWhiteSpace(environment) });
         }
 
-        public ActionResult Login(String userName, String password)
+        public ActionResult Login(UserLoginDto login)
         {
-            if (HttpContext.Session != null && HttpContext.Session["environment"] == null)
-                return this.Direct(new { success = false });
+            var success = login.UserName == "Admin" &&
+                          login.Password == "Admin" &&
+                          !string.IsNullOrWhiteSpace(login.Environment);
 
-            return this.Direct(new { success = (userName == "Admin" && password == "Admin") });
+            return this.Direct(new { success });
         }
 
         public ActionResult IsLoggedIn()
@@ -430,7 +433,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
                                                       new
                                                           {
                                                               Id = '1',
-                                                              Environment = "GenFormTest",
+                                                              Name = "GenFormTest",
                                                               Connection = "TestConnection",
                                                               LogPath = "c/test/logpath",
                                                               ExportPath = "c/test/exportpath"
@@ -438,7 +441,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
                                                       new
                                                           {
                                                               Id = '2',
-                                                              Environment = "GenFormAcceptance",
+                                                              Name = "GenFormAcceptance",
                                                               Connection = "TestConnection",
                                                               LogPath = "c/test/logpath",
                                                               ExportPath = "c/test/exportpath"
@@ -446,7 +449,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
                                                       new
                                                           {
                                                               Id = '3',
-                                                              Environment = "GenFormProduction",
+                                                              Name = "GenFormProduction",
                                                               Connection = "TestConnection",
                                                               LogPath = "c/test/logpath",
                                                               ExportPath = "c/test/exportpath"
@@ -463,11 +466,4 @@ namespace Informedica.GenForm.Mvc3.Controllers
         }
     }
 
-
-
-    public class GenericNameDto
-    {
-        public String Id { get; set; }
-        public String Name { get; set; }
-    }
 }

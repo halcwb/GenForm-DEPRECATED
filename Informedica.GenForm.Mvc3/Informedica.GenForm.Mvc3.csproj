@@ -88,10 +88,13 @@
     <Compile Include="Controllers\AppTestController.cs" />
     <Compile Include="Controllers\EnvironmentController.cs" />
     <Compile Include="Controllers\DebugController.cs" />
+    <Compile Include="Controllers\EnvironmentDto.cs" />
+    <Compile Include="Controllers\GenericNameDto.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UnitTestController.cs" />
+    <Compile Include="Controllers\UserLoginDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

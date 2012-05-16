@@ -17,6 +17,13 @@ Ext.define('GenForm.view.user.LoginWindow', {
 
     },
 
+    updateModel: function (model) {
+        var me = this;
+        me.getLoginForm().getForm().updateRecord(model);
+
+        return model;
+    },
+
     getLoginButton: function () {
         var me = this;
         return me.findButton('btnLogin');
