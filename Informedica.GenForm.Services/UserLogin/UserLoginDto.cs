@@ -1,4 +1,4 @@
-namespace Informedica.GenForm.Mvc3.Controllers
+namespace Informedica.GenForm.Services.UserLogin
 {
     public class UserLoginDto
     {

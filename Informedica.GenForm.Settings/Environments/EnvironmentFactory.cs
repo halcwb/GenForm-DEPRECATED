@@ -4,13 +4,13 @@ namespace Informedica.GenForm.Settings.Environments
     {
         private const string Filesystem = "FileSystem";
 
-        public static GenFormEnvironment GetGenFormEnvironment(string machineName, string environmentName, string provider, string connectionString)
+        public static GenFormEnvironment CreateGenFormEnvironment(string machineName, string environmentName, string provider, string connectionString)
         {
-            return GetGenFormEnvironment(machineName, environmentName, provider, connectionString, string.Empty,
+            return CreateGenFormEnvironment(machineName, environmentName, provider, connectionString, string.Empty,
                                          string.Empty);
         }
 
-        public static GenFormEnvironment GetGenFormEnvironment(string machineName, string environmentName, string provider, string connectionString, string logpath, string exportpath)
+        public static GenFormEnvironment CreateGenFormEnvironment(string machineName, string environmentName, string provider, string connectionString, string logpath, string exportpath)
         {
             var env = Environment.Create(machineName, environmentName);
             env.AddSetting(GenFormEnvironment.Settings.Database.ToString(), provider, connectionString);

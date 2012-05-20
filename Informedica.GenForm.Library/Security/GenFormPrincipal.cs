@@ -7,7 +7,7 @@ using Informedica.GenForm.Library.Services.Users;
 
 namespace Informedica.GenForm.Library.Security
 {
-    internal class GenFormPrincipal: GenericPrincipal, IGenFormPrincipal
+    public class GenFormPrincipal: GenericPrincipal, IGenFormPrincipal
     {
         private static IGenFormPrincipal _principal;
 

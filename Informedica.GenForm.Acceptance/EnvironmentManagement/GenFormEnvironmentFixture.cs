@@ -72,7 +72,7 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
         {
             try
             {
-                return EnvironmentFactory.GetGenFormEnvironment(MachineName, EnvironmentName, Provider, ConnectionString);
+                return EnvironmentFactory.CreateGenFormEnvironment(MachineName, EnvironmentName, Provider, ConnectionString);
             }
             catch (Exception e)
             {

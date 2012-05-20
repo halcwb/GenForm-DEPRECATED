@@ -31,7 +31,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             try
             {
-                var genEnv = EnvironmentFactory.GetGenFormEnvironment("Test", "Test", "Test", "Test");
+                var genEnv = EnvironmentFactory.CreateGenFormEnvironment("Test", "Test", "Test", "Test");
                 Isolate.WhenCalled(() => _environments.Add(null)).IgnoreCall();
                 _genFormEnvironments.Add(genEnv);
                 Isolate.Verify.WasCalledWithAnyArguments(() => _environments.Add(null));
@@ -45,7 +45,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         [TestMethod]
         public void ContainAnEnvironmentWithDatabaseTestEnvironmentTestDatabaseTestDbLogPathTestLpAndExportPathTestEpAfterAdding()
         {
-            var genfenv = EnvironmentFactory.GetGenFormEnvironment("Test", "Test", "Test", "TestDb", "TestLp", "TestEp");
+            var genfenv = EnvironmentFactory.CreateGenFormEnvironment("Test", "Test", "Test", "TestDb", "TestLp", "TestEp");
             Assert.AreEqual("TestDb", genfenv.Database);
             Assert.AreEqual("TestLp", genfenv.LogPath);
             Assert.AreEqual("TestEp", genfenv.ExportPath);
@@ -64,7 +64,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         {
             var count = _genFormEnvironments.Count;
 
-            var genFormEnv = EnvironmentFactory.GetGenFormEnvironment("Test", "Test", "Test", "test");
+            var genFormEnv = EnvironmentFactory.CreateGenFormEnvironment("Test", "Test", "Test", "test");
             _genFormEnvironments.Add(genFormEnv);
 
             Assert.AreEqual(count + 1, _genFormEnvironments.Count);
@@ -73,7 +73,7 @@ namespace Informedica.GenForm.Settings.Tests.Environments
         [TestMethod]
         public void ContainTheNewGenFormEnvironmentAfterAddingIt()
         {
-            var genFormEnv = EnvironmentFactory.GetGenFormEnvironment("Test", "Test", "Test", "Test");
+            var genFormEnv = EnvironmentFactory.CreateGenFormEnvironment("Test", "Test", "Test", "Test");
             _genFormEnvironments.Add(genFormEnv);
 
             Assert.IsTrue(_genFormEnvironments.Any(e => e.MachineName == genFormEnv.MachineName && e.Name == genFormEnv.Name));

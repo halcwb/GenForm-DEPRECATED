@@ -88,13 +88,11 @@
     <Compile Include="Controllers\AppTestController.cs" />
     <Compile Include="Controllers\EnvironmentController.cs" />
     <Compile Include="Controllers\DebugController.cs" />
-    <Compile Include="Controllers\EnvironmentDto.cs" />
     <Compile Include="Controllers\GenericNameDto.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UnitTestController.cs" />
-    <Compile Include="Controllers\UserLoginDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -4391,6 +4389,10 @@
     <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.Services.csproj">
       <Project>{7C647ECA-EB02-4779-A829-A73122341338}</Project>
       <Name>Informedica.GenForm.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Settings\Informedica.GenForm.Settings.csproj">
+      <Project>{B30C5371-DDDD-46BE-827A-72798E743B60}</Project>
+      <Name>Informedica.GenForm.Settings</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.TestFixtures\Informedica.GenForm.TestFixtures.csproj">
       <Project>{F772CA62-5400-45BF-B586-AACF5F20D6BC}</Project>

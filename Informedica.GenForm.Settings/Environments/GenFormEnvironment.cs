@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using System.Linq;
 
 namespace Informedica.GenForm.Settings.Environments
@@ -31,7 +30,7 @@ namespace Informedica.GenForm.Settings.Environments
 
         private bool CheckIfSettingExists(Settings settings)
         {
-            return (_environment.Settings.SingleOrDefault(s => s.Name == settings.ToString()) != null);
+            return (_environment.Settings.Any(s => s.Name == settings.ToString()));
         }
 
         private void CheckIfConnectionStringAndProviderNotEmpty()
@@ -98,8 +97,18 @@ namespace Informedica.GenForm.Settings.Environments
 
         private EnvironmentSetting GetSetting(Enum setting)
         {
-            return _environment.Settings.Single(s => s.Name == setting.ToString(CultureInfo.InvariantCulture));
+            return _environment.Settings.Single(s => s.Name == setting.ToString());
         }
 
+        public static GenFormEnvironment CreateTest()
+        {
+            return Create("TestGenForm", "SqLite", "Data Source=:memory:;Version=3;New=True;Pooling=True;Max Pool Size=1;", string.Empty, string.Empty);
+        }
+
+        public static GenFormEnvironment Create(string name, string provider, string database, string logPath, string exportPath)
+        {
+            return EnvironmentFactory.CreateGenFormEnvironment(System.Environment.MachineName, name, provider, database,
+                                                               logPath, exportPath);
+        }
     }
 }

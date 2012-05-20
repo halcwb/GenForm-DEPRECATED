@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Informedica.GenForm.Library.DomainModel.Databases;
+using Informedica.GenForm.Settings.Environments;
 using StructureMap;
 
 namespace Informedica.GenForm.Services.Databases
@@ -37,5 +39,15 @@ namespace Informedica.GenForm.Services.Databases
         }
 
         #endregion
+
+        public static IEnumerable<GenFormEnvironment> GetEnvironments()
+        {
+            var list = GenFormEnvironmentCollection.Create();
+            if (list.Count == 0)
+            {
+                list.Add(GenFormEnvironment.CreateTest());
+            }
+            return list.Where(e => e.MachineName == System.Environment.MachineName);
+        }
     }
 }

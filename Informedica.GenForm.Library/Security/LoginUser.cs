@@ -13,8 +13,6 @@ namespace Informedica.GenForm.Library.Security
 
         #region Factory Methods
 
-        private LoginUser() {}
-
         public static ILoginCriteria NewLoginUser(String name, String password)
         {
             var user = new LoginUser {UserName = name, Password = password};

@@ -1,4 +1,4 @@
-namespace Informedica.GenForm.Mvc3.Controllers
+namespace Informedica.GenForm.Services.Environments
 {
     public class EnvironmentDto
     {
@@ -11,5 +11,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
         public string LogPath { get; set; }
             
         public string ExportPath { get; set; }
+
+        public string provider { get; set; }
     }
 }

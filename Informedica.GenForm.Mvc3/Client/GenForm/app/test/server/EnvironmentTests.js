@@ -3,24 +3,33 @@ Ext.define('GenForm.test.server.EnvironmentTests', {
 
     tests: function () {
         //noinspection JSUnusedGlobalSymbols
-        var connection = 'Data Source=HAL-WIN7\\INFORMEDICA;Initial Catalog=GenFormTest;Integrated Security=True';
+        var me = this, results,
+            connection = 'Data Source=HAL-WIN7\\INFORMEDICA;Initial Catalog=GenFormTest;Integrated Security=True',
+            server = GenForm.server.Environment;
+
+        me.getEnvironments = function () {
+            server.GetEnvironments(function (response) {
+                console.log(response);
+                results = response;
+            });
+        };
 
         it('have a get environments function', function () {
-            expect(GenForm.server.Environment.GetEnvironments).toBeDefined();
+            expect(server.GetEnvironments).toBeDefined();
         });
 
         it('return a list of environments when get environments is called', function () {
-            var results;
-
-            GenForm.server.UnitTest.GetEnvironments(function (response) {
-                results = response;
-            });
+            me.getEnvironments();
 
             waitsFor(function () {
                 if (results) {
                     return results.data.length > 0;
                 }
             }, 'get environments to return a list', GenForm.test.waitingTime);
+        });
+
+        it('return at least a Test environment', function () {
+            expect(results.data[0].Name).toBe('TestGenFormEnvironment');
         });
 
         it('have a register environment function', function () {
@@ -30,7 +39,7 @@ Ext.define('GenForm.test.server.EnvironmentTests', {
         it('return a  success value (true or false) when RegisterEnvironment is called', function () {
             var result, environment = Ext.create('GenForm.model.environment.Environment', {});
 
-            GenForm.server.UnitTest.RegisterEnvironment(environment.data, function (response) {
+            server.RegisterEnvironment(environment.data, function (response) {
                   result = response;
                   result.success = true;
             });
@@ -49,7 +58,7 @@ Ext.define('GenForm.test.server.EnvironmentTests', {
                 Name: 'Test'
             });
 
-            GenForm.server.UnitTest.RegisterEnvironment(environment.data, function (response) {
+            server.RegisterEnvironment(environment.data, function (response) {
                 result = response;
             });
 
@@ -70,7 +79,7 @@ Ext.define('GenForm.test.server.EnvironmentTests', {
                 LogPath: 'non existing'
             });
 
-            GenForm.server.UnitTest.RegisterEnvironment(environment.data, function (response) {
+            server.RegisterEnvironment(environment.data, function (response) {
                 result = response;
             });
 
@@ -92,7 +101,7 @@ Ext.define('GenForm.test.server.EnvironmentTests', {
                 ExportPath: 'non existing'
             });
 
-            GenForm.server.UnitTest.RegisterEnvironment(environment.data, function (response) {
+            server.RegisterEnvironment(environment.data, function (response) {
                 result = response;
             });
 
@@ -112,7 +121,7 @@ Ext.define('GenForm.test.server.EnvironmentTests', {
                 Database: 'invalid'
             });
 
-            GenForm.server.UnitTest.RegisterEnvironment(environment.data, function (response) {
+            server.RegisterEnvironment(environment.data, function (response) {
                   result = response;
             });
 
@@ -132,7 +141,7 @@ Ext.define('GenForm.test.server.EnvironmentTests', {
                 Database: connection
             });
 
-            GenForm.server.UnitTest.RegisterEnvironment(environment.data, function (response) {
+            server.RegisterEnvironment(environment.data, function (response) {
                   result = response;
             });
 
@@ -158,7 +167,7 @@ Ext.define('GenForm.test.server.EnvironmentTests', {
                 LogPath: 'c:\\'
             });
 
-            GenForm.server.UnitTest.RegisterEnvironment(environment.data, function (response) {
+            server.RegisterEnvironment(environment.data, function (response) {
                   result = response;
             });
 
@@ -183,7 +192,7 @@ Ext.define('GenForm.test.server.EnvironmentTests', {
                 ExportPath: 'c:\\'
             });
 
-            GenForm.server.UnitTest.RegisterEnvironment(environment.data, function (response) {
+            server.RegisterEnvironment(environment.data, function (response) {
                   result = response;
             });
 

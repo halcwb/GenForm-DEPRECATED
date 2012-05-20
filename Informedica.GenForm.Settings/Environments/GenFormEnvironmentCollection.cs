@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Informedica.GenForm.Settings.ConfigurationSettings;
 
 namespace Informedica.GenForm.Settings.Environments
 {
@@ -108,5 +109,14 @@ namespace Informedica.GenForm.Settings.Environments
         }
 
         #endregion
+
+        public static GenFormEnvironmentCollection Create()
+        {
+            var source = SettingSourceFactory.GetSettingSource();
+            var settings = new EnvironmentSettingsCollection(source);
+            var envs = new EnvironmentCollection(settings);
+
+            return new GenFormEnvironmentCollection(envs);
+        }
     }
 }

@@ -57,7 +57,6 @@
     <Compile Include="EnvironmentManagement\AListOfEnvironmentsWillContain.cs" />
     <Compile Include="EnvironmentManagement\CreateEnvironmentsUsingSettings.cs" />
     <Compile Include="EnvironmentManagement\CurrentEnvironmentsReporter.cs" />
-    <Compile Include="EnvironmentManagement\EnvironmentScenarios.cs" />
     <Compile Include="EnvironmentManagement\GenFormEnvironmentFixture.cs" />
     <Compile Include="EnvironmentManagement\GenFormEnvironmentValidityCheck.cs" />
     <Compile Include="EnvironmentManagement\GenFormFixture.cs" />

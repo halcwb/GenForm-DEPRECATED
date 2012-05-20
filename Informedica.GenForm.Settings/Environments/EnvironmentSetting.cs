@@ -23,14 +23,9 @@ namespace Informedica.GenForm.Settings.Environments
             Setting.Value = value;
         }
 
-        private ISetting GetConnectionString()
-        {
-            return Setting;
-        }
-
         private string ReadConnectionStringSetting()
         {
-            return GetConnectionString() == null ? String.Empty : GetConnectionString().Value;
+            return Setting == null ? String.Empty : Setting.Value;
         }
 
 

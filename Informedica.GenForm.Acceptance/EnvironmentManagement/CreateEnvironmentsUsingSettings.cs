@@ -104,7 +104,7 @@ namespace Informedica.GenForm.Acceptance.EnvironmentManagement
         {
             try
             {
-                _environments.Add(EnvironmentFactory.GetGenFormEnvironment(machine, environment, "provider", database, logpath, exportpath));
+                _environments.Add(EnvironmentFactory.CreateGenFormEnvironment(machine, environment, "provider", database, logpath, exportpath));
                 return Success;
             }
             catch (System.Exception e)

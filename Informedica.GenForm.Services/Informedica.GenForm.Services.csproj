@@ -44,8 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Databases\EnvironmentServices.cs" />
+    <Compile Include="Environments\EnvironmentDto.cs" />
     <Compile Include="Environments\EnvironmentServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserLogin\LoginServices.cs" />
+    <Compile Include="UserLogin\UserLoginDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\EntityRepository\Informedica.EntityRepository\Informedica.EntityRepository.csproj">

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Informedica.GenForm.Settings;
 using Informedica.GenForm.Settings.Environments;
 
@@ -6,24 +7,33 @@ namespace Informedica.GenForm.Services.Environments
 {
     public class EnvironmentServices
     {
-        public static IEnumerable<Environment> GetEnvironments(string machine)
+        public static IEnumerable<GenFormEnvironment> GetEnvironments(string machine)
         {
-            return new List<Environment>();
+            var list = GenFormEnvironmentCollection.Create();
+            if (!list.Any(e => e.MachineName == System.Environment.MachineName && e.Name == "TestGenForm"))
+            {
+                list.Add(GenFormEnvironment.CreateTest());
+            }
+            return list.Where(e => e.MachineName == machine);
         }
 
-        public static Environment AddNewEnvironment(string name)
+        public static IEnumerable<GenFormEnvironment> GetEnvironments()
         {
-            return Environment.Create(System.Environment.MachineName, name);
+            return GetEnvironments(System.Environment.MachineName);
         }
 
-        public static Environment AddNewEnvironment(string machine, string name)
+        public static bool AddNewEnvironment(EnvironmentDto dto)
         {
-            return Environment.Create(machine, name);
-        }
-
-        public static IEnumerable<Environment> GetEmptyListOfEnvironments()
-        {
-            return new List<Environment>();
+            var list = GenFormEnvironmentCollection.Create();
+            try
+            {
+                list.Add(GenFormEnvironment.Create(dto.Name, dto.provider, dto.Database, dto.LogPath, dto.ExportPath));
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
         }
     }
 }

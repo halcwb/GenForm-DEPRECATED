@@ -2,10 +2,9 @@
 using System.Web;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
-using Informedica.GenForm.Library.Security;
-using Informedica.GenForm.Library.Services.Users;
 using Informedica.GenForm.Mvc3.Environments;
 using Informedica.GenForm.Presentation.Security;
+using Informedica.GenForm.Services.UserLogin;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
@@ -19,16 +18,15 @@ namespace Informedica.GenForm.Mvc3.Controllers
         }
 
         [Transaction]
-        public ActionResult Login(String userName, String password)
+        public ActionResult Login(UserLoginDto dto)
         {
-            if (String.IsNullOrWhiteSpace(userName) || String.IsNullOrWhiteSpace(password))
+            if (String.IsNullOrWhiteSpace(dto.UserName) || String.IsNullOrWhiteSpace(dto.Password))
                 return this.Direct(new {success = false});
 
-            var user = GetUser(userName, password);
-            LoginServices.Login(user);
+            LoginServices.Login(dto);
 
             var success = false;
-            if (LoginServices.IsLoggedIn(user))
+            if (LoginServices.IsLoggedIn(dto))
             {
                 success = true;
                 SetLoginCookie();
