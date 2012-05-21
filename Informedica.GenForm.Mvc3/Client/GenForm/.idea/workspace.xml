@@ -79,10 +79,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EnvironmentTests.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="EnvironmentTests.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/test/server/EnvironmentTests.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="11" selection-start="1214" selection-end="1214" vertical-scroll-proportion="0.5489405">
+            <state line="32" column="11" selection-start="1214" selection-end="1214" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -97,10 +97,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Login.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Login.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controller/user/Login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="20" selection-start="485" selection-end="494" vertical-scroll-proportion="0.0">
+            <state line="61" column="39" selection-start="1604" selection-end="1604" vertical-scroll-proportion="0.6347124">
               <folding />
             </state>
           </provider>
@@ -135,12 +135,12 @@
         <option value="$PROJECT_DIR$/app/lib/view/ui/LoginWindow.js" />
         <option value="$PROJECT_DIR$/app/test/usecase/AdvancedLoginTest.js" />
         <option value="$PROJECT_DIR$/app/store/environment/Environment.js" />
-        <option value="$PROJECT_DIR$/app/controller/user/Login.js" />
         <option value="$PROJECT_DIR$/app/initTests.js" />
         <option value="$PROJECT_DIR$/app/view/User/LoginWindow.js" />
         <option value="$PROJECT_DIR$/app/test/controller/LoginControllerTests.js" />
         <option value="$PROJECT_DIR$/app/test/TestList.js" />
         <option value="$PROJECT_DIR$/app/test/server/EnvironmentTests.js" />
+        <option value="$PROJECT_DIR$/app/controller/user/Login.js" />
       </list>
     </option>
   </component>
@@ -204,24 +204,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="GenForm" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenForm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ExtJs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -447,12 +429,12 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="preferences.sourceCode.CoffeeScript" />
+    <property name="options.lastSelected" value="JavaScript.Libraries" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Views/AppTest" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
     <property name="GoToClass.includeJavaFiles" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -529,13 +511,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874015" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2751713" sideWeight="0.68799216" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2751713" sideWeight="0.3051181" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16130732" sideWeight="0.4566929" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16130732" sideWeight="0.5364173" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -638,6 +620,21 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/lib/view/ui/LoginWindow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="61" selection-start="2579" selection-end="2598" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/test/controller/LoginControllerTests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="168" column="0" selection-start="5773" selection-end="5773" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/environment/EnvironmentWindow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="32" selection-start="1711" selection-end="1716" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/initTests.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="0" selection-start="959" selection-end="959" vertical-scroll-proportion="0.0" />
@@ -648,56 +645,31 @@
         <state line="29" column="0" selection-start="790" selection-end="790" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/test/TestList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="49" selection-start="927" selection-end="927" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/test/view/LoginWindowTests.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="0" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/test/server/EnvironmentTests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="11" selection-start="1214" selection-end="1214" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/view/User/LoginWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="23" selection-start="2212" selection-end="2231" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/lib/view/ui/LoginWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="61" selection-start="2579" selection-end="2598" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/environment/EnvironmentWindow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="32" selection-start="1711" selection-end="1716" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="90" column="23" selection-start="2212" selection-end="2231" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controller/user/Login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="20" selection-start="485" selection-end="494" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/test/controller/LoginControllerTests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="168" column="0" selection-start="5773" selection-end="5773" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/test/TestList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="49" selection-start="927" selection-end="927" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/test/server/EnvironmentTests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="11" selection-start="1214" selection-end="1214" vertical-scroll-proportion="0.5489405">
+        <state line="61" column="39" selection-start="1604" selection-end="1604" vertical-scroll-proportion="0.6347124">
           <folding />
         </state>
       </provider>

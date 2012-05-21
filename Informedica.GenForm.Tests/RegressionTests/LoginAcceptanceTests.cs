@@ -7,6 +7,7 @@ using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.Services.Users;
 using Informedica.GenForm.Mvc3.Controllers;
+using Informedica.GenForm.Services.UserLogin;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Tests.RegressionTests
@@ -59,9 +60,15 @@ namespace Informedica.GenForm.Tests.RegressionTests
             // Setup
             UserServices.WithDto(GetAdminDto()).Get();
             var loginController = CreateLoginController();
+            var dto = new UserLoginDto
+                          {
+                              UserName = SystemUserName,
+                              Password = SystemUserPassword,
+                              Environment = "Test"
+                          };
 
             // Execute
-            var result = loginController.Login(SystemUserName, SystemUserPassword);
+            var result = loginController.Login(dto);
 
             // Verify
             Assert.IsTrue(ActionResultParser.GetSuccessValue(result), "System user could not successfully log in");
@@ -86,8 +93,14 @@ namespace Informedica.GenForm.Tests.RegressionTests
         public void SystemUserCannotLoginWithInvalidPassword()
         {
             var loginController = CreateLoginController();
+            var dto = new UserLoginDto
+            {
+                UserName = SystemUserName,
+                Password = "bar",
+                Environment = "Test"
+            };
 
-            var result = loginController.Login(SystemUserName, "bar");
+            var result = loginController.Login(dto);
 
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "System should not be able with password bar");
         }
@@ -96,8 +109,14 @@ namespace Informedica.GenForm.Tests.RegressionTests
         public void InvalidUserCannotLoginWithInvalidPassword()
         {
             var loginController = CreateLoginController();
+            var dto = new UserLoginDto
+            {
+                UserName = "foo",
+                Password = "bar",
+                Environment = "Test"
+            };
 
-            var result = loginController.Login("foo", "bar");
+            var result = loginController.Login(dto);
 
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "User foo cannot login with password bar (if not added as users)");
         }
@@ -106,8 +125,14 @@ namespace Informedica.GenForm.Tests.RegressionTests
         public void UserWithoutUserNameCannotLogin()
         {
             var loginController = CreateLoginController();
+            var dto = new UserLoginDto
+            {
+                UserName = string.Empty,
+                Password = "bar",
+                Environment = "Test"
+            };
 
-            var result = loginController.Login("", "bar");
+            var result = loginController.Login(dto);
 
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "User without username cannot log in");
         }
@@ -116,8 +141,14 @@ namespace Informedica.GenForm.Tests.RegressionTests
         public void UserWithoutPasswordCannotLogin()
         {
             var loginController = CreateLoginController();
+            var dto = new UserLoginDto
+            {
+                UserName = "foo",
+                Password = string.Empty,
+                Environment = "Test"
+            };
 
-            var result = loginController.Login("foo", "");
+            var result = loginController.Login(dto);
 
             Assert.IsFalse(ActionResultParser.GetSuccessValue(result), "User without a password cannot login");
         }
@@ -135,7 +166,6 @@ namespace Informedica.GenForm.Tests.RegressionTests
 
         private static HttpContextBase MockHttpContext()
         {
-
             return new HttpContextWrapper(new HttpContext(new HttpRequest("", "http://localhost/genform/default.aspx", ""), new HttpResponse(TextWriter.Null)));
         }
     }

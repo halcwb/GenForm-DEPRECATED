@@ -178,7 +178,7 @@
     <Compile Include="Security\IAnonymousIdentity.cs" />
     <Compile Include="Security\IGenFormIdentity.cs" />
     <Compile Include="Security\IGenFormPrincipal.cs" />
-    <Compile Include="Security\LoginUser.cs" />
+    <Compile Include="Security\LoginCriteria.cs" />
     <Compile Include="Security\ILoginCriteria.cs" />
     <Compile Include="Services\Products\BrandServices.cs" />
     <Compile Include="Services\Products\PackageServices.cs" />

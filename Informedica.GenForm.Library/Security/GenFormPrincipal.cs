@@ -18,7 +18,7 @@ namespace Informedica.GenForm.Library.Security
             Identity = identity;
         }
 
-        internal static void Login(ILoginCriteria user)
+        public static void Login(ILoginCriteria user)
         {
             SetPrincipal(GetIdentity(user));
         }

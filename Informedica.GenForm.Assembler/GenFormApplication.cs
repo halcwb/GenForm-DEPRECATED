@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading;
 using Informedica.GenForm.Assembler.Assemblers;
 using Informedica.GenForm.DataAccess;
-using Informedica.GenForm.Settings;
 using Informedica.GenForm.Settings.Environments;
 using NHibernate;
 using StructureMap;
@@ -52,7 +51,7 @@ namespace Informedica.GenForm.Assembler
         {
             get
             {
-                return GetSessionFactory("Test");
+                return GetSessionFactory("TestGenForm");
             } 
         }
 

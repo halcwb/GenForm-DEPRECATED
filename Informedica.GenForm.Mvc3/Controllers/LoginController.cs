@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Mvc3.Environments;
 using Informedica.GenForm.Presentation.Security;
+using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Services.UserLogin;
 
 namespace Informedica.GenForm.Mvc3.Controllers
@@ -20,19 +21,25 @@ namespace Informedica.GenForm.Mvc3.Controllers
         [Transaction]
         public ActionResult Login(UserLoginDto dto)
         {
+            EnvironmentServices.SetEnvironment(dto.Environment);
+            return LoginUser(dto);
+        }
+
+        private ActionResult LoginUser(UserLoginDto dto)
+        {
             if (String.IsNullOrWhiteSpace(dto.UserName) || String.IsNullOrWhiteSpace(dto.Password))
-                return this.Direct(new {success = false});
+                return this.Direct(new { success = false });
 
             LoginServices.Login(dto);
 
             var success = false;
-            if (LoginServices.IsLoggedIn(dto))
+            if (LoginServices.IsLoggedIn(dto.UserName))
             {
                 success = true;
-                SetLoginCookie();
+                SetLoginCookie(); 
             }
-            
-            return this.Direct(new {success});
+
+            return this.Direct(new { success });            
         }
 
         private void SetLoginCookie()
@@ -71,9 +78,13 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new {success = true, data = form});
         }
 
-        private static ILoginCriteria GetUser(String userName, String password)
+        private static UserLoginDto GetUser(String userName, String password)
         {
-            return LoginUser.NewLoginUser(userName, password);
+            return new UserLoginDto
+                       {
+                           UserName = userName,
+                           Password = password
+                       };
         }
 
     }

@@ -1,7 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Informedica.GenForm.Settings;
+using System.Web;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Settings.Environments;
+using NHibernate;
+using StructureMap;
 
 namespace Informedica.GenForm.Services.Environments
 {
@@ -34,6 +38,12 @@ namespace Informedica.GenForm.Services.Environments
             {
                 return false;
             }
+        }
+
+        public static void SetEnvironment(string environment)
+        {
+            if (HttpContext.Current == null) throw  new NullReferenceException("No HttpContext!");
+            ObjectFactory.Configure(x => x.For<ISessionFactory>().HybridHttpOrThreadLocalScoped().Use(GenFormApplication.GetSessionFactory(environment)));
         }
     }
 }

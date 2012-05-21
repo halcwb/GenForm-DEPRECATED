@@ -10,7 +10,7 @@ namespace Informedica.GenForm.DataAccess
 {
     public static class SessionFactoryManager
     {
-        private const string Test = "Test";
+        public const string Test = "TestGenForm";
 
         static SessionFactoryManager()
         {
@@ -19,7 +19,7 @@ namespace Informedica.GenForm.DataAccess
 
         public static ISessionFactory GetSessionFactory()
         {
-            return GetSessionFactory("Test");
+            return GetSessionFactory(Test);
         }
 
         public static void BuildSchema(string environment, ISession session)
@@ -34,7 +34,7 @@ namespace Informedica.GenForm.DataAccess
 
         private static IEnvironmentConfiguration GetEnvironmentConfiguration(string name)
         {
-            if (name == "Test") return new EnvironmentConfiguration("Test", GetConfig(), GetDbConfig() );
+            if (name == Test) return new EnvironmentConfiguration(name, GetConfig(), GetDbConfig() );
             return ConfigurationManager.Instance.GetConfiguration(name);
         }
 

@@ -73,7 +73,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
         [TestMethod]
         public void LoginWithAsSystemUserWithWrongPasswordShouldReturnFalse()
         {
-            var user = (LoginUser)CreateSystemUser();
+            var user = (LoginCriteria)CreateSystemUser();
             user.Password = "bar";
             GenFormPrincipal.Login(user);
 
@@ -118,7 +118,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests
 
         private static ILoginCriteria CreateSystemUser()
         {
-            return LoginUser.NewLoginUser("Admin", "Admin");
+            return LoginCriteria.NewLoginUser("Admin", "Admin");
         }
 
         private static IGenFormIdentity CreateFakeGenFormIdentity()

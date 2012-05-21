@@ -35,7 +35,7 @@ namespace Informedica.GenForm.Library.Services.Users
 
         public static ILoginCriteria CreateLoginUse(String userName, String password)
         {
-            return LoginUser.NewLoginUser(userName, password);
+            return LoginCriteria.NewLoginUser(userName, password);
         }
 
         private static IGenFormPrincipal Principal

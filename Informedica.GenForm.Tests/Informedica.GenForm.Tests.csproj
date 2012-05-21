@@ -108,6 +108,10 @@
       <Project>{76148642-857A-4186-8A7B-C4AFC05E0152}</Project>
       <Name>Informedica.GenForm.Mvc3</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.Services.csproj">
+      <Project>{7C647ECA-EB02-4779-A829-A73122341338}</Project>
+      <Name>Informedica.GenForm.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AcceptanceTests\" />

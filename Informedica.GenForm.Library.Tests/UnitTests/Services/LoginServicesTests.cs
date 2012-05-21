@@ -53,7 +53,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
         {
             UserServices.WithDto(GetAdminUserDto()).Get();
 
-            var login = LoginUser.NewLoginUser("Admin", "Admin", "GenFormTest");
+            var login = LoginCriteria.NewLoginUser("Admin", "Admin");
             LoginServices.Login(login);
             Assert.IsTrue(LoginServices.IsLoggedIn(login));
         }

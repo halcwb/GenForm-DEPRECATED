@@ -1,12 +1,12 @@
 ﻿using System;
-using Informedica.GenForm.Assembler;
-using Informedica.GenForm.Library.Security;
-using Informedica.GenForm.Library.Services.Users;
 using Informedica.GenForm.Mvc3.Controllers;
 using Informedica.GenForm.Presentation.Security;
+using Informedica.GenForm.Services.Environments;
+using Informedica.GenForm.Services.UserLogin;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Mvc;
 using TypeMock.ArrangeActAssert;
+using LoginServices = Informedica.GenForm.Services.UserLogin.LoginServices;
 
 namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 {
@@ -19,6 +19,8 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
     [TestClass]
     public class LoginControllerShould
     {
+        private LoginController _controller;
+        private UserLoginDto _user;
         private const String ValidUser = "Admin";
         private const String ValidPassword = "Admin";
         private const String TempPassword = "temp";
@@ -36,11 +38,11 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize]
-        public static void MyClassInitialize(TestContext testContext)
-        {
-            GenFormApplication.Initialize();
-        }
+        //[ClassInitialize]
+        //public static void MyClassInitialize(TestContext testContext)
+        //{
+        //    GenFormApplication.Initialize();
+        //}
         //
         //Use ClassCleanup to run code after all tests in a class have run
         //[ClassCleanup()]
@@ -49,10 +51,13 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         //}
         //
         //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
+        [TestInitialize()]
+        public void MyTestInitialize()
+        {
+            _controller = new LoginController();
+            Isolate.WhenCalled(() => EnvironmentServices.SetEnvironment("Test")).IgnoreCall();
+            Isolate.WhenCalled(() => LoginServices.Login(_user)).IgnoreCall();
+        }
         //
         //Use TestCleanup to run code after each test has run
         //[TestCleanup()]
@@ -66,15 +71,17 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public void ReturnFalseForInvalidUserLogin()
         {
-            
-            var controller = new LoginController();
-            var user = GetUser();
-            IsolateLoginController(user);
-            Isolate.Fake.StaticMethods(typeof(LoginServices));
-            Isolate.WhenCalled(() => LoginServices.Login(user)).IgnoreCall();
 
-            var response = controller.Login(InvalidUser, InvalidPassword);
+            _user = new UserLoginDto
+                        {
+                            UserName = InvalidUser,
+                            Password = InvalidPassword,
+                            Environment = "Test"
+                        };
+            var userName = _user.UserName;
+            Isolate.WhenCalled(() => LoginServices.IsLoggedIn(userName)).WillReturn(false);
 
+            var response = _controller.Login(_user);
             Assert.IsFalse(GetSuccessValueFromActionResult(response));
         }
 
@@ -84,14 +91,19 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             // Setup
             var user = GetUser();
-            IsolateLoginController(user);
 
-            Isolate.WhenCalled(() => LoginServices.Login(user)).IgnoreCall();
-            Isolate.WhenCalled(() => LoginServices.IsLoggedIn(user)).WillReturn(true);
-            var controller = new LoginController();
-            Isolate.NonPublic.WhenCalled(controller, "SetLoginCookie").IgnoreCall();
 
-            var response = controller.Login(ValidUser, ValidPassword);
+            var dto = new UserLoginDto
+            {
+                UserName = ValidUser,
+                Password = ValidPassword,
+                Environment = "Test"
+            };
+            Isolate.WhenCalled(() => LoginServices.IsLoggedIn(ValidUser)).WillReturn(true);
+            Isolate.WhenCalled(() => LoginServices.GetLoggedIn()).WillReturn(ValidUser);
+            Isolate.WhenCalled(() => _controller.Response).ReturnRecursiveFake();
+
+            var response = _controller.Login(dto);
 
             Assert.IsTrue(GetSuccessValueFromActionResult(response));
         }
@@ -100,19 +112,13 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public  void ReturnSuccessValueTrueForPasswordChangeForValidUser()
         {
-            var controller = GetController();
             var user = GetUser();
-            IsolateLoginController(user);
-
-            Isolate.WhenCalled(() => LoginServices.IsLoggedIn(user)).WillReturn(true);
-            Assert.IsTrue(LoginServices.IsLoggedIn(GetUser()), "Cannot log in");
-
             Isolate.WhenCalled(() => LoginServices.ChangePassword(user, TempPassword)).IgnoreCall();
             Isolate.WhenCalled(() => LoginServices.CheckPassword(TempPassword)).WillReturn(true);
 
-            var response = controller.ChangePassword(ValidUser, ValidPassword, TempPassword);
-            Isolate.Verify.WasCalledWithExactArguments(() => LoginServices.ChangePassword(user, TempPassword));            
+            var response = _controller.ChangePassword(ValidUser, ValidPassword, TempPassword);
 
+            Isolate.Verify.WasCalledWithAnyArguments(() => LoginServices.ChangePassword(user, TempPassword));            
             Assert.IsTrue(GetSuccessValueFromActionResult(response), "Password was not changed");
         }
 
@@ -120,15 +126,13 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public void NotChangePasswordWhenNotLoggedIn()
         {
-            var controller = GetController();
             var user = GetUser();
-            IsolateLoginController(user);
 
             Isolate.Fake.StaticMethods(typeof(LoginServices));
             Isolate.WhenCalled(() => LoginServices.ChangePassword(user, "newpassword")).IgnoreCall();
 
-            var response = controller.ChangePassword("foo", "oldpassword", "newpassword");
-            Isolate.Verify.WasCalledWithExactArguments(() => LoginServices.ChangePassword(user, "newpassword"));
+            var response = _controller.ChangePassword("foo", "oldpassword", "newpassword");
+            Isolate.Verify.WasCalledWithAnyArguments(() => LoginServices.ChangePassword(user, "newpassword"));
 
             Assert.IsFalse(GetSuccessValueFromActionResult(response), "Password was not changed");
         }
@@ -152,10 +156,9 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public void ReturnLoginPresentationForValidUserWithLoginButtonEnabled()
         {
-            var controller = new LoginController();
             Isolate.Fake.StaticMethods(typeof(LoginForm));
 
-            var result = controller.GetLoginPresentation("Admin", "Admin");
+            var result = _controller.GetLoginPresentation("Admin", "Admin");
 
             Isolate.Verify.WasCalledWithAnyArguments(() => LoginForm.NewLoginForm("", ""));
 
@@ -163,14 +166,9 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Assert.IsFalse(GetLoginInButtonEnabledValue(result));
         }
 
-        private static LoginController GetController()
+        private static UserLoginDto GetUser()
         {
-            return new LoginController();
-        }
-
-        private static ILoginCriteria GetUser()
-        {
-            return Isolate.Fake.Instance<ILoginCriteria>();
+            return new UserLoginDto();
         }
 
         private static bool GetSuccessValueFromActionResult(ActionResult response)
@@ -182,12 +180,6 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             var form = (ILoginForm)((JsonResult)(result)).Data.GetType().GetProperty("data").GetValue(((JsonResult)(result)).Data, null);
             return form.Login.Enabled;
-        }
-
-        private static void IsolateLoginController(ILoginCriteria user)
-        {
-            Isolate.Fake.StaticMethods<LoginUser>();
-            Isolate.WhenCalled(() => LoginUser.NewLoginUser(InvalidUser, InvalidPassword)).WillReturn(user);
         }
 
     }

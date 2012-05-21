@@ -22,7 +22,7 @@ Ext.define('GenForm.controller.user.Login', {
         var me = this
 
         me.registerEnvironment = GenForm.server.UnitTest.RegisterEnvironment;
-        me.loginUser = GenForm.server.UnitTest.Login;
+        me.loginUser = GenForm.server.Login;
 
         me.control({
             'toolbar button[action=login]': {
@@ -62,7 +62,7 @@ Ext.define('GenForm.controller.user.Login', {
         me.loginWindow = win;
         model = win.updateModel(model);
 
-        me.loginUser(model.data, me.loginCallBack, me);
+        me.loginUser.Login(model.data, me.loginCallBack, me);
     },
 
     loginCallBack: function (result) {

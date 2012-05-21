@@ -126,7 +126,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 
         private static ILoginCriteria CreateSystemLoginCriteria()
         {
-            return LoginUser.NewLoginUser("Admin", "Admin");
+            return LoginCriteria.NewLoginUser("Admin", "Admin");
         }
 
     }
