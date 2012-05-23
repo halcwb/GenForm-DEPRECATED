@@ -90,7 +90,6 @@
   <ItemGroup>
     <Compile Include="DatabaseCleanerShould.cs" />
     <Compile Include="SesssionFactoryCreatorShould.cs" />
-    <Compile Include="UnitTests\DatabaseConnectionShould.cs" />
     <Compile Include="UnitTests\Mappings\BrandMapShould.cs" />
     <Compile Include="UnitTests\Mappings\PackageMapShould.cs" />
     <Compile Include="UnitTests\Mappings\ProductMapShould.cs" />

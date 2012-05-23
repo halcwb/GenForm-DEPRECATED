@@ -11,14 +11,17 @@ Ext.define('GenForm.test.controller.LoginControllerTests', {
             GenForm.application.eventbus.bus = {};
 
             if (!loginController) {
-                loginController = me.createLoginController();
+                loginController = me.createLoginController({
+                    loginUser: GenForm.server.UnitTest
+                });
+                console.log(loginController);
             }
 
             return loginController;
         };
 
-        me.createLoginController = function () {
-            return GenForm.application.getController('user.Login');
+        me.createLoginController = function (config) {
+            return GenForm.application.getController('user.Login', config);
         };
 
         me.clickButton = function (button) {
@@ -131,13 +134,13 @@ Ext.define('GenForm.test.controller.LoginControllerTests', {
             loginWindow.show();
             loginWindow.getUserNameField().setValue('Admin');
             loginWindow.getPasswordField().setValue('Admin');
-            loginWindow.getEnvironmentField().value = 'Test';
+            loginWindow.getEnvironmentField().value = 'TestGenForm';
 
             me.clickButton(loginWindow.getLoginButton());
 
             expect(user.UserName).toBe('Admin');
             expect(user.Password).toBe('Admin');
-            expect(user.Environment).toBe('Test');
+            expect(user.Environment).toBe('TestGenForm');
         });
 
         it('should have a login callback function called after logging in', function () {

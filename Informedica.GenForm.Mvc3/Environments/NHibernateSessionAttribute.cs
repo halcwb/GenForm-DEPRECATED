@@ -26,7 +26,7 @@ namespace Informedica.GenForm.Mvc3.Environments
         private static string GetEnvironment()
         {
             var environment = (string)HttpContext.Current.Session["environment"];
-            return environment ?? "TestGenForm";
+            return environment ?? SessionFactoryManager.Test;
         }
 
         public override void OnActionExecuting(
@@ -34,6 +34,7 @@ namespace Informedica.GenForm.Mvc3.Environments
         {
             ObjectFactory.Configure(x => x.For<ISessionFactory>().HttpContextScoped().Use(GenFormApplication.GetSessionFactory(GetEnvironment())));
             var session = SessionFactory.OpenSession();
+            
             SessionFactoryManager.BuildSchema(GetEnvironment(), session);
             CurrentSessionContext.Bind(session);
         }

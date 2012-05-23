@@ -18,29 +18,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new {success = true});
         }
 
-        [Transaction]
-        public ActionResult Login(UserLoginDto dto)
-        {
-            EnvironmentServices.SetEnvironment(dto.Environment);
-            return LoginUser(dto);
-        }
-
-        private ActionResult LoginUser(UserLoginDto dto)
-        {
-            if (String.IsNullOrWhiteSpace(dto.UserName) || String.IsNullOrWhiteSpace(dto.Password))
-                return this.Direct(new { success = false });
-
-            LoginServices.Login(dto);
-
-            var success = false;
-            if (LoginServices.IsLoggedIn(dto.UserName))
-            {
-                success = true;
-                SetLoginCookie(); 
-            }
-
-            return this.Direct(new { success });            
-        }
 
         private void SetLoginCookie()
         {
@@ -87,5 +64,12 @@ namespace Informedica.GenForm.Mvc3.Controllers
                        };
         }
 
+        public ActionResult Login(UserLoginDto dto)
+        {
+            LoginServices.Login(dto);
+            var success = LoginServices.IsLoggedIn(dto.UserName);
+
+            return this.Direct(new { success });
+        }
     }
 }

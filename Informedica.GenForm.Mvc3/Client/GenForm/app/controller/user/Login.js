@@ -18,11 +18,26 @@ Ext.define('GenForm.controller.user.Login', {
     loggedIn: false,
     loginWindow: null,
 
+    constructor: function (config) {
+        var me = this;
+
+        if (config && config.loginUser) {
+            me.loginUser = config.loginUser;
+        } else {
+            me.loginUser = GenForm.server.Login;
+        }
+
+        if (config && config.registerEnvironment) {
+            me.registerEnvironment = config.registerEnvironment
+        } else {
+            me.registerEnvironment = GenForm.server.UnitTest.RegisterEnvironment;
+        }
+
+        me.callParent(arguments);
+    },
+
     init: function () {
         var me = this
-
-        me.registerEnvironment = GenForm.server.UnitTest.RegisterEnvironment;
-        me.loginUser = GenForm.server.Login;
 
         me.control({
             'toolbar button[action=login]': {

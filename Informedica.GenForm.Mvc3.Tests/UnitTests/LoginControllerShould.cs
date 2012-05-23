@@ -56,6 +56,8 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             _controller = new LoginController();
             Isolate.WhenCalled(() => EnvironmentServices.SetEnvironment("Test")).IgnoreCall();
+
+            _user = Isolate.Fake.Instance<UserLoginDto>();
             Isolate.WhenCalled(() => LoginServices.Login(_user)).IgnoreCall();
         }
         //
@@ -87,18 +89,39 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
+        public void RequestLoginFromLoginServicesUsingLoginDto()
+        {
+            Isolate.WhenCalled(() => LoginServices.IsLoggedIn(string.Empty)).WillReturn(true);
+
+            _controller.Login(_user);
+
+            Isolate.Verify.WasCalledWithExactArguments(() => LoginServices.Login(_user));
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void AskLoginServicesIfUserIsLoggedIn()
+        {
+            var name = _user.UserName;
+            Isolate.WhenCalled(() => LoginServices.IsLoggedIn(name)).WillReturn(true);
+
+            _controller.Login(_user);
+
+            Isolate.Verify.WasCalledWithExactArguments(() => LoginServices.IsLoggedIn(name));
+        }
+
+        [Isolated]
+        [TestMethod]
         public  void ReturnSuccessValueIsTrueWhenValidUserLogin()
         {
             // Setup
-            var user = GetUser();
-
-
             var dto = new UserLoginDto
             {
                 UserName = ValidUser,
                 Password = ValidPassword,
                 Environment = "Test"
             };
+            
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(ValidUser)).WillReturn(true);
             Isolate.WhenCalled(() => LoginServices.GetLoggedIn()).WillReturn(ValidUser);
             Isolate.WhenCalled(() => _controller.Response).ReturnRecursiveFake();

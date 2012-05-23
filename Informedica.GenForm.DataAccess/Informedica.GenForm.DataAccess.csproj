@@ -103,7 +103,6 @@
     <Compile Include="Repositories\UnitRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="SessionFactoryManager.cs" />
-    <Compile Include="Databases\DatabaseConnection.cs" />
     <Compile Include="Databases\Environment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -17,7 +17,7 @@ namespace Informedica.GenForm.Services.UserLogin
             GenFormPrincipal.Login(criteria);
         }
 
-        public static bool IsLoggedIn(string dto)
+        public static bool IsLoggedIn(string userName)
         {
             throw new System.NotImplementedException();
         }

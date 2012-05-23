@@ -25,19 +25,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LoginWindow.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/lib/view/ui/LoginWindow.js">
+      <file leaf-file-name="LoginControllerTests.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/test/controller/LoginControllerTests.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="61" selection-start="2579" selection-end="2598" vertical-scroll-proportion="0.0">
+            <state line="14" column="54" selection-start="480" selection-end="503" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginControllerTests.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/test/controller/LoginControllerTests.js">
+      <file leaf-file-name="ext-all-debug-w-comments.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../Library/ext/extjs-4.1.0/ext-all-debug-w-comments.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="168" column="0" selection-start="5773" selection-end="5773" vertical-scroll-proportion="0.0">
+            <state line="142075" column="4" selection-start="4851572" selection-end="4851572" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -82,7 +82,7 @@
       <file leaf-file-name="EnvironmentTests.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/test/server/EnvironmentTests.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="11" selection-start="1214" selection-end="1214" vertical-scroll-proportion="0.0">
+            <state line="43" column="52" selection-start="1731" selection-end="1731" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -100,7 +100,7 @@
       <file leaf-file-name="Login.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controller/user/Login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="39" selection-start="1604" selection-end="1604" vertical-scroll-proportion="0.6347124">
+            <state line="37" column="56" selection-start="841" selection-end="841" vertical-scroll-proportion="0.6347124">
               <folding />
             </state>
           </provider>
@@ -137,9 +137,9 @@
         <option value="$PROJECT_DIR$/app/store/environment/Environment.js" />
         <option value="$PROJECT_DIR$/app/initTests.js" />
         <option value="$PROJECT_DIR$/app/view/User/LoginWindow.js" />
-        <option value="$PROJECT_DIR$/app/test/controller/LoginControllerTests.js" />
         <option value="$PROJECT_DIR$/app/test/TestList.js" />
         <option value="$PROJECT_DIR$/app/test/server/EnvironmentTests.js" />
+        <option value="$PROJECT_DIR$/app/test/controller/LoginControllerTests.js" />
         <option value="$PROJECT_DIR$/app/controller/user/Login.js" />
       </list>
     </option>
@@ -198,6 +198,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -414,16 +424,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -432,9 +432,9 @@
     <property name="options.lastSelected" value="JavaScript.Libraries" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Views/AppTest" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -516,8 +516,8 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874015" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16130732" sideWeight="0.4566929" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16130732" sideWeight="0.5364173" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16130732" sideWeight="0.4606299" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16130732" sideWeight="0.5324803" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -590,11 +590,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/model/product/GenericName.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/model/product/Package.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -625,9 +620,9 @@
         <state line="73" column="61" selection-start="2579" selection-end="2598" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/test/controller/LoginControllerTests.js">
+    <entry file="file://$PROJECT_DIR$/../Library/ext/extjs-4.1.0/ext-all-debug-w-comments.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="168" column="0" selection-start="5773" selection-end="5773" vertical-scroll-proportion="0.0" />
+        <state line="142075" column="4" selection-start="4851572" selection-end="4851572" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/environment/EnvironmentWindow.js">
@@ -655,21 +650,28 @@
         <state line="5" column="0" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/test/server/EnvironmentTests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="11" selection-start="1214" selection-end="1214" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/view/User/LoginWindow.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="90" column="23" selection-start="2212" selection-end="2231" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/test/server/EnvironmentTests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="52" selection-start="1731" selection-end="1731" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/test/controller/LoginControllerTests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="54" selection-start="480" selection-end="503" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controller/user/Login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="39" selection-start="1604" selection-end="1604" vertical-scroll-proportion="0.6347124">
+        <state line="37" column="56" selection-start="841" selection-end="841" vertical-scroll-proportion="0.6347124">
           <folding />
         </state>
       </provider>
