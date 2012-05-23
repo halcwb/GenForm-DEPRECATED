@@ -4,13 +4,13 @@ using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Mvc3.Environments;
 using Informedica.GenForm.Presentation.Security;
-using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Services.UserLogin;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
     public class LoginController : Controller
     {
+        private const int ExpireTimeInHours = 1;
 
         public ActionResult SetEnvironment(String environment)
         {
@@ -18,13 +18,12 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new {success = true});
         }
 
-
-        private void SetLoginCookie()
+        private void SetLoginCookie(string userName)
         {
-            var expires = DateTime.Now.AddHours(1);
-            var loginCookie = new HttpCookie("loginCookie", LoginServices.GetLoggedIn());
-            if (Session != null) Session["user"] = LoginServices.GetLoggedIn();
-            loginCookie.Expires = expires;
+            var expires = DateTime.Now.AddHours(ExpireTimeInHours);
+            var loginCookie = new HttpCookie("loginCookie", userName) {Expires = expires};
+
+            if (Session != null) Session["user"] = userName;
             Response.AppendCookie(loginCookie);
         }
 
@@ -68,6 +67,8 @@ namespace Informedica.GenForm.Mvc3.Controllers
         {
             LoginServices.Login(dto);
             var success = LoginServices.IsLoggedIn(dto.UserName);
+            
+            if (success) SetLoginCookie(dto.UserName);
 
             return this.Direct(new { success });
         }
