@@ -10,6 +10,7 @@ using Informedica.GenForm.Library.DomainModel.Products;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         public ActionResult GetGenericNames()

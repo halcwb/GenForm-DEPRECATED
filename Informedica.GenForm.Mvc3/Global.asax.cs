@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Mvc3.Environments;
 using NHibernate;
 
 namespace Informedica.GenForm.Mvc3
@@ -13,6 +14,7 @@ namespace Informedica.GenForm.Mvc3
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new TransactionAttribute());
         }
 
         public static void RegisterRoutes(RouteCollection routes)

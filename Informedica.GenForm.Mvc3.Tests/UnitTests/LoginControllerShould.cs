@@ -23,6 +23,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         private LoginController _controller;
         private UserLoginDto _user;
         private HttpResponseBase _response;
+        private HttpContextBase _context;
         private const String ValidUser = "Admin";
         private const String ValidPassword = "Admin";
         private const String TempPassword = "temp";
@@ -64,6 +65,9 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
             _response = Isolate.Fake.Instance<HttpResponseBase>();
             Isolate.WhenCalled(() =>_controller.Response).WillReturn(_response);
+
+            _context = Isolate.Fake.Instance<HttpContextBase>();
+            Isolate.WhenCalled(() => _controller.HttpContext).WillReturn(_context);
         }
         //
         //Use TestCleanup to run code after each test has run
@@ -76,20 +80,24 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void ReturnFalseForInvalidUserLogin()
+        public void ReturnALoginExceptionMessageWhenEnvironmentHasNotBeenSet()
         {
-
-            _user = new UserLoginDto
-                        {
-                            UserName = InvalidUser,
-                            Password = InvalidPassword,
-                            Environment = "Test"
-                        };
             var userName = _user.UserName;
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(userName)).WillReturn(false);
 
-            var response = _controller.Login(_user);
-            Assert.IsFalse(GetSuccessValueFromActionResult(response));
+            var result = _controller.Login(_user);
+            Assert.AreEqual(LoginController.NoEnvironmentMessage, ActionResultParser.GetPropertyValue<string>(result, "message"));
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void ReturnFalseForInvalidUserLogin()
+        {
+            var userName = _user.UserName;
+            Isolate.WhenCalled(() => LoginServices.IsLoggedIn(userName)).WillReturn(false);
+
+            var result = _controller.Login(_user);
+            Assert.IsFalse(GetSuccessValueFromActionResult(result));
         }
 
         [Isolated]
@@ -124,14 +132,14 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Isolate.WhenCalled(() => LoginServices.GetLoggedIn()).WillReturn(ValidUser);
             Isolate.WhenCalled(() => _controller.Response).ReturnRecursiveFake();
 
-            var response = _controller.Login(_user);
+            var result = _controller.Login(_user);
             
-            Assert.IsTrue(GetSuccessValueFromActionResult(response));
+            Assert.IsTrue(GetSuccessValueFromActionResult(result));
         }
 
         [Isolated]
         [TestMethod]
-        public void AppendALoginCookieWhenSuccessfulLogin()
+        public void AppendALoginCookieToResponseWhenSuccessfulLogin()
         {
             var cookie = Isolate.Fake.Instance<HttpCookie>();
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(ValidUser)).WillReturn(true);
@@ -150,10 +158,10 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Isolate.WhenCalled(() => LoginServices.ChangePassword(_user, TempPassword)).IgnoreCall();
             Isolate.WhenCalled(() => LoginServices.CheckPassword(TempPassword)).WillReturn(true);
 
-            var response = _controller.ChangePassword(ValidUser, ValidPassword, TempPassword);
+            var result = _controller.ChangePassword(ValidUser, ValidPassword, TempPassword);
 
             Isolate.Verify.WasCalledWithAnyArguments(() => LoginServices.ChangePassword(_user, TempPassword));            
-            Assert.IsTrue(GetSuccessValueFromActionResult(response), "Password was not changed");
+            Assert.IsTrue(GetSuccessValueFromActionResult(result), "Password was not changed");
         }
 
         [Isolated]
@@ -163,10 +171,10 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Isolate.Fake.StaticMethods(typeof(LoginServices));
             Isolate.WhenCalled(() => LoginServices.ChangePassword(_user, "newpassword")).IgnoreCall();
 
-            var response = _controller.ChangePassword("foo", "oldpassword", "newpassword");
+            var result = _controller.ChangePassword("foo", "oldpassword", "newpassword");
             Isolate.Verify.WasCalledWithAnyArguments(() => LoginServices.ChangePassword(_user, "newpassword"));
 
-            Assert.IsFalse(GetSuccessValueFromActionResult(response), "Password was not changed");
+            Assert.IsFalse(GetSuccessValueFromActionResult(result), "Password was not changed");
         }
 
         [Isolated]

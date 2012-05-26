@@ -2,7 +2,6 @@
 using System.Web;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
-using Informedica.GenForm.Mvc3.Environments;
 using Informedica.GenForm.Presentation.Security;
 using Informedica.GenForm.Services.UserLogin;
 
@@ -10,11 +9,14 @@ namespace Informedica.GenForm.Mvc3.Controllers
 {
     public class LoginController : Controller
     {
+        public const string NoEnvironmentMessage = "Environment has not been set";
         private const int ExpireTimeInHours = 1;
+        private const string EnvironmentSetting = "environment";
 
+        
         public ActionResult SetEnvironment(String environment)
         {
-            if (HttpContext.Session != null) HttpContext.Session.Add("environment", environment);
+            if (HttpContext.Session != null) HttpContext.Session.Add(EnvironmentSetting, environment);
             return this.Direct(new {success = true});
         }
 
@@ -32,13 +34,11 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(HttpContext.Session != null ? new {user = HttpContext.Session["user"]} : new {user = (object) ""});
         }
 
-        [Transaction]
         public ActionResult Logout(String userName)
         {
             throw new NotImplementedException();
         }
 
-        [Transaction]
         public ActionResult ChangePassword(String userName, String currentPassword, String newPassword)
         {
             var user = GetUser(userName, currentPassword);
@@ -47,7 +47,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new {success = LoginServices.CheckPassword(newPassword)});
         }
 
-        [Transaction]
         public ActionResult GetLoginPresentation(String userName, String password)
         {
             ILoginForm form = LoginForm.NewLoginForm(userName, password);
@@ -65,12 +64,26 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult Login(UserLoginDto dto)
         {
-            LoginServices.Login(dto);
-            var success = LoginServices.IsLoggedIn(dto.UserName);
-            
-            if (success) SetLoginCookie(dto.UserName);
+            var success = string.IsNullOrEmpty(GetEnvironment());
+
+            if (success)
+            {
+                LoginServices.Login(dto);
+                success = LoginServices.IsLoggedIn(dto.UserName);
+
+                if (success) SetLoginCookie(dto.UserName);
+            } else
+            { 
+                return this.Direct(new {success = false, message = NoEnvironmentMessage});
+            }
 
             return this.Direct(new { success });
+        }
+
+        private string GetEnvironment()
+        {
+            if (HttpContext.Session != null) return (string)HttpContext.Session[EnvironmentSetting];
+            return string.Empty;
         }
     }
 }

@@ -42,8 +42,7 @@ namespace Informedica.GenForm.Services.Environments
 
         public static void SetEnvironment(string environment)
         {
-            if (HttpContext.Current == null) throw  new NullReferenceException("No HttpContext!");
-            ObjectFactory.Configure(x => x.For<ISessionFactory>().HybridHttpOrThreadLocalScoped().Use(GenFormApplication.GetSessionFactory(environment)));
+            ObjectFactory.Configure(x => x.For<ISessionFactory>().Use(GenFormApplication.GetSessionFactory(environment)));
         }
     }
 }

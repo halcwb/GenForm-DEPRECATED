@@ -24,7 +24,7 @@ namespace Informedica.GenForm.Services.UserLogin
 
         public static string GetLoggedIn()
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException(); 
         }
 
         public static void ChangePassword(UserLoginDto loginCriteria, string newPassword)
