@@ -11,7 +11,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
     {
         public const string NoEnvironmentMessage = "Environment has not been set";
         private const int ExpireTimeInHours = 1;
-        private const string EnvironmentSetting = "environment";
+        public const string EnvironmentSetting = "environment";
 
         
         public ActionResult SetEnvironment(String environment)
@@ -64,7 +64,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult Login(UserLoginDto dto)
         {
-            var success = string.IsNullOrEmpty(GetEnvironment());
+            var success = !string.IsNullOrEmpty(GetEnvironment());
 
             if (success)
             {

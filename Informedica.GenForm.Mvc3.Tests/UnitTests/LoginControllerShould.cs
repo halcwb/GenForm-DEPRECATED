@@ -96,6 +96,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             var userName = _user.UserName;
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(userName)).WillReturn(false);
 
+            SetEnvironmentOnController();
             var result = _controller.Login(_user);
             Assert.IsFalse(GetSuccessValueFromActionResult(result));
         }
@@ -106,6 +107,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(string.Empty)).WillReturn(true);
 
+            SetEnvironmentOnController();
             _controller.Login(_user);
 
             Isolate.Verify.WasCalledWithExactArguments(() => LoginServices.Login(_user));
@@ -118,6 +120,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             var name = _user.UserName;
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(name)).WillReturn(true);
 
+            SetEnvironmentOnController();
             _controller.Login(_user);
 
             Isolate.Verify.WasCalledWithExactArguments(() => LoginServices.IsLoggedIn(name));
@@ -132,6 +135,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Isolate.WhenCalled(() => LoginServices.GetLoggedIn()).WillReturn(ValidUser);
             Isolate.WhenCalled(() => _controller.Response).ReturnRecursiveFake();
 
+            SetEnvironmentOnController();
             var result = _controller.Login(_user);
             
             Assert.IsTrue(GetSuccessValueFromActionResult(result));
@@ -146,6 +150,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
             Isolate.WhenCalled(() => _controller.Response).WillReturn(_response);
 
+            SetEnvironmentOnController();
             _controller.Login(_user);
 
             Isolate.Verify.WasCalledWithAnyArguments(() => _response.AppendCookie(cookie));
@@ -158,6 +163,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Isolate.WhenCalled(() => LoginServices.ChangePassword(_user, TempPassword)).IgnoreCall();
             Isolate.WhenCalled(() => LoginServices.CheckPassword(TempPassword)).WillReturn(true);
 
+            SetEnvironmentOnController();
             var result = _controller.ChangePassword(ValidUser, ValidPassword, TempPassword);
 
             Isolate.Verify.WasCalledWithAnyArguments(() => LoginServices.ChangePassword(_user, TempPassword));            
@@ -171,6 +177,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Isolate.Fake.StaticMethods(typeof(LoginServices));
             Isolate.WhenCalled(() => LoginServices.ChangePassword(_user, "newpassword")).IgnoreCall();
 
+            SetEnvironmentOnController();
             var result = _controller.ChangePassword("foo", "oldpassword", "newpassword");
             Isolate.Verify.WasCalledWithAnyArguments(() => LoginServices.ChangePassword(_user, "newpassword"));
 
@@ -206,9 +213,9 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Assert.IsFalse(GetLoginInButtonEnabledValue(result));
         }
 
-        private static UserLoginDto GetUser()
+        private void SetEnvironmentOnController()
         {
-            return new UserLoginDto();
+            Isolate.WhenCalled(() => _context.Session[LoginController.EnvironmentSetting]).WillReturn("TestGenForm");
         }
 
         private static bool GetSuccessValueFromActionResult(ActionResult response)
