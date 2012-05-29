@@ -1,7 +1,6 @@
 ﻿using System.Web;
 using System;
 using Informedica.GenForm.Mvc3.Controllers;
-using Informedica.GenForm.Mvc3.Environments;
 using Informedica.GenForm.Presentation.Security;
 using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Services.UserLogin;
@@ -30,6 +29,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         private const String TempPassword = "temp";
         private const String InvalidUser = "foo";
         private const String InvalidPassword = "bar";
+        private const string Testgenform = "TestGenForm";
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -81,30 +81,13 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void ShouldNotTriggerATransactionWhenLoginIsCalled()
-        {
-            var userName = _user.UserName;
-            Isolate.WhenCalled(() => LoginServices.IsLoggedIn(userName)).WillReturn(true);
-
-            var filters = GlobalFilters.Filters;
-            filters.Add(new TransactionAttribute());
-            MvcApplication.RegisterGlobalFilters(filters);
-            Isolate.Fake.StaticMethods<MvcApplication>();
-
-            SetEnvironmentOnController();
-            _controller.Login(_user);
-            Isolate.Verify.WasNotCalled(() => MvcApplication.GetSessionFactory(""));
-        }
-
-        [Isolated]
-        [TestMethod]
         public void StoreTheEnvironmentNameInTheHttpContextSessionCollection()
         {
             _user = new UserLoginDto
                         {
                             UserName = "Admin",
                             Password = "Admin",
-                            Environment = "TestGenForm"
+                            Environment = Testgenform
                         };
 
             var userName = _user.UserName;
@@ -112,12 +95,20 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
             SetEnvironmentOnController();
             _controller.Login(_user);
-            Isolate.Verify.WasCalledWithAnyArguments(() => _context.Session.Add(LoginController.EnvironmentSetting, "TestGenForm"));
+            Isolate.Verify.WasCalledWithAnyArguments(() => _context.Session.Add(LoginController.EnvironmentSetting, Testgenform));
         }
 
         [Isolated]
         [TestMethod]
-        public void ReturnALoginExceptionMessageWhenEnvironmentHasNotBeenSet()
+        public void ReturnActionResultWithSuccessIsTrueAfterSetEnvironmentActionMethodCall()
+        {
+            SetEnvironmentOnController();
+            Assert.IsTrue(ActionResultParser.GetSuccessValue(_controller.SetEnvironment(Testgenform)));
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void ReturnALoginExceptionMessageWhenEnvironmentHasNotBeenSetBeforeLogin()
         {
             var userName = _user.UserName;
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(userName)).WillReturn(false);
@@ -252,7 +243,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         private void SetEnvironmentOnController()
         {
-            Isolate.WhenCalled(() => _context.Session[LoginController.EnvironmentSetting]).WillReturn("TestGenForm");
+            Isolate.WhenCalled(() => _context.Session[LoginController.EnvironmentSetting]).WillReturn(Testgenform);
         }
 
         private static bool GetSuccessValueFromActionResult(ActionResult response)

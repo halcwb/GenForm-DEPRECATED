@@ -13,10 +13,21 @@ namespace Informedica.GenForm.Mvc3.Controllers
         private const int ExpireTimeInHours = 1;
         public const string EnvironmentSetting = "environment";
 
+        public ActionResult GetEnvironment()
+        {
+            return this.Direct(new {Environment = GetEnvironmentFromSession()});
+        }
+
+        private string GetEnvironmentFromSession()
+        {
+            return HttpContext.Session == null ? string.Empty : 
+                   (string) (HttpContext.Session[EnvironmentSetting] ?? string.Empty);
+        }
+
         public ActionResult SetEnvironment(String environment)
         {
             if (HttpContext.Session != null) HttpContext.Session.Add(EnvironmentSetting, environment);
-            return this.Direct(new {success = true});
+            return this.Direct(new {success = GetEnvironmentFromSession() == environment });
         }
 
         private void SetLoginCookie(string userName)

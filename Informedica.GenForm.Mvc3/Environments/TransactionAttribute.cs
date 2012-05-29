@@ -23,9 +23,9 @@ namespace Informedica.GenForm.Mvc3.Environments
         public override void OnActionExecuting(
           ActionExecutingContext filterContext)
         {
-            base.OnActionExecuting(filterContext);
             if (filterContext.Controller is LoginController) return;
-            
+
+            base.OnActionExecuting(filterContext);
             Session.BeginTransaction();
         }
 
