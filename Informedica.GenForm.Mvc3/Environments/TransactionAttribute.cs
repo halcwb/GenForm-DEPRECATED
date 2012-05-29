@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using Informedica.GenForm.Mvc3.Controllers;
 using NHibernate;
 
 namespace Informedica.GenForm.Mvc3.Environments
@@ -23,12 +24,20 @@ namespace Informedica.GenForm.Mvc3.Environments
           ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
+            if (filterContext.Controller is LoginController) return;
+            
             Session.BeginTransaction();
         }
 
         public override void OnResultExecuted(
           ResultExecutedContext filterContext)
         {
+            if (filterContext.Controller is LoginController)
+            {
+                base.OnResultExecuted(filterContext);
+                return;
+            }
+
             try
             {
                 var tx = Session.Transaction;
@@ -41,8 +50,10 @@ namespace Informedica.GenForm.Mvc3.Environments
 // ReSharper restore EmptyGeneralCatchClause
             {
                 //ToDo: dirty hack, do nothing have to fix this 
+            } finally
+            {
+                base.OnResultExecuted(filterContext);                
             }
-            base.OnResultExecuted(filterContext);
         }
 
     }

@@ -13,7 +13,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
         private const int ExpireTimeInHours = 1;
         public const string EnvironmentSetting = "environment";
 
-        
         public ActionResult SetEnvironment(String environment)
         {
             if (HttpContext.Session != null) HttpContext.Session.Add(EnvironmentSetting, environment);
@@ -22,7 +21,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         private void SetLoginCookie(string userName)
         {
-            var expires = DateTime.Now.AddHours(ExpireTimeInHours);
+            var expires = DateTime.Now.AddHours(ExpireTimeInHours); 
             var loginCookie = new HttpCookie("loginCookie", userName) {Expires = expires};
 
             if (Session != null) Session["user"] = userName;
@@ -61,10 +60,10 @@ namespace Informedica.GenForm.Mvc3.Controllers
                            Password = password
                        };
         }
-
+         
         public ActionResult Login(UserLoginDto dto)
         {
-            var success = !string.IsNullOrEmpty(GetEnvironment());
+            var success = !string.IsNullOrEmpty(GetEnvironment(dto));
 
             if (success)
             {
@@ -80,8 +79,10 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return this.Direct(new { success });
         }
 
-        private string GetEnvironment()
+        private string GetEnvironment(UserLoginDto dto)
         {
+            if (!string.IsNullOrEmpty(dto.Environment)) SetEnvironment(dto.Environment);
+
             if (HttpContext.Session != null) return (string)HttpContext.Session[EnvironmentSetting];
             return string.Empty;
         }

@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using System;
 using Informedica.GenForm.Mvc3.Controllers;
+using Informedica.GenForm.Mvc3.Environments;
 using Informedica.GenForm.Presentation.Security;
 using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Services.UserLogin;
@@ -77,6 +78,42 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         //}
         //
         #endregion
+
+        [Isolated]
+        [TestMethod]
+        public void ShouldNotTriggerATransactionWhenLoginIsCalled()
+        {
+            var userName = _user.UserName;
+            Isolate.WhenCalled(() => LoginServices.IsLoggedIn(userName)).WillReturn(true);
+
+            var filters = GlobalFilters.Filters;
+            filters.Add(new TransactionAttribute());
+            MvcApplication.RegisterGlobalFilters(filters);
+            Isolate.Fake.StaticMethods<MvcApplication>();
+
+            SetEnvironmentOnController();
+            _controller.Login(_user);
+            Isolate.Verify.WasNotCalled(() => MvcApplication.GetSessionFactory(""));
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void StoreTheEnvironmentNameInTheHttpContextSessionCollection()
+        {
+            _user = new UserLoginDto
+                        {
+                            UserName = "Admin",
+                            Password = "Admin",
+                            Environment = "TestGenForm"
+                        };
+
+            var userName = _user.UserName;
+            Isolate.WhenCalled(() => LoginServices.IsLoggedIn(userName)).WillReturn(true);
+
+            SetEnvironmentOnController();
+            _controller.Login(_user);
+            Isolate.Verify.WasCalledWithAnyArguments(() => _context.Session.Add(LoginController.EnvironmentSetting, "TestGenForm"));
+        }
 
         [Isolated]
         [TestMethod]

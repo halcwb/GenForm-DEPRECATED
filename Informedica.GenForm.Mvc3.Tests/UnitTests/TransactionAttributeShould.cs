@@ -1,4 +1,5 @@
-﻿using NHibernate;
+﻿using Informedica.GenForm.Mvc3.Controllers;
+using NHibernate;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
 using System.Web.Mvc;
@@ -17,6 +18,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         private TransactionAttribute _attr;
         private ResultExecutedContext _result;
         private ITransaction _transaction;
+        private LoginController _loginController;
 
         [TestInitialize]
         public void Init()
@@ -34,6 +36,8 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             _mock.CallBase.ExpectCall("OnActionExecuting");
             _attr = new TransactionAttribute();
             Isolate.NonPublic.Property.WhenGetCalled(_attr, "Session").WillReturn(_session);
+
+            _loginController = new LoginController();
         }
 
         [Isolated]
@@ -46,11 +50,31 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
+        public void NotBeginATransactionWhenLoginController()
+        {
+            Isolate.WhenCalled(() => _context.Controller).WillReturn(_loginController);
+
+            _attr.OnActionExecuting(_context);
+            Isolate.Verify.WasNotCalled(() => _session.BeginTransaction());
+        }
+
+        [Isolated]
+        [TestMethod]
         public void CommitATransactionWhenResultExecuted()
         {
             _attr.OnResultExecuted(_result);
             
             Isolate.Verify.WasCalledWithAnyArguments(() => _session.Transaction.Commit());
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void NotCommitATransactionWhenLoginController()
+        {
+            Isolate.WhenCalled(()=> _result.Controller).WillReturn(_loginController);
+
+            _attr.OnResultExecuted(_result);
+            Isolate.Verify.WasNotCalled(() => _session.Transaction.Commit());
         }
 
     }
