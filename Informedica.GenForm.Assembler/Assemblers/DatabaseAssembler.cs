@@ -11,7 +11,7 @@ namespace Informedica.GenForm.Assembler.Assemblers
         public static Registry RegisterDependencies()
         {
             _registry = new Registry();
-            _registry.For<IDatabaseConfig>().Use(new SqlLiteConfig());
+            _registry.For<IDatabaseConfig>().Use(new SqLiteConfig());
             
             return _registry;
         }

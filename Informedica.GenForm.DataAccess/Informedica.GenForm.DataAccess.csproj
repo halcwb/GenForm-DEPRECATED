@@ -70,9 +70,11 @@
     <Reference Include="System.Data.SQLite.Linq">
       <HintPath>..\packages\System.Data.SQLite.x64.1.0.79.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NHibernateProfilerBootstrapper.cs" />
+    <Compile Include="Databases\HttpContextConnectionCache.cs" />
     <Compile Include="Databases\MsSql2008Config.cs" />
     <Compile Include="Databases\IDatabaseConfig.cs" />
     <Compile Include="Databases\SqlLiteConfig.cs" />

@@ -40,7 +40,7 @@ namespace Informedica.GenForm.DataAccess
 
         private static IDatabaseConfig GetDbConfig()
         {
-            return new SqlLiteConfig();
+            return new SqLiteConfig();
         }
 
         private static Configuration GetConfig()

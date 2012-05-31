@@ -50,7 +50,7 @@ namespace Informedica.GenForm.Assembler.Tests
         [TestMethod]
         public void CreateNewSqlLiteConfig()
         {
-            var config = new SqlLiteConfig();
+            var config = new SqLiteConfig();
         }
     }
 }

@@ -44,5 +44,10 @@ namespace Informedica.GenForm.Services.Environments
         {
             ObjectFactory.Configure(x => x.For<ISessionFactory>().Use(GenFormApplication.GetSessionFactory(environment)));
         }
+
+        public static void SetHttpContext(HttpContextBase context)
+        {
+             ObjectFactory.Configure(x => x.For<HttpContextBase>().Use(context));
+        }
     }
 }

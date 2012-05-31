@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Presentation.Security;
+using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Services.UserLogin;
 
 namespace Informedica.GenForm.Mvc3.Controllers
@@ -26,7 +27,12 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult SetEnvironment(String environment)
         {
-            if (HttpContext.Session != null) HttpContext.Session.Add(EnvironmentSetting, environment);
+            if (HttpContext.Session != null)
+            {
+                HttpContext.Session.Add(EnvironmentSetting, environment);
+                EnvironmentServices.SetHttpContext(HttpContext);
+            }
+
             return this.Direct(new {success = GetEnvironmentFromSession() == environment });
         }
 

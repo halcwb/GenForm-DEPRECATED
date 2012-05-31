@@ -27,8 +27,6 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         private const String ValidUser = "Admin";
         private const String ValidPassword = "Admin";
         private const String TempPassword = "temp";
-        private const String InvalidUser = "foo";
-        private const String InvalidPassword = "bar";
         private const string Testgenform = "TestGenForm";
 
         /// <summary>
@@ -239,6 +237,15 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
             Assert.IsNotNull(result);
             Assert.IsFalse(GetLoginInButtonEnabledValue(result));
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void ProvideTheHttpContextToEnvironmentServicesWhenSetEnvironmentIsCalled()
+        {
+            _controller.SetEnvironment(Testgenform);
+
+            Isolate.Verify.WasCalledWithAnyArguments(() => EnvironmentServices.SetHttpContext(_context));
         }
 
         private void SetEnvironmentOnController()
