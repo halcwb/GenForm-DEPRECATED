@@ -14,9 +14,10 @@ namespace Informedica.GenForm.Services
 
         private static ISession GetSession()
         {
-            return ObjectFactory.TryGetInstance<IDbConnection>() == null ? ObjectFactory.GetInstance<ISessionFactory>().OpenSession() :
-                                                                                                                                          ObjectFactory.GetInstance<ISessionFactory>().OpenSession(
-                                                                                                                                              ObjectFactory.GetInstance<IDbConnection>());
+            return ObjectFactory.TryGetInstance<IDbConnection>() == null ? 
+                   ObjectFactory.GetInstance<ISessionFactory>().OpenSession() :
+                   ObjectFactory.GetInstance<ISessionFactory>().OpenSession(
+                   ObjectFactory.GetInstance<IDbConnection>());
         }
     }
 }

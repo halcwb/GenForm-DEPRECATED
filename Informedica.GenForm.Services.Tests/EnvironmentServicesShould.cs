@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web;
+using Informedica.DataAccess.Configurations;
+using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Services.Environments;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StructureMap;
@@ -10,6 +13,16 @@ namespace Informedica.GenForm.Services.Tests
     [TestClass]
     public class EnvironmentServicesShould
     {
+        private HttpSessionStateBase _context;
+        private HttpSessionCache _cache;
+
+        [TestInitialize]
+        public void Init()
+        {
+            _context = Isolate.Fake.Instance<HttpSessionStateBase>();
+            _cache = new HttpSessionCache(_context);
+        }
+
         [TestMethod]
         public void ReturnAListOfGenFormEnvironmentsWithAtLeastATestGenForm()
         {
@@ -17,14 +30,30 @@ namespace Informedica.GenForm.Services.Tests
             Assert.IsTrue(list.Any(e => e.Name == "TestGenForm"));
         }
 
+        [Isolated]
         [TestMethod]
-        public void PutTheHttpContextInObjectFactorySoItCanBeUsedAsAConnectionCache()
+        public void ConfigureObjectFactoryWithAHttpConnectionCacheToCacheAConnection()
         {
-            var context = Isolate.Fake.Instance<HttpContextBase>();
             Isolate.Fake.StaticMethods(typeof(ObjectFactory));
 
-            EnvironmentServices.SetHttpContext(context);
-            Isolate.Verify.WasCalledWithAnyArguments(() => ObjectFactory.Configure(x => x.For<HttpContextBase>().Use(context)));
+            EnvironmentServices.SetHttpSessionCache(_context);
+            Isolate.Verify.WasCalledWithAnyArguments(() => ObjectFactory.Configure(x => x.For<IConnectionCache>().Use(_cache)));
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void MakeSureObjectFactoryReturnsAConnectionCacheWhenSetHttpContextIsCalled()
+        {
+            EnvironmentServices.SetHttpSessionCache(_context);
+            try
+            {
+                ObjectFactory.GetInstance<IConnectionCache>().GetConnection();
+
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.ToString());
+            }
         }
     }
 }

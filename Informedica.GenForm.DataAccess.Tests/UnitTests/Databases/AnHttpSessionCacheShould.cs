@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Data;
+using Informedica.DataAccess.Configurations;
 using Informedica.GenForm.DataAccess.Databases;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TypeMock.ArrangeActAssert;
@@ -7,20 +8,20 @@ using TypeMock.ArrangeActAssert;
 namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Databases
 {
     [TestClass]
-    public class AnHttpContextConnectionCacheShould
+    public class AnHttpSessionCacheShould
     {
-        private HttpContextBase _context;
+        private HttpSessionStateBase _session;
         private IDbConnection _connection;
-        private HttpContextConnectionCache _cache;
+        private IConnectionCache _cache;
 
         [TestInitialize]
         public void Init()
         {
-            _context = Isolate.Fake.Instance<HttpContextBase>();
+            _session = Isolate.Fake.Instance<HttpSessionStateBase>();
             _connection = Isolate.Fake.Instance<IDbConnection>();
-            _cache = new HttpContextConnectionCache(_context);
+            _cache = new HttpSessionCache(_session);
 
-            Isolate.WhenCalled(() => _context.Session[HttpContextConnectionCache.Connection] = null).ReturnRecursiveFake();
+            Isolate.WhenCalled(() => _session[HttpSessionCache.Connection] = null).ReturnRecursiveFake();
         }
 
         [Isolated]
@@ -28,7 +29,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Databases
         public void UseTheHttpSessionCollectionToStoreAConnection()
         {
             _cache.SetConnection(_connection);
-            Isolate.Verify.WasCalledWithExactArguments(() => _context.Session[HttpContextConnectionCache.Connection] = _connection);
+            Isolate.Verify.WasCalledWithExactArguments(() => _session[HttpSessionCache.Connection] = _connection);
             
         }
 
@@ -37,23 +38,33 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Databases
         public void UseTheHttpSessionCollectionToRetrieveAConnection()
         {
             _cache.GetConnection();
-            Isolate.Verify.WasCalledWithAnyArguments(() => _context.Session[HttpContextConnectionCache.Connection]);
+            Isolate.Verify.WasCalledWithAnyArguments(() => _session[HttpSessionCache.Connection]);
         }
 
         [Isolated]
         [TestMethod]
         public void ReturnTrueWhenNoConnectionAndIsEmptyIsCalled()
         {
-            Assert.IsTrue(_cache.IsEmpty);
+            Assert.IsTrue(_cache.HasNoConnection);
         }
 
         [Isolated]
         [TestMethod]
         public void ReturnFalseWhenHasConnectionAndIsEmptyIsCalled()
         {
-            Isolate.WhenCalled(() => _context.Session[HttpContextConnectionCache.Connection]).WillReturn(_connection);
+            Isolate.WhenCalled(() => _session[HttpSessionCache.Connection]).WillReturn(_connection);
 
-            Assert.IsFalse(_cache.IsEmpty);
+            Assert.IsFalse(_cache.HasNoConnection);
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void RemoveTheConnectionItemFromTheSessionAfterClearIsCalled()
+        {
+            _cache.Clear();
+
+            Isolate.Verify.WasCalledWithAnyArguments(() => _session.Remove(HttpSessionCache.Connection));
+
         }
     }
 }

@@ -241,11 +241,12 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void ProvideTheHttpContextToEnvironmentServicesWhenSetEnvironmentIsCalled()
+        public void ProvideTheHttpSessionStateBaseToEnvironmentServicesWhenSetEnvironmentIsCalled()
         {
             _controller.SetEnvironment(Testgenform);
 
-            Isolate.Verify.WasCalledWithAnyArguments(() => EnvironmentServices.SetHttpContext(_context));
+            var session = Isolate.Fake.Instance<HttpSessionStateBase>();
+            Isolate.Verify.WasCalledWithAnyArguments(() => EnvironmentServices.SetHttpSessionCache(session));
         }
 
         private void SetEnvironmentOnController()

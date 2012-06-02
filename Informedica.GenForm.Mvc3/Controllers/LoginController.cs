@@ -16,7 +16,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public ActionResult GetEnvironment()
         {
-            return this.Direct(new {Environment = GetEnvironmentFromSession()});
+            return this.Direct(new {Environment = GetEnvironmentFromSession(), HttpContext.Session.IsNewSession });
         }
 
         private string GetEnvironmentFromSession()
@@ -30,7 +30,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             if (HttpContext.Session != null)
             {
                 HttpContext.Session.Add(EnvironmentSetting, environment);
-                EnvironmentServices.SetHttpContext(HttpContext);
+                EnvironmentServices.SetHttpSessionCache(HttpContext.Session);
             }
 
             return this.Direct(new {success = GetEnvironmentFromSession() == environment });

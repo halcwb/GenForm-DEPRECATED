@@ -1,36 +1,39 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Web;
 using Informedica.DataAccess.Configurations;
 
 namespace Informedica.GenForm.DataAccess.Databases
 {
-    public class HttpContextConnectionCache : IConnectionCache
+    public class HttpSessionCache : IConnectionCache
     {
         public const string Connection = "connection";
-        private HttpContextBase _context;
+        private HttpSessionStateBase _session;
 
-        public HttpContextConnectionCache(HttpContextBase context)
+        public HttpSessionCache(HttpSessionStateBase session)
         {
-            _context = context;
+            _session = session;
         }
 
         #region Implementation of IConnectionCache
 
         public IDbConnection GetConnection()
         {
-            if (_context.Session == null) throw new NullReferenceException("Session is null");
-            return (IDbConnection)_context.Session[Connection];
+            return (IDbConnection)_session[Connection];
         }
 
         public void SetConnection(IDbConnection connection)
         {
-            if (_context.Session != null) _context.Session[Connection] = connection;
+            _session[Connection] = connection;
         }
 
-        public bool IsEmpty
+        public bool HasNoConnection
         {
             get { return GetConnection() == null; }
+        }
+
+        public void Clear()
+        {
+            _session.Remove(Connection);
         }
 
         #endregion

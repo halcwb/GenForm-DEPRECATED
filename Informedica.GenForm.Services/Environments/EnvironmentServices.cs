@@ -1,8 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Informedica.DataAccess.Configurations;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Settings.Environments;
 using NHibernate;
 using StructureMap;
@@ -45,9 +46,9 @@ namespace Informedica.GenForm.Services.Environments
             ObjectFactory.Configure(x => x.For<ISessionFactory>().Use(GenFormApplication.GetSessionFactory(environment)));
         }
 
-        public static void SetHttpContext(HttpContextBase context)
+        public static void SetHttpSessionCache(HttpSessionStateBase session)
         {
-             ObjectFactory.Configure(x => x.For<HttpContextBase>().Use(context));
+             ObjectFactory.Configure(x => x.For<IConnectionCache>().Use(new HttpSessionCache(session)));
         }
     }
 }
