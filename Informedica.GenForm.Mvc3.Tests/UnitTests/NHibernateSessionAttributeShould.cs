@@ -50,17 +50,6 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void CallEnvironmentServicesSetHttpSessionCacheWhenOnActionExecutingAndSessionIsNew()
-        {
-            Isolate.WhenCalled(() => _sessionBase.IsNewSession).WillReturn(true);
-
-            _attribute.OnActionExecuting(_executingContext);
-
-            Isolate.Verify.WasCalledWithAnyArguments(() => EnvironmentServices.SetHttpSessionCache(_sessionBase));
-        }
-
-        [Isolated]
-        [TestMethod]
         public void UseTheSessionFactoryFromHttpSessionStateIfNotNull()
         {
             Isolate.WhenCalled(() => _sessionBase["sessionfactory"]).WillReturn(_factory);

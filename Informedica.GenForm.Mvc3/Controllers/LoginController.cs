@@ -2,9 +2,14 @@
 using System.Web;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
+using Informedica.DataAccess.Configurations;
+using Informedica.GenForm.DataAccess;
 using Informedica.GenForm.Presentation.Security;
 using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Services.UserLogin;
+using NHibernate;
+using NHibernate.Context;
+using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
@@ -31,6 +36,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
             {
                 HttpContext.Session.Add(EnvironmentSetting, environment);
                 EnvironmentServices.SetHttpSessionCache(HttpContext.Session);
+                EnvironmentServices.SetEnvironment(environment);
             }
 
             return this.Direct(new {success = GetEnvironmentFromSession() == environment });
@@ -84,6 +90,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
             if (success)
             {
+                SetupDatabase();
                 LoginServices.Login(dto);
                 success = LoginServices.IsLoggedIn(dto.UserName);
 
@@ -94,6 +101,22 @@ namespace Informedica.GenForm.Mvc3.Controllers
             }
 
             return this.Direct(new { success });
+        }
+
+        private void SetupDatabase()
+        {
+            var environment = (string)HttpContext.Session[EnvironmentSetting];
+            var envConf = ConfigurationManager.Instance.GetConfiguration(environment);
+            envConf.GetConnection();
+            var conn = SessionStateManager.GetConnectionFromSessionState(HttpContext.Session);
+            if (conn == null) return;
+
+            var fact = SessionFactoryManager.GetSessionFactory(environment);
+            HttpContext.Session["sessionfactory"] = fact;
+            SessionStateManager.UseSessionFactoryFromApplicationOrSessionState(HttpContext.Session);
+            var session = ObjectFactory.GetInstance<ISessionFactory>().OpenSession(conn);
+            SessionFactoryManager.BuildSchema(environment, session);
+            CurrentSessionContext.Bind(session);
         }
 
         private string GetEnvironment(UserLoginDto dto)

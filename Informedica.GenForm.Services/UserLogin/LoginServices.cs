@@ -19,7 +19,7 @@ namespace Informedica.GenForm.Services.UserLogin
 
         public static bool IsLoggedIn(string userName)
         {
-            throw new System.NotImplementedException();
+            return true;
         }
 
         public static string GetLoggedIn()
