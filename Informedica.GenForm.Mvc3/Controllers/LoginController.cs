@@ -2,14 +2,9 @@
 using System.Web;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
-using Informedica.DataAccess.Configurations;
-using Informedica.GenForm.DataAccess;
 using Informedica.GenForm.Presentation.Security;
 using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Services.UserLogin;
-using NHibernate;
-using NHibernate.Context;
-using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
@@ -19,15 +14,9 @@ namespace Informedica.GenForm.Mvc3.Controllers
         private const int ExpireTimeInHours = 1;
         public const string EnvironmentSetting = "environment";
 
-        public ActionResult GetEnvironment()
+        public ActionResult GetCurrentEnvironment()
         {
-            return this.Direct(new {Environment = GetEnvironmentFromSession(), HttpContext.Session.IsNewSession });
-        }
-
-        private string GetEnvironmentFromSession()
-        {
-            return HttpContext.Session == null ? string.Empty : 
-                   (string) (HttpContext.Session[EnvironmentSetting] ?? string.Empty);
+            return this.Direct(new {Environment = SessionStateManager.GetEnvironment(HttpContext.Session) });
         }
 
         public ActionResult SetEnvironment(String environment)
@@ -39,7 +28,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
                 EnvironmentServices.SetEnvironment(environment);
             }
 
-            return this.Direct(new {success = GetEnvironmentFromSession() == environment });
+            return this.Direct(new {success = SessionStateManager.GetEnvironment(HttpContext.Session) == environment });
         }
 
         private void SetLoginCookie(string userName)
@@ -90,7 +79,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
             if (success)
             {
-                SetupDatabase();
+                SessionStateManager.SetupDatabase(HttpContext.Session);
                 LoginServices.Login(dto);
                 success = LoginServices.IsLoggedIn(dto.UserName);
 
@@ -101,22 +90,6 @@ namespace Informedica.GenForm.Mvc3.Controllers
             }
 
             return this.Direct(new { success });
-        }
-
-        private void SetupDatabase()
-        {
-            var environment = (string)HttpContext.Session[EnvironmentSetting];
-            var envConf = ConfigurationManager.Instance.GetConfiguration(environment);
-            envConf.GetConnection();
-            var conn = SessionStateManager.GetConnectionFromSessionState(HttpContext.Session);
-            if (conn == null) return;
-
-            var fact = SessionFactoryManager.GetSessionFactory(environment);
-            HttpContext.Session["sessionfactory"] = fact;
-            SessionStateManager.UseSessionFactoryFromApplicationOrSessionState(HttpContext.Session);
-            var session = ObjectFactory.GetInstance<ISessionFactory>().OpenSession(conn);
-            SessionFactoryManager.BuildSchema(environment, session);
-            CurrentSessionContext.Bind(session);
         }
 
         private string GetEnvironment(UserLoginDto dto)

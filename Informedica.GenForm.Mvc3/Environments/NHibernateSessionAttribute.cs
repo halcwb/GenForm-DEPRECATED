@@ -15,14 +15,6 @@ namespace Informedica.GenForm.Mvc3.Environments
     {
         private ISession _session;
 
-        protected ISessionFactory SessionFactory
-        {
-            get
-            {
-                return ObjectFactory.GetInstance<ISessionFactory>();
-            }
-        }
-
         public override void OnActionExecuting(
           ActionExecutingContext filterContext)
         {
@@ -35,9 +27,7 @@ namespace Informedica.GenForm.Mvc3.Environments
 
         private void OpenSession(HttpSessionStateBase session)
         {
-            _session = SessionStateManager.GetConnectionFromSessionState(session) == null ? 
-                            SessionFactory.OpenSession() : 
-                            SessionFactory.OpenSession(SessionStateManager.GetConnectionFromSessionState(session));
+            _session = SessionStateManager.OpenSession(session);
         }
 
         private void BindSessionToCurrentSessionContext()
@@ -51,7 +41,7 @@ namespace Informedica.GenForm.Mvc3.Environments
         {
             try
             {
-                var session = CurrentSessionContext.Unbind(SessionFactory);
+                var session = CurrentSessionContext.Unbind(SessionStateManager.SessionFactory);
                 session.Close();
 
             }

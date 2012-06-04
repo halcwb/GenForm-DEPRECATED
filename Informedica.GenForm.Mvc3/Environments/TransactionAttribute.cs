@@ -16,7 +16,7 @@ namespace Informedica.GenForm.Mvc3.Environments
         {
             get
             {
-                return SessionFactory.GetCurrentSession();
+                return SessionStateManager.SessionFactory.GetCurrentSession();
             }
         }
 

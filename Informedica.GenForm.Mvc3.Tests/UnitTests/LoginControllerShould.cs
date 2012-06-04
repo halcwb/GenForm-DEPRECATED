@@ -27,7 +27,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         private UserLoginDto _user;
         private HttpResponseBase _response;
         private HttpContextBase _context;
-        private HttpSessionStateBase _sessionBase;
+        private HttpSessionStateBase _sessionState;
         private const String ValidUser = "Admin";
         private const String ValidPassword = "Admin";
         private const String TempPassword = "temp";
@@ -62,6 +62,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             _controller = new LoginController();
             Isolate.WhenCalled(() => EnvironmentServices.SetEnvironment("Test")).IgnoreCall();
+            Isolate.WhenCalled(() => SessionStateManager.SetupDatabase(_sessionState)).IgnoreCall();
 
             _user = new UserLoginDto
             {
@@ -77,8 +78,8 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             _context = Isolate.Fake.Instance<HttpContextBase>();
             Isolate.WhenCalled(() => _controller.HttpContext).WillReturn(_context);
 
-            _sessionBase = Isolate.Fake.Instance<HttpSessionStateBase>();
-            Isolate.WhenCalled(() => _context.Session).WillReturn(_sessionBase);
+            _sessionState = Isolate.Fake.Instance<HttpSessionStateBase>();
+            Isolate.WhenCalled(() => _context.Session).WillReturn(_sessionState);
         }
         //
         //Use TestCleanup to run code after each test has run
@@ -98,7 +99,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
             SetEnvironmentOnController();
             _controller.Login(_user);
-            Isolate.Verify.WasCalledWithAnyArguments(() => _sessionBase.Add(LoginController.EnvironmentSetting, Testgenform));
+            Isolate.Verify.WasCalledWithAnyArguments(() => _sessionState.Add(LoginController.EnvironmentSetting, Testgenform));
         }
 
         [Isolated]
@@ -178,7 +179,6 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             var cookie = Isolate.Fake.Instance<HttpCookie>();
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(ValidUser)).WillReturn(true);
-
             Isolate.WhenCalled(() => _controller.Response).WillReturn(_response);
 
             SetEnvironmentOnController();
@@ -250,7 +250,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             _controller.SetEnvironment(Testgenform);
 
-            Isolate.Verify.WasCalledWithAnyArguments(() => EnvironmentServices.SetHttpSessionCache(_sessionBase));
+            Isolate.Verify.WasCalledWithAnyArguments(() => EnvironmentServices.SetHttpSessionCache(_sessionState));
         }
 
 
@@ -260,25 +260,8 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             _controller.Login(_user);
 
-            Isolate.Verify.WasCalledWithAnyArguments(() => EnvironmentServices.SetHttpSessionCache(_sessionBase));
+            Isolate.Verify.WasCalledWithAnyArguments(() => EnvironmentServices.SetHttpSessionCache(_sessionState));
         }
-
-        [Isolated]
-        [TestMethod]
-        public void BuildTheDatabaseWhenSetEnvironmentIsCalledAndTheConnectionCacheIsNotEmpty()
-        {
-            var connection = Isolate.Fake.Instance<IDbConnection>();
-            Isolate.WhenCalled(() => _sessionBase["connection"]).WillReturn(connection);
-            Isolate.WhenCalled(() => _sessionBase["environment"]).WillReturn("TestGenForm");
-            Isolate.WhenCalled(() => LoginServices.IsLoggedIn("")).WillReturn(true);
-
-            var session = Isolate.Fake.Instance<ISession>();
-            Isolate.WhenCalled(() => SessionFactoryManager.BuildSchema("TestGenForm", session)).IgnoreCall();
-
-            _controller.Login(_user);
-            Isolate.Verify.WasCalledWithAnyArguments(() => SessionFactoryManager.BuildSchema("TestGenForm", session));
-        }
-
 
         private void SetEnvironmentOnController()
         {
