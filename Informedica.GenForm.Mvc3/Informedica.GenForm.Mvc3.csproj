@@ -84,7 +84,6 @@
     <Reference Include="System.Web.Routing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ActionResultParser.cs" />
     <Compile Include="Controllers\AppTestController.cs" />
     <Compile Include="Controllers\EnvironmentController.cs" />
     <Compile Include="Controllers\DebugController.cs" />

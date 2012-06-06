@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using Informedica.GenForm.Mvc3.Controllers;
 using NHibernate;
 using NHibernate.Context;
-using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Environments
 {
@@ -18,16 +17,16 @@ namespace Informedica.GenForm.Mvc3.Environments
         public override void OnActionExecuting(
           ActionExecutingContext filterContext)
         {
-            var session = filterContext.HttpContext.Session;
+            var sessionState = filterContext.HttpContext.Session;
 
-            SessionStateManager.UseSessionFactoryFromApplicationOrSessionState(session);
-            OpenSession(session);
+            SessionStateManager.UseSessionFactoryFromApplicationOrSessionState(sessionState);
+            OpenSession(sessionState);
             BindSessionToCurrentSessionContext();
         }
 
-        private void OpenSession(HttpSessionStateBase session)
+        private void OpenSession(HttpSessionStateBase sessionState)
         {
-            _session = SessionStateManager.OpenSession(session);
+            _session = SessionStateManager.OpenSession(sessionState);
         }
 
         private void BindSessionToCurrentSessionContext()
@@ -43,7 +42,6 @@ namespace Informedica.GenForm.Mvc3.Environments
             {
                 var session = CurrentSessionContext.Unbind(SessionStateManager.SessionFactory);
                 session.Close();
-
             }
 // ReSharper disable EmptyGeneralCatchClause
             catch (Exception)

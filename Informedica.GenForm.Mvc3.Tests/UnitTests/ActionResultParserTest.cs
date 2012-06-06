@@ -1,6 +1,7 @@
 ﻿using Ext.Direct.Mvc;
 using Informedica.GenForm.Mvc3.Controllers;
 using Informedica.GenForm.Presentation.Products;
+using Informedica.GenForm.Tests;
 using TypeMock.ArrangeActAssert;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

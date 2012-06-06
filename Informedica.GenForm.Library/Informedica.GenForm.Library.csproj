@@ -189,7 +189,6 @@
     <Compile Include="Services\Products\UnitGroupServices.cs" />
     <Compile Include="Services\Products\UnitServices.cs" />
     <Compile Include="Services\ServicesBase.cs" />
-    <Compile Include="Services\Users\LoginServices.cs" />
     <Compile Include="Services\Users\UserServices.cs" />
   </ItemGroup>
   <ItemGroup>

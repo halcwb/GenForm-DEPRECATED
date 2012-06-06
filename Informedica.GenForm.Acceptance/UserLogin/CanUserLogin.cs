@@ -1,12 +1,15 @@
 ﻿using System.Globalization;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Library.Services.Users;
+using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Services.UserLogin;
+using Informedica.GenForm.Tests;
 
 namespace Informedica.GenForm.Acceptance.UserLogin
 {
-    public class CanUserLogin
+    public class CanUserLogin : TestSessionContext
     {
-        public CanUserLogin()
+        public CanUserLogin(): base(true)
         {
             GenFormApplication.Initialize();
         }
@@ -26,13 +29,18 @@ namespace Informedica.GenForm.Acceptance.UserLogin
 
             try
             {
+                MyTestInitialize();
+                EnvironmentServices.SetEnvironment(Environment);
+                UserServices.ConfigureSystemUser();
                 LoginServices.Login(userLogin);
-                return LoginServices.IsLoggedIn(userLogin.UserName).ToString(CultureInfo.InvariantCulture);
-
+                var result = LoginServices.IsLoggedIn(userLogin.UserName).ToString(CultureInfo.InvariantCulture);
+                MyTestCleanup();
+                
+                return result;
             }
-            catch (System.Exception e)
+            catch (System.Exception)
             {
-                return e.ToString();
+                return "False";
             }
         }
     }

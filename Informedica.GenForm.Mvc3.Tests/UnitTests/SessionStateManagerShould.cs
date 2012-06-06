@@ -2,6 +2,7 @@
 using System.Web;
 using Informedica.DataAccess.Configurations;
 using Informedica.GenForm.DataAccess;
+using Informedica.GenForm.Library.Services.Users;
 using Informedica.GenForm.Mvc3.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
@@ -23,6 +24,13 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             _sessionState = Isolate.Fake.Instance<HttpSessionStateBase>();
             _factory = Isolate.Fake.Instance<ISessionFactory>();
             _connection = null;
+
+            Isolate.Fake.StaticMethods(typeof(UserServices));
+            // ReSharper disable UnusedVariable, otherwise ConfigurationManager will not be faked
+            var confMan = ConfigurationManager.Instance;
+            // ReSharper restore UnusedVariable
+            Isolate.Fake.StaticMethods<ConfigurationManager>();
+
         }
 
         [Isolated]
@@ -87,15 +95,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         public void BuildTheDatabaseWhenTheConnectionCacheIsNotEmpty()
         {
             var connection = Isolate.Fake.Instance<IDbConnection>();
-            Isolate.WhenCalled(() => _sessionState["connection"]).WillReturn(connection);
-            Isolate.WhenCalled(() => _sessionState["environment"]).WillReturn("TestGenForm");
-// ReSharper disable UnusedVariable, otherwise ConfigurationManager will not be faked
-            var confMan = ConfigurationManager.Instance;
-// ReSharper restore UnusedVariable
-            Isolate.Fake.StaticMethods<ConfigurationManager>();
-
-            var session = Isolate.Fake.Instance<ISession>();
-            Isolate.WhenCalled(() => SessionFactoryManager.BuildSchema("TestGenForm", session)).IgnoreCall();
+            var session = IsolateSetupDatabaseMethod(connection);
 
             SessionStateManager.SetupDatabase(_sessionState);
             Isolate.Verify.WasCalledWithAnyArguments(() => SessionFactoryManager.BuildSchema("TestGenForm", session));
@@ -105,18 +105,33 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public void NotBuildTheDatabaseWhenTheConnectionCacheIsEmpty()
         {
-            Isolate.WhenCalled(() => _sessionState["connection"]).WillReturn(null);
-            Isolate.WhenCalled(() => _sessionState["environment"]).WillReturn("TestGenForm");
-// ReSharper disable UnusedVariable, otherwise ConfigurationManager will not be faked
-            var confMan = ConfigurationManager.Instance;
-// ReSharper restore UnusedVariable
-            Isolate.Fake.StaticMethods<ConfigurationManager>();
-
-            var session = Isolate.Fake.Instance<ISession>();
-            Isolate.WhenCalled(() => SessionFactoryManager.BuildSchema("TestGenForm", session)).IgnoreCall();
+            IDbConnection connection = null;
+            var session = IsolateSetupDatabaseMethod(connection);
 
             SessionStateManager.SetupDatabase(_sessionState);
             Isolate.Verify.WasNotCalled(() => SessionFactoryManager.BuildSchema("TestGenForm", session));
         }
+
+        [Isolated]
+        [TestMethod]
+        public void ConfigureTheNewDatabaseWithASystemUserAdminWithPasswordAdmin()
+        {
+            var connection = Isolate.Fake.Instance<IDbConnection>();
+            IsolateSetupDatabaseMethod(connection);
+
+            SessionStateManager.SetupDatabase(_sessionState);
+            Isolate.Verify.WasCalledWithAnyArguments(() => UserServices.ConfigureSystemUser());
+        }
+
+        private ISession IsolateSetupDatabaseMethod(IDbConnection connection)
+        {
+            Isolate.WhenCalled(() => _sessionState["connection"]).WillReturn(connection);
+            Isolate.WhenCalled(() => _sessionState["environment"]).WillReturn("TestGenForm");
+
+            var session = Isolate.Fake.Instance<ISession>();
+            Isolate.WhenCalled(() => SessionFactoryManager.BuildSchema("TestGenForm", session)).IgnoreCall();
+            return session;
+        }
+
     }
 }

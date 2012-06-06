@@ -9,10 +9,15 @@ using StructureMap;
 namespace Informedica.GenForm.Tests
 {
     [TestClass]
-    public abstract class TestSessionContext
+    public class TestSessionContext
     {
         protected SessionContext Context;
         private readonly bool _commit;
+
+        public TestSessionContext()
+        {
+            
+        }
 
         protected TestSessionContext(Boolean commit)
         {
@@ -20,9 +25,14 @@ namespace Informedica.GenForm.Tests
             Initialize();
         }
 
+        protected ISessionFactory SessionFactory
+        {
+            get { return ObjectFactory.GetInstance<ISessionFactory>(); }
+        }
+
         private static void Initialize()
         {
-            ObjectFactory.Configure(x => x.For<ISessionFactory>().HybridHttpOrThreadLocalScoped().Use(GenFormApplication.TestSessionFactory));
+            //ObjectFactory.Configure(x => x.For<ISessionFactory>().HybridHttpOrThreadLocalScoped().Use(GenFormApplication.TestSessionFactory));
         }
 
         [TestInitialize]
@@ -31,6 +41,16 @@ namespace Informedica.GenForm.Tests
             Context = new SessionContext();
             SessionFactoryManager.BuildSchema(SessionFactoryManager.Test, Context.CurrentSession());
             Context.CurrentSession().Transaction.Begin();
+
+            var fact = Context.CurrentSession().SessionFactory;
+            ObjectFactory.Configure(x => x.For<ISessionFactory>().Use(fact));
+        }
+
+        [TestMethod]
+        public void TestMe()
+        {
+            var fact = SessionFactory;
+            Assert.IsNotNull(fact);
         }
 
         [TestCleanup]

@@ -55,5 +55,18 @@ namespace Informedica.GenForm.Library.Services.Users
         {
             Instance.Repository.Remove((User)user);
         }
+
+        public static void ConfigureSystemUser()
+        {
+            WithDto(new UserDto
+                                     {
+                                         FirstName = "Admin",
+                                         LastName = "Admin",
+                                         Name = "Admin",
+                                         Password = "Admin",
+                                         Pager = "123",
+                                         Email = "admin@admin.nl"
+                                     }).Get();
+        }
     }
 }

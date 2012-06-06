@@ -1,4 +1,5 @@
 ﻿using Informedica.GenForm.Library.Security;
+using Informedica.GenForm.Library.Services.Users;
 using Informedica.GenForm.Services.Environments;
 
 namespace Informedica.GenForm.Services.UserLogin
@@ -17,9 +18,10 @@ namespace Informedica.GenForm.Services.UserLogin
             GenFormPrincipal.Login(criteria);
         }
 
-        public static bool IsLoggedIn(string userName)
+        public static bool IsLoggedIn(string userName) 
         {
-            return true;
+            return GenFormPrincipal.GetPrincipal().Identity.Name == userName && 
+                   GenFormPrincipal.GetPrincipal().IsLoggedIn();
         }
 
         public static string GetLoggedIn()
@@ -35,6 +37,16 @@ namespace Informedica.GenForm.Services.UserLogin
         public static bool CheckPassword(string newPassword)
         {
             throw new System.NotImplementedException();
+        }
+
+        public static void Logout(string user)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public static bool UserHasPassword(UserLoginDto userLoginDto)
+        {
+            return UserServices.GetUserByName(userLoginDto.UserName).Password == userLoginDto.Password;
         }
     }
 }

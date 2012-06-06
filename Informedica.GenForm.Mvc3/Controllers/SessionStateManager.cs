@@ -3,6 +3,7 @@ using System.Web;
 using Informedica.DataAccess.Configurations;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess;
+using Informedica.GenForm.Library.Services.Users;
 using NHibernate;
 using NHibernate.Context;
 using StructureMap;
@@ -98,6 +99,8 @@ namespace Informedica.GenForm.Mvc3.Controllers
             
             SessionFactoryManager.BuildSchema(GetEnvironment(sessionState), session);
             CurrentSessionContext.Bind(session);
+
+            UserServices.ConfigureSystemUser();
         }
 
         public static void SetEnvironment(string environment, HttpSessionStateBase sessionState)

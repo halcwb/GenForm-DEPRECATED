@@ -1,14 +1,12 @@
-﻿using System.Data;
-using System.Web;
+﻿using System.Web;
 using System;
-using Informedica.GenForm.DataAccess;
 using Informedica.GenForm.Mvc3.Controllers;
 using Informedica.GenForm.Presentation.Security;
 using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Services.UserLogin;
+using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Mvc;
-using NHibernate;
 using TypeMock.ArrangeActAssert;
 using LoginServices = Informedica.GenForm.Services.UserLogin.LoginServices;
 

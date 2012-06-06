@@ -115,6 +115,10 @@
       <Project>{7C647ECA-EB02-4779-A829-A73122341338}</Project>
       <Name>Informedica.GenForm.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Tests\Informedica.GenForm.Tests.csproj">
+      <Project>{819BA760-6C94-4203-8DB0-7F0AAA4B2159}</Project>
+      <Name>Informedica.GenForm.Tests</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

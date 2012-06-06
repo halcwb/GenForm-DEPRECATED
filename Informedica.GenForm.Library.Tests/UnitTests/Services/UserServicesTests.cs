@@ -1,4 +1,5 @@
-﻿using Informedica.GenForm.Assembler;
+﻿using System.Linq;
+using Informedica.GenForm.Assembler;
 using Informedica.GenForm.Library.Services.Users;
 using Informedica.GenForm.TestFixtures.Fixtures;
 using Informedica.GenForm.Tests;
@@ -62,6 +63,14 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.Services
 
             var user2 = UserServices.GetUserById(user.Id);
             Assert.AreSame(user, user2);
+        }
+
+        [TestMethod]
+        public void ThatUserAdminWithPasswordAdminIsConfigured()
+        {
+            UserServices.ConfigureSystemUser();
+
+            Assert.IsTrue(UserServices.Users.Any(x => x.UserName == "Admin" && x.Password == "Admin"));
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Web.Mvc;
 
-namespace Informedica.GenForm.Mvc3.Controllers
+namespace Informedica.GenForm.Tests
 {
     public class ActionResultParser
     {

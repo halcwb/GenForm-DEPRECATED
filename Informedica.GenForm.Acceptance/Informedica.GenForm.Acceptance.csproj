@@ -62,6 +62,7 @@
     <Compile Include="EnvironmentManagement\GenFormFixture.cs" />
     <Compile Include="EnvironmentManagement\SecureSettingsManagerCommandLineTool.cs" />
     <Compile Include="EnvironmentManagement\TestSource.cs" />
+    <Compile Include="FreshInstall.cs" />
     <Compile Include="HelloFitNesse.cs" />
     <Compile Include="ProductManagement\NewProductDecisions.cs" />
     <Compile Include="UserLogin\CanUserLogin.cs" />
@@ -77,6 +78,10 @@
     <Folder Include="FormulariumManagement\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EntityRepository\Informedica.EntityRepository\Informedica.EntityRepository.csproj">
+      <Project>{E3780309-03FF-43DC-A134-828269F2008C}</Project>
+      <Name>Informedica.EntityRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SecureSettings\Informedica.SecureSettings\Informedica.SecureSettings.csproj">
       <Project>{B426CCA3-460C-44B8-BEF0-C2D8E7263C3E}</Project>
       <Name>Informedica.SecureSettings</Name>
@@ -96,6 +101,10 @@
     <ProjectReference Include="..\Informedica.GenForm.Settings\Informedica.GenForm.Settings.csproj">
       <Project>{B30C5371-DDDD-46BE-827A-72798E743B60}</Project>
       <Name>Informedica.GenForm.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Tests\Informedica.GenForm.Tests.csproj">
+      <Project>{819BA760-6C94-4203-8DB0-7F0AAA4B2159}</Project>
+      <Name>Informedica.GenForm.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

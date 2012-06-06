@@ -108,8 +108,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IntegrationTests\UserTest.cs" />
     <Compile Include="UnitTests\Services\BrandServicesTests.cs" />
-    <Compile Include="UnitTests\Services\LoginServicesShould.cs" />
-    <Compile Include="UnitTests\Services\LoginServicesTests.cs" />
     <Compile Include="UnitTests\Services\PackageServicesTests.cs" />
     <Compile Include="UnitTests\Services\ProductServicesTests.cs" />
     <Compile Include="UnitTests\Services\RouteServicesTests.cs" />
