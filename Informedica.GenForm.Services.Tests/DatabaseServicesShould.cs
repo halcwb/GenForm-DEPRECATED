@@ -2,22 +2,22 @@
 using System.Web;
 using Informedica.DataAccess.Configurations;
 using Informedica.GenForm.DataAccess;
+using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Library.Services.Users;
-using Informedica.GenForm.Mvc3.Controllers;
-using Informedica.GenForm.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 using StructureMap;
 using TypeMock.ArrangeActAssert;
 
-namespace Informedica.GenForm.Mvc3.Tests.UnitTests
+namespace Informedica.GenForm.Services.Tests
 {
     [TestClass]
-    public class SessionStateManagerShould
+    public class DatabaseServicesShould
     {
         private HttpSessionStateBase _sessionState;
         private ISessionFactory _factory;
         private IDbConnection _connection;
+        private ISessionCache _cache;
 
         [TestInitialize]
         public void Init()
@@ -25,6 +25,10 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             _sessionState = Isolate.Fake.Instance<HttpSessionStateBase>();
             _factory = Isolate.Fake.Instance<ISessionFactory>();
             _connection = null;
+
+            Isolate.WhenCalled(() => _sessionState[HttpSessionCache.SessionFactorySetting]).WillReturn(_factory);
+            Isolate.WhenCalled(() => _sessionState[HttpSessionCache.ConnectionSetting]).WillReturn(_connection);
+            _cache = new HttpSessionCache(_sessionState);
 
             Isolate.Fake.StaticMethods(typeof(UserServices));
             // ReSharper disable UnusedVariable, otherwise ConfigurationManager will not be faked
@@ -34,62 +38,20 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         }
 
-
-        [Isolated]
-        [TestMethod]
-        public void ConfigureObjectFactoryWithTheSessionFactoryFromHttpSessionStateIfNotNull()
+        [IsolatedAttribute]
+        [TestMethodAttribute]
+        public void ConfigureObjectFactoryWithTheSessionFactoryFromSessionCacheIfNotNull()
         {
-            Isolate.WhenCalled(() => _sessionState[SessionStateManager.SessionFactorySetting]).WillReturn(_factory);
-            Isolate.WhenCalled(() => _sessionState[SessionStateManager.ConnectionSetting]).WillReturn(_connection);
-            
-            SessionStateManager.UseSessionFactoryFromApplicationOrSessionState(_sessionState);
+
+            DatabaseServices.UseSessionFactoryFromApplicationOrSessionCache(_cache);
             Assert.AreEqual(_factory, ObjectFactory.GetInstance<ISessionFactory>());
-        }
-
-        [Isolated]
-        [TestMethod]
-        public void GetTheConnectionFromHttpSessionStateIfNotNull()
-        {
-            Isolate.WhenCalled(() => _sessionState[SessionStateManager.ConnectionSetting]).WillReturn(_connection);
-
-            Assert.AreEqual(_connection, SessionStateManager.GetConnectionFromSessionState(_sessionState));
-        }
-
-        [Isolated]
-        [TestMethod]
-        public void GetTheSessionFactoryFromTheSessionStateIfNotNull()
-        {
-            Isolate.WhenCalled(() => _sessionState[SessionStateManager.SessionFactorySetting]).WillReturn(_factory);
-
-            Assert.AreEqual(_factory, SessionStateManager.GetSessionFactoryFromSessionState(_sessionState));
-        }
-
-        [Isolated]
-        [TestMethod]
-        public void GetTheEnvironmentFromTheSessionStateIfSet()
-        {
-            Isolate.WhenCalled(() => _sessionState[SessionStateManager.EnvironmentSetting]).WillReturn("Test");
-
-            Assert.AreEqual("Test", SessionStateManager.GetEnvironment(_sessionState));
         }
 
         [Isolated]
         [TestMethod]
         public void GetTheDefaultTestGenFormEnvironmentIfNoEnvironmentInSessionState()
         {
-            Assert.AreEqual("TestGenForm", SessionStateManager.GetEnvironment(_sessionState));
-        }
-
-        [Isolated]
-        [TestMethod]
-        public void SetTheEnvironenmentToTheSessionStateIfNotNull()
-        {
-            Isolate.WhenCalled(() => _sessionState[SessionStateManager.EnvironmentSetting]).WillReturn("Test");
-
-            SessionStateManager.SetEnvironment("Test", _sessionState);
-
-            Isolate.Verify.WasCalledWithAnyArguments(() => _sessionState[SessionStateManager.EnvironmentSetting] = null);
-            Assert.AreEqual("Test", SessionStateManager.GetEnvironment(_sessionState));
+            Assert.AreEqual("TestGenForm", _cache.GetEnvironment());
         }
 
         [Isolated]
@@ -99,7 +61,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             var connection = Isolate.Fake.Instance<IDbConnection>();
             var session = IsolateSetupDatabaseMethod(connection);
 
-            SessionStateManager.InitializeDatabase(_sessionState);
+            DatabaseServices.InitializeDatabase(_cache);
             Isolate.Verify.WasCalledWithAnyArguments(() => SessionFactoryManager.BuildSchema("TestGenForm", session));
         }
 
@@ -107,10 +69,9 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public void NotBuildTheDatabaseWhenTheConnectionCacheIsEmpty()
         {
-            IDbConnection connection = null;
-            var session = IsolateSetupDatabaseMethod(connection);
+            var session = IsolateSetupDatabaseMethod(null);
 
-            SessionStateManager.InitializeDatabase(_sessionState);
+            DatabaseServices.InitializeDatabase(_cache);
             Isolate.Verify.WasNotCalled(() => SessionFactoryManager.BuildSchema("TestGenForm", session));
         }
 
@@ -121,7 +82,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             var connection = Isolate.Fake.Instance<IDbConnection>();
             IsolateSetupDatabaseMethod(connection);
 
-            SessionStateManager.InitializeDatabase(_sessionState);
+            DatabaseServices.InitializeDatabase(_cache);
             Isolate.Verify.WasCalledWithAnyArguments(() => UserServices.ConfigureSystemUser());
         }
 

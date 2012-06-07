@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseServices.cs" />
     <Compile Include="Environments\EnvironmentDto.cs" />
     <Compile Include="Environments\EnvironmentServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

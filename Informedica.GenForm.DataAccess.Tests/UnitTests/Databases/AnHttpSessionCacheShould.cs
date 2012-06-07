@@ -21,7 +21,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Databases
             _connection = Isolate.Fake.Instance<IDbConnection>();
             _cache = new HttpSessionCache(_session);
 
-            Isolate.WhenCalled(() => _session[HttpSessionCache.Connection] = null).ReturnRecursiveFake();
+            Isolate.WhenCalled(() => _session[HttpSessionCache.ConnectionSetting] = null).ReturnRecursiveFake();
         }
 
         [Isolated]
@@ -29,7 +29,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Databases
         public void UseTheHttpSessionCollectionToStoreAConnection()
         {
             _cache.SetConnection(_connection);
-            Isolate.Verify.WasCalledWithExactArguments(() => _session[HttpSessionCache.Connection] = _connection);
+            Isolate.Verify.WasCalledWithExactArguments(() => _session[HttpSessionCache.ConnectionSetting] = _connection);
             
         }
 
@@ -38,7 +38,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Databases
         public void UseTheHttpSessionCollectionToRetrieveAConnection()
         {
             _cache.GetConnection();
-            Isolate.Verify.WasCalledWithAnyArguments(() => _session[HttpSessionCache.Connection]);
+            Isolate.Verify.WasCalledWithAnyArguments(() => _session[HttpSessionCache.ConnectionSetting]);
         }
 
         [Isolated]
@@ -52,7 +52,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Databases
         [TestMethod]
         public void ReturnFalseWhenHasConnectionAndIsEmptyIsCalled()
         {
-            Isolate.WhenCalled(() => _session[HttpSessionCache.Connection]).WillReturn(_connection);
+            Isolate.WhenCalled(() => _session[HttpSessionCache.ConnectionSetting]).WillReturn(_connection);
 
             Assert.IsFalse(_cache.HasNoConnection);
         }
@@ -63,7 +63,7 @@ namespace Informedica.GenForm.DataAccess.Tests.UnitTests.Databases
         {
             _cache.Clear();
 
-            Isolate.Verify.WasCalledWithAnyArguments(() => _session.Remove(HttpSessionCache.Connection));
+            Isolate.Verify.WasCalledWithAnyArguments(() => _session.Remove(HttpSessionCache.ConnectionSetting));
 
         }
     }

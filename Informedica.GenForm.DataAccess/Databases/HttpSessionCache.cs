@@ -1,29 +1,33 @@
 ﻿using System.Data;
 using System.Web;
 using Informedica.DataAccess.Configurations;
+using NHibernate;
 
 namespace Informedica.GenForm.DataAccess.Databases
 {
-    public class HttpSessionCache : IConnectionCache
+    public class HttpSessionCache : IConnectionCache, ISessionCache
     {
-        public const string Connection = "connection";
-        private HttpSessionStateBase _session;
+        public const string SessionFactorySetting = "sessionfactory";
+        public const string EnvironmentSetting = "environment";
+        public const string ConnectionSetting = "connection";
 
-        public HttpSessionCache(HttpSessionStateBase session)
+        private readonly HttpSessionStateBase _sessionState;
+
+        public HttpSessionCache(HttpSessionStateBase sessionState)
         {
-            _session = session;
+            _sessionState = sessionState;
         }
 
         #region Implementation of IConnectionCache
 
         public IDbConnection GetConnection()
         {
-            return (IDbConnection)_session[Connection];
+            return (IDbConnection)_sessionState[ConnectionSetting];
         }
 
         public void SetConnection(IDbConnection connection)
         {
-            _session[Connection] = connection;
+            _sessionState[ConnectionSetting] = connection;
         }
 
         public bool HasNoConnection
@@ -33,7 +37,26 @@ namespace Informedica.GenForm.DataAccess.Databases
 
         public void Clear()
         {
-            _session.Remove(Connection);
+            _sessionState.Remove(ConnectionSetting);
+        }
+
+        #endregion
+
+        #region Implementation of ISessionCache
+
+        public ISessionFactory GetSessionFactory()
+        {
+            return (ISessionFactory)_sessionState[SessionFactorySetting];
+        }
+
+        public string GetEnvironment()
+        {
+            return (string)_sessionState[EnvironmentSetting];
+        }
+
+        public void SetSessionFactory(ISessionFactory fact)
+        {
+            _sessionState[SessionFactorySetting] = fact;
         }
 
         #endregion

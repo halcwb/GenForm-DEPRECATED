@@ -57,6 +57,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseServicesShould.cs" />
     <Compile Include="EnvironmentServicesShould.cs" />
     <Compile Include="LoginServicesShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,6 +83,10 @@
     <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
       <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
       <Name>Informedica.GenForm.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Mvc3\Informedica.GenForm.Mvc3.csproj">
+      <Project>{76148642-857A-4186-8A7B-C4AFC05E0152}</Project>
+      <Name>Informedica.GenForm.Mvc3</Name>
     </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Services\Informedica.GenForm.Services.csproj">
       <Project>{7C647ECA-EB02-4779-A829-A73122341338}</Project>

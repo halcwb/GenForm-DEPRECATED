@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using System.Web;
 using Informedica.DataAccess.Configurations;
@@ -54,6 +55,12 @@ namespace Informedica.GenForm.Mvc3.Controllers
             return null;
         }
 
+        public static void SetEnvironment(string environment, HttpSessionStateBase sessionState)
+        {
+            if (sessionState == null) return;
+            sessionState[EnvironmentSetting] = environment;
+        }
+
         public static ISessionFactory SessionFactory
         {
             get
@@ -65,31 +72,16 @@ namespace Informedica.GenForm.Mvc3.Controllers
         public static ISession OpenSession(HttpSessionStateBase session)
         {
             return GetConnectionFromSessionState(session) == null ? 
-                        SessionFactory.OpenSession() : 
-                        SessionFactory.OpenSession(GetConnectionFromSessionState(session));
+                SessionFactory.OpenSession() : 
+                SessionFactory.OpenSession(GetConnectionFromSessionState(session));
         }
 
-        public static void SetupDatabase(HttpSessionStateBase sessionState)
+        public static void SetupConfiguration(HttpSessionStateBase sessionState)
         {
-            // Will cache the connection if in memory database
-            SetupConfiguration(sessionState);
-
-            // If database config is in memory, connection will be cached in in session state
-            var conn = GetConnectionFromSessionState(sessionState);
-            if (conn == null) return;
-
-            // Connection has been cache so in memory database
-            SetupInMemoryDatabase(sessionState, conn);
+            throw new NotImplementedException();
         }
 
-        private static void SetupConfiguration(HttpSessionStateBase sessionState)
-        {
-            var environment = GetEnvironment(sessionState);
-            var envConf = ConfigurationManager.Instance.GetConfiguration(environment);
-            envConf.GetConnection();
-        }
-
-        private static void SetupInMemoryDatabase(HttpSessionStateBase sessionState, IDbConnection conn)
+        public static void SetupInMemoryDatabase(HttpSessionStateBase sessionState, IDbConnection conn)
         {
             var fact = SessionFactoryManager.GetSessionFactory(GetEnvironment(sessionState));
             sessionState["sessionfactory"] = fact;
@@ -103,10 +95,9 @@ namespace Informedica.GenForm.Mvc3.Controllers
             UserServices.ConfigureSystemUser();
         }
 
-        public static void SetEnvironment(string environment, HttpSessionStateBase sessionState)
+        public static void InitializeDatabase(HttpSessionStateBase sessionState)
         {
-            if (sessionState == null) return;
-            sessionState[EnvironmentSetting] = environment;
+            throw new NotImplementedException();
         }
     }
 }

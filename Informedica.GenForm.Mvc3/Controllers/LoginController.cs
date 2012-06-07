@@ -79,7 +79,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
             if (success)
             {
-                SessionStateManager.SetupDatabase(HttpContext.Session);
+                SessionStateManager.InitializeDatabase(HttpContext.Session);
                 LoginServices.Login(dto);
                 success = LoginServices.IsLoggedIn(dto.UserName);
 

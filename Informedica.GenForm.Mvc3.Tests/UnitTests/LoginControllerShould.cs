@@ -60,7 +60,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             _controller = new LoginController();
             Isolate.WhenCalled(() => EnvironmentServices.SetEnvironment("Test")).IgnoreCall();
-            Isolate.WhenCalled(() => SessionStateManager.SetupDatabase(_sessionState)).IgnoreCall();
+            Isolate.WhenCalled(() => SessionStateManager.InitializeDatabase(_sessionState)).IgnoreCall();
 
             _user = new UserLoginDto
             {
