@@ -19,6 +19,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         private ResultExecutedContext _result;
         private ITransaction _transaction;
         private LoginController _loginController;
+        private ControllerBase _homeController;
 
         [TestInitialize]
         public void Init()
@@ -38,6 +39,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Isolate.NonPublic.Property.WhenGetCalled(_attr, "Session").WillReturn(_session);
 
             _loginController = new LoginController();
+            _homeController = new HomeController();
         }
 
         [Isolated]
@@ -53,6 +55,16 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         public void NotBeginATransactionWhenLoginController()
         {
             Isolate.WhenCalled(() => _context.Controller).WillReturn(_loginController);
+
+            _attr.OnActionExecuting(_context);
+            Isolate.Verify.WasNotCalled(() => _session.BeginTransaction());
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void NotBeginATransactionWhenHomeController()
+        {
+            Isolate.WhenCalled(() => _context.Controller).WillReturn(_homeController);
 
             _attr.OnActionExecuting(_context);
             Isolate.Verify.WasNotCalled(() => _session.BeginTransaction());
@@ -76,6 +88,17 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             _attr.OnResultExecuted(_result);
             Isolate.Verify.WasNotCalled(() => _session.Transaction.Commit());
         }
+
+        [Isolated]
+        [TestMethod]
+        public void NotCommitATransactionWhenHomeController()
+        {
+            Isolate.WhenCalled(() => _result.Controller).WillReturn(_homeController);
+
+            _attr.OnResultExecuted(_result);
+            Isolate.Verify.WasNotCalled(() => _session.Transaction.Commit());
+        }
+        
 
     }
 }

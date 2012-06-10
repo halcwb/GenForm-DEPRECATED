@@ -87,6 +87,7 @@
     <Compile Include="Controllers\AppTestController.cs" />
     <Compile Include="Controllers\EnvironmentController.cs" />
     <Compile Include="Controllers\DebugController.cs" />
+    <Compile Include="Controllers\FilterAttributeDependencyInversionConfigurator.cs" />
     <Compile Include="Controllers\GenericNameDto.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InjectingActionInvoker.cs" />

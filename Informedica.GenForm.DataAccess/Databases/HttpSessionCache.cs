@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Web;
+using System.Web.SessionState;
 using Informedica.DataAccess.Configurations;
 using NHibernate;
 

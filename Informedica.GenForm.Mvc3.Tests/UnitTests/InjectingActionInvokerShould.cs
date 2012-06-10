@@ -1,4 +1,7 @@
-﻿using System.Web.Routing;
+﻿using System;
+using Informedica.GenForm.DataAccess.Databases;
+using Informedica.GenForm.Mvc3.Environments;
+using Informedica.GenForm.Services;
 using StructureMap;
 using TypeMock.ArrangeActAssert;
 using System.Web.Mvc;
@@ -10,39 +13,82 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
     [TestClass]
     public class InjectingActionInvokerShould
     {
+        private InjectingActionInvoker _invoker;
+        private ControllerContext _context;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            _context = Isolate.Fake.Instance<ControllerContext>();
+            var controller = new TestController();
+
+            Isolate.WhenCalled(() => _context.Controller).WillReturn(controller);
+            _invoker = ObjectFactory.GetInstance<InjectingActionInvoker>();
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            ObjectFactory.Initialize(x => {});
+            System.Diagnostics.Debug.WriteLine(ObjectFactory.WhatDoIHave());
+        }
 
         [Isolated]
         [TestMethod]
         public void HaveTestActionFilterWithAnInjectedTestImplementationForITestInterface()
         {
-            ObjectFactory.Configure(x =>
-                                        {
-                                            x.For<IActionInvoker>().Use<InjectingActionInvoker>();
-                                            x.For<ITempDataProvider>().Use<SessionStateTempDataProvider>();
-                                            x.For<RouteCollection>().Use(RouteTable.Routes);
-
-                                            x.SetAllProperties(c =>
-                                                                   {
-                                                                       c.OfType<IActionInvoker>();
-                                                                       c.OfType<ITempDataProvider>();
-                                                                       c.WithAnyTypeFromNamespaceContainingType
-                                                                           <TestAttribute>();
-
-                                                                   });
-                                        });
+            FilterAttributeDependencyInversionConfigurator.Configure<TestAttribute>();
 
             var testSetting = new TestImplementation();
             ObjectFactory.Configure(x => x.For<ITestInterface>().Use(testSetting));
 
+            var methodName = "Test";
+            Assert.IsTrue(_invoker.InvokeAction(_context, methodName));
+        }
 
-            var context = Isolate.Fake.Instance<ControllerContext>();
-            var testController = new TestController();
+        [Isolated]
+        [TestMethod]
+        public void InjectADatabaseServicesDependencyIntoNHibernateSessionAttribute()
+        {
+            FilterAttributeDependencyInversionConfigurator.Configure<IDatabaseServices>();
 
-            Isolate.WhenCalled(() => context.Controller).WillReturn(testController);
-            var invoker = ObjectFactory.GetInstance<InjectingActionInvoker>();
+            SetupDatabaseServices();
 
+            InvokeTestNhibernateSessionAttribute();
+        }
 
-            Assert.IsTrue(invoker.InvokeAction(context,"Test"));
+        private static void SetupDatabaseServices()
+        {
+            ObjectFactory.Configure(x => x.For<IDatabaseServices>().Use<DatabaseServices>());
+            var cache = Isolate.Fake.Instance<HttpSessionCache>();
+            ObjectFactory.Configure(x => x.For<ISessionCache>().Use(cache));
+        }
+
+        private void InvokeTestNhibernateSessionAttribute()
+        {
+            var methodName = "TestNHibernateSessionAttribute";
+            Assert.IsTrue(_invoker.InvokeAction(_context, methodName));
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void NotBeAbleToInjectDependencyWhenConfiguredWithTypeInWrongNameSpace()
+        {
+            System.Diagnostics.Debug.WriteLine(ObjectFactory.WhatDoIHave());
+            FilterAttributeDependencyInversionConfigurator.Configure<TestAttribute>();
+
+            SetupDatabaseServices();
+
+            try
+            {
+                InvokeTestNhibernateSessionAttribute();
+                Assert.Fail("Should not work");
+
+            }
+            catch (Exception e)
+            {
+                 Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
+            }
         }
     }
 
@@ -52,11 +98,23 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
     public class TestController : Controller
     {
-        [TestAttribute]
+        private ViewResult _view;
+
+        public TestController()
+        {
+            _view = Isolate.Fake.Instance<ViewResult>();
+        }
+
+        [Test]
         public ActionResult Test()
         {
-            var view = Isolate.Fake.Instance<ViewResult>();
-            return view;
+            return _view;
+        }
+
+        [NHibernateSession]
+        public ActionResult TestNHibernateSessionAttribute()
+        {
+            return _view;
         }
     }
 

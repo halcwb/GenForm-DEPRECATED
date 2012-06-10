@@ -11,32 +11,38 @@ namespace Informedica.GenForm.Mvc3.Environments
     public class TransactionAttribute
       : NHibernateSessionAttribute
     {
+        private string _controller;
 
         protected ISession Session
         {
             get
             {
-                return SessionStateManager.SessionFactory.GetCurrentSession();
+                try
+                {
+                    return SessionStateManager.SessionFactory.GetCurrentSession();
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(_controller + ": " + e);
+                }
             }
         }
 
         public override void OnActionExecuting(
           ActionExecutingContext filterContext)
         {
-            if (filterContext.Controller is LoginController) return;
+            if (filterContext.Controller is LoginController || filterContext.Controller is HomeController) return;
+            _controller = filterContext.Controller.ToString();
 
             base.OnActionExecuting(filterContext);
             Session.BeginTransaction();
         }
 
-        public override void OnResultExecuted(
-          ResultExecutedContext filterContext)
+        public override void OnActionExecuted(
+            ActionExecutedContext filterContext)
         {
-            if (filterContext.Controller is LoginController)
-            {
-                base.OnResultExecuted(filterContext);
-                return;
-            }
+            if (filterContext.Controller is LoginController || filterContext.Controller is HomeController) return;
 
             try
             {
@@ -45,14 +51,15 @@ namespace Informedica.GenForm.Mvc3.Environments
                     Session.Transaction.Commit();
 
             }
-// ReSharper disable EmptyGeneralCatchClause
+            // ReSharper disable EmptyGeneralCatchClause
             catch (Exception)
-// ReSharper restore EmptyGeneralCatchClause
+            // ReSharper restore EmptyGeneralCatchClause
             {
                 //ToDo: dirty hack, do nothing have to fix this 
-            } finally
+            }
+            finally
             {
-                base.OnResultExecuted(filterContext);                
+                base.OnActionExecuted(filterContext);
             }
         }
 
