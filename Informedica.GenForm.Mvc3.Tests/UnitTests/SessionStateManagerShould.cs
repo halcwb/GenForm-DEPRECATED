@@ -1,10 +1,8 @@
 ﻿using System.Data;
 using System.Web;
 using Informedica.DataAccess.Configurations;
-using Informedica.GenForm.DataAccess;
 using Informedica.GenForm.Library.Services.Users;
 using Informedica.GenForm.Mvc3.Controllers;
-using Informedica.GenForm.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 using StructureMap;
@@ -91,49 +89,5 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             Isolate.Verify.WasCalledWithAnyArguments(() => _sessionState[SessionStateManager.EnvironmentSetting] = null);
             Assert.AreEqual("Test", SessionStateManager.GetEnvironment(_sessionState));
         }
-
-        [Isolated]
-        [TestMethod]
-        public void BuildTheDatabaseWhenTheConnectionCacheIsNotEmpty()
-        {
-            var connection = Isolate.Fake.Instance<IDbConnection>();
-            var session = IsolateSetupDatabaseMethod(connection);
-
-            SessionStateManager.InitializeDatabase(_sessionState);
-            Isolate.Verify.WasCalledWithAnyArguments(() => SessionFactoryManager.BuildSchema("TestGenForm", session));
-        }
-
-        [Isolated]
-        [TestMethod]
-        public void NotBuildTheDatabaseWhenTheConnectionCacheIsEmpty()
-        {
-            IDbConnection connection = null;
-            var session = IsolateSetupDatabaseMethod(connection);
-
-            SessionStateManager.InitializeDatabase(_sessionState);
-            Isolate.Verify.WasNotCalled(() => SessionFactoryManager.BuildSchema("TestGenForm", session));
-        }
-
-        [Isolated]
-        [TestMethod]
-        public void ConfigureTheNewDatabaseWithASystemUserAdminWithPasswordAdmin()
-        {
-            var connection = Isolate.Fake.Instance<IDbConnection>();
-            IsolateSetupDatabaseMethod(connection);
-
-            SessionStateManager.InitializeDatabase(_sessionState);
-            Isolate.Verify.WasCalledWithAnyArguments(() => UserServices.ConfigureSystemUser());
-        }
-
-        private ISession IsolateSetupDatabaseMethod(IDbConnection connection)
-        {
-            Isolate.WhenCalled(() => _sessionState["connection"]).WillReturn(connection);
-            Isolate.WhenCalled(() => _sessionState["environment"]).WillReturn("TestGenForm");
-
-            var session = Isolate.Fake.Instance<ISession>();
-            Isolate.WhenCalled(() => SessionFactoryManager.BuildSchema("TestGenForm", session)).IgnoreCall();
-            return session;
-        }
-
     }
 }

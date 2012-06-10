@@ -38,17 +38,8 @@ namespace Informedica.GenForm.Mvc3.Environments
         public override void OnActionExecuted(
           ActionExecutedContext filterContext)
         {
-            try
-            {
-                var session = CurrentSessionContext.Unbind(SessionStateManager.SessionFactory);
-                session.Close();
-            }
-// ReSharper disable EmptyGeneralCatchClause
-            catch (Exception)
-// ReSharper restore EmptyGeneralCatchClause
-            {
-                // ToDo: dirty hack, have to fix this
-            }
+            var session = CurrentSessionContext.Unbind(SessionStateManager.SessionFactory);
+            session.Close();
         }
 
     }

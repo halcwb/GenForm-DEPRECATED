@@ -7,6 +7,7 @@ using Informedica.GenForm.Services.Environments;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 using NHibernate.Context;
+using StructureMap;
 using TypeMock.ArrangeActAssert;
 
 namespace Informedica.GenForm.Mvc3.Tests.UnitTests
@@ -89,6 +90,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             var factory = Isolate.Fake.Instance<ISessionFactory>();
             Isolate.WhenCalled(() => MvcApplication.GetSessionFactory("Test")).WillReturn(factory);
+            ObjectFactory.Configure(x => x.For<ISessionFactory>().Use(factory));
             var session = Isolate.Fake.Instance<ISession>();
             Isolate.WhenCalled(() => CurrentSessionContext.Unbind(factory)).WillReturn(session);
 

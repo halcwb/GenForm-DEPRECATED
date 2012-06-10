@@ -10,9 +10,21 @@ using StructureMap;
 
 namespace Informedica.GenForm.Services
 {
-    public static class DatabaseServices
+    public class DatabaseServices: IDatabaseServices
     {
-        public static void UseSessionFactoryFromApplicationOrSessionCache(ISessionCache cache)
+        private ISessionCache _cache;
+
+        public DatabaseServices(ISessionCache cache)
+        {
+            _cache = cache;
+        }
+
+        public void ConfigureSessionFactory()
+        {
+            UseSessionFactoryFromApplicationOrSessionCache(_cache);
+        }
+
+        private static void UseSessionFactoryFromApplicationOrSessionCache(ISessionCache cache)
         {
             if (cache.GetSessionFactory() == null)
                 ObjectFactory.Configure(
@@ -27,13 +39,18 @@ namespace Informedica.GenForm.Services
 
         }
 
+        public void InitDatabase()
+        {
+            InitializeDatabase(_cache);
+        }
+
         public static void InitializeDatabase(ISessionCache cache)
         {
             // Will cache the connection if in memory database
             SetupConfiguration(cache);
 
             // If database config is in memory, connection will be cached in in session state
-            var conn = GetConnectionFromSessionState(cache);
+            var conn = GetConnectionFromSessionState((IConnectionCache)cache);
             if (conn == null) return;
 
             // Connection has been cache so in memory database
@@ -54,9 +71,9 @@ namespace Informedica.GenForm.Services
             UserServices.ConfigureSystemUser();
         }
 
-        private static IDbConnection GetConnectionFromSessionState(ISessionCache cache)
+        private static IDbConnection GetConnectionFromSessionState(IConnectionCache cache)
         {
-            return ((IConnectionCache) cache).GetConnection();
+            return cache.GetConnection();
         }
 
         private static void SetupConfiguration(ISessionCache cache)
@@ -65,5 +82,11 @@ namespace Informedica.GenForm.Services
             var envConf = ConfigurationManager.Instance.GetConfiguration(environment);
             envConf.GetConnection();
         }
+    }
+
+    public interface IDatabaseServices
+    {
+        void ConfigureSessionFactory();
+        void InitDatabase();
     }
 }
