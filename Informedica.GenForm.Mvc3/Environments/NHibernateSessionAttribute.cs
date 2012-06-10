@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 using Informedica.GenForm.Mvc3.Controllers;
+using Informedica.GenForm.Services;
 using NHibernate;
 using NHibernate.Context;
 
@@ -13,6 +14,9 @@ namespace Informedica.GenForm.Mvc3.Environments
       : ActionFilterAttribute
     {
         private ISession _session;
+        private IDatabaseServices _services;
+
+        public IDatabaseServices DatabaseServices { get; set; }
 
         public override void OnActionExecuting(
           ActionExecutingContext filterContext)

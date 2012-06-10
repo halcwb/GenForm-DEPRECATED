@@ -1,7 +1,6 @@
 using System;
 using System.Data;
 using System.Web;
-using Informedica.DataAccess.Configurations;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess;
 using Informedica.GenForm.Library.Services.Users;

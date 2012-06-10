@@ -35,17 +35,6 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void ConfigureObjectFactoryWithTheSessionFactoryFromHttpSessionStateIfNotNull()
-        {
-            Isolate.WhenCalled(() => _sessionState[SessionStateManager.SessionFactorySetting]).WillReturn(_factory);
-            Isolate.WhenCalled(() => _sessionState[SessionStateManager.ConnectionSetting]).WillReturn(_connection);
-            
-            SessionStateManager.UseSessionFactoryFromApplicationOrSessionState(_sessionState);
-            Assert.AreEqual(_factory, ObjectFactory.GetInstance<ISessionFactory>());
-        }
-
-        [Isolated]
-        [TestMethod]
         public void GetTheConnectionFromHttpSessionStateIfNotNull()
         {
             Isolate.WhenCalled(() => _sessionState[SessionStateManager.ConnectionSetting]).WillReturn(_connection);
