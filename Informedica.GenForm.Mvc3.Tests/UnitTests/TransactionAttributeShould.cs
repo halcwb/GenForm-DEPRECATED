@@ -16,7 +16,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         private ISession _session;
         private Mock<TransactionAttribute> _mock;
         private TransactionAttribute _attr;
-        private ResultExecutedContext _result;
+        private ActionExecutedContext _result;
         private ITransaction _transaction;
         private LoginController _loginController;
         private ControllerBase _homeController;
@@ -25,16 +25,16 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         public void Init()
         {
             _context = Isolate.Fake.Instance<ActionExecutingContext>();
-            _result = Isolate.Fake.Instance<ResultExecutedContext>();
+            _result = Isolate.Fake.Instance<ActionExecutedContext>();
 
             _session = Isolate.Fake.Instance<ISession>();
             _transaction = Isolate.Fake.Instance<ITransaction>();
             Isolate.WhenCalled(() => _session.Transaction).WillReturn(_transaction);
             Isolate.WhenCalled(() => _transaction.IsActive).WillReturn(true);
 
-
             _mock = MockManager.Mock<TransactionAttribute>();
-            _mock.CallBase.ExpectCall("OnActionExecuting");
+            _mock.CallBase.ExpectCall("OnActionExecuted");
+
             _attr = new TransactionAttribute();
             Isolate.NonPublic.Property.WhenGetCalled(_attr, "Session").WillReturn(_session);
 
@@ -74,7 +74,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public void CommitATransactionWhenResultExecuted()
         {
-            _attr.OnResultExecuted(_result);
+            _attr.OnActionExecuted(_result);
             
             Isolate.Verify.WasCalledWithAnyArguments(() => _session.Transaction.Commit());
         }
@@ -85,7 +85,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             Isolate.WhenCalled(()=> _result.Controller).WillReturn(_loginController);
 
-            _attr.OnResultExecuted(_result);
+            _attr.OnActionExecuted(_result);
             Isolate.Verify.WasNotCalled(() => _session.Transaction.Commit());
         }
 
@@ -95,7 +95,8 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         {
             Isolate.WhenCalled(() => _result.Controller).WillReturn(_homeController);
 
-            _attr.OnResultExecuted(_result);
+            _attr.OnActionExecuted(_result);
+            Isolate.Verify.WasCalledWithAnyArguments(() => _result.Controller);
             Isolate.Verify.WasNotCalled(() => _session.Transaction.Commit());
         }
         

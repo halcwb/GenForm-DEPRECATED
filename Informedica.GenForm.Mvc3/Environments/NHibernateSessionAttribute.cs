@@ -45,7 +45,6 @@ namespace Informedica.GenForm.Mvc3.Environments
 
         private void BindSessionToCurrentSessionContext()
         {
-//SessionFactoryManager.BuildSchema(GetEnvironment(), _session);
             CurrentSessionContext.Bind(_session);
         }
 
@@ -68,5 +67,6 @@ namespace Informedica.GenForm.Mvc3.Environments
                 throw new Exception(context.Controller + ": " + e);
             }
         }
+
     }
 }

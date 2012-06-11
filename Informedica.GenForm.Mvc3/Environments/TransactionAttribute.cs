@@ -20,7 +20,6 @@ namespace Informedica.GenForm.Mvc3.Environments
                 try
                 {
                     return SessionStateManager.SessionFactory.GetCurrentSession();
-
                 }
                 catch (Exception e)
                 {
@@ -32,17 +31,22 @@ namespace Informedica.GenForm.Mvc3.Environments
         public override void OnActionExecuting(
           ActionExecutingContext filterContext)
         {
-            if (filterContext.Controller is LoginController || filterContext.Controller is HomeController) return;
+            if (DoNotRunAttributeForSpecificControllers(filterContext)) return;
             _controller = filterContext.Controller.ToString();
 
             base.OnActionExecuting(filterContext);
             Session.BeginTransaction();
         }
 
+        private static bool DoNotRunAttributeForSpecificControllers(ControllerContext filterContext)
+        {
+            return filterContext.Controller is LoginController || filterContext.Controller is HomeController;
+        }
+
         public override void OnActionExecuted(
             ActionExecutedContext filterContext)
         {
-            if (filterContext.Controller is LoginController || filterContext.Controller is HomeController) return;
+            if (DoNotRunAttributeForSpecificControllers(filterContext)) return;
 
             try
             {
