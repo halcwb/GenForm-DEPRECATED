@@ -2,6 +2,7 @@
 using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Mvc3.Environments;
 using Informedica.GenForm.Services;
+using MyNamespace;
 using StructureMap;
 using TypeMock.ArrangeActAssert;
 using System.Web.Mvc;
@@ -35,12 +36,12 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void HaveTestActionFilterWithAnInjectedTestImplementationForITestInterface()
+        public void MakeSureThatIShouldBeInjectedSettingOfTestAttributeIsInjected()
         {
             FilterAttributeDependencyInversionConfigurator.Configure<TestAttribute>();
 
             var testSetting = new TestImplementation();
-            ObjectFactory.Configure(x => x.For<ITestInterface>().Use(testSetting));
+            ObjectFactory.Configure(x => x.For<IShouldBeInjectedSetting>().Use(testSetting));
 
             var methodName = "Test";
             Assert.IsTrue(_invoker.InvokeAction(_context, methodName));
@@ -48,13 +49,46 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void InjectADatabaseServicesDependencyIntoNHibernateSessionAttribute()
+        public void MakeSureThatIDatabaseServiceOfNHibernateSessinoAttributeIsInjected()
         {
             FilterAttributeDependencyInversionConfigurator.Configure<IDatabaseServices>();
 
             SetupDatabaseServices();
 
             InvokeTestNhibernateSessionAttribute();
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void Have_ShouldBeInjectedSettingInjected_ButNot_ShouldNotBeInjectedSettingOfTestAttribute()
+        {
+            FilterAttributeDependencyInversionConfigurator.Configure<TestAttribute>();
+
+            ConfigureTypesForTestAttribute();
+
+            var methodName = "Test";
+            Assert.IsTrue(_invoker.InvokeAction(_context, methodName));
+        }
+
+        [Isolated]
+        [TestMethod]
+        [ExpectedException(typeof(TestAttributeException))]
+        public void ThrowATestAttributeExceptionWhenSettingsOfTestAttributeAreNotInjectedProperly()
+        {
+            FilterAttributeDependencyInversionConfigurator.Configure<IShouldNotBeInjectedSetting>();
+
+            ConfigureTypesForTestAttribute();
+
+            var methodName = "Test";
+            Assert.IsTrue(_invoker.InvokeAction(_context, methodName));
+        }
+
+        private static void ConfigureTypesForTestAttribute()
+        {
+            var testSetting = new TestImplementation();
+            ObjectFactory.Configure(x => x.For<IShouldBeInjectedSetting>().Use(testSetting));
+            var notASetting = new ShouldNotBeInjectedSetting();
+            ObjectFactory.Configure(x => x.For<IShouldNotBeInjectedSetting>().Use(notASetting));
         }
 
         private static void SetupDatabaseServices()
@@ -69,30 +103,14 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             var methodName = "TestNHibernateSessionAttribute";
             Assert.IsTrue(_invoker.InvokeAction(_context, methodName));
         }
-
-        [Isolated]
-        [TestMethod]
-        public void NotBeAbleToInjectDependencyWhenConfiguredWithTypeInWrongNameSpace()
-        {
-            System.Diagnostics.Debug.WriteLine(ObjectFactory.WhatDoIHave());
-            FilterAttributeDependencyInversionConfigurator.Configure<TestAttribute>();
-
-            SetupDatabaseServices();
-
-            try
-            {
-                InvokeTestNhibernateSessionAttribute();
-                Assert.Fail("Should not work");
-
-            }
-            catch (Exception e)
-            {
-                 Assert.IsNotInstanceOfType(e, typeof(AssertFailedException));
-            }
-        }
     }
 
-    public class TestImplementation: ITestInterface
+    public class TestAttributeException: Exception
+    {
+    }
+
+
+    public class TestImplementation: IShouldBeInjectedSetting
     {
     }
 
@@ -120,12 +138,32 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
     public class TestAttribute : ActionFilterAttribute
     {
-        public ITestInterface Setting { get; set; }
+        public IShouldBeInjectedSetting ShouldBeInjectedSetting { get; set; }
+
+        public IShouldNotBeInjectedSetting ShouldNotBeInjectedSetting { get; set; }
+
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (ShouldBeInjectedSetting == null || ShouldNotBeInjectedSetting != null) throw new TestAttributeException();
+        }
     }
 
 
-    public interface ITestInterface
+    public interface IShouldBeInjectedSetting
     {
     }
+
+}
+
+namespace MyNamespace
+{
+    public interface IShouldNotBeInjectedSetting
+    {
+    }
+
+    public class ShouldNotBeInjectedSetting : IShouldNotBeInjectedSetting
+    {
+    }
+
 
 }

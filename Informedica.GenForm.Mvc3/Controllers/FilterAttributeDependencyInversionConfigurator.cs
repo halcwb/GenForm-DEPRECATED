@@ -1,5 +1,6 @@
 using System.Web.Mvc;
 using System.Web.Routing;
+using Informedica.GenForm.Mvc3.Environments;
 using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
@@ -18,6 +19,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
                                                                    {
                                                                        c.OfType<IActionInvoker>();
                                                                        c.OfType<ITempDataProvider>();
+                                                                       c.OfType<NHibernateSessionAttribute>();
                                                                        c.WithAnyTypeFromNamespaceContainingType
                                                                            <T>();
                                                                    });

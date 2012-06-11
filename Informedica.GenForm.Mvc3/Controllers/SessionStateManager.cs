@@ -3,7 +3,9 @@ using System.Data;
 using System.Web;
 using Informedica.GenForm.Assembler;
 using Informedica.GenForm.DataAccess;
+using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Library.Services.Users;
+using Informedica.GenForm.Services;
 using NHibernate;
 using NHibernate.Context;
 using StructureMap;
@@ -96,7 +98,8 @@ namespace Informedica.GenForm.Mvc3.Controllers
 
         public static void InitializeDatabase(HttpSessionStateBase sessionState)
         {
-            throw new NotImplementedException();
+            //ToDo : refacture so controllers use DatabaseServices instead of SessionStateManager
+            DatabaseServices.InitializeDatabase(new HttpSessionCache(sessionState));
         }
     }
 }

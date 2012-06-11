@@ -51,8 +51,16 @@ namespace Informedica.GenForm.Mvc3.Environments
         public override void OnActionExecuted(
           ActionExecutedContext filterContext)
         {
-            var session = CurrentSessionContext.Unbind(TryGetSessionFactory(filterContext));
-            session.Close();
+            try
+            {
+                var session = CurrentSessionContext.Unbind(TryGetSessionFactory(filterContext));
+                session.Close();
+
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
         private static ISessionFactory TryGetSessionFactory(ControllerContext context)
