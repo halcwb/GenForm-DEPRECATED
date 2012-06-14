@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
+using Informedica.GenForm.DomainModel.Interfaces;
 
 namespace Informedica.GenForm.Library.DomainModel.Equality
 {

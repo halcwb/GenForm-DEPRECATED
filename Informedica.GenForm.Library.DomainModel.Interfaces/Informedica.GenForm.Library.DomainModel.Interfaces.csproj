@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F772CA62-5400-45BF-B586-AACF5F20D6BC}</ProjectGuid>
+    <ProjectGuid>{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Informedica.GenForm.TestFixtures</RootNamespace>
-    <AssemblyName>Informedica.GenForm.TestFixtures</AssemblyName>
+    <RootNamespace>Informedica.GenForm.DomainModel.Interfaces</RootNamespace>
+    <AssemblyName>Informedica.GenForm.DomainModel.Interfaces</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,33 +33,25 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fixtures\BrandTestFixtures.cs" />
-    <Compile Include="Fixtures\PackageTestFixtures.cs" />
-    <Compile Include="Fixtures\ProductTestFixtures.cs" />
-    <Compile Include="Fixtures\RouteTestFixtures.cs" />
-    <Compile Include="Fixtures\ShapeTestFixtures.cs" />
-    <Compile Include="Fixtures\SubstanceGroupTestFixtures.cs" />
-    <Compile Include="Fixtures\SubstanceTestFixtures.cs" />
-    <Compile Include="Fixtures\UnitGroupTestFixtures.cs" />
-    <Compile Include="Fixtures\UnitTestFixtures.cs" />
-    <Compile Include="Fixtures\UserTestFixtures.cs" />
+    <Compile Include="IBrand.cs" />
+    <Compile Include="IPackage.cs" />
+    <Compile Include="IProduct.cs" />
+    <Compile Include="IProductSubstance.cs" />
+    <Compile Include="IRoute.cs" />
+    <Compile Include="IShape.cs" />
+    <Compile Include="ISubstance.cs" />
+    <Compile Include="ISubstanceGroup.cs" />
+    <Compile Include="IUnit.cs" />
+    <Compile Include="IUnitGroup.cs" />
+    <Compile Include="IUnitValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\EntityRepository\Informedica.EntityRepository\Informedica.EntityRepository.csproj">
-      <Project>{E3780309-03FF-43DC-A134-828269F2008C}</Project>
-      <Name>Informedica.EntityRepository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Library.DomainModel.Interfaces\Informedica.GenForm.Library.DomainModel.Interfaces.csproj">
-      <Project>{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}</Project>
-      <Name>Informedica.GenForm.Library.DomainModel.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
-      <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
-      <Name>Informedica.GenForm.Library</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

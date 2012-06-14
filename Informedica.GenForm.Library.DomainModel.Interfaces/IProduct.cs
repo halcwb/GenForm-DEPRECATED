@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Informedica.GenForm.Library.DomainModel.Products.Interfaces
+namespace Informedica.GenForm.DomainModel.Interfaces
 {
     public interface IProduct
     {
@@ -11,12 +11,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Interfaces
         String GenericName { get; }
         IBrand Brand { get; }
         IShape Shape { get; }
-        UnitValue Quantity { get; }
+        IUnitValue Quantity { get; }
         IPackage Package { get; }
         String DisplayName { get; }
         IEnumerable<IProductSubstance> Substances { get; }
         bool ContainsSubstance(ISubstance substance);
-        void AddSubstance(ISubstance substance, int sortOrder, UnitValue quanity);
+        void AddSubstance(ISubstance substance, int sortOrder, IUnitValue quanity);
         void RemoveSubstance(ISubstance substance);
         IEnumerable<IRoute> Routes { get; }
         bool ContainsRoute(IRoute route);
