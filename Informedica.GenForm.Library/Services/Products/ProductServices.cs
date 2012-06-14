@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Informedica.GenForm.DomainModel.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products;
-using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.Factories;
 
 namespace Informedica.GenForm.Library.Services.Products

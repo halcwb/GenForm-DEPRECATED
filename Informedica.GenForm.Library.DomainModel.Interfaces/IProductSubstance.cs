@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Informedica.GenForm.Library.DomainModel.Products.Interfaces
+namespace Informedica.GenForm.DomainModel.Interfaces
 {
     public interface IProductSubstance
     {
@@ -8,6 +8,6 @@ namespace Informedica.GenForm.Library.DomainModel.Products.Interfaces
         String Name { get; }
         Int32 SortOrder { get;  }
         ISubstance Substance { get; }
-        UnitValue Quantity { get; }
+        IUnitValue Quantity { get; }
     }
 }

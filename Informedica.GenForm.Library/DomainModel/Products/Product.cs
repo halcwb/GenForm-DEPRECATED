@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Informedica.GenForm.DomainModel.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Collections;
-using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products
@@ -52,7 +52,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
         
         public virtual string GenericName { get; set; }
 
-        public virtual UnitValue Quantity { get; set; }
+        public virtual IUnitValue Quantity { get; set; }
 
         public virtual IBrand Brand
         {
@@ -148,11 +148,11 @@ namespace Informedica.GenForm.Library.DomainModel.Products
             return _substances.Count(x => x.Substance == substance) > 0;
         }
 
-        public virtual void AddSubstance(ISubstance substance, int sortOrder, UnitValue quanity)
+        public virtual void AddSubstance(ISubstance substance, int sortOrder, IUnitValue quanity)
         {
             if (ContainsSubstance(substance)) return;
             
-            _substances.Add(ProductSubstance.Create(sortOrder, this, (Substance)substance, quanity));
+            _substances.Add(ProductSubstance.Create(sortOrder, this, (Substance)substance, (UnitValue)quanity));
         }
 
         public virtual IList<ProductSubstance> SubstanceList
@@ -242,7 +242,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
                 _product = product;
             }
 
-            public ProductSubstanceCreate Quantity(Unit unit, Decimal quantity)
+            public ProductSubstanceCreate Quantity(IUnit unit, Decimal quantity)
             {
                 var qty = new UnitValue(quantity, unit);
                 _product.SetUnitValue(qty);

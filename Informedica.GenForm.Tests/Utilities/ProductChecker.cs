@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
+using Informedica.GenForm.DomainModel.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Informedica.GenForm.Tests.Utilities

@@ -1,6 +1,6 @@
 using Iesi.Collections.Generic;
+using Informedica.GenForm.DomainModel.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Equality;
-using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 
 namespace Informedica.GenForm.Library.DomainModel.Products.Collections
 {

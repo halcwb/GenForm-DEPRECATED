@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Iesi.Collections.Generic;
+using Informedica.GenForm.DomainModel.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Data;
 using Informedica.GenForm.Library.DomainModel.Products.Collections;
-using Informedica.GenForm.Library.DomainModel.Products.Interfaces;
 using Informedica.GenForm.Library.DomainModel.Validation;
 
 namespace Informedica.GenForm.Library.DomainModel.Products

@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Informedica.GenForm.Library.DomainModel.Products.Interfaces
+namespace Informedica.GenForm.DomainModel.Interfaces
 {
     public interface IUnit
     {
         String Name { get;}
-        UnitGroup UnitGroup { get; }
+        IUnitGroup UnitGroup { get; }
         String Abbreviation { get; }
         Decimal Multiplier { get; }
         Boolean IsReference { get; }
