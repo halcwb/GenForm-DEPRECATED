@@ -7,6 +7,7 @@ using Informedica.GenForm.Services.UserLogin;
 using Informedica.GenForm.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Mvc;
+using StructureMap;
 using TypeMock.ArrangeActAssert;
 using LoginServices = Informedica.GenForm.Services.UserLogin.LoginServices;
 
@@ -19,7 +20,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
     ///to contain all LoginControllerTest Unit Tests
     ///</summary>
     [TestClass]
-    public class LoginControllerShould
+    public class Login_controller_should
     {
         private LoginController _controller;
         private UserLoginDto _user;
@@ -58,7 +59,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestInitialize]
         public void MyTestInitialize()
         {
-            _controller = new LoginController();
+            _controller = ObjectFactory.GetInstance<LoginController>();
             Isolate.WhenCalled(() => EnvironmentServices.SetEnvironment("Test")).IgnoreCall();
             Isolate.WhenCalled(() => SessionStateManager.InitializeDatabase(_sessionState)).IgnoreCall();
 
@@ -90,7 +91,17 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void StoreTheEnvironmentNameInTheHttpContextSessionCollection()
+        public void have_a_IDatabaseServices_to_initialize_the_database()
+        {
+            ObjectFactory.Configure(x => x.For<ILoginController>().Use(_controller));
+            var controller = ObjectFactory.GetInstance<ILoginController>();
+
+            Assert.IsNotNull(controller.DatabaseServices);
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void store_the_environment_name_in_the_HttpContextSession_collection()
         {
             var userName = _user.UserName;
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(userName)).WillReturn(true);
@@ -102,7 +113,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void ReturnActionResultWithSuccessIsTrueAfterSetEnvironmentActionMethodCall()
+        public void return_an_action_result_with_success_is_true_after_set_environment()
         {
             SetEnvironmentOnController();
             Assert.IsTrue(ActionResultParser.GetSuccessValue(_controller.SetEnvironment(Testgenform)));
@@ -110,7 +121,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void ReturnALoginExceptionMessageWhenEnvironmentHasNotBeenSetBeforeLogin()
+        public void return_an_action_result_with_an_exception_message_when_environment_has_not_been_set_before_login()
         {
             var userName = _user.UserName;
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(userName)).WillReturn(false);
@@ -121,7 +132,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void ReturnFalseForInvalidUserLogin()
+        public void return_success_is_false_when_invalid_login()
         {
             var userName = _user.UserName;
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(userName)).WillReturn(false);
@@ -133,7 +144,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void RequestLoginFromLoginServicesUsingLoginDto()
+        public void request_login_from_login_services_using_LoginDto()
         {
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(string.Empty)).WillReturn(true);
 
@@ -145,7 +156,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void AskLoginServicesIfUserIsLoggedIn()
+        public void ask_login_services_if_user_is_logged_in()
         {
             var name = _user.UserName;
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(name)).WillReturn(true);
@@ -158,7 +169,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public  void ReturnSuccessValueIsTrueWhenValidUserLogin()
+        public  void return_success_is_true_when_valid_user_login()
         {
             // Setup            
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(ValidUser)).WillReturn(true);
@@ -173,7 +184,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void AppendALoginCookieToResponseWhenSuccessfulLogin()
+        public void append_a_cookie_to_response_when_successfull_login()
         {
             var cookie = Isolate.Fake.Instance<HttpCookie>();
             Isolate.WhenCalled(() => LoginServices.IsLoggedIn(ValidUser)).WillReturn(true);
@@ -187,7 +198,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public  void ReturnSuccessValueTrueForPasswordChangeForValidUser()
+        public  void return_success_is_true_when_password_change_for_valid_user()
         {
             Isolate.WhenCalled(() => LoginServices.ChangePassword(_user, TempPassword)).IgnoreCall();
             Isolate.WhenCalled(() => LoginServices.CheckPassword(TempPassword)).WillReturn(true);
@@ -201,7 +212,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void NotChangePasswordWhenNotLoggedIn()
+        public void not_change_the_password_when_not_logged_in()
         {
             Isolate.Fake.StaticMethods(typeof(LoginServices));
             Isolate.WhenCalled(() => LoginServices.ChangePassword(_user, "newpassword")).IgnoreCall();
@@ -215,9 +226,9 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void ReturnLoginPresentationWithDisabledLoginButtonForInValidLogin()
+        public void return_a_login_presentation_with_disabled_login_button_for_invalid_login()
         {
-            var controller = new LoginController();
+            var controller = ObjectFactory.GetInstance<LoginController>();
             Isolate.Fake.StaticMethods(typeof(LoginForm));
 
             var result = controller.GetLoginPresentation("", "");
@@ -230,7 +241,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void ReturnLoginPresentationForValidUserWithLoginButtonEnabled()
+        public void return_login_presentation_for_valid_user_with_login_button_enabled()
         {
             Isolate.Fake.StaticMethods(typeof(LoginForm));
 
@@ -244,7 +255,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void ProvideTheHttpSessionStateBaseToEnvironmentServicesWhenSetEnvironmentIsCalled()
+        public void provide_the_HttpSessionState_to_environment_services_when_set_environment_is_called()
         {
             _controller.SetEnvironment(Testgenform);
 
@@ -254,7 +265,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void CallEnvironmentServicesToSetHttpSessionCacheLoggingIn()
+        public void call_environment_services_to_set_HttpSessionCache_when_logging_in()
         {
             _controller.Login(_user);
 

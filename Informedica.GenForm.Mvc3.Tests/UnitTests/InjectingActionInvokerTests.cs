@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 {
     [TestClass]
-    public class InjectingActionInvokerShould
+    public class InjectingActionInvokerTests
     {
         private InjectingActionInvoker _invoker;
         private ControllerContext _context;
@@ -36,7 +36,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void MakeSureThatIShouldBeInjectedSettingOfTestAttributeIsInjected()
+        public void that_IShouldBeInjectedSetting_of_TestAttribute_is_injected()
         {
             FilterAttributeDependencyInversionConfigurator.Configure<TestAttribute>();
 
@@ -49,7 +49,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void MakeSureThatIDatabaseServiceOfNHibernateSessinoAttributeIsInjected()
+        public void that_IDatabaseService_of_NHibernateSessinoAttribute_is_injected()
         {
             FilterAttributeDependencyInversionConfigurator.Configure<IDatabaseServices>();
 
@@ -60,7 +60,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
         [Isolated]
         [TestMethod]
-        public void Have_ShouldBeInjectedSettingInjected_ButNot_ShouldNotBeInjectedSettingOfTestAttribute()
+        public void that_InjectedSetting_is_injected_but_not_ShouldNotBeInjectedSetting_of_TestAttribute()
         {
             FilterAttributeDependencyInversionConfigurator.Configure<TestAttribute>();
 
@@ -73,7 +73,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [Isolated]
         [TestMethod]
         [ExpectedException(typeof(TestAttributeException))]
-        public void ThrowATestAttributeExceptionWhenSettingsOfTestAttributeAreNotInjectedProperly()
+        public void that_a_TestAttributeException_is_thrown_when_Settings_of_TestAttribute_are_not_injected_when_they_should()
         {
             FilterAttributeDependencyInversionConfigurator.Configure<IShouldNotBeInjectedSetting>();
 

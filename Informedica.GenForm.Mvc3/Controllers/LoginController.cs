@@ -3,16 +3,22 @@ using System.Web;
 using System.Web.Mvc;
 using Ext.Direct.Mvc;
 using Informedica.GenForm.Presentation.Security;
+using Informedica.GenForm.Services;
 using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Services.UserLogin;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : Controller, ILoginController
     {
         public const string NoEnvironmentMessage = "Environment has not been set";
         private const int ExpireTimeInHours = 1;
         public const string EnvironmentSetting = "environment";
+
+        public LoginController(IDatabaseServices databaseServices)
+        {
+            DatabaseServices = databaseServices;
+        }
 
         public ActionResult GetCurrentEnvironment()
         {
@@ -99,5 +105,11 @@ namespace Informedica.GenForm.Mvc3.Controllers
             if (HttpContext.Session != null) return (string)HttpContext.Session[EnvironmentSetting];
             return string.Empty;
         }
+
+        #region Implementation of ILoginController
+
+        public IDatabaseServices DatabaseServices { get; private set; }
+
+        #endregion
     }
 }

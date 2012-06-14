@@ -12,7 +12,7 @@ using TypeMock.ArrangeActAssert;
 namespace Informedica.GenForm.Services.Tests
 {
     [TestClass]
-    public class DatabaseServicesShould
+    public class A_database_services_should
     {
         private HttpSessionStateBase _sessionState;
         private ISessionFactory _factory;
@@ -41,7 +41,7 @@ namespace Informedica.GenForm.Services.Tests
 
         [IsolatedAttribute]
         [TestMethodAttribute]
-        public void ConfigureObjectFactoryWithTheSessionFactoryFromSessionCacheIfNotNull()
+        public void configure_ObjectFactory_with_the_SessionFactory_from_the_SessionCache_if_not_null()
         {
             _services = ObjectFactory.GetInstance<IDatabaseServices>();
 
@@ -51,7 +51,7 @@ namespace Informedica.GenForm.Services.Tests
 
         [Isolated]
         [TestMethod]
-        public void GetTheDefaultTestGenFormEnvironmentIfNoEnvironmentInSessionState()
+        public void get_the_default_TestGenForm_environment_if_no_environment_in_SessionState()
         {
             Isolate.WhenCalled(() => _sessionState[HttpSessionCache.EnvironmentSetting]).WillReturn("TestGenForm");
 
@@ -60,7 +60,7 @@ namespace Informedica.GenForm.Services.Tests
 
         [Isolated]
         [TestMethod]
-        public void BuildTheDatabaseWhenTheConnectionCacheIsNotEmpty()
+        public void build_the_database_when_the_connection_cache_is_not_empty()
         {
             var connection = Isolate.Fake.Instance<IDbConnection>();
             var session = IsolateSetupDatabaseMethod(connection);
@@ -71,7 +71,7 @@ namespace Informedica.GenForm.Services.Tests
 
         [Isolated]
         [TestMethod]
-        public void NotBuildTheDatabaseWhenTheConnectionCacheIsEmpty()
+        public void not_build_the_database_when_the_connection_cache_is_empty()
         {
             var session = IsolateSetupDatabaseMethod(null);
             
@@ -81,7 +81,7 @@ namespace Informedica.GenForm.Services.Tests
 
         [Isolated]
         [TestMethod]
-        public void ConfigureTheNewDatabaseWithASystemUserAdminWithPasswordAdmin()
+        public void configure_a_new_database_with_system_user_Admin_with_password_Admin()
         {
             var connection = Isolate.Fake.Instance<IDbConnection>();
             IsolateSetupDatabaseMethod(connection);
