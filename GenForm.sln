@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Services.Tests", "Informedica.GenForm.Services.Tests\Informedica.GenForm.Services.Tests.csproj", "{BD7792E8-47D2-435D-8F64-82BD80B630DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.DomainModel.Interfaces", "Informedica.GenForm.DomainModel.Interfaces\Informedica.GenForm.DomainModel.Interfaces.csproj", "{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = GenForm2.vsmdi
@@ -302,6 +304,16 @@ Global
 		{BD7792E8-47D2-435D-8F64-82BD80B630DB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BD7792E8-47D2-435D-8F64-82BD80B630DB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BD7792E8-47D2-435D-8F64-82BD80B630DB}.Release|x86.ActiveCfg = Release|Any CPU
+		{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

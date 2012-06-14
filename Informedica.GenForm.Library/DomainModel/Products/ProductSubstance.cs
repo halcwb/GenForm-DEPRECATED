@@ -43,7 +43,7 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual int SortOrder { get; set; }
 
-        public virtual UnitValue Quantity { get { return _unitValue; } protected set { _unitValue = value; } }
+        public virtual IUnitValue Quantity { get { return _unitValue; } protected set { _unitValue = (UnitValue)value; } }
 
         public virtual ISubstance Substance { get { return _substance; } protected set { _substance = (Substance)value; } }
 

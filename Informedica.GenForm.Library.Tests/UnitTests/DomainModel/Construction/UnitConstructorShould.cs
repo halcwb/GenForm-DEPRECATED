@@ -76,7 +76,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
                             IsReference = true,
                             Multiplier = (decimal)0.0000001,
                             Name = "microgram",
-                        }, unit1.UnitGroup);
+                        }, (UnitGroup) unit1.UnitGroup);
 
             Assert.AreEqual(unit1.UnitGroup, unit2.UnitGroup);
         }

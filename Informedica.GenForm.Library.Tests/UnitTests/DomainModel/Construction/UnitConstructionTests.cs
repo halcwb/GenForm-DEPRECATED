@@ -107,7 +107,7 @@ namespace Informedica.GenForm.Library.Tests.UnitTests.DomainModel.Construction
             return !string.IsNullOrWhiteSpace(unit.Name) &&
                    !string.IsNullOrWhiteSpace(unit.Abbreviation) &&
                    unit.UnitGroup != null &&
-                   unit.UnitGroup.UnitSet.Contains(unit);
+                   ((UnitGroup)unit.UnitGroup).UnitSet.Contains(unit);
         }
     }
 }

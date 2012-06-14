@@ -45,10 +45,10 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual Boolean IsReference { get; set; }
 
-        public virtual UnitGroup UnitGroup
+        public virtual IUnitGroup UnitGroup
         {
             get { return _unitGroup; }
-            protected internal set { _unitGroup = value; }
+            protected internal set { _unitGroup = (UnitGroup)value; }
         }
 
         public virtual void ChangeUnitGroup(UnitGroup newGroup)
@@ -61,12 +61,12 @@ namespace Informedica.GenForm.Library.DomainModel.Products
 
         public virtual bool CannotChangeGroup(UnitGroup newGroup)
         {
-            return UnitGroup.Equals(newGroup, UnitGroup, new UnitGroupComparer());
+            return Products.UnitGroup.Equals(newGroup, _unitGroup, new UnitGroupComparer());
         }
 
         internal protected virtual void RemoveFromGroup()
         {
-            UnitGroup.RemoveUnit(this);
+            _unitGroup.RemoveUnit(this);
         }
 
         #endregion
