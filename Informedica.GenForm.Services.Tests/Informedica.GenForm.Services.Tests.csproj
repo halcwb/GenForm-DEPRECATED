@@ -57,7 +57,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseServicesShould.cs" />
+    <Compile Include="A_database_services_should.cs" />
     <Compile Include="EnvironmentServicesShould.cs" />
     <Compile Include="LoginServicesShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,5 +1,6 @@
 ﻿using Informedica.GenForm.Mvc3.Controllers;
 using NHibernate;
+using StructureMap;
 using TypeMock;
 using TypeMock.ArrangeActAssert;
 using System.Web.Mvc;
@@ -38,8 +39,8 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
             _attr = new TransactionAttribute();
             Isolate.NonPublic.Property.WhenGetCalled(_attr, "Session").WillReturn(_session);
 
-            _loginController = new LoginController();
-            _homeController = new HomeController();
+            _loginController = ObjectFactory.GetInstance<LoginController>();
+            _homeController = ObjectFactory.GetInstance<HomeController>();
         }
 
         [Isolated]
