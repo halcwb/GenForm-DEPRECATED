@@ -121,16 +121,6 @@
     <Compile Include="DomainModel\Products\Collections\RouteSet.cs" />
     <Compile Include="DomainModel\Products\Collections\ShapeList.cs" />
     <Compile Include="DomainModel\Products\Collections\SubstanceSet.cs" />
-    <Compile Include="DomainModel\Products\Interfaces\IBrand.cs" />
-    <Compile Include="DomainModel\Products\Interfaces\IPackage.cs" />
-    <Compile Include="DomainModel\Products\Interfaces\IProductSubstance.cs" />
-    <Compile Include="DomainModel\Products\Interfaces\IRoute.cs" />
-    <Compile Include="DomainModel\Products\Interfaces\IShape.cs" />
-    <Compile Include="DomainModel\Products\Interfaces\ISubstance.cs" />
-    <Compile Include="DomainModel\Products\Interfaces\ISubstanceGroup.cs" />
-    <Compile Include="DomainModel\Products\Interfaces\IUnit.cs" />
-    <Compile Include="DomainModel\Products\Interfaces\IUnitGroup.cs" />
-    <Compile Include="DomainModel\Products\Interfaces\IUnitValue.cs" />
     <Compile Include="DomainModel\Products\Package.cs" />
     <Compile Include="DomainModel\Products\ProductSubstance.cs" />
     <Compile Include="DomainModel\Products\Route.cs" />
@@ -166,7 +156,6 @@
     <Compile Include="Factories\UnitGroupFactory.cs" />
     <Compile Include="Factories\UserFactory.cs" />
     <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="DomainModel\Products\Interfaces\IProduct.cs" />
     <Compile Include="DomainModel\Products\Product.cs" />
     <Compile Include="DomainModel\Users\Interfaces\IPharamcists.cs" />
     <Compile Include="DomainModel\Users\Interfaces\IUser.cs" />
@@ -202,6 +191,10 @@
     <ProjectReference Include="..\..\EntityRepository\Informedica.EntityRepository\Informedica.EntityRepository.csproj">
       <Project>{E3780309-03FF-43DC-A134-828269F2008C}</Project>
       <Name>Informedica.EntityRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Library.DomainModel.Interfaces\Informedica.GenForm.Library.DomainModel.Interfaces.csproj">
+      <Project>{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}</Project>
+      <Name>Informedica.GenForm.Library.DomainModel.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

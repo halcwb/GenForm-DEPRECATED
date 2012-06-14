@@ -130,6 +130,10 @@
       <Project>{9EC2E9E4-CEEF-4A78-A8DE-EB12F8C6DAE1}</Project>
       <Name>Informedica.GenForm.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Informedica.GenForm.Library.DomainModel.Interfaces\Informedica.GenForm.Library.DomainModel.Interfaces.csproj">
+      <Project>{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}</Project>
+      <Name>Informedica.GenForm.Library.DomainModel.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Informedica.GenForm.Library\Informedica.GenForm.Library.csproj">
       <Project>{584C03D3-A148-4125-B9DB-32B8B144E101}</Project>
       <Name>Informedica.GenForm.Library</Name>

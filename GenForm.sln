@@ -59,7 +59,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Services.Tests", "Informedica.GenForm.Services.Tests\Informedica.GenForm.Services.Tests.csproj", "{BD7792E8-47D2-435D-8F64-82BD80B630DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.DomainModel.Interfaces", "Informedica.GenForm.DomainModel.Interfaces\Informedica.GenForm.DomainModel.Interfaces.csproj", "{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Informedica.GenForm.Library.DomainModel.Interfaces", "Informedica.GenForm.Library.DomainModel.Interfaces\Informedica.GenForm.Library.DomainModel.Interfaces.csproj", "{ECB17AF3-B61D-48BB-97A2-7D4027C2E6DE}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

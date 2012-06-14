@@ -40,6 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBrand.cs" />
+    <Compile Include="IPackage.cs" />
+    <Compile Include="IProduct.cs" />
+    <Compile Include="IProductSubstance.cs" />
+    <Compile Include="IRoute.cs" />
+    <Compile Include="IShape.cs" />
+    <Compile Include="ISubstance.cs" />
+    <Compile Include="ISubstanceGroup.cs" />
+    <Compile Include="IUnit.cs" />
+    <Compile Include="IUnitGroup.cs" />
+    <Compile Include="IUnitValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
