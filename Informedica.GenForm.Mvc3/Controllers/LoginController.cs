@@ -6,6 +6,7 @@ using Informedica.GenForm.Presentation.Security;
 using Informedica.GenForm.Services;
 using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Services.UserLogin;
+using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
