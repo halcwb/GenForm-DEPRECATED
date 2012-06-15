@@ -62,13 +62,14 @@ namespace Informedica.GenForm.Assembler
 
         public static void Initialize()
         {
-            ObjectFactory.Initialize(x =>
+            ObjectFactory.Configure(x =>
             {
                 x.AddRegistry(DatabaseAssembler.RegisterDependencies());
                 x.AddRegistry(DatabaseRegistrationAssembler.RegisterDependencies());
                 x.AddRegistry(RepositoryAssembler.RegisterDependencies());
                 x.AddRegistry(SettingsAssembler.RegisterDependencies());
             });
+
         }
 
         public static ISessionFactory GetSessionFactory(string environment)

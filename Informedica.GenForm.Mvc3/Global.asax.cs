@@ -1,8 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Informedica.GenForm.Assembler;
+using Informedica.GenForm.Mvc3.Controllers;
 using Informedica.GenForm.Mvc3.Environments;
 using NHibernate;
+using StructureMap;
 
 namespace Informedica.GenForm.Mvc3
 {

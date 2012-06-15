@@ -1,5 +1,10 @@
+using System.Web.Mvc;
+using Informedica.GenForm.DataAccess.Databases;
+using Informedica.GenForm.Services;
 using StructureMap;
+
 namespace Informedica.GenForm.Mvc3 {
+
     public static class IoC {
         public static IContainer Initialize() {
             ObjectFactory.Initialize(x =>
@@ -9,8 +14,13 @@ namespace Informedica.GenForm.Mvc3 {
                                         scan.TheCallingAssembly();
                                         scan.WithDefaultConventions();
                                     });
-            //                x.For<IExample>().Use<Example>();
+
+                            x.For<IControllerActivator>().Use<StructureMapControllerActivator>();
+                            x.For<IDatabaseServices>().Use<DatabaseServices>();
+                            x.For<ISessionCache>().Use<HttpSessionCache>();
+
                         });
+
             return ObjectFactory.Container;
         }
     }

@@ -73,6 +73,7 @@
     <Reference Include="Typemock.ArrangeActAssert, Version=6.2.3.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntegrationTests\A_SmDependencyResolver_Should.cs" />
     <Compile Include="UnitTests\ActionResultParserTest.cs" />
     <Compile Include="UnitTests\InjectingActionInvokerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,9 +148,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="IntegrationTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
