@@ -98,7 +98,6 @@
     <Compile Include="Controllers\FilterAttributeDependencyInversionConfigurator.cs" />
     <Compile Include="Controllers\GenericNameDto.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ILoginController.cs" />
     <Compile Include="Controllers\InjectingActionInvoker.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductController.cs" />

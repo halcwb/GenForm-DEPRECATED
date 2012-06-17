@@ -46,7 +46,6 @@ namespace Informedica.GenForm.Tests
             ObjectFactory.Configure(x => x.For<ISessionFactory>().Use(fact));
         }
 
-        [TestMethod]
         public void TestMe()
         {
             var fact = SessionFactory;

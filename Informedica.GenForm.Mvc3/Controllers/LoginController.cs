@@ -6,14 +6,14 @@ using Informedica.GenForm.Presentation.Security;
 using Informedica.GenForm.Services;
 using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Services.UserLogin;
-using StructureMap;
 
 namespace Informedica.GenForm.Mvc3.Controllers
 {
-    public class LoginController : Controller, ILoginController
+    public class LoginController : Controller
     {
-        public const string NoEnvironmentMessage = "Environment has not been set";
         private const int ExpireTimeInHours = 1;
+        
+        public const string NoEnvironmentMessage = "Environment has not been set";
         public const string EnvironmentSetting = "environment";
 
         public LoginController(IDatabaseServices databaseServices)

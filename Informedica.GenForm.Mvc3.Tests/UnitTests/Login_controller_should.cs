@@ -1,7 +1,9 @@
 ﻿using System.Web;
 using System;
+using Informedica.GenForm.DataAccess.Databases;
 using Informedica.GenForm.Mvc3.Controllers;
 using Informedica.GenForm.Presentation.Security;
+using Informedica.GenForm.Services;
 using Informedica.GenForm.Services.Environments;
 using Informedica.GenForm.Services.UserLogin;
 using Informedica.GenForm.Tests;
@@ -43,11 +45,18 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //    GenFormApplication.Initialize();
-        //}
+        [ClassInitialize]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            ObjectFactory.Configure(x => x.Scan(scan =>
+            {
+                scan.AssemblyContainingType<IDatabaseServices>();
+                scan.WithDefaultConventions();
+            }));
+
+            ObjectFactory.Configure(x => x.For<ISessionCache>().Use<HttpSessionCache>());
+
+        }
         //
         //Use ClassCleanup to run code after all tests in a class have run
         //[ClassCleanup()]
@@ -59,7 +68,10 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestInitialize]
         public void MyTestInitialize()
         {
+            _sessionState = Isolate.Fake.Instance<HttpSessionStateBase>();
+            ObjectFactory.Configure(x => x.For<HttpSessionStateBase>().Use(_sessionState));
             _controller = ObjectFactory.GetInstance<LoginController>();
+
             Isolate.WhenCalled(() => EnvironmentServices.SetEnvironment("Test")).IgnoreCall();
             Isolate.WhenCalled(() => SessionStateManager.InitializeDatabase(_sessionState)).IgnoreCall();
 
@@ -76,8 +88,6 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
 
             _context = Isolate.Fake.Instance<HttpContextBase>();
             Isolate.WhenCalled(() => _controller.HttpContext).WillReturn(_context);
-
-            _sessionState = Isolate.Fake.Instance<HttpSessionStateBase>();
             Isolate.WhenCalled(() => _context.Session).WillReturn(_sessionState);
         }
         //
@@ -93,8 +103,8 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         [TestMethod]
         public void have_a_IDatabaseServices_to_initialize_the_database()
         {
-            ObjectFactory.Configure(x => x.For<ILoginController>().Use(_controller));
-            var controller = ObjectFactory.GetInstance<ILoginController>();
+            ObjectFactory.Configure(x => x.For<LoginController>().Use(_controller));
+            var controller = ObjectFactory.GetInstance<LoginController>();
 
             Assert.IsNotNull(controller.DatabaseServices);
         }
