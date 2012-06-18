@@ -37,14 +37,24 @@ namespace Informedica.GenForm.Services.Tests
 
             ObjectFactory.Configure(x => x.For<IDatabaseServices>().Use<DatabaseServices>());
             _services = ObjectFactory.GetInstance<IDatabaseServices>();
+            _services.SessionCache = _cache;
+        }
+
+        [Isolated]
+        [TestMethod]
+        public void have_an_empty_session_cache_if_not_set()
+        {
+            _services = ObjectFactory.GetInstance<IDatabaseServices>();
+            var cache = _services.SessionCache;
+
+            Assert.IsInstanceOfType(cache, typeof(EmptySessionCache));
+            Assert.IsTrue(cache.IsEmpty());
         }
 
         [IsolatedAttribute]
         [TestMethodAttribute]
-        public void configure_ObjectFactory_with_the_SessionFactory_from_the_SessionCache_if_not_null()
+        public void configure_ObjectFactory_with_the_SessionFactory_from_the_SessionCache_if_is_not_empty()
         {
-            _services = ObjectFactory.GetInstance<IDatabaseServices>();
-
             _services.ConfigureSessionFactory();
             Assert.AreEqual(_factory, ObjectFactory.GetInstance<ISessionFactory>());
         }
@@ -86,7 +96,7 @@ namespace Informedica.GenForm.Services.Tests
             var connection = Isolate.Fake.Instance<IDbConnection>();
             IsolateSetupDatabaseMethod(connection);
 
-            DatabaseServices.InitializeDatabase(_cache);
+            _services.InitDatabase();
             Isolate.Verify.WasCalledWithAnyArguments(() => UserServices.ConfigureSystemUser());
         }
 

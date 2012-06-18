@@ -59,6 +59,11 @@ namespace Informedica.GenForm.DataAccess.Databases
             _sessionState[SessionFactorySetting] = fact;
         }
 
+        public bool IsEmpty()
+        {
+            return GetSessionFactory() == null;
+        }
+
         #endregion
     }
 }

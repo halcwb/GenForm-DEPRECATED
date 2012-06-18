@@ -7,5 +7,6 @@ namespace Informedica.GenForm.DataAccess.Databases
         ISessionFactory GetSessionFactory();
         string GetEnvironment();
         void SetSessionFactory(ISessionFactory fact);
+        bool IsEmpty();
     }
 }

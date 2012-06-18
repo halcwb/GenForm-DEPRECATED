@@ -14,19 +14,20 @@ namespace Informedica.GenForm.Services
     {
         private ISessionCache _cache;
 
-        public DatabaseServices(ISessionCache cache)
+        public ISessionCache SessionCache
         {
-            _cache = cache;
+            set { _cache = value; }
+            get { return _cache ?? (_cache = ObjectFactory.GetInstance<EmptySessionCache>()); }
         }
 
         public void ConfigureSessionFactory()
         {
-            UseSessionFactoryFromApplicationOrSessionCache(_cache);
+            UseSessionFactoryFromApplicationOrSessionCache(SessionCache);
         }
 
         private static void UseSessionFactoryFromApplicationOrSessionCache(ISessionCache cache)
         {
-            if (cache.GetSessionFactory() == null)
+            if (cache.IsEmpty())
                 ObjectFactory.Configure(
                     x =>
                     x.For<ISessionFactory>().Use(GenFormApplication.GetSessionFactory(cache.GetEnvironment())));
@@ -41,10 +42,11 @@ namespace Informedica.GenForm.Services
 
         public void InitDatabase()
         {
-            InitializeDatabase(_cache);
+            if (SessionCache.IsEmpty()) return;
+            InitializeDatabase(SessionCache);
         }
 
-        public static void InitializeDatabase(ISessionCache cache)
+        private static void InitializeDatabase(ISessionCache cache)
         {
             // Will cache the connection if in memory database
             SetupConfiguration(cache);
@@ -82,11 +84,5 @@ namespace Informedica.GenForm.Services
             var envConf = ConfigurationManager.Instance.GetConfiguration(environment);
             envConf.GetConnection();
         }
-    }
-
-    public interface IDatabaseServices
-    {
-        void ConfigureSessionFactory();
-        void InitDatabase();
     }
 }
