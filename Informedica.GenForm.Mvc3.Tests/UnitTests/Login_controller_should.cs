@@ -54,7 +54,7 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
                 scan.WithDefaultConventions();
             }));
 
-            ObjectFactory.Configure(x => x.For<ISessionCache>().Use<HttpSessionCache>());
+            ObjectFactory.Configure(x => x.For<ISessionStateCache>().Use<HttpSessionStateCache>());
 
         }
         //

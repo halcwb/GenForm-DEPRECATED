@@ -6,6 +6,6 @@ namespace Informedica.GenForm.Services
     {
         void ConfigureSessionFactory();
         void InitDatabase();
-        ISessionCache SessionCache { get; set; }
+        ISessionStateCache SessionStateCache { get; set; }
     }
 }

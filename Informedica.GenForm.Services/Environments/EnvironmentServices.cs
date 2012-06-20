@@ -48,7 +48,7 @@ namespace Informedica.GenForm.Services.Environments
 
         public static void SetHttpSessionCache(HttpSessionStateBase session)
         {
-             ObjectFactory.Configure(x => x.For<IConnectionCache>().Use(new HttpSessionCache(session)));
+             ObjectFactory.Configure(x => x.For<IConnectionCache>().Use(new HttpSessionStateCache(session)));
         }
     }
 }

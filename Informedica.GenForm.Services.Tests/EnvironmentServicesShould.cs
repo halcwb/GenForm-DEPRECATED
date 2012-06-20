@@ -14,13 +14,13 @@ namespace Informedica.GenForm.Services.Tests
     public class EnvironmentServicesShould
     {
         private HttpSessionStateBase _context;
-        private HttpSessionCache _cache;
+        private HttpSessionStateCache _stateCache;
 
         [TestInitialize]
         public void Init()
         {
             _context = Isolate.Fake.Instance<HttpSessionStateBase>();
-            _cache = new HttpSessionCache(_context);
+            _stateCache = new HttpSessionStateCache(_context);
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace Informedica.GenForm.Services.Tests
             Isolate.Fake.StaticMethods(typeof(ObjectFactory));
 
             EnvironmentServices.SetHttpSessionCache(_context);
-            Isolate.Verify.WasCalledWithAnyArguments(() => ObjectFactory.Configure(x => x.For<IConnectionCache>().Use(_cache)));
+            Isolate.Verify.WasCalledWithAnyArguments(() => ObjectFactory.Configure(x => x.For<IConnectionCache>().Use(_stateCache)));
         }
 
         [Isolated]

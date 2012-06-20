@@ -22,8 +22,8 @@ namespace Informedica.GenForm.Mvc3
                             x.For<IControllerActivator>().Use<StructureMapControllerActivator>();
 
                             x.For<IDatabaseServices>().AlwaysUnique().Use<DatabaseServices>();
-                            x.For<ISessionCache>().AlwaysUnique().Use<HttpSessionCache>();
-                            x.For<HttpSessionStateBase>().AlwaysUnique().Use(s => new HttpSessionStateWrapper(HttpContext.Current.Session));
+                            //x.For<ISessionCache>().AlwaysUnique().Use<HttpSessionCache>();
+                            //x.For<HttpSessionStateBase>().AlwaysUnique().Use(s => new HttpSessionStateWrapper(HttpContext.Current.Session));
 
                         });
 

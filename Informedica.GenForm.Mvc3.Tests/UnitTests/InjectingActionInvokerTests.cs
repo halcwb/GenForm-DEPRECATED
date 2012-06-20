@@ -94,8 +94,8 @@ namespace Informedica.GenForm.Mvc3.Tests.UnitTests
         private static void SetupDatabaseServices()
         {
             ObjectFactory.Configure(x => x.For<IDatabaseServices>().Use<DatabaseServices>());
-            var cache = Isolate.Fake.Instance<HttpSessionCache>();
-            ObjectFactory.Configure(x => x.For<ISessionCache>().Use(cache));
+            var cache = Isolate.Fake.Instance<HttpSessionStateCache>();
+            ObjectFactory.Configure(x => x.For<ISessionStateCache>().Use(cache));
         }
 
         private void InvokeTestNhibernateSessionAttribute()

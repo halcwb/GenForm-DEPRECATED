@@ -12,62 +12,67 @@ namespace Informedica.GenForm.Services
 {
     public class DatabaseServices: IDatabaseServices
     {
-        private ISessionCache _cache;
+        private ISessionStateCache _stateCache;
 
-        public ISessionCache SessionCache
+        public ISessionStateCache SessionStateCache
         {
-            set { _cache = value; }
-            get { return _cache ?? (_cache = ObjectFactory.GetInstance<EmptySessionCache>()); }
+            set { _stateCache = value; }
+            get { return _stateCache ?? (_stateCache = ObjectFactory.GetInstance<EmptySessionStateCache>()); }
         }
 
         public void ConfigureSessionFactory()
         {
-            UseSessionFactoryFromApplicationOrSessionCache(SessionCache);
+            UseSessionFactoryFromApplicationOrSessionCache(SessionStateCache);
         }
 
-        private static void UseSessionFactoryFromApplicationOrSessionCache(ISessionCache cache)
+        private static void UseSessionFactoryFromApplicationOrSessionCache(ISessionStateCache stateCache)
         {
-            if (cache.IsEmpty())
+            if (IsEmptyCache(stateCache))
                 ObjectFactory.Configure(
                     x =>
-                    x.For<ISessionFactory>().Use(GenFormApplication.GetSessionFactory(cache.GetEnvironment())));
+                    x.For<ISessionFactory>().Use(GenFormApplication.GetSessionFactory(stateCache.GetEnvironment())));
             else
             {
                 ObjectFactory.Configure(
                     x =>
-                    x.For<ISessionFactory>().Use(cache.GetSessionFactory));
+                    x.For<ISessionFactory>().Use(stateCache.GetSessionFactory));
             }
 
         }
 
-        public void InitDatabase()
+        private static bool IsEmptyCache(ISessionStateCache stateCache)
         {
-            if (SessionCache.IsEmpty()) return;
-            InitializeDatabase(SessionCache);
+            return stateCache is EmptySessionStateCache;
         }
 
-        private static void InitializeDatabase(ISessionCache cache)
+        public void InitDatabase()
+        {
+            if (IsEmptyCache(SessionStateCache)) return;
+            InitializeDatabase(SessionStateCache);
+        }
+
+        private static void InitializeDatabase(ISessionStateCache stateCache)
         {
             // Will cache the connection if in memory database
-            SetupConfiguration(cache);
+            SetupConfiguration(stateCache);
 
             // If database config is in memory, connection will be cached in in session state
-            var conn = GetConnectionFromSessionState((IConnectionCache)cache);
+            var conn = GetConnectionFromSessionState((IConnectionCache)stateCache);
             if (conn == null) return;
 
             // Connection has been cache so in memory database
-            SetupInMemoryDatabase(cache, conn);
+            SetupInMemoryDatabase(stateCache, conn);
         }
 
-        private static void SetupInMemoryDatabase(ISessionCache cache, IDbConnection conn)
+        private static void SetupInMemoryDatabase(ISessionStateCache stateCache, IDbConnection conn)
         {
-            var fact = SessionFactoryManager.GetSessionFactory(cache.GetEnvironment());
-            cache.SetSessionFactory(fact);
+            var fact = SessionFactoryManager.GetSessionFactory(stateCache.GetEnvironment());
+            stateCache.SetSessionFactory(fact);
 
-            UseSessionFactoryFromApplicationOrSessionCache(cache);
+            UseSessionFactoryFromApplicationOrSessionCache(stateCache);
             var session = ObjectFactory.GetInstance<ISessionFactory>().OpenSession(conn);
 
-            SessionFactoryManager.BuildSchema(cache.GetEnvironment(), session);
+            SessionFactoryManager.BuildSchema(stateCache.GetEnvironment(), session);
             CurrentSessionContext.Bind(session);
 
             UserServices.ConfigureSystemUser();
@@ -78,9 +83,9 @@ namespace Informedica.GenForm.Services
             return cache.GetConnection();
         }
 
-        private static void SetupConfiguration(ISessionCache cache)
+        private static void SetupConfiguration(ISessionStateCache stateCache)
         {
-            var environment = cache.GetEnvironment();
+            var environment = stateCache.GetEnvironment();
             var envConf = ConfigurationManager.Instance.GetConfiguration(environment);
             envConf.GetConnection();
         }

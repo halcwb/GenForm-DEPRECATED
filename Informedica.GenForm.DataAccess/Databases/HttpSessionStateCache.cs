@@ -5,7 +5,7 @@ using NHibernate;
 
 namespace Informedica.GenForm.DataAccess.Databases
 {
-    public class HttpSessionCache : IConnectionCache, ISessionCache
+    public class HttpSessionStateCache : IConnectionCache, ISessionStateCache
     {
         public const string SessionFactorySetting = "sessionfactory";
         public const string EnvironmentSetting = "environment";
@@ -13,7 +13,7 @@ namespace Informedica.GenForm.DataAccess.Databases
 
         private readonly HttpSessionStateBase _sessionState;
 
-        public HttpSessionCache(HttpSessionStateBase sessionState)
+        public HttpSessionStateCache(HttpSessionStateBase sessionState)
         {
             _sessionState = sessionState;
         }
@@ -57,11 +57,6 @@ namespace Informedica.GenForm.DataAccess.Databases
         public void SetSessionFactory(ISessionFactory fact)
         {
             _sessionState[SessionFactorySetting] = fact;
-        }
-
-        public bool IsEmpty()
-        {
-            return GetSessionFactory() == null;
         }
 
         #endregion

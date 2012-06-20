@@ -19,7 +19,7 @@ namespace Informedica.GenForm.Mvc3.Tests.IntegrationTests
         public void Setup()
         {
             ObjectFactory.Configure(x => x.For<IDatabaseServices>().Use<DatabaseServices>());
-            ObjectFactory.Configure(x => x.For<ISessionCache>().Use<HttpSessionCache>());
+            ObjectFactory.Configure(x => x.For<ISessionStateCache>().Use<HttpSessionStateCache>());
 
             var stateBase = Isolate.Fake.Instance<HttpSessionStateBase>();
             ObjectFactory.Configure(x => x.For<HttpSessionStateBase>().Use(stateBase));

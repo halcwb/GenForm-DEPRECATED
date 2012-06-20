@@ -100,7 +100,7 @@ namespace Informedica.GenForm.Mvc3.Controllers
         {
             //ToDo : refacture so controllers use DatabaseServices instead of SessionStateManager
             var services = ObjectFactory.GetInstance<IDatabaseServices>();
-            services.SessionCache = new HttpSessionCache(sessionState);
+            services.SessionStateCache = new HttpSessionStateCache(sessionState);
             services.InitDatabase();
         }
     }

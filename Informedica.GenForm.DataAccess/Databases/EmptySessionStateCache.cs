@@ -2,7 +2,7 @@ using NHibernate;
 
 namespace Informedica.GenForm.DataAccess.Databases
 {
-    public class EmptySessionCache : ISessionCache
+    public class EmptySessionStateCache : ISessionStateCache
     {
         #region Implementation of ISessionCache
 

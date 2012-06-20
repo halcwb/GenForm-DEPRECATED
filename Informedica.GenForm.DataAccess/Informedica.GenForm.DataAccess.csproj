@@ -74,9 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NHibernateProfilerBootstrapper.cs" />
-    <Compile Include="Databases\EmptySessionCache.cs" />
-    <Compile Include="Databases\HttpSessionCache.cs" />
-    <Compile Include="Databases\ISessionCache.cs" />
+    <Compile Include="Databases\EmptySessionStateCache.cs" />
+    <Compile Include="Databases\HttpSessionStateCache.cs" />
+    <Compile Include="Databases\ISessionStateCache.cs" />
     <Compile Include="Databases\MsSql2008Config.cs" />
     <Compile Include="Databases\IDatabaseConfig.cs" />
     <Compile Include="Databases\SqlLiteConfig.cs" />

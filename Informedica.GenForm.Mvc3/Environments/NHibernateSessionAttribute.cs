@@ -21,8 +21,8 @@ namespace Informedica.GenForm.Mvc3.Environments
         {
             if (HttpContext.Current == null || HttpContext.Current.Session == null) return;
             
-            var cache = new HttpSessionCache(new HttpSessionStateWrapper(HttpContext.Current.Session));
-            ObjectFactory.Configure(x => x.For<ISessionCache>().Use(cache));
+            var cache = new HttpSessionStateCache(new HttpSessionStateWrapper(HttpContext.Current.Session));
+            ObjectFactory.Configure(x => x.For<ISessionStateCache>().Use(cache));
         }
 
         public IDatabaseServices DatabaseServices { get; set; }
