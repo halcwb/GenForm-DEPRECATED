@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="4528b2af-4a68-435e-9687-19d62c54f111"
+  name="Databases"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="e9620d07-ff2b-4484-afa5-c93a73c2ec46"
+      handle="viewcode://./CodeSchema_Namespace?Namespace=Informedica.DataAccess.Databases"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <Interface
+        Id="f1c3de71-e533-4a2d-9046-660cd0483c7f"
+        name="IDatabaseConfig"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="9ea8c7d5-5bc9-4a5d-be29-203dfd59e19b"
+            handle="viewcode://./CodeSchema_Interface?Assembly=file:///C:/Development/DataAccess/Informedica.DataAccess/bin/Debug/Informedica.DataAccess.dll Namespace=Informedica.DataAccess.Databases Type=IDatabaseConfig"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="7e79ed1a-1bff-4f36-9e98-ae372ffc79d4"
+            name="interface"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e3ae76fe-37c3-497a-b449-915566e15ffa">
+                <propertyInstance
+                  Id="893d1341-3259-42fa-a6de-687643d691aa"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="71d0d20b-72c8-40b5-a732-d71a0603aee3">
+                <propertyInstance
+                  Id="d2ddee6b-2672-47e0-bcb3-e413449abb9a"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f608831a-24af-4566-a868-fa65f66b4c56">
+                <propertyInstance
+                  Id="c7bad6e7-d6f9-4b98-84e7-16a110694239"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f353a0ff-82b4-43ab-b5b9-d9163a0213bd">
+                <propertyInstance
+                  Id="fe53c71d-0f8d-447e-aeb4-0455ea02d70f"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </Interface>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

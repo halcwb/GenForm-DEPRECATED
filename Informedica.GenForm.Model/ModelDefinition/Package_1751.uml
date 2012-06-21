@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="849a4f81-7709-4af0-aef9-9b3564152ac3"
+  name="GenForm"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="6e5163d7-7990-4b22-9f5d-0937ccf4978c"
+      handle="viewcode://./CodeSchema_Namespace?Namespace=Informedica.GenForm"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="7d6b36f3-64d7-4c76-bc15-28f62589f5db"
+        LastKnownName="Assembler"
+        LastKnownLocation="Package1_1751.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="0626e341-e2c0-48ff-b38f-45f0cd7938f2"
+        LastKnownName="Settings"
+        LastKnownLocation="Package2_1751.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="48531484-9a06-4d27-be2c-6d0c98282221"
+        LastKnownName="DataAccess"
+        LastKnownLocation="Package_1804.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

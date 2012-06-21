@@ -1,0 +1,1660 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="7d6b36f3-64d7-4c76-bc15-28f62589f5db"
+  name="Assembler"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="473119df-d157-4369-bd6c-11118a22115e"
+      handle="viewcode://./CodeSchema_Namespace?Namespace=Informedica.GenForm.Assembler"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="f839d176-9616-4ca9-909d-50e6c8f8d2ee"
+        name="GenFormApplication"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="bbdb3c91-2325-44f6-ab87-490a94620fb7"
+            handle="viewcode://./CodeSchema_Class?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="95ffe6fc-85d9-4aa8-af47-4c100a60fd26"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="9528d423-95cd-444a-8f37-f6f2c6b6f5c8">
+                <propertyInstance
+                  Id="58684e12-407a-48b3-833b-f217b48d90f0"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b197f93b-494b-4105-ad7b-31764d825e6b">
+                <propertyInstance
+                  Id="9c6e43c8-f130-445c-adea-b98ffb605d3a"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ad3b448a-177b-48db-b8f5-c014c2656264">
+                <propertyInstance
+                  Id="4291dd56-ec35-413f-b978-18e482964c42"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c19f420c-623b-49a6-9d2c-93b7217c3e11">
+                <propertyInstance
+                  Id="1f44f6f5-bb5d-482c-a0c3-a0ff2477722a"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="fc207de5-cbd0-4cba-af67-2c3219072c50">
+                <propertyInstance
+                  Id="c55dfffa-8189-42b0-91f4-7c03e7e58640"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <suppliersInternal>
+          <dependency
+            Id="81a836ff-3451-4dc5-9f22-a922d4ec16c3">
+            <classMoniker
+              Id="c100ca60-3ffd-4113-819e-4ac3fb628d77"
+              LastKnownName="ProviderCollector"
+              LastKnownLocation="Package1_1751.uml" />
+          </dependency>
+          <dependency
+            Id="83c7fb09-5e4d-4a8a-bed0-64d224db64c5">
+            <classMoniker
+              Id="e94d6d8a-ab52-47fd-9b83-2dc7a845a5c6"
+              LastKnownName="SessionFactoryManager"
+              LastKnownLocation="Package_1804.uml" />
+          </dependency>
+        </suppliersInternal>
+        <targetEnds>
+          <association
+            Id="2da5087c-2780-4836-ac35-74517cba4b87"
+            isDerived="false"
+            sourceEndRoleName="GenFormApplication"
+            targetEndRoleName="Environments"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="dbfb2de8-f86e-4ce8-8130-6d094ccba93d"
+              LastKnownName="EnvironmentCollection"
+              LastKnownLocation="Package3_1751.uml" />
+            <description>Property Environments references type EnvironmentCollection.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="51f6c980-b215-48f4-98bf-2314bf49f804"
+                  name="GenFormApplication"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="9424bbfd-da59-408d-92a3-9155a431c894"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="f26f31d9-7bef-4e70-a281-611c32c1f0eb"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1180d3eb-c782-4bd0-8629-3af13b480e41"
+                  name="Environments"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="d0a8c302-35f3-4c24-be77-0f523499bce8"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="fa35ad4c-3e81-4b44-ba53-4f706593c145"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="047588a6-08fc-4311-83e4-4102585ad2b6"
+            isDerived="false"
+            sourceEndRoleName="GenFormApplication"
+            targetEndRoleName="Instance"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="f839d176-9616-4ca9-909d-50e6c8f8d2ee"
+              LastKnownName="GenFormApplication"
+              LastKnownLocation="Package1_1751.uml" />
+            <description>Property Instance references type GenFormApplication.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5be9374a-ddaa-4c2c-bc24-003d6a33a374"
+                  name="GenFormApplication"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="76a1ff72-b337-434e-beb3-3a8d883b0875"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="04376777-367a-4002-8414-9f1f2476c6f7"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2c38c52f-ba3f-49fa-9e52-5e8780ca290c"
+                  name="Instance"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="f87bb95c-e6a8-4dbb-a5b8-eeed40b457f9"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="9d4a2fd4-6ad1-4daa-9a63-cf2b657b8f40"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="a5d1a39c-fbcb-4ca8-b9bc-6f81b0b472c3"
+            isDerived="false"
+            sourceEndRoleName="GenFormApplication"
+            targetEndRoleName="SessionFactory"
+            isLeaf="false"
+            isAbstract="false">
+            <interfaceMoniker
+              Id="d712f832-d03a-4863-9126-38f1e907187e"
+              LastKnownName="ISessionFactory"
+              LastKnownLocation="Package5_1311.uml" />
+            <description>Property SessionFactory references type ISessionFactory.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a62c9cc7-0a3e-4aea-ad89-0b0d373c12d3"
+                  name="GenFormApplication"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="e0bc5383-8f59-4970-b568-383dd0cba01b"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="f7ad83dc-a7d3-41ca-bda5-49811cc6e4d8"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9a1379fe-a8b3-4f1b-9742-1b12e334a2a8"
+                  name="SessionFactory"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="719d36b0-58d6-45ad-959f-6754af4f6f30"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="6030d464-fe09-488d-bf32-fa52c8164af2"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="5eebedb3-b100-461d-9671-38c2f53f77aa"
+            isDerived="false"
+            sourceEndRoleName="GenFormApplication"
+            targetEndRoleName="TestSessionFactory"
+            isLeaf="false"
+            isAbstract="false">
+            <interfaceMoniker
+              Id="d712f832-d03a-4863-9126-38f1e907187e"
+              LastKnownName="ISessionFactory"
+              LastKnownLocation="Package5_1311.uml" />
+            <description>Property TestSessionFactory references type ISessionFactory.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="de20375a-5868-41f3-9304-664fc8957678"
+                  name="GenFormApplication"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="2ad30b38-e1c0-4027-b0d4-e6ea81fa0067"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="08b44200-bb0b-408b-948e-7f89c52efcc3"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="02614f42-93af-4279-9a4d-8c37f412d88f"
+                  name="TestSessionFactory"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="bba7fd94-8c3c-4991-91e5-1421f2e14644"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="b6cb1a58-0e14-4409-9050-2cbde0ac9160"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="af90068a-f320-4ed4-bd32-0edbd8c785c3"
+            name="Environments"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="5ce19775-b209-49da-baa5-10b4caa0b430"
+                handle="viewcode://./CodeSchema_Property?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=Environments"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="450ea540-31a0-4ee5-ac74-2157212b6b56"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6973c991-7167-4acf-ae03-b63e9ce0330c">
+                    <propertyInstance
+                      Id="69e0be07-5b4d-40c9-8282-9e6c3d6ebb1d"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="90d12281-d916-4365-9037-26e17171d2ec">
+                    <propertyInstance
+                      Id="616e9787-2b17-4f65-939f-5bfa792e9029"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="dfe9d6fc-eec4-4fd7-b09f-0b9c1e2f15b5">
+                    <propertyInstance
+                      Id="485dceda-5267-4d38-869b-9764fdc58587"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="75e0db7e-fe6c-4d16-8e4f-c79949c27a38">
+                    <propertyInstance
+                      Id="336d8f62-6765-4c7d-8587-991e21477e7b"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="df4eef46-29b6-4d16-ba79-322f602064f0">
+                    <propertyInstance
+                      Id="d6b6b003-d356-4daa-9311-34b977993456"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5ac4e650-34ca-46af-8ebc-a4b5998a4472">
+                    <propertyInstance
+                      Id="a36dbc17-55f5-44d9-a9a1-5d695cda657f"
+                      name="Set"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="dbfb2de8-f86e-4ce8-8130-6d094ccba93d"
+                LastKnownName="EnvironmentCollection"
+                LastKnownLocation="Package3_1751.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="43a20a1f-9c35-4705-9a19-7cfc69f4834d"
+            name="Instance"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="f9de87b2-e6d4-4e77-8a69-48ea5b38e84b"
+                handle="viewcode://./CodeSchema_Property?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=Instance"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="31176db1-1d9a-427d-9757-08b884743e4d"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="995c09b8-c04a-4423-97c1-5dc1e8addf4c">
+                    <propertyInstance
+                      Id="9277ed6b-36cf-40e7-91b1-38d1c38307eb"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c68bbed2-2e4c-4192-a76c-51f7413a4202">
+                    <propertyInstance
+                      Id="5d2fe8bc-3b83-4720-85ba-7f5b3499d213"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="82f5c5bb-ba98-4fe2-9e9a-a31ca807bdf4">
+                    <propertyInstance
+                      Id="714c5b04-c1d9-497f-8592-daf09a7869c1"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="942eb339-cf68-485f-9b29-9917d6fbd420">
+                    <propertyInstance
+                      Id="5e1cef17-211e-4f90-9522-8c635d27bdf6"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0301e577-cf69-4f34-b55b-baff051da5c6">
+                    <propertyInstance
+                      Id="d2da4789-c1da-44f2-8a2d-14e9362e6d2d"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bf63ec94-506a-4532-bf62-e2fc5f4d7d3d">
+                    <propertyInstance
+                      Id="e207a6f8-826b-4241-900a-a233f8cfdc56"
+                      name="Set"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="f839d176-9616-4ca9-909d-50e6c8f8d2ee"
+                LastKnownName="GenFormApplication"
+                LastKnownLocation="Package1_1751.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="b8f413af-351c-4b02-bd8e-542e99e2c772"
+            name="SessionFactory"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="4f8ef044-d90e-4589-8ebd-badbd5de4b39"
+                handle="viewcode://./CodeSchema_Property?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=SessionFactory"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="81f3e6ec-1fce-469e-a484-70cf75be3a27"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1b9ab25e-003d-44db-a13d-b0fd6dc918f2">
+                    <propertyInstance
+                      Id="a4009eda-fcb6-40b7-98c2-73cb44e194a4"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ff3f62ca-35eb-46cf-b556-6e27714d86b9">
+                    <propertyInstance
+                      Id="ecae2a07-c3af-4d8b-acd3-1494e48b26af"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="471a48d8-2065-4734-b2c2-03b464171095">
+                    <propertyInstance
+                      Id="33929a64-4053-424a-a921-aa1a9f0ae352"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d736cede-1a55-4b6e-adae-fd8f31ea2432">
+                    <propertyInstance
+                      Id="05221a6a-ee24-4164-b3e1-87d1ca7bdf03"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cee50fad-6700-48ec-9fc8-35096a83936e">
+                    <propertyInstance
+                      Id="b6aba98e-886b-4f92-9534-304230b889ea"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b441234b-52bd-4518-b579-f4f7cd721523">
+                    <propertyInstance
+                      Id="f01e72da-e6aa-4c55-8f00-03f40e3f4eda"
+                      name="Set"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="d712f832-d03a-4863-9126-38f1e907187e"
+                LastKnownName="ISessionFactory"
+                LastKnownLocation="Package5_1311.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="7099c6d3-52d4-4e36-a12c-19d96b0fb629"
+            name="SessionFactoryFromInstance"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="14cb1a00-5629-4616-9dca-d44bb63c965e"
+                handle="viewcode://./CodeSchema_Property?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=SessionFactoryFromInstance"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="495b16e8-ed01-49a8-b01b-bda15d604225"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="69edacf5-5c75-4935-85e1-3751026ba41e">
+                    <propertyInstance
+                      Id="52435226-c776-4eee-b256-acba0de2a93e"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5a5ab2f4-782f-4414-84ed-8565cb94c6a1">
+                    <propertyInstance
+                      Id="7792a2ea-12e8-4a81-b614-cc8877675e44"
+                      name="Get"
+                      value="private" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="427ffaa8-1575-4cf1-a9f0-a1a4835cdb6d">
+                    <propertyInstance
+                      Id="7963d3a2-0f45-4853-83da-e61374c0a447"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="78725253-0ef0-42ab-821d-0c05219205f4">
+                    <propertyInstance
+                      Id="3fd2ac44-a289-4afd-84d3-5b8353a89386"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3a31ac97-9ae4-4b70-bf81-9c5fd1a31783">
+                    <propertyInstance
+                      Id="b039a090-8eda-4a70-a739-23a41721aeb7"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d681c968-6ed0-4ba5-8b51-7c25265d179e">
+                    <propertyInstance
+                      Id="fc29d7f7-de67-4fce-8aef-bb1d4e47f181"
+                      name="Set"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="d712f832-d03a-4863-9126-38f1e907187e"
+                LastKnownName="ISessionFactory"
+                LastKnownLocation="Package5_1311.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="12f645eb-4e66-4cb0-bfee-d1c441eeebde"
+            name="TestSessionFactory"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="62b15fb8-7afd-4a73-b08b-6ddd30d3bf13"
+                handle="viewcode://./CodeSchema_Property?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=TestSessionFactory"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="ff6aea49-a022-4698-b7c6-119d4f9589e9"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e9f2d321-e28a-40d2-acce-20fbcf0291c4">
+                    <propertyInstance
+                      Id="76e83805-968e-43c8-9a63-6cbb014e246d"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f85b8248-5957-4f03-a1f7-0eaade8f652c">
+                    <propertyInstance
+                      Id="01aee77d-733a-481d-9ea7-ff4f07b4bd0a"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="efae76ed-e247-442e-aa4d-802d3c197c68">
+                    <propertyInstance
+                      Id="adcf0614-a177-4188-a955-b3650a0a98b0"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="de39e0a1-61f2-4180-bf1c-6fb39ca6e6c4">
+                    <propertyInstance
+                      Id="e51ef9e7-26b6-4c67-b58f-6576845b15be"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="34bcadf2-e9d2-41ee-b90c-c20eaa43e39b">
+                    <propertyInstance
+                      Id="6a68dabf-a4fe-4f88-99f7-aa934c96c916"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f99bcc98-ef98-4a51-b575-f759eb70e44f">
+                    <propertyInstance
+                      Id="8d1a1160-d9b7-4f35-9d3d-34a839d1e013"
+                      name="Set"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="d712f832-d03a-4863-9126-38f1e907187e"
+                LastKnownName="ISessionFactory"
+                LastKnownLocation="Package5_1311.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="32f666c0-325b-4912-b17d-f133aece0772"
+            name="Factories"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="685a62ac-d590-45ad-90ad-8155d91effdf"
+                handle="viewcode://./CodeSchema_Field?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=Factories"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="7391bfff-4472-4c53-89c6-3949beb530fe"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c6a119f1-cb63-4fc9-9c33-eb239849eeb4">
+                    <propertyInstance
+                      Id="6d25b7a7-cda2-44b3-9625-33b08189fbc7"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9145412c-9b4c-4463-91e1-b36da553a715">
+                    <propertyInstance
+                      Id="01b28c49-d75f-40be-8931-55d033a89c1a"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="718a4a26-44e3-4878-a709-e8373544680d">
+                    <propertyInstance
+                      Id="48480bab-4725-4d32-8c72-d4e5b193e5b9"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8ff11ede-6e09-4df6-ae55-899ec9cc546e">
+                    <propertyInstance
+                      Id="eb648628-052b-4e4d-9c00-077fde2b7078"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ab04bb61-a0ca-45d8-9949-455f76e418e1">
+                    <propertyInstance
+                      Id="886f1a08-f316-4261-a66b-da2181e4b6f3"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="84ed622d-7f58-4d6c-9628-61a10536e907"
+                LastKnownName="IDictionary&lt;String,ISessionFactory&gt;"
+                LastKnownLocation="Package3_1324.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="bee0e205-3d67-4d99-9e7b-724a9bab91d0"
+            name="LockThis"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="9096e2d6-c8d8-4d43-bae3-7dc75423ed19"
+                handle="viewcode://./CodeSchema_Field?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=LockThis"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="1ea6f638-c6ce-4e85-8acd-008b4efb43be"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a675027f-0f26-4958-9b51-384337182b25">
+                    <propertyInstance
+                      Id="0f527841-d11b-4090-987d-3bcef5dfa6db"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c480fe42-48c7-4520-8f6e-08f37ef3a09d">
+                    <propertyInstance
+                      Id="aa0b7b07-45f2-486a-a2b1-c8ca68119368"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4f39f885-a8ae-4277-9e34-30d2bd717466">
+                    <propertyInstance
+                      Id="c4f8d8d0-22ba-4e52-b62a-bb4ae75317ee"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="92d6ed0e-86a2-4f9f-8078-0de6dee1e8b6">
+                    <propertyInstance
+                      Id="217f6602-dec2-4042-9dff-daff13746245"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="95b123ab-110c-4e2a-90a1-fb201ecbdbcd">
+                    <propertyInstance
+                      Id="ca72499b-ddae-49b0-8d7b-43241e174421"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="fcc58957-7941-4098-9b36-2aebf07d4e03"
+                LastKnownName="Object"
+                LastKnownLocation="Package3_1311.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="3c114c14-96f3-444c-b5aa-a8e79ab014f4"
+            name="_environments"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="cdb7613b-3251-46eb-9c3e-6800ee678f27"
+                handle="viewcode://./CodeSchema_Field?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=_environments"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="7edd4ea5-24f4-4d5d-a288-fb9ff3f847f8"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="040e857e-4ce9-4b72-81f5-34458c172c5f">
+                    <propertyInstance
+                      Id="6ddbefdd-8c6f-41b4-b445-ff3dcb216e54"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="daa6fc05-90d1-4372-874f-379ffcdbd2aa">
+                    <propertyInstance
+                      Id="9e4dbb79-f05f-48c0-b387-885ed9252d82"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cdd33d10-91a8-4ba0-b08a-364d17f2563c">
+                    <propertyInstance
+                      Id="50192b09-f2a6-4495-a548-357ec09319c7"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="88c58dd4-1710-4fd5-8313-5fd2afac396c">
+                    <propertyInstance
+                      Id="ba48dd7c-0b6a-4400-aab3-9e76d8a085ea"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5c60aef0-9b87-45d7-9834-3bd07ad419d5">
+                    <propertyInstance
+                      Id="5a94ff5a-cfa7-46cf-8dc9-e1f6482ae9b4"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="dbfb2de8-f86e-4ce8-8130-6d094ccba93d"
+                LastKnownName="EnvironmentCollection"
+                LastKnownLocation="Package3_1751.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="d644b733-1592-46fb-b083-026bbcf0ab07"
+            name="_instance"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="3e70cd7f-bd07-44ce-a629-6c7a3135c8f4"
+                handle="viewcode://./CodeSchema_Field?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=_instance"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="ab8f0bdf-fec8-428a-aeae-9f8367a91676"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6ebeb60d-e336-4108-88b7-7f38ed05b9ef">
+                    <propertyInstance
+                      Id="3ff1e20f-c39d-46ee-ac72-8b547d2c47e2"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b58870f1-0a61-428a-adf2-721cb736fc4d">
+                    <propertyInstance
+                      Id="aa6ab13c-8ca9-4a35-ad87-dbd857f7ce38"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b8e059a3-1cf2-477f-88df-112ba2871f40">
+                    <propertyInstance
+                      Id="dd7fda46-721e-4550-99a1-b6d570a84afe"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="633a1895-96c7-47de-a44d-3aeb8ee41ceb">
+                    <propertyInstance
+                      Id="539fce6d-d890-4fa4-90a7-6801483be172"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6992b602-3b37-469e-9387-49bd39e2ed38">
+                    <propertyInstance
+                      Id="ea050c90-144f-47c4-ab2b-277a40e2822a"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="f839d176-9616-4ca9-909d-50e6c8f8d2ee"
+                LastKnownName="GenFormApplication"
+                LastKnownLocation="Package1_1751.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="91713a1d-b72f-4713-8840-341b5322eed7"
+            name="GetSessionFactory"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="bc9b30a3-db1a-4632-b6f5-94400fa8dc22"
+                handle="viewcode://./CodeSchema_Method?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=(Name=GetSessionFactory OverloadingParameters=[(Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=String)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="85eb0ef5-d5bc-4d4c-b7ed-09ff7a01f117"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c62c4027-03a8-4a8b-ad71-133ba6bbd4e5">
+                    <propertyInstance
+                      Id="ce48507a-c466-4c50-b668-6b7be3e75ea6"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6717354b-704d-463e-abbb-4eafcdf5c7d1">
+                    <propertyInstance
+                      Id="d66127cc-e7ac-4eb5-ac2b-df79fcab7d3d"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="50589303-5ab8-4612-aa20-059db2e65dc8">
+                    <propertyInstance
+                      Id="771ed712-613d-4d77-9359-0243ae38f50c"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="100a342c-bf92-41fa-bf43-93732f0b5c80">
+                    <propertyInstance
+                      Id="7a8eb5f3-782c-496d-a64f-d4ac9c835d24"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0cfea7c6-4f07-4d1e-936c-591c8d65bf00">
+                    <propertyInstance
+                      Id="3e81e02e-4847-43de-b8d6-6de5c20fb5d5"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8d7f0efe-c8c2-4fc2-9fd9-14faaded1fa9"
+                  direction="Return">
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="d712f832-d03a-4863-9126-38f1e907187e"
+                      LastKnownName="ISessionFactory"
+                      LastKnownLocation="Package5_1311.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="9be802f7-6953-43c8-a031-ffb2d699afb8"
+                  name="environment"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="5495ba9c-35c6-4b1a-bcb4-1cffbfbb1008"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=(Name=GetSessionFactory OverloadingParameters=[(Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=String)]) ParameterIdentifier=environment"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="Informedica.GenForm.Model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="281c123f-4ebd-411d-a19c-f079675fea83"
+            name="GenFormApplication"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="adcaa016-6d18-4150-b317-9447f1793084"
+                handle="viewcode://./CodeSchema_Method?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="ae5d6b56-8e4c-4e61-a38d-264621538e29"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="da61c0b6-2790-41dd-a6b1-318b5bfc264c">
+                    <propertyInstance
+                      Id="a4e387f3-cc28-4123-9f0c-0d01f6897cd0"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a6c59e30-131d-4a20-9de5-ba0f21893e56">
+                    <propertyInstance
+                      Id="696646a8-5b29-4491-8dfc-088e007ff2db"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e0c532f7-8466-4603-b00e-23a71dd8288f">
+                    <propertyInstance
+                      Id="b2182757-a29d-4dea-9646-6256e5f20ee7"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b3b850b2-c3df-4896-8f9a-3304fb996033">
+                    <propertyInstance
+                      Id="e88a7a08-4b13-4af3-82b4-7e4ba57eed7c"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b5a4da43-4d85-40bf-bc8b-9ff759bbdf9f">
+                    <propertyInstance
+                      Id="97ac66e4-ead8-4e64-b80c-f379083027fe"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="c4c32e12-9a17-4004-93c8-5fa1363458a9"
+            name="GetRegisterdProviders"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="6437ce7e-4984-4be6-b743-cc488d15ad7c"
+                handle="viewcode://./CodeSchema_Method?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=GetRegisterdProviders"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="6ff559f2-677c-4149-be5c-e0052dcfb766"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="33fb4019-3711-49da-a606-1c4a0d4f48ac">
+                    <propertyInstance
+                      Id="9a1ef1b0-df9a-477c-80ce-3bc2cebd3f8e"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cbccc52a-3f7e-4124-9e26-d9c30ac24fe5">
+                    <propertyInstance
+                      Id="3ccfc9bb-b244-4261-be79-5e3a2f517bb9"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4a3c27fd-241a-4aea-92a0-503233334cbc">
+                    <propertyInstance
+                      Id="eaf9979c-ce89-40d9-80ca-6ef31495faae"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8a8cd189-050b-4c53-b7f3-63442d397250">
+                    <propertyInstance
+                      Id="e1182824-d84d-4c80-a567-70266ccaa2d8"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="56182381-fcdc-4ce1-bfe9-dddcb9214b2b">
+                    <propertyInstance
+                      Id="473cfe84-d990-42f5-99c2-7b6746cf2d83"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="afaf0c9d-4414-42c0-9b30-cdc0aa250932"
+                  direction="Return">
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="f2c8c2c1-704d-4dcb-8f73-1fa677c7199d"
+                      LastKnownName="IEnumerable&lt;RegisteredProvider&gt;"
+                      LastKnownLocation="Package3_1324.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="597b08d3-c971-46a1-9777-634c28cbca92"
+            name="Initialize"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="f0e50910-74af-4fca-ba62-5f1bf39a71ad"
+                handle="viewcode://./CodeSchema_Method?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=GenFormApplication Member=Initialize"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="6cd27ce8-5220-4f92-9332-91c13fceb2b2"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d1c7fd59-3cb4-44c5-a27f-a8333b8af21f">
+                    <propertyInstance
+                      Id="a700b629-030e-41d8-84a5-f3794f7b27ba"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ba748b04-80f5-4239-9d46-6cdce5a538cd">
+                    <propertyInstance
+                      Id="96c05d47-89f7-47ff-af51-b964a591f192"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e24af09f-4a5a-4ea7-b1aa-ccddf59b3c33">
+                    <propertyInstance
+                      Id="ed6ee9e2-9e92-4c66-adc3-926951c24a8e"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6d85a099-7a6b-45df-8d5b-0ee2943eeee4">
+                    <propertyInstance
+                      Id="1101ff73-cc93-4957-b9fc-3224e1f92188"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0b65ecda-5b3c-4005-8004-a9917b712859">
+                    <propertyInstance
+                      Id="d49c8d31-d477-46d0-b1c8-e7e3598b542e"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="93bd69ba-98f7-4df1-b622-11757017b561"
+        name="RegisteredProvider"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="4111f1f6-195a-4a1d-ba3a-fbe8d69f8abd"
+            handle="viewcode://./CodeSchema_Class?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=RegisteredProvider"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="f9c047c1-f045-4e33-8fa9-138bcfa0cf93"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2fe27a69-44a9-4c6c-9138-9679c2591061">
+                <propertyInstance
+                  Id="a4a5834d-cf01-4e10-bee6-8cfd80f87829"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="781ae78a-7c9f-4947-a95b-d4fa37e002a4">
+                <propertyInstance
+                  Id="355880d8-c365-41f0-9a79-f0cdfe4c2c23"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="37fdcbfd-3dbc-48ec-9263-c2e63a7debdd">
+                <propertyInstance
+                  Id="dccb636b-2472-4aa5-bbe1-66efa3002996"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="74f8fcfd-d678-4bf9-b10b-f8025ccf549c">
+                <propertyInstance
+                  Id="451185ea-2fdd-4bbd-9374-289ab5f39a1c"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1b27ed6b-fc22-4ba3-baba-16f15bf3a6dc">
+                <propertyInstance
+                  Id="b66898e6-c929-4c23-a3f9-92cdf7cfe9cc"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="a89057b6-a533-441b-9b57-ee4c4a59ad0e"
+            name="ProviderName"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="b50efe9d-c488-4bf4-92b7-5e538e0a8e27"
+                handle="viewcode://./CodeSchema_Property?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=RegisteredProvider Member=ProviderName"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="be229e1b-cd55-4a39-be10-fa92d0ee92df"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4ba11b56-fdb3-42fe-ba85-37838e93d4ba">
+                    <propertyInstance
+                      Id="e934759e-25e2-477d-9642-e7e34b62ba67"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9d3765de-2286-41d1-bcb3-ce5166c0835c">
+                    <propertyInstance
+                      Id="716178ad-b7fc-4d35-af1c-5e89a743925a"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9fb3a200-3df9-47a0-9f7c-d6cc452200a8">
+                    <propertyInstance
+                      Id="16648166-158c-4220-82a2-acca3cdef449"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5dee4c0c-f89f-4947-b640-6610c01c9806">
+                    <propertyInstance
+                      Id="b43a23ff-9111-4472-9a25-d704758bacc1"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c2d99605-cd4a-4580-98b4-bf3f56ac54e0">
+                    <propertyInstance
+                      Id="a68b5fc7-3332-4512-8828-799a9a995e7d"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8e8c3014-6f1e-4144-a5fb-0651a29e16fe">
+                    <propertyInstance
+                      Id="c13ad545-da14-42bc-8ee3-9b2cda961d0a"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                LastKnownName="String"
+                LastKnownLocation="Informedica.GenForm.Model.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="4cdeea2e-a2a0-4b27-bb9e-87f5f3c05fd8"
+            name="RegisteredProvider"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="e2011f52-cafe-4dae-badf-29562ea0b890"
+                handle="viewcode://./CodeSchema_Method?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=RegisteredProvider Member=(Name=.ctor OverloadingParameters=[(Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=String)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="56f52dc6-5348-435c-80e6-c12a7bfdc925"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8ebe6338-f0b5-4488-958c-1c4016cdd166">
+                    <propertyInstance
+                      Id="237f29e3-406a-43d6-820e-e5d479f2427b"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ef285ac3-7a46-4272-a5fe-3c3b10bfaedd">
+                    <propertyInstance
+                      Id="30d17791-85db-4d5d-8dfb-053e96080218"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5e7ed5d3-27d0-4b0d-af70-755dc33cd8f1">
+                    <propertyInstance
+                      Id="0a6b0bb6-08d7-484f-9dc7-1418db3c6ecf"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f30f61fe-8fe0-400f-af61-82bf89a4b5e5">
+                    <propertyInstance
+                      Id="93c7cab0-a04d-4c8d-8998-77db00c1b359"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="006b4ab6-65c4-44dd-9a50-bc23c8769c4f">
+                    <propertyInstance
+                      Id="d1fff822-0c2f-46ae-8298-d42a0e3851b6"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f602feda-859e-462a-89d4-554d0318c981"
+                  name="providerName"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="57b7a9be-3857-49a5-867a-b91d1598079e"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=RegisteredProvider Member=(Name=.ctor OverloadingParameters=[(Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=String)]) ParameterIdentifier=providerName"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="Informedica.GenForm.Model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="c100ca60-3ffd-4113-819e-4ac3fb628d77"
+        name="ProviderCollector"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="c51c9cf6-67ec-459a-8d9a-9409e746aeb1"
+            handle="viewcode://./CodeSchema_Class?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=ProviderCollector"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="eff253ed-3a28-4328-9252-33355b71c5e1"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8c24184e-2cd5-4fbd-8124-b8d56ce0b7ab">
+                <propertyInstance
+                  Id="bd654fd0-8ca5-4775-938e-b34ced26471c"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d764813c-8c67-43c5-bfa3-a7eca00e6bc6">
+                <propertyInstance
+                  Id="94f0b719-834a-489e-b80f-40c7b709a04a"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="985c91f1-3b17-42b7-aec9-51d8a79d6dc2">
+                <propertyInstance
+                  Id="226671e6-4791-4446-990a-58ba6bf6914f"
+                  name="IsStatic"
+                  value="True" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="78f6188a-4864-460b-972a-5150418f9f18">
+                <propertyInstance
+                  Id="808b1248-8c25-40cb-8790-6bbd38d1a8ff"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b9c43d4e-bb3b-47b0-903d-80d9bd32788a">
+                <propertyInstance
+                  Id="df2d83ad-ae2c-4a32-a75c-19a0d9866646"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <targetEnds>
+          <association
+            Id="dce790f0-0d9b-470e-860a-878f5c547c38"
+            isDerived="false"
+            sourceEndRoleName="ProviderCollector"
+            targetEndRoleName="RegisteredProvider"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="93bd69ba-98f7-4df1-b622-11757017b561"
+              LastKnownName="RegisteredProvider"
+              LastKnownLocation="Package1_1751.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9f0de588-677a-4512-be7a-de31e8c7d0bb"
+                  name="ProviderCollector"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="78f9f66d-9ff1-4d50-a31d-79b6bbdc07ec"
+                  name="RegisteredProvider"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="4e774fcd-3f72-4947-a3df-51936ec40d4e"
+            name="GetRegisteredProviders"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="baf84321-8a98-486f-916a-cee6fac7ab91"
+                handle="viewcode://./CodeSchema_Method?Assembly=file:///C:/Development/GenForm/Informedica.GenForm.Assembler/bin/Debug/Informedica.GenForm.Assembler.dll Namespace=Informedica.GenForm.Assembler Type=ProviderCollector Member=GetRegisteredProviders"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="5cb230e1-8130-4d6d-8af1-b95cc647998a"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="be330377-7a72-422c-9039-2490940b0a58">
+                    <propertyInstance
+                      Id="f93da9a9-6330-40d5-b93d-53765d024a02"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3a063787-4ddb-446f-a37b-0b1c5e8a4d82">
+                    <propertyInstance
+                      Id="c8a45065-b49f-452a-a029-b20e9e4782c5"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0689fd28-4901-4d32-aa60-a70973213d34">
+                    <propertyInstance
+                      Id="80ee753e-4551-4a70-9635-fd7279b5ab9d"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e39ec66d-5e5c-443b-9b0b-7df14ef96acf">
+                    <propertyInstance
+                      Id="43962b44-c9de-45cd-8317-f04f3334e5d6"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="13f1e9cb-7d1a-4400-95a3-dc6bac30ab7c">
+                    <propertyInstance
+                      Id="5aeeb4fa-f80f-41de-80e6-de7c861ae699"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="163ec0d8-bd0f-4bf9-967c-e82bc067636e"
+                  direction="Return">
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="f2c8c2c1-704d-4dcb-8f73-1fa677c7199d"
+                      LastKnownName="IEnumerable&lt;RegisteredProvider&gt;"
+                      LastKnownLocation="Package3_1324.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
