@@ -32,4 +32,5 @@
 
 The fitsharp library can be downloaded from internet. The library is also available in the Dependencies folder. The Ext.Mvc library is also available in the Dependencies folder and has to be referenced. The Ext javascript library can be found as a zip file in the Informedica.GenForm.Mvc3/Client/GenForm/Library/ext/
 
-
+##License
+This project is licensed under the GNU GPL version 3. See gpl-3.0.txt
